@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_SetWindowVisual manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> SetVisual</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_SetWindowVisual - change visual characteristics of window 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+int<br>
+<b>Tk_SetWindowVisual</b>(<i>tkwin, visual, depth,
+colormap</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Window <b>tkwin</b> (in)</dt>
+
+<dd>Token for window.</dd>
+
+<dt>Visual <b>*visual</b> (in)</dt>
+
+<dd>New visual type to use for <i>tkwin</i>.</dd>
+
+<dt>int <b>depth</b> (in)</dt>
+
+<dd>Number of bits per pixel desired for <i>tkwin</i>.</dd>
+
+<dt>Colormap <b>colormap</b> (in)</dt>
+
+<dd>New colormap for <i>tkwin</i>, which must be compatible with
+<i>visual</i> and <i>depth</i>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+When Tk creates a new window it assigns it the default visual
+characteristics (visual, depth, and colormap) for its screen.
+<b>Tk_SetWindowVisual</b> may be called to change them.
+<b>Tk_SetWindowVisual</b> must be called before the window has
+actually been created in X (e.g. before <b><a href=
+"../TkLib/MapWindow.htm">Tk_MapWindow</a></b> or <b><a href=
+"../TkLib/CrtWindow.htm">Tk_MakeWindowExist</a></b> has been
+invoked for the window). The safest thing is to call
+<b>Tk_SetWindowVisual</b> immediately after calling <b><a href=
+"../TkLib/CrtWindow.htm">Tk_CreateWindow</a></b>. If <i>tkwin</i>
+has already been created before <b>Tk_SetWindowVisual</b> is called
+then it returns 0 and does not make any changes; otherwise it
+returns 1 to signify that the operation completed successfully. 
+
+<p>Note: <b>Tk_SetWindowVisual</b> should not be called if you just
+want to change a window's colormap without changing its visual or
+depth; call <b><a href=
+"../TkLib/ConfigWind.htm">Tk_SetWindowColormap</a></b> instead.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#colormap">colormap</a>, <a href=
+"../Keywords/D.htm#depth">depth</a>, <a href=
+"../Keywords/V.htm#visual">visual</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1992 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - tk_dialog manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> dialog</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="dialog.htm#M2" name="L414">NAME</a> 
+
+<dl>
+<dd>tk_dialog - Create modal dialog and wait for response</dd>
+</dl>
+</dd>
+
+<dd><a href="dialog.htm#M3" name="L415">SYNOPSIS</a> 
+
+<dl>
+<dd><b>tk_dialog</b> <i>window title text bitmap default string
+string ...</i></dd>
+</dl>
+</dd>
+
+<dd><a href="dialog.htm#M4" name="L416">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="dialog.htm#M5" name="L417"><i>window</i></a></dd>
+
+<dd><a href="dialog.htm#M6" name="L418"><i>title</i></a></dd>
+
+<dd><a href="dialog.htm#M7" name="L419"><i>text</i></a></dd>
+
+<dd><a href="dialog.htm#M8" name="L420"><i>bitmap</i></a></dd>
+
+<dd><a href="dialog.htm#M9" name="L421"><i>default</i></a></dd>
+
+<dd><a href="dialog.htm#M10" name="L422"><i>string</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="dialog.htm#M11" name="L423">EXAMPLE</a></dd>
+
+<dd><a href="dialog.htm#M12" name="L424">SEE ALSO</a></dd>
+
+<dd><a href="dialog.htm#M13" name="L425">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+tk_dialog - Create modal dialog and wait for response 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>tk_dialog</b> <i>window title text bitmap default string string
+...</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This procedure is part of the Tk script library. Its arguments
+describe a dialog box: 
+
+<dl class="description">
+<dt><a name="M5"><i>window</i></a></dt>
+
+<dd>Name of top-level window to use for dialog. Any existing window
+by this name is destroyed.</dd>
+
+<dt><a name="M6"><i>title</i></a></dt>
+
+<dd>Text to appear in the window manager's title bar for the
+dialog.</dd>
+
+<dt><a name="M7"><i>text</i></a></dt>
+
+<dd>Message to appear in the top portion of the dialog box.</dd>
+
+<dt><a name="M8"><i>bitmap</i></a></dt>
+
+<dd>If non-empty, specifies a bitmap to display in the top portion
+of the dialog, to the left of the text. If this is an empty string
+then no bitmap is displayed in the dialog.</dd>
+
+<dt><a name="M9"><i>default</i></a></dt>
+
+<dd>If this is an integer greater than or equal to zero, then it
+gives the index of the button that is to be the default button for
+the dialog (0 for the leftmost button, and so on). If less than
+zero or an empty string then there will not be any default
+button.</dd>
+
+<dt><a name="M10"><i>string</i></a></dt>
+
+<dd>There will be one button for each of these arguments. Each
+<i>string</i> specifies text to display in a button, in order from
+left to right.</dd>
+</dl>
+
+<p>After creating a dialog box, <b>tk_dialog</b> waits for the user
+to select one of the buttons either by clicking on the button with
+the mouse or by typing return to invoke the default button (if
+any). Then it returns the index of the selected button: 0 for the
+leftmost button, 1 for the button next to it, and so on. If the
+dialog's window is destroyed before the user selects one of the
+buttons, then -1 is returned.</p>
+
+<p>While waiting for the user to respond, <b>tk_dialog</b> sets a
+local grab. This prevents the user from interacting with the
+application in any way except to invoke the dialog box.</p>
+
+<h3><a name="M11">EXAMPLE</a></h3>
+
+<pre>
+set reply [<b>tk_dialog</b> .foo "The Title" "Do you want to say yes?" \
+        questhead 0 Yes No "I'm not sure"]
+</pre>
+
+<h3><a name="M12">SEE ALSO</a></h3>
+
+<b>tk_messageBox</b> 
+
+<h3><a name="M13">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#bitmap">bitmap</a>, <a href=
+"../Keywords/D.htm#dialog">dialog</a>, <a href=
+"../Keywords/M.htm#modal">modal</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1992 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

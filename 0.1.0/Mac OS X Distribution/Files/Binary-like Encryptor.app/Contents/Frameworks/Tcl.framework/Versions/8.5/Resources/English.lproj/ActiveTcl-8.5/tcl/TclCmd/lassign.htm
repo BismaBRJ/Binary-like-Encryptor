@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - lassign manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> lassign</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+lassign - Assign list elements to variables 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>lassign</b> <i>list varName</i> ?<i>varName ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command treats the value <i>list</i> as a list and assigns
+successive elements from that list to the variables given by the
+<i>varName</i> arguments in order. If there are more variable names
+than list elements, the remaining variables are set to the empty
+string. If there are more list elements than variables, a list of
+unassigned elements is returned. 
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+An illustration of how multiple assignment works, and what happens
+when there are either too few or too many elements. 
+
+<pre>
+lassign {a b c} x y z       ;# Empty return
+puts $x                     ;# Prints "a"
+puts $y                     ;# Prints "b"
+puts $z                     ;# Prints "c"
+
+lassign {d e} x y z         ;# Empty return
+puts $x                     ;# Prints "d"
+puts $y                     ;# Prints "e"
+puts $z                     ;# Prints ""
+
+lassign {f g h i} x y       ;# Returns "h i"
+puts $x                     ;# Prints "f"
+puts $y                     ;# Prints "g"
+</pre>
+
+The <b>lassign</b> command has other uses. It can be used to create
+the analogue of the &ldquo;shift&rdquo; command in many shell
+languages like this: 
+
+<pre>
+set ::argv [lassign $::argv argumentToReadOff]
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/lindex.htm">lindex</a></b>, <b><a href=
+"../TclCmd/list.htm">list</a></b>, <b><a href=
+"../TclCmd/lset.htm">lset</a></b>, <b><a href=
+"../TclCmd/set.htm">set</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#assign">assign</a>, <a href=
+"../Keywords/E.htm#element">element</a>, <a href=
+"../Keywords/L.htm#list">list</a>, <a href=
+"../Keywords/M.htm#multiple">multiple</a>, <a href=
+"../Keywords/S.htm#set">set</a>, <a href=
+"../Keywords/V.htm#variable">variable</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1992-1999 Karl Lehenbauer &amp; Mark Diekhans
+Copyright &copy; 2004 Donal K. Fellows</div>
+</body>
+</html>
+

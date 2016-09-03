@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_UpVar manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> UpVar</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_UpVar, Tcl_UpVar2 - link one variable to another 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_UpVar(</b><i>interp, frameName, sourceName, destName,
+flags</i><b>)</b><br>
+int<br>
+<b>Tcl_UpVar2(</b><i>interp, frameName, name1, name2, destName,
+flags</i><b>)</b><br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Interpreter containing variables; also used for error
+reporting.</dd>
+
+<dt>const char <b>*frameName</b> (in)</dt>
+
+<dd>Identifies the stack frame containing source variable. May have
+any of the forms accepted by the <b><a href=
+"../TclCmd/upvar.htm">upvar</a></b> command, such as <b>#0</b> or
+<b>1</b>.</dd>
+
+<dt>const char <b>*sourceName</b> (in)</dt>
+
+<dd>Name of source variable, in the frame given by
+<i>frameName</i>. May refer to a scalar variable or to an array
+variable with a parenthesized index.</dd>
+
+<dt>const char <b>*destName</b> (in)</dt>
+
+<dd>Name of destination variable, which is to be linked to source
+variable so that references to <i>destName</i> refer to the other
+variable. Must not currently exist except as an upvar-ed
+variable.</dd>
+
+<dt>int <b>flags</b> (in)</dt>
+
+<dd>One of <b>TCL_GLOBAL_ONLY</b>, <b>TCL_NAMESPACE_ONLY</b> or 0;
+if non-zero, then <i>destName</i> is a global or namespace
+variable; otherwise it is local to the current procedure (or
+current namespace if no procedure is active).</dd>
+
+<dt>const char <b>*name1</b> (in)</dt>
+
+<dd>First part of source variable's name (scalar name, or name of
+array without array index).</dd>
+
+<dt>const char <b>*name2</b> (in)</dt>
+
+<dd>If source variable is an element of an array, gives the index
+of the element. For scalar source variables, is NULL.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_UpVar</b> and <b>Tcl_UpVar2</b> provide the same
+functionality as the <b><a href="../TclCmd/upvar.htm">upvar</a></b>
+command: they make a link from a source variable to a destination
+variable, so that references to the destination are passed
+transparently through to the source. The name of the source
+variable may be specified either as a single string such as
+<b>xyx</b> or <b>a(24)</b> (by calling <b>Tcl_UpVar</b>) or in two
+parts where the array name has been separated from the element name
+(by calling <b>Tcl_UpVar2</b>). The destination variable name is
+specified in a single string; it may not be an array element. 
+
+<p>Both procedures return either <b>TCL_OK</b> or <b>TCL_ERROR</b>,
+and they leave an error message in the interpreter's result if an
+error occurs.</p>
+
+<p>As with the <b><a href="../TclCmd/upvar.htm">upvar</a></b>
+command, the source variable need not exist; if it does exist,
+unsetting it later does not destroy the link. The destination
+variable may exist at the time of the call, but if so it must exist
+as a linked variable.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/L.htm#linked variable">linked variable</a>, <a
+href="../Keywords/U.htm#upvar">upvar</a>, <a href=
+"../Keywords/V.htm#variable">variable</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

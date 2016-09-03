@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Tk Built-In Commands - Safe manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> loadTk</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+loadTk - Load Tk into a safe interpreter. 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>::safe::loadTk</b> <i>slave</i> ?<b>-use</b> <i>windowId</i>?
+?<b>-display</b> <i>displayName</i>? <br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+Safe Tk is based on Safe Tcl, which provides a mechanism that
+allows restricted and mediated access to auto-loading and packages
+for safe interpreters. Safe Tk adds the ability to configure the
+interpreter for safe Tk operations and load Tk into safe
+interpreters. 
+
+<p>The <b>::safe::loadTk</b> command initializes the required data
+structures in the named safe interpreter and then loads Tk into it.
+The interpreter must have been created with
+<b>::safe::interpCreate</b> or have been initialized with
+<b>::safe::interpInit</b>. The command returns the name of the safe
+interpreter. If <b>-use</b> is specified, the window identified by
+the specified system dependent identifier <i>windowId</i> is used
+to contain the &ldquo;.&rdquo; window of the safe interpreter; it
+can be any valid id, eventually referencing a window belonging to
+another application. As a convenience, if the window you plan to
+use is a Tk Window of the application you can use the window name
+(e.g. <b>.x.y</b>) instead of its window Id (<b>[winfo id
+.x.y]</b>). When <b>-use</b> is not specified, a new toplevel
+window is created for the &ldquo;.&rdquo; window of the safe
+interpreter. On X11 if you want the embedded window to use another
+display than the default one, specify it with <b>-display</b>. See
+the <b>SECURITY ISSUES</b> section below for implementation
+details.</p>
+
+<h3><a name="M5">SECURITY ISSUES</a></h3>
+
+Please read the <b>safe</b> manual page for Tcl to learn about the
+basic security considerations for Safe Tcl. 
+
+<p><b>::safe::loadTk</b> adds the value of <b>tk_library</b> taken
+from the master interpreter to the virtual access path of the safe
+interpreter so that auto-loading will work in the safe
+interpreter.</p>
+
+<p>Tk initialization is now safe with respect to not trusting the
+slave's state for startup. <b>::safe::loadTk</b> registers the
+slave's name so when the Tk initialization (<b><a href=
+"../TkLib/Tk_Init.htm">Tk_SafeInit</a></b>) is called and in turn
+calls the master's <b>::safe::InitTk</b> it will return the desired
+<b>argv</b> equivalent (<b>-use</b> <i>windowId</i>, correct
+<b>-display</b>, etc.)</p>
+
+<p>When <b>-use</b> is not used, the new toplevel created is
+specially decorated so the user is always aware that the user
+interface presented comes from a potentially unsafe code and can
+easily delete the corresponding interpreter.</p>
+
+<p>On X11, conflicting <b>-use</b> and <b>-display</b> are likely
+to generate a fatal X error.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b>safe</b>, <b><a href="../TclCmd/interp.htm">interp</a></b>,
+<b>library</b>, <b><a href="../TclCmd/load.htm">load</a></b>, <b><a
+href="../TclCmd/package.htm">package</a></b>, <b><a href=
+"../TclCmd/source.htm">source</a></b>, <b><a href=
+"../TclCmd/unknown.htm">unknown</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#alias">alias</a>, <a href=
+"../Keywords/A.htm#auto-loading">auto-loading</a>, <a href=
+"../Keywords/A.htm#auto_mkindex">auto_mkindex</a>, <a href=
+"../Keywords/L.htm#load">load</a>, <a href=
+"../Keywords/M.htm#master interpreter">master interpreter</a>, <a
+href="../Keywords/S.htm#safe interpreter">safe interpreter</a>, <a
+href="../Keywords/S.htm#slave interpreter">slave interpreter</a>,
+<a href="../Keywords/S.htm#source">source</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1995-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

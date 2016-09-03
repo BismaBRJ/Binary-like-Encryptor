@@ -1,0 +1,19 @@
+Package platform 1.0.13
+Meta activestatetags ActiveTcl Public
+Meta as::build::date 2015-03-23
+Meta entrysource     platform.tcl
+Meta included        platform.tcl
+Meta license         BSD
+Meta platform        tcl
+
+
+Package platform::shell 1.1.4
+Meta activestatetags ActiveTcl Public
+Meta as::build::date 2015-03-23
+Meta entrysource     shell.tcl
+Meta included        shell.tcl
+Meta license         BSD
+Meta platform        tcl
+Meta require         platform
+
+

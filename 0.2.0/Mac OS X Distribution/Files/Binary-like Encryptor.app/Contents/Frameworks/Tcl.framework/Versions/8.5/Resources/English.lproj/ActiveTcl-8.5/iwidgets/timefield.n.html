@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>timefield - Create and manipulate a time field
+widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>timefield - Create and manipulate a time field widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>timefield pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- LabeledWidget &lt;- timefield 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>background</b><br>
+<b>foreground</b><br>
+<b>justify</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>highlightColor</b><br>
+<b>relief</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>highlightThickness</b><br>
+</td>
+<td valign="top"><b>exportSelection</b><br>
+<b>insertBackground</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>disabledForeground</b><br>
+<b>labelMargin</b><br>
+<b>state</b><br>
+</td>
+<td valign="top"><b>labelBitmap</b><br>
+<b>labelPos</b><br>
+</td>
+<td valign="top"><b>labelFont</b><br>
+<b>labelText</b><br>
+</td>
+<td valign="top"><b>labelImage</b><br>
+<b>labelVariable</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="labeledwidget.n.html">"labeledwidget"</a> class
+manual entry for details on the inherited options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>childSitePos</b>
+Class:                  <b>Position</b>
+Command-Line Switch:    <b>-childsitepos</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the position of the child
+site in the time field: <b>n</b>, <b>s</b>, <b>e</b>, or <b>w</b>.
+The default is e.</div>
+
+<pre>
+Name:                   <b>command</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-command</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command to be
+executed upon detection of a Return key press event.</div>
+
+<pre>
+Name:                   <b>state</b>
+Class:                  <b>State</b>
+Command-Line Switch:    <b>-state</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies one of two states for the
+timefield: <b>normal</b> or <b>disabled</b>. If the timefield is
+disabled then input is not accepted. The default is normal.</div>
+
+<pre>
+Name:                   <b>textBackground</b>
+Class:                  <b>Background</b>
+Command-Line Switch:    <b>-textbackground</b>
+</pre>
+
+<div style="margin-left: 2em">Background color for inside textual
+portion of the entry field. The value may be given in any of the
+forms acceptable to <b>Tk_GetColor</b>.</div>
+
+<pre>
+Name:                   <b>textFont</b>
+Class:                  <b>Font</b>
+Command-Line Switch:    <b>-textfont</b>
+</pre>
+
+<div style="margin-left: 2em">Name of font to use for display of
+text in timefield. The value may be given in any of the forms
+acceptable to <b>Tk_GetFont</b>.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>timefield</b> command creates an enhanced text entry
+widget for the purpose of time entry with various degrees of
+built-in intelligence.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>timefield</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for timefield
+widgets: 
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>timefield</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>timefield</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>get</b> ?<b>format</b>?</i></dt>
+
+<dd>Returns the current contents of the timefield in a format of
+string or as an integer clock value using the <b>-string</b> and
+<b>-clicks</b> format options respectively. The default is by
+string. Reference the clock command for more information on
+obtaining times and their formats.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>isvalid</b></i></dt>
+
+<dd>Returns a boolean indication of the validity of the currently
+displayed time value. For example, 12:59:59 is valid whereas
+25:59:59 is invalid.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>show</b></i> time</dt>
+
+<dd>Changes the currently displayed time to be that of the time
+argument. The time may be specified either as a string, an integer
+clock value or the keyword "now" (the default). Reference the clock
+command for more information on obtaining times and their
+formats.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>time</b>
+Class:                  <b>Entry</b>
+</pre>
+
+<div style="margin-left: 2em">The time component provides the entry
+field for time input and display. See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/entry.n.html">"entry"</a>
+widget manual entry for details on the time component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ proc returnCmd {} {
+   puts [.tf get]
+ }
+
+ timefield .tf -command returnCmd
+ pack .tf -fill x -expand yes -padx 10 -pady 10
+</pre>
+
+<h2>AUTHOR</h2>
+
+John A. Tucker Mark L. Ulferts 
+
+<h2>KEYWORDS</h2>
+
+timefield, widget
+</body>
+</html>
+

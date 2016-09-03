@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>ProgressBar</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>ProgressBar</b> - Progress indicator widget</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>ProgressBar</b></a> <i>pathName</i>
+?<i>option value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i>STANDARD OPTIONS</i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-background">-background or -bg</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-borderwidth">-borderwidth or
+-bd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-foreground">-foreground or -fg</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-orient">-orient</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-relief">-relief</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-troughcolor">-troughcolor</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-height">-height</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-maximum">-maximum</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-type">-type</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-variable">-variable</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-width">-width</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>ProgressBar widget indicates the user the progress of a lengthly
+operation. It is used by <a href="MainFrame.html">MainFrame</a> and
+<a href="ProgressDlg.html">ProgressDlg</a>.</p>
+
+<br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-height"><b>-height</b></a></dt>
+
+<dd>Specifies the desired height for the progress indicator.</dd>
+</dl>
+
+<dl>
+<dt><a name="-maximum"><b>-maximum</b></a></dt>
+
+<dd>Specifies the maximum value of the variable. This value must be
+greater than zero.</dd>
+</dl>
+
+<dl>
+<dt><a name="-type"><b>-type</b></a></dt>
+
+<dd>Specifies the type of the ProgressBar. Must be one of
+<b>normal</b>, <b>incremental</b>, <b>infinite</b> or
+<b>nonincremental_infinite</b>.<br>
+<br>
+If <b>type</b> is <i>normal</i>, the progress indicator is drawn
+proportional to the variable value and <b>maximum</b> option each
+time the variable is set.<br>
+<br>
+If <b>type</b> is <i>incremental</i>, the value of the progress
+indicator is maintained internally, and incremented each time the
+variable is set by its value. The progress indicator is drawn
+proportional to the internal value and <b>maximum</b> option.<br>
+<br>
+If <b>type</b> is <i>infinite</i>, the value of the progress
+indicator is maintained internally, and incremented each time the
+variable is set by its value. The progress indicator moves from
+left to right if internal value (modulo <b>maximum</b>) is less
+than <b>maximum</b>/2, and from right to left if internal value is
+greater than <b>maximum</b>/2.<br>
+<br>
+If <b>type</b> is <i>nonincremental_infinite</i>, the value of the
+progress indicator taken from the variable value, The progress
+indicator moves from left to right if variable value (modulo
+<b>maximum</b>) is less than <b>maximum</b>/2, and from right to
+left if internal value is greater than <b>maximum</b>/2.<br>
+<br>
+See <b>-variable</b> option for special case of its value,<br>
+<br>
+Default value for <b>type</b> is <i>normal</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-variable"><b>-variable</b></a></dt>
+
+<dd>Specifies the variable attached to the progress indicator.
+Progress indicator is updated when the value of the variable
+changes. If the value of the variable is negative, the progress
+indicator is not displayed (it is drawn flat with <b>background</b>
+color - usefull for ProgressDlg to make it invisible). If its value
+0, progress indicator is reinitialized.</dd>
+</dl>
+
+<dl>
+<dt><a name="-width"><b>-width</b></a></dt>
+
+<dd>Specifies the desired width for the progress indicator.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+</body>
+</html>
+

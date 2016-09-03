@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_Ensemble manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> Ensemble</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="Ensemble.htm#M2" name="L231">NAME</a> 
+
+<dl>
+<dd>Tcl_CreateEnsemble, Tcl_FindEnsemble, Tcl_GetEnsembleFlags,
+Tcl_GetEnsembleMappingDict, Tcl_GetEnsembleNamespace,
+Tcl_GetEnsembleUnknownHandler, Tcl_GetEnsembleSubcommandList,
+Tcl_IsEnsemble, Tcl_SetEnsembleFlags, Tcl_SetEnsembleMappingDict,
+Tcl_SetEnsembleSubcommandList, Tcl_SetEnsembleUnknownHandler -
+manipulate ensemble commands</dd>
+</dl>
+</dd>
+
+<dd><a href="Ensemble.htm#M3" name="L232">SYNOPSIS</a></dd>
+
+<dd><a href="Ensemble.htm#M4" name="L233">ARGUMENTS</a></dd>
+
+<dd><a href="Ensemble.htm#M5" name="L234">DESCRIPTION</a></dd>
+
+<dd><a href="Ensemble.htm#M6" name="L235">ENSEMBLE PROPERTIES</a> 
+
+<dl class="ensemble properties">
+<dd><a href="Ensemble.htm#M7" name="L236"><b>flags</b>
+(read-write)</a></dd>
+
+<dd><a href="Ensemble.htm#M8" name="L237"><b>mapping dictionary</b>
+(read-write)</a></dd>
+
+<dd><a href="Ensemble.htm#M9" name="L238"><b>subcommand list</b>
+(read-write)</a></dd>
+
+<dd><a href="Ensemble.htm#M10" name="L239"><b>unknown subcommand
+handler command prefix</b> (read-write)</a></dd>
+
+<dd><a href="Ensemble.htm#M11" name="L240"><b>bound namespace</b>
+(read-only)</a></dd>
+</dl>
+</dd>
+
+<dd><a href="Ensemble.htm#M12" name="L241">SEE ALSO</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_CreateEnsemble, Tcl_FindEnsemble, Tcl_GetEnsembleFlags,
+Tcl_GetEnsembleMappingDict, Tcl_GetEnsembleNamespace,
+Tcl_GetEnsembleUnknownHandler, Tcl_GetEnsembleSubcommandList,
+Tcl_IsEnsemble, Tcl_SetEnsembleFlags, Tcl_SetEnsembleMappingDict,
+Tcl_SetEnsembleSubcommandList, Tcl_SetEnsembleUnknownHandler -
+manipulate ensemble commands 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+Tcl_Command<br>
+<b>Tcl_CreateEnsemble</b>(<i>interp, name, namespacePtr,
+ensFlags</i>)<br>
+Tcl_Command<br>
+<b>Tcl_FindEnsemble</b>(<i>interp, cmdNameObj, flags</i>)<br>
+int<br>
+<b>Tcl_IsEnsemble</b>(<i>token</i>)<br>
+int<br>
+<b>Tcl_GetEnsembleFlags</b>(<i>interp, token, ensFlagsPtr</i>)<br>
+int<br>
+<b>Tcl_SetEnsembleFlags</b>(<i>interp, token, ensFlags</i>)<br>
+int<br>
+<b>Tcl_GetEnsembleMappingDict</b>(<i>interp, token,
+dictObjPtr</i>)<br>
+int<br>
+<b>Tcl_SetEnsembleMappingDict</b>(<i>interp, token,
+dictObj</i>)<br>
+int<br>
+<b>Tcl_GetEnsembleSubcommandList</b>(<i>interp, token,
+listObjPtr</i>)<br>
+int<br>
+<b>Tcl_SetEnsembleSubcommandList</b>(<i>interp, token,
+listObj</i>)<br>
+int<br>
+<b>Tcl_GetEnsembleUnknownHandler</b>(<i>interp, token,
+listObjPtr</i>)<br>
+int<br>
+<b>Tcl_SetEnsembleUnknownHandler</b>(<i>interp, token,
+listObj</i>)<br>
+int<br>
+<b>Tcl_GetEnsembleNamespace</b>(<i>interp, token,
+namespacePtrPtr</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in/out)</dt>
+
+<dd>The interpreter in which the ensemble is to be created or
+found. Also where error result messages are written. The functions
+whose names start with <b>Tcl_GetEnsemble</b> may have a NULL for
+the <i>interp</i>, but all other functions must not.</dd>
+
+<dt>const char <b>*name</b> (in)</dt>
+
+<dd>The name of the ensemble command to be created.</dd>
+
+<dt>Tcl_Namespace <b>*namespacePtr</b> (in)</dt>
+
+<dd>The namespace to which the ensemble command is to be bound, or
+NULL for the current namespace.</dd>
+
+<dt>int <b>ensFlags</b> (in)</dt>
+
+<dd>An ORed set of flag bits describing the basic configuration of
+the ensemble. Currently only one bit has meaning,
+TCL_ENSEMBLE_PREFIX, which is present when the ensemble command
+should also match unambiguous prefixes of subcommands.</dd>
+
+<dt>Tcl_Obj <b>*cmdNameObj</b> (in)</dt>
+
+<dd>A value holding the name of the ensemble command to look
+up.</dd>
+
+<dt>int <b>flags</b> (in)</dt>
+
+<dd>An ORed set of flag bits controlling the behavior of
+<b>Tcl_FindEnsemble</b>. Currently only TCL_LEAVE_ERR_MSG is
+supported.</dd>
+
+<dt>Tcl_Command <b>token</b> (in)</dt>
+
+<dd>A normal command token that refers to an ensemble command, or
+which you wish to use for testing as an ensemble command in
+<b>Tcl_IsEnsemble</b>.</dd>
+
+<dt>int <b>*ensFlagsPtr</b> (out)</dt>
+
+<dd>Pointer to a variable into which to write the current ensemble
+flag bits; currently only the bit TCL_ENSEMBLE_PREFIX is
+defined.</dd>
+
+<dt>Tcl_Obj <b>*dictObj</b> (in)</dt>
+
+<dd>A dictionary value to use for the subcommand to implementation
+command prefix mapping dictionary in the ensemble. May be NULL if
+the mapping dictionary is to be removed.</dd>
+
+<dt>Tcl_Obj <b>**dictObjPtr</b> (out)</dt>
+
+<dd>Pointer to a variable into which to write the current ensemble
+mapping dictionary.</dd>
+
+<dt>Tcl_Obj <b>*listObj</b> (in)</dt>
+
+<dd>A list value to use for the defined list of subcommands in the
+dictionary or the unknown subcommmand handler command prefix. May
+be NULL if the subcommand list or unknown handler are to be
+removed.</dd>
+
+<dt>Tcl_Obj <b>**listObjPtr</b> (out)</dt>
+
+<dd>Pointer to a variable into which to write the current defiend
+list of subcommands or the current unknown handler prefix.</dd>
+
+<dt>Tcl_Namespace <b>**namespacePtrPtr</b> (out)</dt>
+
+<dd>Pointer to a variable into which to write the handle of the
+namespace to which the ensemble is bound.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+An ensemble is a command, bound to some namespace, which consists
+of a collection of subcommands implemented by other Tcl commands.
+The first argument to the ensemble command is always interpreted as
+a selector that states what subcommand to execute. 
+
+<p>Ensembles are created using <b>Tcl_CreateEnsemble</b>, which
+takes four arguments: the interpreter to work within, the name of
+the ensemble to create, the namespace within the interpreter to
+bind the ensemble to, and the default set of ensemble flags. The
+result of the function is the command token for the ensemble, which
+may be used to further configure the ensemble using the API
+described below in <b>ENSEMBLE PROPERTIES</b>.</p>
+
+<p>Given the name of an ensemble command, the token for that
+command may be retrieved using <b>Tcl_FindEnsemble</b>. If the
+given command name (in <i>cmdNameObj</i>) does not refer to an
+ensemble command, the result of the function is NULL and (if the
+TCL_LEAVE_ERR_MSG bit is set in <i>flags</i>) an error message is
+left in the interpreter result.</p>
+
+<p>A command token may be checked to see if it refers to an
+ensemble using <b>Tcl_IsEnsemble</b>. This returns 1 if the token
+refers to an ensemble, or 0 otherwise.</p>
+
+<h4><a name="M6">ENSEMBLE PROPERTIES</a></h4>
+
+Every ensemble has four read-write properties and a read-only
+property. The properties are: 
+
+<dl class="ensemble properties">
+<dt><a name="M7"><b>flags</b> (read-write)</a></dt>
+
+<dd>The set of flags for the ensemble, expressed as a bit-field.
+Currently, the only public flag is TCL_ENSEMBLE_PREFIX which is set
+when unambiguous prefixes of subcommands are permitted to be
+resolved to implementations as well as exact matches. The flags may
+be read and written using <b>Tcl_GetEnsembleFlags</b> and
+<b>Tcl_SetEnsembleFlags</b> respectively. The result of both of
+those functions is a Tcl result code (TCL_OK, or TCL_ERROR if the
+token does not refer to an ensemble).</dd>
+
+<dt><a name="M8"><b>mapping dictionary</b> (read-write)</a></dt>
+
+<dd>A dictionary containing a mapping from subcommand names to
+lists of words to use as a command prefix (replacing the first two
+words of the command which are the ensemble command itself and the
+subcommand name), or NULL if every subcommand is to be mapped to
+the command with the same unqualified name in the ensemble's bound
+namespace. Defaults to NULL. May be read and written using
+<b>Tcl_GetEnsembleMappingDict</b> and
+<b>Tcl_SetEnsembleMappingDict</b> respectively. The result of both
+of those functions is a Tcl result code (TCL_OK, or TCL_ERROR if
+the token does not refer to an ensemble) and the dictionary
+obtained from <b>Tcl_GetEnsembleMappingDict</b> should always be
+treated as immutable even if it is unshared. All command names in
+prefixes set via <b>Tcl_SetEnsembleMappingDict</b> must be fully
+qualified.</dd>
+
+<dt><a name="M9"><b>subcommand list</b> (read-write)</a></dt>
+
+<dd>A list of all the subcommand names for the ensemble, or NULL if
+this is to be derived from either the keys of the mapping
+dictionary (see above) or (if that is also NULL) from the set of
+commands exported by the bound namespace. May be read and written
+using <b>Tcl_GetEnsembleSubcommandList</b> and
+<b>Tcl_SetEnsembleSubcommandList</b> respectively. The result of
+both of those functions is a Tcl result code (TCL_OK, or TCL_ERROR
+if the token does not refer to an ensemble) and the list obtained
+from <b>Tcl_GetEnsembleSubcommandList</b> should always be treated
+as immutable even if it is unshared.</dd>
+
+<dt><a name="M10"><b>unknown subcommand handler command prefix</b>
+(read-write)</a></dt>
+
+<dd>A list of words to prepend on the front of any subcommand when
+the subcommand is unknown to the ensemble (according to the current
+prefix handling rule); see the <b>namespace ensemble</b> command
+for more details. If NULL, the default behavior - generate a
+suitable error message - will be used when an unknown subcommand is
+encountered. May be read and written using
+<b>Tcl_GetEnsembleUnknownHandler</b> and
+<b>Tcl_SetEnsembleUnknownHandler</b> respectively. The result of
+both functions is a Tcl result code (TCL_OK, or TCL_ERROR if the
+token does not refer to an ensemble) and the list obtained from
+<b>Tcl_GetEnsembleUnknownHandler</b> should always be treated as
+immutable even if it is unshared.</dd>
+
+<dt><a name="M11"><b>bound namespace</b> (read-only)</a></dt>
+
+<dd>The namespace to which the ensemble is bound; when the
+namespace is deleted, so too will the ensemble, and this namespace
+is also the namespace whose list of exported commands is used if
+both the mapping dictionary and the subcommand list properties are
+NULL. May be read using <b>Tcl_GetEnsembleNamespace</b> which
+returns a Tcl result code (TCL_OK, or TCL_ERROR if the token does
+not refer to an ensemble).</dd>
+</dl>
+
+<h3><a name="M12">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/namespace.htm">namespace</a></b>, <b><a href=
+"../TclLib/CrtObjCmd.htm">Tcl_DeleteCommandFromToken</a></b> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2005 Donal K. Fellows</div>
+</body>
+</html>
+

@@ -1,0 +1,1058 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk::treeview manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_treeview</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_treeview.htm#M2" name="L2013">NAME</a> 
+
+<dl>
+<dd>ttk::treeview - hierarchical multicolumn data display
+widget</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M3" name="L2014">SYNOPSIS</a> 
+
+<dl>
+<dd><b>ttk::treeview</b> <i>pathname</i> ?<i>options</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M4" name="L2015">DESCRIPTION</a></dd>
+
+<dd><a href="ttk_treeview.htm#M5" name="L2016">STANDARD OPTIONS</a>
+
+
+<dl>
+<dd><a href="options.htm#M-class">-class</a></dd>
+
+<dd><a href="options.htm#M-cursor">-cursor, cursor, Cursor</a></dd>
+
+<dd><a href="options.htm#M-style">-style</a></dd>
+
+<dd><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></dd>
+
+<dd><a href="options.htm#M-xscrollcommand">-xscrollcommand,
+xScrollCommand, ScrollCommand</a></dd>
+
+<dd><a href="options.htm#M-yscrollcommand">-yscrollcommand,
+yScrollCommand, ScrollCommand</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M8" name="L2019">WIDGET-SPECIFIC
+OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_treeview.htm#M9" name="L2020">-columns, columns,
+Columns</a></dd>
+
+<dd><a href="ttk_treeview.htm#M10" name="L2021">-displaycolumns,
+displayColumns, DisplayColumns</a></dd>
+
+<dd><a href="ttk_treeview.htm#M11" name="L2022">-height, height,
+Height</a></dd>
+
+<dd><a href="ttk_treeview.htm#M12" name="L2023">-padding, padding,
+Padding</a></dd>
+
+<dd><a href="ttk_treeview.htm#M13" name="L2024">-selectmode,
+selectMode, SelectMode</a></dd>
+</dl>
+
+<dl>
+<dd><a href="ttk_treeview.htm#M14" name="L2025">-show, show,
+Show</a></dd>
+</dl>
+
+<dl class="widget-specific options">
+<dd><a href="ttk_treeview.htm#M15" name=
+"L2026"><b>tree</b></a></dd>
+
+<dd><a href="ttk_treeview.htm#M16" name=
+"L2027"><b>headings</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M17" name="L2028">WIDGET COMMAND</a> 
+
+<dl class="widget command">
+<dd><a href="ttk_treeview.htm#M18" name="L2029"><i>pathname</i>
+<b>bbox</b> <i>item</i> ?<i>column</i>?</a></dd>
+
+<dd><a href="ttk_treeview.htm#M19" name="L2030"><i>pathname</i>
+<b>cget</b> <i>option</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M20" name="L2031"><i>pathname</i>
+<b>children</b> <i>item</i> ?<i>newchildren</i>?</a></dd>
+
+<dd><a href="ttk_treeview.htm#M21" name="L2032"><i>pathname</i>
+<b>column</b> <i>column</i> ?<i>-option</i> ?<i>value -option
+value...</i>?</a> 
+
+<dl class="widget command">
+<dd><a href="ttk_treeview.htm#M22" name="L2033"><b>-id</b>
+<i>name</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M23" name=
+"L2034"><b>-anchor</b></a></dd>
+
+<dd><a href="ttk_treeview.htm#M24" name=
+"L2035"><b>-minwidth</b></a></dd>
+
+<dd><a href="ttk_treeview.htm#M25" name=
+"L2036"><b>-stretch</b></a></dd>
+
+<dd><a href="ttk_treeview.htm#M26" name="L2037"><b>-width</b>
+<i>w</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M27" name="L2038"><i>pathname</i>
+<b>configure</b> ?<i>option</i>? ?<i>value option value
+...</i>?</a></dd>
+
+<dd><a href="ttk_treeview.htm#M28" name="L2039"><i>pathname</i>
+<b>delete</b> <i>itemList</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M29" name="L2040"><i>pathname</i>
+<b>detach</b> <i>itemList</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M30" name="L2041"><i>pathname</i>
+<b>exists</b> <i>item</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M31" name="L2042"><i>pathname</i>
+<b>focus</b> ?<i>item</i>?</a></dd>
+
+<dd><a href="ttk_treeview.htm#M32" name="L2043"><i>pathname</i>
+<b>heading</b> <i>column</i> ?<i>-option</i> ?<i>value -option
+value...</i>?</a> 
+
+<dl class="widget command">
+<dd><a href="ttk_treeview.htm#M33" name="L2044"><b>-text</b>
+<i>text</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M34" name="L2045"><b>-image</b>
+<i>imageName</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M35" name="L2046"><b>-anchor</b>
+<i>anchor</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M36" name="L2047"><b>-command</b>
+<i>script</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M37" name="L2048"><i>pathname</i>
+<b>identify</b> <i>component x y</i></a> 
+
+<dl class="widget command">
+<dd><a href="ttk_treeview.htm#M38" name="L2049"><i>pathname</i>
+<b>identify region</b> <i>x y</i></a> 
+
+<dl class="widget command">
+<dd><a href="ttk_treeview.htm#M39" name="L2050">heading</a></dd>
+
+<dd><a href="ttk_treeview.htm#M40" name="L2051">separator</a></dd>
+
+<dd><a href="ttk_treeview.htm#M41" name="L2052">tree</a></dd>
+
+<dd><a href="ttk_treeview.htm#M42" name="L2053">cell</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M43" name="L2054"><i>pathname</i>
+<b>identify column</b> <i>x y</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M44" name="L2055"><i>pathname</i>
+<b>identify element</b> <i>x y</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M45" name="L2056"><i>pathname</i>
+<b>identify row</b> <i>x y</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M46" name="L2057"><i>pathname</i>
+<b>index</b> <i>item</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M47" name="L2058"><i>pathname</i>
+<b>insert</b> <i>parent index</i> ?<b>-id</b> <i>id</i>?
+<i>options...</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M48" name="L2059"><i>pathname</i>
+<b>instate</b> <i>statespec</i> ?<i>script</i>?</a></dd>
+
+<dd><a href="ttk_treeview.htm#M49" name="L2060"><i>pathname</i>
+<b>item</b> <i>item</i> ?<i>-option</i> ?<i>value -option
+value...</i>?</a></dd>
+
+<dd><a href="ttk_treeview.htm#M50" name="L2061"><i>pathname</i>
+<b>move</b> <i>item parent index</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M51" name="L2062"><i>pathname</i>
+<b>next</b> <i>item</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M52" name="L2063"><i>pathname</i>
+<b>parent</b> <i>item</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M53" name="L2064"><i>pathname</i>
+<b>prev</b> <i>item</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M54" name="L2065"><i>pathname</i>
+<b>see</b> <i>item</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M55" name="L2066"><i>pathname</i>
+<b>selection</b> ?<i>selop itemList</i>?</a> 
+
+<dl class="widget command">
+<dd><a href="ttk_treeview.htm#M56" name="L2067"><i>pathname</i>
+<b>selection set</b> <i>itemList</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M57" name="L2068"><i>pathname</i>
+<b>selection add</b> <i>itemList</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M58" name="L2069"><i>pathname</i>
+<b>selection remove</b> <i>itemList</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M59" name="L2070"><i>pathname</i>
+<b>selection toggle</b> <i>itemList</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M60" name="L2071"><i>pathname</i>
+<b>set</b> <i>item</i> ?<i>column</i>? ?<i>value</i>?</a></dd>
+
+<dd><a href="ttk_treeview.htm#M61" name="L2072"><i>pathname</i>
+<b>state</b> ?<i>stateSpec</i>?</a></dd>
+
+<dd><a href="ttk_treeview.htm#M62" name="L2073"><i>pathName</i>
+<b>tag</b> <i>args...</i></a> 
+
+<dl class="widget command">
+<dd><a href="ttk_treeview.htm#M63" name="L2074"><i>pathName</i>
+<b>tag bind</b> <i>tagName</i> ?<i>sequence</i>?
+?<i>script</i>?</a></dd>
+
+<dd><a href="ttk_treeview.htm#M64" name="L2075"><i>pathName</i>
+<b>tag configure</b> <i>tagName</i> ?<i>option</i>? ?<i>value
+option value...</i>?</a></dd>
+
+<dd><a href="ttk_treeview.htm#M65" name="L2076"><i>pathName</i>
+<b>tag has</b> <i>tagName</i> ?<i>item</i>?</a></dd>
+
+<dd><a href="ttk_treeview.htm#M66" name="L2077"><i>pathName</i>
+<b>tag names</b></a></dd>
+
+<dd><a href="ttk_treeview.htm#M67" name="L2078"><i>pathName</i>
+<b>tag add</b> <i>tag</i> <i>items</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M68" name="L2079"><i>pathName</i>
+<b>tag remove</b> <i>tag</i> ?<i>items</i>?</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M69" name="L2080"><i>pathName</i>
+<b>xview</b> <i>args</i></a></dd>
+
+<dd><a href="ttk_treeview.htm#M70" name="L2081"><i>pathName</i>
+<b>yview</b> <i>args</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M71" name="L2082">ITEM OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_treeview.htm#M72" name="L2083">-text, text,
+Text</a></dd>
+
+<dd><a href="ttk_treeview.htm#M73" name="L2084">-image, image,
+Image</a></dd>
+
+<dd><a href="ttk_treeview.htm#M74" name="L2085">-values, values,
+Values</a></dd>
+</dl>
+
+<dl>
+<dd><a href="ttk_treeview.htm#M75" name="L2086">-open, open,
+Open</a></dd>
+
+<dd><a href="ttk_treeview.htm#M76" name="L2087">-tags, tags,
+Tags</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M77" name="L2088">TAG OPTIONS</a> 
+
+<dl class="tag options">
+<dd><a href="ttk_treeview.htm#M78" name=
+"L2089"><b>-foreground</b></a></dd>
+
+<dd><a href="ttk_treeview.htm#M79" name=
+"L2090"><b>-background</b></a></dd>
+
+<dd><a href="ttk_treeview.htm#M80" name=
+"L2091"><b>-font</b></a></dd>
+
+<dd><a href="ttk_treeview.htm#M81" name=
+"L2092"><b>-image</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M82" name="L2093">COLUMN
+IDENTIFIERS</a></dd>
+
+<dd><a href="ttk_treeview.htm#M83" name="L2094">VIRTUAL EVENTS</a> 
+
+<dl class="virtual events">
+<dd><a href="ttk_treeview.htm#M84" name=
+"L2095">&lt;&lt;TreeviewSelect&gt;&gt;</a></dd>
+
+<dd><a href="ttk_treeview.htm#M85" name=
+"L2096">&lt;&lt;TreeviewOpen&gt;&gt;</a></dd>
+
+<dd><a href="ttk_treeview.htm#M86" name=
+"L2097">&lt;&lt;TreeviewClose&gt;&gt;</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_treeview.htm#M87" name="L2098">SEE ALSO</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk::treeview - hierarchical multicolumn data display widget 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>ttk::treeview</b> <i>pathname</i> ?<i>options</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>ttk::treeview</b> widget displays a hierarchical collection
+of items. Each item has a textual label, an optional image, and an
+optional list of data values. The data values are displayed in
+successive columns after the tree label. 
+
+<p>The order in which data values are displayed may be controlled
+by setting the <b>-displaycolumns</b> widget option. The tree
+widget can also display column headings. Columns may be accessed by
+number or by symbolic names listed in the <b>-columns</b> widget
+option; see <b>COLUMN IDENTIFIERS</b>.</p>
+
+<p>Each item is identified by a unique name. The widget will
+generate item IDs if they are not supplied by the caller. There is
+a distinguished root item, named <b>{}</b>. The root item itself is
+not displayed; its children appear at the top level of the
+hierarchy.</p>
+
+<p>Each item also has a list of <i>tags</i>, which can be used to
+associate event bindings with individual items and control the
+appearance of the item.</p>
+
+<p>Treeview widgets support horizontal and vertical scrolling with
+the standard <b>-</b>[<b>xy</b>]<b>scrollcommand</b> options and
+[<b>xy</b>]<b>view</b> widget commands.</p>
+
+<h3><a name="M5">STANDARD OPTIONS</a></h3>
+
+<dl>
+<dt><b><a href="options.htm#M-class">-class</a></b></dt>
+
+<dt><b><a href="options.htm#M-cursor">-cursor, cursor,
+Cursor</a></b></dt>
+
+<dt><b><a href="options.htm#M-style">-style</a></b></dt>
+
+<dt><b><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></b></dt>
+
+<dt><b><a href="options.htm#M-xscrollcommand">-xscrollcommand,
+xScrollCommand, ScrollCommand</a></b></dt>
+
+<dt><b><a href="options.htm#M-yscrollcommand">-yscrollcommand,
+yScrollCommand, ScrollCommand</a></b></dt>
+</dl>
+
+<h3><a name="M8">WIDGET-SPECIFIC OPTIONS</a></h3>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M9">-columns</a></b></dt>
+
+<dt>Database Name: <b>columns</b></dt>
+
+<dt>Database Class: <b>Columns</b></dt>
+
+<dd>A list of column identifiers, specifying the number of columns
+and their names.</dd>
+
+<dt>Command-Line Name: <b><a name=
+"M10">-displaycolumns</a></b></dt>
+
+<dt>Database Name: <b>displayColumns</b></dt>
+
+<dt>Database Class: <b>DisplayColumns</b></dt>
+
+<dd>A list of column identifiers (either symbolic names or integer
+indices) specifying which data columns are displayed and the order
+in which they appear, or the string <b>#all</b>. If set to
+<b>#all</b> (the default), all columns are shown in the order
+given.</dd>
+
+<dt>Command-Line Name: <b><a name="M11">-height</a></b></dt>
+
+<dt>Database Name: <b>height</b></dt>
+
+<dt>Database Class: <b>Height</b></dt>
+
+<dd>Specifies the number of rows which should be visible. Note: the
+requested width is determined from the sum of the column
+widths.</dd>
+
+<dt>Command-Line Name: <b><a name="M12">-padding</a></b></dt>
+
+<dt>Database Name: <b>padding</b></dt>
+
+<dt>Database Class: <b>Padding</b></dt>
+
+<dd>Specifies the internal padding for the widget. The padding is a
+list of up to four length specifications; see
+<b>Ttk_GetPaddingFromObj()</b> for details.</dd>
+
+<dt>Command-Line Name: <b><a name="M13">-selectmode</a></b></dt>
+
+<dt>Database Name: <b>selectMode</b></dt>
+
+<dt>Database Class: <b>SelectMode</b></dt>
+
+<dd>Controls how the built-in class bindings manage the selection.
+One of <b>extended</b>, <b>browse</b>, or <b>none</b>.</dd>
+</dl>
+
+<dl>
+<dd>
+<p>If set to <b>extended</b> (the default), multiple items may be
+selected. If <b>browse</b>, only a single item will be selected at
+a time. If <b>none</b>, the selection will not be changed.</p>
+
+<p>Note that application code and tag bindings can set the
+selection however they wish, regardless of the value of
+<b>-selectmode</b>.</p>
+</dd>
+</dl>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M14">-show</a></b></dt>
+
+<dt>Database Name: <b>show</b></dt>
+
+<dt>Database Class: <b>Show</b></dt>
+
+<dd>A list containing zero or more of the following values,
+specifying which elements of the tree to display.</dd>
+</dl>
+
+<dl class="widget-specific options">
+<dt><a name="M15"><b>tree</b></a></dt>
+
+<dd>Display tree labels in column #0.</dd>
+
+<dt><a name="M16"><b>headings</b></a></dt>
+
+<dd>Display the heading row.</dd>
+</dl>
+
+<dl>
+<dd>
+<p>The default is <b>tree headings</b>, i.e., show all
+elements.</p>
+
+<p><b>NOTE:</b> Column #0 always refers to the tree column, even if
+<b>-show tree</b> is not specified.</p>
+</dd>
+</dl>
+
+<h3><a name="M17">WIDGET COMMAND</a></h3>
+
+<dl class="widget command">
+<dt><a name="M18"><i>pathname</i> <b>bbox</b> <i>item</i>
+?<i>column</i>?</a></dt>
+
+<dd>Returns the bounding box (relative to the treeview widget's
+window) of the specified <i>item</i> in the form <i>x y width
+height</i>. If <i>column</i> is specified, returns the bounding box
+of that cell. If the <i>item</i> is not visible (i.e., if it is a
+descendant of a closed item or is scrolled offscreen), returns the
+empty list.</dd>
+
+<dt><a name="M19"><i>pathname</i> <b>cget</b>
+<i>option</i></a></dt>
+
+<dd>Returns the current value of the specified <i>option</i>; see
+<i>ttk::widget(n)</i>.</dd>
+
+<dt><a name="M20"><i>pathname</i> <b>children</b> <i>item</i>
+?<i>newchildren</i>?</a></dt>
+
+<dd>If <i>newchildren</i> is not specified, returns the list of
+children belonging to <i>item</i>. 
+
+<p>If <i>newchildren</i> is specified, replaces <i>item</i>'s child
+list with <i>newchildren</i>. Items in the old child list not
+present in the new child list are detached from the tree. None of
+the items in <i>newchildren</i> may be an ancestor of
+<i>item</i>.</p>
+</dd>
+
+<dt><a name="M21"><i>pathname</i> <b>column</b> <i>column</i>
+?<i>-option</i> ?<i>value -option value...</i>?</a></dt>
+
+<dd>Query or modify the options for the specified <i>column</i>. If
+no <i>-option</i> is specified, returns a dictionary of
+option/value pairs. If a single <i>-option</i> is specified,
+returns the value of that option. Otherwise, the options are
+updated with the specified values. The following options may be set
+on each column: 
+
+<dl class="widget command">
+<dt><a name="M22"><b>-id</b> <i>name</i></a></dt>
+
+<dd>The column name. This is a read-only option. For example,
+[<i>$pathname</i> <b>column #</b><i>n</i> <b>-id</b>] returns the
+data column associated with display column #<i>n</i>.</dd>
+
+<dt><a name="M23"><b>-anchor</b></a></dt>
+
+<dd>Specifies how the text in this column should be aligned with
+respect to the cell. One of <b>n</b>, <b>ne</b>, <b>e</b>,
+<b>se</b>, <b>s</b>, <b>sw</b>, <b>w</b>, <b>nw</b>, or
+<b>center</b>.</dd>
+
+<dt><a name="M24"><b>-minwidth</b></a></dt>
+
+<dd>The minimum width of the column in pixels. The treeview widget
+will not make the column any smaller than <b>-minwidth</b> when the
+widget is resized or the user drags a column separator.</dd>
+
+<dt><a name="M25"><b>-stretch</b></a></dt>
+
+<dd>Specifies whether or not the column's width should be adjusted
+when the widget is resized.</dd>
+
+<dt><a name="M26"><b>-width</b> <i>w</i></a></dt>
+
+<dd>The width of the column in pixels. Default is something
+reasonable, probably 200 or so.</dd>
+</dl>
+
+<p>Use <i>pathname column #0</i> to configure the tree column.</p>
+</dd>
+
+<dt><a name="M27"><i>pathname</i> <b>configure</b> ?<i>option</i>?
+?<i>value option value ...</i>?</a></dt>
+
+<dd>Modify or query widget options; see <i>ttk::widget(n)</i>.</dd>
+
+<dt><a name="M28"><i>pathname</i> <b>delete</b>
+<i>itemList</i></a></dt>
+
+<dd>Deletes each of the items in <i>itemList</i> and all of their
+descendants. The root item may not be deleted. See also:
+<b>detach</b>.</dd>
+
+<dt><a name="M29"><i>pathname</i> <b>detach</b>
+<i>itemList</i></a></dt>
+
+<dd>Unlinks all of the specified items in <i>itemList</i> from the
+tree. The items and all of their descendants are still present and
+may be reinserted at another point in the tree with the <b>move</b>
+operation, but will not be displayed until that is done. The root
+item may not be detached. See also: <b>delete</b>.</dd>
+
+<dt><a name="M30"><i>pathname</i> <b>exists</b>
+<i>item</i></a></dt>
+
+<dd>Returns 1 if the specified <i>item</i> is present in the tree,
+0 otherwise.</dd>
+
+<dt><a name="M31"><i>pathname</i> <b>focus</b>
+?<i>item</i>?</a></dt>
+
+<dd>If <i>item</i> is specified, sets the focus item to
+<i>item</i>. Otherwise, returns the current focus item, or
+<b>{}</b> if there is none.</dd>
+
+<dt><a name="M32"><i>pathname</i> <b>heading</b> <i>column</i>
+?<i>-option</i> ?<i>value -option value...</i>?</a></dt>
+
+<dd>Query or modify the heading options for the specified
+<i>column</i>. Valid options are: 
+
+<dl class="widget command">
+<dt><a name="M33"><b>-text</b> <i>text</i></a></dt>
+
+<dd>The text to display in the column heading.</dd>
+
+<dt><a name="M34"><b>-image</b> <i>imageName</i></a></dt>
+
+<dd>Specifies an image to display to the right of the column
+heading.</dd>
+
+<dt><a name="M35"><b>-anchor</b> <i>anchor</i></a></dt>
+
+<dd>Specifies how the heading text should be aligned. One of the
+standard Tk anchor values.</dd>
+
+<dt><a name="M36"><b>-command</b> <i>script</i></a></dt>
+
+<dd>A script to evaluate when the heading label is pressed.</dd>
+</dl>
+
+<p>Use <i>pathname heading #0</i> to configure the tree column
+heading.</p>
+</dd>
+
+<dt><a name="M37"><i>pathname</i> <b>identify</b> <i>component x
+y</i></a></dt>
+
+<dd>Returns a description of the specified <i>component</i> under
+the point given by <i>x</i> and <i>y</i>, or the empty string if no
+such <i>component</i> is present at that position. The following
+subcommands are supported: 
+
+<dl class="widget command">
+<dt><a name="M38"><i>pathname</i> <b>identify region</b> <i>x
+y</i></a></dt>
+
+<dd>
+<dl>
+<dd>Returns one of: 
+
+<dl class="widget command">
+<dt><a name="M39">heading</a></dt>
+
+<dd>Tree heading area; use [<b>pathname identify column</b> <i>x
+y</i>] to determine the heading number.</dd>
+
+<dt><a name="M40">separator</a></dt>
+
+<dd>Space between two column headings; [<b>pathname identify
+column</b> <i>x y</i>] will return the display column identifier of
+the heading to left of the separator.</dd>
+
+<dt><a name="M41">tree</a></dt>
+
+<dd>The tree area.</dd>
+
+<dt><a name="M42">cell</a></dt>
+
+<dd>A data cell.</dd>
+</dl>
+</dd>
+</dl>
+
+<i>pathname</i> <b>identify item</b> <i>x y</i> Returns the item ID
+of the item at position <i>y</i>.</dd>
+
+<dt><a name="M43"><i>pathname</i> <b>identify column</b> <i>x
+y</i></a></dt>
+
+<dd>Returns the data column identifier of the cell at position
+<i>x</i>. The tree column has ID <b>#0</b>.</dd>
+
+<dt><a name="M44"><i>pathname</i> <b>identify element</b> <i>x
+y</i></a></dt>
+
+<dd>The element at position <i>x,y</i>.</dd>
+
+<dt><a name="M45"><i>pathname</i> <b>identify row</b> <i>x
+y</i></a></dt>
+
+<dd>Obsolescent synonym for <i>pathname</i> <b>identify
+item</b>.</dd>
+</dl>
+
+<p>See <b>COLUMN IDENTIFIERS</b> for a discussion of display
+columns and data columns.</p>
+</dd>
+
+<dt><a name="M46"><i>pathname</i> <b>index</b> <i>item</i></a></dt>
+
+<dd>Returns the integer index of <i>item</i> within its parent's
+list of children.</dd>
+
+<dt><a name="M47"><i>pathname</i> <b>insert</b> <i>parent index</i>
+?<b>-id</b> <i>id</i>? <i>options...</i></a></dt>
+
+<dd>Creates a new item. <i>parent</i> is the item ID of the parent
+item, or the empty string <b>{}</b> to create a new top-level item.
+<i>index</i> is an integer, or the value <b>end</b>, specifying
+where in the list of <i>parent</i>'s children to insert the new
+item. If <i>index</i> is less than or equal to zero, the new node
+is inserted at the beginning; if <i>index</i> is greater than or
+equal to the current number of children, it is inserted at the end.
+If <b>-id</b> is specified, it is used as the item identifier;
+<i>id</i> must not already exist in the tree. Otherwise, a new
+unique identifier is generated. 
+
+<p><i>pathname</i> <b>insert</b> returns the item identifier of the
+newly created item. See <b>ITEM OPTIONS</b> for the list of
+available options.</p>
+</dd>
+
+<dt><a name="M48"><i>pathname</i> <b>instate</b> <i>statespec</i>
+?<i>script</i>?</a></dt>
+
+<dd>Test the widget state; see <i>ttk::widget(n)</i>.</dd>
+
+<dt><a name="M49"><i>pathname</i> <b>item</b> <i>item</i>
+?<i>-option</i> ?<i>value -option value...</i>?</a></dt>
+
+<dd>Query or modify the options for the specified <i>item</i>. If
+no <i>-option</i> is specified, returns a dictionary of
+option/value pairs. If a single <i>-option</i> is specified,
+returns the value of that option. Otherwise, the item's options are
+updated with the specified values. See <b>ITEM OPTIONS</b> for the
+list of available options.</dd>
+
+<dt><a name="M50"><i>pathname</i> <b>move</b> <i>item parent
+index</i></a></dt>
+
+<dd>Moves <i>item</i> to position <i>index</i> in <i>parent</i>'s
+list of children. It is illegal to move an item under one of its
+descendants. 
+
+<p>If <i>index</i> is less than or equal to zero, <i>item</i> is
+moved to the beginning; if greater than or equal to the number of
+children, it is moved to the end.</p>
+</dd>
+
+<dt><a name="M51"><i>pathname</i> <b>next</b> <i>item</i></a></dt>
+
+<dd>Returns the identifier of <i>item</i>'s next sibling, or
+<b>{}</b> if <i>item</i> is the last child of its parent.</dd>
+
+<dt><a name="M52"><i>pathname</i> <b>parent</b>
+<i>item</i></a></dt>
+
+<dd>Returns the ID of the parent of <i>item</i>, or <b>{}</b> if
+<i>item</i> is at the top level of the hierarchy.</dd>
+
+<dt><a name="M53"><i>pathname</i> <b>prev</b> <i>item</i></a></dt>
+
+<dd>Returns the identifier of <i>item</i>'s previous sibling, or
+<b>{}</b> if <i>item</i> is the first child of its parent.</dd>
+
+<dt><a name="M54"><i>pathname</i> <b>see</b> <i>item</i></a></dt>
+
+<dd>Ensure that <i>item</i> is visible: sets all of <i>item</i>'s
+ancestors to <b>-open true</b>, and scrolls the widget if necessary
+so that <i>item</i> is within the visible portion of the tree.</dd>
+
+<dt><a name="M55"><i>pathname</i> <b>selection</b> ?<i>selop
+itemList</i>?</a></dt>
+
+<dd>If <i>selop</i> is not specified, returns the list of selected
+items. Otherwise, <i>selop</i> is one of the following: 
+
+<dl class="widget command">
+<dt><a name="M56"><i>pathname</i> <b>selection set</b>
+<i>itemList</i></a></dt>
+
+<dd><i>itemList</i> becomes the new selection.</dd>
+
+<dt><a name="M57"><i>pathname</i> <b>selection add</b>
+<i>itemList</i></a></dt>
+
+<dd>Add <i>itemList</i> to the selection</dd>
+
+<dt><a name="M58"><i>pathname</i> <b>selection remove</b>
+<i>itemList</i></a></dt>
+
+<dd>Remove <i>itemList</i> from the selection</dd>
+
+<dt><a name="M59"><i>pathname</i> <b>selection toggle</b>
+<i>itemList</i></a></dt>
+
+<dd>Toggle the selection state of each item in
+<i>itemList</i>.</dd>
+</dl>
+</dd>
+
+<dt><a name="M60"><i>pathname</i> <b>set</b> <i>item</i>
+?<i>column</i>? ?<i>value</i>?</a></dt>
+
+<dd>With one argument, returns a dictionary of column/value pairs
+for the specified <i>item</i>. With two arguments, returns the
+current value of the specified <i>column</i>. With three arguments,
+sets the value of column <i>column</i> in item <i>item</i> to the
+specified <i>value</i>. See also <b>COLUMN IDENTIFIERS</b>.</dd>
+
+<dt><a name="M61"><i>pathname</i> <b>state</b>
+?<i>stateSpec</i>?</a></dt>
+
+<dd>Modify or query the widget state; see
+<i>ttk::widget(n)</i>.</dd>
+
+<dt><a name="M62"><i>pathName</i> <b>tag</b>
+<i>args...</i></a></dt>
+
+<dd>
+<dl class="widget command">
+<dt><a name="M63"><i>pathName</i> <b>tag bind</b> <i>tagName</i>
+?<i>sequence</i>? ?<i>script</i>?</a></dt>
+
+<dd>Add a Tk binding script for the event sequence <i>sequence</i>
+to the tag <i>tagName</i>. When an X event is delivered to an item,
+binding scripts for each of the item's <b>-tags</b> are evaluated
+in order as per <i>bindtags(n)</i>. 
+
+<p><b>&lt;KeyPress&gt;</b>, <b>&lt;KeyRelease&gt;</b>, and virtual
+events are sent to the focus item. <b>&lt;ButtonPress&gt;</b>,
+<b>&lt;ButtonRelease&gt;</b>, and <b>&lt;Motion&gt;</b> events are
+sent to the item under the mouse pointer. No other event types are
+supported.</p>
+
+<p>The binding <i>script</i> undergoes <b>%</b>-substitutions
+before evaluation; see <b>bind(n)</b> for details.</p>
+</dd>
+
+<dt><a name="M64"><i>pathName</i> <b>tag configure</b>
+<i>tagName</i> ?<i>option</i>? ?<i>value option
+value...</i>?</a></dt>
+
+<dd>Query or modify the options for the specified <i>tagName</i>.
+If one or more <i>option/value</i> pairs are specified, sets the
+value of those options for the specified tag. If a single
+<i>option</i> is specified, returns the value of that option (or
+the empty string if the option has not been specified for
+<i>tagName</i>). With no additional arguments, returns a dictionary
+of the option settings for <i>tagName</i>. See <b>TAG OPTIONS</b>
+for the list of available options.</dd>
+
+<dt><a name="M65"><i>pathName</i> <b>tag has</b> <i>tagName</i>
+?<i>item</i>?</a></dt>
+
+<dd>If <i>item</i> is specified, returns 1 or 0 depending on
+whether the specified item has the named tag. Otherwise, returns a
+list of all items which have the specified tag.</dd>
+
+<dt><a name="M66"><i>pathName</i> <b>tag names</b></a></dt>
+
+<dd>Returns a list of all tags used by the widget.</dd>
+
+<dt><a name="M67"><i>pathName</i> <b>tag add</b> <i>tag</i>
+<i>items</i></a></dt>
+
+<dd>Adds the specified <i>tag</i> to each of the listed
+<i>items</i>. If <i>tag</i> is already present for a particular
+item, then the <b>-tags</b> for that item are unchanged.</dd>
+
+<dt><a name="M68"><i>pathName</i> <b>tag remove</b> <i>tag</i>
+?<i>items</i>?</a></dt>
+
+<dd>Removes the specified <i>tag</i> from each of the listed
+<i>items</i>. If <i>items</i> is omitted, removes <i>tag</i> from
+each item in the tree. If <i>tag</i> is not present for a
+particular item, then the <b>-tags</b> for that item are
+unchanged.</dd>
+</dl>
+</dd>
+
+<dt><a name="M69"><i>pathName</i> <b>xview</b> <i>args</i></a></dt>
+
+<dd>Standard command for horizontal scrolling; see
+<i>widget(n)</i>.</dd>
+
+<dt><a name="M70"><i>pathName</i> <b>yview</b> <i>args</i></a></dt>
+
+<dd>Standard command for vertical scrolling; see
+<i>ttk::widget(n)</i>.</dd>
+</dl>
+
+<h3><a name="M71">ITEM OPTIONS</a></h3>
+
+The following item options may be specified for items in the
+<b>insert</b> and <b>item</b> widget commands. 
+
+<dl>
+<dt>Command-Line Name: <b><a name="M72">-text</a></b></dt>
+
+<dt>Database Name: <b><a href="../TkCmd/text.htm">text</a></b></dt>
+
+<dt>Database Class: <b><a href=
+"../TkCmd/text.htm">Text</a></b></dt>
+
+<dd>The textual label to display for the item.</dd>
+
+<dt>Command-Line Name: <b><a name="M73">-image</a></b></dt>
+
+<dt>Database Name: <b><a href=
+"../TkCmd/image.htm">image</a></b></dt>
+
+<dt>Database Class: <b><a href=
+"../TkCmd/image.htm">Image</a></b></dt>
+
+<dd>A Tk image, displayed to the left of the label.</dd>
+
+<dt>Command-Line Name: <b><a name="M74">-values</a></b></dt>
+
+<dt>Database Name: <b>values</b></dt>
+
+<dt>Database Class: <b>Values</b></dt>
+
+<dd>The list of values associated with the item.</dd>
+</dl>
+
+<dl>
+<dd>
+<p>Each item should have the same number of values as the
+<b>-columns</b> widget option. If there are fewer values than
+columns, the remaining values are assumed empty. If there are more
+values than columns, the extra values are ignored.</p>
+</dd>
+</dl>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M75">-open</a></b></dt>
+
+<dt>Database Name: <b><a href=
+"../TclCmd/open.htm">open</a></b></dt>
+
+<dt>Database Class: <b><a href=
+"../TclCmd/open.htm">Open</a></b></dt>
+
+<dd>A boolean value indicating whether the item's children should
+be displayed (<b>-open true</b>) or hidden (<b>-open
+false</b>).</dd>
+
+<dt>Command-Line Name: <b><a name="M76">-tags</a></b></dt>
+
+<dt>Database Name: <b>tags</b></dt>
+
+<dt>Database Class: <b>Tags</b></dt>
+
+<dd>A list of tags associated with this item.</dd>
+</dl>
+
+<h3><a name="M77">TAG OPTIONS</a></h3>
+
+The following options may be specified on tags: 
+
+<dl class="tag options">
+<dt><a name="M78"><b>-foreground</b></a></dt>
+
+<dd>Specifies the text foreground color.</dd>
+
+<dt><a name="M79"><b>-background</b></a></dt>
+
+<dd>Specifies the cell or item background color.</dd>
+
+<dt><a name="M80"><b>-font</b></a></dt>
+
+<dd>Specifies the font to use when drawing text.</dd>
+
+<dt><a name="M81"><b>-image</b></a></dt>
+
+<dd>Specifies the item image, in case the item's <b>-image</b>
+option is empty.</dd>
+</dl>
+
+<h3><a name="M82">COLUMN IDENTIFIERS</a></h3>
+
+Column identifiers take any of the following forms: 
+
+<dl class="column identifiers">
+<dd>&bull;&nbsp; A symbolic name from the list of
+<b>-columns</b>.</dd>
+
+<dd>&bull;&nbsp; An integer <i>n</i>, specifying the <i>n</i>th
+data column.</dd>
+
+<dd>&bull;&nbsp; A string of the form <b>#</b><i>n</i>, where
+<i>n</i> is an integer, specifying the <i>n</i>th display
+column.</dd>
+</dl>
+
+<p><b>NOTE:</b> Item <b>-values</b> may be displayed in a different
+order than the order in which they are stored.</p>
+
+<p><b>NOTE:</b> Column #0 always refers to the tree column, even if
+<b>-show tree</b> is not specified.</p>
+
+<p>A <i>data column number</i> is an index into an item's
+<b>-values</b> list; a <i>display column number</i> is the column
+number in the tree where the values are displayed. Tree labels are
+displayed in column #0. If <b>-displaycolumns</b> is not set, then
+data column <i>n</i> is displayed in display column
+<b>#</b><i>n+1</i>. Again, <b>column #0 always refers to the tree
+column</b>.</p>
+
+<h3><a name="M83">VIRTUAL EVENTS</a></h3>
+
+The treeview widget generates the following virtual events. 
+
+<dl class="virtual events">
+<dt><a name="M84">&lt;&lt;TreeviewSelect&gt;&gt;</a></dt>
+
+<dd>Generated whenever the selection changes.</dd>
+
+<dt><a name="M85">&lt;&lt;TreeviewOpen&gt;&gt;</a></dt>
+
+<dd>Generated just before setting the focus item to <b>-open
+true</b>.</dd>
+
+<dt><a name="M86">&lt;&lt;TreeviewClose&gt;&gt;</a></dt>
+
+<dd>Generated just after setting the focus item to <b>-open
+false</b>.</dd>
+</dl>
+
+<p>The <b><a href="../TkCmd/focus.htm">focus</a></b> and <b><a
+href="../TkCmd/selection.htm">selection</a></b> widget commands can
+be used to determine the affected item or items.</p>
+
+<h3><a name="M87">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_widget.htm">ttk::widget</a></b>, <b><a
+href="../TkCmd/listbox.htm">listbox</a></b>, <b><a href=
+"../TkCmd/image.htm">image</a></b>, <b><a href=
+"../TkCmd/bind.htm">bind</a></b> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2004 Joe English</div>
+</body>
+</html>
+

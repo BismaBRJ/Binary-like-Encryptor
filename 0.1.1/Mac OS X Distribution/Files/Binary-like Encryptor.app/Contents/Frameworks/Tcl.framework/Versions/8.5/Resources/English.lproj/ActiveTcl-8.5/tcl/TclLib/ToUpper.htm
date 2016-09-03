@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_UtfToUpper manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> ToUpper</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_UniCharToUpper, Tcl_UniCharToLower, Tcl_UniCharToTitle,
+Tcl_UtfToUpper, Tcl_UtfToLower, Tcl_UtfToTitle - routines for
+manipulating the case of Unicode characters and UTF-8 strings 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+<a href="../TclLib/Utf.htm">Tcl_UniChar</a><br>
+<b>Tcl_UniCharToUpper</b>(<i>ch</i>)<br>
+<a href="../TclLib/Utf.htm">Tcl_UniChar</a><br>
+<b>Tcl_UniCharToLower</b>(<i>ch</i>)<br>
+<a href="../TclLib/Utf.htm">Tcl_UniChar</a><br>
+<b>Tcl_UniCharToTitle</b>(<i>ch</i>)<br>
+int<br>
+<b>Tcl_UtfToUpper</b>(<i>str</i>)<br>
+int<br>
+<b>Tcl_UtfToLower</b>(<i>str</i>)<br>
+int<br>
+<b>Tcl_UtfToTitle</b>(<i>str</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>int <b>ch</b> (in)</dt>
+
+<dd>The <a href="../TclLib/Utf.htm">Tcl_UniChar</a> to be
+converted.</dd>
+
+<dt>char <b>*str</b> (in/out)</dt>
+
+<dd>Pointer to UTF-8 string to be converted in place.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+The first three routines convert the case of individual Unicode
+characters: 
+
+<p>If <i>ch</i> represents a lower-case character,
+<b>Tcl_UniCharToUpper</b> returns the corresponding upper-case
+character. If no upper-case character is defined, it returns the
+character unchanged.</p>
+
+<p>If <i>ch</i> represents an upper-case character,
+<b>Tcl_UniCharToLower</b> returns the corresponding lower-case
+character. If no lower-case character is defined, it returns the
+character unchanged.</p>
+
+<p>If <i>ch</i> represents a lower-case character,
+<b>Tcl_UniCharToTitle</b> returns the corresponding title-case
+character. If no title-case character is defined, it returns the
+corresponding upper-case character. If no upper-case character is
+defined, it returns the character unchanged. Title-case is defined
+for a small number of characters that have a different appearance
+when they are at the beginning of a capitalized word.</p>
+
+<p>The next three routines convert the case of UTF-8 strings in
+place in memory:</p>
+
+<p><b>Tcl_UtfToUpper</b> changes every UTF-8 character in
+<i>str</i> to upper-case. Because changing the case of a character
+may change its size, the byte offset of each character in the
+resulting string may differ from its original location.
+<b>Tcl_UtfToUpper</b> writes a null byte at the end of the
+converted string. <b>Tcl_UtfToUpper</b> returns the new length of
+the string in bytes. This new length is guaranteed to be no longer
+than the original string length.</p>
+
+<p><b>Tcl_UtfToLower</b> is the same as <b>Tcl_UtfToUpper</b>
+except it turns each character in the string into its lower-case
+equivalent.</p>
+
+<p><b>Tcl_UtfToTitle</b> is the same as <b>Tcl_UtfToUpper</b>
+except it turns the first character in the string into its
+title-case equivalent and all following characters into their
+lower-case equivalents.</p>
+
+<h3><a name="M6">BUGS</a></h3>
+
+At this time, the case conversions are only defined for the
+ISO8859-1 characters. Unicode characters above 0x00ff are not
+modified by these routines. 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/U.htm#utf">utf</a>, <a href=
+"../Keywords/U.htm#unicode">unicode</a>, <a href=
+"../Keywords/T.htm#toupper">toupper</a>, <a href=
+"../Keywords/T.htm#tolower">tolower</a>, <a href=
+"../Keywords/T.htm#totitle">totitle</a>, <a href=
+"../Keywords/C.htm#case">case</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1997 by Sun Microsystems, Inc.</div>
+</body>
+</html>
+

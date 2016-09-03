@@ -1,0 +1,430 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Tcl &gt;&gt; Tcl C Procedures</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<hr>
+<h3>Tcl &gt;&gt; Tcl C Procedures</h3>
+
+<hr>
+<dl>
+<dt><a name="item15">Tcl C Procedures</a></dt>
+
+<dd>
+<dl>
+<dt><a name="item16">Initialization</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TclLib/AppInit.htm">Tcl_AppInit</a> - perform
+application-specific initialization</dd>
+
+<dd><a href="TclLib/CallDel.htm">Tcl_CallWhenDeleted</a> - Arrange
+for callback when interpreter is deleted</dd>
+
+<dd><a href="TclLib/CrtInterp.htm">Tcl_CreateInterp</a> - create
+and delete Tcl command interpreters</dd>
+
+<dd><a href="TclLib/CrtSlave.htm">Tcl_CreateSlave</a> - manage
+multiple Tcl interpreters, aliases and hidden commands</dd>
+
+<dd><a href="TclLib/Exit.htm">Tcl_Exit</a> - end the application or
+thread (and invoke exit handlers)</dd>
+
+<dd><a href="TclLib/FindExec.htm">Tcl_FindExecutable</a> - identify
+or return the name of the binary file containing the
+application</dd>
+
+<dd><a href="TclLib/GetVersion.htm">Tcl_GetVersion</a> - get the
+version of the library at runtime</dd>
+
+<dd><a href="TclLib/Init.htm">Tcl_Init</a> - find and source
+initialization script</dd>
+
+<dd><a href="TclLib/InitStubs.htm">Tcl_InitStubs</a> - initialize
+the Tcl stubs mechanism</dd>
+
+<dd><a href="TclLib/Interp.htm">Tcl_Interp</a> - client-visible
+fields of interpreter structures</dd>
+
+<dd><a href="TclLib/PkgRequire.htm">Tcl_PkgRequire</a> - package
+version control</dd>
+
+<dd><a href="TclLib/SourceRCFile.htm">Tcl_SourceRCFile</a> - source
+the Tcl rc file</dd>
+
+<dd><a href="TclLib/StaticPkg.htm">Tcl_StaticPackage</a> - make a
+statically linked package available via the 'load' command</dd>
+
+<dd><a href="TclLib/Tcl_Main.htm">Tcl_Main</a> - main program and
+event loop definition for Tcl-based applications</dd>
+</dl>
+</dd>
+
+<dt><a name="item17">Utilities</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TclLib/Alloc.htm">Tcl_Alloc</a> - allocate or free
+heap memory</dd>
+
+<dd><a href="TclLib/AssocData.htm">Tcl_SetAssocData</a> - manage
+associations of string keys and user specified data with Tcl
+interpreters</dd>
+
+<dd><a href="TclLib/Concat.htm">Tcl_Concat</a> - concatenate a
+collection of strings</dd>
+
+<dd><a href="TclLib/DString.htm">Tcl_DString</a> - manipulate
+dynamic strings</dd>
+
+<dd><a href="TclLib/Encoding.htm">Tcl_GetEncoding</a> - procedures
+for creating and using encodings</dd>
+
+<dd><a href="TclLib/GetIndex.htm">Tcl_GetIndexFromObj</a> - lookup
+string in table of keywords</dd>
+
+<dd><a href="TclLib/GetInt.htm">Tcl_GetInt</a> - convert from
+string to integer, double, or boolean</dd>
+
+<dd><a href="TclLib/Hash.htm">Tcl_InitHashTable</a> - procedures to
+manage hash tables</dd>
+
+<dd><a href="TclLib/Preserve.htm">Tcl_Preserve</a> - avoid freeing
+storage while it is being used</dd>
+
+<dd><a href="TclLib/PrintDbl.htm">Tcl_PrintDouble</a> - Convert
+floating value to string</dd>
+
+<dd><a href="TclLib/RegConfig.htm">Tcl_RegisterConfig</a> -
+procedures to register embedded configuration information</dd>
+
+<dd><a href="TclLib/RegExp.htm">Tcl_RegExpMatch</a> - Pattern
+matching with regular expressions</dd>
+
+<dd><a href="TclLib/SetChanErr.htm">Tcl_SetChannelError</a> -
+functions to create/intercept Tcl errors by channel drivers.</dd>
+
+<dd><a href="TclLib/SplitList.htm">Tcl_SplitList</a> - manipulate
+Tcl lists</dd>
+
+<dd><a href="TclLib/SplitPath.htm">Tcl_SplitPath</a> - manipulate
+platform-dependent file paths</dd>
+
+<dd><a href="TclLib/StrMatch.htm">Tcl_StringMatch</a> - test
+whether a string matches a pattern</dd>
+
+<dd><a href="TclLib/ToUpper.htm">Tcl_UtfToUpper</a> - routines for
+manipulating the case of Unicode characters and UTF-8 strings</dd>
+
+<dd><a href="TclLib/UniCharIsAlpha.htm">Tcl_UniCharIsAlpha</a> -
+routines for classification of Tcl_UniChar characters</dd>
+
+<dd><a href="TclLib/Utf.htm">Utf</a> - routines for manipulating
+UTF-8 strings</dd>
+
+<dd><a href="TclLib/WrongNumArgs.htm">Tcl_WrongNumArgs</a> -
+generate standard error message for wrong number of arguments</dd>
+</dl>
+</dd>
+
+<dt><a name="item18">Namespaces</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TclLib/Namespace.htm">Tcl_AppendExportList</a> -
+manipulate namespaces</dd>
+</dl>
+</dd>
+
+<dt><a name="item19">Input and Output</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TclLib/ChnlStack.htm">Tcl_StackChannel</a> -
+manipulate stacked I/O channels</dd>
+
+<dd><a href="TclLib/CrtChannel.htm">Tcl_CreateChannel</a> -
+procedures for creating and manipulating channels</dd>
+
+<dd><a href="TclLib/CrtChnlHdlr.htm">Tcl_CreateChannelHandler</a> -
+call a procedure when a channel becomes readable or writable</dd>
+
+<dd><a href="TclLib/CrtCloseHdlr.htm">Tcl_CreateCloseHandler</a> -
+arrange for callbacks when channels are closed</dd>
+
+<dd><a href="TclLib/CrtFileHdlr.htm">Tcl_CreateFileHandler</a> -
+associate procedure callbacks with files or devices (Unix
+only)</dd>
+
+<dd><a href="TclLib/FileSystem.htm">Tcl_FSRegister</a> - procedures
+to interact with any filesystem</dd>
+
+<dd><a href="TclLib/GetOpnFl.htm">Tcl_GetOpenFile</a> - Return a
+FILE* for a channel registered in the given interpreter (Unix
+only)</dd>
+
+<dd><a href="TclLib/GetStdChan.htm">Tcl_GetStdChannel</a> -
+procedures for retrieving and replacing the standard channels</dd>
+
+<dd><a href="TclLib/OpenFileChnl.htm">Tcl_OpenFileChannel</a> -
+buffered I/O facilities using channels</dd>
+
+<dd><a href="TclLib/OpenTcp.htm">Tcl_OpenTcpClient</a> - procedures
+to open channels using TCP sockets</dd>
+</dl>
+</dd>
+
+<dt><a name="item20">The Event Loop</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TclLib/Async.htm">Tcl_AsyncCreate</a> - handle
+asynchronous events</dd>
+
+<dd><a href="TclLib/CrtTimerHdlr.htm">Tcl_CreateTimerHandler</a> -
+call a procedure at a given time</dd>
+
+<dd><a href="TclLib/DoOneEvent.htm">Tcl_DoOneEvent</a> - wait for
+events and invoke event handlers</dd>
+
+<dd><a href="TclLib/DoWhenIdle.htm">Tcl_DoWhenIdle</a> - invoke a
+procedure when there are no pending events</dd>
+
+<dd><a href="TclLib/Notifier.htm">Notifier</a> - the event queue
+and notifier interfaces</dd>
+
+<dd><a href="TclLib/Sleep.htm">Tcl_Sleep</a> - delay execution for
+a given number of milliseconds</dd>
+
+<dd><a href="TclLib/Thread.htm">Thread</a> - Tcl thread
+support</dd>
+</dl>
+</dd>
+
+<dt><a name="item21">Objects</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TclLib/BoolObj.htm">Tcl_BooleanObj</a> -
+store/retrieve boolean value in a Tcl_Obj</dd>
+
+<dd><a href="TclLib/ByteArrObj.htm">Tcl_ByteArrayObj</a> -
+manipulate Tcl objects as a arrays of bytes</dd>
+
+<dd><a href="TclLib/DictObj.htm">Tcl_DictObj</a> - manipulate Tcl
+objects as dictionaries</dd>
+
+<dd><a href="TclLib/DoubleObj.htm">Tcl_DoubleObj</a> - manipulate
+Tcl objects as floating-point values</dd>
+
+<dd><a href="TclLib/IntObj.htm">Tcl_IntObj</a> - manipulate Tcl
+objects as integer values</dd>
+
+<dd><a href="TclLib/ListObj.htm">Tcl_ListObj</a> - manipulate Tcl
+objects as lists</dd>
+
+<dd><a href="TclLib/Object.htm">Tcl_NewObj</a> - manipulate Tcl
+objects</dd>
+
+<dd><a href="TclLib/ObjectType.htm">Tcl_RegisterObjType</a> -
+manipulate Tcl object types</dd>
+
+<dd><a href="TclLib/StringObj.htm">Tcl_StringObj</a> - manipulate
+Tcl objects as strings</dd>
+</dl>
+</dd>
+
+<dt><a name="item22">Invoking the Interpreter</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TclLib/AllowExc.htm">Tcl_AllowExceptions</a> - allow
+all exceptions in next script evaluation</dd>
+
+<dd><a href="TclLib/Backslash.htm">Tcl_Backslash</a> - parse a
+backslash sequence</dd>
+
+<dd><a href="TclLib/CmdCmplt.htm">Tcl_CommandComplete</a> - Check
+for unmatched braces in a Tcl command</dd>
+
+<dd><a href="TclLib/Ensemble.htm">Tcl_CreateEnsemble</a> -
+manipulate ensemble commands</dd>
+
+<dd><a href="TclLib/Eval.htm">Tcl_Eval</a> - execute Tcl
+scripts</dd>
+
+<dd><a href="TclLib/ExprLong.htm">Tcl_ExprLong</a> - evaluate an
+expression</dd>
+
+<dd><a href="TclLib/ExprLongObj.htm">Tcl_ExprLongObj</a> - evaluate
+an expression</dd>
+
+<dd><a href="TclLib/ParseCmd.htm">Tcl_ParseCommand</a> - parse Tcl
+scripts and expressions</dd>
+
+<dd><a href="TclLib/RecEvalObj.htm">Tcl_RecordAndEvalObj</a> - save
+command on history list before evaluating</dd>
+
+<dd><a href="TclLib/RecordEval.htm">Tcl_RecordAndEval</a> - save
+command on history list before evaluating</dd>
+
+<dd><a href="TclLib/SetRecLmt.htm">Tcl_SetRecursionLimit</a> - set
+maximum allowable nesting depth in interpreter</dd>
+
+<dd><a href="TclLib/SubstObj.htm">Tcl_SubstObj</a> - perform
+substitutions on Tcl objects</dd>
+</dl>
+</dd>
+
+<dt><a name="item23">Resource Limits</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TclLib/Limit.htm">Tcl_LimitAddHandler</a> - manage and
+check resource limits on interpreters</dd>
+</dl>
+</dd>
+
+<dt><a name="item24">Commands</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TclLib/AddErrInfo.htm">Tcl_AddErrorInfo</a> - retrieve
+or record information about errors and other return options</dd>
+
+<dd><a href="TclLib/BackgdErr.htm">Tcl_BackgroundError</a> - report
+Tcl error that occurred in background processing</dd>
+
+<dd><a href="TclLib/CrtCommand.htm">Tcl_CreateCommand</a> -
+implement new commands in C</dd>
+
+<dd><a href="TclLib/CrtMathFnc.htm">Tcl_CreateMathFunc</a> -
+Define, query and enumerate math functions for expressions</dd>
+
+<dd><a href="TclLib/CrtObjCmd.htm">Tcl_CreateObjCommand</a> -
+implement new commands in C</dd>
+
+<dd><a href="TclLib/Panic.htm">Tcl_Panic</a> - report fatal error
+and abort</dd>
+
+<dd><a href="TclLib/SaveResult.htm">Tcl_SaveResult</a> - save and
+restore an interpreter's state</dd>
+
+<dd><a href="TclLib/SetErrno.htm">Tcl_SetErrno</a> - manipulate
+errno to store and retrieve error codes</dd>
+
+<dd><a href="TclLib/SetResult.htm">Tcl_SetResult</a> - manipulate
+Tcl result</dd>
+</dl>
+</dd>
+
+<dt><a name="item25">Variables</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TclLib/CrtTrace.htm">Tcl_CreateTrace</a> - arrange for
+command execution to be traced</dd>
+
+<dd><a href="TclLib/LinkVar.htm">Tcl_LinkVar</a> - link Tcl
+variable to C variable</dd>
+
+<dd><a href="TclLib/SetVar.htm">Tcl_SetVar</a> - manipulate Tcl
+variables</dd>
+
+<dd><a href="TclLib/TraceCmd.htm">Tcl_TraceCommand</a> - monitor
+renames and deletes of a command</dd>
+
+<dd><a href="TclLib/TraceVar.htm">Tcl_TraceVar</a> - monitor
+accesses to a variable</dd>
+
+<dd><a href="TclLib/UpVar.htm">Tcl_UpVar</a> - link one variable to
+another</dd>
+</dl>
+</dd>
+
+<dt><a name="item26">Operating System Interface</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TclLib/Access.htm">Tcl_Access</a> - check file
+permissions and other attributes</dd>
+
+<dd><a href="TclLib/DetachPids.htm">Tcl_DetachPids</a> - manage
+child processes in background</dd>
+
+<dd><a href="TclLib/Environment.htm">Tcl_PutEnv</a> - procedures to
+manipulate the environment</dd>
+
+<dd><a href="TclLib/GetCwd.htm">Tcl_GetCwd</a> - manipulate the
+current working directory</dd>
+
+<dd><a href="TclLib/GetHostName.htm">Tcl_GetHostName</a> - get the
+name of the local host</dd>
+
+<dd><a href="TclLib/GetTime.htm">Tcl_GetTime</a> - get date and
+time</dd>
+
+<dd><a href="TclLib/Signal.htm">Tcl_SignalId</a> - Convert signal
+codes</dd>
+
+<dd><a href="TclLib/Translate.htm">Tcl_TranslateFileName</a> -
+convert file name to native form and replace tilde with home
+directory</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<hr>
+<pre>
+<a href=
+"copyright.htm">Copyright</a> &copy; 1989-1994 The Regents of the University of California.
+<a href=
+"copyright.htm">Copyright</a> &copy; 1990-1994 The Regents of the University of California
+<a href=
+"copyright.htm">Copyright</a> &copy; 1992-1999 Karl Lehenbauer and Mark Diekhans
+<a href=
+"copyright.htm">Copyright</a> &copy; 1992-1999 Karl Lehenbauer and Mark Diekhans.
+<a href=
+"copyright.htm">Copyright</a> &copy; 1993-1997 Bell Labs Innovations for Lucent Technologies
+<a href=
+"copyright.htm">Copyright</a> &copy; 1994 The Australian National University
+<a href=
+"copyright.htm">Copyright</a> &copy; 1994-2000 Sun Microsystems, Inc.
+<a href=
+"copyright.htm">Copyright</a> &copy; 1997-2000 Ajuba Solutions.
+<a href=
+"copyright.htm">Copyright</a> &copy; 1997-2000 Scriptics Corporation.
+<a href="copyright.htm">Copyright</a> &copy; 1998 Mark Harrison.
+<a href=
+"copyright.htm">Copyright</a> &copy; 1998-1999 Scriptics Corporation
+<a href=
+"copyright.htm">Copyright</a> &copy; 1998-1999 Scriptics Corportation
+<a href=
+"copyright.htm">Copyright</a> &copy; 1995-1997 Roger E. Critchlow Jr.
+</pre>
+</body>
+</html>
+

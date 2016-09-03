@@ -1,0 +1,445 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - tm manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> tm</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="tm.htm#M2" name="L1812">NAME</a> 
+
+<dl>
+<dd>tm - Facilities for locating and loading of Tcl Modules</dd>
+</dl>
+</dd>
+
+<dd><a href="tm.htm#M3" name="L1813">SYNOPSIS</a> 
+
+<dl>
+<dd><b>::tcl::tm::path add</b> ?<i>path</i>...?</dd>
+
+<dd><b>::tcl::tm::path remove</b> ?<i>path</i>...?</dd>
+
+<dd><b>::tcl::tm::path list</b></dd>
+
+<dd><b>::tcl::tm::roots</b> ?<i>path</i>...?</dd>
+</dl>
+</dd>
+
+<dd><a href="tm.htm#M4" name="L1814">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="tm.htm#M5" name="L1815"><b>::tcl::tm::path add</b>
+?<i>path</i>...?</a></dd>
+
+<dd><a href="tm.htm#M6" name="L1816"><b>::tcl::tm::path remove</b>
+?<i>path</i>...?</a></dd>
+
+<dd><a href="tm.htm#M7" name="L1817"><b>::tcl::tm::path
+list</b></a></dd>
+
+<dd><a href="tm.htm#M8" name="L1818"><b>::tcl::tm::roots</b>
+?<i>path</i>...?</a></dd>
+</dl>
+</dd>
+
+<dd><a href="tm.htm#M9" name="L1819">MODULE DEFINITION</a></dd>
+
+<dd><a href="tm.htm#M10" name="L1820">FINDING MODULES</a></dd>
+
+<dd><a href="tm.htm#M11" name="L1821">DEFAULT PATHS</a></dd>
+
+<dd><a href="tm.htm#M12" name="L1822">SYSTEM SPECIFIC PATHS</a> 
+
+<dl class="system specific paths">
+<dd><a href="tm.htm#M13" name="L1823"><b>file normalize [info
+library]/../tcl</b><i>X</i><b>/</b><i>X</i><b>.</b><i>y</i></a></dd>
+
+<dd><a href="tm.htm#M14" name="L1824"><b>file normalize
+EXEC/tcl</b><i>X</i><b>/</b><i>X</i><b>.</b><i>y</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="tm.htm#M15" name="L1825">SITE SPECIFIC PATHS</a> 
+
+<dl class="site specific paths">
+<dd><a href="tm.htm#M16" name="L1826"><b>file normalize [info
+library]/../tcl</b><i>X</i><b>/site-tcl</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="tm.htm#M17" name="L1827">USER SPECIFIC PATHS</a> 
+
+<dl class="user specific paths">
+<dd><a href="tm.htm#M18" name=
+"L1828"><b>$::env(TCL</b><i>X</i><b>_</b><i>y</i><b>_TM_PATH)</b></a></dd>
+
+<dd><a href="tm.htm#M19" name=
+"L1829"><b>$::env(TCL</b><i>X</i><b>.</b><i>y</i><b>_TM_PATH)</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="tm.htm#M20" name="L1830">SEE ALSO</a></dd>
+
+<dd><a href="tm.htm#M21" name="L1831">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+tm - Facilities for locating and loading of Tcl Modules 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>::tcl::tm::path add</b> ?<i>path</i>...?<br>
+<b>::tcl::tm::path remove</b> ?<i>path</i>...?<br>
+<b>::tcl::tm::path list</b><br>
+<b>::tcl::tm::roots</b> ?<i>path</i>...?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This document describes the facilities for locating and loading Tcl
+Modules (see <b>MODULE DEFINITION</b> for the definition of a Tcl
+Module). The following commands are supported: 
+
+<dl class="description">
+<dt><a name="M5"><b>::tcl::tm::path add</b>
+?<i>path</i>...?</a></dt>
+
+<dd>The paths are added at the head to the list of module paths, in
+order of appearance. This means that the last argument ends up as
+the new head of the list. 
+
+<p>The command enforces the restriction that no path may be an
+ancestor directory of any other path on the list. If any of the new
+paths violates this restriction an error will be raised, before any
+of the paths have been added. In other words, if only one path
+argument violates the restriction then none will be added.</p>
+
+<p>If a path is already present as is, no error will be raised and
+no action will be taken.</p>
+
+<p>Paths are searched later in the order of their appearance in the
+list. As they are added to the front of the list they are searched
+in reverse order of addition. In other words, the paths added last
+are looked at first.</p>
+</dd>
+
+<dt><a name="M6"><b>::tcl::tm::path remove</b>
+?<i>path</i>...?</a></dt>
+
+<dd>Removes the paths from the list of module paths. The command
+silently ignores all paths which are not on the list.</dd>
+
+<dt><a name="M7"><b>::tcl::tm::path list</b></a></dt>
+
+<dd>Returns a list containing all registered module paths, in the
+order that they are searched for modules.</dd>
+
+<dt><a name="M8"><b>::tcl::tm::roots</b> ?<i>path</i>...?</a></dt>
+
+<dd>Similar to <b>path add</b>, and layered on top of it. This
+command takes a list of paths, extends each with
+&ldquo;<b>tcl</b><i>X</i><b>/site-tcl</b>&rdquo;, and
+&ldquo;<b>tcl</b><i>X</i><b>/</b><i>X</i><b>.</b><i>y</i>&rdquo;,
+for major version <i>X</i> of the Tcl interpreter and minor version
+<i>y</i> less than or equal to the minor version of the
+interpreter, and adds the resulting set of paths to the list of
+paths to search. 
+
+<p>This command is used internally by the system to set up the
+system-specific default paths.</p>
+
+<p>The command has been exposed to allow a build system to define
+additional root paths beyond those described by this document.</p>
+</dd>
+</dl>
+
+<h3><a name="M9">MODULE DEFINITION</a></h3>
+
+A Tcl Module is a Tcl Package contained in a single file, and no
+other files required by it. This file has to be <b><a href=
+"../TclCmd/source.htm">source</a></b>able. In other words, a Tcl
+Module is always imported via: 
+
+<pre>
+source module_file
+</pre>
+
+<p>The <b><a href="../TclCmd/load.htm">load</a></b> command is not
+directly used. This restriction is not an actual limitation, as
+some may believe. Ever since 8.4 the Tcl <b><a href=
+"../TclCmd/source.htm">source</a></b> command reads only until the
+first ^Z character. This allows us to combine an arbitrary Tcl
+script with arbitrary binary data into one file, where the script
+processes the attached data in any it chooses to fully import and
+activate the package.</p>
+
+<p>The name of a module file has to match the regular
+expression:</p>
+
+<pre>
+([_[:alpha:]][:_[:alnum:]]*)-([[:digit:]].*)\.tm
+</pre>
+
+<p>The first capturing parentheses provides the name of the
+package, the second clause its version. In addition to matching the
+pattern, the extracted version number must not raise an error when
+used in the command:</p>
+
+<pre>
+package vcompare $version 0
+</pre>
+
+<h3><a name="M10">FINDING MODULES</a></h3>
+
+The directory tree for storing Tcl modules is separate from other
+parts of the filesystem and independent of <b>auto_path</b>. 
+
+<p>Tcl Modules are searched for in all directories listed in the
+result of the command <b>::tcl::tm::path list</b>. This is called
+the <i>Module path</i>. Neither the <b>auto_path</b> nor the
+<b>tcl_pkgPath</b> variables are used. All directories on the
+module path have to obey one restriction:</p>
+
+<dl>
+<dd>
+<p>For any two directories, neither is an ancestor directory of the
+other.</p>
+</dd>
+</dl>
+
+<p>This is required to avoid ambiguities in package naming. If for
+example the two directories &ldquo;<i>foo/</i>&rdquo; and
+&ldquo;<i>foo/cool</i>&rdquo; were on the path a package named
+<b>cool::ice</b> could be found via the names <b>cool::ice</b> or
+<b>ice</b>, the latter potentially obscuring a package named
+<b>ice</b>, unqualified.</p>
+
+<p>Before the search is started, the name of the requested package
+is translated into a partial path, using the following
+algorithm:</p>
+
+<dl>
+<dd>
+<p>All occurrences of &ldquo;<b>::</b>&rdquo; in the package name
+are replaced by the appropriate directory separator character for
+the platform we are on. On Unix, for example, this is
+&ldquo;<b>/</b>&rdquo;.</p>
+</dd>
+</dl>
+
+<p>Example:</p>
+
+<dl>
+<dd>
+<p>The requested package is <b>encoding::base64</b>. The generated
+partial path is &ldquo;<i>encoding/base64</i>&rdquo;.</p>
+</dd>
+</dl>
+
+<p>After this translation the package is looked for in all module
+paths, by combining them one-by-one, first to last with the partial
+path to form a complete search pattern. Note that the search
+algorithm rejects all files where the filename does not match the
+regular expression given in the section <b>MODULE DEFINITION</b>.
+For the remaining files <i>provide scripts</i> are generated and
+added to the package ifneeded database.</p>
+
+<p>The algorithm falls back to the previous unknown handler when
+none of the found module files satisfy the request. If the request
+was satisfied the fall-back is ignored.</p>
+
+<p>Note that packages in module form have <i>no</i> control over
+the <i>index</i> and <i>provide script</i>s entered into the
+package database for them. For a module file <b>MF</b> the <i>index
+script</i> is always:</p>
+
+<pre>
+package ifneeded <b>PNAME PVERSION</b> [list source <b>MF</b>]
+</pre>
+
+and the <i>provide script</i> embedded in the above is: 
+
+<pre>
+source <b>MF</b>
+</pre>
+
+<p>Both package name <b>PNAME</b> and package version
+<b>PVERSION</b> are extracted from the filename <b>MF</b> according
+to the definition below:</p>
+
+<pre>
+<b>MF</b> = /module_path/<b>PNAME&prime;</b>-<b>PVERSION</b>.tm
+</pre>
+
+<p>Where <b>PNAME&prime;</b> is the partial path of the module as
+defined in section <b>FINDING MODULES</b>, and translated into
+<b>PNAME</b> by changing all directory separators to
+&ldquo;<b>::</b>&rdquo;, and <b>module_path</b> is the path (from
+the list of paths to search) that we found the module file
+under.</p>
+
+<p>Note also that we are here creating a connection between package
+names and paths. Tcl is case-sensitive when it comes to comparing
+package names, but there are filesystems which are not, like NTFS.
+Luckily these filesystems do store the case of the name, despite
+not using the information when comparing.</p>
+
+<p>Given the above we allow the names for packages in Tcl modules
+to have mixed-case, but also require that there are no collisions
+when comparing names in a case-insensitive manner. In other words,
+if a package <b>Foo</b> is deployed in the form of a Tcl Module,
+packages like <b>foo</b>, <b>fOo</b>, etc. are not allowed
+anymore.</p>
+
+<h3><a name="M11">DEFAULT PATHS</a></h3>
+
+The default list of paths on the module path is computed by a <b><a
+href="../UserCmd/tclsh.htm">tclsh</a></b> as follows, where
+<i>X</i> is the major version of the Tcl interpreter and <i>y</i>
+is less than or equal to the minor version of the Tcl interpreter. 
+
+<p>All the default paths are added to the module path, even those
+paths which do not exist. Non-existent paths are filtered out
+during actual searches. This enables a user to create one of the
+paths searched when needed and all running applications will
+automatically pick up any modules placed in them.</p>
+
+<p>The paths are added in the order as they are listed below, and
+for lists of paths defined by an environment variable in the order
+they are found in the variable.</p>
+
+<h4><a name="M12">SYSTEM SPECIFIC PATHS</a></h4>
+
+<dl class="system specific paths">
+<dt><a name="M13"><b>file normalize [info
+library]/../tcl</b><i>X</i><b>/</b><i>X</i><b>.</b><i>y</i></a></dt>
+
+<dd>In other words, the interpreter will look into a directory
+specified by its major version and whose minor versions are less
+than or equal to the minor version of the interpreter. 
+
+<p>For example for Tcl 8.4 the paths searched are:</p>
+
+<pre>
+<b>[info library]/../tcl8/8.4</b>
+<b>[info library]/../tcl8/8.3</b>
+<b>[info library]/../tcl8/8.2</b>
+<b>[info library]/../tcl8/8.1</b>
+<b>[info library]/../tcl8/8.0</b>
+</pre>
+
+<p>This definition assumes that a package defined for Tcl
+<i>X</i><b>.</b><i>y</i> can also be used by all interpreters which
+have the same major number <i>X</i> and a minor number greater than
+<i>y</i>.</p>
+</dd>
+
+<dt><a name="M14"><b>file normalize
+EXEC/tcl</b><i>X</i><b>/</b><i>X</i><b>.</b><i>y</i></a></dt>
+
+<dd>Where <b><a href="../TclCmd/exec.htm">EXEC</a></b> is <b>file
+normalize [info nameofexecutable]/../lib</b> or <b>file normalize
+[::tcl::pkgconfig get libdir,runtime]</b> 
+
+<p>This sets of paths is handled equivalently to the set coming
+before, except that it is anchored in <b>EXEC_PREFIX</b>. For a
+build with <b>PREFIX</b> = <b>EXEC_PREFIX</b> the two sets are
+identical.</p>
+</dd>
+</dl>
+
+<h4><a name="M15">SITE SPECIFIC PATHS</a></h4>
+
+<dl class="site specific paths">
+<dt><a name="M16"><b>file normalize [info
+library]/../tcl</b><i>X</i><b>/site-tcl</b></a></dt>
+
+<dd>Note that this is always a single entry because <i>X</i> is
+always a specific value (the current major version of Tcl).</dd>
+</dl>
+
+<h4><a name="M17">USER SPECIFIC PATHS</a></h4>
+
+<dl class="user specific paths">
+<dt><a name=
+"M18"><b>$::env(TCL</b><i>X</i><b>_</b><i>y</i><b>_TM_PATH)</b></a></dt>
+
+<dd>A list of paths, separated by either <b>:</b> (Unix) or
+<b>;</b> (Windows). This is user and site specific as this
+environment variable can be set not only by the user's profile, but
+by system configuration scripts as well.</dd>
+
+<dt><a name=
+"M19"><b>$::env(TCL</b><i>X</i><b>.</b><i>y</i><b>_TM_PATH)</b></a></dt>
+
+<dd>Same meaning and content as the previous variable. However the
+use of dot '.' to separate major and minor version number makes
+this name less to non-portable and its use is discouraged. Support
+of this variable has been kept only for backward compatibility with
+the original specification, i.e. TIP 189.</dd>
+</dl>
+
+<p>These paths are seen and therefore shared by all Tcl shells in
+the <b>$::env(PATH)</b> of the user.</p>
+
+<p>Note that <i>X</i> and <i>y</i> follow the general rules set out
+above. In other words, Tcl 8.4, for example, will look at these 5
+environment variables:</p>
+
+<pre>
+<b>$::env(TCL8.4_TM_PATH)</b>  <b>$::env(TCL8_4_TM_PATH)</b>
+<b>$::env(TCL8.3_TM_PATH)</b>  <b>$::env(TCL8_3_TM_PATH)</b>
+<b>$::env(TCL8.2_TM_PATH)</b>  <b>$::env(TCL8_2_TM_PATH)</b>
+<b>$::env(TCL8.1_TM_PATH)</b>  <b>$::env(TCL8_1_TM_PATH)</b>
+<b>$::env(TCL8.0_TM_PATH)</b>  <b>$::env(TCL8_0_TM_PATH)</b>
+</pre>
+
+<h3><a name="M20">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/package.htm">package</a></b>, <b>Tcl
+Improvement Proposal #189</b> <b>&ldquo;<i>Tcl Modules</i>&rdquo;
+(online at http://tip.tcl.tk/189.html)</b>, <b>Tcl Improvement
+Proposal #190</b> <b>&ldquo;<i>Implementation Choices for Tcl
+Modules</i>&rdquo; (online at http://tip.tcl.tk/190.html)</b> 
+
+<h3><a name="M21">KEYWORDS</a></h3>
+
+<a href="../Keywords/M.htm#modules">modules</a>, <a href=
+"../Keywords/P.htm#package">package</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2004-2010 Andreas Kupries
+&lt;andreas_kupries(at)users.sourceforge.net&gt;</div>
+</body>
+</html>
+

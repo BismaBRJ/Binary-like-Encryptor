@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>XOTcl - Documentation --
+xotcl/library/store/Persistence.xotcl</title>
+<link rel="StyleSheet" href="xotcl-doc.css" type="text/css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1><img src="./logo-100.jpg" alt=
+"xotcl/library/store/Persistence.xotcl" align="MIDDLE">
+xotcl/library/store/Persistence.xotcl</h1>
+
+<hr>
+<h2>Package/File Information</h2>
+
+<b>No package provided/required</b> <br>
+ <br>
+ <b>Defined Objects/Classes:</b> 
+
+<ul>
+<li><a href="#PersistenceMgr"><em>PersistenceMgr</em>:</a><br>
+</li>
+
+<li><a href="#Persistent"><em>Persistent</em>:</a> <a href=
+"#Persistent-makeVarScript">makeVarScript</a>, <a href=
+"#Persistent-persistenceMgr">persistenceMgr</a>, <a href=
+"#Persistent-persistent">persistent</a>, <a href=
+"#Persistent-persistent+init">persistent+init</a>, <a href=
+"#Persistent-persistentVars">persistentVars</a>, <a href=
+"#Persistent-unPersistent">unPersistent</a>.<br>
+</li>
+
+<li><a href="#Persistent=Eager"><em>Persistent=Eager</em>:</a><br>
+</li>
+
+<li><a href="#Persistent=Lazy"><em>Persistent=Lazy</em>:</a><br>
+</li>
+</ul>
+
+<br>
+ <b>Filename:</b> <a href=
+"xotcl/library/store/Persistence.xotcl">xotcl/library/store/Persistence.xotcl</a>
+<br>
+ <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Persistent store for XOTcl objects with Eager and
+Lazy persistence. Take a look at "persistenceExample.xotcl" for
+exmaple of usage.</td>
+</tr>
+</table>
+
+<br>
+ 
+
+<hr>
+<p><a name="PersistenceMgr"></a></p>
+
+<h2>Class: <em>PersistenceMgr</em></h2>
+
+<b>Class</b>: Class <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">A persistent store requires a persistent manager.
+The persistent manager implements the Storage interface via storage
+mixin. With the parameter "dbPackage" we can specify which storage
+will be used. The persistent manager than tries to load the package
+"xotcl::${dbPackage}Storage". Default is Sdbm. Example: 
+
+<pre>
+        PersistenceMgr pmgr -persistenceDir . -persistenceFile example-db
+       
+</pre>
+</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="Persistent"></a></p>
+
+<h2>Class: <em>Persistent</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Procs/Instprocs:</b> <a href=
+"#Persistent-makeVarScript">makeVarScript</a>, <a href=
+"#Persistent-persistenceMgr">persistenceMgr</a>, <a href=
+"#Persistent-persistent">persistent</a>, <a href=
+"#Persistent-persistent+init">persistent+init</a>, <a href=
+"#Persistent-persistentVars">persistentVars</a>, <a href=
+"#Persistent-unPersistent">unPersistent</a>. 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Superclass or mixin class for all persistent
+objects. Normally subclasses are used as mixins or instmixins on
+object, like: 
+
+<pre>
+        o mixin Persistent=Eager
+        p mixin Persistent=Lazy
+       
+</pre>
+</td>
+</tr>
+</table>
+
+<h3>Instprocs</h3>
+
+<ul>
+<li><a name="Persistent-persistenceMgr"></a> <b>persistenceMgr</b>
+<em>args</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>args</b>: persistent manager name</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Specify which persistence manager to use for
+[self] object, like: 
+
+<pre>
+        o persistenceMgr pmgr
+       
+</pre>
+
+Each persistent object must have a persistence manager specified,
+before vars can be made persistent.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Persistent-persistentVars"></a> <b>persistentVars</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Returns list of persistent vars.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Persistent-persistent"></a> <b>persistent</b>
+<em>list</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>list</b>: persistent variables</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Make a list of object variables persistent. If a
+persistent DB exists, the values are read from this DB, overwriting
+the current value. E.g.: 
+
+<pre>
+        o persistent {x y}
+       
+</pre>
+</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Persistent-persistent+init"></a>
+<b>persistent+init</b> <em>list</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>list</b>: persistent variables</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Initialize all data in the list as empty strings,
+if they do not exist yet, and then make them persistent using the
+'persistent' method</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Persistent-unPersistent"></a> <b>unPersistent</b>
+<em>list</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>list</b>: persistent variables</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Make a list of object variables not
+persistent.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Persistent-makeVarScript"></a> <b>makeVarScript</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Build a Tcl script of "set ..." statements
+reflecting the current situation in the database.</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="Persistent=Eager"></a></p>
+
+<h2>Class: <em>Persistent=Eager</em></h2>
+
+<b>Class</b>: Class <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Eager persistence strategy. Store everything at
+the same moment to the database</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="Persistent=Lazy"></a></p>
+
+<h2>Class: <em>Persistent=Lazy</em></h2>
+
+<b>Class</b>: Class <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Lazy persistence strategy. Store everything on
+object destroy (or program termination).</td>
+</tr>
+</table>
+
+<br>
+<br>
+ <br>
+ <br>
+<br>
+ 
+
+<hr>
+<a href="./index.html">Back to index page.</a> <br>
+ 
+
+<hr>
+</body>
+</html>
+

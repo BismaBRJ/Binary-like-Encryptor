@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Tk &gt;&gt; Tk C Procedures</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<hr>
+<h3>Tk &gt;&gt; Tk C Procedures</h3>
+
+<hr>
+<dl>
+<dt><a name="item37">Tk C Procedures</a></dt>
+
+<dd>
+<dl>
+<dt><a name="item38">Initialization</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TkLib/CrtConsoleChan.htm">Tk_InitConsoleChannels</a> -
+Install the console channels as standard channels</dd>
+
+<dd><a href="TkLib/CrtErrHdlr.htm">Tk_CreateErrorHandler</a> -
+handle X protocol errors</dd>
+
+<dd><a href="TkLib/MainLoop.htm">Tk_MainLoop</a> - loop for events
+until all windows are deleted</dd>
+
+<dd><a href="TkLib/MainWin.htm">Tk_MainWindow</a> - functions for
+querying main</dd>
+
+<dd><a href="TkLib/ParseArgv.htm">Tk_ParseArgv</a> - process
+command-line options</dd>
+
+<dd><a href="TkLib/SetAppName.htm">Tk_SetAppName</a> - Set the name
+of an application for 'send' commands</dd>
+
+<dd><a href="TkLib/StrictMotif.htm">Tk_StrictMotif</a> - Return
+value of tk_strictMotif variable</dd>
+
+<dd><a href="TkLib/TkInitStubs.htm">Tk_InitStubs</a> - initialize
+the Tk stubs mechanism</dd>
+
+<dd><a href="TkLib/Tk_Init.htm">Tk_Init</a> - add Tk to an
+interpreter and make a new Tk application.</dd>
+
+<dd><a href="TkLib/Tk_Main.htm">Tk_Main</a> - main program for
+Tk-based applications</dd>
+</dl>
+</dd>
+
+<dt><a name="item39">Widget Implementation</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TkLib/CoordToWin.htm">Tk_CoordsToWindow</a> - Find
+window containing a point</dd>
+
+<dd><a href="TkLib/GeomReq.htm">Tk_GeometryRequest</a> - specify
+desired geometry or internal border for a window</dd>
+
+<dd><a href="TkLib/GetAnchor.htm">Tk_GetAnchorFromObj</a> -
+translate between strings and anchor positions</dd>
+
+<dd><a href="TkLib/GetScroll.htm">Tk_GetScrollInfo</a> - parse
+arguments for scrolling commands</dd>
+
+<dd><a href="TkLib/GetUid.htm">Tk_GetUid</a> - convert from string
+to unique identifier</dd>
+
+<dd><a href="TkLib/MaintGeom.htm">Tk_MaintainGeometry</a> -
+maintain geometry of one window relative to another</dd>
+
+<dd><a href="TkLib/ManageGeom.htm">Tk_ManageGeometry</a> - arrange
+to handle geometry requests for a window</dd>
+
+<dd><a href="TkLib/MapWindow.htm">Tk_MapWindow</a> - map or unmap a
+window</dd>
+
+<dd><a href="TkLib/MoveToplev.htm">Tk_MoveToplevelWindow</a> -
+Adjust the position of a top-level window</dd>
+
+<dd><a href="TkLib/Name.htm">Tk_Name</a> - convert between names
+and window tokens</dd>
+
+<dd><a href="TkLib/Restack.htm">Tk_RestackWindow</a> - Change a
+window's position in the stacking order</dd>
+
+<dd><a href="TkLib/SetClass.htm">Tk_SetClass</a> - set or retrieve
+a window's class</dd>
+
+<dd><a href="TkLib/SetClassProcs.htm">Tk_SetClassProcs</a> -
+register widget specific procedures</dd>
+
+<dd><a href="TkLib/SetGrid.htm">Tk_SetGrid</a> - control the grid
+for interactive resizing</dd>
+
+<dd><a href="TkLib/SetVisual.htm">Tk_SetWindowVisual</a> - change
+visual characteristics of window</dd>
+
+<dd><a href="TkLib/WindowId.htm">Tk_WindowId</a> - retrieve
+information from Tk's local data structure</dd>
+</dl>
+</dd>
+
+<dt><a name="item40">Themed Widget Implementation</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TkLib/ttk_Geometry.htm">Ttk_MakeBox</a> - Tk themed
+geometry utilities</dd>
+
+<dd><a href="TkLib/ttk_Theme.htm">Ttk_CreateTheme</a> - create and
+use Tk themes.</dd>
+</dl>
+</dd>
+
+<dt><a name="item41">Events and Bindings</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TkLib/BindTable.htm">Tk_CreateBindingTable</a> -
+invoke scripts in response to X events</dd>
+
+<dd><a href="TkLib/EventHndlr.htm">Tk_CreateEventHandler</a> -
+associate procedure callback with an X event</dd>
+
+<dd><a href="TkLib/Grab.htm">Tk_Grab</a> - manipulate grab state in
+an application</dd>
+
+<dd><a href="TkLib/HandleEvent.htm">Tk_HandleEvent</a> - invoke
+event handlers for window system events</dd>
+
+<dd><a href="TkLib/Inactive.htm">Tk_GetUserInactiveTime</a> -
+discover user inactivity time</dd>
+
+<dd><a href="TkLib/QWinEvent.htm">Tk_QueueWindowEvent</a> - Add a
+window event to the Tcl event queue</dd>
+
+<dd><a href="TkLib/RestrictEv.htm">Tk_RestrictEvents</a> - filter
+and selectively delay X events</dd>
+
+<dd><a href="TkLib/SetCaret.htm">Tk_SetCaretPos</a> - set the
+display caret location</dd>
+</dl>
+</dd>
+
+<dt><a name="item42">Resources and Options</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TkLib/AddOption.htm">Tk_AddOption</a> - Add an option
+to the option database</dd>
+
+<dd><a href="TkLib/ConfigWidg.htm">Tk_ConfigureWidget</a> - process
+configuration options for widgets</dd>
+
+<dd><a href="TkLib/ConfigWind.htm">Tk_ConfigureWindow</a> - change
+window configuration or attributes</dd>
+
+<dd><a href="TkLib/CrtWindow.htm">Tk_CreateWindow</a> - create or
+delete window</dd>
+
+<dd><a href="TkLib/FontId.htm">Tk_FontId</a> - accessor functions
+for</dd>
+
+<dd><a href="TkLib/GetOption.htm">Tk_GetOption</a> - retrieve an
+option from the option database</dd>
+
+<dd><a href="TkLib/SetOptions.htm">Tk_SetOptions</a> - process
+configuration options</dd>
+</dl>
+</dd>
+
+<dt><a name="item43">Images</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TkLib/CrtImgType.htm">Tk_CreateImageType</a> - define
+new kind of image</dd>
+
+<dd><a href="TkLib/CrtItemType.htm">Tk_CreateItemType</a> - define
+new kind of canvas item</dd>
+
+<dd><a href="TkLib/CrtPhImgFmt.htm">Tk_CreatePhotoImageFormat</a> -
+define new file format for photo images</dd>
+
+<dd><a href="TkLib/DeleteImg.htm">Tk_DeleteImage</a> - Destroy an
+image.</dd>
+
+<dd><a href="TkLib/FindPhoto.htm">Tk_FindPhoto</a> - manipulate the
+image data stored in a photo image.</dd>
+
+<dd><a href="TkLib/GetBitmap.htm">Tk_AllocBitmapFromObj</a> -
+maintain database of single-plane pixmaps</dd>
+
+<dd><a href="TkLib/ImgChanged.htm">Tk_ImageChanged</a> - notify
+widgets that image needs to be redrawn</dd>
+
+<dd><a href="TkLib/NameOfImg.htm">Tk_NameOfImage</a> - Return name
+of image.</dd>
+</dl>
+</dd>
+
+<dt><a name="item44">Canvas Widgets</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TkLib/CanvPsY.htm">Tk_CanvasPs</a> - utility
+procedures for generating Postscript for canvases</dd>
+
+<dd><a href="TkLib/CanvTkwin.htm">Tk_CanvasTkwin</a> - utility
+procedures for canvas type managers</dd>
+
+<dd><a href="TkLib/CanvTxtInfo.htm">Tk_CanvasTextInfo</a> -
+additional information for managing text items in canvases</dd>
+</dl>
+</dd>
+
+<dt><a name="item45">Graphics Routines</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TkLib/3DBorder.htm">Tk_Alloc3DBorderFromObj</a> - draw
+borders with three-dimensional appearance</dd>
+
+<dd><a href="TkLib/DrawFocHlt.htm">Tk_DrawFocusHighlight</a> - draw
+the traversal highlight ring for a widget</dd>
+
+<dd><a href="TkLib/GetCapStyl.htm">Tk_GetCapStyle</a> - translate
+between strings and cap styles</dd>
+
+<dd><a href="TkLib/GetClrmap.htm">Tk_GetColormap</a> - allocate and
+free colormaps</dd>
+
+<dd><a href="TkLib/GetColor.htm">Tk_AllocColorFromObj</a> -
+maintain database of colors</dd>
+
+<dd><a href="TkLib/GetCursor.htm">Tk_AllocCursorFromObj</a> -
+maintain database of cursors</dd>
+
+<dd><a href="TkLib/GetDash.htm">Tk_GetDash</a> - convert from
+string to valid dash structure.</dd>
+
+<dd><a href="TkLib/GetFont.htm">Tk_AllocFontFromObj</a> - maintain
+database of fonts</dd>
+
+<dd><a href="TkLib/GetGC.htm">Tk_GetGC</a> - maintain database of
+read-only graphics contexts</dd>
+
+<dd><a href="TkLib/GetImage.htm">Tk_GetImage</a> - use an image in
+a widget</dd>
+
+<dd><a href="TkLib/GetJoinStl.htm">Tk_GetJoinStyle</a> - translate
+between strings and join styles</dd>
+
+<dd><a href="TkLib/GetJustify.htm">Tk_GetJustifyFromObj</a> -
+translate between strings and justification styles</dd>
+
+<dd><a href="TkLib/GetPixels.htm">Tk_GetPixelsFromObj</a> -
+translate between strings and screen units</dd>
+
+<dd><a href="TkLib/GetPixmap.htm">Tk_GetPixmap</a> - allocate and
+free pixmaps</dd>
+
+<dd><a href="TkLib/GetRelief.htm">Tk_GetReliefFromObj</a> -
+translate between strings and relief values</dd>
+
+<dd><a href="TkLib/GetRootCrd.htm">Tk_GetRootCoords</a> - Compute
+root-window coordinates of window</dd>
+
+<dd><a href="TkLib/MeasureChar.htm">Tk_MeasureChars</a> - routines
+to measure and display simple single-line strings.</dd>
+
+<dd><a href="TkLib/TextLayout.htm">Tk_ComputeTextLayout</a> -
+routines to measure and display single-font, multi-line, justified
+text.</dd>
+</dl>
+</dd>
+
+<dt><a name="item46">System-specific</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TkLib/CrtCmHdlr.htm">Tk_CreateClientMessageHandler</a>
+- associate procedure callback with ClientMessage type X
+events</dd>
+
+<dd><a href="TkLib/CrtGenHdlr.htm">Tk_CreateGenericHandler</a> -
+associate procedure callback with all X events</dd>
+
+<dd><a href="TkLib/FreeXId.htm">Tk_FreeXId</a> - make X resource
+identifier available for reuse</dd>
+
+<dd><a href="TkLib/GetHINSTANCE.htm">Tk_GetHINSTANCE</a> - retrieve
+the global application instance handle</dd>
+
+<dd><a href="TkLib/GetHWND.htm">Tk_GetHWND</a> - manage
+interactions between the Windows handle and an X window</dd>
+
+<dd><a href="TkLib/GetVRoot.htm">Tk_GetVRootGeometry</a> - Get
+location and size of virtual root for window</dd>
+
+<dd><a href="TkLib/GetVisual.htm">Tk_GetVisual</a> - translate from
+string to visual</dd>
+
+<dd><a href="TkLib/HWNDToWindow.htm">Tk_HWNDToWindow</a> - Find
+Tk's window information for a Windows window</dd>
+
+<dd><a href="TkLib/IdToWindow.htm">Tk_IdToWindow</a> - Find Tk's
+window information for an X window</dd>
+
+<dd><a href="TkLib/InternAtom.htm">Tk_InternAtom</a> - manage cache
+of X atoms</dd>
+</dl>
+</dd>
+
+<dt><a name="item47">Selection and Clipboard</a></dt>
+
+<dd>
+<dl>
+<dd><a href="TkLib/Clipboard.htm">Tk_ClipboardClear</a> - Manage
+the clipboard</dd>
+
+<dd><a href="TkLib/ClrSelect.htm">Tk_ClearSelection</a> - Deselect
+a selection</dd>
+
+<dd><a href="TkLib/CrtSelHdlr.htm">Tk_CreateSelHandler</a> -
+arrange to handle requests for a selection</dd>
+
+<dd><a href="TkLib/GetSelect.htm">Tk_GetSelection</a> - retrieve
+the contents of a selection</dd>
+
+<dd><a href="TkLib/OwnSelect.htm">Tk_OwnSelection</a> - make a
+window the owner of the primary selection</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<hr>
+<pre>
+<a href=
+"copyright.htm">Copyright</a> &copy; 1989-1994 The Regents of the University of California.
+<a href=
+"copyright.htm">Copyright</a> &copy; 1990-1994 The Regents of the University of California
+<a href=
+"copyright.htm">Copyright</a> &copy; 1992-1999 Karl Lehenbauer and Mark Diekhans
+<a href=
+"copyright.htm">Copyright</a> &copy; 1992-1999 Karl Lehenbauer and Mark Diekhans.
+<a href=
+"copyright.htm">Copyright</a> &copy; 1993-1997 Bell Labs Innovations for Lucent Technologies
+<a href=
+"copyright.htm">Copyright</a> &copy; 1994 The Australian National University
+<a href=
+"copyright.htm">Copyright</a> &copy; 1994-2000 Sun Microsystems, Inc.
+<a href=
+"copyright.htm">Copyright</a> &copy; 1997-2000 Ajuba Solutions.
+<a href=
+"copyright.htm">Copyright</a> &copy; 1997-2000 Scriptics Corporation.
+<a href="copyright.htm">Copyright</a> &copy; 1998 Mark Harrison.
+<a href=
+"copyright.htm">Copyright</a> &copy; 1998-1999 Scriptics Corporation
+<a href=
+"copyright.htm">Copyright</a> &copy; 1998-1999 Scriptics Corportation
+<a href=
+"copyright.htm">Copyright</a> &copy; 1995-1997 Roger E. Critchlow Jr.
+</pre>
+</body>
+</html>
+

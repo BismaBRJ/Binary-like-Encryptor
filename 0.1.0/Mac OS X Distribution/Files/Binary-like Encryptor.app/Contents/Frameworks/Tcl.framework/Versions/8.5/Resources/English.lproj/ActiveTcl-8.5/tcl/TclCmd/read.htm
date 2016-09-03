@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - read manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> read</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="read.htm#M2" name="L1325">NAME</a> 
+
+<dl>
+<dd>read - Read from a channel</dd>
+</dl>
+</dd>
+
+<dd><a href="read.htm#M3" name="L1326">SYNOPSIS</a> 
+
+<dl>
+<dd><b>read</b> ?<b>-nonewline</b>? <i>channelId</i></dd>
+
+<dd><b>read</b> <i>channelId numChars</i></dd>
+</dl>
+</dd>
+
+<dd><a href="read.htm#M4" name="L1327">DESCRIPTION</a></dd>
+
+<dd><a href="read.htm#M5" name="L1328">USE WITH SERIAL PORTS</a> 
+
+<dl class="use with serial ports">
+<dd><a href="read.htm#M6" name="L1329"><b>read</b> <i>channelId
+numChars</i></a></dd>
+
+<dd><a href="read.htm#M7" name="L1330"><b>read</b>
+<i>channelId</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="read.htm#M8" name="L1331">EXAMPLE</a></dd>
+
+<dd><a href="read.htm#M9" name="L1332">SEE ALSO</a></dd>
+
+<dd><a href="read.htm#M10" name="L1333">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+read - Read from a channel 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>read</b> ?<b>-nonewline</b>? <i>channelId</i><br>
+<b>read</b> <i>channelId numChars</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+In the first form, the <b>read</b> command reads all of the data
+from <i>channelId</i> up to the end of the file. If the
+<b>-nonewline</b> switch is specified then the last character of
+the file is discarded if it is a newline. In the second form, the
+extra argument specifies how many characters to read. Exactly that
+many characters will be read and returned, unless there are fewer
+than <i>numChars</i> left in the file; in this case all the
+remaining characters are returned. If the channel is configured to
+use a multi-byte encoding, then the number of characters read may
+not be the same as the number of bytes read. 
+
+<p><i>ChannelId</i> must be an identifier for an open channel such
+as the Tcl standard input channel (<b>stdin</b>), the return value
+from an invocation of <b><a href="../TclCmd/open.htm">open</a></b>
+or <b><a href="../TclCmd/socket.htm">socket</a></b>, or the result
+of a channel creation command provided by a Tcl extension. The
+channel must have been opened for input.</p>
+
+<p>If <i>channelId</i> is in nonblocking mode, the command may not
+read as many characters as requested: once all available input has
+been read, the command will return the data that is available
+rather than blocking for more input. If the channel is configured
+to use a multi-byte encoding, then there may actually be some bytes
+remaining in the internal buffers that do not form a complete
+character. These bytes will not be returned until a complete
+character is available or end-of-file is reached. The
+<b>-nonewline</b> switch is ignored if the command returns before
+reaching the end of the file.</p>
+
+<p><b>Read</b> translates end-of-line sequences in the input into
+newline characters according to the <b>-translation</b> option for
+the channel. See the <b><a href=
+"../TclCmd/fconfigure.htm">fconfigure</a></b> manual entry for a
+discussion on ways in which <b><a href=
+"../TclCmd/fconfigure.htm">fconfigure</a></b> will alter input.</p>
+
+<h3><a name="M5">USE WITH SERIAL PORTS</a></h3>
+
+For most applications a channel connected to a serial port should
+be configured to be nonblocking: <b>fconfigure</b> <i>channelId</i>
+<b>-blocking</b> <i>0</i>. Then <b>read</b> behaves much like
+described above. Care must be taken when using <b>read</b> on
+blocking serial ports: 
+
+<dl class="use with serial ports">
+<dt><a name="M6"><b>read</b> <i>channelId numChars</i></a></dt>
+
+<dd>In this form <b>read</b> blocks until <i>numChars</i> have been
+received from the serial port.</dd>
+
+<dt><a name="M7"><b>read</b> <i>channelId</i></a></dt>
+
+<dd>In this form <b>read</b> blocks until the reception of the
+end-of-file character, see <b>fconfigure -eofchar</b>. If there no
+end-of-file character has been configured for the channel, then
+<b>read</b> will block forever.</dd>
+</dl>
+
+<h3><a name="M8">EXAMPLE</a></h3>
+
+This example code reads a file all at once, and splits it into a
+list, with each line in the file corresponding to an element in the
+list: 
+
+<pre>
+set fl [open /proc/meminfo]
+set data [<b>read</b> $fl]
+close $fl
+set lines [split $data \n]
+</pre>
+
+<h3><a name="M9">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/file.htm">file</a></b>, <b><a href=
+"../TclCmd/eof.htm">eof</a></b>, <b><a href=
+"../TclCmd/fblocked.htm">fblocked</a></b>, <b><a href=
+"../TclCmd/fconfigure.htm">fconfigure</a></b>, <b><a href=
+"../TclLib/StdChannels.htm">Tcl_StandardChannels</a></b> 
+
+<h3><a name="M10">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#blocking">blocking</a>, <a href=
+"../Keywords/C.htm#channel">channel</a>, <a href=
+"../Keywords/E.htm#end of line">end of line</a>, <a href=
+"../Keywords/E.htm#end of file">end of file</a>, <a href=
+"../Keywords/N.htm#nonblocking">nonblocking</a>, <a href=
+"../Keywords/R.htm#read">read</a>, <a href=
+"../Keywords/T.htm#translation">translation</a>, <a href=
+"../Keywords/E.htm#encoding">encoding</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

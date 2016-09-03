@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Substitution without evaluation - format, subst</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Substitution without evaluation - format,
+subst</h1>
+
+<div class="nav"><a href="Tcl33.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl35.html">Next
+lesson</a></div>
+
+The Tcl interpreter does only one substitution pass during command
+evaluation. Some situations, such as placing the name of a variable
+in a variable, require two passes through the substitution phase.
+In this case, the <b>subst</b> command is useful. <br>
+<br>
+<p><b>Subst</b> performs a substitution pass without performing any
+execution of commands except those required for the substitution to
+occur, ie: commands within <b>[]</b> will be executed, and the
+results placed in the return string.</p>
+
+<p>In the example code:</p>
+
+<pre class="example">
+puts "[subst $$c]\n"
+</pre>
+
+shows an example of placing a variable name in a variable, and
+evaluating through the indirection. <br>
+<br>
+<p>The <b>format</b> command can also be used to force some levels
+of substitution to occur.</p>
+
+<dl>
+<dt><b>subst ?-nobackslashes? ?-nocommands? ?-novariables?</b>
+<i>string</i></dt>
+
+<dd>Passes <i>string</i> through the Tcl substitution phase, and
+returns the original string with the backslash sequences, commands
+and variables replaced by their equivalents.<br>
+<br>
+<p>If any of the <b>-no...</b> arguments are present, then that set
+of substitutions will not be done.</p>
+
+<p>NOTE: <b>subst</b> does not honor braces or quotes.</p>
+</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set a "alpha"
+set b a
+
+puts {a and b with no substitution: $a $$b}
+puts "a and b with one pass of substitution: $a $$b"
+puts "a and b with subst in braces: [subst {$a $$b}]"
+puts "a and b with subst in quotes: [subst "$a $$b"]\n"
+
+puts "format with no subst [format {$%s} $b]"
+puts "format with subst: [subst [format {$%s} $b]]"
+eval "puts \"eval after format: [format {$%s} $b]\""
+
+set num 0;
+set cmd "proc tempFileName {} "
+set cmd [format "%s {global num; incr num;" $cmd]
+set cmd [format {%s return "/tmp/TMP.%s.$num"} $cmd [pid] ]
+set cmd [format "%s }" $cmd ]
+eval $cmd
+
+puts "[info body tempFileName]"
+
+set a arrayname
+set b index
+set c newvalue
+eval [format "set %s(%s) %s" $a $b $c]
+
+puts "Index: $b of $a was set to: $arrayname(index)"
+</pre>
+
+<div class="nav"><a href="Tcl33.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl35.html">Next
+lesson</a></div>
+</body>
+</html>
+

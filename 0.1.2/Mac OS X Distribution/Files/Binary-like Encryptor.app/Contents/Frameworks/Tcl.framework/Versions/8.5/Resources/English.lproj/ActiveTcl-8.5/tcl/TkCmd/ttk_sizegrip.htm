@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk::sizegrip manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_sizegrip</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_sizegrip.htm#M2" name="L1952">NAME</a> 
+
+<dl>
+<dd>ttk::sizegrip - Bottom-right corner resize widget</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_sizegrip.htm#M3" name="L1953">SYNOPSIS</a> 
+
+<dl>
+<dd><b>ttk::sizegrip</b> <i>pathName</i> ?<i>options</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_sizegrip.htm#M4" name="L1954">DESCRIPTION</a></dd>
+
+<dd><a href="ttk_sizegrip.htm#M5" name="L1955">STANDARD OPTIONS</a>
+
+
+<dl>
+<dd><a href="options.htm#M-class">-class</a></dd>
+
+<dd><a href="options.htm#M-cursor">-cursor, cursor, Cursor</a></dd>
+
+<dd><a href="options.htm#M-state">-state</a></dd>
+
+<dd><a href="options.htm#M-style">-style</a></dd>
+
+<dd><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_sizegrip.htm#M9" name="L1959">WIDGET
+COMMAND</a></dd>
+
+<dd><a href="ttk_sizegrip.htm#M10" name="L1960">PLATFORM-SPECIFIC
+NOTES</a></dd>
+
+<dd><a href="ttk_sizegrip.htm#M11" name="L1961">EXAMPLES</a></dd>
+
+<dd><a href="ttk_sizegrip.htm#M12" name="L1962">BUGS</a></dd>
+
+<dd><a href="ttk_sizegrip.htm#M13" name="L1963">SEE ALSO</a></dd>
+
+<dd><a href="ttk_sizegrip.htm#M14" name="L1964">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk::sizegrip - Bottom-right corner resize widget 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>ttk::sizegrip</b> <i>pathName</i> ?<i>options</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+A <b>ttk::sizegrip</b> widget (also known as a <i>grow box</i>)
+allows the user to resize the containing toplevel window by
+pressing and dragging the grip. 
+
+<h3><a name="M5">STANDARD OPTIONS</a></h3>
+
+<dl>
+<dt><b><a href="options.htm#M-class">-class</a></b></dt>
+
+<dt><b><a href="options.htm#M-cursor">-cursor, cursor,
+Cursor</a></b></dt>
+
+<dt><b><a href="options.htm#M-state">-state</a></b></dt>
+
+<dt><b><a href="options.htm#M-style">-style</a></b></dt>
+
+<dt><b><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></b></dt>
+</dl>
+
+<h3><a name="M9">WIDGET COMMAND</a></h3>
+
+Sizegrip widgets support the standard <b>cget</b>,
+<b>configure</b>, <b>identify</b>, <b>instate</b>, and <b>state</b>
+methods. No other widget methods are used. 
+
+<h3><a name="M10">PLATFORM-SPECIFIC NOTES</a></h3>
+
+On Mac OSX, toplevel windows automatically include a built-in size
+grip by default. Adding a <b>ttk::sizegrip</b> there is harmless,
+since the built-in grip will just mask the widget. 
+
+<h3><a name="M11">EXAMPLES</a></h3>
+
+Using pack: 
+
+<pre>
+pack [ttk::frame $top.statusbar] -side bottom -fill x
+pack [<b>ttk::sizegrip</b> $top.statusbar.grip] -side right -anchor se
+</pre>
+
+<p>Using grid:</p>
+
+<pre>
+grid [<b>ttk::sizegrip</b> $top.statusbar.grip] \
+    -row $lastRow -column $lastColumn -sticky se
+# ... optional: add vertical scrollbar in $lastColumn,
+# ... optional: add horizontal scrollbar in $lastRow
+</pre>
+
+<h3><a name="M12">BUGS</a></h3>
+
+If the containing toplevel's position was specified relative to the
+right or bottom of the screen (e.g., &ldquo;<b>wm geometry ...</b>
+<i>w</i><b>x</b><i>h</i><b>-</b><i>x</i><b>-</b><i>y</i>&rdquo;
+instead of &ldquo;<b>wm geometry ...</b>
+<i>w</i><b>x</b><i>h</i><b>+</b><i>x</i><b>+</b><i>y</i>&rdquo;),
+the sizegrip widget will not resize the window. 
+
+<p><b>ttk::sizegrip</b> widgets only support
+&ldquo;southeast&rdquo; resizing.</p>
+
+<h3><a name="M13">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_widget.htm">ttk::widget</a></b> 
+
+<h3><a name="M14">KEYWORDS</a></h3>
+
+<a href="../Keywords/W.htm#widget">widget</a>, <a href=
+"../Keywords/S.htm#sizegrip">sizegrip</a>, <a href=
+"../Keywords/G.htm#grow box">grow box</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2006 Joe English</div>
+</body>
+</html>
+

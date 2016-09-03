@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_Interp manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> Interp</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_Interp - client-visible fields of interpreter structures 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+typedef struct {<br>
+ char *<i>result</i>;<br>
+ Tcl_FreeProc *<i>freeProc</i>;<br>
+ int <i>errorLine</i>;<br>
+} Tcl_Interp;<br>
+<br>
+typedef void Tcl_FreeProc(char *<i>blockPtr</i>);<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b><a href="../TclLib/CrtInterp.htm">Tcl_CreateInterp</a></b>
+procedure returns a pointer to a Tcl_Interp structure. This pointer
+is then passed into other Tcl procedures to process commands in the
+interpreter and perform other operations on the interpreter.
+Interpreter structures contain many fields that are used by Tcl,
+but only three that may be accessed by clients: <i>result</i>,
+<i>freeProc</i>, and <i>errorLine</i>. 
+
+<p><b>Note that access to all three fields,</b>
+<i>result</i><b>,</b> <i>freeProc</i> <b>and</b> <i>errorLine</i>
+<b>is deprecated.</b> Use <b><a href=
+"../TclLib/SetResult.htm">Tcl_SetResult</a></b>,
+<b>Tcl_GetResult</b>, and <b><a href=
+"../TclLib/AddErrInfo.htm">Tcl_GetReturnOptions</a></b>
+instead.</p>
+
+<p>The <i>result</i> and <i>freeProc</i> fields are used to return
+results or error messages from commands. This information is
+returned by command procedures back to <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b>, and by <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b> back to its callers. The
+<i>result</i> field points to the string that represents the result
+or error message, and the <i>freeProc</i> field tells how to
+dispose of the storage for the string when it is not needed
+anymore. The easiest way for command procedures to manipulate these
+fields is to call procedures like <b><a href=
+"../TclLib/SetResult.htm">Tcl_SetResult</a></b> or <b><a href=
+"../TclLib/SetResult.htm">Tcl_AppendResult</a></b>; they will hide
+all the details of managing the fields. The description below is
+for those procedures that manipulate the fields directly.</p>
+
+<p>Whenever a command procedure returns, it must ensure that the
+<i>result</i> field of its interpreter points to the string being
+returned by the command. The <i>result</i> field must always point
+to a valid string. If a command wishes to return no result then
+<i>interp-&gt;result</i> should point to an empty string. Normally,
+results are assumed to be statically allocated, which means that
+the contents will not change before the next time <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b> is called or some other
+command procedure is invoked. In this case, the <i>freeProc</i>
+field must be zero. Alternatively, a command procedure may
+dynamically allocate its return value (e.g. using <b><a href=
+"../TclLib/Alloc.htm">Tcl_Alloc</a></b>) and store a pointer to it
+in <i>interp-&gt;result</i>. In this case, the command procedure
+must also set <i>interp-&gt;freeProc</i> to the address of a
+procedure that can free the value, or <b>TCL_DYNAMIC</b> if the
+storage was allocated directly by Tcl or by a call to <b><a href=
+"../TclLib/Alloc.htm">Tcl_Alloc</a></b>. If
+<i>interp-&gt;freeProc</i> is non-zero, then Tcl will call
+<i>freeProc</i> to free the space pointed to by
+<i>interp-&gt;result</i> before it invokes the next command. If a
+client procedure overwrites <i>interp-&gt;result</i> when
+<i>interp-&gt;freeProc</i> is non-zero, then it is responsible for
+calling <i>freeProc</i> to free the old <i>interp-&gt;result</i>
+(the <b><a href="../TclLib/SetResult.htm">Tcl_FreeResult</a></b>
+macro should be used for this purpose).</p>
+
+<p><i>FreeProc</i> should have arguments and result that match the
+<b>Tcl_FreeProc</b> declaration above: it receives a single
+argument which is a pointer to the result value to free. In most
+applications <b>TCL_DYNAMIC</b> is the only non-zero value ever
+used for <i>freeProc</i>. However, an application may store a
+different procedure address in <i>freeProc</i> in order to use an
+alternate memory allocator or in order to do other cleanup when the
+result memory is freed.</p>
+
+<p>As part of processing each command, <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b> initializes
+<i>interp-&gt;result</i> and <i>interp-&gt;freeProc</i> just before
+calling the command procedure for the command. The <i>freeProc</i>
+field will be initialized to zero, and <i>interp-&gt;result</i>
+will point to an empty string. Commands that do not return any
+value can simply leave the fields alone. Furthermore, the empty
+string pointed to by <i>result</i> is actually part of an array of
+<b>TCL_RESULT_SIZE</b> characters (approximately 200). If a command
+wishes to return a short string, it can simply copy it to the area
+pointed to by <i>interp-&gt;result</i>. Or, it can use the sprintf
+procedure to generate a short result string at the location pointed
+to by <i>interp-&gt;result</i>.</p>
+
+<p>It is a general convention in Tcl-based applications that the
+result of an interpreter is normally in the initialized state
+described in the previous paragraph. Procedures that manipulate an
+interpreter's result (e.g. by returning an error) will generally
+assume that the result has been initialized when the procedure is
+called. If such a procedure is to be called after the result has
+been changed, then <b><a href=
+"../TclLib/SetResult.htm">Tcl_ResetResult</a></b> should be called
+first to reset the result to its initialized state. The direct use
+of <i>interp-&gt;result</i> is strongly deprecated (see <b><a href=
+"../TclLib/SetResult.htm">Tcl_SetResult</a></b>).</p>
+
+<p>The <i>errorLine</i> field is valid only after <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b> returns a <b>TCL_ERROR</b>
+return code. In this situation the <i>errorLine</i> field
+identifies the line number of the command being executed when the
+error occurred. The line numbers are relative to the command being
+executed: 1 means the first line of the command passed to <b><a
+href="../TclLib/Eval.htm">Tcl_Eval</a></b>, 2 means the second
+line, and so on. The <i>errorLine</i> field is typically used in
+conjunction with <b><a href=
+"../TclLib/AddErrInfo.htm">Tcl_AddErrorInfo</a></b> to report
+information about where an error occurred. <i>ErrorLine</i> should
+not normally be modified except by <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b>.</p>
+
+<h3><a name="M5">KEYWORDS</a></h3>
+
+<a href="../Keywords/F.htm#free">free</a>, <a href=
+"../Keywords/I.htm#initialized">initialized</a>, <a href=
+"../Keywords/I.htm#interpreter">interpreter</a>, <a href=
+"../Keywords/M.htm#malloc">malloc</a>, <a href=
+"../Keywords/R.htm#result">result</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1989-1993 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

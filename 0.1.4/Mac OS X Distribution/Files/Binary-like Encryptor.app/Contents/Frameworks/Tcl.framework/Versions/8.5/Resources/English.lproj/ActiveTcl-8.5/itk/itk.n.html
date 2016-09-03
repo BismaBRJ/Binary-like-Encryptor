@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>itk - itk (n)</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<center>
+<h1>[incr\ Tk]</h1>
+</center>
+
+<h3>NAME</h3>
+
+itk - framework for building mega-widgets in Tcl/Tk 
+
+<h3>DESCRIPTION</h3>
+
+<p>Mega-widgets are high-level widgets that are constructed using
+Tk widgets as component parts, usually without any C code. A
+fileselectionbox, for example, may have a few listboxes, some entry
+widgets and some control buttons. These individual widgets are put
+together in a way that makes them act like one big widget. A
+fileselectionbox mega-widget can be created with a command
+like:</p>
+
+<blockquote>
+<pre>
+fileselectionbox .fsb -background blue -foreground white
+</pre>
+</blockquote>
+
+Once it has been created, it can be reconfigured with a command
+like: 
+
+<blockquote>
+<pre>
+.fsb configure -background green -foreground black
+</pre>
+</blockquote>
+
+and all of its internal components will change color. Each
+mega-widget has a set of methods that can be used to manipulate it.
+For example, the current selection can be queried from a
+fileselectionbox like this: 
+
+<blockquote>
+<pre>
+set fileName [.fsb get]
+</pre>
+</blockquote>
+
+In effect, a mega-widget looks and acts exactly like a Tk widget,
+but is considerably easier to implement. 
+
+<p><b>[incrTk]</b> is a framework for building mega-widgets. It
+uses <b>[incrTcl]</b> to support the object paradigm, and adds base
+classes which provide default widget behaviors.</p>
+
+<p>All <b>[incrTk]</b> widgets are derived from the <b><a href=
+"Archetype.n.html">Archetype</a></b> base class. This class manages
+internal component widgets, and provides methods like "configure"
+and "cget" to access configuration options.</p>
+
+<p>The <b><a href="Widget.n.html">Widget</a></b> base class
+inherits everything from <b><a href=
+"Archetype.n.html">Archetype</a></b>, and adds a Tk frame which
+acts as a container for the mega-widget. It is used to build
+mega-widgets that sit inside of other frames and toplevels. Derived
+classes create other internal components and pack them into the
+"hull" frame created by the <b><a href=
+"Widget.n.html">Widget</a></b> base class.</p>
+
+<p>The <b><a href="Toplevel.n.html">Toplevel</a></b> base class
+inherits everything from <b><a href=
+"Archetype.n.html">Archetype</a></b>, but adds a Tk toplevel which
+acts as a container for the mega-widget. It is used to build
+mega-widgets, such as dialog boxes, that have their own toplevel
+window. Derived classes create other internal components and pack
+them into the "hull" toplevel created by the <b><a href=
+"Toplevel.n.html">Toplevel</a></b> base class.</p>
+
+<h3>[incr Widgets] LIBRARY</h3>
+
+<p><b>[incrWidgets]</b> is a mega-widget library built using
+<b>[incrTk]</b>. It can be used right out of the box, and contains
+more than 30 different widget classes, including:</p>
+
+<ol>
+<li>fileselectiondialog</li>
+
+<li>tabnotebook</li>
+
+<li>panedwindow</li>
+
+<li>combobox</li>
+
+<li>optionmenu</li>
+
+<li>scrolledlistbox</li>
+
+<li>scrolledframe</li>
+
+<li>messagedialog</li>
+
+<li>and many others...</li>
+</ol>
+
+<p>The <b>catalog</b> demo in the "iwidgets/demos" directory shows
+all of the available widgets in action. Each widget class has its
+own man page describing the features available.</p>
+
+<h3>KEYWORDS</h3>
+
+class, object, object-oriented, mega-widget 
+
+<hr>
+[ <a href="../itk/contents.html">itk</a> ] 
+
+<hr>
+<pre>
+Copyright &copy; 1989-1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.
+</pre>
+</body>
+</html>
+

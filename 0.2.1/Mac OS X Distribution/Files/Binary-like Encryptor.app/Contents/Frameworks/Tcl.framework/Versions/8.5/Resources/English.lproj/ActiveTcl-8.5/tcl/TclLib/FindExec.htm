@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_FindExecutable manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> FindExec</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_FindExecutable, Tcl_GetNameOfExecutable - identify or return
+the name of the binary file containing the application 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+void<br>
+<b>Tcl_FindExecutable</b>(<i>argv0</i>)<br>
+const char *<br>
+<b>Tcl_GetNameOfExecutable</b>()<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>char <b>*argv0</b> (in)</dt>
+
+<dd>The first command-line argument to the program, which gives the
+application's name.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+The <b>Tcl_FindExecutable</b> procedure computes the full path name
+of the executable file from which the application was invoked and
+saves it for Tcl's internal use. The executable's path name is
+needed for several purposes in Tcl. For example, it is needed on
+some platforms in the implementation of the <b><a href=
+"../TclCmd/load.htm">load</a></b> command. It is also returned by
+the <b><a href="../TclCmd/info.htm">info nameofexecutable</a></b>
+command. 
+
+<p>On UNIX platforms this procedure is typically invoked as the
+very first thing in the application's main program; it must be
+passed <i>argv[0]</i> as its argument. It is important not to
+change the working directory before the invocation.
+<b>Tcl_FindExecutable</b> uses <i>argv0</i> along with the
+<b>PATH</b> environment variable to find the application's
+executable, if possible. If it fails to find the binary, then
+future calls to <b><a href="../TclCmd/info.htm">info
+nameofexecutable</a></b> will return an empty string.</p>
+
+<p><b>Tcl_GetNameOfExecutable</b> simply returns a pointer to the
+internal full path name of the executable file as computed by
+<b>Tcl_FindExecutable</b>. This procedure call is the C API
+equivalent to the <b><a href="../TclCmd/info.htm">info
+nameofexecutable</a></b> command. NULL is returned if the internal
+full path name has not been computed or unknown.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#binary">binary</a>, <a href=
+"../Keywords/E.htm#executable file">executable file</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1995-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

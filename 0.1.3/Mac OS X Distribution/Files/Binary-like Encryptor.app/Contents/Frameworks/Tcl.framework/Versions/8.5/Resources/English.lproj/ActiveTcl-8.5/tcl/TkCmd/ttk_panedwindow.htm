@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk::panedwindow manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_panedwindow</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_panedwindow.htm#M2" name="L1820">NAME</a> 
+
+<dl>
+<dd>ttk::panedwindow - Multi-pane container window</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_panedwindow.htm#M3" name="L1821">SYNOPSIS</a> 
+
+<dl>
+<dd><b>ttk::panedwindow</b> <i>pathname</i> ?<i>options</i>?</dd>
+
+<dd><i>pathname</i> <b>add</b> <i>window</i>
+?<i>options...</i>?</dd>
+
+<dd><i>pathname</i> <b>insert</b> <i>index</i> <i>window</i>
+?<i>options...</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_panedwindow.htm#M4" name=
+"L1822">DESCRIPTION</a></dd>
+
+<dd><a href="ttk_panedwindow.htm#M5" name="L1823">STANDARD
+OPTIONS</a> 
+
+<dl>
+<dd><a href="options.htm#M-class">-class</a></dd>
+
+<dd><a href="options.htm#M-cursor">-cursor, cursor, Cursor</a></dd>
+
+<dd><a href="options.htm#M-style">-style</a></dd>
+
+<dd><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_panedwindow.htm#M8" name="L1826">WIDGET-SPECIFIC
+OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_panedwindow.htm#M9" name="L1827">-orient, orient,
+Orient</a></dd>
+
+<dd><a href="ttk_panedwindow.htm#M10" name="L1828">-width, width,
+Width</a></dd>
+
+<dd><a href="ttk_panedwindow.htm#M11" name="L1829">-height, height,
+Height</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_panedwindow.htm#M12" name="L1830">PANE OPTIONS</a>
+
+
+<dl>
+<dd><a href="ttk_panedwindow.htm#M13" name="L1831">-weight, weight,
+Weight</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_panedwindow.htm#M14" name="L1832">WIDGET
+COMMAND</a> 
+
+<dl class="widget command">
+<dd><a href="ttk_panedwindow.htm#M15" name="L1833"><i>pathname</i>
+<b>add</b> <i>subwindow</i> <i>options...</i></a></dd>
+
+<dd><a href="ttk_panedwindow.htm#M16" name="L1834"><i>pathname</i>
+<b>forget</b> <i>pane</i></a></dd>
+
+<dd><a href="ttk_panedwindow.htm#M17" name="L1835"><i>pathname</i>
+<b>identify</b> <i>component</i> <i>x</i> <i>y</i></a> 
+
+<dl class="widget command">
+<dd><a href="ttk_panedwindow.htm#M18" name="L1836"><i>pathname</i>
+<b>identify</b> <b>element</b> <i>x</i> <i>y</i></a></dd>
+
+<dd><a href="ttk_panedwindow.htm#M19" name="L1837"><i>pathname</i>
+<b>identify</b> <b>sash</b> <i>x</i> <i>y</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_panedwindow.htm#M20" name="L1838"><i>pathname</i>
+<b>insert</b> <i>pos</i> <i>subwindow</i>
+<i>options...</i></a></dd>
+
+<dd><a href="ttk_panedwindow.htm#M21" name="L1839"><i>pathname</i>
+<b>pane</b> <i>pane -option</i> ?<i>value</i> ?<i>-option
+value...</i></a></dd>
+
+<dd><a href="ttk_panedwindow.htm#M22" name="L1840"><i>pathname</i>
+<b>panes</b></a></dd>
+
+<dd><a href="ttk_panedwindow.htm#M23" name="L1841"><i>pathname</i>
+<b>sashpos</b> <i>index</i> ?<i>newpos</i>?</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_panedwindow.htm#M24" name="L1842">VIRTUAL
+EVENTS</a></dd>
+
+<dd><a href="ttk_panedwindow.htm#M25" name="L1843">SEE
+ALSO</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk::panedwindow - Multi-pane container window 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>ttk::panedwindow</b> <i>pathname</i> ?<i>options</i>?<br>
+<i>pathname</i> <b>add</b> <i>window</i> ?<i>options...</i>?<br>
+<i>pathname</i> <b>insert</b> <i>index</i> <i>window</i>
+?<i>options...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+A <b>ttk::panedwindow</b> widget displays a number of subwindows,
+stacked either vertically or horizontally. The user may adjust the
+relative sizes of the subwindows by dragging the sash between
+panes. 
+
+<h3><a name="M5">STANDARD OPTIONS</a></h3>
+
+<dl>
+<dt><b><a href="options.htm#M-class">-class</a></b></dt>
+
+<dt><b><a href="options.htm#M-cursor">-cursor, cursor,
+Cursor</a></b></dt>
+
+<dt><b><a href="options.htm#M-style">-style</a></b></dt>
+
+<dt><b><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></b></dt>
+</dl>
+
+<h3><a name="M8">WIDGET-SPECIFIC OPTIONS</a></h3>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M9">-orient</a></b></dt>
+
+<dt>Database Name: <b>orient</b></dt>
+
+<dt>Database Class: <b>Orient</b></dt>
+
+<dd>Specifies the orientation of the window. If <b>vertical</b>,
+subpanes are stacked top-to-bottom; if <b>horizontal</b>, subpanes
+are stacked left-to-right.</dd>
+
+<dt>Command-Line Name: <b><a name="M10">-width</a></b></dt>
+
+<dt>Database Name: <b>width</b></dt>
+
+<dt>Database Class: <b>Width</b></dt>
+
+<dd>If present and greater than zero, specifies the desired width
+of the widget in pixels. Otherwise, the requested width is
+determined by the width of the managed windows.</dd>
+
+<dt>Command-Line Name: <b><a name="M11">-height</a></b></dt>
+
+<dt>Database Name: <b>height</b></dt>
+
+<dt>Database Class: <b>Height</b></dt>
+
+<dd>If present and greater than zero, specifies the desired height
+of the widget in pixels. Otherwise, the requested height is
+determined by the height of the managed windows.</dd>
+</dl>
+
+<h3><a name="M12">PANE OPTIONS</a></h3>
+
+The following options may be specified for each pane: 
+
+<dl>
+<dt>Command-Line Name: <b><a name="M13">-weight</a></b></dt>
+
+<dt>Database Name: <b>weight</b></dt>
+
+<dt>Database Class: <b>Weight</b></dt>
+
+<dd>An integer specifying the relative stretchability of the pane.
+When the paned window is resized, the extra space is added or
+subtracted to each pane proportionally to its <b>-weight</b>.</dd>
+</dl>
+
+<h3><a name="M14">WIDGET COMMAND</a></h3>
+
+Supports the standard <b>configure</b>, <b>cget</b>, <b>state</b>,
+and <b>instate</b> commands; see <i>ttk::widget(n)</i> for details.
+Additional commands: 
+
+<dl class="widget command">
+<dt><a name="M15"><i>pathname</i> <b>add</b> <i>subwindow</i>
+<i>options...</i></a></dt>
+
+<dd>Adds a new pane to the window. See <b>PANE OPTIONS</b> for the
+list of available options.</dd>
+
+<dt><a name="M16"><i>pathname</i> <b>forget</b>
+<i>pane</i></a></dt>
+
+<dd>Removes the specified subpane from the widget. <i>pane</i> is
+either an integer index or the name of a managed subwindow.</dd>
+
+<dt><a name="M17"><i>pathname</i> <b>identify</b> <i>component</i>
+<i>x</i> <i>y</i></a></dt>
+
+<dd>Returns the name of the element under the point given by
+<i>x</i> and <i>y</i>, or the empty string if no component is
+present at that location. If <i>component</i> is omitted, it
+defaults to <b>sash</b>. The following subcommands are supported: 
+
+<dl class="widget command">
+<dt><a name="M18"><i>pathname</i> <b>identify</b> <b>element</b>
+<i>x</i> <i>y</i></a></dt>
+
+<dd>Returns the name of the element at the specified location.</dd>
+
+<dt><a name="M19"><i>pathname</i> <b>identify</b> <b>sash</b>
+<i>x</i> <i>y</i></a></dt>
+
+<dd>Returns the index of the sash at the specified location.</dd>
+</dl>
+</dd>
+
+<dt><a name="M20"><i>pathname</i> <b>insert</b> <i>pos</i>
+<i>subwindow</i> <i>options...</i></a></dt>
+
+<dd>Inserts a pane at the specified position. <i>pos</i> is either
+the string <b>end</b>, an integer index, or the name of a managed
+subwindow. If <i>subwindow</i> is already managed by the paned
+window, moves it to the specified position. See <b>PANE OPTIONS</b>
+for the list of available options.</dd>
+
+<dt><a name="M21"><i>pathname</i> <b>pane</b> <i>pane -option</i>
+?<i>value</i> ?<i>-option value...</i></a></dt>
+
+<dd>Query or modify the options of the specified <i>pane</i>, where
+<i>pane</i> is either an integer index or the name of a managed
+subwindow. If no <i>-option</i> is specified, returns a dictionary
+of the pane option values. If one <i>-option</i> is specified,
+returns the value of that <i>option</i>. Otherwise, sets the
+<i>-option</i>s to the corresponding <i>value</i>s.</dd>
+
+<dt><a name="M22"><i>pathname</i> <b>panes</b></a></dt>
+
+<dd>Returns the list of all windows managed by the widget.</dd>
+
+<dt><a name="M23"><i>pathname</i> <b>sashpos</b> <i>index</i>
+?<i>newpos</i>?</a></dt>
+
+<dd>If <i>newpos</i> is specified, sets the position of sash number
+<i>index</i>. May adjust the positions of adjacent sashes to ensure
+that positions are monotonically increasing. Sash positions are
+further constrained to be between 0 and the total size of the
+widget. Returns the new position of sash number <i>index</i>.</dd>
+</dl>
+
+<h3><a name="M24">VIRTUAL EVENTS</a></h3>
+
+The panedwindow widget generates an
+<b>&lt;&lt;EnteredChild&gt;&gt;</b> virtual event on
+LeaveNotify/NotifyInferior events, because Tk does not execute
+binding scripts for &lt;Leave&gt; events when the pointer crosses
+from a parent to a child. The panedwindow widget needs to know when
+that happens. 
+
+<h3><a name="M25">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_widget.htm">ttk::widget</a></b>, <b><a
+href="../TkCmd/ttk_notebook.htm">ttk::notebook</a></b>, <b><a href=
+"../TkCmd/panedwindow.htm">panedwindow</a></b> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2005 Joe English</div>
+</body>
+</html>
+

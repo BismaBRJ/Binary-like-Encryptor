@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - set manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> set</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+set - Read and write variables 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>set</b> <i>varName</i> ?<i>value</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+Returns the value of variable <i>varName</i>. If <i>value</i> is
+specified, then set the value of <i>varName</i> to <i>value</i>,
+creating a new variable if one does not already exist, and return
+its value. If <i>varName</i> contains an open parenthesis and ends
+with a close parenthesis, then it refers to an array element: the
+characters before the first open parenthesis are the name of the
+array, and the characters between the parentheses are the index
+within the array. Otherwise <i>varName</i> refers to a scalar
+variable. 
+
+<p>If <i>varName</i> includes namespace qualifiers (in the array
+name if it refers to an array element), or if <i>varName</i> is
+unqualified (does not include the names of any containing
+namespaces) but no procedure is active, <i>varName</i> refers to a
+namespace variable resolved according to the rules described under
+<b>NAME RESOLUTION</b> in the <b><a href=
+"../TclCmd/namespace.htm">namespace</a></b> manual page.</p>
+
+<p>If a procedure is active and <i>varName</i> is unqualified, then
+<i>varName</i> refers to a parameter or local variable of the
+procedure, unless <i>varName</i> was declared to resolve
+differently through one of the <b><a href=
+"../TclCmd/global.htm">global</a></b>, <b><a href=
+"../TclCmd/variable.htm">variable</a></b> or <b><a href=
+"../TclCmd/upvar.htm">upvar</a></b> commands.</p>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+Store a random number in the variable <i>r</i>: 
+
+<pre>
+<b>set</b> r [expr {rand()}]
+</pre>
+
+<p>Store a short message in an array element:</p>
+
+<pre>
+<b>set</b> anAry(msg) "Hello, World!"
+</pre>
+
+<p>Store a short message in an array element specified by a
+variable:</p>
+
+<pre>
+<b>set</b> elemName "msg"
+<b>set</b> anAry($elemName) "Hello, World!"
+</pre>
+
+<p>Copy a value into the variable <i>out</i> from a variable whose
+name is stored in the <i>vbl</i> (note that it is often easier to
+use arrays in practice instead of doing double-dereferencing):</p>
+
+<pre>
+<b>set</b> in0 "small random"
+<b>set</b> in1 "large random"
+<b>set</b> vbl in[expr {rand() &gt;= 0.5}]
+<b>set</b> out [<b>set</b> $vbl]
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/expr.htm">expr</a></b>, <b><a href=
+"../TclCmd/global.htm">global</a></b>, <b><a href=
+"../TclCmd/namespace.htm">namespace</a></b>, <b><a href=
+"../TclCmd/proc.htm">proc</a></b>, <b><a href=
+"../TclCmd/trace.htm">trace</a></b>, <b><a href=
+"../TclCmd/unset.htm">unset</a></b>, <b><a href=
+"../TclCmd/upvar.htm">upvar</a></b>, <b><a href=
+"../TclCmd/variable.htm">variable</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/R.htm#read">read</a>, <a href=
+"../Keywords/W.htm#write">write</a>, <a href=
+"../Keywords/V.htm#variable">variable</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Numeric Comparisons 101 - if</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Numeric Comparisons 101 - if</h1>
+
+<div class="nav"><a href="Tcl6a.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl8.html">Next
+lesson</a></div>
+
+<p>Like most languages, Tcl supports an if command. The syntax
+is:</p>
+
+<ul>
+<li><code class="keyword">if</code> <code class="arg">expr1</code>
+<code class="keyword">?then?</code> <code class="arg">body1</code>
+<code class="keyword">elseif</code> <code class="arg">expr2</code>
+<code class="keyword">?then?</code> <code class="arg">body2</code>
+<code class="keyword">elseif</code> ... <code class=
+"keyword">?else?</code> <code class="arg">?bodyN?</code></li>
+</ul>
+
+<p>The words <code class="keyword">then</code> and <code class=
+"keyword">else</code> are optional, although generally <code class=
+"keyword">then</code> is left out and <code class=
+"keyword">else</code> is used.</p>
+
+<p>The test expression following <code class="keyword">if</code>
+should return a value that can be interpreted as representing
+"true" or "false":</p>
+
+<table>
+<tbody>
+<tr>
+<td></td>
+<th>False</th>
+<th>True</th>
+</tr>
+
+<tr>
+<th>a numeric value</th>
+<td>0</td>
+<td>all others</td>
+</tr>
+
+<tr>
+<th>yes/no</th>
+<td>no</td>
+<td>yes</td>
+</tr>
+
+<tr>
+<th>true/false</th>
+<td>false</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+
+<p>If the test expression returns a string "yes"/"no" or
+"true"/"false", the case of the return is not checked. True/FALSE
+or YeS/nO are legitimate returns.</p>
+
+<p>If the test expression evaluates to True, then <code class=
+"arg">body1</code> will be executed.</p>
+
+<p>If the test expression evaluates to False, then the word after
+<code class="arg">body1</code> will be examined. If the next word
+is <code class="keyword">elseif</code>, then the next test
+expression will be tested as a condition. If the next word is <code
+class="keyword">else</code> then the final <code class=
+"arg">body</code> will be evaluated as a command.</p>
+
+<p>The test expression following the word <code class=
+"keyword">if</code> is evaluated in the same manner as in the <code
+class="keyword">expr</code> command.</p>
+
+<p>The test expression following <code class="keyword">if</code>
+may be enclosed within quotes, or braces. If it is enclosed within
+braces, it will be evaluated within the <code class=
+"keyword">if</code> command, and if enclosed within quotes it will
+be evaluated during the substitution phase, and then another round
+of substitutions will be done within the <code class=
+"keyword">if</code> command.</p>
+
+<p><i>Note:</i> This extra round can cause unexpected trouble -
+avoid it.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set x 1
+
+if {$x == 2} {puts "$x is 2"} else {puts "$x is not 2"}
+
+if {$x != 1} {
+    puts "$x is != 1"
+} else {
+    puts "$x is 1"
+}
+
+if $x==1 {puts "GOT 1"}
+
+#
+# Be careful, this is just an example
+# Usually you should avoid such constructs,
+# it is less than clear what is going on and it can be dangerous
+#
+set y x
+if "$$y != 1" {
+    puts "$$y is != 1"
+} else {
+    puts "$$y is 1"
+}
+
+#
+# A dangerous example: due to the extra round of substitution,
+# the script stops
+#
+set y {[exit]}
+if "$$y != 1" {
+    puts "$$y is != 1"
+} else {
+    puts "$$y is 1"
+}
+</pre>
+
+<div class="nav"><a href="Tcl6a.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl8.html">Next
+lesson</a></div>
+</body>
+</html>
+

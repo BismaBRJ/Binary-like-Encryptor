@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Tcllibc</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2>Tcllibc</h2>
+
+<p>Tcllibc is a helper package a user normally will not have to
+deal with. It is especially not necessary to load it explicitly, to
+the contrary, this is not recommended.</p>
+
+<p>Instead, a number of packages in <a href=
+"../tcllib/toc.html">Tcllib</a> are automatically checking for its
+presence and will load it if available, to accelerate their
+operation.</p>
+
+<p>As such the commands it provides may implement public and/or
+internal interfaces of the package in question. Whichever, they are
+commands which do not need documentation here.</p>
+
+<p>The packages using Tcllibc are:</p>
+
+<ol>
+<li><a href="../tcllib/base32/base32.html">base32</a></li>
+
+<li><a href="../tcllib/crc/crc32.html">crc32</a></li>
+
+<li><a href="../tcllib/dns/tcllib_ip.html">ip</a></li>
+
+<li><a href="../tcllib/md4/md4.html">md4</a></li>
+
+<li><a href="../tcllib/md5/md5.html">md5</a></li>
+
+<li><a href="../tcllib/md5crypt/md5crypt.html">md5crypt</a></li>
+
+<li><a href="../tcllib/rc4/rc4.html">rc4</a></li>
+
+<li><a href="../tcllib/ripemd/ripemd128.html">ripemd128</a></li>
+
+<li><a href="../tcllib/ripemd/ripemd160.html">ripemd160</a></li>
+
+<li><a href="../tcllib/sha1/sha1.html">sha1</a></li>
+
+<li><a href="../tcllib/struct/graph.html">struct::graph</a></li>
+
+<li><a href=
+"../tcllib/struct/struct_set.html">struct::sets</a></li>
+
+<li><a href=
+"../tcllib/struct/struct_tree.html">struct::tree</a></li>
+
+<li><a href="../tcllib/crc/sum.html">sum</a></li>
+
+<li><a href="../tcllib/base64/uuencode.html">uuencode</a></li>
+
+<li><a href="../tcllib/uuid/uuid.html">uuid</a></li>
+
+<li><a href="../tcllib/base64/yencode.html">yencode</a></li>
+</ol>
+
+<br>
+<br>
+ 
+
+<p>As a last note: While the Tcllibc binary has been built using
+Critcl, it is not Critcl itself. Critcl is not distributed with
+ActiveTcl.</p>
+
+<hr>
+<pre>
+Copyright &copy; 2008 ActiveState Software Inc.
+</pre>
+</body>
+</html>
+

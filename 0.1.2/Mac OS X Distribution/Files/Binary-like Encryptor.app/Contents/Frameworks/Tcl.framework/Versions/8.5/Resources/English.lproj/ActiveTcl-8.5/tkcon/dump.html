@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>tkcon: dump procedure</title>
+<link rel="STYLESHEET" type="text/css" href="./style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<table width="100%" border="0" cellspacing="2" cellpadding="0"
+bgcolor="#000000">
+<tr>
+<td><!-- start header info -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0"
+bgcolor="#FFFFFF">
+<tr>
+<th><font size="+3">tkcon: <code>dump</code> procedure</font></th>
+<td align="right"><a href="http://tkcon.sourceforge.net/"><img src=
+"http://sourceforge.net/sflogo.php?group_id=11462&amp;type=1"
+width="88" height="31" border="0" alt="SourceForge Logo"></a> </td>
+</tr>
+</table>
+
+<!-- end header info -->
+</td>
+</tr>
+
+<tr>
+<td><!-- start main navigation table -->
+<table border="1" cellpadding="2" cellspacing="2" bgcolor="#CCCCCC"
+width="100%">
+<tr>
+<th class="hi"><a href="index.html" class=
+"hi">Documentation</a></th>
+<th><a href="purpose.html">Purpose &amp; Features</a></th>
+<th><a href="limits.html">Limitations</a></th>
+<th><a href="todo.html">To&nbsp;Do</a></th>
+<th><a href="license.terms">License</a></th>
+</tr>
+
+<tr>
+<th colspan="2"><a href="plugin.html">Online Demo</a> (requires <a
+href="http://tcl.activestate.com/software/plugin/">Tk
+plugin</a>)</th>
+<th colspan="3"><a href="nontcl.html">Using TkCon with other Tk
+Languages</a></th>
+</tr>
+</table>
+
+<!-- end main navigation table -->
+</td>
+</tr>
+
+<tr>
+<td><!-- start secondary navigation table -->
+<table border="1" cellpadding="2" cellspacing="2" bgcolor="#BBBBBB"
+width="100%">
+<tr>
+<th><a href="start.html">Getting Started</a></th>
+<th><a href="bindings.html">Special Bindings</a></th>
+<th><a href="procs.html">Procedures</a></th>
+<th><a href="demopic.png">Screenshot</a></th>
+</tr>
+
+<tr>
+<th class="hi2"><a href="dump.html" class=
+"hi2"><code>dump</code></a></th>
+<th><a href="tkcon.html"><code>tkcon</code></a></th>
+<th><a href="idebug.html"><code>idebug</code></a></th>
+<th><a href="observe.html"><code>observe</code></a></th>
+</tr>
+</table>
+
+<!-- end secondary navigation table -->
+</td>
+</tr>
+
+<tr>
+<td bgcolor="#FFFFFF">
+<div class="indent">
+<p>The <code>dump</code> command provides a way for the user to
+spit out state information about the interpreter in a Tcl readable
+(and human readable) form. It takes the general form:</p>
+
+<blockquote><code>dump</code> <b>method</b> <i>?-nocomplain?
+?-filter pattern? ?--? pattern ?pattern ...?</i></blockquote>
+
+The patterns represent glob-style patterns (as in <code>string
+match pattern $str</code>). <i>-nocomplain</i> will prevent
+<code>dump</code> from throwing an error if no items matched the
+pattern. <i>-filter</i> is interpreted as appropriate for the
+method. The various methods are: 
+
+<dl>
+<dt><code>dump <b>command</b></code> <i>args</i></dt>
+
+<dd>Outputs one or more commands.</dd>
+
+<dt><code>dump <b>procedure</b></code> <i>args</i></dt>
+
+<dd>Outputs one or more procs in sourceable form.</dd>
+
+<dt><code>dump <b>variable</b></code> <i>args</i></dt>
+
+<dd>Outputs the values of variables in sourceable form. Recognizes
+nested arrays. The <i>-filter</i> pattern is used as to filter
+array element names and is interepreted as a glob pattern (defaults
+to {*}). It is passed down for nested arrays.</dd>
+
+<dt><code>dump <b>widget</b></code> <i>args</i></dt>
+
+<dd>Outputs one or more widgets by giving their configuration
+options. The <i>-filter</i> pattern is used as to filter the config
+options and is interpreted as a case insensitive regexp pattern
+(defaults to {.*})</dd>
+</dl>
+</div>
+</td>
+</tr>
+</table>
+
+<hr noshade size="1">
+<address><font size="2">&copy; Jeffrey Hobbs</font></address>
+</body>
+</html>
+

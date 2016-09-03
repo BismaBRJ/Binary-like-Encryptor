@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_GetPixmap manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> GetPixmap</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_GetPixmap, Tk_FreePixmap - allocate and free pixmaps 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+Pixmap<br>
+<b>Tk_GetPixmap(</b><i>display, d, width, height,
+depth</i><b>)</b><br>
+<b>Tk_FreePixmap(</b><i>display, pixmap</i><b>)</b><br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Display <b>*display</b> (in)</dt>
+
+<dd>X display for the pixmap.</dd>
+
+<dt>Drawable <b>d</b> (in)</dt>
+
+<dd>Pixmap or window where the new pixmap will be used for
+drawing.</dd>
+
+<dt>int <b>width</b> (in)</dt>
+
+<dd>Width of pixmap.</dd>
+
+<dt>int <b>height</b> (in)</dt>
+
+<dd>Height of pixmap.</dd>
+
+<dt>int <b>depth</b> (in)</dt>
+
+<dd>Number of bits per pixel in pixmap.</dd>
+
+<dt>Pixmap <b>pixmap</b> (in)</dt>
+
+<dd>Pixmap to destroy.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These procedures are identical to the Xlib procedures
+<b>XCreatePixmap</b> and <b>XFreePixmap</b>, except that they have
+extra code to manage X resource identifiers so that identifiers for
+deleted pixmaps can be reused in the future. It is important for Tk
+applications to use these procedures rather than
+<b>XCreatePixmap</b> and <b>XFreePixmap</b>; otherwise long-running
+applications may run out of resource identifiers. 
+
+<p><b>Tk_GetPixmap</b> creates a pixmap suitable for drawing in
+<i>d</i>, with dimensions given by <i>width</i>, <i>height</i>, and
+<i>depth</i>, and returns its identifier. <b>Tk_FreePixmap</b>
+destroys the pixmap given by <i>pixmap</i> and makes its resource
+identifier available for reuse.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/P.htm#pixmap">pixmap</a>, <a href=
+"../Keywords/R.htm#resource identifier">resource identifier</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

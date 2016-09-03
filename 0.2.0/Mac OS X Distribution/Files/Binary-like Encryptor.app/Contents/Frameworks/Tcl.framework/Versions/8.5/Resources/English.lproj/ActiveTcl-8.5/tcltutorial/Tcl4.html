@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Evaluation &amp; Substitutions 2: Grouping arguments with
+{}</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Evaluation &amp; Substitutions 2: Grouping
+arguments with {}</h1>
+
+<div class="nav"><a href="Tcl3.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl5.html">Next
+lesson</a></div>
+
+<p>During the substitution phase of command evaluation, the two
+grouping operators, the brace ({) and the double quote ("), are
+treated differently by the Tcl interpreter.</p>
+
+<p>In the last lesson you saw that grouping words with double
+quotes allows substitutions to occur within the double quotes. By
+contrast, grouping words within double braces
+<strong>disables</strong> substitution within the braces.
+Characters within braces are passed to a command exactly as
+written. The only "Backslash Sequence" that is processed within
+braces is the backslash at the end of a line. This is still a line
+continuation character.</p>
+
+<p>Note that braces have this effect only when they are used for
+grouping (i.e. at the beginning and end of a sequence of words). If
+a string is already grouped, either with quotes or braces, and
+braces occur in the middle of the grouped string (i.e. "foo{bar"),
+then the braces are treated as regular characters with no special
+meaning. If the string is grouped with quotes, substitutions will
+occur within the quoted string, even between the braces.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set Z Albany
+set Z_LABEL "The Capitol of New York is: "
+
+puts "\n................. examples of differences between  \" and \{"
+puts "$Z_LABEL $Z"
+puts {$Z_LABEL $Z}
+
+puts "\n....... examples of differences in nesting \{ and \" "
+puts "$Z_LABEL {$Z}"
+puts {Who said, "What this country needs is a good $0.05 cigar!"?}
+
+puts "\n................. examples of escape strings"
+puts {There are no substitutions done within braces \n \r \x0a \f \v}
+puts {But, the escaped newline at the end of a\
+string is still evaluated as a space}
+</pre>
+
+<div class="nav"><a href="Tcl3.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl5.html">Next
+lesson</a></div>
+</body>
+</html>
+

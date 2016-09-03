@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_CreateFileHandler manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> CrtFileHdlr</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_CreateFileHandler, Tcl_DeleteFileHandler - associate procedure
+callbacks with files or devices (Unix only) 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+<b>Tcl_CreateFileHandler</b>(<i>fd, mask, proc, clientData</i>)<br>
+<b>Tcl_DeleteFileHandler</b>(<i>fd</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>int <b>fd</b> (in)</dt>
+
+<dd>Unix file descriptor for an open file or device.</dd>
+
+<dt>int <b>mask</b> (in)</dt>
+
+<dd>Conditions under which <i>proc</i> should be called: OR-ed
+combination of <b>TCL_READABLE</b>, <b>TCL_WRITABLE</b>, and
+<b>TCL_EXCEPTION</b>. May be set to 0 to temporarily disable a
+handler.</dd>
+
+<dt>Tcl_FileProc <b>*proc</b> (in)</dt>
+
+<dd>Procedure to invoke whenever the file or device indicated by
+<i>file</i> meets the conditions specified by <i>mask</i>.</dd>
+
+<dt>ClientData <b>clientData</b> (in)</dt>
+
+<dd>Arbitrary one-word value to pass to <i>proc</i>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_CreateFileHandler</b> arranges for <i>proc</i> to be invoked
+in the future whenever I/O becomes possible on a file or an
+exceptional condition exists for the file. The file is indicated by
+<i>fd</i>, and the conditions of interest are indicated by
+<i>mask</i>. For example, if <i>mask</i> is <b>TCL_READABLE</b>,
+<i>proc</i> will be called when the file is readable. The callback
+to <i>proc</i> is made by <b><a href=
+"../TclLib/DoOneEvent.htm">Tcl_DoOneEvent</a></b>, so
+<b>Tcl_CreateFileHandler</b> is only useful in programs that
+dispatch events through <b><a href=
+"../TclLib/DoOneEvent.htm">Tcl_DoOneEvent</a></b> or through Tcl
+commands such as <b><a href="../TclCmd/vwait.htm">vwait</a></b>. 
+
+<p><i>Proc</i> should have arguments and result that match the type
+<b>Tcl_FileProc</b>:</p>
+
+<pre>
+typedef void Tcl_FileProc(
+        ClientData <i>clientData</i>,
+        int <i>mask</i>);
+</pre>
+
+The <i>clientData</i> parameter to <i>proc</i> is a copy of the
+<i>clientData</i> argument given to <b>Tcl_CreateFileHandler</b>
+when the callback was created. Typically, <i>clientData</i> points
+to a data structure containing application-specific information
+about the file. <i>Mask</i> is an integer mask indicating which of
+the requested conditions actually exists for the file; it will
+contain a subset of the bits in the <i>mask</i> argument to
+<b>Tcl_CreateFileHandler</b>. 
+
+<p>There may exist only one handler for a given file at a given
+time. If <b>Tcl_CreateFileHandler</b> is called when a handler
+already exists for <i>fd</i>, then the new callback replaces the
+information that was previously recorded.</p>
+
+<p><b>Tcl_DeleteFileHandler</b> may be called to delete the file
+handler for <i>fd</i>; if no handler exists for the file given by
+<i>fd</i> then the procedure has no effect.</p>
+
+<p>The purpose of file handlers is to enable an application to
+respond to events while waiting for files to become ready for I/O.
+For this to work correctly, the application may need to use
+non-blocking I/O operations on the files for which handlers are
+declared. Otherwise the application may block if it reads or writes
+too much data; while waiting for the I/O to complete the
+application will not be able to service other events. Use <b><a
+href="../TclLib/OpenFileChnl.htm">Tcl_SetChannelOption</a></b> with
+<b>-blocking</b> to set the channel into blocking or nonblocking
+mode as required.</p>
+
+<p>Note that these interfaces are only supported by the Unix
+implementation of the Tcl notifier.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#callback">callback</a>, <a href=
+"../Keywords/F.htm#file">file</a>, <a href=
+"../Keywords/H.htm#handler">handler</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990-1994 The Regents of the University of
+California. Copyright &copy; 1994-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

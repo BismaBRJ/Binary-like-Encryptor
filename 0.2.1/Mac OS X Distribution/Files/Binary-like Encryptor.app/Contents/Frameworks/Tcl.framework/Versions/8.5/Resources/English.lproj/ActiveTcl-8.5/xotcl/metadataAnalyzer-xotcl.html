@@ -1,0 +1,499 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>XOTcl - Documentation --
+xotcl/library/lib/metadataAnalyzer.xotcl</title>
+<link rel="StyleSheet" href="xotcl-doc.css" type="text/css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1><img src="./logo-100.jpg" alt=
+"xotcl/library/lib/metadataAnalyzer.xotcl" align="MIDDLE">
+xotcl/library/lib/metadataAnalyzer.xotcl</h1>
+
+<hr>
+<h2>Package/File Information</h2>
+
+<b>No package provided/required</b> <br>
+ <br>
+ <b>Defined Objects/Classes:</b> 
+
+<ul>
+<li><a href="#@"><em>@</em>:</a><br>
+</li>
+
+<li><a href="#AnalyzerCmd"><em>AnalyzerCmd</em>:</a><br>
+</li>
+
+<li><a href="#ClassToken"><em>ClassToken</em>:</a><br>
+</li>
+
+<li><a href="#ConstraintToken"><em>ConstraintToken</em>:</a><br>
+</li>
+
+<li><a href="#FileToken"><em>FileToken</em>:</a><br>
+</li>
+
+<li><a href="#InstprocToken"><em>InstprocToken</em>:</a><br>
+</li>
+
+<li><a href="#MetaClassToken"><em>MetaClassToken</em>:</a><br>
+</li>
+
+<li><a href="#MetadataAnalyzer"><em>MetadataAnalyzer</em>:</a> <a
+href="#MetadataAnalyzer-print">print</a>.<br>
+</li>
+
+<li><a href="#MetadataToken"><em>MetadataToken</em>:</a> <a href=
+"#MetadataToken-print">print</a>, <a href=
+"#MetadataToken-printProperties">printProperties</a>, <a href=
+"#MetadataToken-sortTokenList">sortTokenList</a>.<br>
+</li>
+
+<li><a href="#MethodToken"><em>MethodToken</em>:</a><br>
+</li>
+
+<li><a href="#ObjToken"><em>ObjToken</em>:</a><br>
+</li>
+
+<li><a href="#PackageToken"><em>PackageToken</em>:</a><br>
+</li>
+
+<li><a href="#ProcToken"><em>ProcToken</em>:</a><br>
+</li>
+</ul>
+
+<br>
+ <b>Filename:</b> <a href=
+"xotcl/library/lib/metadataAnalyzer.xotcl">xotcl/library/lib/metadataAnalyzer.xotcl</a>
+<br>
+ <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">XOTcl file analyzer for @ metadata. E.g.\ used for
+doumentation with xoDoc (but in the static variant
+StaticMetadataAnalyzer which uses the dynamic variant in this
+file). 
+
+<p>Sample sample usage:</p>
+
+<pre>
+        package require xotcl::metadataAnalyzer
+
+        # instantiate metadata analyzer object
+        MetadataAnalyzer @::m
+        # make this object be known to @ and turn @ metadata processing on
+        @ analyzerObj @::m
+        @ onOff 1
+
+        # read in some metadata tags (in sample file) &amp; execute the file
+        source lib/testx.xotcl
+
+        # turn @ metadata processing off again
+        @ onOff 0
+
+        # print out all collected metadata
+        puts [@::m print]
+       
+</pre>
+</td>
+</tr>
+</table>
+
+<br>
+ 
+
+<hr>
+<p><a name="@"></a></p>
+
+<h2>Object: <em>@</em></h2>
+
+<b>Class</b>: AnalyzerCmd <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Recreate @ with metadata analyis
+funtionality.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="AnalyzerCmd"></a></p>
+
+<h2>Class: <em>AnalyzerCmd</em></h2>
+
+<b>Class</b>: Class <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Class that overload the unknown mechanism of @ to
+provide metadata analysis.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="ClassToken"></a></p>
+
+<h2>Class: <em>ClassToken</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Heritage</b>: ObjToken <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Token for Class metadata. Contains additional
+parameters: "instprocList" = list of all instproc token.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="ConstraintToken"></a></p>
+
+<h2>Class: <em>ConstraintToken</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Heritage</b>: MetadataToken <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Token for @Constraint Metadata.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="FileToken"></a></p>
+
+<h2>Class: <em>FileToken</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Heritage</b>: MetadataToken <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Token for @File Metadata.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="InstprocToken"></a></p>
+
+<h2>Class: <em>InstprocToken</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Heritage</b>: MethodToken <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Token for Instproc metadata.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="MetaClassToken"></a></p>
+
+<h2>Class: <em>MetaClassToken</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Heritage</b>: ClassToken <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Token for Meta-Class metadata.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="MetadataAnalyzer"></a></p>
+
+<h2>Class: <em>MetadataAnalyzer</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Procs/Instprocs:</b> <a href=
+"#MetadataAnalyzer-print">print</a>. 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Handler class for building a metadata runtime
+structure</td>
+</tr>
+</table>
+
+<h3>Instprocs</h3>
+
+<ul>
+<li><a name="MetadataAnalyzer-print"></a> <b>print</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Print all collected token information to stdout.
+This method is also an exmaple how the tokens can be used.</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="MetadataToken"></a></p>
+
+<h2>Class: <em>MetadataToken</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Procs/Instprocs:</b> <a href="#MetadataToken-print">print</a>,
+<a href="#MetadataToken-printProperties">printProperties</a>, <a
+href="#MetadataToken-sortTokenList">sortTokenList</a>. 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Each collected metadata element is stored in a
+token object. MetadataToken is superclass of token object classes.
+Each metadata token has two interesting parameters: 
+
+<p>"properties" contains list of all described metadata properties.
+E.g. can be printed with</p>
+
+<pre>
+        foreach p [my set properties] { 
+        if {[my exists $p]} {
+            append c "    $p=[my set $p]\n"
+        }
+        }
+       
+</pre>
+
+"name" contains the method, object, ... name of the metadata
+element. 
+
+<p>All metadata token are aggregated by @. Therefore,</p>
+
+<pre>
+        foreach mdt [@ info children] { 
+        if {[$mdt istype MetadataToken]} {$mdt print}
+        }
+       
+</pre>
+
+prints all token.</td>
+</tr>
+</table>
+
+<h3>Instprocs</h3>
+
+<ul>
+<li><a name="MetadataToken-printProperties"></a>
+<b>printProperties</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Print metadata properties to stdout.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="MetadataToken-print"></a> <b><em>abstract</em></b>
+<b>print</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Abstract method for printing a token to
+stdout.</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<h3>Procs</h3>
+
+<ul>
+<li><a name="MetadataToken-sortTokenList"></a> <b>sortTokenList</b>
+<em>l</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>l</b>: token list</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Sort a token list with names. Since names are
+autonames, this means order of appearance in the program.</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="MethodToken"></a></p>
+
+<h2>Class: <em>MethodToken</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Heritage</b>: MetadataToken <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Token for Method metadata. Contains additional
+parameters: "arguments" of the method, "returnValue" of the method,
+"obj" name, "abstract" = 0 or 1 (whether its an abstract method or
+not).</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="ObjToken"></a></p>
+
+<h2>Class: <em>ObjToken</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Heritage</b>: MetadataToken <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Token for Object metadata. Contains additional
+parameters: "procList" = list of all proc token and "cl"= class
+name.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="PackageToken"></a></p>
+
+<h2>Class: <em>PackageToken</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Heritage</b>: MetadataToken <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Token for Package metadata. Contains additional
+parameters: "version" of the package and "type"= either "require"
+or "provide".</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="ProcToken"></a></p>
+
+<h2>Class: <em>ProcToken</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Heritage</b>: MethodToken <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Token for Proc metadata</td>
+</tr>
+</table>
+
+<br>
+<br>
+ <br>
+ <br>
+<br>
+ 
+
+<hr>
+<a href="./index.html">Back to index page.</a> <br>
+ 
+
+<hr>
+</body>
+</html>
+

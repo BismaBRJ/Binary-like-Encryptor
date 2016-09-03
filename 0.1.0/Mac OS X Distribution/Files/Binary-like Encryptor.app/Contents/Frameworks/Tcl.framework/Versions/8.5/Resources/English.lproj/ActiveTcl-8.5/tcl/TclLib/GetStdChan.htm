@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_GetStdChannel manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> GetStdChan</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_GetStdChannel, Tcl_SetStdChannel - procedures for retrieving
+and replacing the standard channels 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+Tcl_Channel<br>
+<b>Tcl_GetStdChannel</b>(<i>type</i>)<br>
+<b>Tcl_SetStdChannel</b>(<i>channel, type</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>int <b>type</b> (in)</dt>
+
+<dd>The identifier for the standard channel to retrieve or modify.
+Must be one of <b>TCL_STDIN</b>, <b>TCL_STDOUT</b>, or
+<b>TCL_STDERR</b>.</dd>
+
+<dt>Tcl_Channel <b>channel</b> (in)</dt>
+
+<dd>The channel to use as the new value for the specified standard
+channel.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+Tcl defines three special channels that are used by various I/O
+related commands if no other channels are specified. The standard
+input channel has a channel name of <b>stdin</b> and is used by
+<b><a href="../TclCmd/read.htm">read</a></b> and <b><a href=
+"../TclCmd/gets.htm">gets</a></b>. The standard output channel is
+named <b>stdout</b> and is used by <b><a href=
+"../TclCmd/puts.htm">puts</a></b>. The standard error channel is
+named <b>stderr</b> and is used for reporting errors. In addition,
+the standard channels are inherited by any child processes created
+using <b><a href="../TclCmd/exec.htm">exec</a></b> or <b><a href=
+"../TclCmd/open.htm">open</a></b> in the absence of any other
+redirections. 
+
+<p>The standard channels are actually aliases for other normal
+channels. The current channel associated with a standard channel
+can be retrieved by calling <b>Tcl_GetStdChannel</b> with one of
+<b>TCL_STDIN</b>, <b>TCL_STDOUT</b>, or <b>TCL_STDERR</b> as the
+<i>type</i>. The return value will be a valid channel, or NULL.</p>
+
+<p>A new channel can be set for the standard channel specified by
+<i>type</i> by calling <b>Tcl_SetStdChannel</b> with a new channel
+or NULL in the <i>channel</i> argument. If the specified channel is
+closed by a later call to <b><a href=
+"../TclLib/OpenFileChnl.htm">Tcl_Close</a></b>, then the
+corresponding standard channel will automatically be set to
+NULL.</p>
+
+<p>If a non-NULL value for <i>channel</i> is passed to
+<b>Tcl_SetStdChannel</b>, then that same value should be passed to
+<b><a href=
+"../TclLib/OpenFileChnl.htm">Tcl_RegisterChannel</a></b>, like
+so:</p>
+
+<pre>
+<a href=
+"../TclLib/OpenFileChnl.htm">Tcl_RegisterChannel</a>(NULL, channel);
+</pre>
+
+This is a workaround for a misfeature in <b>Tcl_SetStdChannel</b>
+that it fails to do some reference counting housekeeping. This
+misfeature cannot be corrected without contradicting the
+assumptions of some existing code that calls
+<b>Tcl_SetStdChannel</b>. 
+
+<p>If <b>Tcl_GetStdChannel</b> is called before
+<b>Tcl_SetStdChannel</b>, Tcl will construct a new channel to wrap
+the appropriate platform-specific standard file handle. If
+<b>Tcl_SetStdChannel</b> is called before <b>Tcl_GetStdChannel</b>,
+then the default channel will not be created.</p>
+
+<p>If one of the standard channels is set to NULL, either by
+calling <b>Tcl_SetStdChannel</b> with a NULL <i>channel</i>
+argument, or by calling <b><a href=
+"../TclLib/OpenFileChnl.htm">Tcl_Close</a></b> on the channel, then
+the next call to <b><a href=
+"../TclLib/CrtChannel.htm">Tcl_CreateChannel</a></b> will
+automatically set the standard channel with the newly created
+channel. If more than one standard channel is NULL, then the
+standard channels will be assigned starting with standard input,
+followed by standard output, with standard error being last.</p>
+
+<p>See <b><a href=
+"../TclLib/StdChannels.htm">Tcl_StandardChannels</a></b> for a
+general treatise about standard channels and the behaviour of the
+Tcl library with regard to them.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclLib/OpenFileChnl.htm">Tcl_Close</a></b>, <b><a
+href="../TclLib/CrtChannel.htm">Tcl_CreateChannel</a></b>, <b><a
+href="../TclLib/Tcl_Main.htm">Tcl_Main</a></b>, <b><a href=
+"../UserCmd/tclsh.htm">tclsh</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/S.htm#standard channel">standard channel</a>,
+<a href="../Keywords/S.htm#standard input">standard input</a>, <a
+href="../Keywords/S.htm#standard output">standard output</a>, <a
+href="../Keywords/S.htm#standard error">standard error</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1996 by Sun Microsystems, Inc.</div>
+</body>
+</html>
+

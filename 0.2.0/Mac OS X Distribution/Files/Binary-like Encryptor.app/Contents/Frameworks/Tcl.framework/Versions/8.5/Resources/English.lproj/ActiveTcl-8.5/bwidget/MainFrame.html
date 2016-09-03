@@ -1,0 +1,413 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>MainFrame</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>MainFrame</b> - Manage toplevel with menu, toolbar and
+statusbar</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>MainFrame</b></a> <i>pathName</i>
+?<i>option value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i><a href="ProgressBar.html">OPTIONS from
+<b>ProgressBar</b></a></i></dt>
+
+<dd>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;-background or -bg</td>
+<td>&nbsp;&nbsp;-progressfg (see <b>-foreground</b>)</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-progressmax (see <b>-maximum</b>)</td>
+<td>&nbsp;&nbsp;-progresstype (see <b>-type</b>)</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-progressvar (see <b>-variable</b>)</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-height">-height</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-menu">-menu</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-separator">-separator</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-textvariable">-textvariable</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-width">-width</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-sizegrip">-sizegrip</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#addindicator"><b>addindicator</b></a>
+?<i>arg...</i>?</dd>
+
+<dd><i>pathName</i> <a href=
+"#addtoolbar"><b>addtoolbar</b></a></dd>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#getframe"><b>getframe</b></a></dd>
+
+<dd><i>pathName</i> <a href="#getindicator"><b>getindicator</b></a>
+<i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#getmenu"><b>getmenu</b></a>
+<i>menuid</i></dd>
+
+<dd><i>pathName</i> <a href="#gettoolbar"><b>gettoolbar</b></a>
+<i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#setmenustate"><b>setmenustate</b></a>
+<i>tag</i> <i>state</i></dd>
+
+<dd><i>pathName</i> <a href=
+"#showstatusbar"><b>showstatusbar</b></a> <i>name</i></dd>
+
+<dd><i>pathName</i> <a href="#showtoolbar"><b>showtoolbar</b></a>
+<i>index</i> <i>bool</i></dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>MainFrame manage toplevel to have:<br>
+</p>
+
+<ul>
+<li>simple menu creation, with automatic accelerator bindings and
+<a href="DynamicHelp.html">DynamicHelp</a> association,</li>
+
+<li>one or more toolbars that user can hide,</li>
+
+<li>a status bar, displaying a user message or a menu description,
+and optionally a <a href="ProgressBar.html">ProgressBar</a>.</li>
+</ul>
+
+<br>
+<br>
+ <br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-height"><b>-height</b></a></dt>
+
+<dd>Specifies the desired height for the user frame in any of the
+forms acceptable to Tk_GetPixels. If this option is less than or
+equal to zero (the default) then the window will not request any
+size at all.</dd>
+</dl>
+
+<dl>
+<dt><a name="-menu"><b>-menu (read-only)</b></a></dt>
+
+<dd>This option describes the menu. This is a list whose each five
+elements describe one cascade menu. It has the following form:
+{<i>menuname</i> <i>tags</i> <i>menuId</i> <i>tearoff</i>
+<i>menuentries</i>...} where <i>menuentries</i> is a list where
+each element describe one menu entry, which can be: 
+
+<ul>
+<li>for a separator:<br>
+ {<b>separator</b>}</li>
+
+<li>for a command:<br>
+ {<b>command</b> <i>menuname</i> ?<i>tags</i>? ?<i>description</i>?
+?<i>accelerator</i>? ?<i>option</i> <i>value</i>? ...}</li>
+
+<li>for a check button:<br>
+ {<b>checkbutton</b> <i>menuname</i> ?<i>tags</i>?
+?<i>description</i>? ?<i>accelerator</i>? ?<i>option</i>
+<i>value</i>? ...}</li>
+
+<li>for a radio button:<br>
+ {<b>radiobutton</b> <i>menuname</i> ?<i>tags</i>?
+?<i>description</i>? ?<i>accelerator</i> ?<i>option</i>
+<i>value</i>? ...}</li>
+
+<li>for a cascade menu:<br>
+ {<b>cascade</b> <i>menuname</i> <i>tags</i> <i>menuId</i>
+<i>tearoff</i> <i>menuentries</i>}</li>
+</ul>
+
+where: 
+
+<ul>
+<li><i>menuname</i> is the name of the menu. If it contains a
+&amp;, the following character is automatically converted to the
+corresponding <b>-underline</b> option of <b>menu add</b>
+command.</li>
+
+<li><i>tags</i> is the tags list for the entry, used for enabling
+or disabling menu entries with <b>MainFrame::setmenustate</b>.</li>
+
+<li><i>menuId</i> is an id for the menu, from which you can get
+menu pathname with <b>MainFrame::getmenu</b>.</li>
+
+<li><i>tearoff</i> specifies if menu has tearoff entry.</li>
+
+<li><i>description</i> specifies a string for <a href=
+"\">DynamicHelp</a>.</li>
+
+<li><i>accelerator</i> specifies a key sequence. It is a list of
+two elements, where the first is one of <b>Shift</b>, <b>Ctrl</b>,
+<b>Alt</b>, <b>CtrlAlt</b>, <b>Cmd</b>, or <b>ShiftCmd</b>, and the
+second as letter (see <a href="#-casesensitive">-casesensitive</a>
+option for interpretation), digit or a special key name. An
+accelerator string is build and corresponding binding set on the
+toplevel to invoke the menu entry.</li>
+
+<li><i>option value</i> specifies additionnal options for the entry
+(see <b>menu add</b> command).</li>
+</ul>
+
+Each value enclosed by ? are optional and defaulted to empty
+string, but must be provided if one or more following options is
+not empty.<br>
+Example: 
+
+<pre>
+set descmenu {
+    "&amp;File" {} {} 0 {
+        {command "&amp;New"     {} "Create a new document"     {Ctrl n} -command Menu::new}
+        {command "&amp;Open..." {} "Open an existing document" {Ctrl o} -command Menu::open}
+        {command "&amp;Save"    open "Save the document" {Ctrl s} -command Menu::save}
+        {cascade  "&amp;Export"  {} export 0 {
+            {command "Format &amp;1" open "Export document to format 1" {} -command {Menu::export 1}}
+            {command "Format &amp;2" open "Export document to format 2" {} -command {Menu::export 2}}
+        }}
+        {separator}
+        {cascade "&amp;Recent files" {} recent 0 {}}
+        {separator}
+        {command "E&amp;xit" {} "Exit the application" {} -command Menu::exit}
+    }
+    "&amp;Options" {} {} 0 {
+        {checkbutton "Toolbar" {} "Show/hide toolbar" {}
+            -variable Menu::_drawtoolbar
+            -command  {$Menu::_mainframe showtoolbar toolbar $Menu::_drawtoolbar}
+        }
+    }
+}
+</pre>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="-separator"><b>-separator (read-only)</b></a></dt>
+
+<dd>Specifies if separator should be drawn at the top and/or at the
+bottom of the user window. Must be one of the values <b>none</b>,
+<b>top</b>, <b>bottom</b> or <b>both</b>. It depends on the relief
+of subwidgets of user window.</dd>
+</dl>
+
+<dl>
+<dt><a name="-textvariable"><b>-textvariable</b></a></dt>
+
+<dd>Specifies the textvariable option for the label of the status
+bar. <a href="DynamicHelp.html">DynamicHelp</a> description of menu
+entries are mapped to this variable at the creation of the
+MainFrame. If this variable is changed by MainFrame::configure,
+menu description will not be available.<br>
+You change the text of the label by modifying the value of the
+variable.</dd>
+</dl>
+
+<dl>
+<dt><a name="-width"><b>-width</b></a></dt>
+
+<dd>Specifies the desired width for the user frame in any of the
+forms acceptable to Tk_GetPixels. If this option is less than or
+equal to zero (the default) then the window will not request any
+size at all.</dd>
+</dl>
+
+<dl>
+<dt><a name="-sizegrip"><b>-sizegrip (themed,
+read-only)</b></a></dt>
+
+<dd>If bool argument is true and themed mode, show a ttk sizegrip
+widget in the lower-right corner.</dd>
+
+<dd>
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="addindicator"><i>pathName</i> <b>addindicator</b></a>
+?<i>arg...</i>?</dt>
+
+<dd>Add an indicator box at the right of the status bar. Each
+indicator are added from left to right. An indicator is a Tk label
+widget configured with option-value pair given by ?<i>arg...</i>?.
+<b>-relief</b> and <b>-borderwidth</b> options are respetively
+defaulted to <i>sunken</i> and 1. Returns the pathname of the
+created label.</dd>
+</dl>
+
+<dl>
+<dt><a name="addtoolbar"><i>pathName</i> <b>addtoolbar</b></a></dt>
+
+<dd>Add a toolbar to the MainFrame. Returns the pathname of the new
+window where to place toolbar items.</dd>
+</dl>
+
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="getframe"><i>pathName</i> <b>getframe</b></a></dt>
+
+<dd>Returns the pathname of the user window.</dd>
+</dl>
+
+<dl>
+<dt><a name="getindicator"><i>pathName</i> <b>getindicator</b></a>
+<i>index</i></dt>
+
+<dd>Returns the pathname of the <i>index</i>th added
+indicator.</dd>
+</dl>
+
+<dl>
+<dt><a name="getmenu"><i>pathName</i> <b>getmenu</b></a>
+<i>menuid</i></dt>
+
+<dd>Returns the pathname of the menu whose id is
+<i>menuid</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="getmenustate"><i>pathName</i> <b>getmenustate</b></a>
+<i>tag</i> <i>state</i></dt>
+
+<dd>Returns the state of the given menu <i>tag</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="gettoolbar"><i>pathName</i> <b>gettoolbar</b></a>
+<i>index</i></dt>
+
+<dd>Returns the pathname of the <i>index</i>th added toolbar.</dd>
+</dl>
+
+<dl>
+<dt><a name="setmenustate"><i>pathName</i> <b>setmenustate</b></a>
+<i>tag</i> <i>state</i></dt>
+
+<dd>Set the <b>-state</b> option value of all the menu entries that
+have the tag <i>tag</i> to <i>state</i>. A menu entry is disabled,
+if one of its associated tags have state <b>disabled</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="showstatusbar"><i>pathName</i>
+<b>showstatusbar</b></a> <i>name</i></dt>
+
+<dd><i>name</i> is one of <b>none</b>, <b>status</b> or
+<b>progression</b>. Use <b>none</b> to hide the status bar,
+<b>status</b> to display the label only, or <b>progression</b> to
+display the label and the <a href=
+"ProgressBar.html">ProgressBar</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="showtoolbar"><i>pathName</i> <b>showtoolbar</b></a>
+<i>index</i> <i>bool</i></dt>
+
+<dd>Hide if <i>bool</i> is 0, or show if <i>bool</i> is 1 the
+<i>index</i>th added toolbar. To prevent your toplevel from
+resizing while hiding/showing toolbar, do [wm geometry $top [wm
+geometry $top]] when it is managed.</dd>
+</dl>
+</dd>
+</dl>
+</body>
+</html>
+

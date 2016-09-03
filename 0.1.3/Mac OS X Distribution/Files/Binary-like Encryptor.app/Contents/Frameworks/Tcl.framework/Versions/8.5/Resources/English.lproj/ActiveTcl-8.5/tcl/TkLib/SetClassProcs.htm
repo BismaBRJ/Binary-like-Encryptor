@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_SetClassProcs manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> SetClassProcs</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_SetClassProcs - register widget specific procedures 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+<b>Tk_SetClassProcs</b>(<i>tkwin, procs, instanceData</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Window <b>tkwin</b> (in)</dt>
+
+<dd>Token for window to modify.</dd>
+
+<dt>Tk_ClassProcs <b>*procs</b> (in)</dt>
+
+<dd>Pointer to data structure containing widget specific
+procedures. The data structure pointed to by <i>procs</i> must be
+static: Tk keeps a reference to it as long as the window
+exists.</dd>
+
+<dt>ClientData <b>instanceData</b> (in)</dt>
+
+<dd>Arbitrary one-word value to pass to widget callbacks.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tk_SetClassProcs</b> is called to register a set of procedures
+that are used as callbacks in different places. 
+
+<p>The structure pointed to by <i>procs</i> contains the
+following:</p>
+
+<pre>
+typedef struct Tk_ClassProcs {
+    unsigned int <i>size</i>;
+    Tk_ClassWorldChangedProc *<i>worldChangedProc</i>;
+    Tk_ClassCreateProc *<i>createProc</i>;
+    Tk_ClassModalProc *<i>modalProc</i>;
+} Tk_ClassProcs;
+</pre>
+
+The <i>size</i> field is used to simplify future expansion of the
+structure. It should always be set to (literally)
+<b>sizeof(Tk_ClassProcs)</b>. 
+
+<p><i>worldChangedProc</i> is invoked when the system has altered
+in some way that requires some reaction from the widget. For
+example, when a font alias (see the <b><a href=
+"../TkCmd/font.htm">font</a></b> manual entry) is reconfigured,
+widgets configured to use that font alias must update their display
+accordingly. <i>worldChangedProc</i> should have arguments and
+results that match the type <b>Tk_ClassWorldChangedProc</b>:</p>
+
+<pre>
+typedef void Tk_ClassWorldChangedProc(
+    ClientData <i>instanceData</i>);
+</pre>
+
+The <i>instanceData</i> parameter passed to the
+<i>worldChangedProc</i> will be identical to the
+<i>instanceData</i> parameter passed to <b>Tk_SetClassProcs</b>. 
+
+<p><i>createProc</i> is used to create platform-dependant windows.
+It is invoked by <b><a href=
+"../TkLib/CrtWindow.htm">Tk_MakeWindowExist</a></b>.
+<i>createProc</i> should have arguments and results that match the
+type <b>Tk_ClassCreateProc</b>:</p>
+
+<pre>
+typedef Window Tk_ClassCreateProc(
+    Tk_Window <i>tkwin</i>,
+    Window <i>parent</i>,
+    ClientData <i>instanceData</i>);
+</pre>
+
+The <i>tkwin</i> and <i>instanceData</i> parameters will be
+identical to the <i>tkwin</i> and <i>instanceData</i> parameters
+passed to <b>Tk_SetClassProcs</b>. The <i>parent</i> parameter will
+be the parent of the window to be created. The <i>createProc</i>
+should return the created window. 
+
+<p><i>modalProc</i> is invoked after all bindings on a widget have
+been triggered in order to handle a modal loop. <i>modalProc</i>
+should have arguments and results that match the type
+<b>Tk_ClassModalProc</b>:</p>
+
+<pre>
+typedef void Tk_ClassModalProc(
+    Tk_Window <i>tkwin</i>,
+    XEvent *<i>eventPtr</i>);
+</pre>
+
+The <i>tkwin</i> parameter to <i>modalProc</i> will be identical to
+the <i>tkwin</i> parameter passed to <b>Tk_SetClassProcs</b>. The
+<i>eventPtr</i> parameter will be a pointer to an XEvent structure
+describing the event being processed. 
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#callback">callback</a>, <a href=
+"../Keywords/C.htm#class">class</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2000 Ajuba Solutions.</div>
+</body>
+</html>
+

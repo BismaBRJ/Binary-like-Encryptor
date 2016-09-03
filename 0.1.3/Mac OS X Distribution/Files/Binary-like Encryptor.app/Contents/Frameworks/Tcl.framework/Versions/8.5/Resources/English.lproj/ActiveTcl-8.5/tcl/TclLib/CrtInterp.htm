@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_CreateInterp manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> CrtInterp</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="CrtInterp.htm#M2" name="L131">NAME</a> 
+
+<dl>
+<dd>Tcl_CreateInterp, Tcl_DeleteInterp, Tcl_InterpDeleted - create
+and delete Tcl command interpreters</dd>
+</dl>
+</dd>
+
+<dd><a href="CrtInterp.htm#M3" name="L132">SYNOPSIS</a></dd>
+
+<dd><a href="CrtInterp.htm#M4" name="L133">ARGUMENTS</a></dd>
+
+<dd><a href="CrtInterp.htm#M5" name="L134">DESCRIPTION</a></dd>
+
+<dd><a href="CrtInterp.htm#M6" name="L135">INTERPRETERS AND MEMORY
+MANAGEMENT</a> 
+
+<dl class="interpreters and memory management">
+<dd><a href="CrtInterp.htm#M7" name="L136">Interpreters Passed As
+Arguments</a></dd>
+
+<dd><a href="CrtInterp.htm#M8" name="L137">Interpreter Creation And
+Deletion</a></dd>
+
+<dd><a href="CrtInterp.htm#M9" name="L138">Retrieving An
+Interpreter From A Data Structure</a></dd>
+</dl>
+</dd>
+
+<dd><a href="CrtInterp.htm#M10" name="L139">SEE ALSO</a></dd>
+
+<dd><a href="CrtInterp.htm#M11" name="L140">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_CreateInterp, Tcl_DeleteInterp, Tcl_InterpDeleted - create and
+delete Tcl command interpreters 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+<a href="../TclLib/Interp.htm">Tcl_Interp</a> *<br>
+<b>Tcl_CreateInterp</b>()<br>
+<b>Tcl_DeleteInterp</b>(<i>interp</i>)<br>
+int<br>
+<b>Tcl_InterpDeleted</b>(<i>interp</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Token for interpreter to be destroyed.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_CreateInterp</b> creates a new interpreter structure and
+returns a token for it. The token is required in calls to most
+other Tcl procedures, such as <b><a href=
+"../TclLib/CrtCommand.htm">Tcl_CreateCommand</a></b>, <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b>, and <b>Tcl_DeleteInterp</b>.
+Clients are only allowed to access a few of the fields of <a href=
+"../TclLib/Interp.htm">Tcl_Interp</a> structures; see the <b><a
+href="../TclLib/Interp.htm">Tcl_Interp</a></b> and <b><a href=
+"../TclLib/CrtCommand.htm">Tcl_CreateCommand</a></b> man pages for
+details. The new interpreter is initialized with the built-in Tcl
+commands and with the variables documented in tclvars(n). To bind
+in additional commands, call <b><a href=
+"../TclLib/CrtCommand.htm">Tcl_CreateCommand</a></b>. 
+
+<p><b>Tcl_DeleteInterp</b> marks an interpreter as deleted; the
+interpreter will eventually be deleted when all calls to <b><a
+href="../TclLib/Preserve.htm">Tcl_Preserve</a></b> for it have been
+matched by calls to <b><a href=
+"../TclLib/Preserve.htm">Tcl_Release</a></b>. At that time, all of
+the resources associated with it, including variables, procedures,
+and application-specific command bindings, will be deleted. After
+<b>Tcl_DeleteInterp</b> returns any attempt to use <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b> on the interpreter will fail
+and return <b>TCL_ERROR</b>. After the call to
+<b>Tcl_DeleteInterp</b> it is safe to examine the interpreter's
+result, query or set the values of variables, define, undefine or
+retrieve procedures, and examine the runtime evaluation stack. See
+below, in the section <b>INTERPRETERS AND MEMORY MANAGEMENT</b> for
+details.</p>
+
+<p><b>Tcl_InterpDeleted</b> returns nonzero if
+<b>Tcl_DeleteInterp</b> was called with <i>interp</i> as its
+argument; this indicates that the interpreter will eventually be
+deleted, when the last call to <b><a href=
+"../TclLib/Preserve.htm">Tcl_Preserve</a></b> for it is matched by
+a call to <b><a href="../TclLib/Preserve.htm">Tcl_Release</a></b>.
+If nonzero is returned, further calls to <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b> in this interpreter will
+return <b>TCL_ERROR</b>.</p>
+
+<p><b>Tcl_InterpDeleted</b> is useful in deletion callbacks to
+distinguish between when only the memory the callback is
+responsible for is being deleted and when the whole interpreter is
+being deleted. In the former case the callback may recreate the
+data being deleted, but this would lead to an infinite loop if the
+interpreter were being deleted.</p>
+
+<h3><a name="M6">INTERPRETERS AND MEMORY MANAGEMENT</a></h3>
+
+<b>Tcl_DeleteInterp</b> can be called at any time on an interpreter
+that may be used by nested evaluations and C code in various
+extensions. Tcl implements a simple mechanism that allows callers
+to use interpreters without worrying about the interpreter being
+deleted in a nested call, and without requiring special code to
+protect the interpreter, in most cases. This mechanism ensures that
+nested uses of an interpreter can safely continue using it even
+after <b>Tcl_DeleteInterp</b> is called. 
+
+<p>The mechanism relies on matching up calls to <b><a href=
+"../TclLib/Preserve.htm">Tcl_Preserve</a></b> with calls to <b><a
+href="../TclLib/Preserve.htm">Tcl_Release</a></b>. If
+<b>Tcl_DeleteInterp</b> has been called, only when the last call to
+<b><a href="../TclLib/Preserve.htm">Tcl_Preserve</a></b> is matched
+by a call to <b><a href=
+"../TclLib/Preserve.htm">Tcl_Release</a></b>, will the interpreter
+be freed. See the manual entry for <b><a href=
+"../TclLib/Preserve.htm">Tcl_Preserve</a></b> for a description of
+these functions.</p>
+
+<p>The rules for when the user of an interpreter must call <b><a
+href="../TclLib/Preserve.htm">Tcl_Preserve</a></b> and <b><a href=
+"../TclLib/Preserve.htm">Tcl_Release</a></b> are simple:</p>
+
+<dl class="interpreters and memory management">
+<dt><a name="M7">Interpreters Passed As Arguments</a></dt>
+
+<dd>Functions that are passed an interpreter as an argument can
+safely use the interpreter without any special protection. Thus,
+when you write an extension consisting of new Tcl commands, no
+special code is needed to protect interpreters received as
+arguments. This covers the majority of all uses.</dd>
+
+<dt><a name="M8">Interpreter Creation And Deletion</a></dt>
+
+<dd>When a new interpreter is created and used in a call to <b><a
+href="../TclLib/Eval.htm">Tcl_Eval</a></b>, <b><a href=
+"../TclLib/Eval.htm">Tcl_VarEval</a></b>, <b><a href=
+"../TclLib/Eval.htm">Tcl_GlobalEval</a></b>, <b><a href=
+"../TclLib/SetVar.htm">Tcl_SetVar</a></b>, or <b><a href=
+"../TclLib/SetVar.htm">Tcl_GetVar</a></b>, a pair of calls to <b><a
+href="../TclLib/Preserve.htm">Tcl_Preserve</a></b> and <b><a href=
+"../TclLib/Preserve.htm">Tcl_Release</a></b> should be wrapped
+around all uses of the interpreter. Remember that it is unsafe to
+use the interpreter once <b><a href=
+"../TclLib/Preserve.htm">Tcl_Release</a></b> has been called. To
+ensure that the interpreter is properly deleted when it is no
+longer needed, call <b>Tcl_InterpDeleted</b> to test if some other
+code already called <b>Tcl_DeleteInterp</b>; if not, call
+<b>Tcl_DeleteInterp</b> before calling <b><a href=
+"../TclLib/Preserve.htm">Tcl_Release</a></b> in your own code.</dd>
+
+<dt><a name="M9">Retrieving An Interpreter From A Data
+Structure</a></dt>
+
+<dd>When an interpreter is retrieved from a data structure (e.g.
+the client data of a callback) for use in <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b>, <b><a href=
+"../TclLib/Eval.htm">Tcl_VarEval</a></b>, <b><a href=
+"../TclLib/Eval.htm">Tcl_GlobalEval</a></b>, <b><a href=
+"../TclLib/SetVar.htm">Tcl_SetVar</a></b>, or <b><a href=
+"../TclLib/SetVar.htm">Tcl_GetVar</a></b>, a pair of calls to <b><a
+href="../TclLib/Preserve.htm">Tcl_Preserve</a></b> and <b><a href=
+"../TclLib/Preserve.htm">Tcl_Release</a></b> should be wrapped
+around all uses of the interpreter; it is unsafe to reuse the
+interpreter once <b><a href=
+"../TclLib/Preserve.htm">Tcl_Release</a></b> has been called. If an
+interpreter is stored inside a callback data structure, an
+appropriate deletion cleanup mechanism should be set up by the code
+that creates the data structure so that the interpreter is removed
+from the data structure (e.g. by setting the field to NULL) when
+the interpreter is deleted. Otherwise, you may be using an
+interpreter that has been freed and whose memory may already have
+been reused.</dd>
+</dl>
+
+<p>All uses of interpreters in Tcl and Tk have already been
+protected. Extension writers should ensure that their code also
+properly protects any additional interpreters used, as described
+above.</p>
+
+<h3><a name="M10">SEE ALSO</a></h3>
+
+<b><a href="../TclLib/Preserve.htm">Tcl_Preserve</a></b>, <b><a
+href="../TclLib/Preserve.htm">Tcl_Release</a></b> 
+
+<h3><a name="M11">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#command">command</a>, <a href=
+"../Keywords/C.htm#create">create</a>, <a href=
+"../Keywords/D.htm#delete">delete</a>, <a href=
+"../Keywords/I.htm#interpreter">interpreter</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1989-1993 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

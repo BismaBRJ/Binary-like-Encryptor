@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>itcl - itclvars (n)</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<center>
+<h1>[incr\ Tcl]</h1>
+</center>
+
+<h3>NAME</h3>
+
+itclvars - variables used by [incrTcl] 
+
+<h3>DESCRIPTION</h3>
+
+<p>The following global variables are created and managed
+automatically by the <b>[incrTcl]</b> library. Except where noted
+below, these variables should normally be treated as read-only by
+application-specific code and by users.</p>
+
+<dl>
+<dt><b>itcl::library</b></dt>
+
+<dd>When an interpreter is created, <b>[incrTcl]</b> initializes
+this variable to hold the name of a directory containing the system
+library of <b>[incrTcl]</b> scripts. The initial value of
+<b>itcl::library</b> is set from the ITCL_LIBRARY environment
+variable if it exists, or from a compiled-in value otherwise.</dd>
+
+<dt><b>itcl::patchLevel</b></dt>
+
+<dd>When an interpreter is created, <b>[incrTcl]</b> initializes
+this variable to hold the current patch level for <b>[incrTcl]</b>.
+For example, the value "<b>2.0p1</b>" indicates <b>[incrTcl]</b>
+version 2.0 with the first set of patches applied.</dd>
+
+<dt><b>itcl::purist</b></dt>
+
+<dd>When an interpreter is created containing Tcl/Tk and the
+<b>[incrTcl]</b> namespace facility, this variable controls a
+"backward-compatibility" mode for widget access.<br>
+In vanilla Tcl/Tk, there is a single pool of commands, so the
+access command for a widget is the same as the window name. When a
+widget is created within a namespace, however, its access command
+is installed in that namespace, and should be accessed outside of
+the namespace using a qualified name. For example, 
+
+<blockquote>
+<pre>
+namespace foo {
+    namespace bar {
+        button .b -text "Testing"
+    }
+}
+foo::bar::.b configure -background red
+pack .b
+</pre>
+</blockquote>
+
+Note that the window name ".b" is still used in conjunction with
+commands like <b>pack</b> and <b>destroy</b>. However, the access
+command for the widget (i.e., name that appears as the <i>first</i>
+argument on a command line) must be more specific.<br>
+The "<b>winfo command</b>" command can be used to query the
+fully-qualified access command for any widget, so one can write: 
+
+<blockquote>
+<pre>
+[winfo command .b] configure -background red
+</pre>
+</blockquote>
+
+and this is good practice when writing library procedures. Also, in
+conjunction with the <b>bind</b> command, the "%q" field can be
+used in place of "%W" as the access command: 
+
+<blockquote>
+<pre>
+bind Button &lt;Key-Return&gt; {%q flash; %q invoke}
+</pre>
+</blockquote>
+
+While this behavior makes sense from the standpoint of
+encapsulation, it causes problems with existing Tcl/Tk
+applications. Many existing applications are written with bindings
+that use "%W". Many library procedures assume that the window name
+is the access command.<br>
+The <b>itcl::purist</b> variable controls a backward-compatibility
+mode. By default, this variable is "0", and the window name can be
+used as an access command in any context. Whenever the
+<b>unknown</b> procedure stumbles across a widget name, it simply
+uses "<b>winfo command</b>" to determine the appropriate command
+name. If this variable is set to "1", this backward-compatibility
+mode is disabled. This gives better encapsulation, but using the
+window name as the access command may lead to "invalid command"
+errors.</dd>
+
+<dt><b>itcl::version</b></dt>
+
+<dd>When an interpreter is created, <b>[incrTcl]</b> initializes
+this variable to hold the version number of the form <i>x.y</i>.
+Changes to <i>x</i> represent major changes with probable
+incompatibilities and changes to <i>y</i> represent small
+enhancements and bug fixes that retain backward compatibility.</dd>
+</dl>
+
+<h3>KEYWORDS</h3>
+
+itcl, variables 
+
+<hr>
+[ <a href="../itcl/contents.html">itcl</a> ] 
+
+<hr>
+<pre>
+Copyright &copy; 1989-1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.
+</pre>
+</body>
+</html>
+

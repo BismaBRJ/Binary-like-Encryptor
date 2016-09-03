@@ -1,0 +1,698 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>spintime - Create and manipulate time spinner
+widgets</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>spintime - Create and manipulate time spinner widgets</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>spintime pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- Spintime 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>background</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+</td>
+<td valign="top"><b>foreground</b><br>
+</td>
+<td valign="top"><b>relief</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>textBackground</b><br>
+</td>
+<td valign="top"><b>textFont</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="entryfield.n.html">"entryfield"</a> manual
+entry for details on the above associated options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>labelFont</b><br>
+</td>
+<td valign="top"><b>labelMargin</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="labeledwidget.n.html">"labeledwidget"</a>
+manual entry for details on the above associated options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>arrowOrient</b><br>
+</td>
+<td valign="top"><b>repeatDelay</b><br>
+</td>
+<td valign="top"><b>repeatInterval</b><br>
+</td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="spinner.n.html">"spinner"</a> manual entry for
+details on the above associated options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>labelPos</b>
+Class:                  <b>Position</b>
+Command-Line Switch:    <b>-labelpos</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the position of the label
+along the sides of the various spinners: <b>n</b>, <b>e</b>,
+<b>s</b>, or <b>w</b>. The default is w.</div>
+
+<pre>
+Name:                   <b>hourLabel</b>
+Class:                  <b>Text</b>
+Command-Line Switch:    <b>-hourlabel</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text of the label for
+the hour spinner. The default is "Hour".</div>
+
+<pre>
+Name:                   <b>hourOn</b>
+Class:                  <b>hourOn</b>
+Command-Line Switch:    <b>-houron</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies whether or not to display
+the hour spinner in any of the forms acceptable to
+<b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<pre>
+Name:                   <b>hourWidth</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-hourwidth</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width of the hour
+spinner in any of the forms acceptable to <b>Tcl_GetPixels</b>. The
+default is 3 pixels.</div>
+
+<pre>
+Name:                   <b>militaryOn</b>
+Class:                  <b>militaryOn</b>
+Command-Line Switch:    <b>-militaryon</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies use of a 24 hour clock for
+hour display in any of the forms acceptable to
+<b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<pre>
+Name:                   <b>minuteLabel</b>
+Class:                  <b>Text</b>
+Command-Line Switch:    <b>-minutelabel</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text of the label for
+the minute spinner. The default is "Minute".</div>
+
+<pre>
+Name:                   <b>minuteOn</b>
+Class:                  <b>minuteOn</b>
+Command-Line Switch:    <b>-minuteon</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies whether or not to display
+the minute spinner in any of the forms acceptable to
+<b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<pre>
+Name:                   <b>minuteWidth</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-minutewidth</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width of the minute
+spinner in any of the forms acceptable to <b>Tcl_GetPixels</b>. The
+default is 3 pixels.</div>
+
+<pre>
+Name:                   <b>orient</b>
+Class:                  <b>Orient</b>
+Command-Line Switch:    <b>-orient</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the orientation of the
+hour, minute, and second spinners: <b>vertical</b> or
+<b>horizontal</b>. The default is horizontal.</div>
+
+<pre>
+Name:                   <b>secondLabel</b>
+Class:                  <b>Text</b>
+Command-Line Switch:    <b>-secondlabel</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text of the label for
+the second spinner. The default is "Second"</div>
+
+<pre>
+Name:                   <b>secondOn</b>
+Class:                  <b>secondOn</b>
+Command-Line Switch:    <b>-secondon</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies whether or not to display
+the second spinner in any of the forms acceptable to
+<b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<pre>
+Name:                   <b>secondWidth</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-secondwidth</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width of the second
+spinner in any of the forms acceptable to <b>Tcl_GetPixels</b>. The
+default is 3 pixels.</div>
+
+<pre>
+Name:                   <b>timeMargin</b>
+Class:                  <b>Margin</b>
+Command-Line Switch:    <b>-timemargin</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the margin space between
+the hour, minute, and second spinners is any of the forms
+accpetable to <b>Tcl_GetPixels</b>. The default is 1 pixel.</div>
+
+<table cellpadding="5">
+<tr>
+<td valign="top">
+<hr>
+<br>
+<b>spintime</b><br>
+set<br>
+use<br>
+entry.<br>
+an<br>
+second<br>
+<p><br>
+creates<br>
+command<br>
+<i>pathName</i>.<br>
+be<br>
+various<br>
+widget.<br>
+following<br>
+<i>pathName<br>
+...</i>?<br>
+the<br>
+exact<br>
+command.<br>
+are<br>
+widgets:<br>
+</p>
+
+<dl>
+<dt><br>
+<br>
+current<br>
+configuration<br>
+<i>option</i>.<br>
+any<br>
+accepted<br>
+command.<br>
+<i>pathName</i><br>
+option<br>
+</dt>
+
+<dd><br>
+the<br>
+the<br>
+<i>option</i><br>
+a<br>
+of<br>
+for<br>
+for<br>
+format<br>
+If<br>
+with<br>
+the<br>
+list<br>
+named<br>
+will<br>
+the<br>
+the<br>
+no<br>
+If<br>
+<i>option-value</i><br>
+then<br>
+the<br>
+to<br>
+value(s);<br>
+the<br>
+empty<br>
+have<br>
+values<br>
+<b>spintime</b><br>
+</dd>
+
+<dt><br>
+<br>
+current<br>
+spintime<br>
+format<br>
+as<br>
+value<br>
+and<br>
+respectively.<br>
+by<br>
+clock<br>
+information<br>
+and<br>
+</dt>
+</dl>
+
+<dl>
+<dd><br>
+<i>time</i><br>
+the<br>
+to<br>
+the<br>
+time<br>
+either<br>
+an<br>
+or<br>
+Reference<br>
+for<br>
+obtaining<br>
+format.<br>
+</dd>
+</dl>
+
+<br>
+Spinint<br>
+</td>
+<td valign="top">
+<h2>DESCRIPTION</h2>
+
+<br>
+command<br>
+of<br>
+in<br>
+The<br>
+hour,<br>
+spinner<br>
+The<br>
+a<br>
+whose<br>
+This<br>
+used<br>
+operations<br>
+It<br>
+general<br>
+option<br>
+<br>
+<i>arg</i>s<br>
+behavior<br>
+The<br>
+possible<br>
+<h2>WIDGET-SPECIFIC<br>
+<i>pathName<br>
+</i></h2>
+
+<dl>
+<dd><i><br>
+value<br>
+option<br>
+Option<br>
+of<br>
+by<br>
+</i></dd>
+</dl>
+
+<br>
+<b>configure</b><br>
+value<br>
+Query<br>
+configuration<br>
+widget.<br>
+is<br>
+list<br>
+the<br>
+<i>pathName</i><br>
+information<br>
+of<br>
+<i>option</i><br>
+no<br>
+command<br>
+describing<br>
+option<br>
+be<br>
+corresponding<br>
+value<br>
+<i>option</i><br>
+one<br>
+pairs<br>
+the<br>
+given<br>
+have<br>
+in<br>
+command<br>
+string.<br>
+any<br>
+accepted<br>
+command.<br>
+<i>pathName<br>
+</i> 
+
+<dl>
+<dd><i><br>
+contents<br>
+widget<br>
+of<br>
+an<br>
+using<br>
+<b>-clicks</b><br>
+The<br>
+string.<br>
+command<br>
+on<br>
+its<br>
+</i></dd>
+
+<dt><i><br>
+</i><br>
+currently<br>
+be<br>
+time<br>
+may<br>
+as<br>
+integer<br>
+the<br>
+the<br>
+more<br>
+times<br>
+</dt>
+</dl>
+
+<br>
+Name:<br>
+</td>
+<td valign="top">
+<p><br>
+creates<br>
+spinners<br>
+time<br>
+set<br>
+minute,<br>
+widget.<br>
+<b>spintime</b><br>
+new<br>
+name<br>
+command<br>
+to<br>
+on<br>
+has<br>
+form:<br>
+?<i>arg<br>
+</i>Option<br>
+determine<br>
+of<br>
+following<br>
+for<br>
+METHODS<br>
+<b>cget</b><br>
+Returns<br>
+of<br>
+given<br>
+may<br>
+the<br>
+the<br>
+</p>
+
+<dl>
+<dd><br>
+?<i>option</i>?<br>
+...?<br>
+or<br>
+options<br>
+If<br>
+specified,<br>
+describing<br>
+available<br>
+(see<br>
+on<br>
+this<br>
+is<br>
+<i>value</i>,<br>
+returns<br>
+the<br>
+(this<br>
+identical<br>
+sublist<br>
+returned<br>
+is<br>
+or<br>
+are<br>
+command<br>
+widget<br>
+the<br>
+this<br>
+returns<br>
+<i>Option</i><br>
+of<br>
+by<br>
+</dd>
+</dl>
+
+<br>
+<b>get</b><br>
+Returns<br>
+of<br>
+in<br>
+string<br>
+integer<br>
+the<br>
+format<br>
+default<br>
+Reference<br>
+for<br>
+obtaining<br>
+formats.<br>
+<i>pathName<br>
+</i> 
+
+<dl>
+<dd><i><br>
+displayed<br>
+that<br>
+argument.<br>
+be<br>
+a<br>
+clock<br>
+keyword<br>
+clock<br>
+information<br>
+and<br>
+</i></dd>
+</dl>
+
+<h2><i>COMPONENTS</i></h2>
+
+<i><br>
+<b>hour</b><br>
+</i></td>
+<td valign="top">The<br>
+a<br>
+for<br>
+value<br>
+includes<br>
+and<br>
+<h2>METHODS</h2>
+
+<br>
+command<br>
+Tcl<br>
+is<br>
+may<br>
+invoke<br>
+the<br>
+the<br>
+<pre>
+<br>
+arg<br>
+and<br>
+the<br>
+the<br>
+commands<br>
+spintime<br>
+</pre>
+
+<dl>
+<dd><br>
+<i>option</i><br>
+the<br>
+the<br>
+by<br>
+have<br>
+values<br>
+<b>spintime</b><br>
+</dd>
+
+<dt><br>
+?<i>value<br>
+</i><br>
+modify<br>
+of<br>
+no<br>
+returns<br>
+all<br>
+options<br>
+<b>Tk_ConfigureInfo</b><br>
+the<br>
+list).<br>
+specified<br>
+then<br>
+a<br>
+one<br>
+list<br>
+to<br>
+of<br>
+if<br>
+specified).<br>
+more<br>
+specified,<br>
+modifies<br>
+option(s)<br>
+given<br>
+case<br>
+an<br>
+may<br>
+the<br>
+the<br>
+</dt>
+</dl>
+
+<dl>
+<dd><br>
+?<b>format</b>?<br>
+the<br>
+the<br>
+a<br>
+or<br>
+clock<br>
+<b>-string</b><br>
+options<br>
+is<br>
+the<br>
+more<br>
+time<br>
+</dd>
+</dl>
+
+<pre>
+<br>
+<b>show</b><br>
+Changes<br>
+time<br>
+of<br>
+The<br>
+specified<br>
+string,<br>
+value<br>
+"now".<br>
+command<br>
+on<br>
+its<br>
+<br>
+<br>
+Class:<br>
+</pre>
+</td>
+</tr>
+</table>
+
+<div style="margin-left: 2em">The hour component is the hour
+spinner of the time spinner. See the SpinInt widget manual entry
+for details on the hour component item.</div>
+
+<pre>
+Name:                   <b>minute</b>
+Class:                  <b>Spinint</b>
+</pre>
+
+<div style="margin-left: 2em">The minute component is the minute
+spinner of the time spinner. See the SpinInt widget manual entry
+for details on the minute component item.</div>
+
+<pre>
+Name:                   <b>second</b>
+Class:                  <b>Spinint</b>
+</pre>
+
+<div style="margin-left: 2em">The second component is the second
+spinner of the time spinner. See the SpinInt widget manual entry
+for details on the second component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+spintime .st
+pack .st -padx 10 -pady 10
+</pre>
+
+<h2>AUTHORS</h2>
+
+Sue Yockey 
+
+<p>Mark L. Ulferts</p>
+
+<h2>KEYWORDS</h2>
+
+spintime, spinint, spinner, entryfield, entry, widget
+</body>
+</html>
+

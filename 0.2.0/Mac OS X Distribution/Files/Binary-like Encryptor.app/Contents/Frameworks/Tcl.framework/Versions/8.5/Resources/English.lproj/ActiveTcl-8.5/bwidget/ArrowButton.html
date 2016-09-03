@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>ArrowButton</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>ArrowButton</b> - Button widget with an arrow shape.</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>ArrowButton</b></a> <i>pathName</i>
+?<i>option value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i>STANDARD OPTIONS</i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-activebackground">-activebackground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-activeforeground">-activeforeground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-background">-background or -bg</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-borderwidth">-borderwidth or
+-bd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-disabledforeground">-disabledforeground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-foreground">-foreground or -fg</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightbackground">-highlightbackground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightcolor">-highlightcolor</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightthickness">-highlightthickness</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-relief">-relief</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-repeatdelay">-repeatdelay</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-repeatinterval">-repeatinterval</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-takefocus">-takefocus</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-troughcolor">-troughcolor</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-armcommand">-armcommand</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-arrowbd">-arrowbd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-arrowrelief">-arrowrelief</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-clean">-clean</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-command">-command</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dir">-dir</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-disarmcommand">-disarmcommand</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-height">-height</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-helptext">-helptext</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-helptype">-helptype</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-helpvar">-helpvar</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-ipadx">-ipadx</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-ipady">-ipady</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-state">-state</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-type">-type</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-width">-width</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#invoke"><b>invoke</b></a></dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>ArrowButton can be of two types following <b>type</b> option:
+for <b>button</b> type, it is standard button with an arrow drawn
+on it; for <b>arrow</b> type, it is an arrow like scrollbar's
+arrow.</p>
+
+<br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-armcommand"><b>-armcommand</b></a></dt>
+
+<dd>Specifies a Tcl command to associate with the ArrowButton when
+mouse button 1 is pressed over the ArrowButton. When
+<b>repeatdelay</b> or <b>repeatinterval</b> option is positive
+integer, this command is repeatedly called if mouse pointer is over
+the button and until mouse button 1 is released.</dd>
+</dl>
+
+<dl>
+<dt><a name="-arrowbd"><b>-arrowbd</b></a></dt>
+
+<dd>When ArrowButton <b>type</b> is <i>arrow</i>, specifies the
+border width of the arrow. Must be 1 or 2.</dd>
+</dl>
+
+<dl>
+<dt><a name="-arrowrelief"><b>-arrowrelief</b></a></dt>
+
+<dd>When ArrowButton <b>type</b> is <i>arrow</i>, specifies the
+relief of the arrow. Must be <b>raised</b> or <b>sunken</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-clean"><b>-clean</b></a></dt>
+
+<dd>Specifies a level of quality, between 0 and 2, for the arrow.
+If 0, the arrow is drawn with its maximum width and height. If 1,
+the base of arrow is arranged to be odd to have same edges. If 2,
+the base of arrow is arranged to be odd and the orthogonal to be
+(base+1)/2 to have 'straight' diagonal for edges.</dd>
+</dl>
+
+<dl>
+<dt><a name="-command"><b>-command</b></a></dt>
+
+<dd>Specifies a Tcl command to associate with the ArrowButton. This
+command is typically invoked when mouse button 1 is released over
+the ArrowButton window.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dir"><b>-dir</b></a></dt>
+
+<dd>Specifies the direction of the arrow: <b>top</b>,
+<b>bottom</b>, <b>left</b> or <b>right</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-disarmcommand"><b>-disarmcommand</b></a></dt>
+
+<dd>Specifies a Tcl command to associate with the ArrowButton when
+mouse button 1 is released. This command is called even if pointer
+is not over the ArrowButton, and always before the command
+specified by <b>command</b> option. It is typically used in
+conjuntion with <b>armcommand</b>, <b>repeatdelay</b> and
+<b>repeatinterval</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-height"><b>-height</b></a></dt>
+
+<dd>Specifies a desired height for the ArrowButton. The value is in
+screen units.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helptext"><b>-helptext</b></a></dt>
+
+<dd>Text for dynamic help. If empty, no help is available for this
+widget. See also <a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helptype"><b>-helptype</b></a></dt>
+
+<dd>Type of dynamic help. Use <i>balloon</i> or <i>variable</i>.
+See also <a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helpvar"><b>-helpvar</b></a></dt>
+
+<dd>Variable to use when <b>helptype</b> option is <i>variable</i>.
+See also <a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-ipadx"><b>-ipadx</b></a></dt>
+
+<dd>Specifies a minimun pad between the ArrowButton border and the
+right and left side of the arrow. The value is in screen
+units.</dd>
+</dl>
+
+<dl>
+<dt><a name="-ipady"><b>-ipady</b></a></dt>
+
+<dd>Specifies a minimun pad between the ArrowButton border and the
+top and bottom side of the arrow. The value is in screen
+units.</dd>
+</dl>
+
+<dl>
+<dt><a name="-state"><b>-state</b></a></dt>
+
+<dd>Specifies one of three states for the ArrowButton:
+<b>normal</b>, <b>active</b>, or <b>disabled</b>. 
+
+<dl>
+<dt>If ArrowButton <b>type</b> is <i>button</i>:</dt>
+
+<dd>In normal state the ArrowButton is displayed using the
+<b>foreground</b> and <b>background</b> options. The active state
+is typically used when the pointer is over the ArrowButton. In
+active state the ArrowButton is displayed using the
+<b>activeforeground</b> and <b>activebackground</b> options. In
+disabled state the <b>disabledforeground</b> and <b>background</b>
+options determine how the ArrowButton is displayed.</dd>
+
+<dt>If ArrowButton <b>type</b> is <i>arrow</i>:</dt>
+
+<dd>Only colors of arrow change. The background of ArrowButton is
+always displayed using <b>troughcolor</b> option. In normal state
+the ArrowButton is displayed using the <b>background</b> option.
+The active state is typically used when the pointer is over the
+ArrowButton. In active state the ArrowButton is displayed using the
+<b>activebackground</b> option. In disabled state the ArrowButton
+is displayed with a dark stipple.</dd>
+</dl>
+
+Disabled state means that the ArrowButton should be insensitive:
+the default bindings will refuse to activate the widget and will
+ignore mouse button presses.</dd>
+</dl>
+
+<dl>
+<dt><a name="-type"><b>-type</b></a></dt>
+
+<dd>Determines the type of the ArrowButton: <b>button</b> for
+standard button look, or <b>arrow</b> scrollbar's arrow look.</dd>
+</dl>
+
+<dl>
+<dt><a name="-width"><b>-width</b></a></dt>
+
+<dd>Specifies a desired width for the ArrowButton. The value is in
+screen units.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="invoke"><i>pathName</i> <b>invoke</b></a></dt>
+
+<dd>If ArrowButton <b>state</b> is not disabled, this invoke the
+commands of the button. ArrowButton is redisplayed with active
+color and sunken relief, and <b>armcommand</b> is called. Then
+ArrowButton is redisplayed with normal color and its defined
+relief, and <b>disarmcommand</b> then <b>command</b> are called. 
+
+<p><b>invoke</b> is called when ArrowButton has input focus and
+user press the space bar.</p>
+</dd>
+</dl>
+</body>
+</html>
+

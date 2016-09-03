@@ -1,0 +1,418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>mainwindow - Create and manipulate a mainwindow
+widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>mainwindow - Create and manipulate a mainwindow widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>mainwindow pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Toplevel &lt;- shell &lt;- mainwindow 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>background</b><br>
+<b>foreground</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>highlightBackground</b><br>
+</td>
+<td valign="top"><b>disabledForeground</b><br>
+<b>highlightColor</b><br>
+</td>
+<td valign="top"><b>font</b><br>
+<b>highlightThickness</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>balloonBackground</b><br>
+<b>balloonForeground</b><br>
+</td>
+<td valign="top"><b>balloonDelay1</b><br>
+</td>
+<td valign="top"><b>balloonDelay2</b><br>
+</td>
+<td valign="top"><b>ballonFont</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the "toolbar" manual entry for details on the above
+associated options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>title</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the "Toplevel" manual entry for details on the above
+inherited options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>height</b><br>
+<b>padY</b><br>
+</td>
+<td valign="top"><b>master</b><br>
+<b>width</b><br>
+</td>
+<td valign="top"><b>modality</b><br>
+</td>
+<td valign="top"><b>padX</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the "shell" manual entry for details on the above inherited
+options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>helpLine</b>
+Class:                  <b>HelpLine</b>
+Command-Line Switch:    <b>-helpline</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies whether or not to display
+the help line. The value may be given in any of the forms
+acceptable to Tk_GetBoolean. The default is yes.</div>
+
+<pre>
+Name:                   <b>menuBarBackground</b>
+Class:                  <b>Background</b>
+Command-Line Switch:    <b>-menubarbackground</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the normal background color
+for the menubar.</div>
+
+<pre>
+Name:                   <b>menuBarFont</b>
+Class:                  <b>Font</b>
+Command-Line Switch:    <b>-menubarfont</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the font to use when
+drawing text inside the menubar.</div>
+
+<pre>
+Name:                   <b>menuBarForeround</b>
+Class:                  <b>Foreground</b>
+Command-Line Switch:    <b>-menubarforeground</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the normal foreground color
+for the menubar.</div>
+
+<pre>
+Name:                   <b>statusLine</b>
+Class:                  <b>StatusLine</b>
+Command-Line Switch:    <b>-statusline</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies whether or not to display
+the status line. The value may be given in any of the forms
+acceptable to Tk_GetBoolean. The default is yes.</div>
+
+<pre>
+Name:                   <b>toolBarBackground</b>
+Class:                  <b>Background</b>
+Command-Line Switch:    <b>-toolbarbackground</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the normal background color
+for the toolbar.</div>
+
+<pre>
+Name:                   <b>toolBarFont</b>
+Class:                  <b>Font</b>
+Command-Line Switch:    <b>-toolbarfont</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the font to use when
+drawing text inside the toolbar.</div>
+
+<pre>
+Name:                   <b>toolBarForeround</b>
+Class:                  <b>Foreground</b>
+Command-Line Switch:    <b>-toolbarforeground</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the normal foreground color
+for the toolbar.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>mainwindow</b> command creates a mainwindow shell which
+contains a menubar, toolbar, mousebar, childsite, status line, and
+help line. Each item may be filled and configured to suit
+individual needs.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>mainwindow</b> command create a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for mainwindow
+widgets: 
+
+<h2>INHERITED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activate</b><br>
+</td>
+<td valign="top"><b>center</b><br>
+</td>
+<td valign="top"><b>deactivate</b><br>
+</td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the "shell" manual entry for details on the above inherited
+methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>mainwindow</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>childsite</b></i></dt>
+
+<dd>Returns the pathname of the child site widget.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>mainwindow</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>menubar</b> ?</i>args?</dt>
+
+<dd>The <b>menubar</b> method provides access to the menubar.
+Invoked with no arguments it returns the pathname of the menubar.
+With arguments, they are evaluated against the menubar which in
+effect provides access to the entire API of the menubar. See the
+"menubar" manual entry for details on the commands available in the
+menubar.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>mousebar</b> ?</i>args?</dt>
+
+<dd>The <b>mousebar</b> method provides access to the mousebar
+which is a vertical toolbar. Invoked with no arguments it returns
+the pathname of the mousebar. With arguments, they are evaluated
+against the mousebar which in effect provides access to the entire
+API of the underlying toolbar. See the "toolbar" manual entry for
+details on the commands available in the mousebar.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>msgd</b> ?</i>args?</dt>
+
+<dd>The <b>msgd</b> method provides access to the messagedialog
+contained in the mainwindow. Invoked with no arguments it returns
+the pathname of the messagedialog. With arguments, they are
+evaluated against the messagedialog which in effect provides access
+to the entire API of the messagedialog. See the "messagedialog"
+manual entry for details on the commands available in the
+messagedialog.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>toolbar</b> ?</i>args?</dt>
+
+<dd>The <b>toolbar</b> method provides access to the toolbar.
+Invoked with no arguments it returns the pathname of the toolbar.
+With arguments, they are evaluated against the toolbar which in
+effect provides access to the entire API of the toolbar. See the
+"toolbar" manual entry for details on the commands available in the
+toolbar.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>help</b>
+Class:                  <b>Label</b>
+</pre>
+
+<div style="margin-left: 2em">The help component provides a
+location for displaying any help strings provided in the menubar,
+toolbar, or mousebar. See the "label" widget manual entry for
+details on the help component item.</div>
+
+<pre>
+Name:                   <b>menubar</b>
+Class:                  <b>Menubar</b>
+</pre>
+
+<div style="margin-left: 2em">The menubar component is the menubar
+located at the top of the window. See the "menubar" widget manual
+entry for details on the menubar component item.</div>
+
+<pre>
+Name:                   <b>mousebar</b>
+Class:                  <b>Toolbar</b>
+</pre>
+
+<div style="margin-left: 2em">The mousebar component is the
+vertical toolbar located on the right side of the window. See the
+"toolbar" widget manual entry for details on the mousebar component
+item.</div>
+
+<pre>
+Name:                   <b>msgd</b>
+Class:                  <b>Messagedialog</b>
+</pre>
+
+<div style="margin-left: 2em">The msgd component is a messagedialog
+which may be reconfigured as needed and used repeatedly throughout
+the application. See the "messagedialog" widget manual entry for
+details on the messagedialog component item.</div>
+
+<pre>
+Name:                   <b>status</b>
+Class:                  <b>Label</b>
+</pre>
+
+<div style="margin-left: 2em">The status component provides a
+location for displaying application status information. See the
+"label" widget manual entry for details on the status component
+item.</div>
+
+<pre>
+Name:                   <b>toolbar</b>
+Class:                  <b>Toolbar</b>
+</pre>
+
+<div style="margin-left: 2em">The toolbar component is the
+horizontal toolbar located on the top of the window. See the
+"toolbar" widget manual entry for details on the toolbar component
+item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ mainwindow .mw
+
+ #
+ # Add a File menubutton
+ #
+ .mw menubar add menubutton file -text "File" -underline 0 -padx 8 -pady 2 \\
+    -menu {options -tearoff no
+       command new -label "New" -underline 0 \\
+           -helpstr "Create a new file"
+       command open -label "Open ..." -underline 0 \\
+           -helpstr "Open an existing file"
+       command save -label "Save" -underline 0 \\
+           -helpstr "Save the current file"
+       command saveas -label "Save As ..." -underline 5 \\
+           -helpstr "Save the file as a differnet name"
+       command print -label "Print" -underline 0 \\
+           -helpstr "Print the file"
+           separator sep1
+       command close -label "Close" -underline 0 \\
+           -helpstr "Close the file"
+       separator sep2
+       command exit -label "Exit" -underline 1 \\
+           -helpstr "Exit this application" 
+    }
+
+ #
+ # Install a scrolledtext widget in the childsite.
+ #
+ scrolledtext [.mw childsite].st
+ pack [.mw childsite].st -fill both -expand yes
+
+ #
+ # Activate the main window.
+ #
+ .mw activate
+</pre>
+
+<h2>AUTHORS</h2>
+
+Mark L. Ulferts 
+
+<p>John A. Tucker</p>
+
+<h2>KEYWORDS</h2>
+
+mainwindow, shell, widget
+</body>
+</html>
+

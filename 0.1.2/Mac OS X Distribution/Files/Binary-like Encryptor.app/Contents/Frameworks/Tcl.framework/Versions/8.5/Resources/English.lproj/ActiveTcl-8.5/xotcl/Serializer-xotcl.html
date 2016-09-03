@@ -1,0 +1,348 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>XOTcl - Documentation --
+xotcl/library/serialize/Serializer.xotcl</title>
+<link rel="StyleSheet" href="xotcl-doc.css" type="text/css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1><img src="./logo-100.jpg" alt=
+"xotcl/library/serialize/Serializer.xotcl" align="MIDDLE">
+xotcl/library/serialize/Serializer.xotcl</h1>
+
+<hr>
+<h2>Package/File Information</h2>
+
+<b>No package provided/required</b> <br>
+ <br>
+ <b>Defined Objects/Classes:</b> 
+
+<ul>
+<li><a href="#Serializer"><em>Serializer</em>:</a> <a href=
+"#Serializer-all">all</a>, <a href=
+"#Serializer-deepSerialize">deepSerialize</a>, <a href=
+"#Serializer-exportMethods">exportMethods</a>, <a href=
+"#Serializer-methodSerialize">methodSerialize</a>, <a href=
+"#Serializer-serialize">serialize</a>.<br>
+</li>
+</ul>
+
+<br>
+ <b>Filename:</b> <a href=
+"xotcl/library/serialize/Serializer.xotcl">xotcl/library/serialize/Serializer.xotcl</a>
+<br>
+ <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">This package provides the class Serializer, which
+can be used to generate a snapshot of the current state of the
+workspace in the form of XOTcl source code.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Authors:</em> </td>
+<td valign="top">Gustaf Neumann, Gustaf.Neumann@wu-wien.ac.at</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Date:</em> </td>
+<td valign="top">$Date: 2007/10/05 09:06:00 $</td>
+</tr>
+</table>
+
+<br>
+ 
+
+<hr>
+<p><a name="Serializer"></a></p>
+
+<h2>Class: <em>Serializer</em></h2>
+
+<b>Procs/Instprocs:</b> <a href="#Serializer-all">all</a>, <a href=
+"#Serializer-deepSerialize">deepSerialize</a>, <a href=
+"#Serializer-exportMethods">exportMethods</a>, <a href=
+"#Serializer-methodSerialize">methodSerialize</a>, <a href=
+"#Serializer-serialize">serialize</a>. 
+
+<h3>Instprocs</h3>
+
+<ul>
+<li><a name="Serializer-serialize"></a> <b>serialize</b>
+<em>entity</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>entity</b>: Object or Class</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Serialize the specified object or class.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">Object or Class with all currently defined
+methods, variables, invariants, filters and mixins</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<h3>Procs</h3>
+
+<ul>
+<li><a name="Serializer-all"></a> <b>all</b>
+<em>?-ignoreVarsRE&nbsp;RE?</em>
+<em>?-ignore&nbsp;obj1&nbsp;obj2&nbsp;...?</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>?-ignoreVarsRE&nbsp;RE?</b>: provide regular
+expression; matching vars are ignored</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"></td>
+<td valign="top"><b>?-ignore&nbsp;obj1&nbsp;obj2&nbsp;...?</b>:
+provide a list of objects to be omitted</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Serialize all objects and classes that are
+currently defined (except the specified omissions and the current
+Serializer object). 
+
+<p>Examples:<br>
+</p>
+
+<pre class='code'>
+Serializer all -ignoreVarsRE {::b$}
+</pre>
+
+Do not serialize any instance variable named b (of any object). 
+
+<pre class='code'>
+Serializer all -ignoreVarsRE {^::o1::.*text.*$|^::o2::x$}
+</pre>
+
+Do not serialize any variable of c1 whose name contains the string
+"text" and do not serialze the variable x of o2. 
+
+<pre class='code'>
+Serializer all -ignore obj1 obj2 ...
+</pre>
+
+do not serizalze the specified objects</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">script</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Serializer-deepSerialize"></a> <b>deepSerialize</b>
+<em>objs</em> <em>?-ignoreVarsRE&nbsp;RE?</em>
+<em>?-ignore&nbsp;obj1&nbsp;obj2&nbsp;...?</em>
+<em>?-map&nbsp;list?</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>objs</b>: Objects to be serialized</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"></td>
+<td valign="top"><b>?-ignoreVarsRE&nbsp;RE?</b>: provide regular
+expression; matching vars are ignored</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"></td>
+<td valign="top"><b>?-ignore&nbsp;obj1&nbsp;obj2&nbsp;...?</b>:
+provide a list of objects to be omitted</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"></td>
+<td valign="top"><b>?-map&nbsp;list?</b>: translate object names in
+serialized code</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Serialize object with all child objects (deep
+operation) except the specified omissions. For the description of
+<tt>ignore</tt> and <tt>igonoreVarsRE</tt> see <tt>Serizalizer
+all</tt>. <tt>map</tt> can be used in addition to provide pairs of
+old-string and new-string (like in the tcl command <tt>string
+map</tt>). This option can be used to regenerate the serialized
+object under a different object or under an different name, or to
+translate relative object names in the serialized code. 
+
+<p>Examples:</p>
+
+<pre class='code'>
+Serializer deepSerialize ::a::b::c -map {::a::b ::x::y}
+</pre>
+
+Serialize the object <tt>c</tt> which is a child of <tt>a::b</tt>;
+the object will be reinitialized as object <tt>::x::y::c</tt>, all
+references <tt>::a::b</tt> will be replaced by <tt>::x::y</tt>. 
+
+<pre class='code'>
+Serializer deepSerialize ::a::b::c -map {::a::b [self]}
+</pre>
+
+The serizalized object can be reinstantiated under some current
+object, under which the script is evaluated. 
+
+<pre class='code'>
+Serializer deepSerialize ::a::b::c -map {::a::b::c ${var}}
+</pre>
+
+The serizalized object will be reinstantiated under a name
+specified by the variable <tt>var</tt> in the recreation
+context.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">script</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Serializer-methodSerialize"></a>
+<b>methodSerialize</b> <em>object</em> <em>method</em>
+<em>prefix</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>object</b>: object or class</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"></td>
+<td valign="top"><b>method</b>: name of method</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"></td>
+<td valign="top"><b>prefix</b>: either empty or 'inst' (latter for
+instprocs)</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Serialize the specified method. In order to
+serialize an instproc, <tt>prefix</tt> should be 'inst'; to
+serialze procs, it should be empty. 
+
+<p>Examples:</p>
+
+<pre class='code'>
+Serializer methodSerialize Serializer deepSerialize ""
+</pre>
+
+This command serializes the proc <tt>deepSerialize</tt> of the
+Class <tt>Serializer</tt>. 
+
+<pre class='code'>
+Serializer methodSerialize Serializer serialize inst
+</pre>
+
+This command serializes the instproc <tt>serialize</tt> of the
+Class <tt>Serializer</tt>.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">Script, which can be used to recreate the
+specified method</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Serializer-exportMethods"></a> <b>exportMethods</b>
+<em>list</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>list</b>: list of methods of the form 'object
+proc|instproc methodname'</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">This method can be used to specify methods that
+should be exported in every <tt>Serializer all</tt>. The rationale
+behind this is that the serializer does not serialize objects from
+the ::xotcl:: namespace, which is used for XOTcl internals and
+volatile objects. It is however often useful to define methods on
+::xotcl::Class or ::xotcl::Objects, which should be exported. One
+can export procs, instprocs, forward and instforward 
+
+<p>Example:</p>
+
+<pre class='code'>
+      Serializer exportMethods {
+    ::xotcl::Object instproc __split_arguments
+    ::xotcl::Object instproc __make_doc
+    ::xotcl::Object instproc ad_proc
+    ::xotcl::Class  instproc ad_instproc
+    ::xotcl::Object forward  expr
+      }
+</pre>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<br>
+<br>
+ <br>
+ <br>
+<br>
+ 
+
+<hr>
+<a href="./index.html">Back to index page.</a> <br>
+ 
+
+<hr>
+</body>
+</html>
+

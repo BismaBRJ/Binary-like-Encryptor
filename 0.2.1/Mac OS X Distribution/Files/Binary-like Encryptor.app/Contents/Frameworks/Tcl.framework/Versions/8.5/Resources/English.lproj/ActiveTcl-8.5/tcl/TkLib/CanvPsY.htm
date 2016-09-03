@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_CanvasPs manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> CanvPsY</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_CanvasPsY, Tk_CanvasPsBitmap, Tk_CanvasPsColor, Tk_CanvasPsFont,
+Tk_CanvasPsPath, Tk_CanvasPsStipple - utility procedures for
+generating Postscript for canvases 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+double<br>
+<b>Tk_CanvasPsY</b>(<i>canvas, canvasY</i>)<br>
+int<br>
+<b>Tk_CanvasPsBitmap</b>(<i>interp, canvas, bitmap, x, y, width,
+height</i>)<br>
+int<br>
+<b>Tk_CanvasPsColor</b>(<i>interp, canvas, colorPtr</i>)<br>
+int<br>
+<b>Tk_CanvasPsFont</b>(<i>interp, canvas, tkFont</i>)<br>
+<b>Tk_CanvasPsPath</b>(<i>interp, canvas, coordPtr,
+numPoints</i>)<br>
+int<br>
+<b>Tk_CanvasPsStipple</b>(<i>interp, canvas, bitmap</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Canvas <b><a href="../TkCmd/canvas.htm">canvas</a></b>
+(in)</dt>
+
+<dd>A token that identifies a canvas widget for which Postscript is
+being generated.</dd>
+
+<dt>double <b>canvasY</b> (in)</dt>
+
+<dd>Y-coordinate in the space of the canvas.</dd>
+
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in/out)</dt>
+
+<dd>A Tcl interpreter; Postscript is appended to its result, or the
+result may be replaced with an error message.</dd>
+
+<dt>Pixmap <b><a href="../TkCmd/bitmap.htm">bitmap</a></b>
+(in)</dt>
+
+<dd>Bitmap to use for generating Postscript.</dd>
+
+<dt>int <b>x</b> (in)</dt>
+
+<dd>X-coordinate within <i>bitmap</i> of left edge of region to
+output.</dd>
+
+<dt>int <b>y</b> (in)</dt>
+
+<dd>Y-coordinate within <i>bitmap</i> of top edge of region to
+output.</dd>
+
+<dt>int <b>width</b> (in)</dt>
+
+<dd>Width of region of bitmap to output, in pixels.</dd>
+
+<dt>int <b>height</b> (in)</dt>
+
+<dd>Height of region of bitmap to output, in pixels.</dd>
+
+<dt>XColor <b>*colorPtr</b> (in)</dt>
+
+<dd>Information about color value to set in Postscript.</dd>
+
+<dt>Tk_Font <b>tkFont</b> (in)</dt>
+
+<dd>Font for which Postscript is to be generated.</dd>
+
+<dt>double <b>*coordPtr</b> (in)</dt>
+
+<dd>Pointer to an array of coordinates for one or more points
+specified in canvas coordinates. The order of values in
+<i>coordPtr</i> is x1, y1, x2, y2, x3, y3, and so on.</dd>
+
+<dt>int <b>numPoints</b> (in)</dt>
+
+<dd>Number of points at <i>coordPtr</i>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These procedures are called by canvas type managers to carry out
+common functions related to generating Postscript. Most of the
+procedures take a <i>canvas</i> argument, which refers to a canvas
+widget for which Postscript is being generated. 
+
+<p><b>Tk_CanvasPsY</b> takes as argument a y-coordinate in the
+space of a canvas and returns the value that should be used for
+that point in the Postscript currently being generated for
+<i>canvas</i>. Y coordinates require transformation because
+Postscript uses an origin at the lower-left corner whereas X uses
+an origin at the upper-left corner. Canvas x coordinates can be
+used directly in Postscript without transformation.</p>
+
+<p><b>Tk_CanvasPsBitmap</b> generates Postscript to describe a
+region of a bitmap. The Postscript is generated in proper image
+data format for Postscript, i.e., as data between angle brackets,
+one bit per pixel. The Postscript is appended to
+<i>interp-&gt;result</i> and <b>TCL_OK</b> is returned unless an
+error occurs, in which case <b>TCL_ERROR</b> is returned and
+<i>interp-&gt;result</i> is overwritten with an error message.</p>
+
+<p><b>Tk_CanvasPsColor</b> generates Postscript to set the current
+color to correspond to its <i>colorPtr</i> argument, taking into
+account any color map specified in the <b>postscript</b> command.
+It appends the Postscript to <i>interp-&gt;result</i> and returns
+<b>TCL_OK</b> unless an error occurs, in which case
+<b>TCL_ERROR</b> is returned and <i>interp-&gt;result</i> is
+overwritten with an error message.</p>
+
+<p><b>Tk_CanvasPsFont</b> generates Postscript that sets the
+current font to match <i>tkFont</i> as closely as possible.
+<b>Tk_CanvasPsFont</b> takes into account any font map specified in
+the <b>postscript</b> command, and it does the best it can at
+mapping X fonts to Postscript fonts. It appends the Postscript to
+<i>interp-&gt;result</i> and returns <b>TCL_OK</b> unless an error
+occurs, in which case <b>TCL_ERROR</b> is returned and
+<i>interp-&gt;result</i> is overwritten with an error message.</p>
+
+<p><b>Tk_CanvasPsPath</b> generates Postscript to set the current
+path to the set of points given by <i>coordPtr</i> and
+<i>numPoints</i>. It appends the resulting Postscript to
+<i>interp-&gt;result</i>.</p>
+
+<p><b>Tk_CanvasPsStipple</b> generates Postscript that will fill
+the current path in stippled fashion. It uses <i>bitmap</i> as the
+stipple pattern and the current Postscript color; ones in the
+stipple bitmap are drawn in the current color, and zeroes are not
+drawn at all. The Postscript is appended to
+<i>interp-&gt;result</i> and <b>TCL_OK</b> is returned, unless an
+error occurs, in which case <b>TCL_ERROR</b> is returned and
+<i>interp-&gt;result</i> is overwritten with an error message.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#bitmap">bitmap</a>, <a href=
+"../Keywords/C.htm#canvas">canvas</a>, <a href=
+"../Keywords/C.htm#color">color</a>, <a href=
+"../Keywords/F.htm#font">font</a>, <a href=
+"../Keywords/P.htm#path">path</a>, <a href=
+"../Keywords/P.htm#Postscript">Postscript</a>, <a href=
+"../Keywords/S.htm#stipple">stipple</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

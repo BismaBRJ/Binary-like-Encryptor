@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>More list commands - lsearch, lsort, lrange</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">More list commands - lsearch, lsort, lrange</h1>
+
+<div class="nav"><a href="Tcl15.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl16a.html">Next
+lesson</a></div>
+
+<p>Lists can be searched with the <code class=
+"keyword">lsearch</code> command, sorted with the <code class=
+"keyword">lsort</code> command, and a range of list entries can be
+extracted with the <code class="keyword">lrange</code> command.</p>
+
+<dl>
+<dt><code class="keyword">lsearch</code> <code class=
+"arg">list</code> <code class="arg">pattern</code></dt>
+
+<dd>Searches <code class="arg">list</code> for an entry that
+matches <code class="arg">pattern</code>, and returns the index for
+the first match, or a -1 if there is no match. By default, <code
+class="keyword">lsearch</code> uses "glob" patterns for matching.
+See the section on <a href="Tcl16a.html">globbing</a>.</dd>
+
+<dt><code class="keyword">lsort</code> <code class=
+"arg">list</code></dt>
+
+<dd>Sorts <code class="arg">list</code> and returns a new list in
+the sorted order. By default, it sorts the list into alphabetic
+order. Note that this command returns the sorted list as a result,
+instead of sorting the list in place. If you have a list in a
+variable, the way to sort it is like so:
+<code>set&nbsp;lst&nbsp;[lsort&nbsp;$lst]</code></dd>
+
+<dt><code class="keyword">lrange</code> <code class=
+"arg">list</code> <code class="arg">first</code> <code class=
+"arg">last</code></dt>
+
+<dd>Returns a list composed of the <code class="arg">first</code>
+through <code class="arg">last</code> entries in the list. If <code
+class="arg">first</code> is less than or equal to 0, it is treated
+as the first list element. If <code class="arg">last</code> is
+<b>end</b> or a value greater than the number of elements in the
+list, it is treated as the end. If <code class="arg">first</code>
+is greater than <code class="arg">last</code> then an empty list is
+returned.</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set list [list {Washington 1789} {Adams 1797} {Jefferson 1801} \
+               {Madison 1809} {Monroe 1817} {Adams 1825} ]
+
+set x [lsearch $list Washington*]
+set y [lsearch $list Madison*]
+incr x
+incr y -1                        ;# Set range to be not-inclusive
+
+set subsetlist [lrange $list $x $y]
+
+puts "The following presidents served between Washington and Madison"
+foreach item $subsetlist {
+    puts "Starting in [lindex $item 1]: President [lindex $item 0] "
+}
+
+set x [lsearch $list Madison*]
+
+set srtlist [lsort $list]
+set y [lsearch $srtlist Madison*]
+
+puts "\n$x Presidents came before Madison chronologically"
+puts "$y Presidents came before Madison alphabetically"
+</pre>
+
+<div class="nav"><a href="Tcl15.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl16a.html">Next
+lesson</a></div>
+</body>
+</html>
+

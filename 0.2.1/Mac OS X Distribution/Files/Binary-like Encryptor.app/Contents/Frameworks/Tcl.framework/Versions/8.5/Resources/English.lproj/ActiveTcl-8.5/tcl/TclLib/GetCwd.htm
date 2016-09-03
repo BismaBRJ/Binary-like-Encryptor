@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_GetCwd manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> GetCwd</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_GetCwd, Tcl_Chdir - manipulate the current working directory 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+char *<br>
+<b>Tcl_GetCwd</b>(<i>interp</i>, <i>bufferPtr</i>)<br>
+int<br>
+<b>Tcl_Chdir</b>(<i>path</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Interpreter in which to report an error, if any.</dd>
+
+<dt>Tcl_DString <b>*bufferPtr</b> (in/out)</dt>
+
+<dd>This dynamic string is used to store the current working
+directory. At the time of the call it should be uninitialized or
+free. The caller must eventually call <b><a href=
+"../TclLib/DString.htm">Tcl_DStringFree</a></b> to free up anything
+stored here.</dd>
+
+<dt>char <b>*path</b> (in)</dt>
+
+<dd>File path in UTF-8 format.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These procedures may be used to manipulate the current working
+directory for the application. They provide C-level access to the
+same functionality as the Tcl <b><a href=
+"../TclCmd/pwd.htm">pwd</a></b> command. 
+
+<p><b>Tcl_GetCwd</b> returns a pointer to a string specifying the
+current directory, or NULL if the current directory could not be
+determined. If NULL is returned, an error message is left in the
+<i>interp</i>'s result. Storage for the result string is allocated
+in bufferPtr; the caller must call <b>Tcl_DStringFree()</b> when
+the result is no longer needed. The format of the path is
+UTF-8.</p>
+
+<p><b>Tcl_Chdir</b> changes the applications current working
+directory to the value specified in <i>path</i>. The format of the
+passed in string must be UTF-8. The function returns -1 on error or
+0 on success.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/P.htm#pwd">pwd</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1998-1999 Scriptics Corporation</div>
+</body>
+</html>
+

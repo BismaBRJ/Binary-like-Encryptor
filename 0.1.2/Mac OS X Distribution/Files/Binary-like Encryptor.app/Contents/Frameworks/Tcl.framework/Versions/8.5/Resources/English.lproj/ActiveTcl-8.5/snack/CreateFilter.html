@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<meta http-equiv="Content-Type" content=
+"text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content=
+"Mozilla/4.72 [en] (X11; U; Linux 2.2.14-5.0 i686) [Netscape]">
+<meta name="Author" content="K&aring;re Sj&ouml;lander">
+<title>CreateFilter</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h3>NAME</h3>
+
+Snack_CreateFilterType - define new filter type 
+
+<h3>SYNOPSIS</h3>
+
+#include &lt;snack.h&gt; <br>
+<b>Snack_CreateFilterType</b>(filterType) 
+
+<h3>ARGUMENTS</h3>
+
+Snack_FilterType *filterType 
+
+<p>struct Snack_FilterType {<br>
+&nbsp;
+char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+*name;<br>
+&nbsp; createProc&nbsp;&nbsp;&nbsp; *createProc;<br>
+&nbsp; configProc&nbsp;&nbsp;&nbsp;&nbsp; *configProc;<br>
+&nbsp; startProc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+*startProc;<br>
+&nbsp; flowProc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+*flowProc;<br>
+&nbsp; freeProc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+*freeProc;<br>
+&nbsp; struct Snack_FilterType *nextPtr;<br>
+} Snack_FilterType;</p>
+
+<p>char *<b>name</b></p>
+
+<p>Snack_Filter <b>createProc</b> (Tcl_Interp *interp, int objc,
+Tcl_Obj *CONST objv[])</p>
+
+<p>int <b>configProc</b> (Snack_Filter f, Tcl_Interp *interp, int
+objc, Tcl_Obj *CONST objv[])</p>
+
+<p>int <b>startProc</b> (Snack_Filter f, Snack_StreamInfo si)</p>
+
+<p>int <b>flowProc</b> (Snack_Filter f, Snack_StreamInfo si, float
+*inBuffer, float *outBuffer, int *inFrames, int *outFrames)</p>
+
+<p>void <b>freeProc</b> (Snack_Filter f)</p>
+
+<h3>DESCRIPTION</h3>
+
+<b>Snack_CreateFilterType</b> is used to define a new kind of
+filter type. Everything regarding filters is still under
+development. The source code itself is currently the only source of
+information. 
+
+<p>Some helpful notes on the current implementation:</p>
+
+<p>inFrames specifies how many samples exist in inBuffer. This
+value can be modified to specify how many samples were actually
+consumed.</p>
+
+<p>outFrames is an upper bound on how many samples that may be
+written to outBuffer.</p>
+
+<p><b>flowProc</b> should start to drain out any samples as soon as
+inFrames &lt; outFrames.</p>
+
+<p>If the return value of outFrames is less than the original, the
+procedure will not be called again. Internal clean-up can be
+performed in this case.</p>
+
+<p>The parameters inBuffer and outBuffer may point to the same
+memory. In some cases it might be neccessary to make local copies
+of samples during calculations.</p>
+
+<p><b>configProc</b> can be called at any time.</p>
+
+<p>inBuffer can be NULL if inSize is 0.<br>
+&nbsp;</p>
+</body>
+</html>
+

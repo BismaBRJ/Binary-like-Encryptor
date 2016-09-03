@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk_vsapi manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_vsapi</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_vsapi.htm#M2" name="L2099">NAME</a> 
+
+<dl>
+<dd>ttk_vsapi - Define a Microsoft Visual Styles element</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_vsapi.htm#M3" name="L2100">SYNOPSIS</a> 
+
+<dl>
+<dd><b>ttk::style element create</b> <i>name</i> <b>vsapi</b>
+<i>className</i> <i>partId</i> ?<i>stateMap</i>?
+?<i>options</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_vsapi.htm#M4" name="L2101">DESCRIPTION</a></dd>
+
+<dd><a href="ttk_vsapi.htm#M5" name="L2102">OPTIONS</a> 
+
+<dl class="options">
+<dd><a href="ttk_vsapi.htm#M6" name="L2103"><b>-padding</b>
+<i>padding</i></a></dd>
+
+<dd><a href="ttk_vsapi.htm#M7" name="L2104"><b>-margins</b>
+<i>padding</i></a></dd>
+
+<dd><a href="ttk_vsapi.htm#M8" name="L2105"><b>-width</b>
+<i>width</i></a></dd>
+
+<dd><a href="ttk_vsapi.htm#M9" name="L2106"><b>-height</b>
+<i>height</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_vsapi.htm#M10" name="L2107">STATE MAP</a></dd>
+
+<dd><a href="ttk_vsapi.htm#M11" name="L2108">EXAMPLE</a></dd>
+
+<dd><a href="ttk_vsapi.htm#M12" name="L2109">SEE ALSO</a></dd>
+
+<dd><a href="ttk_vsapi.htm#M13" name="L2110">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk_vsapi - Define a Microsoft Visual Styles element 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>ttk::style element create</b> <i>name</i> <b>vsapi</b>
+<i>className</i> <i>partId</i> ?<i>stateMap</i>?
+?<i>options</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <i>vsapi</i> element factory creates a new element in the
+current theme whose visual appearance is drawn using the Microsoft
+Visual Styles API which is reponsible for the themed styles on
+Windows XP and Vista. This factory permits any of the Visual Styles
+parts to be declared as ttk elements that can then be included in a
+style layout to modify the appearance of ttk widgets. 
+
+<p><i>className</i> and <i>partId</i> are required parameters and
+specify the Visual Styles class and part as given in the Microsoft
+documentation. The <i>stateMap</i> may be provided to map ttk
+states to Visual Styles API states (see <b>STATE MAP</b>).</p>
+
+<h3><a name="M5">OPTIONS</a></h3>
+
+Valid <i>options</i> are: 
+
+<dl class="options">
+<dt><a name="M6"><b>-padding</b> <i>padding</i></a></dt>
+
+<dd>Specify the element's interior padding. <i>padding</i> is a
+list of up to four integers specifying the left, top, right and
+bottom padding quantities respectively. This option may not be
+mixed with any other options.</dd>
+
+<dt><a name="M7"><b>-margins</b> <i>padding</i></a></dt>
+
+<dd>Specifies the elements exterior padding. <i>padding</i> is a
+list of up to four integers specifying the left, top, right and
+bottom padding quantities respectively. This option may not be
+mixed with any other options.</dd>
+
+<dt><a name="M8"><b>-width</b> <i>width</i></a></dt>
+
+<dd>Specifies the height for the element. If this option is set
+then the Visual Styles API will not be queried for the recommended
+size or the part. If this option is set then <i>-height</i> should
+also be set. The <i>-width</i> and <i>-height</i> options cannot be
+mixed with the <i>-padding</i> or <i>-margins</i> options.</dd>
+
+<dt><a name="M9"><b>-height</b> <i>height</i></a></dt>
+
+<dd>Specifies the height of the element. See the comments for
+<i>-width</i>.</dd>
+</dl>
+
+<h3><a name="M10">STATE MAP</a></h3>
+
+The <i>stateMap</i> parameter is a list of ttk states and the
+corresponding Visual Styles API state value. This permits the
+element appearence to respond to changes in the widget state such
+as becoming active or being pressed. The list should be as
+described for the <b>ttk::style map</b> command but note that the
+last pair in the list should be the default state and is typically
+and empty list and 1. Unfortunately all the Visual Styles parts
+have different state values and these must be looked up either in
+the Microsoft documentation or more likely in the header files. The
+original header to use was <i>tmschema.h</i> but in more recent
+versions of the Windows Development Kit this is <i>vssym32.h</i>. 
+
+<p>If no <i>stateMap</i> parameter is given there is an implicit
+default map of {{} 1}</p>
+
+<h3><a name="M11">EXAMPLE</a></h3>
+
+Create a correctly themed close button by changing the layout of a
+<b><a href="../TkCmd/ttk_button.htm">ttk::button</a></b>(n). This
+uses the WINDOW part WP_SMALLCLOSEBUTTON and as documented the
+states CBS_DISABLED, CBS_HOT, CBS_NORMAL and CBS_PUSHED are mapped
+from ttk states. 
+
+<pre>
+ttk::style element create smallclose vsapi WINDOW 19 \
+    {disabled 4 pressed 3 active 2 {} 1}
+ttk::style layout CloseButton {CloseButton.smallclose -sticky news}
+pack [ttk::button .close -style CloseButton]
+</pre>
+
+<p>Change the appearence of a <b><a href=
+"../TkCmd/ttk_checkbutton.htm">ttk::checkbutton</a></b>(n) to use
+the Explorer pin part EBP_HEADERPIN.</p>
+
+<pre>
+ttk::style element create pin vsapi EXPLORERBAR 3 {
+    {pressed !selected} 3
+    {active !selected} 2
+    {pressed selected} 6
+    {active selected} 5
+    {selected} 4
+    {} 1
+}
+ttk::style layout Explorer.Pin {Explorer.Pin.pin -sticky news}
+pack [ttk::checkbutton .pin -style Explorer.Pin]
+</pre>
+
+<h3><a name="M12">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_intro.htm">ttk::intro</a></b>, <b><a href=
+"../TkCmd/ttk_widget.htm">ttk::widget</a></b>, <b><a href=
+"../TkCmd/ttk_style.htm">ttk::style</a></b>, <b><a href=
+"../TkCmd/ttk_image.htm">ttk_image</a></b> 
+
+<h3><a name="M13">KEYWORDS</a></h3>
+
+<a href="../Keywords/S.htm#style">style</a>, <a href=
+"../Keywords/T.htm#theme">theme</a>, <a href=
+"../Keywords/A.htm#appearance">appearance</a>, <a href=
+"../Keywords/W.htm#windows">windows</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2008 Pat Thoyts</div>
+</body>
+</html>
+

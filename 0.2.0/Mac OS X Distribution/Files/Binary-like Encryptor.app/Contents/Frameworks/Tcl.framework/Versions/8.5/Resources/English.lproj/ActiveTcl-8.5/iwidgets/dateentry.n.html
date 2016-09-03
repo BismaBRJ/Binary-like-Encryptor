@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>dateentry - Create and manipulate a dateentry widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>dateentry - Create and manipulate a dateentry widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>dateentry pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- LabeledWidget &lt;- Datefield &lt;- Dateentry 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>background</b><br>
+<b>foreground</b><br>
+<b>justify</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>highlightColor</b><br>
+<b>relief</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>highlightThickness</b><br>
+</td>
+<td valign="top"><b>exportSelection</b><br>
+<b>insertBackground</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>disabledForeground</b><br>
+<b>labelMargin</b><br>
+<b>state</b><br>
+</td>
+<td valign="top"><b>labelBitmap</b><br>
+<b>labelPos</b><br>
+</td>
+<td valign="top"><b>labelFont</b><br>
+<b>labelText</b><br>
+</td>
+<td valign="top"><b>labelImage</b><br>
+<b>labelVariable</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="labeledwidget.n.html">"labeledwidget"</a> class
+manual entry for details on these inherited options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>command</b><br>
+<b>textFont</b><br>
+</td>
+<td valign="top"><b>int</b><br>
+<b>iq</b><br>
+</td>
+<td valign="top"><b>state</b><br>
+</td>
+<td valign="top"><b>textBackground</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the "datefield" class manual entry for details on these
+inherited options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>backwardImage</b><br>
+<b>dateFont</b><br>
+<b>outline</b><br>
+<b>titleFont</b><br>
+</td>
+<td valign="top"><b>buttonForeground</b><br>
+<b>dayFont</b><br>
+<b>selectColor</b><br>
+<b>weekdayBackground</b><br>
+</td>
+<td valign="top"><b>command</b><br>
+<b>days</b><br>
+<b>selectThickness</b><br>
+<b>weekendBackground</b><br>
+</td>
+<td valign="top"><b>currentDateFont</b><br>
+<b>forwardImage</b><br>
+<b>startDay</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the "calendar" manual entry for details on the associated
+options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>grab</b>
+Class:                  <b>Grab</b>
+Command-Line Switch:    <b>-grab</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the grab level,
+<b>local</b> or <b>global</b>, to be obtained before bringing up
+the popup calendar. The default is global. For more information
+concerning grab levels, consult the documentation for Tk's
+<b>grab</b> command.</div>
+
+<pre>
+Name:                   <b>icon</b>
+Class:                  <b>Icon</b>
+Command-Line Switch:    <b>-icon</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the calendar icon image to
+be used in the dateentry. This image must have been created
+previously with the <b>image create</b> command. Should one not be
+provided, then one will be generated, pixmap if possible, bitmap
+otherwise.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>dateentry</b> command creates a quicken style date entry
+field with a popup calendar by combining the datefield and calendar
+widgets together. This allows a user to enter the date via the
+keyboard or by using the mouse and selecting the calendar icon
+which brings up a popup calendar.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>dateentry</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for dateentry
+widgets: 
+
+<h2>INHERITED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>get</b><br>
+</td>
+<td valign="top"><b>isvalid</b><br>
+</td>
+<td valign="top"><b>show</b><br>
+</td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the "datefield" manual entry for details on the associated
+methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>dateentry</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>dateentry</b> command.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>label</b>
+Class:                  <b>Label</b>
+</pre>
+
+<div style="margin-left: 2em">The label component provides a label
+component to used to identify the date. See the "label" widget
+manual entry for details on the label component item.</div>
+
+<pre>
+Name:                   <b>iconbutton</b>
+Class:                  <b>Label</b>
+</pre>
+
+<div style="margin-left: 2em">The iconbutton component provides a
+labelbutton component to act as a lightweight button displaying the
+calendar icon. Upon pressing the labelbutton, the calendar appears.
+See the "label" widget manual entry for details on the labelbutton
+component item.</div>
+
+<pre>
+Name:                   <b>date</b>
+Class:                  <b>Entry</b>
+</pre>
+
+<div style="margin-left: 2em">The date component provides the entry
+field for date input and display. See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/entry.n.html">"entry"</a>
+widget manual entry for details on the date component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ dateentry .de
+ pack .de
+</pre>
+
+<h2>AUTHOR</h2>
+
+Mark L. Ulferts 
+
+<h2>KEYWORDS</h2>
+
+dateentry, widget
+</body>
+</html>
+

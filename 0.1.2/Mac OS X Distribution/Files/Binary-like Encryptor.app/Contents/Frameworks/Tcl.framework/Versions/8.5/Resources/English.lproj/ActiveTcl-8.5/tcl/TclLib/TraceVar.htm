@@ -1,0 +1,526 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_TraceVar manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> TraceVar</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="TraceVar.htm#M2" name="L768">NAME</a> 
+
+<dl>
+<dd>Tcl_TraceVar, Tcl_TraceVar2, Tcl_UntraceVar, Tcl_UntraceVar2,
+Tcl_VarTraceInfo, Tcl_VarTraceInfo2 - monitor accesses to a
+variable</dd>
+</dl>
+</dd>
+
+<dd><a href="TraceVar.htm#M3" name="L769">SYNOPSIS</a></dd>
+
+<dd><a href="TraceVar.htm#M4" name="L770">ARGUMENTS</a></dd>
+
+<dd><a href="TraceVar.htm#M5" name="L771">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="TraceVar.htm#M6" name=
+"L772"><b>TCL_GLOBAL_ONLY</b></a></dd>
+
+<dd><a href="TraceVar.htm#M7" name=
+"L773"><b>TCL_NAMESPACE_ONLY</b></a></dd>
+
+<dd><a href="TraceVar.htm#M8" name=
+"L774"><b>TCL_TRACE_READS</b></a></dd>
+
+<dd><a href="TraceVar.htm#M9" name=
+"L775"><b>TCL_TRACE_WRITES</b></a></dd>
+
+<dd><a href="TraceVar.htm#M10" name=
+"L776"><b>TCL_TRACE_UNSETS</b></a></dd>
+
+<dd><a href="TraceVar.htm#M11" name=
+"L777"><b>TCL_TRACE_ARRAY</b></a></dd>
+
+<dd><a href="TraceVar.htm#M12" name=
+"L778"><b>TCL_TRACE_RESULT_DYNAMIC</b></a></dd>
+
+<dd><a href="TraceVar.htm#M13" name=
+"L779"><b>TCL_TRACE_RESULT_OBJECT</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="TraceVar.htm#M14" name="L780">TWO-PART NAMES</a></dd>
+
+<dd><a href="TraceVar.htm#M15" name="L781">ACCESSING VARIABLES
+DURING TRACES</a></dd>
+
+<dd><a href="TraceVar.htm#M16" name="L782">CALLBACK TIMING</a></dd>
+
+<dd><a href="TraceVar.htm#M17" name="L783">WHOLE-ARRAY
+TRACES</a></dd>
+
+<dd><a href="TraceVar.htm#M18" name="L784">MULTIPLE TRACES</a></dd>
+
+<dd><a href="TraceVar.htm#M19" name="L785">ERROR RETURNS</a></dd>
+
+<dd><a href="TraceVar.htm#M20" name="L786">RESTRICTIONS</a></dd>
+
+<dd><a href="TraceVar.htm#M21" name="L787">UNDEFINED
+VARIABLES</a></dd>
+
+<dd><a href="TraceVar.htm#M22" name="L788">TCL_TRACE_DESTROYED
+FLAG</a></dd>
+
+<dd><a href="TraceVar.htm#M23" name=
+"L789">TCL_INTERP_DESTROYED</a></dd>
+
+<dd><a href="TraceVar.htm#M24" name="L790">BUGS</a></dd>
+
+<dd><a href="TraceVar.htm#M25" name="L791">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_TraceVar, Tcl_TraceVar2, Tcl_UntraceVar, Tcl_UntraceVar2,
+Tcl_VarTraceInfo, Tcl_VarTraceInfo2 - monitor accesses to a
+variable 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_TraceVar(</b><i>interp, varName, flags, proc,
+clientData</i><b>)</b><br>
+int<br>
+<b>Tcl_TraceVar2(</b><i>interp, name1, name2, flags, proc,
+clientData</i><b>)</b><br>
+<b>Tcl_UntraceVar(</b><i>interp, varName, flags, proc,
+clientData</i><b>)</b><br>
+<b>Tcl_UntraceVar2(</b><i>interp, name1, name2, flags, proc,
+clientData</i><b>)</b><br>
+ClientData<br>
+<b>Tcl_VarTraceInfo(</b><i>interp, varName, flags, proc,
+prevClientData</i><b>)</b><br>
+ClientData<br>
+<b>Tcl_VarTraceInfo2(</b><i>interp, name1, name2, flags, proc,
+prevClientData</i><b>)</b><br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Interpreter containing variable.</dd>
+
+<dt>const char <b>*varName</b> (in)</dt>
+
+<dd>Name of variable. May refer to a scalar variable, to an array
+variable with no index, or to an array variable with a
+parenthesized index.</dd>
+
+<dt>int <b>flags</b> (in)</dt>
+
+<dd>OR-ed combination of the values <b>TCL_TRACE_READS</b>,
+<b>TCL_TRACE_WRITES</b>, <b>TCL_TRACE_UNSETS</b>,
+<b>TCL_TRACE_ARRAY</b>, <b>TCL_GLOBAL_ONLY</b>,
+<b>TCL_NAMESPACE_ONLY</b>, <b>TCL_TRACE_RESULT_DYNAMIC</b> and
+<b>TCL_TRACE_RESULT_OBJECT</b>. Not all flags are used by all
+procedures. See below for more information.</dd>
+
+<dt>Tcl_VarTraceProc <b>*proc</b> (in)</dt>
+
+<dd>Procedure to invoke whenever one of the traced operations
+occurs.</dd>
+
+<dt>ClientData <b>clientData</b> (in)</dt>
+
+<dd>Arbitrary one-word value to pass to <i>proc</i>.</dd>
+
+<dt>const char <b>*name1</b> (in)</dt>
+
+<dd>Name of scalar or array variable (without array index).</dd>
+
+<dt>const char <b>*name2</b> (in)</dt>
+
+<dd>For a trace on an element of an array, gives the index of the
+element. For traces on scalar variables or on whole arrays, is
+NULL.</dd>
+
+<dt>ClientData <b>prevClientData</b> (in)</dt>
+
+<dd>If non-NULL, gives last value returned by
+<b>Tcl_VarTraceInfo</b> or <b>Tcl_VarTraceInfo2</b>, so this call
+will return information about next trace. If NULL, this call will
+return information about first trace.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_TraceVar</b> allows a C procedure to monitor and control
+access to a Tcl variable, so that the C procedure is invoked
+whenever the variable is read or written or unset. If the trace is
+created successfully then <b>Tcl_TraceVar</b> returns
+<b>TCL_OK</b>. If an error occurred (e.g. <i>varName</i> specifies
+an element of an array, but the actual variable is not an array)
+then <b>TCL_ERROR</b> is returned and an error message is left in
+the interpreter's result. 
+
+<p>The <i>flags</i> argument to <b>Tcl_TraceVar</b> indicates when
+the trace procedure is to be invoked and provides information for
+setting up the trace. It consists of an OR-ed combination of any of
+the following values:</p>
+
+<dl class="description">
+<dt><a name="M6"><b>TCL_GLOBAL_ONLY</b></a></dt>
+
+<dd>Normally, the variable will be looked up at the current level
+of procedure call; if this bit is set then the variable will be
+looked up at global level, ignoring any active procedures.</dd>
+
+<dt><a name="M7"><b>TCL_NAMESPACE_ONLY</b></a></dt>
+
+<dd>Normally, the variable will be looked up at the current level
+of procedure call; if this bit is set then the variable will be
+looked up in the current namespace, ignoring any active
+procedures.</dd>
+
+<dt><a name="M8"><b>TCL_TRACE_READS</b></a></dt>
+
+<dd>Invoke <i>proc</i> whenever an attempt is made to read the
+variable.</dd>
+
+<dt><a name="M9"><b>TCL_TRACE_WRITES</b></a></dt>
+
+<dd>Invoke <i>proc</i> whenever an attempt is made to modify the
+variable.</dd>
+
+<dt><a name="M10"><b>TCL_TRACE_UNSETS</b></a></dt>
+
+<dd>Invoke <i>proc</i> whenever the variable is unset. A variable
+may be unset either explicitly by an <b><a href=
+"../TclCmd/unset.htm">unset</a></b> command, or implicitly when a
+procedure returns (its local variables are automatically unset) or
+when the interpreter is deleted (all variables are automatically
+unset).</dd>
+
+<dt><a name="M11"><b>TCL_TRACE_ARRAY</b></a></dt>
+
+<dd>Invoke <i>proc</i> whenever the array command is invoked. This
+gives the trace procedure a chance to update the array before array
+names or array get is called. Note that this is called before an
+array set, but that will trigger write traces.</dd>
+
+<dt><a name="M12"><b>TCL_TRACE_RESULT_DYNAMIC</b></a></dt>
+
+<dd>The result of invoking the <i>proc</i> is a dynamically
+allocated string that will be released by the Tcl library via a
+call to <b><a href="../TclLib/Alloc.htm">ckfree</a></b>. Must not
+be specified at the same time as
+<b>TCL_TRACE_RESULT_OBJECT</b>.</dd>
+
+<dt><a name="M13"><b>TCL_TRACE_RESULT_OBJECT</b></a></dt>
+
+<dd>The result of invoking the <i>proc</i> is a Tcl_Obj* (cast to a
+char*) with a reference count of at least one. The ownership of
+that reference will be transferred to the Tcl core for release
+(when the core has finished with it) via a call to <b><a href=
+"../TclLib/Object.htm">Tcl_DecrRefCount</a></b>. Must not be
+specified at the same time as <b>TCL_TRACE_RESULT_DYNAMIC</b>.</dd>
+</dl>
+
+<p>Whenever one of the specified operations occurs on the variable,
+<i>proc</i> will be invoked. It should have arguments and result
+that match the type <b>Tcl_VarTraceProc</b>:</p>
+
+<pre>
+typedef char *Tcl_VarTraceProc(
+        ClientData <i>clientData</i>,
+        <a href=
+"../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>,
+        char *<i>name1</i>,
+        char *<i>name2</i>,
+        int <i>flags</i>);
+</pre>
+
+The <i>clientData</i> and <i>interp</i> parameters will have the
+same values as those passed to <b>Tcl_TraceVar</b> when the trace
+was created. <i>ClientData</i> typically points to an
+application-specific data structure that describes what to do when
+<i>proc</i> is invoked. <i>Name1</i> and <i>name2</i> give the name
+of the traced variable in the normal two-part form (see the
+description of <b>Tcl_TraceVar2</b> below for details).
+<i>Flags</i> is an OR-ed combination of bits providing several
+pieces of information. One of the bits <b>TCL_TRACE_READS</b>,
+<b>TCL_TRACE_WRITES</b>, <b>TCL_TRACE_ARRAY</b>, or
+<b>TCL_TRACE_UNSETS</b> will be set in <i>flags</i> to indicate
+which operation is being performed on the variable. The bit
+<b>TCL_GLOBAL_ONLY</b> will be set whenever the variable being
+accessed is a global one not accessible from the current level of
+procedure call: the trace procedure will need to pass this flag
+back to variable-related procedures like <b><a href=
+"../TclLib/SetVar.htm">Tcl_GetVar</a></b> if it attempts to access
+the variable. The bit <b>TCL_NAMESPACE_ONLY</b> will be set
+whenever the variable being accessed is a namespace one not
+accessible from the current level of procedure call: the trace
+procedure will need to pass this flag back to variable-related
+procedures like <b><a href=
+"../TclLib/SetVar.htm">Tcl_GetVar</a></b> if it attempts to access
+the variable. The bit <b>TCL_TRACE_DESTROYED</b> will be set in
+<i>flags</i> if the trace is about to be destroyed; this
+information may be useful to <i>proc</i> so that it can clean up
+its own internal data structures (see the section
+<b>TCL_TRACE_DESTROYED</b> below for more details). Lastly, the bit
+<b>TCL_INTERP_DESTROYED</b> will be set if the entire interpreter
+is being destroyed. When this bit is set, <i>proc</i> must be
+especially careful in the things it does (see the section
+<b>TCL_INTERP_DESTROYED</b> below). The trace procedure's return
+value should normally be NULL; see <b>ERROR RETURNS</b> below for
+information on other possibilities. 
+
+<p><b>Tcl_UntraceVar</b> may be used to remove a trace. If the
+variable specified by <i>interp</i>, <i>varName</i>, and
+<i>flags</i> has a trace set with <i>flags</i>, <i>proc</i>, and
+<i>clientData</i>, then the corresponding trace is removed. If no
+such trace exists, then the call to <b>Tcl_UntraceVar</b> has no
+effect. The same bits are valid for <i>flags</i> as for calls to
+<b>Tcl_TraceVar</b>.</p>
+
+<p><b>Tcl_VarTraceInfo</b> may be used to retrieve information
+about traces set on a given variable. The return value from
+<b>Tcl_VarTraceInfo</b> is the <i>clientData</i> associated with a
+particular trace. The trace must be on the variable specified by
+the <i>interp</i>, <i>varName</i>, and <i>flags</i> arguments (only
+the <b>TCL_GLOBAL_ONLY</b> and <b>TCL_NAMESPACE_ONLY</b> bits from
+<i>flags</i> is used; other bits are ignored) and its trace
+procedure must the same as the <i>proc</i> argument. If the
+<i>prevClientData</i> argument is NULL then the return value
+corresponds to the first (most recently created) matching trace, or
+NULL if there are no matching traces. If the <i>prevClientData</i>
+argument is not NULL, then it should be the return value from a
+previous call to <b>Tcl_VarTraceInfo</b>. In this case, the new
+return value will correspond to the next matching trace after the
+one whose <i>clientData</i> matches <i>prevClientData</i>, or NULL
+if no trace matches <i>prevClientData</i> or if there are no more
+matching traces after it. This mechanism makes it possible to step
+through all of the traces for a given variable that have the same
+<i>proc</i>.</p>
+
+<h3><a name="M14">TWO-PART NAMES</a></h3>
+
+The procedures <b>Tcl_TraceVar2</b>, <b>Tcl_UntraceVar2</b>, and
+<b>Tcl_VarTraceInfo2</b> are identical to <b>Tcl_TraceVar</b>,
+<b>Tcl_UntraceVar</b>, and <b>Tcl_VarTraceInfo</b>, respectively,
+except that the name of the variable consists of two parts.
+<i>Name1</i> gives the name of a scalar variable or array, and
+<i>name2</i> gives the name of an element within an array. When
+<i>name2</i> is NULL, <i>name1</i> may contain both an array and an
+element name: if the name contains an open parenthesis and ends
+with a close parenthesis, then the value between the parentheses is
+treated as an element name (which can have any string value) and
+the characters before the first open parenthesis are treated as the
+name of an array variable. If <i>name2</i> is NULL and <i>name1</i>
+does not refer to an array element it means that either the
+variable is a scalar or the trace is to be set on the entire array
+rather than an individual element (see WHOLE-ARRAY TRACES below for
+more information). 
+
+<h3><a name="M15">ACCESSING VARIABLES DURING TRACES</a></h3>
+
+During read, write, and array traces, the trace procedure can read,
+write, or unset the traced variable using <b><a href=
+"../TclLib/SetVar.htm">Tcl_GetVar2</a></b>, <b><a href=
+"../TclLib/SetVar.htm">Tcl_SetVar2</a></b>, and other procedures.
+While <i>proc</i> is executing, traces are temporarily disabled for
+the variable, so that calls to <b><a href=
+"../TclLib/SetVar.htm">Tcl_GetVar2</a></b> and <b><a href=
+"../TclLib/SetVar.htm">Tcl_SetVar2</a></b> will not cause
+<i>proc</i> or other trace procedures to be invoked again.
+Disabling only occurs for the variable whose trace procedure is
+active; accesses to other variables will still be traced. However,
+if a variable is unset during a read or write trace then unset
+traces will be invoked. 
+
+<p>During unset traces the variable has already been completely
+expunged. It is possible for the trace procedure to read or write
+the variable, but this will be a new version of the variable.
+Traces are not disabled during unset traces as they are for read
+and write traces, but existing traces have been removed from the
+variable before any trace procedures are invoked. If new traces are
+set by unset trace procedures, these traces will be invoked on
+accesses to the variable by the trace procedures.</p>
+
+<h3><a name="M16">CALLBACK TIMING</a></h3>
+
+When read tracing has been specified for a variable, the trace
+procedure will be invoked whenever the variable's value is read.
+This includes <b><a href="../TclCmd/set.htm">set</a></b> Tcl
+commands, <b>$</b>-notation in Tcl commands, and invocations of the
+<b><a href="../TclLib/SetVar.htm">Tcl_GetVar</a></b> and <b><a
+href="../TclLib/SetVar.htm">Tcl_GetVar2</a></b> procedures.
+<i>Proc</i> is invoked just before the variable's value is
+returned. It may modify the value of the variable to affect what is
+returned by the traced access. If it unsets the variable then the
+access will return an error just as if the variable never existed. 
+
+<p>When write tracing has been specified for a variable, the trace
+procedure will be invoked whenever the variable's value is
+modified. This includes <b><a href="../TclCmd/set.htm">set</a></b>
+commands, commands that modify variables as side effects (such as
+<b><a href="../TclCmd/catch.htm">catch</a></b> and <b><a href=
+"../TclCmd/scan.htm">scan</a></b>), and calls to the <b><a href=
+"../TclLib/SetVar.htm">Tcl_SetVar</a></b> and <b><a href=
+"../TclLib/SetVar.htm">Tcl_SetVar2</a></b> procedures). <i>Proc</i>
+will be invoked after the variable's value has been modified, but
+before the new value of the variable has been returned. It may
+modify the value of the variable to override the change and to
+determine the value actually returned by the traced access. If it
+deletes the variable then the traced access will return an empty
+string.</p>
+
+<p>When array tracing has been specified, the trace procedure will
+be invoked at the beginning of the array command implementation,
+before any of the operations like get, set, or names have been
+invoked. The trace procedure can modify the array elements with
+<b><a href="../TclLib/SetVar.htm">Tcl_SetVar</a></b> and <b><a
+href="../TclLib/SetVar.htm">Tcl_SetVar2</a></b>.</p>
+
+<p>When unset tracing has been specified, the trace procedure will
+be invoked whenever the variable is destroyed. The traces will be
+called after the variable has been completely unset.</p>
+
+<h3><a name="M17">WHOLE-ARRAY TRACES</a></h3>
+
+If a call to <b>Tcl_TraceVar</b> or <b>Tcl_TraceVar2</b> specifies
+the name of an array variable without an index into the array, then
+the trace will be set on the array as a whole. This means that
+<i>proc</i> will be invoked whenever any element of the array is
+accessed in the ways specified by <i>flags</i>. When an array is
+unset, a whole-array trace will be invoked just once, with
+<i>name1</i> equal to the name of the array and <i>name2</i> NULL;
+it will not be invoked once for each element. 
+
+<h3><a name="M18">MULTIPLE TRACES</a></h3>
+
+It is possible for multiple traces to exist on the same variable.
+When this happens, all of the trace procedures will be invoked on
+each access, in order from most-recently-created to
+least-recently-created. When there exist whole-array traces for an
+array as well as traces on individual elements, the whole-array
+traces are invoked before the individual-element traces. If a read
+or write trace unsets the variable then all of the unset traces
+will be invoked but the remainder of the read and write traces will
+be skipped. 
+
+<h3><a name="M19">ERROR RETURNS</a></h3>
+
+Under normal conditions trace procedures should return NULL,
+indicating successful completion. If <i>proc</i> returns a non-NULL
+value it signifies that an error occurred. The return value must be
+a pointer to a static character string containing an error message,
+unless (<i>exactly</i> one of) the <b>TCL_TRACE_RESULT_DYNAMIC</b>
+and <b>TCL_TRACE_RESULT_OBJECT</b> flags is set, which specify that
+the result is either a dynamic string (to be released with <b><a
+href="../TclLib/Alloc.htm">ckfree</a></b>) or a Tcl_Obj* (cast to
+char* and to be released with <b><a href=
+"../TclLib/Object.htm">Tcl_DecrRefCount</a></b>) containing the
+error message. If a trace procedure returns an error, no further
+traces are invoked for the access and the traced access aborts with
+the given message. Trace procedures can use this facility to make
+variables read-only, for example (but note that the value of the
+variable will already have been modified before the trace procedure
+is called, so the trace procedure will have to restore the correct
+value). 
+
+<p>The return value from <i>proc</i> is only used during read and
+write tracing. During unset traces, the return value is ignored and
+all relevant trace procedures will always be invoked.</p>
+
+<h3><a name="M20">RESTRICTIONS</a></h3>
+
+A trace procedure can be called at any time, even when there is a
+partially formed result in the interpreter's result area. If the
+trace procedure does anything that could damage this result (such
+as calling <b><a href="../TclLib/Eval.htm">Tcl_Eval</a></b>) then
+it must save the original values of the interpreter's <b>result</b>
+and <b>freeProc</b> fields and restore them before it returns. 
+
+<h3><a name="M21">UNDEFINED VARIABLES</a></h3>
+
+It is legal to set a trace on an undefined variable. The variable
+will still appear to be undefined until the first time its value is
+set. If an undefined variable is traced and then unset, the unset
+will fail with an error (&ldquo;no such variable&rdquo;), but the
+trace procedure will still be invoked. 
+
+<h3><a name="M22">TCL_TRACE_DESTROYED FLAG</a></h3>
+
+In an unset callback to <i>proc</i>, the <b>TCL_TRACE_DESTROYED</b>
+bit is set in <i>flags</i> if the trace is being removed as part of
+the deletion. Traces on a variable are always removed whenever the
+variable is deleted; the only time <b>TCL_TRACE_DESTROYED</b> is
+not set is for a whole-array trace invoked when only a single
+element of an array is unset. 
+
+<h3><a name="M23">TCL_INTERP_DESTROYED</a></h3>
+
+When an interpreter is destroyed, unset traces are called for all
+of its variables. The <b>TCL_INTERP_DESTROYED</b> bit will be set
+in the <i>flags</i> argument passed to the trace procedures. Trace
+procedures must be extremely careful in what they do if the
+<b>TCL_INTERP_DESTROYED</b> bit is set. It is not safe for the
+procedures to invoke any Tcl procedures on the interpreter, since
+its state is partially deleted. All that trace procedures should do
+under these circumstances is to clean up and free their own
+internal data structures. 
+
+<h3><a name="M24">BUGS</a></h3>
+
+Tcl does not do any error checking to prevent trace procedures from
+misusing the interpreter during traces with
+<b>TCL_INTERP_DESTROYED</b> set. 
+
+<p>Array traces are not yet integrated with the Tcl <b><a href=
+"../TclCmd/info.htm">info exists</a></b> command, nor is there
+Tcl-level access to array traces.</p>
+
+<h3><a name="M25">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#clientData">clientData</a>, <a href=
+"../Keywords/T.htm#trace">trace</a>, <a href=
+"../Keywords/V.htm#variable">variable</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1989-1993 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

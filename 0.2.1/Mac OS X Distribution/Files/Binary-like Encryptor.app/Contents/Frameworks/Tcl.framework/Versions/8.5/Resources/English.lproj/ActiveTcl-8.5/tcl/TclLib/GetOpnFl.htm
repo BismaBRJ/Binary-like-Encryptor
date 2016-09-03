@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_GetOpenFile manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> GetOpnFl</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_GetOpenFile - Return a FILE* for a channel registered in the
+given interpreter (Unix only) 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_GetOpenFile</b>(<i>interp, chanID, write, checkUsage,
+filePtr</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Tcl interpreter from which file handle is to be obtained.</dd>
+
+<dt>const char <b>*chanID</b> (in)</dt>
+
+<dd>String identifying channel, such as <b>stdin</b> or
+<b>file4</b>.</dd>
+
+<dt>int <b>write</b> (in)</dt>
+
+<dd>Non-zero means the file will be used for writing, zero means it
+will be used for reading.</dd>
+
+<dt>int <b>checkUsage</b> (in)</dt>
+
+<dd>If non-zero, then an error will be generated if the file was
+not opened for the access indicated by <i>write</i>.</dd>
+
+<dt>ClientData <b>*filePtr</b> (out)</dt>
+
+<dd>Points to word in which to store pointer to FILE structure for
+the file given by <i>chanID</i>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_GetOpenFile</b> takes as argument a file identifier of the
+form returned by the <b><a href="../TclCmd/open.htm">open</a></b>
+command and returns at <i>*filePtr</i> a pointer to the FILE
+structure for the file. The <i>write</i> argument indicates whether
+the FILE pointer will be used for reading or writing. In some
+cases, such as a channel that connects to a pipeline of
+subprocesses, different FILE pointers will be returned for reading
+and writing. <b>Tcl_GetOpenFile</b> normally returns <b>TCL_OK</b>.
+If an error occurs in <b>Tcl_GetOpenFile</b> (e.g. <i>chanID</i>
+did not make any sense or <i>checkUsage</i> was set and the file
+was not opened for the access specified by <i>write</i>) then
+<b>TCL_ERROR</b> is returned and the interpreter's result will
+contain an error message. In the current implementation
+<i>checkUsage</i> is ignored and consistency checks are always
+performed. 
+
+<p>Note that this interface is only supported on the Unix
+platform.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#channel">channel</a>, <a href=
+"../Keywords/F.htm#file handle">file handle</a>, <a href=
+"../Keywords/P.htm#permissions">permissions</a>, <a href=
+"../Keywords/P.htm#pipeline">pipeline</a>, <a href=
+"../Keywords/R.htm#read">read</a>, <a href=
+"../Keywords/W.htm#write">write</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1996-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

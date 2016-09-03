@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Creating Commands - eval</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Creating Commands - eval</h1>
+
+<div class="nav"><a href="Tcl31.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl33.html">Next
+lesson</a></div>
+
+One difference between Tcl and most other compilers is that Tcl
+will allow an executing program to create new commands and execute
+them while running. <br>
+<br>
+<p>A tcl command is defined as a list of strings in which the first
+string is a command or proc. Any string or list which meets this
+criteria can be evaluated and executed.</p>
+
+<p>The <b>eval</b> command will evaluate a list of strings as
+though they were commands typed at the <b>%</b> prompt or sourced
+from a file. The <b>eval</b> command normally returns the final
+value of the commands being evaluated. If the commands being
+evaluated throw an error (for example, if there is a syntax error
+in one of the strings), then <b>eval</b> will will throw an
+error.</p>
+
+<p>Note that either <b>concat</b> or <b>list</b> may be used to
+create the command string, but that these two commands will create
+slightly different command strings.</p>
+
+<dl>
+<dt><b>eval</b> <i>arg1 ??arg2?? ... ??argn??</i></dt>
+
+<dd>Evaluates <i>arg1</i> - <i>argn</i> as one or more Tcl
+commands. The <i>args</i> are concatenated into a string, and
+passed to <b>tcl_Eval</b> to evaluate and execute.<br>
+<br>
+<p><b>Eval</b> returns the result (or error code) of that
+evaluation.</p>
+</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set cmd {puts "Evaluating a puts"}
+puts "CMD IS: $cmd"
+eval $cmd
+
+if {[string match [info procs newProcA] ""] } {
+    puts "\nDefining newProcA for this invocation"
+    set num 0;
+    set cmd "proc newProcA "
+    set cmd [concat $cmd "{} {\n"]
+    set cmd [concat $cmd "global num;\n"]
+    set cmd [concat $cmd "incr num;\n"]
+    set cmd [concat $cmd " return \"/tmp/TMP.[pid].\$num\";\n"]
+    set cmd [concat $cmd "}"]
+    eval  $cmd
+}
+
+puts "\nThe body of newProcA is: \n[info body newProcA]\n"
+
+puts "newProcA returns: [newProcA]"
+puts "newProcA returns: [newProcA]"
+
+#
+# Define a proc using lists
+#
+
+if {[string match [info procs newProcB] ""] } {
+    puts "\nDefining newProcB for this invocation"
+    set cmd "proc newProcB "
+    lappend cmd {}
+    lappend cmd {global num; incr num; return $num;}
+
+    eval  $cmd
+}
+
+puts "\nThe body of newProcB is: \n[info body newProcB]\n"
+puts "newProcB returns: [newProcB]"
+</pre>
+
+<div class="nav"><a href="Tcl31.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl33.html">Next
+lesson</a></div>
+</body>
+</html>
+

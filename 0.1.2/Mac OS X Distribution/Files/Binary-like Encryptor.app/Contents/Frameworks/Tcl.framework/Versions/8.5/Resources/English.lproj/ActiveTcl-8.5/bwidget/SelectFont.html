@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>SelectFont</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>SelectFont</b> - Font selection widget</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>SelectFont</b></a> <i>pathName</i>
+?<i>option value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i>STANDARD OPTIONS</i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-background">-background or -bg</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-font">-font</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-command">-command</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-initialcolor">-initialcolor</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-nosizes">-nosizes</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-parent">-parent</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-sampletext">-sampletext</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-title">-title</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-type">-type</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd>SelectFont::<a href="#loadfont"><b>loadfont</b></a></dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>SelectFont provides a simple way to choose font. It can be
+displayed as a dialog box or as a toolbar.<br>
+Textual items in Dialog box uses <b>-name</b> options so they can
+be translated to any language. Symbolic name used are <b>ok</b>,
+<b>cancel</b>, <b>font</b>, <b>size</b>, <b>style</b>, <b>bold</b>,
+<b>italic</b>, <b>underline</b> and <b>overstrike</b>.</p>
+
+<br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-command"><b>-command</b></a></dt>
+
+<dd>Specifies a command to call when user select a new font when
+SelectFont <b>type</b> option is <i>toolbar</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-initialcolor"><b>-initialcolor</b></a></dt>
+
+<dd>If specified, add an additional button that lets the user pick
+a color. This option is ignored if <b>type</b> is
+<i>toolbar</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-nosizes"><b>-nosizes</b></a></dt>
+
+<dd>If true, don't show the listbox containing valid font sizes.
+This option is ignored if <b>type</b> is <i>toolbar</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-parent"><b>-parent</b></a></dt>
+
+<dd>Parent of the Dialog. Dialog is centered in its parent. If
+empty, it is centered in root window.</dd>
+</dl>
+
+<dl>
+<dt><a name="-sampletext"><b>-sampletext</b></a></dt>
+
+<dd>Specifies the text displayed in the preview area.</dd>
+</dl>
+
+<dl>
+<dt><a name="-title"><b>-title</b></a></dt>
+
+<dd>Title of the Dialog toplevel.</dd>
+</dl>
+
+<dl>
+<dt><a name="-type"><b>-type</b></a></dt>
+
+<dd>Specifies the type of the SelectFont widget. Must be
+<b>dialog</b> or <b>toolbar</b>.<br>
+If <b>type</b> option is <i>dialog</i>, SelectFont::<b>create</b>
+directly creates the dialog, displays it and return an empty string
+if cancel button is pressed or if dialog is destroyed, and the
+selected font (and color if <b>initialcolor</b>) if ok button is
+pressed. In all cases, dialog is destroyed.<br>
+If <b>type</b> option is <i>toolbar</i>, SelectFont::<b>create</b>
+returns the pathname of the widget created.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="loadfont">SelectFont::<b>loadfont</b></a></dt>
+
+<dd>Load the font available in the system.</dd>
+</dl>
+</body>
+</html>
+

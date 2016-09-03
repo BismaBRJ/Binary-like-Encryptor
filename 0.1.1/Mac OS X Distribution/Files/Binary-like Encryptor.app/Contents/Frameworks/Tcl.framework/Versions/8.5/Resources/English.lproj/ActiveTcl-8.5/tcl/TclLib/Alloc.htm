@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_Alloc manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> Alloc</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_Alloc, Tcl_Free, Tcl_Realloc, Tcl_AttemptAlloc,
+Tcl_AttemptRealloc, ckalloc, ckfree, ckrealloc, attemptckalloc,
+attemptckrealloc - allocate or free heap memory 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+char *<br>
+<b>Tcl_Alloc</b>(<i>size</i>)<br>
+void<br>
+<b>Tcl_Free</b>(<i>ptr</i>)<br>
+char *<br>
+<b>Tcl_Realloc</b>(<i>ptr, size</i>)<br>
+char *<br>
+<b>Tcl_AttemptAlloc</b>(<i>size</i>)<br>
+char *<br>
+<b>Tcl_AttemptRealloc</b>(<i>ptr, size</i>)<br>
+char *<br>
+<b>ckalloc</b>(<i>size</i>)<br>
+void<br>
+<b>ckfree</b>(<i>ptr</i>)<br>
+char *<br>
+<b>ckrealloc</b>(<i>ptr, size</i>)<br>
+char *<br>
+<b>attemptckalloc</b>(<i>size</i>)<br>
+char *<br>
+<b>attemptckrealloc</b>(<i>ptr, size</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>unsigned int <b>size</b> (in)</dt>
+
+<dd>Size in bytes of the memory block to allocate.</dd>
+
+<dt>char <b>*ptr</b> (in)</dt>
+
+<dd>Pointer to memory block to free or realloc.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These procedures provide a platform and compiler independent
+interface for memory allocation. Programs that need to transfer
+ownership of memory blocks between Tcl and other modules should use
+these routines rather than the native <b>malloc()</b> and
+<b>free()</b> routines provided by the C run-time library. 
+
+<p><b>Tcl_Alloc</b> returns a pointer to a block of at least
+<i>size</i> bytes suitably aligned for any use.</p>
+
+<p><b>Tcl_Free</b> makes the space referred to by <i>ptr</i>
+available for further allocation.</p>
+
+<p><b>Tcl_Realloc</b> changes the size of the block pointed to by
+<i>ptr</i> to <i>size</i> bytes and returns a pointer to the new
+block. The contents will be unchanged up to the lesser of the new
+and old sizes. The returned location may be different from
+<i>ptr</i>. If <i>ptr</i> is NULL, this is equivalent to calling
+<b>Tcl_Alloc</b> with just the <i>size</i> argument.</p>
+
+<p><b>Tcl_AttemptAlloc</b> and <b>Tcl_AttemptRealloc</b> are
+identical in function to <b>Tcl_Alloc</b> and <b>Tcl_Realloc</b>,
+except that <b>Tcl_AttemptAlloc</b> and <b>Tcl_AttemptRealloc</b>
+will not cause the Tcl interpreter to <b>panic</b> if the memory
+allocation fails. If the allocation fails, these functions will
+return NULL. Note that on some platforms, but not all, attempting
+to allocate a zero-sized block of memory will also cause these
+functions to return NULL.</p>
+
+<p>The procedures <b>ckalloc</b>, <b>ckfree</b>, <b>ckrealloc</b>,
+<b>attemptckalloc</b>, and <b>attemptckrealloc</b> are implemented
+as macros. Normally, they are synonyms for the corresponding
+procedures documented on this page. When Tcl and all modules
+calling Tcl are compiled with <b>TCL_MEM_DEBUG</b> defined,
+however, these macros are redefined to be special debugging
+versions of these procedures. To support Tcl's memory debugging
+within a module, use the macros rather than direct calls to
+<b>Tcl_Alloc</b>, etc.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#alloc">alloc</a>, <a href=
+"../Keywords/A.htm#allocation">allocation</a>, <a href=
+"../Keywords/F.htm#free">free</a>, <a href=
+"../Keywords/M.htm#malloc">malloc</a>, <a href=
+"../Keywords/M.htm#memory">memory</a>, <a href=
+"../Keywords/R.htm#realloc">realloc</a>, <a href=
+"../Keywords/T.htm#TCL_MEM_DEBUG">TCL_MEM_DEBUG</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1995-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

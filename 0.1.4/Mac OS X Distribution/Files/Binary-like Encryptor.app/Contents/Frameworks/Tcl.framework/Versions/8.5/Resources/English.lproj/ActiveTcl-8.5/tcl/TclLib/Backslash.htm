@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_Backslash manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> Backslash</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_Backslash - parse a backslash sequence 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+char<br>
+<b>Tcl_Backslash</b>(<i>src, countPtr</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>char <b>*src</b> (in)</dt>
+
+<dd>Pointer to a string starting with a backslash.</dd>
+
+<dt>int <b>*countPtr</b> (out)</dt>
+
+<dd>If <i>countPtr</i> is not NULL, <i>*countPtr</i> gets filled in
+with number of characters in the backslash sequence, including the
+backslash character.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+The use of <b>Tcl_Backslash</b> is deprecated in favor of <b><a
+href="../TclLib/Utf.htm">Tcl_UtfBackslash</a></b>. 
+
+<p>This is a utility procedure provided for backwards compatibility
+with non-internationalized Tcl extensions. It parses a backslash
+sequence and returns the low byte of the Unicode character
+corresponding to the sequence. <b>Tcl_Backslash</b> modifies
+<i>*countPtr</i> to contain the number of characters in the
+backslash sequence.</p>
+
+<p>See the <a href="../TclCmd/Tcl.htm">Tcl</a> manual entry for
+information on the valid backslash sequences. All of the sequences
+described in the <a href="../TclCmd/Tcl.htm">Tcl</a> manual entry
+are supported by <b>Tcl_Backslash</b>.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/Tcl.htm">Tcl</a></b>, <b><a href=
+"../TclLib/Utf.htm">Tcl_UtfBackslash</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#backslash">backslash</a>, <a href=
+"../Keywords/P.htm#parse">parse</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1989-1993 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

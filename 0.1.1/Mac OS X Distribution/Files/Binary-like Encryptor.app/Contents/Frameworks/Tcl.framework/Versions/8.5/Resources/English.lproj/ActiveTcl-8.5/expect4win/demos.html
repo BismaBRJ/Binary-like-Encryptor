@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<link rel="STYLESHEET" href="aspn.css" charset="ISO-8859-1" type=
+"text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Expect for Windows - Demos</title>
+</head>
+<body marginheight="5" topmargin="5" marginwidth="10" leftmargin=
+"10">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/Products/Expect/"><img src=
+"images/expect_logo.gif" border="0" align="left" alt="Expect"></a>
+</td>
+<td align="center" class="heading">Expect for
+Windows<sup><small>&reg;</small></sup> User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="images/AS_logo.gif" border=
+"0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<a name="top"></a> 
+
+<h1>Demos</h1>
+
+<ul>
+<li><a class="doc" href="#demos_intro">Introduction</a></li>
+
+<li style="list-style: none">
+<ul>
+<li><a class="doc" href="#demos_beer">beer.tcl</a></li>
+
+<li><a class="doc" href="#demos_ftp">ftp-rfc.tcl</a></li>
+
+<li><a class="doc" href="#demos_remote">remotels.tcl</a></li>
+
+<li style="list-style: none">
+<ul>
+<li>tkremotels.tcl</li>
+
+<li>tkremotels.tpj</li>
+</ul>
+</li>
+
+<li><a class="doc" href="#demos_read">timed-read.tcl</a></li>
+
+<li><a class="doc" href="#demos_run">timed-run.tcl</a></li>
+
+<li><a class="doc" href="#demos_weather">weather.tcl</a></li>
+
+<li style="list-style: none">
+<ul>
+<li>weather.tpj</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2><a name="demos_intro">Introduction</a></h2>
+
+<p>Expect for Windows includes a number of demonstration
+applications to help you get started. These demos are installed in
+the <code>demos\Expect</code> directory beneath the Tcl
+installation directory (by default,
+<code>C:\Tcl\demos\Expect</code>).</p>
+
+<p>The <strong>Remote Ls</strong> demo and the <strong>Wrap Remote
+Ls</strong> (both described in the <a class="doc" href=
+"#demos_remote">remotels.tcl</a> section below) are also accessible
+from the <strong>ActiveState Expect for Windows</strong> program
+group on the Windows Start menu. These are the only demos with
+graphical (as opposed to console) interfaces; therefore, they are
+the only demos that can be run from the Start menu. The other demos
+must be run from the command line. The <strong>Wrap Remote
+Ls</strong> demo requires that the <strong>Tcl Dev Kit</strong> is
+installed, as it uses <strong>TclApp</strong> for wrapping.</p>
+
+<p>The instructions for running these demos assume that the
+<code>Tcl\bin</code> directory is in your system's PATH environment
+variable. If this is not the case, in the instructions for running
+the demos, substitute the full path to the <code>tclsh</code>
+interpreter.</p>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="demos_beer">beer.tcl</a></h2>
+
+<p>This demo is a simple application that "sings" (types) <em>99
+Bottles of Beer on the Wall</em> in the manner of a singing,
+beer-drinking typist, with predictable degradation as more bottles
+of beer are consumed.</p>
+
+<p>To run the demo, change to the Expect demos directory (by
+default, <code>C:\Tcl\demos\Expect</code>) and enter:</p>
+
+<pre>
+    
+    tclsh beer.tcl
+</pre>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="demos_ftp">ftp-rfc.tcl</a></h2>
+
+<p>This demo retrieves an RFC standard by number from the uunet ftp
+archive. Alternatively, the <code>-index</code> switch can be used
+to request an index of documents.</p>
+
+<p>To run the demo, change to the Expect demos directory (by
+default, <code>C:\Tcl\demos\Expect</code>) and enter:</p>
+
+<pre>
+    
+    tclsh ftp-rfc.tcl <em>rfc-number</em>
+</pre>
+
+<p>...or...</p>
+
+<pre>
+    
+    tclsh ftp-rfc.tcl -index
+</pre>
+
+<p>Note that individual RFCs and the index are downloaded in
+"compress" format (.Z), and must be uncompressed before
+reading.</p>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="demos_remote">remotels.tcl</a></h2>
+
+<p>This demo logs in to a remote host and lists the contents of the
+current directory. It is fully described in the <a class="doc"
+href="ex_tut.html">Expect for Windows Tutorial</a>.</p>
+
+<p>To run the demo, change to the Expect demos directory (by
+default, <code>C:\Tcl\demos\Expect</code>) and enter:</p>
+
+<pre>
+    
+    tclsh remotels.tcl
+</pre>
+
+<p>This will display a list of the switches that are used for
+specifying the host, user name, password, etc.</p>
+
+<h3>tkremotels.tcl</h3>
+
+<p>This demo is similar to the "remotels.tcl" demo, except it has a
+graphical Tk front-end. To run the demo, enter:</p>
+
+<pre>
+    wish tkremotels.tcl
+</pre>
+
+<p>Alternatively, from the Windows Start menu, select
+<strong>ActiveState Expect for Windows | Expect Demos | Remote
+Ls</strong>.</p>
+
+<h3>tkremotels.tpj</h3>
+
+<p>If you are using ActiveState's <a class="doc" target="_blank"
+href="http://www.activestate.com/tcl-dev-kit">Tcl Dev Kit</a>, the
+"tkremotels.tpj" project file can be opened using the TDK's <a
+target="_blank" href=
+"http://docs.activestate.com/tdk/5.2/TclApp.html">TclApp</a>.
+TclApp uses the project file to build a standalone executable that
+contains the tkremotels script.</p>
+
+<p>To open, load the "tkremotels.tpj" project file within TclApp,
+or, from the Windows Start menu, select <strong>ActiveState Expect
+for Windows | Expect Demos | Wrap Remote Ls</strong> (which will
+automatically launch TclApp).</p>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="demos_read">timed-read.tcl</a></h2>
+
+<p>This demo waits for input from STDIN, aborting if input is not
+received with the specified timeout value (which is, by default, 10
+seconds).</p>
+
+<p>To run the demo, change to the Expect demos directory (by
+default, <code>C:\Tcl\demos\Expect</code>) and enter:</p>
+
+<pre>
+    
+    tclsh timed-read.tcl
+</pre>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="demos_run">timed-run.tcl</a></h2>
+
+<p>This demo runs a specified external program for a specified
+amount of time. The program is aborted when the specified time is
+reached.</p>
+
+<p>To run the demo, change to the Expect demos directory (by
+default, <code>C:\Tcl\demos\Expect</code>) and enter:</p>
+
+<pre>
+    
+    tclsh timed-read.tcl <em>time(seconds)</em> <em>program</em> <em>program_args</em>
+</pre>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="demos_weather">weather.tcl</a></h2>
+
+<p>This demo retrieves US weather data from an open server. It
+accepts a three-character National Weather Service region code (or
+a two-character state code, which returns the associated region
+code) as input.</p>
+
+<p>To run the demo, change to the Expect demos directory (by
+default, <code>C:\Tcl\demos\Expect</code>) and enter:</p>
+
+<pre>
+    
+    tclsh weather.tcl <em>state</em> | <em>region</em>
+</pre>
+
+<p>The two-character <em>state</em> abbreviation (eg CA =
+California) returns a list of three-character abbreviations of
+National Weather Service regions for that state. The
+three-character <em>region</em> abbreviation returns the weather
+for that region.</p>
+
+<h3>weather.tpj</h3>
+
+<p>If you are using ActiveState's <a class="doc" target="_blank"
+href="http://www.activestate.com/tcl-dev-kit">Tcl Dev Kit</a>, the
+"weather.tpj" project file can be opened using the TDK's <a target=
+"_blank" href=
+"http://docs.activestate.com/tdk/5.2/TclApp.html">TclApp</a>.
+TclApp uses the project file to build a standalone executable that
+contains the tkremotels script.</p>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a>
+</body>
+</html>
+

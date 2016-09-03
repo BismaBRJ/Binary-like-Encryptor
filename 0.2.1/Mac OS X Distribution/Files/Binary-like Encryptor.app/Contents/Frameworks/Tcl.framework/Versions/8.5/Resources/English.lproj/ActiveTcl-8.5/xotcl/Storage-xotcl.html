@@ -1,0 +1,294 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>XOTcl - Documentation --
+xotcl/library/store/Storage.xotcl</title>
+<link rel="StyleSheet" href="xotcl-doc.css" type="text/css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1><img src="./logo-100.jpg" alt=
+"xotcl/library/store/Storage.xotcl" align="MIDDLE">
+xotcl/library/store/Storage.xotcl</h1>
+
+<hr>
+<h2>Package/File Information</h2>
+
+<b>No package provided/required</b> <br>
+ <br>
+ <b>Defined Objects/Classes:</b> 
+
+<ul>
+<li><a href="#Storage"><em>Storage</em>:</a> <a href=
+"#Storage-close">close</a>, <a href="#Storage-exists">exists</a>,
+<a href="#Storage-firstkey">firstkey</a>, <a href=
+"#Storage-names">names</a>, <a href="#Storage-nextkey">nextkey</a>,
+<a href="#Storage-open">open</a>, <a href="#Storage-set">set</a>,
+<a href="#Storage-someNewChildStore">someNewChildStore</a>, <a
+href="#Storage-unset">unset</a>.<br>
+</li>
+</ul>
+
+<br>
+ <b>Filename:</b> <a href=
+"xotcl/library/store/Storage.xotcl">xotcl/library/store/Storage.xotcl</a>
+<br>
+ <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Simple generic storage interface for
+hashtable-like (persistent) storages. There are several different
+existing stores, including a memory storage, a GDBM storage, a SDBM
+storage, and a TextFile storage.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Date:</em> </td>
+<td valign="top">$Date: 2005/09/09 21:09:01 $</td>
+</tr>
+</table>
+
+<br>
+ 
+
+<hr>
+<p><a name="Storage"></a></p>
+
+<h2>Class: <em>Storage</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Procs/Instprocs:</b> <a href="#Storage-close">close</a>, <a
+href="#Storage-exists">exists</a>, <a href=
+"#Storage-firstkey">firstkey</a>, <a href=
+"#Storage-names">names</a>, <a href="#Storage-nextkey">nextkey</a>,
+<a href="#Storage-open">open</a>, <a href="#Storage-set">set</a>,
+<a href="#Storage-someNewChildStore">someNewChildStore</a>, <a
+href="#Storage-unset">unset</a>. 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Abstract storage interface class (superclass of
+all storages).</td>
+</tr>
+</table>
+
+<h3>Instprocs</h3>
+
+<ul>
+<li><a name="Storage-open"></a> <b>open</b> <em>filename</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>filename</b>: database filename (or filename
+base, if more than one file has to be created)</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Each storage object represents exactly one
+database table. The db has to be opened, before it can it used. If
+it is not opened all other methods return errors.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">empty string</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Storage-close"></a> <b>close</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Close associated database.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">empty string</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Storage-exists"></a> <b>exists</b> <em>key</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>key</b>: Key to be searched for.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Search for a key whether it exists or not.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">1, if key exists in the database, otherwise 0</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Storage-set"></a> <b>set</b> <em>key</em>
+<em>?value?</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>key</b>: Key to be set.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"></td>
+<td valign="top"><b>?value?</b>: Optional value that might be
+set</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Set or query a database key in the same way as
+Tcl's set functions.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">Key value.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Storage-unset"></a> <b>unset</b> <em>key</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>key</b>: Key to be unset.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Unset a database key in the same way as Tcl's
+unset functions.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">empty string</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Storage-names"></a> <b>names</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Return a list of keys in the database (functions
+in the same way as Tcl's array names)</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">List of keys in the db.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Storage-firstkey"></a> <b>firstkey</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Start a traversal of the database, starting with
+any key.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">Name of first key.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Storage-nextkey"></a> <b>nextkey</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Proceed with the db traversal. Requires a firstkey
+before first usage, otherwise it returns an error.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">Name of next key, if one exists. Otherwise an
+empty string is returned.</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<h3>Procs</h3>
+
+<ul>
+<li><a name="Storage-someNewChildStore"></a>
+<b>someNewChildStore</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Create a childStore according to a preference list
+depending on which storages are available. Currently the preference
+list has the following order: Gdbm, Sdbm and TextFile.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">name of the created storage object.</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<br>
+<br>
+ <br>
+ <br>
+<br>
+ 
+
+<hr>
+<a href="./index.html">Back to index page.</a> <br>
+ 
+
+<hr>
+</body>
+</html>
+

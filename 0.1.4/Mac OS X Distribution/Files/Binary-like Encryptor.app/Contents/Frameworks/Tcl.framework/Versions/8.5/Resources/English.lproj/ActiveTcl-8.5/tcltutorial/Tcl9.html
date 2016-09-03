@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Looping 101 - While loop</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Looping 101 - While loop</h1>
+
+<div class="nav"><a href="Tcl8.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl10.html">Next
+lesson</a></div>
+
+<p>Tcl includes two commands for looping, the <code class=
+"keyword">while</code> and <code class="keyword">for</code>
+commands. Like the <code class="keyword">if</code> statement, they
+evaluate their test the same way that the <code class=
+"keyword">expr</code> does. In this lesson we discuss the <code
+class="keyword">while</code> command, and in the next lesson, the
+<code class="keyword">for</code> command. In most circumstances
+where one of these commands can be used, the other can be used as
+well.</p>
+
+<ul>
+<li><code class="keyword">while</code> <code class=
+"arg">test</code> <code class="arg">body</code></li>
+</ul>
+
+<p>The <code class="keyword">while</code> command evaluates <code
+class="arg">test</code> as an expression. If <code class=
+"arg">test</code> is true, the code in <code class=
+"arg">body</code> is executed. After the code in <code class=
+"arg">body</code> has been executed, <code class=
+"arg">test</code>is evaluated again.</p>
+
+<p>A <code class="keyword">continue</code> statement within <code
+class="arg">body</code> will stop the execution of the code and the
+test will be re-evaluated. A <code class="keyword">break</code>
+within <code class="arg">body</code> will break out of the while
+loop, and execution will continue with the next line of code after
+<code class="arg">body</code></p>
+
+<p>In Tcl <strong>everything</strong> is a command, and everything
+goes through the same substitution phase. For this reason, the
+<code class="arg">test</code> must be placed within braces. If
+<code class="arg">test</code> is placed within quotes, the
+substitution phase will replace any variables with their current
+value, and will pass that test to the <code class=
+"keyword">while</code> command to evaluate, and since the test has
+only numbers, it will always evaluate the same, quite probably
+leading to an endless loop!</p>
+
+<p>Look at the two loops in the example. If it weren't for the
+break command in the second loop, it would loop forever.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set x 1
+
+# This is a normal way to write a Tcl while loop.
+
+while {$x &lt; 5} {
+    puts "x is $x"
+    set x [expr {$x + 1}]
+}
+
+puts "exited first loop with X equal to $x\n"
+
+# The next example shows the difference between ".." and {...}
+# How many times does the following loop run?  Why does it not
+# print on each pass?
+
+set x 0
+while "$x &lt; 5" {
+    set x [expr {$x + 1}]
+    if {$x &gt; 7} break
+    if "$x &gt; 3" continue
+    puts "x is $x"
+}
+
+puts "exited second loop with X equal to $x"
+</pre>
+
+<div class="nav"><a href="Tcl8.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl10.html">Next
+lesson</a></div>
+</body>
+</html>
+

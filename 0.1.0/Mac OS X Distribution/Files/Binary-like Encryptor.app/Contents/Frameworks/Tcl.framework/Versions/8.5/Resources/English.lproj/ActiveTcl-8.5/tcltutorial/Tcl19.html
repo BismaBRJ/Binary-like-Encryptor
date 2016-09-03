@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Modifying Strings - tolower, toupper, trim, format</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Modifying Strings - tolower, toupper, trim,
+format</h1>
+
+<div class="nav"><a href="Tcl18.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl20.html">Next
+lesson</a></div>
+
+<p>These are the commands which modify a string. Note that none of
+these modify the string in place. In all cases a new string is
+returned.</p>
+
+<dl>
+<dt><code class="keyword">string</code> <code class=
+"keyword">tolower</code> <code class="arg">string</code></dt>
+
+<dd>Returns <code class="arg">string</code> with all the letters
+converted from upper to lower case.</dd>
+
+<dt><code class="keyword">string</code> <code class=
+"keyword">toupper</code> <code class="arg">string</code></dt>
+
+<dd>Returns <code class="arg">string</code> with all the letters
+converted from lower to upper case.</dd>
+
+<dt><code class="keyword">string</code> <code class=
+"keyword">trim</code> <code class="arg">string</code> <code class=
+"arg">?trimChars?</code></dt>
+
+<dd>Returns <code class="arg">string</code> with all occurrences of
+<code class="arg">trimChars</code> removed from both ends. By
+default <code class="arg">trimChars</code> are whitespace (spaces,
+tabs, newlines). Note that the characters are not treated as a
+"block" of characters - in other words, <code>string trim "davidw"
+dw</code> would return the string <code>avi</code> and not
+<code>davi</code>.</dd>
+
+<dt><code class="keyword">string</code> <code class=
+"keyword">trimleft</code> <code class="arg">string</code> <code
+class="arg">?trimChars?</code></dt>
+
+<dd>Returns <code class="arg">string</code> with all occurrences of
+<code class="arg">trimChars</code> removed from the left. By
+default <code class="arg">trimChars</code> are whitespace (spaces,
+tabs, newlines)</dd>
+
+<dt><code class="keyword">string</code> <code class=
+"keyword">trimright</code> <code class="arg">string</code> <code
+class="arg">?trimChars?</code></dt>
+
+<dd>Returns <code class="arg">string</code> with all occurrences of
+<code class="arg">trimChars</code> removed from the right. By
+default <code class="arg">trimChars</code> are whitespace (spaces,
+tabs, newlines)</dd>
+
+<dt><code class="keyword">format</code> <code class=
+"arg">formatString</code> <code class="arg">?arg1 arg2 ...
+argN?</code></dt>
+
+<dd>Returns a string formatted in the same manner as the ANSI <code
+class="keyword">sprintf</code> procedure. <code class=
+"arg">FormatString</code> is a description of the formatting to
+use. The full definition of this protocol is in the <code class=
+"keyword">format</code> man page. A useful subset of the definition
+is that <code class="arg">formatString</code> consists of literal
+words, backslash sequences, and <code class="keyword">%
+fields</code>. The <code class="keyword">% fields</code> are
+strings which start with a <code class="keyword">%</code> and end
+with one of: 
+
+<ul>
+<li><code class="keyword">s</code>... Data is a string</li>
+
+<li><code class="keyword">d</code>... Data is a decimal
+integer</li>
+
+<li><code class="keyword">x</code>... Data is a hexadecimal
+integer</li>
+
+<li><code class="keyword">o</code>... Data is an octal integer</li>
+
+<li><code class="keyword">f</code>... Data is a floating point
+number</li>
+</ul>
+
+The <code class="keyword">%</code> may be followed by: 
+
+<ul>
+<li><code class="keyword">-</code>... Left justify the data in this
+field</li>
+
+<li><code class="keyword">+</code>... Right justify the data in
+this field</li>
+</ul>
+
+The justification value may be followed by a number giving the
+minimum number of spaces to use for the data.</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set upper "THIS IS A STRING IN UPPER CASE LETTERS"
+set lower "this is a string in lower case letters"
+set trailer "This string has trailing dots ...."
+set leader "....This string has leading dots"
+set both  "((this string is nested in parens )))"
+
+puts "tolower converts this: $upper"
+puts "              to this: [string tolower $upper]\n"
+puts "toupper converts this: $lower"
+puts "              to this: [string toupper $lower]\n"
+puts "trimright converts this: $trailer"
+puts "                to this: [string trimright $trailer .]\n"
+puts "trimleft converts this: $leader"
+puts "               to this: [string trimleft $leader .]\n"
+puts "trim converts this: $both"
+puts "           to this: [string trim $both "()"]\n"
+
+set labels [format "%-20s %+10s " "Item" "Cost"]
+set price1 [format "%-20s %10d Cents Each" "Tomatoes" "30"]
+set price2 [format "%-20s %10d Cents Each" "Peppers" "20"]
+set price3 [format "%-20s %10d Cents Each" "Onions" "10"]
+set price4 [format "%-20s %10.2f per Lb." "Steak" "3.59997"]
+
+puts "\n Example of format:\n"
+puts "$labels"
+puts "$price1"
+puts "$price2"
+puts "$price3"
+puts "$price4"
+</pre>
+
+<div class="nav"><a href="Tcl18.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl20.html">Next
+lesson</a></div>
+</body>
+</html>
+

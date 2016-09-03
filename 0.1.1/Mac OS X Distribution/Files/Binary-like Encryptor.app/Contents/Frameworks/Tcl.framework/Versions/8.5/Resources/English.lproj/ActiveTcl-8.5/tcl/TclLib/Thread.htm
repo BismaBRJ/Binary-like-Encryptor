@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Threads manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> Thread</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="Thread.htm#M2" name="L742">NAME</a> 
+
+<dl>
+<dd>Tcl_ConditionNotify, Tcl_ConditionWait, Tcl_ConditionFinalize,
+Tcl_GetThreadData, Tcl_MutexLock, Tcl_MutexUnlock,
+Tcl_MutexFinalize, Tcl_CreateThread, Tcl_JoinThread - Tcl thread
+support</dd>
+</dl>
+</dd>
+
+<dd><a href="Thread.htm#M3" name="L743">SYNOPSIS</a></dd>
+
+<dd><a href="Thread.htm#M4" name="L744">ARGUMENTS</a></dd>
+
+<dd><a href="Thread.htm#M5" name="L745">INTRODUCTION</a></dd>
+
+<dd><a href="Thread.htm#M6" name="L746">DESCRIPTION</a></dd>
+
+<dd><a href="Thread.htm#M7" name="L747">SYNCHRONIZATION AND
+COMMUNICATION</a></dd>
+
+<dd><a href="Thread.htm#M8" name="L748">INITIALIZATION</a></dd>
+
+<dd><a href="Thread.htm#M9" name="L749">SCRIPT-LEVEL ACCESS TO
+THREADS</a></dd>
+
+<dd><a href="Thread.htm#M10" name="L750">SEE ALSO</a></dd>
+
+<dd><a href="Thread.htm#M11" name="L751">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_ConditionNotify, Tcl_ConditionWait, Tcl_ConditionFinalize,
+Tcl_GetThreadData, Tcl_MutexLock, Tcl_MutexUnlock,
+Tcl_MutexFinalize, Tcl_CreateThread, Tcl_JoinThread - Tcl thread
+support 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+void<br>
+<b>Tcl_ConditionNotify</b>(<i>condPtr</i>)<br>
+void<br>
+<b>Tcl_ConditionWait</b>(<i>condPtr, mutexPtr, timePtr</i>)<br>
+void<br>
+<b>Tcl_ConditionFinalize</b>(<i>condPtr</i>)<br>
+Void *<br>
+<b>Tcl_GetThreadData</b>(<i>keyPtr, size</i>)<br>
+void<br>
+<b>Tcl_MutexLock</b>(<i>mutexPtr</i>)<br>
+void<br>
+<b>Tcl_MutexUnlock</b>(<i>mutexPtr</i>)<br>
+void<br>
+<b>Tcl_MutexFinalize</b>(<i>mutexPtr</i>)<br>
+int<br>
+<b>Tcl_CreateThread</b>(<i>idPtr, threadProc, clientData,
+stackSize, flags</i>)<br>
+int<br>
+<b>Tcl_JoinThread</b>(<i>id, result</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tcl_Condition <b>*condPtr</b> (in)</dt>
+
+<dd>A condition variable, which must be associated with a mutex
+lock.</dd>
+
+<dt>Tcl_Mutex <b>*mutexPtr</b> (in)</dt>
+
+<dd>A mutex lock.</dd>
+
+<dt>Tcl_Time <b>*timePtr</b> (in)</dt>
+
+<dd>A time limit on the condition wait. NULL to wait forever. Note
+that a polling value of 0 seconds does not make much sense.</dd>
+
+<dt>Tcl_ThreadDataKey <b>*keyPtr</b> (in)</dt>
+
+<dd>This identifies a block of thread local storage. The key should
+be static and process-wide, yet each thread will end up associating
+a different block of storage with this key.</dd>
+
+<dt>int <b>*size</b> (in)</dt>
+
+<dd>The size of the thread local storage block. This amount of data
+is allocated and initialized to zero the first time each thread
+calls <b>Tcl_GetThreadData</b>.</dd>
+
+<dt>Tcl_ThreadId <b>*idPtr</b> (out)</dt>
+
+<dd>The referred storage will contain the id of the newly created
+thread as returned by the operating system.</dd>
+
+<dt>Tcl_ThreadId <b>id</b> (in)</dt>
+
+<dd>Id of the thread waited upon.</dd>
+
+<dt>Tcl_ThreadCreateProc <b>threadProc</b> (in)</dt>
+
+<dd>This procedure will act as the <b>main()</b> of the newly
+created thread. The specified <i>clientData</i> will be its sole
+argument.</dd>
+
+<dt>ClientData <b>clientData</b> (in)</dt>
+
+<dd>Arbitrary information. Passed as sole argument to the
+<i>threadProc</i>.</dd>
+
+<dt>int <b>stackSize</b> (in)</dt>
+
+<dd>The size of the stack given to the new thread.</dd>
+
+<dt>int <b>flags</b> (in)</dt>
+
+<dd>Bitmask containing flags allowing the caller to modify
+behaviour of the new thread.</dd>
+
+<dt>int <b>*result</b> (out)</dt>
+
+<dd>The referred storage is used to place the exit code of the
+thread waited upon into it.</dd>
+</dl>
+
+<h3><a name="M5">INTRODUCTION</a></h3>
+
+Beginning with the 8.1 release, the Tcl core is thread safe, which
+allows you to incorporate Tcl into multithreaded applications
+without customizing the Tcl core. To enable Tcl multithreading
+support, you must include the <b>--enable-threads</b> option to
+<b>configure</b> when you configure and compile your Tcl core. 
+
+<p>An important constraint of the Tcl threads implementation is
+that <i>only the thread that created a Tcl interpreter can use that
+interpreter</i>. In other words, multiple threads can not access
+the same Tcl interpreter. (However, a single thread can safely
+create and use multiple interpreters.)</p>
+
+<h3><a name="M6">DESCRIPTION</a></h3>
+
+Tcl provides <b>Tcl_CreateThread</b> for creating threads. The
+caller can determine the size of the stack given to the new thread
+and modify the behaviour through the supplied <i>flags</i>. The
+value <b>TCL_THREAD_STACK_DEFAULT</b> for the <i>stackSize</i>
+indicates that the default size as specified by the operating
+system is to be used for the new thread. As for the flags,
+currently only the values <b>TCL_THREAD_NOFLAGS</b> and
+<b>TCL_THREAD_JOINABLE</b> are defined. The first of them invokes
+the default behaviour with no specialties. Using the second value
+marks the new thread as <i>joinable</i>. This means that another
+thread can wait for the such marked thread to exit and join it. 
+
+<p>Restrictions: On some UNIX systems the pthread-library does not
+contain the functionality to specify the stack size of a thread.
+The specified value for the stack size is ignored on these systems.
+Windows currently does not support joinable threads. This flag
+value is therefore ignored on this platform.</p>
+
+<p>Tcl provides the <b><a href=
+"../TclLib/Exit.htm">Tcl_ExitThread</a></b> and <b><a href=
+"../TclLib/Exit.htm">Tcl_FinalizeThread</a></b> functions for
+terminating threads and invoking optional per-thread exit handlers.
+See the <b><a href="../TclLib/Exit.htm">Tcl_Exit</a></b> page for
+more information on these procedures.</p>
+
+<p>The <b>Tcl_JoinThread</b> function is provided to allow threads
+to wait upon the exit of another thread, which must have been
+marked as joinable through usage of the
+<b>TCL_THREAD_JOINABLE</b>-flag during its creation via
+<b>Tcl_CreateThread</b>.</p>
+
+<p>Trying to wait for the exit of a non-joinable thread or a thread
+which is already waited upon will result in an error. Waiting for a
+joinable thread which already exited is possible, the system will
+retain the necessary information until after the call to
+<b>Tcl_JoinThread</b>. This means that not calling
+<b>Tcl_JoinThread</b> for a joinable thread will cause a memory
+leak.</p>
+
+<p>The <b>Tcl_GetThreadData</b> call returns a pointer to a block
+of thread-private data. Its argument is a key that is shared by all
+threads and a size for the block of storage. The storage is
+automatically allocated and initialized to all zeros the first time
+each thread asks for it. The storage is automatically deallocated
+by <b><a href="../TclLib/Exit.htm">Tcl_FinalizeThread</a></b>.</p>
+
+<h4><a name="M7">SYNCHRONIZATION AND COMMUNICATION</a></h4>
+
+Tcl provides <b><a href=
+"../TclLib/Notifier.htm">Tcl_ThreadQueueEvent</a></b> and <b><a
+href="../TclLib/Notifier.htm">Tcl_ThreadAlert</a></b> for handling
+event queuing in multithreaded applications. See the
+<b>Notifier</b> manual page for more information on these
+procedures. 
+
+<p>A mutex is a lock that is used to serialize all threads through
+a piece of code by calling <b>Tcl_MutexLock</b> and
+<b>Tcl_MutexUnlock</b>. If one thread holds a mutex, any other
+thread calling <b>Tcl_MutexLock</b> will block until
+<b>Tcl_MutexUnlock</b> is called. A mutex can be destroyed after
+its use by calling <b>Tcl_MutexFinalize</b>. The result of locking
+a mutex twice from the same thread is undefined. On some platforms
+it will result in a deadlock. The <b>Tcl_MutexLock</b>,
+<b>Tcl_MutexUnlock</b> and <b>Tcl_MutexFinalize</b> procedures are
+defined as empty macros if not compiling with threads enabled. For
+declaration of mutexes the <b>TCL_DECLARE_MUTEX</b> macro should be
+used. This macro assures correct mutex handling even when the core
+is compiled without threads enabled.</p>
+
+<p>A condition variable is used as a signaling mechanism: a thread
+can lock a mutex and then wait on a condition variable with
+<b>Tcl_ConditionWait</b>. This atomically releases the mutex lock
+and blocks the waiting thread until another thread calls
+<b>Tcl_ConditionNotify</b>. The caller of
+<b>Tcl_ConditionNotify</b> should have the associated mutex held by
+previously calling <b>Tcl_MutexLock</b>, but this is not enforced.
+Notifying the condition variable unblocks all threads waiting on
+the condition variable, but they do not proceed until the mutex is
+released with <b>Tcl_MutexUnlock</b>. The implementation of
+<b>Tcl_ConditionWait</b> automatically locks the mutex before
+returning.</p>
+
+<p>The caller of <b>Tcl_ConditionWait</b> should be prepared for
+spurious notifications by calling <b>Tcl_ConditionWait</b> within a
+while loop that tests some invariant.</p>
+
+<p>A condition variable can be destroyed after its use by calling
+<b>Tcl_ConditionFinalize</b>.</p>
+
+<p>The <b>Tcl_ConditionNotify</b>, <b>Tcl_ConditionWait</b> and
+<b>Tcl_ConditionFinalize</b> procedures are defined as empty macros
+if not compiling with threads enabled.</p>
+
+<h4><a name="M8">INITIALIZATION</a></h4>
+
+All of these synchronization objects are self-initializing. They
+are implemented as opaque pointers that should be NULL upon first
+use. The mutexes and condition variables are either cleaned up by
+process exit handlers (if living that long) or explicitly by calls
+to <b>Tcl_MutexFinalize</b> or <b>Tcl_ConditionFinalize</b>. Thread
+local storage is reclaimed during <b><a href=
+"../TclLib/Exit.htm">Tcl_FinalizeThread</a></b>. 
+
+<h3><a name="M9">SCRIPT-LEVEL ACCESS TO THREADS</a></h3>
+
+Tcl provides no built-in commands for scripts to use to create,
+manage, or join threads, nor any script-level access to mutex or
+condition variables. It provides such facilities only via C
+interfaces, and leaves it up to packages to expose these matters to
+the script level. One such package is the <b>Thread</b> package. 
+
+<h3><a name="M10">SEE ALSO</a></h3>
+
+<b><a href="../TclLib/Notifier.htm">Tcl_GetCurrentThread</a></b>,
+<b><a href="../TclLib/Notifier.htm">Tcl_ThreadQueueEvent</a></b>,
+<b><a href="../TclLib/Notifier.htm">Tcl_ThreadAlert</a></b>, <b><a
+href="../TclLib/Exit.htm">Tcl_ExitThread</a></b>, <b><a href=
+"../TclLib/Exit.htm">Tcl_FinalizeThread</a></b>, <b><a href=
+"../TclLib/Exit.htm">Tcl_CreateThreadExitHandler</a></b>, <b><a
+href="../TclLib/Exit.htm">Tcl_DeleteThreadExitHandler</a></b>,
+<b>Thread</b> 
+
+<h3><a name="M11">KEYWORDS</a></h3>
+
+<a href="../Keywords/T.htm#thread">thread</a>, <a href=
+"../Keywords/M.htm#mutex">mutex</a>, <a href=
+"../Keywords/C.htm#condition variable">condition variable</a>, <a
+href="../Keywords/T.htm#thread local storage">thread local
+storage</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1999 Scriptics Corporation Copyright &copy; 1998
+Sun Microsystems, Inc.</div>
+</body>
+</html>
+

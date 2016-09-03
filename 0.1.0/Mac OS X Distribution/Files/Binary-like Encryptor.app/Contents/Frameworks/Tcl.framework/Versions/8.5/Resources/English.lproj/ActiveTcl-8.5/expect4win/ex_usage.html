@@ -1,0 +1,833 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>Using ActiveState Expect For Windows</title>
+<link rel="stylesheet" type="text/css" href="aspn.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body marginheight="5" topmargin="5" marginwidth="10" leftmargin=
+"10">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/Products/Expect/"><img src=
+"images/expect_logo.gif" border="0" align="left" alt="Expect"></a>
+</td>
+<td align="center" class="heading">Expect for
+Windows<sup><small>&reg;</small></sup> User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="images/AS_logo.gif" border=
+"0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<a name="top"></a> 
+
+<h1>Using ActiveState Expect for Windows</h1>
+
+<ul>
+<li><a href="#overview">Expect for Windows Overview</a></li>
+
+<li style="list-style: none">
+<ul>
+<li><a href="#about_doc">About this Document</a></li>
+</ul>
+</li>
+
+<li><a href="#code_tcl">Writing Expect Scripts</a></li>
+
+<li style="list-style: none">
+<ul>
+<li><a href="#tcl_usage">Using Expect with Tcl</a></li>
+
+<li><a href="#ftp">Use Case 1: FTP</a></li>
+
+<li><a href="#passwords">Use Case 2: Updating Passwords</a></li>
+
+<li><a href="#login">Use Case 3: Remote Directory Lister
+Tutorial</a></li>
+</ul>
+</li>
+
+<li><a href="#cross_platform">Porting Expect Scripts to
+Windows</a></li>
+
+<li style="list-style: none">
+<ul>
+<li><a href="#e4w_commands">Expect for Windows Commands</a></li>
+
+<li><a href="#e4w_modified">Modified Commands and
+Behaviors</a></li>
+
+<li><a href="#e4w_unimplemented">Unimplemented Commands and
+Behaviors</a></li>
+
+<li><a href="#caveats">Caveats</a></li>
+
+<li><a href="#tips">Tips for Writing Cross-Platform Expect
+Scripts</a></li>
+</ul>
+</li>
+
+<li><a href="#wrapping_expect_tclapp">Wrapping Expect using
+TclApp</a></li>
+</ul>
+
+<!--Start of Using Expect for Windows -->
+<a class="topText" href="#top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="overview">Expect for Windows Overview</a></h2>
+
+<p>ActiveState Expect for Windows provides the ability to automate
+interactive programs from within the Windows environment. For
+example, use Expect for Windows to telnet to a Unix client and run
+commands on the remote system. By driving the telnet session with
+Expect for Windows, you have the ability to fully automate the
+process.</p>
+
+<p>ActiveState Expect for Windows includes the following
+features:</p>
+
+<ul>
+<li>Automation of interactive programs from the Windows
+platform.</li>
+
+<li>Compatibility with the latest Tcl core (Tcl 8.4+).</li>
+
+<li>Stubs-enabled and deployable using <a target="_blank" href=
+"http://aspn.activestate.com/ASPN/docs/Tcl_Dev_Kit/TclApp.html">TclApp</a>,
+a component in the ActiveState Tcl Dev Kit.</li>
+</ul>
+
+<h3><a name="about_doc">About this Document</a></h3>
+
+<p>This document discusses how to use Expect for Windows to
+automate various programs. This document is divided into three
+parts:</p>
+
+<ul>
+<li>The first part describes three Expect for Windows use
+cases.</li>
+
+<li>The second part addresses how the Expect for Windows port
+differs from Expect, including command and behavior modifications.
+Tips for writing cross-platform scripts are also outlined.</li>
+
+<li>The third part describes the process of wrapping Expect for
+Windows scripts in TclApp, a component of the Tcl Dev Kit.</li>
+</ul>
+
+<p>This document should be used together with the <a href=
+"expect.html">Expect for Windows Reference</a>, which lists all
+available Expect commands and options.</p>
+
+<a class="topText" href="#top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="code_tcl">Writing Expect Scripts</a></h2>
+
+<p>This section discusses how to write Tcl scripts to use Expect
+for Windows. The first part addresses <a href="#tcl_usage">using
+Expect with Tcl</a>. Next, three use cases are provided to
+demonstrate how Expect for Windows can be used to automate the
+interaction between various remote Unix programs. Each use case
+includes code snippets to demonstrate the communication between
+Expect for Windows and the interacting Unix program. It should be
+noted that this sample code is incomplete and does not provide the
+adequate error checking recommended for successful automation.</p>
+
+<h3><a name="tcl_usage">Using Expect with Tcl</a></h3>
+
+<p>Expect for Windows is implemented as a Tcl package (as opposed
+to a stand-alone executable). Expect for Windows must be declared
+in a Tcl script with the <code>package require Expect</code>
+statement. For example:</p>
+
+<pre>
+    #!/bin/sh
+    # \
+    exec tclsh "$0" ${1+"$@"}
+    package require Expect
+</pre>
+
+<p>Failure to declare the <code>package require Expect</code>
+statement results in an error message when running the script on
+the Windows platform.</p>
+
+<h3><a name="ftp">Use Case 1: FTP</a></h3>
+
+<p><strong>Scenario:</strong><br>
+Use Expect for Windows to automatically upload a completed software
+build from a Windows machine to a Unix FTP server.</p>
+
+<strong>Code Snippet:</strong><br>
+ <!--OK, many thanks for not choking on my Tcl attempts.
+(kerry, not totally TCLing ... yet)-->
+<!--
+#!/bin/sh
+# \
+exec tclsh "$0"  ${1+"$@"}
+
+##
+## build_ftp.tcl
+## Uploads a finished build to a Unix FTP fileserver.
+##
+
+# This is required to declare that we will use Expect
+package require Expect
+
+# Turn off echo logging to the user by default
+#exp_log_user 1
+
+# This special variable used by the ActiveState Expect for Windows
+# port will enable actual viewing of the controlled console.
+# Otherwise it remains hidden (default).
+#set exp::winnt_debug 1
+
+
+# This is the magic timeout variable used by Expect (time in seconds).
+set timeout 10
+
+# We want to operate very simply - force a dumb terminal mode
+#set env(TERM) dumb
+set env(TERM) vt100
+
+## User login, password, and hostname essentials.
+set username "MyUsername"
+set password "MyPassword"
+set hostname "MyHostname"
+set port 21
+
+## This is where the file to upload is located.
+#set build_directory "C:\\builds\\latest"
+set build_directory "/home/kerryk/tcl"
+
+## This is the name of the file to upload
+set build_file "install.msi"
+
+## This is the directory on the ftp server where the file gets uploaded
+to.
+#set target_directory "/pub/drops/latest"
+set target_directory "/home/kerryk"
+-->
+<pre>
+      <span class=
+"doccodecomment"># 1. Set the ftp prompt using a regular expression.</span>
+      set ftp_prompt "ftp&gt;?"
+
+      <span class="doccodecomment"># 2. Print to console.</span>
+      puts stdout "Connecting to $hostname to upload the latest build."
+
+      <span class=
+"doccodecomment"># 3. Connect to the FTP server using the "spawn" command.</span>
+      spawn ftp $hostname
+
+      <span class=
+"doccodecomment"># 4. Wait for a login prompt.</span>
+      expect -re "(Name|login|Login|Username).*:.*" {
+
+          <span class=
+"doccodecomment"># 5. Login prompt received. Send user name to Unix server.</span>
+          exp_send "$username\r"
+          exp_send_user "sent username\n"
+      } eof {
+
+          <span class=
+"doccodecomment"># 6. No login prompt received. Display an error.</span>
+          exp_send_user "could not connect\n"
+      }
+
+      <span class=
+"doccodecomment"># 7. Wait for a password prompt from the Unix server.</span>
+      expect "Password:" {
+          <span class=
+"doccodecomment"># 8. Password prompt received. Send the password.</span>
+          exp_send "$password\r"
+      }
+
+      <span class=
+"doccodecomment"># 9. Wait for an FTP prompt. Enter FTP commands.</span>
+      expect -re $ftp_prompt {
+          <span class=
+"doccodecomment"># 10. Change to the upload directory on the Unix server.</span>
+          exp_send "cd $target_directory\r"
+      }
+
+      expect -re $ftp_prompt {
+          <span class=
+"doccodecomment"># 11. Change to the local directory you want to</span>
+          <span class=
+"doccodecomment"># upload from (Windows machine).</span>
+          exp_send "lcd $build_directory\r"
+      }
+
+      expect -re $ftp_prompt {
+          <span class=
+"doccodecomment"># 12. Upload the file to the Unix server.</span>
+          exp_send "put $build_file\r"
+      }
+
+      expect -re $ftp_prompt {
+          <span class=
+"doccodecomment"># 13. Close the FTP connection to the Unix server.</span>
+          exp_send "exit\r"
+      }
+</pre>
+
+<strong>Description:</strong><br>
+<ol>
+<li>Use a <a target="_blank" href="regex.html">regular
+expression</a> to match an FTP prompt.</li>
+
+<li>Print this message to the console: "Connecting to [hostname] to
+upload the latest build".</li>
+
+<li>An FTP session to a Unix server is opened from a Windows
+machine.</li>
+
+<li>Expect waits for a login prompt.</li>
+
+<li>The login prompt is received. The username is sent to the Unix
+server.</li>
+
+<li>If a login prompt is not received, display an error in the
+Windows console.</li>
+
+<li>Expect waits for a password prompt from the Unix server.</li>
+
+<li>The password prompt is received. The password is sent to the
+Unix server.</li>
+
+<li>Expect waits for an FTP prompt. Enter FTP commands.</li>
+
+<li>Expect changes to the upload directory on the Unix server.</li>
+
+<li>Expect changes to the local directory to where the source file
+is located.</li>
+
+<li>The file is uploaded to the Unix server.</li>
+
+<li>Expect closes the FTP connection to the Unix server.</li>
+</ol>
+
+<h3><a name="passwords">Use Case 2: Updating Passwords</a></h3>
+
+<p><strong>Scenario:</strong><br>
+Use Expect for Windows to update a user's password on a Unix server
+via a Windows machine.</p>
+
+<strong>Code Snippet:</strong><br>
+ <!--OK, many thanks for not choking on my Tcl attempts. (kerry)-->
+<!--
+##
+## Username and passwords should be parsed from the commandline...
+##
+
+# Unix server to change the password on
+set authserver AuthServerName
+
+# username and the passwords
+set user UserName
+set oldpass OldPassword
+set newpass NewPassword
+-->
+<pre>
+      <span class=
+"doccodecomment"># 1. Open a telnet session to the Unix server.</span>
+      spawn telnet $authserver
+
+      <span class=
+"doccodecomment"># 2. Wait for a login prompt.</span>
+      expect -re ".*login: " {
+        <span class=
+"doccodecomment"># 3. Send user login name.</span>
+        exp_send "$user\r"
+      }
+
+      expect "Password: " {
+        <span class=
+"doccodecomment"># 4. Send the user's old password.</span>
+          exp_send "$oldpass\r"
+      }
+
+      expect -re ".*$ " {
+          <span class=
+"doccodecomment"># 5. Run the passwd command on the Unix server.</span>
+          exp_send "passwd\r"
+      }
+
+      expect -re ".*password: " {
+          <span class=
+"doccodecomment"># 6. Send the user's old password.</span>
+          exp_send "$oldpass\r"
+      }
+
+      expect "New password: " {
+          <span class=
+"doccodecomment"># 7. Send the user's new password.</span>
+          exp_send "$newpass\r"
+      }
+
+      expect "Retype new password: " {
+          <span class=
+"doccodecomment"># 8. Send the user's new password again.</span>
+          exp_send "$newpass\r"
+      }
+
+      <span class="doccodecomment"># 9. Close the session.</span>
+      exp_send "exit\r"
+
+      <span class=
+"doccodecomment"># 10. The Windows console displays a confirmation message.</span>
+      exp_send_user "Password for $user changed."
+</pre>
+
+<strong>Description:</strong><br>
+<ol>
+<li>A telnet session to a Unix server is opened from a Windows
+machine.</li>
+
+<li>Expect waits for a login prompt.</li>
+
+<li>The user's login name is sent to the Unix server.</li>
+
+<li>The user's old password is sent.</li>
+
+<li>Expect runs the <code>passwd</code> command on the Unix
+server.</li>
+
+<li>The user's old password is sent.</li>
+
+<li>The user's new password is sent.</li>
+
+<li>The user's new password is sent again for confirmation.</li>
+
+<li>The telnet session is closed.</li>
+
+<li>Expect displays a confirmation message in the Windows
+console.</li>
+</ol>
+
+<h3><a name="login">Use Case 3: Remote Directory Lister
+Tutorial</a></h3>
+
+<p><strong>Scenario:</strong><br>
+Use Expect for Windows to automatically login to a remote Unix
+server from a Windows machine. Use the "ls" program to remotely
+list the contents of a directory. The Remote Directory Lister
+Tutorial demonstrates how to write a complete Tcl script using
+Expect for Windows. See the <a href="ex_tut.html">Remote Directory
+Lister Tutorial</a> for more information.</p>
+
+<a class="topText" href="#top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="cross_platform">Porting Expect Scripts to
+Windows</a></h2>
+
+<p>The ActiveState Expect for Windows implementation differs from
+the original Expect written by Don Libes (at the National Institute
+of Standards and Technology (NIST)). These differences are due to
+Expect initially being written for the Unix platform. This section
+addresses the various command and behavior modifications in the
+Windows port. The last part lists the <a href=
+"#caveats">caveats</a> you should consider when writing Expect
+scripts.</p>
+
+<h3><a name="e4w_commands">Expect for Windows Commands</a></h3>
+
+<p>To review all available commands and options, see the <a href=
+"expect.html">Expect for Windows Reference</a> for more
+information.</p>
+
+<h3><a name="e4w_modified">Modified Commands and Behaviors</a></h3>
+
+<p>The following Expect commands and behaviors are modified for
+Windows usage:</p>
+
+<p>Modified Commands:</p>
+
+<ul>
+<li><strong>exp_close</strong>: The <code>-slave</code> option is
+not supported.</li>
+
+<li><strong>exp_send_*</strong>: The <code>-break</code> flag is
+not supported. Does not implement a parser for VT100 codes for
+special keypress codes such as "arrow up", F1, Home, etc.</li>
+
+<li><strong>exp_spawn</strong>: The <code>-ignore</code> and
+<code>-trap</code> options are not supported.</li>
+
+<li><strong>exp_spawn</strong>: Supports two new options:<br>
+ 
+
+<ul>
+<li><code>-environment</code>: Takes a list of name/value pairs in
+the form that <code>array get</code> would return.</li>
+
+<li><code>-directory</code>: Sets the starting directory.</li>
+</ul>
+</li>
+
+<li><strong>exp_stty</strong>: Redirection is not supported. Row
+and column options are not supported.</li>
+</ul>
+
+<p>Modified Behaviors:</p>
+
+<ul>
+<li>TTY channels are not created when not already provided to the
+application. This is not applicable on Unix. (For example, if
+<code>CreateFile("CONOUT$")</code> fails when asking for an
+existing TTY channel, there is no recourse in the generic layer to
+create one.) Only a single console window is allowed per process on
+Windows. This affects <code>exp_send_tty</code> and
+<code>expect_tty</code>, and is a prerequisite for enabling
+<code>exp_interact</code>.</li>
+
+<li>Signal manipulation beyond the seven signals abstracted via
+ANSI's <code>signal.h</code> is not supported, nor are
+windows-specific ones such as <code>CTRL_SHUTDOWN_EVENT</code>.
+Also, <code>exp_wait</code> is limited in the same way for signal
+exits, as is the core's <code>Tcl_WaitPid()</code> which it
+uses.</li>
+</ul>
+
+<p>The following commands are not applicable to the Windows
+platform. When used, these commands only return errors.</p>
+
+<ul>
+<li><strong>exp_fork</strong>: Not applicable on Windows.</li>
+
+<li><strong>exp_overlay</strong>: Not applicable on Windows.</li>
+
+<li><strong>exp_disconnect</strong>: Not applicable on
+Windows.</li>
+
+<li><strong>exp_system</strong>: Use <code>exec</code> instead
+.</li>
+
+<li><strong>exp_open</strong>: Detaching to Tcl is not
+enabled.</li>
+</ul>
+
+<h3><a name="e4w_unimplemented">Unimplemented Commands and
+Behaviors</a></h3>
+
+<p>This section addresses those commands and behaviors that have
+yet to be implemented in Expect for Windows:</p>
+
+<p>Unimplemented Commands:</p>
+
+<ul>
+<li><strong>exp_interact</strong>: Usage creates a syntax error.
+Command is not implemented.</li>
+</ul>
+
+<p>Unimplemented Behaviors:</p>
+
+<ul>
+<li><strong>Expect clib</strong>: The C Library is not
+implemented.</li>
+
+<li><strong>Expect channels</strong>: Cannot be moved to a
+different thread with <code>thread::transfer</code>. This is a
+limitation of Tcl's channel API.</li>
+</ul>
+
+<h3><a name="caveats">Caveats</a></h3>
+
+<p>The following caveats should be reviewed before writing Expect
+for Windows scripts.</p>
+
+<strong>Extensions</strong><br>
+<p>Extensions may collide with Expect command names. For example,
+<code>send</code> is defined by Tk for an entirely different
+purpose. This is why the commands listed have the
+"<code>exp_</code>" prefix. Use these extended command names to
+ensure compatibility between Windows and Unix environments.</p>
+
+<strong>Scope</strong><br>
+<p>Expect takes a liberal view of scoping. In particular, variables
+read by commands specific to the Expect program are sought first
+from the local scope, and if not found, in the global scope. For
+example, this obviates the need to place <code>global
+timeout</code> in every procedure that uses
+<strong>expect</strong>. On the other hand, variables written are
+always in the local scope (unless a "global" command has been
+issued). The most common problem this causes is when
+<code>exp_spawn</code> is executed in a procedure. Outside the
+procedure, <code>spawn_id</code> no longer exists, so the spawned
+process is no longer accessible simply because of scoping. Add a
+<code>global spawn_id</code> to such a procedure.</p>
+
+<strong>Terminal Parameters</strong><br>
+<p>Terminal parameters can have a big effect on scripts. For
+example, if a script is written to look for echoing, it misbehaves
+if echoing is turned off. For this reason, Expect forces terminal
+parameters by default. Unfortunately, this can make things
+challenging for other programs. For example, the emacs shell wants
+to change the "usual" mappings: newlines get mapped to newlines
+instead of carriage-return newlines, and echoing is disabled. A
+user can use emacs to edit the input line. Unfortunately, Expect
+cannot possibly guess this. You can tell Expect not to override its
+default terminal parameters, but you must then be very careful when
+writing scripts for such environments. In the case of emacs, avoid
+depending upon things like echoing and end-of-line mappings.</p>
+
+<strong>Single and Multiple Arguments</strong><br>
+<p>Commands that accept arguments braced into a single list (the
+<code>expect</code> variants<!-- and <code>interact</code>-->) use
+a heuristic to decide if the list is actually one argument or many.
+The heuristic can fail only in the case when the list actually does
+represent a single argument which has multiple embedded
+<code>\n</code>'s with non-whitespace characters between them. This
+may seem unlikely, however, the argument <code>-nobrace</code> can
+be used to force a single argument to be handled as a single
+argument. This could conceivably be used with machine-generated
+Expect code. Similarly, <code>-brace</code> forces a single
+argument to be handled as multiple patterns or actions.</p>
+
+<h3><a name="tips">Tips for Writing Expect Scripts</a></h3>
+
+<p>This section addresses various tips for writing Expect
+scripts.</p>
+
+<p><strong>Tip 1:</strong> Use a shell command trick in your
+scripts to associate the file type on Unix systems.</p>
+
+<p>Place the following commands at the beginning of your Expect for
+Windows scripts to run them in both Unix and Windows.</p>
+
+<pre>
+      #!/bin/sh
+      # \
+      exec tclsh "$0"  ${1+"$@"}
+</pre>
+
+<strong>Description:</strong><br>
+<ul>
+<li>In Unix, these instructions identify the file as a Tcl script.
+The <code>exec tclsh "$0" ${1+"$@"}</code> command launches the
+tclsh interpreter to run the Expect for Windows script in
+Unix.</li>
+
+<li>In Windows, these instructions are viewed as commented code and
+are ignored. Specifying an interpreter is unnecessary in Windows as
+the ".tcl" file extension identifies the file as a Tcl script
+(assuming that the PATH contains the Tcl interpreter).</li>
+</ul>
+
+<br>
+ 
+
+<p><strong>Tip 2:</strong> Debug the process by viewing the
+controlled console.</p>
+
+<p>Place the following variable near the beginning of your Expect
+for Windows scripts to view program interaction on the Windows
+platform.</p>
+
+<pre>
+      <span class=
+"doccodecomment"># This special variable used by the ActiveState Expect for Windows</span>
+      <span class=
+"doccodecomment"># port will enable actual viewing of the controlled console.</span>
+      <span class=
+"doccodecomment"># Otherwise it remains hidden (default).</span>
+      set exp::winnt_debug 1
+</pre>
+
+<strong>Description:</strong><br>
+<ul>
+<li>The <code>set exp::winnt_debug 1</code> variable opens the
+controlled console and displays the interaction between the Expect
+for Windows script and the Unix program.</li>
+</ul>
+
+<br>
+ 
+
+<p><strong>Tip 3:</strong> Use a <a target="_blank" href=
+"regex.html">regular expression</a> to recognize shell prompts.</p>
+
+<p>A common Expect usage challenge is determining which shell
+prompt to expect on the interacting Unix system. Since command
+prompts vary greatly among users and shells, automating Expect to
+interact with a program like <code>rlogin</code> can prove
+difficult.</p>
+
+<p>One solution is to use a <a target="_blank" href=
+"regex.html">regular expression</a> to match a variety of prompt
+types. Another solution is to use <code>catch</code> to see whether
+a particular user stored a regular expression describing their
+prompt in the <code>EXPECT_PROMPT</code> environment variable.</p>
+
+<pre>
+      set prompt "(%|#|\\$) $"    ;# default prompt
+      catch {set prompt $env(EXPECT_PROMPT)}
+
+      expect -re $prompt
+</pre>
+
+<strong>Description:</strong><br>
+<ul>
+<li>Use a <a target="_blank" href="regex.html">regular
+expression</a> to match a prompt, for example <code>set prompt
+"(%|#|\\$) $"</code></li>
+
+<li>Attempt to catch the user's EXPECT_PROMPT environment
+variable.</li>
+</ul>
+
+<p>To learn more about regular expression syntax and usage, see the
+<a target="_blank" href="regex.html">Regular Expressions Primer</a>
+for more information.</p>
+
+<br>
+ 
+
+<p><strong>Tip 4:</strong> Matching output</p>
+
+<p><em>About Output:</em><br>
+If you use a pattern of the form X*, the * matches all output
+received from the end of X to the last character received. This
+sounds intuitive but can be confusing because the phrase "last
+character received" can vary depending upon the speed of the
+computer and the processing of I/O, both by the kernel and the
+device driver.</p>
+
+<p>In particular, humans tend to see program output arriving in
+large portions (atomically) when in reality most programs produce
+output one line at a time. Assuming this is the case, the *, in X*,
+may only match the end of the current line even though there seems
+to be more. This is because at the time of the match this included
+all received output. Expect does not know that further output is
+arriving unless your pattern specifically accounts for it.</p>
+
+<p><em>Express the last few characters of a prompt:</em><br>
+Always express the last few characters of a prompt when writing
+patterns as depending on line-oriented buffering is unwise.
+Programs rarely reveal the type of buffering they do and system
+indigestion can break-up output lines at seemingly random
+places.</p>
+
+<p><em>Use "timeout" and "eof" to determine last output:</em><br>
+If you are waiting for a pattern in the last output of a program
+and the program emits something else instead, you cannot detect it
+with the <code>timeout</code> keyword. The reason is that
+<code>expect</code> does not timeout. Rather, expect gets an
+<code>eof</code> indication. Use the <code>eof</code> indication
+along with the <code>timeout</code> keyword to be sure to located
+the true last output.</p>
+
+<p><em>Matching a two-lined pattern:</em><br>
+Newlines are usually converted to carriage returns and linefeed
+sequences when output by the terminal driver. When matching a
+two-lined pattern as follows:</p>
+
+<pre>
+      printf("foo\nbar")
+</pre>
+
+<p>You may require a pattern constructed as follows:</p>
+
+<pre>
+      "foo\r\nbar"
+</pre>
+
+<br>
+ 
+
+<p><strong>Tip 5:</strong> Matching user input</p>
+
+<p>A similar translation occurs when reading from the user, via
+<code>expect_user</code>. In this case, when you press "Return",
+the character is translated to a newline. If <code>expect</code>
+then passes that character to a program which sets its terminal to
+raw mode (like telnet), a problem results, as the program expects a
+true return. (Note that some programs are forgiving as they
+automatically translate newlines to returns, but most do not.)
+Unfortunately, there is no way to determine if a program puts its
+terminal into raw mode.</p>
+
+<p>Rather than manually replacing newlines with returns, the
+solution is to use the command <code>stty raw</code>, which stops
+the translation. Note that you can not get the cooked line-editing
+features when <code>stty raw</code> is used.</p>
+
+<a class="topText" href="#top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="wrapping_expect_tclapp">Wrapping Expect using
+TclApp</a></h2>
+
+<p>Use the Tcl Dev Kit's TclApp to seamlessly deploy your Expect
+for Windows programs on any platform without installing Tcl or
+otherwise configuring the system. The TclApp tool simplifies the
+process of distributing an Expect for Windows application by
+collecting all of the files needed to run a Tcl application -- such
+as Tcl scripts, Expect libraries, graphics and other data files,
+Tcl extensions, a Tcl interpreter, and the standard Tcl and Tk
+libraries -- into a single executable file. A user can then install
+the Expect for Windows file anywhere on their system and execute it
+without installing any other packages or reconfiguring their
+system.</p>
+
+<p>To wrap Expect for Windows applications in TclApp, include the
+Expect base kit (located under <code>Tcl/bin/</code>). Use the
+Expect Tk base kit if you require the Tk package in your
+application.</p>
+
+<ul>
+<li>base-expect-win32-ix86.exe</li>
+
+<li>base-expect-tk-win32-ix86.exe</li>
+</ul>
+
+<p>You can include an Expect base kit in TclApp via the command
+line or through the TclApp user interface. The Expect base kit
+includes the dll <code>injector.dll</code> which will be
+automatically extracted at runtime to the currently working
+directory of the wrapped base kit for the controlling of spawned
+applications. If this is not able to be extracted (e.g. on a
+read-only file system), and the <code>injector.dll</code> does not
+already exist on the system dll path, spawning will fail.</p>
+
+<p><strong>Command Line:</strong></p>
+
+<ul>
+<li>Assign the base kit to a project using the
+<code>-executable</code> flag on the command line, for
+example:</li>
+</ul>
+
+<pre>
+      tclapp.tcl -nologogui -executable {C:\Tcl\bin\base-expect-tk-win32-ix86.exe}
+        -out {C:\Tcl\tkremotels.exe} -pkg BWidget -relativeto C:\Tcl\demos\Expect
+        C:\Tcl\demos\Expect\tkremotels.tcl
+</pre>
+
+<p><strong>TclApp GUI Interface:</strong></p>
+
+<ul>
+<li>Assign the base kit to a project using the <strong>Prefix
+file</strong> field on the Wrapping tab.</li>
+</ul>
+
+<p>For more information about wrapping Expect scripts with TclApp,
+refer to the <a href="demos.html#demos_remote">"tkremotels.tpj"
+demo</a>. See <a target="_blank" href=
+"http://aspn.activestate.com/ASPN/docs/Tcl_Dev_Kit/TclApp.html">TclApp</a>
+on ASPN for more information on wrapping Tcl applications with
+TclApp.</p>
+
+<a class="topText" href="#top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a>
+</body>
+</html>
+

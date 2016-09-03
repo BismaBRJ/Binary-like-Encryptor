@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_SubstObj manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> SubstObj</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_SubstObj - perform substitutions on Tcl objects 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+Tcl_Obj *<br>
+<b>Tcl_SubstObj</b>(<i>interp, objPtr, flags</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Interpreter in which to execute Tcl scripts and lookup
+variables. If an error occurs, the interpreter's result is modified
+to hold an error message.</dd>
+
+<dt>Tcl_Obj <b>*objPtr</b> (in)</dt>
+
+<dd>A Tcl object containing the string to perform substitutions
+on.</dd>
+
+<dt>int <b>flags</b> (in)</dt>
+
+<dd>ORed combination of flag bits that specify which substitutions
+to perform. The flags <b>TCL_SUBST_COMMANDS</b>,
+<b>TCL_SUBST_VARIABLES</b> and <b>TCL_SUBST_BACKSLASHES</b> are
+currently supported, and <b>TCL_SUBST_ALL</b> is provided as a
+convenience for the common case where all substitutions are
+desired.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+The <b>Tcl_SubstObj</b> function is used to perform substitutions
+on strings in the fashion of the <b><a href=
+"../TclCmd/subst.htm">subst</a></b> command. It gets the value of
+the string contained in <i>objPtr</i> and scans it, copying
+characters and performing the chosen substitutions as it goes to an
+output object which is returned as the result of the function. In
+the event of an error occurring during the execution of a command
+or variable substitution, the function returns NULL and an error
+message is left in <i>interp</i>'s result. 
+
+<p>Three kinds of substitutions are supported. When the
+<b>TCL_SUBST_BACKSLASHES</b> bit is set in <i>flags</i>, sequences
+that look like backslash substitutions for Tcl commands are
+replaced by their corresponding character.</p>
+
+<p>When the <b>TCL_SUBST_VARIABLES</b> bit is set in <i>flags</i>,
+sequences that look like variable substitutions for Tcl commands
+are replaced by the contents of the named variable.</p>
+
+<p>When the <b>TCL_SUBST_COMMANDS</b> bit is set in <i>flags</i>,
+sequences that look like command substitutions for Tcl commands are
+replaced by the result of evaluating that script. Where an uncaught
+&ldquo;continue exception&rdquo; occurs during the evaluation of a
+command substitution, an empty string is substituted for the
+command. Where an uncaught &ldquo;break exception&rdquo; occurs
+during the evaluation of a command substitution, the result of the
+whole substitution on <i>objPtr</i> will be truncated at the point
+immediately before the start of the command substitution, and no
+characters will be added to the result or substitutions performed
+after that point.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/subst.htm">subst</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#backslash substitution">backslash
+substitution</a>, <a href=
+"../Keywords/C.htm#command substitution">command substitution</a>,
+<a href="../Keywords/V.htm#variable substitution">variable
+substitution</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2001 Donal K. Fellows</div>
+</body>
+</html>
+

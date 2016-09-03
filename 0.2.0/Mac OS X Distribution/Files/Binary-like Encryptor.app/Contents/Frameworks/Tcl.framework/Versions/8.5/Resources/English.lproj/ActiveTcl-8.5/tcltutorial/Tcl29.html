@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Information about procs - info</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Information about procs - info</h1>
+
+<div class="nav"><a href="Tcl28.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl30.html">Next
+lesson</a></div>
+
+The <code class="keyword">info</code> command includes a set of
+subcommands that will provide all the info you could want about a
+proc. These subcommands will return the body of a proc, the
+arguments to the proc, and the value of any default arguments. <br>
+<br>
+<p>These subcommands can be used to:</p>
+
+<ul compact>
+<li>Access the contents of a proc in a debugger.</li>
+
+<li>Generate custom procs from a template.</li>
+
+<li>Report default values while prompting for input.</li>
+</ul>
+
+<br>
+<br>
+<p><b>Info commands that return information about a proc</b></p>
+
+<dl>
+<dt><code class="keyword">info</code> <code class="arg">args</code>
+<code class="arg">procname</code></dt>
+
+<dd>Returns a list of the names of the arguments to the procedure
+<code class="arg">procname</code>.</dd>
+
+<dt><code class="keyword">info</code> <code class="arg">body</code>
+<code class="arg">procname</code></dt>
+
+<dd>Returns the body of the procedure <code class=
+"arg">procname</code>.</dd>
+
+<dt><code class="keyword">info</code> <code class=
+"arg">default</code> <code class="arg">procname arg
+varName</code></dt>
+
+<dd>Returns 1 if the argument <code class="arg">arg</code> in
+procedure <code class="arg">procName</code> has a default, and sets
+<code class="arg">varName</code> to the default. Otherwise, returns
+0.</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+proc demo {argument1 {default "DefaultValue"} } {
+    puts "This is a demo proc.  It is being called with $argument1 and $default"
+    #
+    # We can use [info level] to find out if a value was given for
+    # the optional argument "default" ...
+    #
+    puts "Actual call: [info level [info level]]"
+}
+
+puts "The args for demo are: [info args demo]\n"
+puts "The body for demo is:  [info body demo]\n"
+
+set arglist [info args demo]
+
+foreach arg $arglist {
+    if {[info default demo $arg defaultval]} {
+        puts "$arg has a default value of $defaultval"
+    } else {
+        puts "$arg has no default"
+    }
+}
+</pre>
+
+<div class="nav"><a href="Tcl28.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl30.html">Next
+lesson</a></div>
+</body>
+</html>
+

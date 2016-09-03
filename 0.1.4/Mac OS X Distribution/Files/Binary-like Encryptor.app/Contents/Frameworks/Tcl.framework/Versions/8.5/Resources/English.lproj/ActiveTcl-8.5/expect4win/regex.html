@@ -1,0 +1,1779 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>Regular Expressions Primer</title>
+<link rel="stylesheet" type="text/css" href="aspn.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body marginheight="5" topmargin="5" marginwidth="10" leftmargin=
+"10">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/Products/Expect/"><img src=
+"images/expect_logo.gif" border="0" align="left" alt="Expect"></a>
+</td>
+<td align="center" class="heading">Expect for
+Windows<sup><small>&reg;</small></sup> User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="images/AS_logo.gif" border=
+"0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<a name="top"></a> 
+
+<h1>Regular Expressions Primer</h1>
+
+<ul>
+<li><a href="#regexprimer">Regular Expressions Primer
+Overview</a></li>
+
+<li style="list-style: none">
+<ul>
+<li><a href="#aboutregex">About Regular Expressions</a></li>
+
+<li><a href="#aboutsyntax">About Regex Syntax</a></li>
+
+<li><a href="#buildingpatterns">Building Simple Patterns</a></li>
+
+<li style="list-style: none">
+<ul>
+<li><a href="#matchingstrings">Matching Simple Strings</a></li>
+
+<li><a href="#wildcards">Searching with Wildcards</a></li>
+
+<li><a href="#escaping">Searching for Special Characters</a></li>
+
+<li><a href="#quantifiers">Ranges and Repetition</a></li>
+
+<li style="list-style: none">
+<ul>
+<li><a href="#ranges">Ranges, {min, max}</a></li>
+
+<li><a href="#repetition">Repetition, ?*+</a></li>
+
+<li><a href="#quantifiersummary">Quantifier Summary</a></li>
+</ul>
+</li>
+
+<li><a href="#alternation">Using Conditional Expressions</a></li>
+
+<li><a href="#parentheses">Grouping Similar Items in
+Parentheses</a></li>
+
+<li><a href="#charclass">Matching Sequences</a></li>
+
+<li style="list-style: none">
+<ul>
+<li><a href="#simplecharclass">Building Simple Character
+Classes</a></li>
+
+<li><a href="#negation">Preventing Matches with Character
+Classes</a></li>
+
+<li><a href="#compoundcharclass">Compound Character
+Classes</a></li>
+
+<li><a href="#charclasssummary">Character Class Summary</a></li>
+</ul>
+</li>
+
+<li><a href="#anchors">Matching Locations within a Sting</a></li>
+</ul>
+</li>
+
+<li><a href="#more">More Tcl Regex Resources</a></li>
+</ul>
+</li>
+</ul>
+
+<!--Start of Regex Primer-->
+<h2><a name="regexprimer">Regular Expressions Primer
+Overview</a></h2>
+
+<p>The Regular Expressions Primer is a tutorial for those
+completely new to regular expressions. To familiarize you with
+regular expressions, this primer starts with the simple building
+blocks of the syntax and through examples, builds to construct
+complex expressions.</p>
+
+<p>Regular expressions are embedded in programs to parse text. For
+example, an Expect Tcl script might contain the following string to
+anonymously log in to an FTP server:</p>
+
+<pre>
+  expect -re "([Ll]ogin|Username):.*" {
+      send "anonymous\r"
+  }
+</pre>
+
+<p>The <code>([Ll]ogin|Username)</code> regular expression matches
+the following strings: "Login", "login", and "Username". When one
+of these strings is matched, Expect sends the string "anonymous" to
+the FTP server. Note that the <code>expect -re</code> command must
+prefix all Tcl regular expressions. Without <code>expect
+-re</code>, the command defaults to matching glob patterns. In glob
+pattern matching, the wildcards are "*" (which matches any sequence
+of characters) and "?" (which matches a single character). A
+literal "*", "?" or "\" might be matched by escaping with a
+backslash. See the <a target="_blank" href=
+"http://www.tcl.tk/man/tcl8.2.3/TclCmd/glob.htm">Tcl Glob Manual
+Page</a> for more information.</p>
+
+<h2><a name="aboutregex">About Regular Expressions</a></h2>
+
+<p>Regular expressions are used to describe patterns of characters
+that match against text strings. They can be used as a tool to
+search for and replace text, manipulate data, or test for a certain
+condition in a string of characters. Many everyday tasks can be
+accomplished with regular expressions, such as checking for the
+occurrence of a specific word or phrase in the body of an e-mail
+message, or finding specific file types, such as <code>.txt</code>
+files, in a folder or directory. Regular expressions are often
+called "regex", "regexes", "regexps", and "RE". This primer uses
+the terms "regular expressions", "regex", and "regexes"
+equally.</p>
+
+<h2><a name="aboutsyntax">About Regex Syntax</a></h2>
+
+<p>Regular expressions use syntax elements comprised of
+alphanumeric characters and symbols. For example, the regex
+<code>(2)</code> searches for the number 2, while the regex
+<code>([1-9][0-9]{2}-[0-9]{4})</code> matches a regular 7-digit
+phone number.</p>
+
+<p>There are many flavors and types of regular expression syntax.
+These variations are found in various tools, languages and
+operating systems. For example, Tcl, Perl, Python, grep, sed, VI,
+and Unix all use variations on standard regex syntax. This primer
+focuses on standard regex patterns not tied to a specific language
+or tool. This standard syntax can be later applied to the specific
+language, tool or application of your choice.</p>
+
+<h2><a name="buildingpatterns">Building Simple Patterns</a></h2>
+
+<p>Complete regular expressions are constructed using characters as
+small building block units. Each building block is in itself
+simple, but since these units can be combined in an infinite number
+of ways, knowing how to combine them to achieve a goal takes some
+practice. This section shows you how to build regexes through
+examples ranging from the simple to the more complex.</p>
+
+<h3><a name="matchingstrings">Matching Simple Strings</a></h3>
+
+<p>The simplest and most common type of regex is an alphanumeric
+string that matches itself, called a "literal text match". A
+literal text regex matches anywhere along a string. For example, a
+literal string matches itself when placed alone, and at the
+beginning, middle, or end of a larger string. Literal text matches
+are case sensitive.</p>
+
+<p><strong>Using regexes to search for simple strings.</strong></p>
+
+<p><strong>Example 1</strong>: Search for the string "at".</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    at
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    at
+    math
+    hat
+    ate
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    it
+    a-t
+    At
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 2</strong>: Search for the string "email".</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    email
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    email
+    emailing
+    many_emails
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    Email
+    EMAILing
+    e-mails
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 3</strong>: Search for the alphanumeric string
+"abcdE567".</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    abcdE567
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    abcdE567
+    AabcdE567ing
+    text_abcdE567
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    SPAMabCdE567
+    ABCDe567
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Note:</strong> Regular expressions are case sensitive
+unless case is deliberately modified.</p>
+
+<h3><a name="wildcards">Searching with Wildcards</a></h3>
+
+<p>In the previous examples, regular expressions are constructed
+with literal characters that match themselves. There are other
+characters in regex syntax that match in a more generalized way.
+These are called "metacharacters". Metacharacters do not match
+themselves, but rather perform a specific task when used in a
+regular expression. One such metacharacter is the dot ".", or
+wildcard. When used in a regular expression, the wildcard can match
+any single character.</p>
+
+<p><strong>Using the wildcard to match any character.</strong></p>
+
+<p><strong>Example 1</strong>: Use a wildcard to search for any one
+character before the string "ubject:".</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    .ubject:
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    Subject:
+    subject:
+    Fubject:
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    Subject
+    subject
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 2</strong>: Use three dots "<code>...</code>" to
+search for any three characters within a string.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    t...s
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    trees
+    tEENs
+    t345s
+    t-4-s
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+   Trees
+   twentys
+   t1234s
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 3</strong>: Use several wildcards to match
+characters throughout a string.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    .a.a.a
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    Canada
+    alabama
+    banana
+    3a4a5a
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    aaa
+   
+</pre>
+</li>
+</ul>
+
+<h3><a name="escaping">Searching for Special Characters</a></h3>
+
+<p>In regular expression syntax, most non-alphanumerical characters
+are treated as special characters. These characters, called
+"metacharacters", include asterisks, question marks, dots, slashes,
+etc. In order to search for a metacharacter without using its
+special attribute, precede it with a backslash "\" to change it
+into a literal character. For example, to build a regex to search
+for a <code>.txt</code> file, precede the dot with a backslash
+<code>\.txt</code> to prevent the dot's special function, a
+wildcard search. The backslash, called an "escape character" in
+regex terminology, turns metacharacters into literal
+characters.</p>
+
+<p>Precede the following metacharacters with a backslash "\" to
+search for them as literal characters:</p>
+
+<p><code>^ $ + * ? . | ( ) { } [ ] \</code></p>
+
+<p><strong>Using the backslash "\" to escape special characters in
+a regular expression.</strong></p>
+
+<p><strong>Example 1</strong>: Escape the dollar sign "$" to find
+the alphanumeric string "$100".</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    \$100
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    $100
+    $1000
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    \$100
+    100
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 2</strong>: Use the dot "." as a literal
+character to find a file called "email.txt".</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    email\.txt
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    email.txt
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    email
+    txt
+    email_txt
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 3</strong>: Escape the backslash "\" character
+to search for a Windows file.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    c:\\readme\.txt
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    c:\readme.txt
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    c:\\readme.txt
+    d:\readme.txt
+    c:/readme.txt
+   
+</pre>
+</li>
+</ul>
+
+<h3><a name="quantifiers">Ranges and Repetition</a></h3>
+
+<p>Regex syntax includes metacharacters which specify the number of
+times a particular character or string must match. This group of
+metacharacters are called "quantifiers"; they influence the
+quantity of matches found. Quantifiers act on the element
+immediately preceding them, which could be a digit, a letter, or
+another metacharacter (including spaces as metacharacters not
+previously defined and the dot "."). This section demonstrates how
+quantifers search using ranges and repetition.</p>
+
+<h4><a name="ranges">Ranges, {min, max}</a></h4>
+
+<p>Ranges are considered "counting qualifiers" in regular
+expressions. This is because they specify the minimum number of
+matches to find and the maximum number of matches to allow. Use
+ranges in regex searches when a bound, or a limit, should be placed
+on search results. For example, the range <code>{3,5}</code>
+matches an item at least 3 times, but not more than 5 times. When
+this range is combined with the regex, <code>a{3,5}</code>, the
+strings "aaa", "aaaa", and "aaaaa" are successfully matched. If
+only a single number is expressed within curly braces
+<code>{3}</code>, the pattern matches exactly three items. For
+example, the regex <code>b{3}</code> matches the string "bbb".</p>
+
+<p><strong>Using ranges to identify search patterns.</strong></p>
+
+<p><strong>Example 1</strong>: Match the preceding "0" at least 3
+times with a maximum of 5 times.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    60{3,5} years
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    6000 years
+    60000 years
+    600000 years
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    60 years
+    600 years
+    6003 years
+    6000000 years
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 2</strong>: Using the "." wildcard to match any
+character sequence two or three characters long.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    .{2,3}
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    404
+    44
+    com
+    w3
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    4
+    a
+    aaaa
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 3</strong>: Match the preceding "e" exactly
+twice.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    be{2}t
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    beet
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    bet
+    beat
+    eee
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 4</strong>: Match the preceding "w" exactly
+three times.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    w{3}\.mydomain\.com
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    www.mydomain.com
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    web.mydomain.com
+    w3.mydomain.com
+   
+</pre>
+</li>
+</ul>
+
+<h4><a name="repetition">Repetition, ?*+</a></h4>
+
+<p>Unlike range quantifiers, the repetition quantifiers (question
+mark "?", asterisk "*", and plus "+") have few limits when
+performing regex searches, they are greedy. This is significant
+because these quantifiers settle for the minimum number of required
+matches, but always attempt to match as many times as possible, up
+to the maximum allowed. For example, the question mark "?" matches
+any preceding character 0 or 1 times, the asterisk "*" matches the
+preceding character 0 or more times, and the plus "+" matches the
+preceding character 1 or more times. Use repetition quantifiers in
+regex searches when large numbers of results are desired.</p>
+
+<p><strong>Using repetition to search for repeated characters with
+few limits.</strong></p>
+
+<p><strong>Example 1</strong>: Use "?" to match the "u" character 0
+or 1 times.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    colou?r
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    colour
+    color
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    colouur
+    Colour
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 2</strong>: Use "*" to match the preceding item
+0 or more times; use "." to match any character.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    www\.my.*\.com
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    www.mysite.com
+    www.mypage.com
+    www.my.com
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    www.oursite.com
+    mypage.com
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 3</strong>: Use "+" to match the preceding "5"
+at least once.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    bob5+@foo\.com
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    bob5@foo.com
+    bob5555@foo.com
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    bob@foo.com
+    bob65555@foo.com
+   
+</pre>
+</li>
+</ul>
+
+<h4><a name="quantifiersummary">Quantifier Summary</a></h4>
+
+<p>The following table defines the various regex quantifiers. Note
+that each quantifier is unique and will perform a varying minimum
+and maximum number of matches in order to search successfully.</p>
+
+<table border="0" cellpadding="5" width="40%">
+<tr>
+<td width="30%"><strong>Quantifier</strong></td>
+<td width="70%"><strong>Description</strong></td>
+</tr>
+
+<tr>
+<td width="30%" valign="top">{<em>num</em>}</td>
+<td width="70%" valign="top">Matches the preceding element
+<em>num</em> times.</td>
+</tr>
+
+<tr>
+<td width="30%" valign="top">{<em>min</em>, <em>max</em>}</td>
+<td width="70%" valign="top">Matches the preceding element at least
+<em>min</em> times, but not more than <em>max</em> times.</td>
+</tr>
+
+<tr>
+<td width="30%" valign="top">?</td>
+<td width="70%" valign="top">Matches any preceding element 0 or 1
+times.</td>
+</tr>
+
+<tr>
+<td width="30%" valign="top">*</td>
+<td width="70%" valign="top">Matches the preceding element 0 or
+more times.</td>
+</tr>
+
+<tr>
+<td width="30%" valign="top">+</td>
+<td width="70%" valign="top">Matches the preceding element 1 or
+more times.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<h3><a name="alternation">Using Conditional Expressions</a></h3>
+
+<p>Conditional expressions help qualify and restrict regex
+searches, increasing the probability of a desirable match. The
+vertical bar "|" symbol, meaning "OR", places a condition on the
+regex to search for either one character in a string or another.
+Because the regex has a list of alternate choices to evaluate, this
+regex technique is called "alternation". To search for either one
+character or another, insert a vertical bar "|" between the desired
+characters.</p>
+
+<p><strong>Example 1</strong>: Use "|" to alternate a search for
+various spellings of a string.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    gray|grey
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    gray
+    grey 
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    GREY
+    Gray
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 2</strong>: Use "|" to alternate a search for
+either email or Email or EMAIL or e-mail.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    email|Email|EMAIL|e-mail
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    email
+    Email
+    EMAIL
+    e-mail
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    EmAiL
+    E-Mail
+   
+</pre>
+</li>
+</ul>
+
+<h3><a name="parentheses">Grouping Similar Items in
+Parentheses</a></h3>
+
+<p>Use parentheses to enclose a group of related search elements.
+Parentheses limit scope on alternation and create substrings to
+enhance searches with metacharacters. For example, use parentheses
+to group the expression <code>(abc)</code>, then apply the range
+quantifier <code>{3}</code> to find instances of the string
+"abcabcabc".</p>
+
+<p>Along with grouping expressions into subpatterns, parentheses
+also capture each part of a matched string. It should be noted that
+this further parsing requires additional time and resources to
+complete.</p>
+
+<p><strong>Using parentheses to group regular
+expressions.</strong></p>
+
+<p><strong>Example 1</strong>: Use parentheses and a range
+quantifier to find instances of the string "abcabcabc".</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    (abc){3}
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    abcabcabc
+    abcabcabcabc
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    abc
+    abcabc
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 2</strong>: Use parentheses to limit the scope
+of alternative matches on the words gray and grey.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    gr(a|e)y
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    gray
+    grey
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    gry
+    graey
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 3</strong>: Use parentheses and "|" to locate
+past correspondence in a mail-filtering program. This regex finds a
+'To:' or a 'From:' line followed by a space and then either the
+word 'Smith' or the word 'Chan'.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    (To:|From:)(Smith|Chan)
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    To:Smith
+    To:Chan
+    From:Smith
+    To:Smith, Chan
+    To:Smithe
+    From:Channel4News
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    To:smith
+    To:All
+    To:Schmidt
+   
+</pre>
+</li>
+</ul>
+
+<h3><a name="charclass">Matching Sequences</a></h3>
+
+<p>You can build a regular expression to match a sequence of
+characters. These sequences, called "character classes", simply
+place a set of characters side-by-side within square brackets "[]".
+An item in a character class can be either an ordinary character,
+representing itself, or a metacharacter, performing a special
+function. This primer covers how to build simple character classes,
+prevent matches with character classes, and construct compound
+character classes with metacharacters.</p>
+
+<h4><a name="simplecharclass">Building Simple Character
+Classes</a></h4>
+
+<p>The most basic type of character class is a set of characters
+placed side-by-side within square brackets "[]". For example, the
+regular expression <code>[bcr]at</code>, matches the words "bat",
+"cat", or "rat" because it uses a character class (that includes
+"b","c", or "r") as its first character. Character classes only
+match singular characters unless a quantifier is placed after the
+closing bracket. For examples using quantifiers with character
+classes, see <a href="#compoundcharclass">Compound Character
+Classes</a>. The following table shows how to use simple character
+classes in regex searches.</p>
+
+<p><strong>Note:</strong> When placed inside a character class, the
+hyphen "-" metacharacter denotes a continuious sequence of letters
+or numbers in a range. For example, [a-d] is a range of letters
+denoting the continuious sequence of a,b,c and d. When a hyphen is
+otherwise used in a regex, it matches a literal hyphen.</p>
+
+<p><strong>Using simple character classes to perform regex
+searches.</strong></p>
+
+<p><strong>Example 1</strong>: Use a character class to match all
+cases of the letter "s".</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    Java[Ss]cript
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    JavaScript
+    Javascript
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    javascript
+    javaScript
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 2</strong>: Use a character class to limit the
+scope of alternative matches on the words gray and grey.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    gr[ae]y
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    gray
+    grey
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    gry
+    graey
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 3</strong>: Use a character class to match any
+one digit in the list.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    [0123456789]
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    5 
+    0
+    9
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    x
+    ?
+    F
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 4</strong>: To simplify the previous example,
+use a hyphen "-" within a character class to denote a range for
+matching any one digit in the list.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    [0-9]
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    5
+    0
+    9
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    234
+    42
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 5</strong>: Use a hyphen "-" within a character
+class to denote an alphabetic range for matching various words
+ending in "mail".</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    [A-Z]mail
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    Email
+    Xmail
+    Zmail
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    email
+    mail
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 6</strong>: Match any three or more digits
+listed in the character class.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    [0-9]{3,}
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    012
+    1234
+    555
+    98754378623
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    10
+    7
+   
+</pre>
+</li>
+</ul>
+
+<h4><a name="negation">Preventing Matches with Character
+Classes</a></h4>
+
+<p>Previous examples used character classes to specify exact
+sequences to match. Character classes can also be used to prevent,
+or negate, matches with undesirable strings. To prevent a match,
+use a leading caret "^" (meaning NOT), within square brackets,
+<code>[^...]</code>. For example, the regex <code>[^a]</code>
+matches any single character except the letter "a".</p>
+
+<p><strong>Note:</strong> The caret symbol must be the first
+character within the square brackets to negate a character
+class.</p>
+
+<p><strong>Using character classes to prevent a sequence from
+matching.</strong></p>
+
+<p><strong>Example 1</strong>: Prevent a match on any numeric
+string. Use the "*" to match an item 0 or more times.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    [^0-9]*
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    abc
+    c
+    Mail
+    u-see
+    a4a
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    1
+    42
+    100
+    23000000
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 2</strong>: Search for a text file beginning
+with any character not a lower-case letter.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    [^a-z]\.txt
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    A.txt
+    4.txt
+    Z.txt
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    r.txt
+    a.txt
+    Aa.txt
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 3</strong>: Prevent a match on the numbers "10"
+and "12".</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    1[^02]
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    13
+    11
+    19
+    17
+    1a
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    10
+    12
+    42
+    a1
+   
+</pre>
+</li>
+</ul>
+
+<h4><a name="compoundcharclass">Compound Character Classes</a></h4>
+
+<p>Character classes are a versatile tool when combined with
+various pieces of the regex syntax. Compound character classes can
+help clarify and define sophisticated searches, test for certain
+conditions in a program, and filter wanted e-mail from spam. This
+section uses compound character classes to build meaningful
+expressions with the regex syntax.</p>
+
+<p><strong>Using compound character classes with the regex
+syntax.</strong></p>
+
+<p><strong>Example 1</strong>: Find a partial e-mail address. Use a
+character class to denote a match for any number between 0 and 9.
+Use a range to restrict the number of times a digit matches.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    smith[0-9]{2}@
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    smith44@
+    smith42@
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    Smith34
+    smith6
+    Smith0a
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 2</strong>: Search an HTML file to find each
+instance of a header tag. Allow matches on whitespace after the tag
+but before the "&gt;".</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    (&lt;[Hh][1-6] *&gt;)
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+     &lt;H1&gt;
+     &lt;h6&gt;
+     &lt;H3  &gt;
+     &lt;h2    &gt;
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    &lt;H1
+    &lt;   h2&gt;
+    &lt;a1&gt;
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 3</strong>: Match a regular 7-digit phone
+number. Prevent the digit "0" from leading the string.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    ([1-9][0-9]{2}-[0-9]{4})
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+     555-5555
+     123-4567 
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    555.5555
+    1234-567
+    023-1234
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 4</strong>: Match a valid web-based protocol.
+Escape the two front slashes.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    [a-z]+:\/\/
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    http://
+    ftp://
+    tcl://
+    https://
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    http
+    http:
+    1a3:// 
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 5</strong>: Match a valid e-mail address.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    [a-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)+
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    j_smith@foo.com
+    j.smith@bc.canada.ca
+    smith99@foo.co.uk
+    1234@mydomain.net
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    @foo.com
+    .smith@foo.net
+    smith.@foo.org
+    www.myemail.com
+   
+</pre>
+</li>
+</ul>
+
+<h4><a name="charclasssummary">Character Class Summary</a></h4>
+
+<p>The following table defines various character class sequences.
+Use these alphanumeric patterns to simplify your regex
+searches.</p>
+
+<table border="0" cellpadding="5" width="40%">
+<tr>
+<td width="30%" nowrap="nowrap"><strong>Character
+Class</strong></td>
+<td width="70%"><strong>Description</strong></td>
+</tr>
+
+<tr>
+<td width="30%" valign="top"><code>[0-9]</code></td>
+<td width="70%" valign="top">Matches any digit from 0 to 9.</td>
+</tr>
+
+<tr>
+<td width="30%" valign="top"><code>[a-zA-z]</code></td>
+<td width="70%" valign="top">Matches any alphabetic character.</td>
+</tr>
+
+<tr>
+<td width="30%" valign="top" nowrap="nowrap">
+<code>[a-zA-z0-9]</code></td>
+<td width="70%" valign="top">Matches any alphanumeric
+character.</td>
+</tr>
+
+<tr>
+<td width="30%" valign="top"><code>[^0-9]</code></td>
+<td width="70%" valign="top">Matches any non-digit.</td>
+</tr>
+
+<tr>
+<td width="30%" valign="top" nowrap="nowrap">
+<code>[^a-zA-z]</code></td>
+<td width="70%" valign="top">Matches any non-alphabetic
+character.</td>
+</tr>
+</table>
+
+<h3><a name="anchors">Matching Locations within a String</a></h3>
+
+<p>At times, the pattern to be matched appears at either the very
+beginning or end of a string. In these cases, use a caret "^" to
+match a desired pattern at the beginning of a string, and a dollar
+sign "$" for the end of the string. For example, the regular
+expression <code>email</code> matches anywhere along the following
+strings: "email", "emailing", "bogus_emails", and
+"smithsemailaddress". However, the regex <code>^email</code> only
+matches the strings "email" and "emailing". The caret "^" in this
+example is used to effectively <em>anchor</em> the match to the
+start of the string. For this reason, both the caret "^" and dollar
+sign "$" are referred to as anchors in the regex syntax.</p>
+
+<p><strong>Note:</strong> The caret "^" has many meanings in
+regular expressions. Its function is determined by its context. The
+caret can be used as an anchor to match patterns at the beginning
+of a string, for example:<code>(^File)</code>. The caret can also
+be used as a logical "NOT" to negate content in a character class,
+for example: <code>[^...]</code>.</p>
+
+<p><strong>Using anchors to match at the beginning or end of a
+string.</strong></p>
+
+<p><strong>Example 1</strong>: Use "$" to match the ".com" pattern
+at the end of a string.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    .*\.com$
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    mydomain.com 
+    a.b.c.com
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    mydomain.org 
+    mydomain.com.org
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 2</strong>: Use "^" to match "inter" at the
+beginning of a string, "$" to match "ion" at the end of a string,
+and ".*" to match any number of characters within the string.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    ^inter.*ion$
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    internationalization
+    internalization
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    reinternationalization
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 3</strong>: Use "^" inside parentheses to match
+"To" and "From" at the beginning of the string.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    (^To:|^From:)(Smith|Chan)
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    From:Chan
+    To:Smith
+    From:Smith 
+    To:Chan 
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    From: Chan
+    from:Smith
+    To Chan
+   
+</pre>
+</li>
+</ul>
+
+<p><strong>Example 4</strong>: Performing the same search as #3,
+place the caret "^" outside the parentheses this time for similar
+results.</p>
+
+<ul>
+<li><strong>Regex</strong>: 
+
+<pre>
+    ^(From|Subject|Date):(Smith|Chan|Today)
+   
+</pre>
+</li>
+
+<li><strong>Matches</strong>: 
+
+<pre>
+    From:Smith
+    Subject:Chan 
+    Date:Today
+   
+</pre>
+</li>
+
+<li><strong>Doesn't Match</strong>: 
+
+<pre>
+    X-Subject:
+    date:Today
+   
+</pre>
+</li>
+</ul>
+
+<h2><a name="more">More Tcl Regex Resources</a></h2>
+
+<h3>ActiveState Programmer Network (ASPN)</h3>
+
+<ul>
+<li><a target="_blank" href=
+"http://www.aspn.activestate.com/ASPN/docs/ActiveTcl/tcl/TclCmd/re_syntax.htm">
+re_syntax</a>, Tcl regular expressions syntax</li>
+
+<li><a target="_blank" href=
+"http://www.aspn.activestate.com/ASPN/docs/ActiveTcl/tcl/TclCmd/regexp.htm">
+regexp</a>, match a regular expression against a string</li>
+
+<li><a target="_blank" href=
+"http://www.aspn.activestate.com/ASPN/docs/ActiveTcl/tcl/TclCmd/regsub.htm">
+regsub</a>, perform substitutions based on regular expression
+pattern matching</li>
+</ul>
+
+<h3>Tcl Developer Xchange</h3>
+
+<ul>
+<li><a target="_blank" href=
+"http://www.tcl.tk/doc/howto/regexp81.html">Regular Expressions in
+Tcl 8.1</a></li>
+
+<li><a target="_blank" href=
+"http://www.tcl.tk/man/tcl8.2.3/TclCmd/switch.htm">Evaluating
+Scripts with Switch</a></li>
+</ul>
+
+<h3>O'Reilly Books</h3>
+
+<ul>
+<li><a target="_blank" href=
+"http://www.oreilly.com/catalog/expect/">Exploring Expect</a>,
+<em>"Chapter 5: Regular Expressions"</em>, by Don Libes</li>
+
+<li><a target="_blank" href=
+"http://www.oreilly.com/catalog/regex2/">Mastering Regular
+Expressions</a>, by Jeffrey Friedl</li>
+</ul>
+</body>
+</html>
+

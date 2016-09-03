@@ -1,0 +1,536 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> Tk Library</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | Tk Library</h3>
+
+<table>
+<tr>
+<td><a href="3DBorder.htm">Tk_3DBorderColor</a></td>
+<td><a href="WindowId.htm">Tk_DisplayName</a></td>
+<td><a href="GetRelief.htm">Tk_GetReliefFromObj</a></td>
+<td><a href="TextLayout.htm">Tk_PointToChar</a></td>
+</tr>
+
+<tr>
+<td><a href="3DBorder.htm">Tk_3DBorderGC</a></td>
+<td><a href="TextLayout.htm">Tk_DistanceToTextLayout</a></td>
+<td><a href="GetRootCrd.htm">Tk_GetRootCoords</a></td>
+<td><a href="FontId.htm">Tk_PostscriptFontName</a></td>
+</tr>
+
+<tr>
+<td><a href="3DBorder.htm">Tk_3DHorizontalBevel</a></td>
+<td><a href="3DBorder.htm">Tk_Draw3DPolygon</a></td>
+<td><a href="GetPixels.htm">Tk_GetScreenMM</a></td>
+<td><a href="GetClrmap.htm">Tk_PreserveColormap</a></td>
+</tr>
+
+<tr>
+<td><a href="3DBorder.htm">Tk_3DVerticalBevel</a></td>
+<td><a href="3DBorder.htm">Tk_Draw3DRectangle</a></td>
+<td><a href="GetScroll.htm">Tk_GetScrollInfo</a></td>
+<td><a href="QWinEvent.htm">Tk_QueueWindowEvent</a></td>
+</tr>
+
+<tr>
+<td><a href="AddOption.htm">Tk_AddOption</a></td>
+<td><a href="MeasureChar.htm">Tk_DrawChars</a></td>
+<td><a href="GetScroll.htm">Tk_GetScrollInfoObj</a></td>
+<td><a href="GetImage.htm">Tk_RedrawImage</a></td>
+</tr>
+
+<tr>
+<td><a href="3DBorder.htm">Tk_Alloc3DBorderFromObj</a></td>
+<td><a href="DrawFocHlt.htm">Tk_DrawFocusHighlight</a></td>
+<td><a href="GetSelect.htm">Tk_GetSelection</a></td>
+<td><a href="WindowId.htm">Tk_ReqHeight</a></td>
+</tr>
+
+<tr>
+<td><a href="GetBitmap.htm">Tk_AllocBitmapFromObj</a></td>
+<td><a href="TextLayout.htm">Tk_DrawTextLayout</a></td>
+<td><a href="GetUid.htm">Tk_GetUid</a></td>
+<td><a href="WindowId.htm">Tk_ReqWidth</a></td>
+</tr>
+
+<tr>
+<td><a href="GetColor.htm">Tk_AllocColorFromObj</a></td>
+<td><a href="3DBorder.htm">Tk_Fill3DPolygon</a></td>
+<td><a href="Inactive.htm">Tk_GetUserInactiveTime</a></td>
+<td><a href="Inactive.htm">Tk_ResetUserInactiveTime</a></td>
+</tr>
+
+<tr>
+<td><a href="GetCursor.htm">Tk_AllocCursorFromObj</a></td>
+<td><a href="3DBorder.htm">Tk_Fill3DRectangle</a></td>
+<td><a href="GetVisual.htm">Tk_GetVisual</a></td>
+<td><a href="ConfigWind.htm">Tk_ResizeWindow</a></td>
+</tr>
+
+<tr>
+<td><a href="GetFont.htm">Tk_AllocFontFromObj</a></td>
+<td><a href="FindPhoto.htm">Tk_FindPhoto</a></td>
+<td><a href="GetVRoot.htm">Tk_GetVRootGeometry</a></td>
+<td><a href="Restack.htm">Tk_RestackWindow</a></td>
+</tr>
+
+<tr>
+<td><a href="GetHWND.htm">Tk_AttachHWND</a></td>
+<td><a href="FontId.htm">Tk_FontId</a></td>
+<td><a href="Grab.htm">Tk_Grab</a></td>
+<td><a href="SetOptions.htm">Tk_RestoreSavedOptions</a></td>
+</tr>
+
+<tr>
+<td><a href="WindowId.htm">Tk_Attributes</a></td>
+<td><a href="3DBorder.htm">Tk_Free3DBorder</a></td>
+<td><a href="HandleEvent.htm">Tk_HandleEvent</a></td>
+<td><a href="RestrictEv.htm">Tk_RestrictEvents</a></td>
+</tr>
+
+<tr>
+<td><a href="BindTable.htm">Tk_BindEvent</a></td>
+<td><a href="3DBorder.htm">Tk_Free3DBorderFromObj</a></td>
+<td><a href="WindowId.htm">Tk_Height</a></td>
+<td><a href="Tk_Init.htm">Tk_SafeInit</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvTkwin.htm">Tk_CanvasDrawableCoords</a></td>
+<td><a href="GetBitmap.htm">Tk_FreeBitmap</a></td>
+<td><a href="HWNDToWindow.htm">Tk_HWNDToWindow</a></td>
+<td><a href="WindowId.htm">Tk_Screen</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvTkwin.htm">Tk_CanvasEventuallyRedraw</a></td>
+<td><a href="GetBitmap.htm">Tk_FreeBitmapFromObj</a></td>
+<td><a href="IdToWindow.htm">Tk_IdToWindow</a></td>
+<td><a href="WindowId.htm">Tk_ScreenNumber</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvTkwin.htm">Tk_CanvasGetCoord</a></td>
+<td><a href="GetColor.htm">Tk_FreeColor</a></td>
+<td><a href="ImgChanged.htm">Tk_ImageChanged</a></td>
+<td><a href="SetAppName.htm">Tk_SetAppName</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvPsY.htm">Tk_CanvasPsBitmap</a></td>
+<td><a href="GetColor.htm">Tk_FreeColorFromObj</a></td>
+<td><a href="Tk_Init.htm">Tk_Init</a></td>
+<td><a href="3DBorder.htm">Tk_SetBackgroundFromBorder</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvPsY.htm">Tk_CanvasPsColor</a></td>
+<td><a href="GetClrmap.htm">Tk_FreeColormap</a></td>
+<td><a href="CrtConsoleChan.htm">Tk_InitConsoleChannels</a></td>
+<td><a href="SetCaret.htm">Tk_SetCaretPos</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvPsY.htm">Tk_CanvasPsFont</a></td>
+<td><a href="SetOptions.htm">Tk_FreeConfigOptions</a></td>
+<td><a href="CrtImgType.htm">Tk_InitImageArgs</a></td>
+<td><a href="SetClass.htm">Tk_SetClass</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvPsY.htm">Tk_CanvasPsPath</a></td>
+<td><a href="GetCursor.htm">Tk_FreeCursor</a></td>
+<td><a href="SetOptions.htm">Tk_InitOptions</a></td>
+<td><a href="SetClassProcs.htm">Tk_SetClassProcs</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvPsY.htm">Tk_CanvasPsStipple</a></td>
+<td><a href="GetCursor.htm">Tk_FreeCursorFromObj</a></td>
+<td><a href="TkInitStubs.htm">Tk_InitStubs</a></td>
+<td><a href="SetGrid.htm">Tk_SetGrid</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvPsY.htm">Tk_CanvasPsY</a></td>
+<td><a href="GetFont.htm">Tk_FreeFont</a></td>
+<td><a href="WindowId.htm">Tk_InternalBorderBottom</a></td>
+<td><a href="GeomReq.htm">Tk_SetInternalBorder</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvTkwin.htm">Tk_CanvasSetStippleOrigin</a></td>
+<td><a href="GetFont.htm">Tk_FreeFontFromObj</a></td>
+<td><a href="WindowId.htm">Tk_InternalBorderLeft</a></td>
+<td><a href="GeomReq.htm">Tk_SetInternalBorderEx</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvTkwin.htm">Tk_CanvasTagsOption</a></td>
+<td><a href="GetGC.htm">Tk_FreeGC</a></td>
+<td><a href="WindowId.htm">Tk_InternalBorderRight</a></td>
+<td><a href="GeomReq.htm">Tk_SetMinimumRequestSize</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvTxtInfo.htm">Tk_CanvasTextInfo</a></td>
+<td><a href="GetImage.htm">Tk_FreeImage</a></td>
+<td><a href="WindowId.htm">Tk_InternalBorderTop</a></td>
+<td><a href="SetOptions.htm">Tk_SetOptions</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvTkwin.htm">Tk_CanvasTkwin</a></td>
+<td><a href="ConfigWidg.htm">Tk_FreeOptions</a></td>
+<td><a href="InternAtom.htm">Tk_InternAtom</a></td>
+<td><a href="ConfigWind.htm">Tk_SetWindowBackground</a></td>
+</tr>
+
+<tr>
+<td><a href="CanvTkwin.htm">Tk_CanvasWindowCoords</a></td>
+<td><a href="GetPixmap.htm">Tk_FreePixmap</a></td>
+<td><a href="WindowId.htm">Tk_Interp</a></td>
+<td><a href="ConfigWind.htm">Tk_SetWindowBackgroundPixmap</a></td>
+</tr>
+
+<tr>
+<td><a href="WindowId.htm">Tk_Changes</a></td>
+<td><a href="SetOptions.htm">Tk_FreeSavedOptions</a></td>
+<td><a href="TextLayout.htm">Tk_IntersectTextLayout</a></td>
+<td><a href="ConfigWind.htm">Tk_SetWindowBorder</a></td>
+</tr>
+
+<tr>
+<td><a href="ConfigWind.htm">Tk_ChangeWindowAttributes</a></td>
+<td><a href="TextLayout.htm">Tk_FreeTextLayout</a></td>
+<td><a href="WindowId.htm">Tk_IsContainer</a></td>
+<td><a href="ConfigWind.htm">Tk_SetWindowBorderPixmap</a></td>
+</tr>
+
+<tr>
+<td><a href="TextLayout.htm">Tk_CharBbox</a></td>
+<td><a href="FreeXId.htm">Tk_FreeXId</a></td>
+<td><a href="WindowId.htm">Tk_IsEmbedded</a></td>
+<td><a href="ConfigWind.htm">Tk_SetWindowBorderWidth</a></td>
+</tr>
+
+<tr>
+<td><a href="SetClass.htm">Tk_Class</a></td>
+<td><a href="GeomReq.htm">Tk_GeometryRequest</a></td>
+<td><a href="WindowId.htm">Tk_IsMapped</a></td>
+<td><a href="ConfigWind.htm">Tk_SetWindowColormap</a></td>
+</tr>
+
+<tr>
+<td><a href="ClrSelect.htm">Tk_ClearSelection</a></td>
+<td><a href="3DBorder.htm">Tk_Get3DBorder</a></td>
+<td><a href="WindowId.htm">Tk_IsTopLevel</a></td>
+<td><a href="SetVisual.htm">Tk_SetWindowVisual</a></td>
+</tr>
+
+<tr>
+<td><a href="Clipboard.htm">Tk_ClipboardAppend</a></td>
+<td><a href="3DBorder.htm">Tk_Get3DBorderFromObj</a></td>
+<td><a href="Tk_Main.htm">Tk_Main</a></td>
+<td><a href="GetBitmap.htm">Tk_SizeOfBitmap</a></td>
+</tr>
+
+<tr>
+<td><a href="Clipboard.htm">Tk_ClipboardClear</a></td>
+<td><a href="BindTable.htm">Tk_GetAllBindings</a></td>
+<td><a href="MainLoop.htm">Tk_MainLoop</a></td>
+<td><a href="GetImage.htm">Tk_SizeOfImage</a></td>
+</tr>
+
+<tr>
+<td><a href="QWinEvent.htm">Tk_CollapseMotionEvents</a></td>
+<td><a href="GetAnchor.htm">Tk_GetAnchor</a></td>
+<td><a href="MaintGeom.htm">Tk_MaintainGeometry</a></td>
+<td><a href="StrictMotif.htm">Tk_StrictMotif</a></td>
+</tr>
+
+<tr>
+<td><a href="WindowId.htm">Tk_Colormap</a></td>
+<td><a href="GetAnchor.htm">Tk_GetAnchorFromObj</a></td>
+<td><a href="MainWin.htm">Tk_MainWindow</a></td>
+<td><a href="TextLayout.htm">Tk_TextLayoutToPostscript</a></td>
+</tr>
+
+<tr>
+<td><a href="TextLayout.htm">Tk_ComputeTextLayout</a></td>
+<td><a href="InternAtom.htm">Tk_GetAtomName</a></td>
+<td><a href="CrtWindow.htm">Tk_MakeWindowExist</a></td>
+<td><a href="MeasureChar.htm">Tk_TextWidth</a></td>
+</tr>
+
+<tr>
+<td><a href="ConfigWidg.htm">Tk_ConfigureInfo</a></td>
+<td><a href="BindTable.htm">Tk_GetBinding</a></td>
+<td><a href="ManageGeom.htm">Tk_ManageGeometry</a></td>
+<td><a href="GetUid.htm">Tk_Uid</a></td>
+</tr>
+
+<tr>
+<td><a href="ConfigWidg.htm">Tk_ConfigureValue</a></td>
+<td><a href="GetBitmap.htm">Tk_GetBitmap</a></td>
+<td><a href="MapWindow.htm">Tk_MapWindow</a></td>
+<td><a href="ConfigWind.htm">Tk_UndefineCursor</a></td>
+</tr>
+
+<tr>
+<td><a href="ConfigWidg.htm">Tk_ConfigureWidget</a></td>
+<td><a href="GetBitmap.htm">Tk_GetBitmapFromObj</a></td>
+<td><a href="MeasureChar.htm">Tk_MeasureChars</a></td>
+<td><a href="MeasureChar.htm">Tk_UnderlineChars</a></td>
+</tr>
+
+<tr>
+<td><a href="ConfigWind.htm">Tk_ConfigureWindow</a></td>
+<td><a href="GetCapStyl.htm">Tk_GetCapStyle</a></td>
+<td><a href="WindowId.htm">Tk_MinReqHeight</a></td>
+<td><a href="TextLayout.htm">Tk_UnderlineTextLayout</a></td>
+</tr>
+
+<tr>
+<td><a href="CoordToWin.htm">Tk_CoordsToWindow</a></td>
+<td><a href="GetColor.htm">Tk_GetColor</a></td>
+<td><a href="WindowId.htm">Tk_MinReqWidth</a></td>
+<td><a href="Grab.htm">Tk_Ungrab</a></td>
+</tr>
+
+<tr>
+<td><a href="BindTable.htm">Tk_CreateBinding</a></td>
+<td><a href="GetColor.htm">Tk_GetColorByValue</a></td>
+<td><a href="ConfigWind.htm">Tk_MoveResizeWindow</a></td>
+<td><a href="MaintGeom.htm">Tk_UnmaintainGeometry</a></td>
+</tr>
+
+<tr>
+<td><a href="BindTable.htm">Tk_CreateBindingTable</a></td>
+<td><a href="GetColor.htm">Tk_GetColorFromObj</a></td>
+<td><a href="MoveToplev.htm">Tk_MoveToplevelWindow</a></td>
+<td><a href="MapWindow.htm">Tk_UnmapWindow</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtCmHdlr.htm">Tk_CreateClientMessageHandler</a></td>
+<td><a href="GetClrmap.htm">Tk_GetColormap</a></td>
+<td><a href="ConfigWind.htm">Tk_MoveWindow</a></td>
+<td><a href="SetGrid.htm">Tk_UnsetGrid</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtErrHdlr.htm">Tk_CreateErrorHandler</a></td>
+<td><a href="GetCursor.htm">Tk_GetCursor</a></td>
+<td><a href="Name.htm">Tk_Name</a></td>
+<td><a href="WindowId.htm">Tk_Visual</a></td>
+</tr>
+
+<tr>
+<td><a href="EventHndlr.htm">Tk_CreateEventHandler</a></td>
+<td><a href="GetCursor.htm">Tk_GetCursorFromData</a></td>
+<td><a href="3DBorder.htm">Tk_NameOf3DBorder</a></td>
+<td><a href="WindowId.htm">Tk_Width</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtGenHdlr.htm">Tk_CreateGenericHandler</a></td>
+<td><a href="GetCursor.htm">Tk_GetCursorFromObj</a></td>
+<td><a href="GetAnchor.htm">Tk_NameOfAnchor</a></td>
+<td><a href="WindowId.htm">Tk_WindowId</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtImgType.htm">Tk_CreateImageType</a></td>
+<td><a href="GetDash.htm">Tk_GetDash</a></td>
+<td><a href="GetBitmap.htm">Tk_NameOfBitmap</a></td>
+<td><a href="WindowId.htm">Tk_X</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtItemType.htm">Tk_CreateItemType</a></td>
+<td><a href="GetFont.htm">Tk_GetFont</a></td>
+<td><a href="GetCapStyl.htm">Tk_NameOfCapStyle</a></td>
+<td><a href="WindowId.htm">Tk_Y</a></td>
+</tr>
+
+<tr>
+<td><a href="SetOptions.htm">Tk_CreateOptionTable</a></td>
+<td><a href="GetFont.htm">Tk_GetFontFromObj</a></td>
+<td><a href="GetColor.htm">Tk_NameOfColor</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_AddPadding</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtPhImgFmt.htm">Tk_CreatePhotoImageFormat</a></td>
+<td><a href="FontId.htm">Tk_GetFontMetrics</a></td>
+<td><a href="GetCursor.htm">Tk_NameOfCursor</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_BoxContains</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtSelHdlr.htm">Tk_CreateSelHandler</a></td>
+<td><a href="GetGC.htm">Tk_GetGC</a></td>
+<td><a href="GetFont.htm">Tk_NameOfFont</a></td>
+<td><a href="ttk_Theme.htm">Ttk_CreateTheme</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtWindow.htm">Tk_CreateWindow</a></td>
+<td><a href="GetHINSTANCE.htm">Tk_GetHINSTANCE</a></td>
+<td><a href="NameOfImg.htm">Tk_NameOfImage</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_ExpandBox</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtWindow.htm">Tk_CreateWindowFromPath</a></td>
+<td><a href="GetHWND.htm">Tk_GetHWND</a></td>
+<td><a href="GetJoinStl.htm">Tk_NameOfJoinStyle</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_GetBorderFromObj</a></td>
+</tr>
+
+<tr>
+<td><a href="GetBitmap.htm">Tk_DefineBitmap</a></td>
+<td><a href="GetImage.htm">Tk_GetImage</a></td>
+<td><a href="GetJustify.htm">Tk_NameOfJustify</a></td>
+<td><a href="ttk_Theme.htm">Ttk_GetCurrentTheme</a></td>
+</tr>
+
+<tr>
+<td><a href="ConfigWind.htm">Tk_DefineCursor</a></td>
+<td><a href="CrtImgType.htm">Tk_GetImageMasterData</a></td>
+<td><a href="GetRelief.htm">Tk_NameOfRelief</a></td>
+<td><a href="ttk_Theme.htm">Ttk_GetDefaultTheme</a></td>
+</tr>
+
+<tr>
+<td><a href="BindTable.htm">Tk_DeleteAllBindings</a></td>
+<td><a href="CrtItemType.htm">Tk_GetItemTypes</a></td>
+<td><a href="Name.htm">Tk_NameToWindow</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_GetPaddingFromObj</a></td>
+</tr>
+
+<tr>
+<td><a href="BindTable.htm">Tk_DeleteBinding</a></td>
+<td><a href="GetJoinStl.htm">Tk_GetJoinStyle</a></td>
+<td><a href="SetOptions.htm">Tk_Offset</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_GetStickyFromObj</a></td>
+</tr>
+
+<tr>
+<td><a href="BindTable.htm">Tk_DeleteBindingTable</a></td>
+<td><a href="GetJustify.htm">Tk_GetJustify</a></td>
+<td><a href="OwnSelect.htm">Tk_OwnSelection</a></td>
+<td><a href="ttk_Theme.htm">Ttk_GetTheme</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtCmHdlr.htm">Tk_DeleteClientMessageHandler</a></td>
+<td><a href="GetJustify.htm">Tk_GetJustifyFromObj</a></td>
+<td><a href="WindowId.htm">Tk_Parent</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_MakeBox</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtErrHdlr.htm">Tk_DeleteErrorHandler</a></td>
+<td><a href="GetPixels.htm">Tk_GetMMFromObj</a></td>
+<td><a href="ParseArgv.htm">Tk_ParseArgv</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_MakePadding</a></td>
+</tr>
+
+<tr>
+<td><a href="EventHndlr.htm">Tk_DeleteEventHandler</a></td>
+<td><a href="MainWin.htm">Tk_GetNumMainWindows</a></td>
+<td><a href="Name.htm">Tk_PathName</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_PackBox</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtGenHdlr.htm">Tk_DeleteGenericHandler</a></td>
+<td><a href="GetOption.htm">Tk_GetOption</a></td>
+<td><a href="FindPhoto.htm">Tk_PhotoBlank</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_PadBox</a></td>
+</tr>
+
+<tr>
+<td><a href="DeleteImg.htm">Tk_DeleteImage</a></td>
+<td><a href="SetOptions.htm">Tk_GetOptionInfo</a></td>
+<td><a href="FindPhoto.htm">Tk_PhotoExpand</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_PlaceBox</a></td>
+</tr>
+
+<tr>
+<td><a href="SetOptions.htm">Tk_DeleteOptionTable</a></td>
+<td><a href="SetOptions.htm">Tk_GetOptionValue</a></td>
+<td><a href="FindPhoto.htm">Tk_PhotoGetImage</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_RelievePadding</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtSelHdlr.htm">Tk_DeleteSelHandler</a></td>
+<td><a href="GetPixels.htm">Tk_GetPixels</a></td>
+<td><a href="FindPhoto.htm">Tk_PhotoGetSize</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_StickBox</a></td>
+</tr>
+
+<tr>
+<td><a href="WindowId.htm">Tk_Depth</a></td>
+<td><a href="GetPixels.htm">Tk_GetPixelsFromObj</a></td>
+<td><a href="FindPhoto.htm">Tk_PhotoPutBlock</a></td>
+<td><a href="ttk_Geometry.htm">Ttk_UniformPadding</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtWindow.htm">Tk_DestroyWindow</a></td>
+<td><a href="GetPixmap.htm">Tk_GetPixmap</a></td>
+<td><a href="FindPhoto.htm">Tk_PhotoPutZoomedBlock</a></td>
+</tr>
+
+<tr>
+<td><a href="WindowId.htm">Tk_Display</a></td>
+<td><a href="GetRelief.htm">Tk_GetRelief</a></td>
+<td><a href="FindPhoto.htm">Tk_PhotoSetSize</a></td>
+</tr>
+</table>
+
+<div class="copy">Copyright &copy; 1989-1994 The Regents of the
+University of California Copyright &copy; 1994 The Australian
+National University Copyright &copy; 1994-1998 Sun Microsystems,
+Inc Copyright &copy; 1995-1997 Roger E. Critchlow Jr Copyright
+&copy; 1998-2000 Scriptics Corporation Copyright &copy; 2000 Ajuba
+Solutions Copyright &copy; 2002 ActiveState Corporation Copyright
+&copy; 2003-2004 Joe English Copyright &copy; 2007 ActiveState
+Software Inc</div>
+</body>
+</html>
+

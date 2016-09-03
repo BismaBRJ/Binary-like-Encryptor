@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_Main manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> Tcl_Main</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_Main, Tcl_SetMainLoop - main program and event loop definition
+for Tcl-based applications 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+<b>Tcl_Main</b>(<i>argc, argv, appInitProc</i>)<br>
+<b>Tcl_SetMainLoop</b>(<i>mainLoopProc</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>int <b>argc</b> (in)</dt>
+
+<dd>Number of elements in <i>argv</i>.</dd>
+
+<dt>char <b>*argv[]</b> (in)</dt>
+
+<dd>Array of strings containing command-line arguments.</dd>
+
+<dt>Tcl_AppInitProc <b>*appInitProc</b> (in)</dt>
+
+<dd>Address of an application-specific initialization procedure.
+The value for this argument is usually <b><a href=
+"../TclLib/AppInit.htm">Tcl_AppInit</a></b>.</dd>
+
+<dt>Tcl_MainLoopProc <b>*mainLoopProc</b> (in)</dt>
+
+<dd>Address of an application-specific event loop procedure.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_Main</b> can serve as the main program for Tcl-based shell
+applications. A &ldquo;shell application&rdquo; is a program like
+tclsh or wish that supports both interactive interpretation of Tcl
+and evaluation of a script contained in a file given as a command
+line argument. <b>Tcl_Main</b> is offered as a convenience to
+developers of shell applications, so they do not have to reproduce
+all of the code for proper initialization of the Tcl library and
+interactive shell operation. Other styles of embedding Tcl in an
+application are not supported by <b>Tcl_Main</b>. Those must be
+achieved by calling lower level functions in the Tcl library
+directly. The <b>Tcl_Main</b> function has been offered by the Tcl
+library since release Tcl 7.4. In older releases of Tcl, the Tcl
+library itself defined a function <b>main</b>, but that lacks
+flexibility of embedding style and having a function <b>main</b> in
+a library (particularly a shared library) causes problems on many
+systems. Having <b>main</b> in the Tcl library would also make it
+hard to use Tcl in C++ programs, since C++ programs must have
+special C++ <b>main</b> functions. 
+
+<p>Normally each shell application contains a small <b>main</b>
+function that does nothing but invoke <b>Tcl_Main</b>.
+<b>Tcl_Main</b> then does all the work of creating and running a
+<b><a href="../UserCmd/tclsh.htm">tclsh</a></b>-like
+application.</p>
+
+<p><b>Tcl_Main</b> is not provided by the public interface of Tcl's
+stub library. Programs that call <b>Tcl_Main</b> must be linked
+against the standard Tcl library. Extensions (stub-enabled or not)
+are not intended to call <b>Tcl_Main</b>.</p>
+
+<p><b>Tcl_Main</b> is not thread-safe. It should only be called by
+a single master thread of a multi-threaded application. This
+restriction is not a problem with normal use described above.</p>
+
+<p><b>Tcl_Main</b> and therefore all applications based upon it,
+like <b><a href="../UserCmd/tclsh.htm">tclsh</a></b>, use <b><a
+href="../TclLib/GetStdChan.htm">Tcl_GetStdChannel</a></b> to
+initialize the standard channels to their default values. See <b><a
+href="../TclLib/StdChannels.htm">Tcl_StandardChannels</a></b> for
+more information.</p>
+
+<p><b>Tcl_Main</b> supports two modes of operation, depending on
+the values of <i>argc</i> and <i>argv</i>. If the first few
+arguments in <i>argv</i> match ?<b>-encoding</b> <i>name</i>?
+<i>fileName</i>, where <i>fileName</i> does not begin with the
+character <i>-</i>, then <i>fileName</i> is taken to be the name of
+a file containing a <i>startup script</i>, and <i>name</i> is taken
+to be the name of the encoding of the contents of that file, which
+<b>Tcl_Main</b> will attempt to evaluate. Otherwise,
+<b>Tcl_Main</b> will enter an interactive mode.</p>
+
+<p>In either mode, <b>Tcl_Main</b> will define in its master
+interpreter the Tcl variables <i>argc</i>, <i>argv</i>,
+<i>argv0</i>, and <i>tcl_interactive</i>, as described in the
+documentation for <b><a href=
+"../UserCmd/tclsh.htm">tclsh</a></b>.</p>
+
+<p>When it has finished its own initialization, but before it
+processes commands, <b>Tcl_Main</b> calls the procedure given by
+the <i>appInitProc</i> argument. This procedure provides a
+&ldquo;hook&rdquo; for the application to perform its own
+initialization of the interpreter created by <b>Tcl_Main</b>, such
+as defining application-specific commands. The procedure must have
+an interface that matches the type <b>Tcl_AppInitProc</b>:</p>
+
+<pre>
+typedef int Tcl_AppInitProc(<a href=
+"../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>);
+</pre>
+
+<i>AppInitProc</i> is almost always a pointer to <b><a href=
+"../TclLib/AppInit.htm">Tcl_AppInit</a></b>; for more details on
+this procedure, see the documentation for <b><a href=
+"../TclLib/AppInit.htm">Tcl_AppInit</a></b>. 
+
+<p>When the <i>appInitProc</i> is finished, <b>Tcl_Main</b> enters
+one of its two modes. If a startup script has been provided,
+<b>Tcl_Main</b> attempts to evaluate it. Otherwise, interactive
+mode begins with examination of the variable <i>tcl_rcFileName</i>
+in the master interpreter. If that variable exists and holds the
+name of a readable file, the contents of that file are evaluated in
+the master interpreter. Then interactive operations begin, with
+prompts and command evaluation results written to the standard
+output channel, and commands read from the standard input channel
+and then evaluated. The prompts written to the standard output
+channel may be customized by defining the Tcl variables
+<i>tcl_prompt1</i> and <i>tcl_prompt2</i> as described in the
+documentation for <b><a href="../UserCmd/tclsh.htm">tclsh</a></b>.
+The prompts and command evaluation results are written to the
+standard output channel only if the Tcl variable
+<i>tcl_interactive</i> in the master interpreter holds a non-zero
+integer value.</p>
+
+<p><b>Tcl_SetMainLoop</b> allows setting an event loop procedure to
+be run. This allows, for example, Tk to be dynamically loaded and
+set its event loop. The event loop will run following the startup
+script. If you are in interactive mode, setting the main loop
+procedure will cause the prompt to become fileevent based and then
+the loop procedure is called. When the loop procedure returns in
+interactive mode, interactive operation will continue. The main
+loop procedure must have an interface that matches the type
+<b>Tcl_MainLoopProc</b>:</p>
+
+<pre>
+typedef void Tcl_MainLoopProc(void);
+</pre>
+
+<p><b>Tcl_Main</b> does not return. Normally a program based on
+<b>Tcl_Main</b> will terminate when the <b><a href=
+"../TclCmd/exit.htm">exit</a></b> command is evaluated. In
+interactive mode, if an EOF or channel error is encountered on the
+standard input channel, then <b>Tcl_Main</b> itself will evaluate
+the <b><a href="../TclCmd/exit.htm">exit</a></b> command after the
+main loop procedure (if any) returns. In non-interactive mode,
+after <b>Tcl_Main</b> evaluates the startup script, and the main
+loop procedure (if any) returns, <b>Tcl_Main</b> will also evaluate
+the <b><a href="../TclCmd/exit.htm">exit</a></b> command.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../UserCmd/tclsh.htm">tclsh</a></b>, <b><a href=
+"../TclLib/GetStdChan.htm">Tcl_GetStdChannel</a></b>, <b><a href=
+"../TclLib/StdChannels.htm">Tcl_StandardChannels</a></b>, <b><a
+href="../TclLib/AppInit.htm">Tcl_AppInit</a></b>, <b><a href=
+"../TclCmd/exit.htm">exit</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href=
+"../Keywords/A.htm#application-specific initialization">application-specific
+initialization</a>, <a href=
+"../Keywords/C.htm#command-line arguments">command-line
+arguments</a>, <a href="../Keywords/M.htm#main program">main
+program</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+2000 Ajuba Solutions.</div>
+</body>
+</html>
+

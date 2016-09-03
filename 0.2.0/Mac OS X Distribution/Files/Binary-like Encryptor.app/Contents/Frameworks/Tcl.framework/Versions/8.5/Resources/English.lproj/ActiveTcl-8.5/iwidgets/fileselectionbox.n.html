@@ -1,0 +1,487 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>fileselectionbox - Create and manipulate a file selection
+box widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>fileselectionbox - Create and manipulate a file selection box
+widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>fileselectionbox pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- Fileselectionbox 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeBackground</b><br>
+<b>foreground</b><br>
+<b>insertBorderWidth</b><br>
+<b>selectBackground</b><br>
+</td>
+<td valign="top"><b>background</b><br>
+<b>highlightColor</b><br>
+<b>insertOffTime</b><br>
+<b>selectBorderWidth</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>highlightThickness</b><br>
+<b>insertOnTime</b><br>
+<b>selectForeground</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>insertBackground</b><br>
+<b>insertWidth</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>textBackground</b><br>
+</td>
+<td valign="top"><b>textFont</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="entryfield.n.html">"entryfield"</a> widget
+manual entry for details on the above associated options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>labelFont</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="labeledwidget.n.html">"labeledwidget"</a>
+widget manual entry for details on the above associated
+options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeRelief</b><br>
+</td>
+<td valign="top"><b>elementBorderWidth</b><br>
+</td>
+<td valign="top"><b>jump</b><br>
+</td>
+<td valign="top"><b>troughColor</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/scrollbar.n.html">"scrollbar"</a>
+widget class manual entry for details on the above associated
+options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>textBackground</b><br>
+</td>
+<td valign="top"><b>textFont</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="scrolledlistbox.n.html">"scrolledlistbox"</a>
+widget manual entry for details on the above associated
+options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>childSitePos</b>
+Class:                  <b>Position</b>
+Command-Line Switch:    <b>-childsitepos</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the position of the child
+site in the selection box: <b>n</b>, <b>s</b>, <b>e</b>, <b>w</b>,
+<b>top</b>, <b>bottom</b>, or <b>center</b>. The default is
+s.</div>
+
+<div style="margin-left: 2em">Specifies a Tcl command procedure
+which is called when an file list item is double clicked. Typically
+this occurs when mouse button 1 is double clicked over a file
+name.</div>
+
+<pre>
+Name:                   <b>directory</b>
+Class:                  <b>Directory</b>
+Command-Line Switch:    <b>-directory</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the initial default
+directory. The default is the present working directory.</div>
+
+<pre>
+Name:                   <b>dirSearchCommand</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-dirsearchcommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command to be
+executed to perform a directory search. The command will receive
+the current working directory and filter mask as arguments. The
+command should return a list of files which will be placed into the
+directory list.</div>
+
+<pre>
+Name:                   <b>dirsLabel</b>
+Class:                  <b>Text</b>
+Command-Line Switch:    <b>-dirslabel</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text of the label for
+the directory list. The default is "Directories".</div>
+
+<pre>
+Name:                   <b>dirsOn</b>
+Class:                  <b>DirsOn</b>
+Command-Line Switch:    <b>-dirson</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies whether or not to display
+the directory list. The value may be given in any of the forms
+acceptable to <b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<pre>
+Name:                   <b>fileSearchCommand</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-filesearchcommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command to be
+executed to perform a file search. The command will receive the
+current working directory and filter mask as arguments. The command
+should return a list of files which will be placed into the file
+list.</div>
+
+<pre>
+Name:                   <b>filesLabel</b>
+Class:                  <b>Text</b>
+Command-Line Switch:    <b>-fileslabel</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text of the label for
+the files list. The default is "Files".</div>
+
+<pre>
+Name:                   <b>filesOn</b>
+Class:                  <b>FilesOn</b>
+Command-Line Switch:    <b>-fileson</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies whether or not to display
+the files list. The value may be given in any of the forms
+acceptable to <b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<pre>
+Name:                   <b>fileType</b>
+Class:                  <b>FileType</b>
+Command-Line Switch:    <b>-filetype</b>
+</pre>
+
+<div style="margin-left: 2em">Specify the type of files which may
+appear in the file list: <b>regular</b>, <b>directory</b>, or
+<b>any</b>. The default is regular.</div>
+
+<pre>
+Name:                   <b>filterCommand</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-filtercommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command to be
+executed upon hitting the Return key in the filter entry
+widget.</div>
+
+<pre>
+Name:                   <b>filterLabel</b>
+Class:                  <b>Text</b>
+Command-Line Switch:    <b>-filterlabel</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text of the label for
+the filter entry field. The default is "Filter".</div>
+
+<pre>
+Name:                   <b>filterOn</b>
+Class:                  <b>FilterOn</b>
+Command-Line Switch:    <b>-filteron</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies whether or not to display
+the filter entry. The value may be given in any of the forms
+acceptable to <b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<pre>
+Name:                   <b>height</b>
+Class:                  <b>Height</b>
+Command-Line Switch:    <b>-height</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the height of the selection
+box. The value may be specified in any of the forms acceptable to
+Tk_GetPixels. The default is 360 pixels.</div>
+
+<pre>
+Name:                   <b>invalid</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-invalid</b>
+</pre>
+
+<div style="margin-left: 2em">Command to be executed should the
+filter contents be proven invalid. The default is {bell}.</div>
+
+<pre>
+Name:                   <b>mask</b>
+Class:                  <b>Mask</b>
+Command-Line Switch:    <b>-mask</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the initial file mask
+string. The default is "*".</div>
+
+<pre>
+Name:                   <b>noMatchString</b>
+Class:                  <b>NoMatchString</b>
+Command-Line Switch:    <b>-nomatchstring</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the string to be displayed
+in the files list should no files match the mask. The default is
+"".</div>
+
+<pre>
+Name:                   <b>selectDirCommand</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-selectdirommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command to be
+executed following selection of a directory in the directory
+list.</div>
+
+<pre>
+Name:                   <b>selectFileCommand</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-selectfileommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command to be
+executed following selection of a file in the files list.</div>
+
+<pre>
+Name:                   <b>selectionCommand</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-selectioncommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command to be
+executed upon hitting the Return key in the selection entry
+widget.</div>
+
+<pre>
+Name:                   <b>selectionLabel</b>
+Class:                  <b>Text</b>
+Command-Line Switch:    <b>-selectionlabel</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text of the label for
+the selection entry field. The default is "Selection".</div>
+
+<pre>
+Name:                   <b>selectionOn</b>
+Class:                  <b>SelectionOn</b>
+Command-Line Switch:    <b>-selectionon</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies whether or not to display
+the selection entry. The value may be given in any of the forms
+acceptable to <b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<pre>
+Name:                   <b>width</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-width</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width of the selection
+box. The value may be specified in any of the forms acceptable to
+Tk_GetPixels. The default is 470 pixels.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>fileselectionbox</b> command creates a file selection box
+similar to the OSF/Motif standard Xmfileselectionbox composite
+widget. The fileselectionbox is composed of directory and file
+scrolled lists as well as filter and selection entry fields.
+Bindings are in place such that selection of a directory list item
+loads the filter entry field and selection of a file list item
+loads the selection entry field. Options exist to control the
+appearance and actions of the widget.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>fileselectionbox</b> command creates a new Tcl command
+whose name is <i>pathName</i>. This command may be used to invoke
+various operations on the widget. It has the following general
+form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for
+fileselectionbox widgets: 
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>fileselectionbox</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>childsite</b></i></dt>
+
+<dd>Returns the child site widget path name.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>fileselectionbox</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>filter</b></i></dt>
+
+<dd>Update the current contents of the file selection box based on
+the current filter entry field value.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>get</b></i></dt>
+
+<dd>Returns the current value of the selection entry widget.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>dirs</b>
+Class:                  <b>Scrolledlistbox</b>
+</pre>
+
+<div style="margin-left: 2em">The dirs component is the directory
+list box for the file selection box. See the <a href=
+"scrolledlistbox.n.html">"scrolledlistbox"</a> widget manual entry
+for details on the dirs component item.</div>
+
+<pre>
+Name:                   <b>files</b>
+Class:                  <b>Scrolledlistbox</b>
+</pre>
+
+<div style="margin-left: 2em">The files component is the file list
+box for the file selection box. See the <a href=
+"scrolledlistbox.n.html">"scrolledlistbox"</a> widget manual entry
+for details on the files component item.</div>
+
+<pre>
+Name:                   <b>filter</b>
+Class:                  <b>Entryfield</b>
+</pre>
+
+<div style="margin-left: 2em">The filter component is the entry
+field for user input of the filter value. See the <a href=
+"entryfield.n.html">"entryfield"</a> widget manual entry for
+details on the filter component item.</div>
+
+<pre>
+Name:                   <b>selection</b>
+Class:                  <b>Entryfield</b>
+</pre>
+
+<div style="margin-left: 2em">The selection component is the entry
+field for user input of the currently selected file value. See the
+"entryfield" widget manual entry for details on the selection
+component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+fileselectionbox .fsb
+pack .fsb -padx 10 -pady 10 -fill both -expand yes 
+</pre>
+
+<h2>AUTHOR</h2>
+
+Mark L. Ulferts 
+
+<h2>KEYWORDS</h2>
+
+fileselectionbox, widget
+</body>
+</html>
+

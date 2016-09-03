@@ -1,0 +1,684 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - open manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> open</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="open.htm#M2" name="L1082">NAME</a> 
+
+<dl>
+<dd>open - Open a file-based or command pipeline channel</dd>
+</dl>
+</dd>
+
+<dd><a href="open.htm#M3" name="L1083">SYNOPSIS</a> 
+
+<dl>
+<dd><b>open</b> <i>fileName</i></dd>
+
+<dd><b>open</b> <i>fileName access</i></dd>
+
+<dd><b>open</b> <i>fileName access permissions</i></dd>
+</dl>
+</dd>
+
+<dd><a href="open.htm#M4" name="L1084">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="open.htm#M5" name="L1085"><b>r</b></a></dd>
+
+<dd><a href="open.htm#M6" name="L1086"><b>r+</b></a></dd>
+
+<dd><a href="open.htm#M7" name="L1087"><b>w</b></a></dd>
+
+<dd><a href="open.htm#M8" name="L1088"><b>w+</b></a></dd>
+
+<dd><a href="open.htm#M9" name="L1089"><b>a</b></a></dd>
+
+<dd><a href="open.htm#M10" name="L1090"><b>a+</b></a></dd>
+</dl>
+
+<dl class="description">
+<dd><a href="open.htm#M11" name="L1091"><b>RDONLY</b></a></dd>
+
+<dd><a href="open.htm#M12" name="L1092"><b>WRONLY</b></a></dd>
+
+<dd><a href="open.htm#M13" name="L1093"><b>RDWR</b></a></dd>
+
+<dd><a href="open.htm#M14" name="L1094"><b>APPEND</b></a></dd>
+
+<dd><a href="open.htm#M15" name="L1095"><b>BINARY</b></a></dd>
+
+<dd><a href="open.htm#M16" name="L1096"><b>CREAT</b></a></dd>
+
+<dd><a href="open.htm#M17" name="L1097"><b>EXCL</b></a></dd>
+
+<dd><a href="open.htm#M18" name="L1098"><b>NOCTTY</b></a></dd>
+
+<dd><a href="open.htm#M19" name="L1099"><b>NONBLOCK</b></a></dd>
+
+<dd><a href="open.htm#M20" name="L1100"><b>TRUNC</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="open.htm#M21" name="L1101">COMMAND PIPELINES</a></dd>
+
+<dd><a href="open.htm#M22" name="L1102">SERIAL COMMUNICATIONS</a> 
+
+<dl class="serial communications">
+<dd><a href="open.htm#M23" name="L1103"><b>-mode</b>
+<i>baud</i><b>,</b><i>parity</i><b>,</b><i>data</i><b>,</b><i>stop</i></a></dd>
+
+<dd><a href="open.htm#M24" name="L1104"><b>-handshake</b>
+<i>type</i></a></dd>
+
+<dd><a href="open.htm#M25" name="L1105"><b>-queue</b></a></dd>
+
+<dd><a href="open.htm#M26" name="L1106"><b>-timeout</b>
+<i>msec</i></a></dd>
+
+<dd><a href="open.htm#M27" name="L1107"><b>-ttycontrol</b>
+<i>{signal boolean signal boolean ...}</i></a></dd>
+
+<dd><a href="open.htm#M28" name="L1108"><b>-ttystatus</b></a></dd>
+
+<dd><a href="open.htm#M29" name="L1109"><b>-xchar</b> <i>{xonChar
+xoffChar}</i></a></dd>
+
+<dd><a href="open.htm#M30" name="L1110"><b>-pollinterval</b>
+<i>msec</i></a></dd>
+
+<dd><a href="open.htm#M31" name="L1111"><b>-sysbuffer</b>
+<i>inSize</i></a></dd>
+
+<dd><a href="open.htm#M32" name="L1112"><b>-sysbuffer</b>
+<i>{inSize outSize}</i></a></dd>
+
+<dd><a href="open.htm#M33" name="L1113"><b>-lasterror</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="open.htm#M34" name="L1114">SERIAL PORT SIGNALS</a> 
+
+<dl class="serial port signals">
+<dd><a href="open.htm#M35" name="L1115"><b>TXD(output)</b></a></dd>
+
+<dd><a href="open.htm#M36" name="L1116"><b>RXD(input)</b></a></dd>
+
+<dd><a href="open.htm#M37" name="L1117"><b>RTS(output)</b></a></dd>
+
+<dd><a href="open.htm#M38" name="L1118"><b>CTS(input)</b></a></dd>
+
+<dd><a href="open.htm#M39" name="L1119"><b>DTR(output)</b></a></dd>
+
+<dd><a href="open.htm#M40" name="L1120"><b>DSR(input)</b></a></dd>
+
+<dd><a href="open.htm#M41" name="L1121"><b>DCD(input)</b></a></dd>
+
+<dd><a href="open.htm#M42" name="L1122"><b>RI(input)</b></a></dd>
+
+<dd><a href="open.htm#M43" name="L1123"><b>BREAK</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="open.htm#M44" name="L1124">ERROR CODES (Windows
+only)</a> 
+
+<dl class="error codes (windows only)">
+<dd><a href="open.htm#M45" name="L1125"><b>RXOVER</b></a></dd>
+
+<dd><a href="open.htm#M46" name="L1126"><b>TXFULL</b></a></dd>
+
+<dd><a href="open.htm#M47" name="L1127"><b>OVERRUN</b></a></dd>
+
+<dd><a href="open.htm#M48" name="L1128"><b>RXPARITY</b></a></dd>
+
+<dd><a href="open.htm#M49" name="L1129"><b>FRAME</b></a></dd>
+
+<dd><a href="open.htm#M50" name="L1130"><b>BREAK</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="open.htm#M51" name="L1131">PORTABILITY ISSUES</a> 
+
+<dl class="portability issues">
+<dd><a href="open.htm#M52" name="L1132"><b>Windows</b></a></dd>
+
+<dd><a href="open.htm#M53" name="L1133"><b>Unix</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="open.htm#M54" name="L1134">EXAMPLE</a></dd>
+
+<dd><a href="open.htm#M55" name="L1135">SEE ALSO</a></dd>
+
+<dd><a href="open.htm#M56" name="L1136">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+open - Open a file-based or command pipeline channel 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>open</b> <i>fileName</i><br>
+<b>open</b> <i>fileName access</i><br>
+<b>open</b> <i>fileName access permissions</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command opens a file, serial port, or command pipeline and
+returns a channel identifier that may be used in future invocations
+of commands like <b><a href="../TclCmd/read.htm">read</a></b>,
+<b><a href="../TclCmd/puts.htm">puts</a></b>, and <b><a href=
+"../TclCmd/close.htm">close</a></b>. If the first character of
+<i>fileName</i> is not <b>|</b> then the command opens a file:
+<i>fileName</i> gives the name of the file to open, and it must
+conform to the conventions described in the <b><a href=
+"../TclCmd/filename.htm">filename</a></b> manual entry. 
+
+<p>The <i>access</i> argument, if present, indicates the way in
+which the file (or command pipeline) is to be accessed. In the
+first form <i>access</i> may have any of the following values:</p>
+
+<dl class="description">
+<dt><a name="M5"><b>r</b></a></dt>
+
+<dd>Open the file for reading only; the file must already exist.
+This is the default value if <i>access</i> is not specified.</dd>
+
+<dt><a name="M6"><b>r+</b></a></dt>
+
+<dd>Open the file for both reading and writing; the file must
+already exist.</dd>
+
+<dt><a name="M7"><b>w</b></a></dt>
+
+<dd>Open the file for writing only. Truncate it if it exists. If it
+does not exist, create a new file.</dd>
+
+<dt><a name="M8"><b>w+</b></a></dt>
+
+<dd>Open the file for reading and writing. Truncate it if it
+exists. If it does not exist, create a new file.</dd>
+
+<dt><a name="M9"><b>a</b></a></dt>
+
+<dd>Open the file for writing only. If the file does not exist,
+create a new empty file. Set the file pointer to the end of the
+file prior to each write.</dd>
+
+<dt><a name="M10"><b>a+</b></a></dt>
+
+<dd>Open the file for reading and writing. If the file does not
+exist, create a new empty file. Set the initial access position to
+the end of the file.</dd>
+</dl>
+
+<p>All of the legal <i>access</i> values above may have the
+character <b>b</b> added as the second or third character in the
+value to indicate that the opened channel should be configured with
+the <b>-translation binary</b> option, making the channel suitable
+for reading or writing of binary data.</p>
+
+<p>In the second form, <i>access</i> consists of a list of any of
+the following flags, all of which have the standard POSIX meanings.
+One of the flags must be either <b>RDONLY</b>, <b>WRONLY</b> or
+<b>RDWR</b>.</p>
+
+<dl class="description">
+<dt><a name="M11"><b>RDONLY</b></a></dt>
+
+<dd>Open the file for reading only.</dd>
+
+<dt><a name="M12"><b>WRONLY</b></a></dt>
+
+<dd>Open the file for writing only.</dd>
+
+<dt><a name="M13"><b>RDWR</b></a></dt>
+
+<dd>Open the file for both reading and writing.</dd>
+
+<dt><a name="M14"><b>APPEND</b></a></dt>
+
+<dd>Set the file pointer to the end of the file prior to each
+write.</dd>
+
+<dt><a name="M15"><b>BINARY</b></a></dt>
+
+<dd>Configure the opened channel with the <b>-translation
+binary</b> option.</dd>
+
+<dt><a name="M16"><b>CREAT</b></a></dt>
+
+<dd>Create the file if it does not already exist (without this flag
+it is an error for the file not to exist).</dd>
+
+<dt><a name="M17"><b>EXCL</b></a></dt>
+
+<dd>If <b>CREAT</b> is also specified, an error is returned if the
+file already exists.</dd>
+
+<dt><a name="M18"><b>NOCTTY</b></a></dt>
+
+<dd>If the file is a terminal device, this flag prevents the file
+from becoming the controlling terminal of the process.</dd>
+
+<dt><a name="M19"><b>NONBLOCK</b></a></dt>
+
+<dd>Prevents the process from blocking while opening the file, and
+possibly in subsequent I/O operations. The exact behavior of this
+flag is system- and device-dependent; its use is discouraged (it is
+better to use the <b><a href=
+"../TclCmd/fconfigure.htm">fconfigure</a></b> command to put a file
+in nonblocking mode). For details refer to your system
+documentation on the <b>open</b> system call's <b>O_NONBLOCK</b>
+flag.</dd>
+
+<dt><a name="M20"><b>TRUNC</b></a></dt>
+
+<dd>If the file exists it is truncated to zero length.</dd>
+</dl>
+
+<p>If a new file is created as part of opening it,
+<i>permissions</i> (an integer) is used to set the permissions for
+the new file in conjunction with the process's file mode creation
+mask. <i>Permissions</i> defaults to 0666.</p>
+
+<h3><a name="M21">COMMAND PIPELINES</a></h3>
+
+If the first character of <i>fileName</i> is &ldquo;|&rdquo; then
+the remaining characters of <i>fileName</i> are treated as a list
+of arguments that describe a command pipeline to invoke, in the
+same style as the arguments for <b><a href=
+"../TclCmd/exec.htm">exec</a></b>. In this case, the channel
+identifier returned by <b>open</b> may be used to write to the
+command's input pipe or read from its output pipe, depending on the
+value of <i>access</i>. If write-only access is used (e.g.
+<i>access</i> is <b>w</b>), then standard output for the pipeline
+is directed to the current standard output unless overridden by the
+command. If read-only access is used (e.g. <i>access</i> is
+<b>r</b>), standard input for the pipeline is taken from the
+current standard input unless overridden by the command. The id of
+the spawned process is accessible through the <b><a href=
+"../TclCmd/pid.htm">pid</a></b> command, using the channel id
+returned by <b>open</b> as argument. 
+
+<p>If the command (or one of the commands) executed in the command
+pipeline returns an error (according to the definition in <b><a
+href="../TclCmd/exec.htm">exec</a></b>), a Tcl error is generated
+when <b><a href="../TclCmd/close.htm">close</a></b> is called on
+the channel unless the pipeline is in non-blocking mode then no
+exit status is returned (a silent <b><a href=
+"../TclCmd/close.htm">close</a></b> with -blocking 0).</p>
+
+<p>It is often useful to use the <b><a href=
+"../TclCmd/fileevent.htm">fileevent</a></b> command with pipelines
+so other processing may happen at the same time as running the
+command in the background.</p>
+
+<h3><a name="M22">SERIAL COMMUNICATIONS</a></h3>
+
+If <i>fileName</i> refers to a serial port, then the specified
+serial port is opened and initialized in a platform-dependent
+manner. Acceptable values for the <i>fileName</i> to use to open a
+serial port are described in the PORTABILITY ISSUES section. 
+
+<p>The <b><a href="../TclCmd/fconfigure.htm">fconfigure</a></b>
+command can be used to query and set additional configuration
+options specific to serial ports (where supported):</p>
+
+<dl class="serial communications">
+<dt><a name="M23"><b>-mode</b>
+<i>baud</i><b>,</b><i>parity</i><b>,</b><i>data</i><b>,</b><i>stop</i></a></dt>
+
+<dd>This option is a set of 4 comma-separated values: the baud
+rate, parity, number of data bits, and number of stop bits for this
+serial port. The <i>baud</i> rate is a simple integer that
+specifies the connection speed. <i>Parity</i> is one of the
+following letters: <b>n</b>, <b>o</b>, <b>e</b>, <b>m</b>,
+<b>s</b>; respectively signifying the parity options of
+&ldquo;none&rdquo;, &ldquo;odd&rdquo;, &ldquo;even&rdquo;,
+&ldquo;mark&rdquo;, or &ldquo;space&rdquo;. <i>Data</i> is the
+number of data bits and should be an integer from 5 to 8, while
+<i>stop</i> is the number of stop bits and should be the integer 1
+or 2.</dd>
+
+<dt><a name="M24"><b>-handshake</b> <i>type</i></a></dt>
+
+<dd>(Windows and Unix). This option is used to setup automatic
+handshake control. Note that not all handshake types maybe
+supported by your operating system. The <i>type</i> parameter is
+case-independent. 
+
+<p>If <i>type</i> is <b>none</b> then any handshake is switched
+off. <b>rtscts</b> activates hardware handshake. Hardware handshake
+signals are described below. For software handshake <b>xonxoff</b>
+the handshake characters can be redefined with <b>-xchar</b>. An
+additional hardware handshake <b>dtrdsr</b> is available only under
+Windows. There is no default handshake configuration, the initial
+value depends on your operating system settings. The
+<b>-handshake</b> option cannot be queried.</p>
+</dd>
+
+<dt><a name="M25"><b>-queue</b></a></dt>
+
+<dd>(Windows and Unix). The <b>-queue</b> option can only be
+queried. It returns a list of two integers representing the current
+number of bytes in the input and output queue respectively.</dd>
+
+<dt><a name="M26"><b>-timeout</b> <i>msec</i></a></dt>
+
+<dd>(Windows and Unix). This option is used to set the timeout for
+blocking read operations. It specifies the maximum interval between
+the reception of two bytes in milliseconds. For Unix systems the
+granularity is 100 milliseconds. The <b>-timeout</b> option does
+not affect write operations or nonblocking reads. This option
+cannot be queried.</dd>
+
+<dt><a name="M27"><b>-ttycontrol</b> <i>{signal boolean signal
+boolean ...}</i></a></dt>
+
+<dd>(Windows and Unix). This option is used to setup the handshake
+output lines (see below) permanently or to send a BREAK over the
+serial line. The <i>signal</i> names are case-independent. <b>{RTS
+1 DTR 0}</b> sets the RTS output to high and the DTR output to low.
+The BREAK condition (see below) is enabled and disabled with
+<b>{BREAK 1}</b> and <b>{BREAK 0}</b> respectively. It is not a
+good idea to change the <b>RTS</b> (or <b>DTR</b>) signal with
+active hardware handshake <b>rtscts</b> (or <b>dtrdsr</b>). The
+result is unpredictable. The <b>-ttycontrol</b> option cannot be
+queried.</dd>
+
+<dt><a name="M28"><b>-ttystatus</b></a></dt>
+
+<dd>(Windows and Unix). The <b>-ttystatus</b> option can only be
+queried. It returns the current modem status and handshake input
+signals (see below). The result is a list of signal,value pairs
+with a fixed order, e.g. <b>{CTS 1 DSR 0 RING 1 DCD 0}</b>. The
+<i>signal</i> names are returned upper case.</dd>
+
+<dt><a name="M29"><b>-xchar</b> <i>{xonChar xoffChar}</i></a></dt>
+
+<dd>(Windows and Unix). This option is used to query or change the
+software handshake characters. Normally the operating system
+default should be DC1 (0x11) and DC3 (0x13) representing the ASCII
+standard XON and XOFF characters.</dd>
+
+<dt><a name="M30"><b>-pollinterval</b> <i>msec</i></a></dt>
+
+<dd>(Windows only). This option is used to set the maximum time
+between polling for fileevents. This affects the time interval
+between checking for events throughout the Tcl interpreter (the
+smallest value always wins). Use this option only if you want to
+poll the serial port more or less often than 10 msec (the
+default).</dd>
+
+<dt><a name="M31"><b>-sysbuffer</b> <i>inSize</i></a></dt>
+
+<dt><a name="M32"><b>-sysbuffer</b> <i>{inSize
+outSize}</i></a></dt>
+
+<dd>(Windows only). This option is used to change the size of
+Windows system buffers for a serial channel. Especially at higher
+communication rates the default input buffer size of 4096 bytes can
+overrun for latent systems. The first form specifies the input
+buffer size, in the second form both input and output buffers are
+defined.</dd>
+
+<dt><a name="M33"><b>-lasterror</b></a></dt>
+
+<dd>(Windows only). This option is query only. In case of a serial
+communication error, <b><a href="../TclCmd/read.htm">read</a></b>
+or <b><a href="../TclCmd/puts.htm">puts</a></b> returns a general
+Tcl file I/O error. <b>fconfigure -lasterror</b> can be called to
+get a list of error details. See below for an explanation of the
+various error codes.</dd>
+</dl>
+
+<h3><a name="M34">SERIAL PORT SIGNALS</a></h3>
+
+RS-232 is the most commonly used standard electrical interface for
+serial communications. A negative voltage (-3V..-12V) define a mark
+(on=1) bit and a positive voltage (+3..+12V) define a space (off=0)
+bit (RS-232C). The following signals are specified for incoming and
+outgoing data, status lines and handshaking. Here we are using the
+terms <i>workstation</i> for your computer and <i>modem</i> for the
+external device, because some signal names (DCD, RI) come from
+modems. Of course your external device may use these signal lines
+for other purposes. 
+
+<dl class="serial port signals">
+<dt><a name="M35"><b>TXD(output)</b></a></dt>
+
+<dd><b>Transmitted Data:</b> Outgoing serial data.</dd>
+
+<dt><a name="M36"><b>RXD(input)</b></a></dt>
+
+<dd><b>Received Data:</b>Incoming serial data.</dd>
+
+<dt><a name="M37"><b>RTS(output)</b></a></dt>
+
+<dd><b>Request To Send:</b> This hardware handshake line informs
+the modem that your workstation is ready to receive data. Your
+workstation may automatically reset this signal to indicate that
+the input buffer is full.</dd>
+
+<dt><a name="M38"><b>CTS(input)</b></a></dt>
+
+<dd><b>Clear To Send:</b> The complement to RTS. Indicates that the
+modem is ready to receive data.</dd>
+
+<dt><a name="M39"><b>DTR(output)</b></a></dt>
+
+<dd><b>Data Terminal Ready:</b> This signal tells the modem that
+the workstation is ready to establish a link. DTR is often enabled
+automatically whenever a serial port is opened.</dd>
+
+<dt><a name="M40"><b>DSR(input)</b></a></dt>
+
+<dd><b>Data Set Ready:</b> The complement to DTR. Tells the
+workstation that the modem is ready to establish a link.</dd>
+
+<dt><a name="M41"><b>DCD(input)</b></a></dt>
+
+<dd><b>Data Carrier Detect:</b> This line becomes active when a
+modem detects a &ldquo;Carrier&rdquo; signal.</dd>
+
+<dt><a name="M42"><b>RI(input)</b></a></dt>
+
+<dd><b>Ring Indicator:</b> Goes active when the modem detects an
+incoming call.</dd>
+
+<dt><a name="M43"><b>BREAK</b></a></dt>
+
+<dd>A BREAK condition is not a hardware signal line, but a logical
+zero on the TXD or RXD lines for a long period of time, usually 250
+to 500 milliseconds. Normally a receive or transmit data signal
+stays at the mark (on=1) voltage until the next character is
+transferred. A BREAK is sometimes used to reset the communications
+line or change the operating mode of communications hardware.</dd>
+</dl>
+
+<h3><a name="M44">ERROR CODES (Windows only)</a></h3>
+
+A lot of different errors may occur during serial read operations
+or during event polling in background. The external device may have
+been switched off, the data lines may be noisy, system buffers may
+overrun or your mode settings may be wrong. That is why a reliable
+software should always <b><a href=
+"../TclCmd/catch.htm">catch</a></b> serial read operations. In
+cases of an error Tcl returns a general file I/O error. Then
+<b>fconfigure -lasterror</b> may help to locate the problem. The
+following error codes may be returned. 
+
+<dl class="error codes (windows only)">
+<dt><a name="M45"><b>RXOVER</b></a></dt>
+
+<dd>Windows input buffer overrun. The data comes faster than your
+scripts reads it or your system is overloaded. Use <b>fconfigure
+-sysbuffer</b> to avoid a temporary bottleneck and/or make your
+script faster.</dd>
+
+<dt><a name="M46"><b>TXFULL</b></a></dt>
+
+<dd>Windows output buffer overrun. Complement to RXOVER. This error
+should practically not happen, because Tcl cares about the output
+buffer status.</dd>
+
+<dt><a name="M47"><b>OVERRUN</b></a></dt>
+
+<dd>UART buffer overrun (hardware) with data lost. The data comes
+faster than the system driver receives it. Check your advanced
+serial port settings to enable the FIFO (16550) buffer and/or setup
+a lower(1) interrupt threshold value.</dd>
+
+<dt><a name="M48"><b>RXPARITY</b></a></dt>
+
+<dd>A parity error has been detected by your UART. Wrong parity
+settings with <b>fconfigure -mode</b> or a noisy data line (RXD)
+may cause this error.</dd>
+
+<dt><a name="M49"><b>FRAME</b></a></dt>
+
+<dd>A stop-bit error has been detected by your UART. Wrong mode
+settings with <b>fconfigure -mode</b> or a noisy data line (RXD)
+may cause this error.</dd>
+
+<dt><a name="M50"><b>BREAK</b></a></dt>
+
+<dd>A BREAK condition has been detected by your UART (see
+above).</dd>
+</dl>
+
+<h3><a name="M51">PORTABILITY ISSUES</a></h3>
+
+<dl class="portability issues">
+<dt><a name="M52"><b>Windows</b></a></dt>
+
+<dd>Valid values for <i>fileName</i> to open a serial port are of
+the form <b>com</b><i>X</i>, where <i>X</i> is a number, generally
+from 1 to 9. A legacy form accepted as well is
+<b>com</b><i>X</i><b>:</b>. This notation only works for serial
+ports from 1 to 9. An attempt to open a serial port that does not
+exist or has a number greater than 9 will fail. An alternate form
+of opening serial ports is to use the filename <b>//./comX</b>,
+where X is any number that corresponds to a serial port. 
+
+<p>When running Tcl interactively, there may be some strange
+interactions between the real console, if one is present, and a
+command pipeline that uses standard input or output. If a command
+pipeline is opened for reading, some of the lines entered at the
+console will be sent to the command pipeline and some will be sent
+to the Tcl evaluator. If a command pipeline is opened for writing,
+keystrokes entered into the console are not visible until the pipe
+is closed. These problems only occur because both Tcl and the child
+application are competing for the console at the same time. If the
+command pipeline is started from a script, so that Tcl is not
+accessing the console, or if the command pipeline does not use
+standard input or output, but is redirected from or to a file, then
+the above problems do not occur.</p>
+</dd>
+
+<dt><a name="M53"><b>Unix</b></a></dt>
+
+<dd>Valid values for <i>fileName</i> to open a serial port are
+generally of the form <b>/dev/tty</b><i>X</i>, where <i>X</i> is
+<b>a</b> or <b>b</b>, but the name of any pseudo-file that maps to
+a serial port may be used. Advanced configuration options are only
+supported for serial ports when Tcl is built to use the POSIX
+serial interface. 
+
+<p>When running Tcl interactively, there may be some strange
+interactions between the console, if one is present, and a command
+pipeline that uses standard input. If a command pipeline is opened
+for reading, some of the lines entered at the console will be sent
+to the command pipeline and some will be sent to the Tcl evaluator.
+This problem only occurs because both Tcl and the child application
+are competing for the console at the same time. If the command
+pipeline is started from a script, so that Tcl is not accessing the
+console, or if the command pipeline does not use standard input,
+but is redirected from a file, then the above problem does not
+occur.</p>
+</dd>
+</dl>
+
+<p>See the <b>PORTABILITY ISSUES</b> section of the <b><a href=
+"../TclCmd/exec.htm">exec</a></b> command for additional
+information not specific to command pipelines about executing
+applications on the various platforms</p>
+
+<h3><a name="M54">EXAMPLE</a></h3>
+
+Open a command pipeline and catch any errors: 
+
+<pre>
+set fl [<b>open</b> "| ls this_file_does_not_exist"]
+set data [read $fl]
+if {[catch {close $fl} err]} {
+    puts "ls command failed: $err"
+}
+</pre>
+
+<h3><a name="M55">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/file.htm">file</a></b>, <b><a href=
+"../TclCmd/close.htm">close</a></b>, <b><a href=
+"../TclCmd/filename.htm">filename</a></b>, <b><a href=
+"../TclCmd/fconfigure.htm">fconfigure</a></b>, <b><a href=
+"../TclCmd/gets.htm">gets</a></b>, <b><a href=
+"../TclCmd/read.htm">read</a></b>, <b><a href=
+"../TclCmd/puts.htm">puts</a></b>, <b><a href=
+"../TclCmd/exec.htm">exec</a></b>, <b><a href=
+"../TclCmd/pid.htm">pid</a></b>, <b>fopen</b> 
+
+<h3><a name="M56">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#access mode">access mode</a>, <a href=
+"../Keywords/A.htm#append">append</a>, <a href=
+"../Keywords/C.htm#create">create</a>, <a href=
+"../Keywords/F.htm#file">file</a>, <a href=
+"../Keywords/N.htm#non-blocking">non-blocking</a>, <a href=
+"../Keywords/O.htm#open">open</a>, <a href=
+"../Keywords/P.htm#permissions">permissions</a>, <a href=
+"../Keywords/P.htm#pipeline">pipeline</a>, <a href=
+"../Keywords/P.htm#process">process</a>, <a href=
+"../Keywords/S.htm#serial">serial</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

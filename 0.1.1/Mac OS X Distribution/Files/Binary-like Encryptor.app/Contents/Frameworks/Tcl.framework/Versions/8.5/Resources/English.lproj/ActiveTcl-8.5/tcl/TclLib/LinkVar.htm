@@ -1,0 +1,330 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_LinkVar manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> LinkVar</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="LinkVar.htm#M2" name="L415">NAME</a> 
+
+<dl>
+<dd>Tcl_LinkVar, Tcl_UnlinkVar, Tcl_UpdateLinkedVar - link Tcl
+variable to C variable</dd>
+</dl>
+</dd>
+
+<dd><a href="LinkVar.htm#M3" name="L416">SYNOPSIS</a></dd>
+
+<dd><a href="LinkVar.htm#M4" name="L417">ARGUMENTS</a></dd>
+
+<dd><a href="LinkVar.htm#M5" name="L418">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="LinkVar.htm#M6" name=
+"L419"><b>TCL_LINK_INT</b></a></dd>
+
+<dd><a href="LinkVar.htm#M7" name=
+"L420"><b>TCL_LINK_UINT</b></a></dd>
+
+<dd><a href="LinkVar.htm#M8" name=
+"L421"><b>TCL_LINK_CHAR</b></a></dd>
+
+<dd><a href="LinkVar.htm#M9" name=
+"L422"><b>TCL_LINK_UCHAR</b></a></dd>
+
+<dd><a href="LinkVar.htm#M10" name=
+"L423"><b>TCL_LINK_SHORT</b></a></dd>
+
+<dd><a href="LinkVar.htm#M11" name=
+"L424"><b>TCL_LINK_USHORT</b></a></dd>
+
+<dd><a href="LinkVar.htm#M12" name=
+"L425"><b>TCL_LINK_LONG</b></a></dd>
+
+<dd><a href="LinkVar.htm#M13" name=
+"L426"><b>TCL_LINK_ULONG</b></a></dd>
+
+<dd><a href="LinkVar.htm#M14" name=
+"L427"><b>TCL_LINK_DOUBLE</b></a></dd>
+
+<dd><a href="LinkVar.htm#M15" name=
+"L428"><b>TCL_LINK_FLOAT</b></a></dd>
+
+<dd><a href="LinkVar.htm#M16" name=
+"L429"><b>TCL_LINK_WIDE_INT</b></a></dd>
+
+<dd><a href="LinkVar.htm#M17" name=
+"L430"><b>TCL_LINK_WIDE_UINT</b></a></dd>
+
+<dd><a href="LinkVar.htm#M18" name=
+"L431"><b>TCL_LINK_BOOLEAN</b></a></dd>
+
+<dd><a href="LinkVar.htm#M19" name=
+"L432"><b>TCL_LINK_STRING</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="LinkVar.htm#M20" name="L433">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_LinkVar, Tcl_UnlinkVar, Tcl_UpdateLinkedVar - link Tcl variable
+to C variable 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_LinkVar</b>(<i>interp, varName, addr, type</i>)<br>
+<b>Tcl_UnlinkVar</b>(<i>interp, varName</i>)<br>
+<b>Tcl_UpdateLinkedVar</b>(<i>interp, varName</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Interpreter that contains <i>varName</i>. Also used by
+<b>Tcl_LinkVar</b> to return error messages.</dd>
+
+<dt>const char <b>*varName</b> (in)</dt>
+
+<dd>Name of global variable.</dd>
+
+<dt>char <b>*addr</b> (in)</dt>
+
+<dd>Address of C variable that is to be linked to
+<i>varName</i>.</dd>
+
+<dt>int <b>type</b> (in)</dt>
+
+<dd>Type of C variable. Must be one of <b>TCL_LINK_INT</b>,
+<b>TCL_LINK_UINT</b>, <b>TCL_LINK_CHAR</b>, <b>TCL_LINK_UCHAR</b>,
+<b>TCL_LINK_SHORT</b>, <b>TCL_LINK_USHORT</b>,
+<b>TCL_LINK_LONG</b>, <b>TCL_LINK_ULONG</b>,
+<b>TCL_LINK_WIDE_INT</b>, <b>TCL_LINK_WIDE_UINT</b>,
+<b>TCL_LINK_FLOAT</b>, <b>TCL_LINK_DOUBLE</b>,
+<b>TCL_LINK_BOOLEAN</b>, or <b>TCL_LINK_STRING</b>, optionally
+OR'ed with <b>TCL_LINK_READ_ONLY</b> to make Tcl variable
+read-only.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_LinkVar</b> uses variable traces to keep the Tcl variable
+named by <i>varName</i> in sync with the C variable at the address
+given by <i>addr</i>. Whenever the Tcl variable is read the value
+of the C variable will be returned, and whenever the Tcl variable
+is written the C variable will be updated to have the same value.
+<b>Tcl_LinkVar</b> normally returns <b>TCL_OK</b>; if an error
+occurs while setting up the link (e.g. because <i>varName</i> is
+the name of array) then <b>TCL_ERROR</b> is returned and the
+interpreter's result contains an error message. 
+
+<p>The <i>type</i> argument specifies the type of the C variable,
+and must have one of the following values, optionally OR'ed with
+<b>TCL_LINK_READ_ONLY</b>:</p>
+
+<dl class="description">
+<dt><a name="M6"><b>TCL_LINK_INT</b></a></dt>
+
+<dd>The C variable is of type <b>int</b>. Any value written into
+the Tcl variable must have a proper integer form acceptable to
+<b><a href="../TclLib/IntObj.htm">Tcl_GetIntFromObj</a></b>;
+attempts to write non-integer values into <i>varName</i> will be
+rejected with Tcl errors.</dd>
+
+<dt><a name="M7"><b>TCL_LINK_UINT</b></a></dt>
+
+<dd>The C variable is of type <b>unsigned int</b>. Any value
+written into the Tcl variable must have a proper unsigned integer
+form acceptable to <b><a href=
+"../TclLib/IntObj.htm">Tcl_GetWideIntFromObj</a></b> and in the
+platform's defined range for the <b>unsigned int</b> type; attempts
+to write non-integer values (or values outside the range) into
+<i>varName</i> will be rejected with Tcl errors.</dd>
+
+<dt><a name="M8"><b>TCL_LINK_CHAR</b></a></dt>
+
+<dd>The C variable is of type <b>char</b>. Any value written into
+the Tcl variable must have a proper integer form acceptable to
+<b><a href="../TclLib/IntObj.htm">Tcl_GetIntFromObj</a></b> and be
+in the range of the <b>char</b> datatype; attempts to write
+non-integer or out-of-range values into <i>varName</i> will be
+rejected with Tcl errors.</dd>
+
+<dt><a name="M9"><b>TCL_LINK_UCHAR</b></a></dt>
+
+<dd>The C variable is of type <b>unsigned char</b>. Any value
+written into the Tcl variable must have a proper unsigned integer
+form acceptable to <b><a href=
+"../TclLib/IntObj.htm">Tcl_GetIntFromObj</a></b> and in the
+platform's defined range for the <b>unsigned char</b> type;
+attempts to write non-integer values (or values outside the range)
+into <i>varName</i> will be rejected with Tcl errors.</dd>
+
+<dt><a name="M10"><b>TCL_LINK_SHORT</b></a></dt>
+
+<dd>The C variable is of type <b>short</b>. Any value written into
+the Tcl variable must have a proper integer form acceptable to
+<b><a href="../TclLib/IntObj.htm">Tcl_GetIntFromObj</a></b> and be
+in the range of the <b>short</b> datatype; attempts to write
+non-integer or out-of-range values into <i>varName</i> will be
+rejected with Tcl errors.</dd>
+
+<dt><a name="M11"><b>TCL_LINK_USHORT</b></a></dt>
+
+<dd>The C variable is of type <b>unsigned short</b>. Any value
+written into the Tcl variable must have a proper unsigned integer
+form acceptable to <b><a href=
+"../TclLib/IntObj.htm">Tcl_GetIntFromObj</a></b> and in the
+platform's defined range for the <b>unsigned short</b> type;
+attempts to write non-integer values (or values outside the range)
+into <i>varName</i> will be rejected with Tcl errors.</dd>
+
+<dt><a name="M12"><b>TCL_LINK_LONG</b></a></dt>
+
+<dd>The C variable is of type <b>long</b>. Any value written into
+the Tcl variable must have a proper integer form acceptable to
+<b><a href="../TclLib/IntObj.htm">Tcl_GetLongFromObj</a></b>;
+attempts to write non-integer or out-of-range values into
+<i>varName</i> will be rejected with Tcl errors.</dd>
+
+<dt><a name="M13"><b>TCL_LINK_ULONG</b></a></dt>
+
+<dd>The C variable is of type <b>unsigned long</b>. Any value
+written into the Tcl variable must have a proper unsigned integer
+form acceptable to <b><a href=
+"../TclLib/IntObj.htm">Tcl_GetWideIntFromObj</a></b> and in the
+platform's defined range for the <b>unsigned long</b> type;
+attempts to write non-integer values (or values outside the range)
+into <i>varName</i> will be rejected with Tcl errors.</dd>
+
+<dt><a name="M14"><b>TCL_LINK_DOUBLE</b></a></dt>
+
+<dd>The C variable is of type <b>double</b>. Any value written into
+the Tcl variable must have a proper real form acceptable to <b><a
+href="../TclLib/DoubleObj.htm">Tcl_GetDoubleFromObj</a></b>;
+attempts to write non-real values into <i>varName</i> will be
+rejected with Tcl errors.</dd>
+
+<dt><a name="M15"><b>TCL_LINK_FLOAT</b></a></dt>
+
+<dd>The C variable is of type <b>float</b>. Any value written into
+the Tcl variable must have a proper real form acceptable to <b><a
+href="../TclLib/DoubleObj.htm">Tcl_GetDoubleFromObj</a></b> and
+must be within the range acceptable for a <b>float</b>; attempts to
+write non-real values (or values outside the range) into
+<i>varName</i> will be rejected with Tcl errors.</dd>
+
+<dt><a name="M16"><b>TCL_LINK_WIDE_INT</b></a></dt>
+
+<dd>The C variable is of type <b>Tcl_WideInt</b> (which is an
+integer type at least 64-bits wide on all platforms that can
+support it.) Any value written into the Tcl variable must have a
+proper integer form acceptable to <b><a href=
+"../TclLib/IntObj.htm">Tcl_GetWideIntFromObj</a></b>; attempts to
+write non-integer values into <i>varName</i> will be rejected with
+Tcl errors.</dd>
+
+<dt><a name="M17"><b>TCL_LINK_WIDE_UINT</b></a></dt>
+
+<dd>The C variable is of type <b>Tcl_WideUInt</b> (which is an
+unsigned integer type at least 64-bits wide on all platforms that
+can support it.) Any value written into the Tcl variable must have
+a proper unsigned integer form acceptable to <b><a href=
+"../TclLib/IntObj.htm">Tcl_GetWideIntFromObj</a></b> (it will be
+cast to unsigned); attempts to write non-integer values into
+<i>varName</i> will be rejected with Tcl errors.</dd>
+
+<dt><a name="M18"><b>TCL_LINK_BOOLEAN</b></a></dt>
+
+<dd>The C variable is of type <b>int</b>. If its value is zero then
+it will read from Tcl as &ldquo;0&rdquo;; otherwise it will read
+from Tcl as &ldquo;1&rdquo;. Whenever <i>varName</i> is modified,
+the C variable will be set to a 0 or 1 value. Any value written
+into the Tcl variable must have a proper boolean form acceptable to
+<b><a href="../TclLib/BoolObj.htm">Tcl_GetBooleanFromObj</a></b>;
+attempts to write non-boolean values into <i>varName</i> will be
+rejected with Tcl errors.</dd>
+
+<dt><a name="M19"><b>TCL_LINK_STRING</b></a></dt>
+
+<dd>The C variable is of type <b>char *</b>. If its value is not
+NULL then it must be a pointer to a string allocated with <b><a
+href="../TclLib/Alloc.htm">Tcl_Alloc</a></b> or <b><a href=
+"../TclLib/Alloc.htm">ckalloc</a></b>. Whenever the Tcl variable is
+modified the current C string will be freed and new memory will be
+allocated to hold a copy of the variable's new value. If the C
+variable contains a NULL pointer then the Tcl variable will read as
+&ldquo;NULL&rdquo;.</dd>
+</dl>
+
+<p>If the <b>TCL_LINK_READ_ONLY</b> flag is present in <i>type</i>
+then the variable will be read-only from Tcl, so that its value can
+only be changed by modifying the C variable. Attempts to write the
+variable from Tcl will be rejected with errors.</p>
+
+<p><b>Tcl_UnlinkVar</b> removes the link previously set up for the
+variable given by <i>varName</i>. If there does not exist a link
+for <i>varName</i> then the procedure has no effect.</p>
+
+<p><b>Tcl_UpdateLinkedVar</b> may be invoked after the C variable
+has changed to force the Tcl variable to be updated immediately. In
+many cases this procedure is not needed, since any attempt to read
+the Tcl variable will return the latest value of the C variable.
+However, if a trace has been set on the Tcl variable (such as a Tk
+widget that wishes to display the value of the variable), the trace
+will not trigger when the C variable has changed.
+<b>Tcl_UpdateLinkedVar</b> ensures that any traces on the Tcl
+variable are invoked.</p>
+
+<h3><a name="M20">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#boolean">boolean</a>, <a href=
+"../Keywords/I.htm#integer">integer</a>, <a href=
+"../Keywords/L.htm#link">link</a>, <a href=
+"../Keywords/R.htm#read-only">read-only</a>, <a href=
+"../Keywords/R.htm#real">real</a>, <a href=
+"../Keywords/S.htm#string">string</a>, <a href=
+"../Keywords/T.htm#traces">traces</a>, <a href=
+"../Keywords/V.htm#variable">variable</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

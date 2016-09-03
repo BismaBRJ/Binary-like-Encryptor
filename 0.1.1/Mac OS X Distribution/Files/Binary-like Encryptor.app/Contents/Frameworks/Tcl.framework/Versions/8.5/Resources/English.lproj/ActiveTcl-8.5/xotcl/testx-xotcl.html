@@ -1,0 +1,579 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>XOTcl - Documentation -- xotcl/tests/testx.xotcl</title>
+<link rel="StyleSheet" href="xotcl-doc.css" type="text/css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1><img src="./logo-100.jpg" alt="xotcl/tests/testx.xotcl" align=
+"MIDDLE"> xotcl/tests/testx.xotcl</h1>
+
+<hr>
+<h2>Package/File Information</h2>
+
+<b>No package provided/required</b> <br>
+ <br>
+ <b>Defined Objects/Classes:</b> 
+
+<ul>
+<li><a href="#TestX"><em>TestX</em>:</a><br>
+</li>
+
+<li><a href="#assertions"><em>assertions</em>:</a><br>
+</li>
+
+<li><a href="#condMixins"><em>condMixins</em>:</a><br>
+</li>
+
+<li><a href="#copymove"><em>copymove</em>:</a><br>
+</li>
+
+<li><a href="#filterAddRemove"><em>filterAddRemove</em>:</a><br>
+</li>
+
+<li><a href=
+"#filterClassChange"><em>filterClassChange</em>:</a><br>
+</li>
+
+<li><a href="#filterGuards"><em>filterGuards</em>:</a><br>
+</li>
+
+<li><a href="#filterInfo"><em>filterInfo</em>:</a><br>
+</li>
+
+<li><a href=
+"#filterSimpleObserver"><em>filterSimpleObserver</em>:</a><br>
+</li>
+
+<li><a href="#init_params"><em>init_params</em>:</a><br>
+</li>
+
+<li><a href="#mixinGuards"><em>mixinGuards</em>:</a><br>
+</li>
+
+<li><a href=
+"#mixinInheritanceTest"><em>mixinInheritanceTest</em>:</a><br>
+</li>
+
+<li><a href="#mixinTest"><em>mixinTest</em>:</a><br>
+</li>
+
+<li><a href="#nestingClasses"><em>nestingClasses</em>:</a><br>
+</li>
+
+<li><a href="#nestingObjects"><em>nestingObjects</em>:</a><br>
+</li>
+
+<li><a href="#nextTest"><em>nextTest</em>:</a><br>
+</li>
+
+<li><a href="#objectReferences"><em>objectReferences</em>:</a><br>
+</li>
+
+<li><a href="#procsearchTest"><em>procsearchTest</em>:</a><br>
+</li>
+
+<li><a href="#recreation"><em>recreation</em>:</a><br>
+</li>
+
+<li><a href="#smallScripts"><em>smallScripts</em>:</a><br>
+</li>
+
+<li><a href="#stdargs"><em>stdargs</em>:</a><br>
+</li>
+
+<li><a href="#volatileObjects"><em>volatileObjects</em>:</a><br>
+</li>
+</ul>
+
+<br>
+ <b>Filename:</b> <a href=
+"xotcl/tests/testx.xotcl">xotcl/tests/testx.xotcl</a> <br>
+ <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">This is a file which provides a regression test
+for the features of the XOTcl - Language.</td>
+</tr>
+</table>
+
+<br>
+ 
+
+<hr>
+<p><a name="TestX"></a></p>
+
+<h2>Class: <em>TestX</em></h2>
+
+<b>Class</b>: Class <br>
+ <br>
+<br>
+ 
+
+<hr>
+<p><a name="assertions"></a></p>
+
+<h2>Object: <em>assertions</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing the
+assertions.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="condMixins"></a></p>
+
+<h2>Object: <em>condMixins</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test for conditional mixins</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="copymove"></a></p>
+
+<h2>Object: <em>copymove</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test for copy/move methods</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="filterAddRemove"></a></p>
+
+<h2>Object: <em>filterAddRemove</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing adding/removing of
+filters.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="filterClassChange"></a></p>
+
+<h2>Object: <em>filterClassChange</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing class changes of
+filters.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="filterGuards"></a></p>
+
+<h2>Object: <em>filterGuards</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing filter guards.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="filterInfo"></a></p>
+
+<h2>Object: <em>filterInfo</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description{:</em> </td>
+<td valign="top">Regression</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Test:</em> </td>
+<td valign="top">object</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Testing:</em> </td>
+<td valign="top">introspection</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Of:</em> </td>
+<td valign="top">filters.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>}:</em> </td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="filterSimpleObserver"></a></p>
+
+<h2>Object: <em>filterSimpleObserver</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing a simple observer
+using filters.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="init_params"></a></p>
+
+<h2>Object: <em>init_params</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing the parameter
+instance method, the init dash '-' and constructor calling.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="mixinGuards"></a></p>
+
+<h2>Object: <em>mixinGuards</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing mixin guards.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="mixinInheritanceTest"></a></p>
+
+<h2>Object: <em>mixinInheritanceTest</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing per-object mixin
+inheritance.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="mixinTest"></a></p>
+
+<h2>Object: <em>mixinTest</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing per-object
+mixins.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="nestingClasses"></a></p>
+
+<h2>Object: <em>nestingClasses</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing the class nesting
+feature.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="nestingObjects"></a></p>
+
+<h2>Object: <em>nestingObjects</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing the object nesting
+feature.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="nextTest"></a></p>
+
+<h2>Object: <em>nextTest</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing the next
+primitive.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="objectReferences"></a></p>
+
+<h2>Object: <em>objectReferences</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test for object and class references in
+tcl_objs</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="procsearchTest"></a></p>
+
+<h2>Object: <em>procsearchTest</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test for procsearch</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="recreation"></a></p>
+
+<h2>Object: <em>recreation</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test for object
+recreation/cleanup.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="smallScripts"></a></p>
+
+<h2>Object: <em>smallScripts</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing arbitrary
+features.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="stdargs"></a></p>
+
+<h2>Object: <em>stdargs</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test object testing the ability of the
+next primitive to pass arguments without naming them.</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="volatileObjects"></a></p>
+
+<h2>Object: <em>volatileObjects</em></h2>
+
+<b>Class</b>: TestX <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Regression test for volatile objects</td>
+</tr>
+</table>
+
+<br>
+<br>
+ <br>
+ <br>
+<br>
+ 
+
+<hr>
+<a href="./index.html">Back to index page.</a> <br>
+ 
+
+<hr>
+</body>
+</html>
+

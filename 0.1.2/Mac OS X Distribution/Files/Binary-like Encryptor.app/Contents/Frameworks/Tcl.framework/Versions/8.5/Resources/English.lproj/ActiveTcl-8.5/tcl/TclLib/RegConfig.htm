@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_RegisterConfig manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> RegConfig</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="RegConfig.htm#M2" name="L570">NAME</a> 
+
+<dl>
+<dd>Tcl_RegisterConfig - procedures to register embedded
+configuration information</dd>
+</dl>
+</dd>
+
+<dd><a href="RegConfig.htm#M3" name="L571">SYNOPSIS</a></dd>
+
+<dd><a href="RegConfig.htm#M4" name="L572">ARGUMENTS</a></dd>
+
+<dd><a href="RegConfig.htm#M5" name="L573">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="RegConfig.htm#M6" name="L574">(1)</a></dd>
+
+<dd><a href="RegConfig.htm#M7" name="L575">(2)</a></dd>
+</dl>
+
+<dl class="description">
+<dd><a href="RegConfig.htm#M8" name=
+"L576">::<i>pkgName</i>::<b>pkgconfig</b> list</a></dd>
+
+<dd><a href="RegConfig.htm#M9" name=
+"L577">::<i>pkgName</i>::<b>pkgconfig</b> get <i>key</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="RegConfig.htm#M10" name="L578">TCL_CONFIG</a></dd>
+
+<dd><a href="RegConfig.htm#M11" name="L579">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_RegisterConfig - procedures to register embedded configuration
+information 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+void<br>
+<b>Tcl_RegisterConfig</b>(<i>interp, pkgName, configuration,
+valEncoding</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Refers to the interpreter the embedded configuration
+information is registered for. Must not be NULL.</dd>
+
+<dt>const char <b>*pkgName</b> (in)</dt>
+
+<dd>Contains the name of the package registering the embedded
+configuration as ASCII string. This means that this information is
+in UTF-8 too. Must not be NULL.</dd>
+
+<dt>Tcl_Config <b>*configuration</b> (in)</dt>
+
+<dd>Refers to an array of Tcl_Config entries containing the
+information embedded in the binary library. Must not be NULL. The
+end of the array is signaled by either a key identical to NULL, or
+a key referring to the empty string.</dd>
+
+<dt>const char <b>*valEncoding</b> (in)</dt>
+
+<dd>Contains the name of the encoding used to store the
+configuration values as ASCII string. This means that this
+information is in UTF-8 too. Must not be NULL.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+The function described here has its base in TIP 59 and provides
+extensions with support for the embedding of configuration
+information into their binary library and the generation of a
+Tcl-level interface for querying this information. 
+
+<p>To embed configuration information into their binary library an
+extension has to define a non-volatile array of Tcl_Config entries
+in one if its source files and then call <b>Tcl_RegisterConfig</b>
+to register that information.</p>
+
+<p><b>Tcl_RegisterConfig</b> takes four arguments; first, a
+reference to the interpreter we are registering the information
+with, second, the name of the package registering its configuration
+information, third, a pointer to an array of structures, and fourth
+a string declaring the encoding used by the configuration
+values.</p>
+
+<p>The string <i>valEncoding</i> contains the name of an encoding
+known to Tcl. All these names are use only characters in the ASCII
+subset of UTF-8 and are thus implicitly in the UTF-8 encoding. It
+is expected that keys are legible English text and therefore using
+the ASCII subset of UTF-8. In other words, they are expected to be
+in UTF-8 too. The values associated with the keys can be any string
+however. For these the contents of <i>valEncoding</i> define which
+encoding was used to represent the characters of the strings.</p>
+
+<p>Each element of the <i>configuration</i> array refers to two
+strings containing the key and the value associated with that key.
+The end of the array is signaled by either an empty key or a key
+identical to NULL. The function makes <b>no</b> copy of the
+<i>configuration</i> array. This means that the caller has to make
+sure that the memory holding this array is never released. This is
+the meaning behind the word <b>non-volatile</b> used earlier. The
+easiest way to accomplish this is to define a global static array
+of Tcl_Config entries. See the file
+&ldquo;generic/tclPkgConfig.c&rdquo; in the sources of the Tcl core
+for an example.</p>
+
+<p>When called <b>Tcl_RegisterConfig</b> will</p>
+
+<dl class="description">
+<dt><a name="M6">(1)</a></dt>
+
+<dd>create a namespace having the provided <i>pkgName</i>, if not
+yet existing.</dd>
+
+<dt><a name="M7">(2)</a></dt>
+
+<dd>create the command <b>pkgconfig</b> in that namespace and link
+it to the provided information so that the keys from
+_configuration_ and their associated values can be retrieved
+through calls to <b>pkgconfig</b>.</dd>
+</dl>
+
+<p>The command <b>pkgconfig</b> will provide two subcommands, <b><a
+href="../TclCmd/list.htm">list</a></b> and <b>get</b>:</p>
+
+<dl class="description">
+<dt><a name="M8">::<i>pkgName</i>::<b>pkgconfig</b> list</a></dt>
+
+<dd>Returns a list containing the names of all defined keys.</dd>
+
+<dt><a name="M9">::<i>pkgName</i>::<b>pkgconfig</b> get
+<i>key</i></a></dt>
+
+<dd>Returns the configuration value associated with the specified
+<i>key</i>.</dd>
+</dl>
+
+<h3><a name="M10">TCL_CONFIG</a></h3>
+
+The <b>Tcl_Config</b> structure contains the following fields: 
+
+<pre>
+typedef struct Tcl_Config {
+    const char* key;
+    const char* value;
+} Tcl_Config;
+</pre>
+
+<h3><a name="M11">KEYWORDS</a></h3>
+
+<a href="../Keywords/E.htm#embedding">embedding</a>, <a href=
+"../Keywords/C.htm#configuration">configuration</a>, <a href=
+"../Keywords/B.htm#binary library">binary library</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2002 Andreas Kupries
+&lt;andreas_kupries(at)users.sourceforge.net&gt;</div>
+</body>
+</html>
+

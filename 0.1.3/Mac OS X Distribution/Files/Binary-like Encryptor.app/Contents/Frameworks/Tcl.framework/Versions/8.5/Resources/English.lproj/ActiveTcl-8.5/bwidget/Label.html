@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Label</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>Label</b> - Label widget with <b>state</b> option, dynamic
+help and drag and drop facilities</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>Label</b></a> <i>pathName</i> ?<i>option
+value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i>STANDARD OPTIONS</i></dt>
+
+<dt><i>Not themed</i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-anchor">-anchor</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-background">-background or -bg</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-bitmap">-bitmap</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-borderwidth">-borderwidth or
+-bd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-cursor">-cursor</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-disabledforeground">-disabledforeground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-font">-font</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-foreground">-foreground or -fg</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightbackground">-highlightbackground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightcolor">-highlightcolor</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightthickness">-highlightthickness</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-image">-image</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-justify">-justify</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-padx">-padx</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-pady">-pady</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-relief">-relief</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-takefocus">-takefocus</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-text">-text</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-textvariable">-textvariable</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-wraplength">-wraplength</a></td>
+</tr>
+</table>
+</dd>
+
+<dt><i>Themed</i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-anchor">-anchor</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-background">-background or -bg</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-cursor">-cursor</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-font">-font</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-foreground">-foreground or -fg</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-image">-image</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-justify">-justify</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-relief">-relief</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-takefocus">-takefocus</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-text">-text</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-textvariable">-textvariable</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-wraplength">-wraplength</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dragenabled">-dragenabled</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dragendcmd">-dragendcmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dragevent">-dragevent</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-draginitcmd">-draginitcmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dragtype">-dragtype</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dropcmd">-dropcmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dropenabled">-dropenabled</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dropovercmd">-dropovercmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-droptypes">-droptypes</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-focus">-focus</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-height">-height</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-helptext">-helptext</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-helptype">-helptype</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-helpvar">-helpvar</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-name">-name</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-state">-state</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-underline">-underline</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-width">-width</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#setfocus"><b>setfocus</b></a></dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>The <b>Label</b> widget extends the default Tk label. Options
+have been added to provide visual effect depending on the state of
+the Label, <a href="DynamicHelp.html">DynamicHelp</a> options, and
+<a href="DragSite.html">Drag</a> and <a href=
+"DropSite.html">Drop</a>.</p>
+
+<br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-dragenabled"><b>-dragenabled</b></a></dt>
+
+<dd>A boolean specifying if drag is enabled.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dragendcmd"><b>-dragendcmd</b></a></dt>
+
+<dd>Specifies a command to be called when drag ended.
+<b>dragendcmd</b> must be a command conforming to the description
+of the option <b>dragendcmd</b> of <b>DragSite::<a href=
+"DragSite.html#register">register</a></b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dragevent"><b>-dragevent</b></a></dt>
+
+<dd>Specifies the number of the mouse button associated to the
+drag. Must be <b>1</b>, <b>2</b> or <b>3</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-draginitcmd"><b>-draginitcmd</b></a></dt>
+
+<dd>Specifies a command to be called when <b>dragevent</b> occurs
+on widget. <b>draginitcmd</b> must be a command conforming to the
+description of the option <b>draginitcmd</b> of <b>DragSite::<a
+href="DragSite.html#register">register</a></b>.<br>
+If <b>draginitcmd</b> is empty, the internal <b>draginitcmd</b>
+command is used instead and returns: 
+
+<dl>
+<dd>
+<table border="0" cellspacing="1">
+<tr>
+<td valign="top">
+<i>IMAGE&nbsp;{copy}&nbsp;&lt;image&nbsp;name&gt;</i> </td>
+<td>if an image is displayed.</td>
+</tr>
+
+<tr>
+<td valign="top">
+<i>BITMAP&nbsp;{copy}&nbsp;&lt;bitmap&nbsp;name&gt;</i> </td>
+<td>if a bitmap is displayed.</td>
+</tr>
+
+<tr>
+<td valign="top"><i>TEXT&nbsp;{copy}&nbsp;&lt;text&gt;</i> </td>
+<td>if a text is displayed.</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+Note that if <b>dragtype</b> option is not empty, its value is used
+instead of those above.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dragtype"><b>-dragtype</b></a></dt>
+
+<dd>Specifies an alternate type of dragged object.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dropcmd"><b>-dropcmd</b></a></dt>
+
+<dd>Specifies a command to be called when drop occurs on the
+widget. <b>dropcmd</b> must be a command conforming to the
+description of the option <b>dropcmd</b> of <b>DropSite::<a href=
+"DropSite.html#register">register</a></b>.<br>
+If <b>dropcmd</b> is empty, the command updates the label following
+the type of the data: 
+
+<dl>
+<dd>
+<table border="0" cellspacing="1">
+<tr>
+<td><i>COLOR</i> or <i>FGCOLOR</i></td>
+<td>reconfigure the <b>foreground</b> of the Label.</td>
+</tr>
+
+<tr>
+<td><i>BGCOLOR</i></td>
+<td>reconfigure the <b>background</b> of the Label.</td>
+</tr>
+
+<tr>
+<td><i>IMAGE</i></td>
+<td>reconfigure the Label to display the associated image.</td>
+</tr>
+
+<tr>
+<td><i>BITMAP</i></td>
+<td>reconfigure the Label to display the associated bitmap.
+<b>image</b> option is set to empty.</td>
+</tr>
+
+<tr>
+<td><i>TEXT</i>,<br>
+or any other tag</td>
+<td>reconfigure the Label to display the associated string.
+<b>image</b> and <b>bitmap</b> options are set to empty.</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+and returns 1.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dropenabled"><b>-dropenabled</b></a></dt>
+
+<dd>A boolean specifying if drop is enabled.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dropovercmd"><b>-dropovercmd</b></a></dt>
+
+<dd>Specifies a command to be called when drag icon is over the
+widget. <b>dropovercmd</b> must be a command conforming to the
+description of the option <b>dropovercmd</b> of <b>DropSite::<a
+href="DropSite.html#register">register</a></b>.<br>
+If <b>dropovercmd</b> is empty, Label always accepts the drop if
+data type is <i>FGCOLOR</i>, <i>COLOR</i>, <i>BGCOLOR</i>, and
+accepts all other data type only if <b>state</b> is normal.</dd>
+</dl>
+
+<dl>
+<dt><a name="-droptypes"><b>-droptypes</b></a></dt>
+
+<dd>Specifies a list of accepted dropped object/operation. See
+option <b>droptypes</b> of <b>DropSite::<a href=
+"DropSite.html#register">register</a></b>. for more infromation.
+Default accepts <i>FGCOLOR</i>, <i>COLOR</i>, <i>BGCOLOR</i>,
+<i>TEXT</i>, <i>BITMAP</i> and <i>IMAGE</i>, all with <b>copy</b>
+and <b>move</b> operations.</dd>
+</dl>
+
+<dl>
+<dt><a name="-focus"><b>-focus</b></a></dt>
+
+<dd>Specifies a pathname to set the focus on for
+Label::<b>setfocus</b> command.</dd>
+</dl>
+
+<dl>
+<dt><a name="-height"><b>-height</b></a></dt>
+
+<dd>Specifies a desired height for the label. If an image or bitmap
+is being displayed in the label then the value is in screen units,
+for text it is in lines of text. If this option isn't specified,
+the label's desired height is computed from the size of the image
+or bitmap or text being displayed in it.<br>
+Option not available for <i>themed</i> widgets.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helptext"><b>-helptext</b></a></dt>
+
+<dd>Text for dynamic help. If empty, no help is available for this
+widget. See also <a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helptype"><b>-helptype</b></a></dt>
+
+<dd>Type of dynamic help. Use <i>balloon</i> or <i>variable</i>.
+See also <a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helpvar"><b>-helpvar</b></a></dt>
+
+<dd>Variable to use when <b>helptype</b> option is <i>variable</i>.
+See also <a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-name"><b>-name</b></a></dt>
+
+<dd>Specifies a standard name for the label. If the option
+<b>*<i>name</i>Name</b> is found in the resource database, then
+<b>text</b> and <b>underline</b> options are extracted from its
+value.</dd>
+</dl>
+
+<dl>
+<dt><a name="-state"><b>-state</b></a></dt>
+
+<dd>Specifies one of two states for the Label: <b>normal</b> or
+<b>disabled</b>. In normal state the text of the Label is displayed
+using the <b>foreground</b> option. In disabled state the text of
+the Label is displayed using the <b>disabledforeground</b>
+option.</dd>
+</dl>
+
+<dl>
+<dt><a name="-underline"><b>-underline</b></a></dt>
+
+<dd>Specifies the integer index of a character to underline in the
+label. 0 corresponds to the first character of the text displayed,
+1 to the next character, and so on.<br>
+The binding <b>&lt;Alt-<i>char</i>&gt;</b> is automatically set on
+the toplevel of the Label to call Label::<b>setfocus</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-width"><b>-width</b></a></dt>
+
+<dd>Specifies a desired width for the label. If an image or bitmap
+is being displayed in the label then the value is in screen units,
+for text it is in characters. If this option isn't specified, the
+label's desired width is computed from the size of the image or
+bitmap or text being displayed in it.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="setfocus"><i>pathName</i> <b>setfocus</b></a></dt>
+
+<dd>Set the focus on the pathname given by <b>-focus</b> option if
+<b>-state</b> is <i>normal</i>.</dd>
+</dl>
+</body>
+</html>
+

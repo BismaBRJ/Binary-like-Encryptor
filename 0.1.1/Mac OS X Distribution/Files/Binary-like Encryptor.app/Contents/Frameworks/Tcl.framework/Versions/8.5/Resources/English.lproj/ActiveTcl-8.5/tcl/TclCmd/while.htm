@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - while manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> while</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+while - Execute script repeatedly as long as a condition is met 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>while</b> <i>test body</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>while</b> command evaluates <i>test</i> as an expression (in
+the same way that <b><a href="../TclCmd/expr.htm">expr</a></b>
+evaluates its argument). The value of the expression must a proper
+boolean value; if it is a true value then <i>body</i> is executed
+by passing it to the Tcl interpreter. Once <i>body</i> has been
+executed then <i>test</i> is evaluated again, and the process
+repeats until eventually <i>test</i> evaluates to a false boolean
+value. <b><a href="../TclCmd/continue.htm">Continue</a></b>
+commands may be executed inside <i>body</i> to terminate the
+current iteration of the loop, and <b><a href=
+"../TclCmd/break.htm">break</a></b> commands may be executed inside
+<i>body</i> to cause immediate termination of the <b>while</b>
+command. The <b>while</b> command always returns an empty string. 
+
+<p>Note: <i>test</i> should almost always be enclosed in braces. If
+not, variable substitutions will be made before the <b>while</b>
+command starts executing, which means that variable changes made by
+the loop body will not be considered in the expression. This is
+likely to result in an infinite loop. If <i>test</i> is enclosed in
+braces, variable substitutions are delayed until the expression is
+evaluated (before each loop iteration), so changes in the variables
+will be visible. For an example, try the following script with and
+without the braces around <b>$x&lt;10</b>:</p>
+
+<pre>
+set x 0
+<b>while</b> {$x&lt;10} {
+    puts "x is $x"
+    incr x
+}
+</pre>
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+Read lines from a channel until we get to the end of the stream,
+and print them out with a line-number prepended: 
+
+<pre>
+set lineCount 0
+<b>while</b> {[gets $chan line] &gt;= 0} {
+    puts "[incr lineCount]: $line"
+}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/break.htm">break</a></b>, <b><a href=
+"../TclCmd/continue.htm">continue</a></b>, <b><a href=
+"../TclCmd/for.htm">for</a></b>, <b><a href=
+"../TclCmd/foreach.htm">foreach</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#boolean value">boolean value</a>, <a
+href="../Keywords/L.htm#loop">loop</a>, <a href=
+"../Keywords/T.htm#test">test</a>, <a href=
+"../Keywords/W.htm#while">while</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

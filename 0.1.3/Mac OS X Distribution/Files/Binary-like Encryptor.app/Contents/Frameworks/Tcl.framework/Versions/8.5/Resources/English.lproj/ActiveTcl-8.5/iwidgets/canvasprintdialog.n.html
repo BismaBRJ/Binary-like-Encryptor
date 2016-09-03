@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>canvasprintdialog - Create and manipulate a canvas print
+dialog widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>canvasprintdialog - Create and manipulate a canvas print dialog
+widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>canvasprintdialog pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Toplevel &lt;- Dialogshell &lt;- Dialog &lt;-
+Canvasprintdialog 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeBackground</b><br>
+<b>foreground</b><br>
+<b>insertBackground</b><br>
+<b>insertWidth</b><br>
+<b>selectBackground</b><br>
+</td>
+<td valign="top"><b>background</b><br>
+<b>highlightBackground</b><br>
+<b>insertBorderWidth</b><br>
+<b>relief</b><br>
+<b>selectBorderWidth</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>highlightColor</b><br>
+<b>insertOffTime</b><br>
+<b>repeatDelay</b><br>
+<b>selectForeground</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>highlightThickness</b><br>
+<b>insertOnTime</b><br>
+<b>repeatInterval</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>filename</b><br>
+<b>pagesize</b><br>
+<b>vpagecnt</b><br>
+</td>
+<td valign="top"><b>hpagecnt</b><br>
+<b>posterize</b><br>
+</td>
+<td valign="top"><b>orient</b><br>
+<b>printcmd</b><br>
+</td>
+<td valign="top"><b>output</b><br>
+<b>printregion</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the "canvasprintbox" widget manual entry for details on the
+above associated options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>buttonBoxPadX</b><br>
+<b>padY</b><br>
+</td>
+<td valign="top"><b>buttonBoxPadY</b><br>
+<b>separator</b><br>
+</td>
+<td valign="top"><b>buttonBoxPos</b><br>
+<b>thickness</b><br>
+</td>
+<td valign="top"><b>padX</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="dialogshell.n.html">"dialogshell"</a> widget
+manual entry for details on the above inherited options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>master</b><br>
+</td>
+<td valign="top"><b>modality</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the "shell" widget manual entry for details on the above
+inherited options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>title</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the "Toplevel" widget manual entry for details on the above
+inherited options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>canvasprintdialog</b> command creates a print dialog for
+printing the contents of a canvas widget to a printer or a file. It
+is possible to specify page orientation, the number of pages to
+print the image on and if the output should be stretched to fit the
+page.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>canvasprintdialog</b> command creates a new Tcl command
+whose name is <i>pathName</i>. This command may be used to invoke
+various operations on the widget. It has the following general
+form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for
+canvasprintdialog widgets: 
+
+<h2>ASSOCIATED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>getoutput</b><br>
+</td>
+<td valign="top"><b>setcanvas</b><br>
+</td>
+<td valign="top"><b>refresh</b><br>
+</td>
+<td valign="top"><b>print</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the "canvasprintbox" class manual entry for details on the
+associated methods.</p>
+
+<h2>INHERITED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>add</b><br>
+<b>insert</b><br>
+</td>
+<td valign="top"><b>buttonconfigure</b><br>
+<b>invoke</b><br>
+</td>
+<td valign="top"><b>default</b><br>
+<b>show</b><br>
+</td>
+<td valign="top"><b>hide</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="buttonbox.n.html">"buttonbox"</a> widget manual
+entry for details on the above inherited methods.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activate</b><br>
+</td>
+<td valign="top"><b>deactivate</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="dialogshell.n.html">"dialogshell"</a> widget
+manual entry for details on the above inherited methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>canvasprintdialog</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>canvasprintdialog</b> command.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>cpb</b>
+Class:                  <b>Canvasprintbox</b>
+</pre>
+
+<div style="margin-left: 2em">The cpb component is the canvas print
+box for the canvas print dialog. See the "canvasprintbox" widget
+manual entry for details on the cpb component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ canvasprintdialog .cpb 
+ .cpb activate
+</pre>
+
+<h2>AUTHOR</h2>
+
+Tako Schotanus 
+
+<h2>KEYWORDS</h2>
+
+canvasprintdialog, canvasprintbox, dialog, widget
+</body>
+</html>
+

@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>shell - Create and manipulate a shell widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>shell - Create and manipulate a shell widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>shell pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Toplevel &lt;- shell 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>background</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+</td>
+<td valign="top"><b>foreground</b><br>
+</td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>title</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the "Toplevel" manual entry for details on the above
+inherited options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>height</b>
+Class:                  <b>Height</b>
+Command-Line Switch:    <b>-height</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the height of the shell.
+The value may be specified in any of the forms acceptable to
+<b>Tk_GetPixels</b>. A value of zero causes the height to be
+adjusted to the required value based on the size requests of the
+components placed in the childsite. Otherwise, the height is fixed.
+The default is zero. NOTE: This may cause some amount of flickering
+on slower machines. To prevent it simply set the width and height
+to a appropriate value.</div>
+
+<pre>
+Name:                   <b>master</b>
+Class:                  <b>Window</b>
+Command-Line Switch:    <b>-master</b>
+</pre>
+
+<div style="margin-left: 2em">Defines the shell as being a
+transient window with the master window given by the master option.
+The master window should be either another existing toplevel window
+or {} for no master. The default is {} for shells and "." for
+dialogs.</div>
+
+<pre>
+Name:                   <b>modality</b>
+Class:                  <b>Modality</b>
+Command-Line Switch:    <b>-modality</b>
+</pre>
+
+<div style="margin-left: 2em">Allows the shell to grab control of
+the screen in one of three different ways: <b>application</b>,
+<b>system</b>, or <b>none</b>. Application modal prevents any other
+toplevel windows within the application which are direct children
+of '.' from gaining focus. System modal locks the screen and
+prevents all windows from gaining focus regardless of application.
+A modality of none performs no grabs at all. The default is
+none.</div>
+
+<pre>
+Name:                   <b>padX</b>
+Class:                  <b>Pad</b>
+Command-Line Switch:    <b>-padx</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a padding distance for the
+childsite in the X-direction in any of the forms acceptable to
+<b>Tk_GetPixels</b>. The default is 10.</div>
+
+<pre>
+Name:                   <b>padY</b>
+Class:                  <b>Pad</b>
+Command-Line Switch:    <b>-pady</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a padding distance for the
+childsite in the Y-direction in any of the forms acceptable to
+<b>Tk_GetPixels</b>. The default is 10.</div>
+
+<pre>
+Name:                   <b>width</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-width</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width of the shell. The
+value may be specified in any of the forms acceptable to
+<b>Tk_GetPixels</b>. A value of zero causes the width to be
+adjusted to the required value based on the size requests of the
+components placed in the childsite. Otherwise, the width is fixed.
+The default is zero. NOTE: This may cause some amount of flickering
+on slower machines. To prevent it simply set the width and height
+to a appropriate value.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>shell</b> command creates a shell which is a top level
+widget which supports modal operation.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>shell</b> command create a new Tcl command whose name is
+<i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for shell widgets:
+
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>activate</b></i></dt>
+
+<dd>Display the shell and wait based on the modality. For
+application and system modal activations, perform a grab operation,
+and wait for the result. The result may be returned via an argument
+to the <b>deactivate</b> method.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>center</b></i> ?widget?</dt>
+
+<dd>Centers the shell with respect to another widget. The widget
+argument is optional. If provided, it should be the path of another
+widget with to center upon. If absent, then the shell will be
+centered on the screen as a whole.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>shell</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>childsite</b></i></dt>
+
+<dd>Returns the pathname of the child site widget.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>shell</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>deactivate</b> ?</i>arg?</dt>
+
+<dd>Deactivate the display of the shell. The method takes an
+optional argument to be passed to the <b>activate</b> method which
+returns the value. The optional argument is only effective for
+application and system modal dialogs.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>shellchildsite</b>
+Class:                  <b>frame</b>
+</pre>
+
+<div style="margin-left: 2em">The shellchildsite component is the
+user child site for the shell. See the "frame" widget manual entry
+for details on the shellchildsite component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ shell .sh -modality application -padx 20 -pady 20 -title Shell
+
+ pack [label [.sh childsite].l -text SHELL]
+
+ .sh center
+ .sh activate
+</pre>
+
+<h2>AUTHOR</h2>
+
+Mark L. Ulferts 
+
+<p>Kris Raney</p>
+
+<h2>KEYWORDS</h2>
+
+shell, widget
+</body>
+</html>
+

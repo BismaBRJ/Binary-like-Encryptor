@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>scrolledcanvas - Create and manipulate scrolled canvas
+widgets</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>scrolledcanvas - Create and manipulate scrolled canvas
+widgets</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>scrolledcanvas pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- Labeledwidget &lt;- Scrolledwidget &lt;-
+Scrolledcanvas 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeBackground</b><br>
+<b>exportSelection</b><br>
+<b>highlightThickness</b><br>
+<b>insertWidth</b><br>
+<b>selectForeground</b><br>
+</td>
+<td valign="top"><b>background</b><br>
+<b>font</b><br>
+<b>insertBorderWidth</b><br>
+<b>relief</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>foreground</b><br>
+<b>insertOffTime</b><br>
+<b>selectBackground</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>highlightColor</b><br>
+<b>insertOnTime</b><br>
+<b>selectBorderWidth</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>closeEnough</b><br>
+<b>yScrollIncrement</b><br>
+</td>
+<td valign="top"><b>confine</b><br>
+</td>
+<td valign="top"><b>scrollRegion</b><br>
+</td>
+<td valign="top"><b>xScrollIncrement</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/canvas.n.html">"canvas"</a>
+widget manual entry for details on the above associated
+options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeRelief</b><br>
+</td>
+<td valign="top"><b>elementBorderWidth</b><br>
+</td>
+<td valign="top"><b>jump</b><br>
+</td>
+<td valign="top"><b>troughColor</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/scrollbar.n.html">"scrollbar"</a>
+widget manual entry for details on the above associated
+options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>disabledForeground</b><br>
+<b>labelMargin</b><br>
+<b>state</b><br>
+</td>
+<td valign="top"><b>labelBitmap</b><br>
+<b>labelPos</b><br>
+</td>
+<td valign="top"><b>labelFont</b><br>
+<b>labelText</b><br>
+</td>
+<td valign="top"><b>labelImage</b><br>
+<b>labelVariable</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="labeledwidget.n.html">"labeledwidget"</a> class
+manual entry for details on the inherited options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>autoMargin</b>
+Class:                  <b>AutoMargin</b>
+Command-Line Switch:    <b>-automargin</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the autoresize extra margin
+to reserve. This option is only effective with autoresize turned
+on. The default is 10.</div>
+
+<pre>
+Name:                   <b>autoResize</b>
+Class:                  <b>AutoResize</b>
+Command-Line Switch:    <b>-autoresize</b>
+</pre>
+
+<div style="margin-left: 2em">Automatically adjusts the scrolled
+region to be the bounding box covering all the items in the canvas
+following the execution of any method which creates or destroys
+items. Thus, as new items are added, the scrollbars adjust
+accordingly.</div>
+
+<pre>
+Name:                   <b>height</b>
+Class:                  <b>Height</b>
+Command-Line Switch:    <b>-height</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the height of the scrolled
+canvas widget in any of the forms acceptable to
+<b>Tk_GetPixels</b>. The default height is 30 pixels.</div>
+
+<pre>
+Name:                   <b>hscrollMode</b>
+Class:                  <b>ScrollMode</b>
+Command-Line Switch:    <b>-hscrollmode</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the the display mode to be
+used for the horizontal scrollbar: <b>static, dynamic,</b> or
+<b>none</b>. In static mode, the scroll bar is displayed at all
+times. Dynamic mode displays the scroll bar as required, and none
+disables the scroll bar display. The default is static.</div>
+
+<pre>
+Name:                   <b>sbWidth</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-sbwidth</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width of the scrollbar
+in any of the forms acceptable to <b>Tk_GetPixels</b>. The default
+width is 15 pixels..</div>
+
+<pre>
+Name:                   <b>scrollMargin</b>
+Class:                  <b>ScrollMargin</b>
+Command-Line Switch:    <b>-scrollmargin</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the distance between the
+canvas and scrollbar in any of the forms acceptable to
+<b>Tk_GetPixels</b>. The default is 3 pixels.</div>
+
+<pre>
+Name:                   <b>textBackground</b>
+Class:                  <b>Background</b>
+Command-Line Switch <b>-textbackground</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the background color for
+the canvas. This allows the background within the canvas to be
+different from the normal background color.</div>
+
+<pre>
+Name:                   <b>vscrollMode</b>
+Class:                  <b>ScrollMode</b>
+Command-Line Switch:    <b>-vscrollmode</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the the display mode to be
+used for the vertical scrollbar: <b>static, dynamic,</b> or
+<b>none</b>. In static mode, the scroll bar is displayed at all
+times. Dynamic mode displays the scroll bar as required, and none
+disables the scroll bar display. The default is static.</div>
+
+<pre>
+Name:                   <b>width</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-width</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width of the scrolled
+canvas widget in any of the forms acceptable to
+<b>Tk_GetPixels</b>. The default height is 30 pixels.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>scrolledcanvas</b> command creates a scrolled canvas with
+additional options to manage horizontal and vertical scrollbars.
+This includes options to control which scrollbars are displayed and
+the method, i.e. statically or dynamically.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>scrolledcanvas</b> command creates a new Tcl command
+whose name is <i>pathName</i>. This command may be used to invoke
+various operations on the widget. It has the following general
+form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for scrolledcanvas
+widgets: 
+
+<h2>ASSOCIATED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>addtag</b><br>
+<b>canvasy</b><br>
+<b>delete</b><br>
+<b>gettags</b><br>
+<b>itemconfigure</b><br>
+<b>raise</b><br>
+<b>type</b><br>
+</td>
+<td valign="top"><b>bbox</b><br>
+<b>coords</b><br>
+<b>dtag</b><br>
+<b>icursor</b><br>
+<b>lower</b><br>
+<b>scale</b><br>
+<b>xview</b><br>
+</td>
+<td valign="top"><b>bind</b><br>
+<b>create</b><br>
+<b>find</b><br>
+<b>index</b><br>
+<b>move</b><br>
+<b>scan</b><br>
+<b>yview</b><br>
+</td>
+<td valign="top"><b>canvasx</b><br>
+<b>dchars</b><br>
+<b>focus</b><br>
+<b>insert</b><br>
+<b>postscript</b><br>
+<b>select</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/canvas.n.html">"canvas"</a>
+manual entry for details on the associated methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>scrolledcanvas</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>childsite</b></i></dt>
+
+<dd>Returns the child site widget path name.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>scrolledcanvas</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>justify <i>direction</i></b></i></dt>
+
+<dd>Justifies the canvas contents via the scroll bars in one of
+four directions: <b>left</b>, <b>right</b>, <b>top</b>, or
+<b>bottom</b>.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>canvas</b>
+Class:                  <b>Canvas</b>
+</pre>
+
+<div style="margin-left: 2em">The canvas component is the canvas
+widget. See the "canvas" widget manual entry for details on the
+canvas component item.</div>
+
+<pre>
+Name:                   <b>horizsb</b>
+Class:                  <b>Scrollbar</b>
+</pre>
+
+<div style="margin-left: 2em">The horizsb component is the
+horizontal scroll bar. See the "ScrollBar" widget manual entry for
+details on the horizsb component item.</div>
+
+<pre>
+Name:                   <b>vertsb</b>
+Class:                  <b>Scrollbar</b>
+</pre>
+
+<div style="margin-left: 2em">The vertsb component is the vertical
+scroll bar. See the "ScrollBar" widget manual entry for details on
+the vertsb component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+  scrolledcanvas .sc 
+
+  .sc create rectangle 100 100 400 400 -fill red
+  .sc create rectangle 300 300 600 600 -fill green
+  .sc create rectangle 200 200 500 500 -fill blue
+
+  pack .sc -padx 10 -pady 10 -fill both -expand yes
+</pre>
+
+<h2>AUTHOR</h2>
+
+Mark L. Ulferts 
+
+<h2>KEYWORDS</h2>
+
+scrolledcanvas, canvas, widget
+</body>
+</html>
+

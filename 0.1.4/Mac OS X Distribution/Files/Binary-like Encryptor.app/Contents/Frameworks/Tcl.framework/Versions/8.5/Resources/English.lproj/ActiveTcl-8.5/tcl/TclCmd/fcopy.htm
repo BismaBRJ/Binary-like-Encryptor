@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - fcopy manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> fcopy</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+fcopy - Copy data from one channel to another 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>fcopy</b> <i>inchan</i> <i>outchan</i> ?<b>-size</b>
+<i>size</i>? ?<b>-command</b> <i>callback</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>fcopy</b> command copies data from one I/O channel,
+<i>inchan</i> to another I/O channel, <i>outchan</i>. The
+<b>fcopy</b> command leverages the buffering in the Tcl I/O system
+to avoid extra copies and to avoid buffering too much data in main
+memory when copying large files to slow destinations like network
+sockets. 
+
+<p>The <b>fcopy</b> command transfers data from <i>inchan</i> until
+end of file or <i>size</i> bytes have been transferred. If no
+<b>-size</b> argument is given, then the copy goes until end of
+file. All the data read from <i>inchan</i> is copied to
+<i>outchan</i>. Without the <b>-command</b> option, <b>fcopy</b>
+blocks until the copy is complete and returns the number of bytes
+written to <i>outchan</i>.</p>
+
+<p>The <b>-command</b> argument makes <b>fcopy</b> work in the
+background. In this case it returns immediately and the
+<i>callback</i> is invoked later when the copy completes. The
+<i>callback</i> is called with one or two additional arguments that
+indicates how many bytes were written to <i>outchan</i>. If an
+error occurred during the background copy, the second argument is
+the error string associated with the error. With a background copy,
+it is not necessary to put <i>inchan</i> or <i>outchan</i> into
+non-blocking mode; the <b>fcopy</b> command takes care of that
+automatically. However, it is necessary to enter the event loop by
+using the <b><a href="../TclCmd/vwait.htm">vwait</a></b> command or
+by using Tk.</p>
+
+<p>You are not allowed to do other I/O operations with
+<i>inchan</i> or <i>outchan</i> during a background <b>fcopy</b>.
+If either <i>inchan</i> or <i>outchan</i> get closed while the copy
+is in progress, the current copy is stopped and the command
+callback is <i>not</i> made. If <i>inchan</i> is closed, then all
+data already queued for <i>outchan</i> is written out.</p>
+
+<p>Note that <i>inchan</i> can become readable during a background
+copy. You should turn off any <b><a href=
+"../TclCmd/fileevent.htm">fileevent</a></b> handlers during a
+background copy so those handlers do not interfere with the copy.
+Any I/O attempted by a <b><a href=
+"../TclCmd/fileevent.htm">fileevent</a></b> handler will get a
+&ldquo;channel busy&rdquo; error.</p>
+
+<p><b>Fcopy</b> translates end-of-line sequences in <i>inchan</i>
+and <i>outchan</i> according to the <b>-translation</b> option for
+these channels. See the manual entry for <b><a href=
+"../TclCmd/fconfigure.htm">fconfigure</a></b> for details on the
+<b>-translation</b> option. The translations mean that the number
+of bytes read from <i>inchan</i> can be different than the number
+of bytes written to <i>outchan</i>. Only the number of bytes
+written to <i>outchan</i> is reported, either as the return value
+of a synchronous <b>fcopy</b> or as the argument to the callback
+for an asynchronous <b>fcopy</b>.</p>
+
+<p><b>Fcopy</b> obeys the encodings and character translations
+configured for the channels. This means that the incoming
+characters are converted internally first UTF-8 and then into the
+encoding of the channel <b>fcopy</b> writes to. See the manual
+entry for <b><a href="../TclCmd/fconfigure.htm">fconfigure</a></b>
+for details on the <b>-encoding</b> and <b>-translation</b>
+options. No conversion is done if both channels are set to encoding
+&ldquo;binary&rdquo; and have matching translations. If only the
+output channel is set to encoding &ldquo;binary&rdquo; the system
+will write the internal UTF-8 representation of the incoming
+characters. If only the input channel is set to encoding
+&ldquo;binary&rdquo; the system will assume that the incoming bytes
+are valid UTF-8 characters and convert them according to the output
+encoding. The behaviour of the system for bytes which are not valid
+UTF-8 characters is undefined in this case.</p>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+The first example transfers the contents of one channel exactly to
+another. Note that when copying one file to another, it is better
+to use <b><a href="../TclCmd/file.htm">file copy</a></b> which also
+copies file metadata (e.g. the file access permissions) where
+possible. 
+
+<pre>
+fconfigure $in -translation binary
+fconfigure $out -translation binary
+<b>fcopy</b> $in $out
+</pre>
+
+<p>This second example shows how the callback gets passed the
+number of bytes transferred. It also uses vwait to put the
+application into the event loop. Of course, this simplified example
+could be done without the command callback.</p>
+
+<pre>
+proc Cleanup {in out bytes {error {}}} {
+    global total
+    set total $bytes
+    close $in
+    close $out
+    if {[string length $error] != 0} {
+    # error occurred during the copy
+    }
+}
+set in [open $file1]
+set out [socket $server $port]
+<b>fcopy</b> $in $out -command [list Cleanup $in $out]
+vwait total
+</pre>
+
+<p>The third example copies in chunks and tests for end of file in
+the command callback</p>
+
+<pre>
+proc CopyMore {in out chunk bytes {error {}}} {
+    global total done
+    incr total $bytes
+    if {([string length $error] != 0) || [eof $in]} {
+    set done $total
+    close $in
+    close $out
+    } else {
+    <b>fcopy</b> $in $out -size $chunk \
+                -command [list CopyMore $in $out $chunk]
+    }
+}
+set in [open $file1]
+set out [socket $server $port]
+set chunk 1024
+set total 0
+<b>fcopy</b> $in $out -size $chunk \
+        -command [list CopyMore $in $out $chunk]
+vwait done
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/eof.htm">eof</a></b>, <b><a href=
+"../TclCmd/fblocked.htm">fblocked</a></b>, <b><a href=
+"../TclCmd/fconfigure.htm">fconfigure</a></b>, <b><a href=
+"../TclCmd/file.htm">file</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#blocking">blocking</a>, <a href=
+"../Keywords/C.htm#channel">channel</a>, <a href=
+"../Keywords/E.htm#end of line">end of line</a>, <a href=
+"../Keywords/E.htm#end of file">end of file</a>, <a href=
+"../Keywords/N.htm#nonblocking">nonblocking</a>, <a href=
+"../Keywords/R.htm#read">read</a>, <a href=
+"../Keywords/T.htm#translation">translation</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

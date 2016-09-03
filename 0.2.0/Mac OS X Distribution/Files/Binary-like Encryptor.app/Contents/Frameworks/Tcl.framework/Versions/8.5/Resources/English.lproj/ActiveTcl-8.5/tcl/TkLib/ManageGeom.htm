@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_ManageGeometry manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> ManageGeom</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_ManageGeometry - arrange to handle geometry requests for a
+window 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+<b>Tk_ManageGeometry</b>(<i>tkwin, mgrPtr, clientData</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Window <b>tkwin</b> (in)</dt>
+
+<dd>Token for window to be managed.</dd>
+
+<dt>const Tk_GeomMgr <b>*mgrPtr</b> (in)</dt>
+
+<dd>Pointer to data structure containing information about the
+geometry manager, or NULL to indicate that <i>tkwin</i>'s geometry
+should not be managed anymore. The data structure pointed to by
+<i>mgrPtr</i> must be static: Tk keeps a reference to it as long as
+the window is managed.</dd>
+
+<dt>ClientData <b>clientData</b> (in)</dt>
+
+<dd>Arbitrary one-word value to pass to geometry manager
+callbacks.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tk_ManageGeometry</b> arranges for a particular geometry
+manager, described by the <i>mgrPtr</i> argument, to control the
+geometry of a particular slave window, given by <i>tkwin</i>. If
+<i>tkwin</i> was previously managed by some other geometry manager,
+the previous manager loses control in favor of the new one. If
+<i>mgrPtr</i> is NULL, geometry management is cancelled for
+<i>tkwin</i>. 
+
+<p>The structure pointed to by <i>mgrPtr</i> contains information
+about the geometry manager:</p>
+
+<pre>
+typedef struct {
+    const char *<i>name</i>;
+    Tk_GeomRequestProc *<i>requestProc</i>;
+    Tk_GeomLostSlaveProc *<i>lostSlaveProc</i>;
+} Tk_GeomMgr;
+</pre>
+
+The <i>name</i> field is the textual name for the geometry manager,
+such as <b><a href="../TkCmd/pack.htm">pack</a></b> or <b><a href=
+"../TkCmd/place.htm">place</a></b>; this value will be returned by
+the command <b><a href="../TkCmd/winfo.htm">winfo manager</a></b>. 
+
+<p><i>requestProc</i> is a procedure in the geometry manager that
+will be invoked whenever <b><a href=
+"../TkLib/GeomReq.htm">Tk_GeometryRequest</a></b> is called by the
+slave to change its desired geometry. <i>requestProc</i> should
+have arguments and results that match the type
+<b>Tk_GeomRequestProc</b>:</p>
+
+<pre>
+typedef void Tk_GeomRequestProc(
+    ClientData <i>clientData</i>,
+    Tk_Window <i>tkwin</i>);
+</pre>
+
+The parameters to <i>requestProc</i> will be identical to the
+corresponding parameters passed to <b>Tk_ManageGeometry</b>.
+<i>clientData</i> usually points to a data structure containing
+application-specific information about how to manage <i>tkwin</i>'s
+geometry. 
+
+<p>The <i>lostSlaveProc</i> field of <i>mgrPtr</i> points to
+another procedure in the geometry manager. Tk will invoke
+<i>lostSlaveProc</i> if some other manager calls
+<b>Tk_ManageGeometry</b> to claim <i>tkwin</i> away from the
+current geometry manager. <i>lostSlaveProc</i> is not invoked if
+<b>Tk_ManageGeometry</b> is called with a NULL value for
+<i>mgrPtr</i> (presumably the current geometry manager has made
+this call, so it already knows that the window is no longer
+managed), nor is it called if <i>mgrPtr</i> is the same as the
+window's current geometry manager. <i>lostSlaveProc</i> should have
+arguments and results that match the following prototype:</p>
+
+<pre>
+typedef void Tk_GeomLostSlaveProc(
+    ClientData <i>clientData</i>,
+    Tk_Window <i>tkwin</i>);
+</pre>
+
+The parameters to <i>lostSlaveProc</i> will be identical to the
+corresponding parameters passed to <b>Tk_ManageGeometry</b>. 
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#callback">callback</a>, <a href=
+"../Keywords/G.htm#geometry">geometry</a>, <a href=
+"../Keywords/M.htm#managed">managed</a>, <a href=
+"../Keywords/R.htm#request">request</a>, <a href=
+"../Keywords/U.htm#unmanaged">unmanaged</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990-1994 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

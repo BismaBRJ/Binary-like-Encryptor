@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - time manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> time</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+time - Time the execution of a script 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>time</b> <i>script</i> ?<i>count</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command will call the Tcl interpreter <i>count</i> times to
+evaluate <i>script</i> (or once if <i>count</i> is not specified).
+It will then return a string of the form 
+
+<pre>
+<b>503 microseconds per iteration</b>
+</pre>
+
+which indicates the average amount of time required per iteration,
+in microseconds. Time is measured in elapsed time, not CPU time. 
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+Estimate how long it takes for a simple Tcl <b><a href=
+"../TclCmd/for.htm">for</a></b> loop to count to a thousand: 
+
+<pre>
+time {
+    for {set i 0} {$i&lt;1000} {incr i} {
+        # empty body
+    }
+}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/clock.htm">clock</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/S.htm#script">script</a>, <a href=
+"../Keywords/T.htm#time">time</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

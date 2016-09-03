@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>textutil::string - Text and string utilities, macro
+processing</title>
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+</head>
+<body>
+<div class="doctools">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<hr>
+[ <a href="../../at.pkg_index.html">Main table Of Contents</a> | <a
+href="../toc.html">Tcllib Table Of Contents</a> | <a href=
+"../index.html">Tcllib Index</a> ] 
+
+<hr>
+<h1 class="title">textutil::string(n) 0.8 "Text and string
+utilities, macro processing"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>textutil::string - Procedures to manipulate texts and
+strings.</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">Bugs, Ideas,
+Feedback</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#category">Category</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tcl 8.2</b></li>
+
+<li>package require <b class="pkgname">textutil::string <span
+class="opt">?0.8?</span></b></li>
+</ul>
+
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">::textutil::string::chop</b> <i
+class="arg">string</i></a></li>
+
+<li><a href="#2"><b class="cmd">::textutil::string::tail</b> <i
+class="arg">string</i></a></li>
+
+<li><a href="#3"><b class="cmd">::textutil::string::cap</b> <i
+class="arg">string</i></a></li>
+
+<li><a href="#4"><b class="cmd">::textutil::string::capEachWord</b>
+<i class="arg">string</i></a></li>
+
+<li><a href="#5"><b class="cmd">::textutil::string::uncap</b> <i
+class="arg">string</i></a></li>
+
+<li><a href="#6"><b class=
+"cmd">::textutil::string::longestCommonPrefixList</b> <i class=
+"arg">list</i></a></li>
+
+<li><a href="#7"><b class=
+"cmd">::textutil::string::longestCommonPrefix</b> <span class=
+"opt">?<i class="arg">string</i>...?</span></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>The package <b class="package">textutil::string</b> provides
+miscellaneous string manipulation commands.</p>
+
+<p>The complete set of procedures is described below.</p>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">::textutil::string::chop</b> <i
+class="arg">string</i></a></dt>
+
+<dd>
+<p>A convenience command. Removes the last character of <i class=
+"arg">string</i> and returns the shortened string.</p>
+</dd>
+
+<dt><a name="2"><b class="cmd">::textutil::string::tail</b> <i
+class="arg">string</i></a></dt>
+
+<dd>
+<p>A convenience command. Removes the first character of <i class=
+"arg">string</i> and returns the shortened string.</p>
+</dd>
+
+<dt><a name="3"><b class="cmd">::textutil::string::cap</b> <i
+class="arg">string</i></a></dt>
+
+<dd>
+<p>Capitalizes the first character of <i class="arg">string</i> and
+returns the modified string.</p>
+</dd>
+
+<dt><a name="4"><b class="cmd">::textutil::string::capEachWord</b>
+<i class="arg">string</i></a></dt>
+
+<dd>
+<p>Capitalizes the first character of word of the <i class=
+"arg">string</i> and returns the modified string. Words quoted with
+either backslash or dollar-sign are left untouched.</p>
+</dd>
+
+<dt><a name="5"><b class="cmd">::textutil::string::uncap</b> <i
+class="arg">string</i></a></dt>
+
+<dd>
+<p>The complementary operation to <b class=
+"cmd">::textutil::string::cap</b>. Forces the first character of <i
+class="arg">string</i> to lower case and returns the modified
+string.</p>
+</dd>
+
+<dt><a name="6"><b class=
+"cmd">::textutil::string::longestCommonPrefixList</b> <i class=
+"arg">list</i></a></dt>
+
+<dt><a name="7"><b class=
+"cmd">::textutil::string::longestCommonPrefix</b> <span class=
+"opt">?<i class="arg">string</i>...?</span></a></dt>
+
+<dd>
+<p>Computes the longest common prefix for either the <i class=
+"arg">string</i>s given to the command, or the strings specified in
+the single <i class="arg">list</i>, and returns it as the result of
+the command.</p>
+
+<p>If no strings were specified the result is the empty string. If
+only one string was specified, the string itself is returned, as it
+is its own longest common prefix.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">Bugs, Ideas, Feedback</a></h2>
+
+<p>This document, and the package it describes, will undoubtedly
+contain bugs and other problems. Please report such in the category
+<em>textutil</em> of the <a href=
+"http://core.tcl.tk/tcllib/reportlist">Tcllib Trackers</a>. Please
+also report any ideas for enhancements you may have for either
+package and/or documentation.</p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p>regexp(n), split(n), string(n)</p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../index.html#key161">capitalize</a>, <a href=
+"../index.html#key179">chop</a>, <a href=
+"../index.html#key197">common prefix</a>, <a href=
+"../index.html#key345">formatting</a>, <a href=
+"../index.html#key574">prefix</a>, <a href=
+"../index.html#key716">string</a>, <a href=
+"../index.html#key793">uncapitalize</a></p>
+</div>
+
+<div id="category" class="section">
+<h2><a name="category">Category</a></h2>
+
+<p>Text processing</p>
+</div>
+
+<h4>Copyright &copy; 2015 <a href="http://www.activestate.com">for
+compilation: ActiveState</a></h4>
+</div>
+</body>
+</html>
+

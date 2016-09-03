@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>string::token - Text and string utilities</title>
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+</head>
+<body>
+<div class="doctools">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<hr>
+[ <a href="../../at.pkg_index.html">Main table Of Contents</a> | <a
+href="../toc.html">Tcllib Table Of Contents</a> | <a href=
+"../index.html">Tcllib Index</a> ] 
+
+<hr>
+<h1 class="title">string::token(n) 1 "Text and string
+utilities"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>string::token - Regex based iterative lexing</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">Bugs, Ideas,
+Feedback</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#category">Category</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tcl 8.5</b></li>
+
+<li>package require <b class="pkgname">string::token <span class=
+"opt">?1?</span></b></li>
+
+<li>package require <b class="pkgname">fileutil</b></li>
+</ul>
+
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">::string token text</b> <i class=
+"arg">lex</i> <i class="arg">string</i></a></li>
+
+<li><a href="#2"><b class="cmd">::string token file</b> <i class=
+"arg">lex</i> <i class="arg">path</i></a></li>
+
+<li><a href="#3"><b class="cmd">::string token chomp</b> <i class=
+"arg">lex</i> <i class="arg">startvar</i> <i class="arg">string</i>
+<i class="arg">resultvar</i></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>This package provides commands for regular expression based
+lexing (tokenization) of strings.</p>
+
+<p>The complete set of procedures is described below.</p>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">::string token text</b> <i class=
+"arg">lex</i> <i class="arg">string</i></a></dt>
+
+<dd>
+<p>This command takes an ordered dictionary <i class="arg">lex</i>
+mapping regular expressions to labels, and tokenizes the <i class=
+"arg">string</i> according to this dictionary.</p>
+
+<p>The result of the command is a list of tokens, where each token
+is a 3-element list of label, start- and end-index in the <i class=
+"arg">string</i>.</p>
+
+<p>The command will throw an error if it is not able to tokenize
+the whole string.</p>
+</dd>
+
+<dt><a name="2"><b class="cmd">::string token file</b> <i class=
+"arg">lex</i> <i class="arg">path</i></a></dt>
+
+<dd>
+<p>This command is a convenience wrapper around <b class=
+"cmd">::string token text</b> above, and <b class=
+"cmd">fileutil::cat</b>, enabling the easy tokenization of whole
+files. <em>Note</em> that this command loads the file wholly into
+memory before starting to process it.</p>
+
+<p>If the file is too large for this mode of operation a command
+directly based on <b class="cmd">::string token chomp</b> below
+will be necessary.</p>
+</dd>
+
+<dt><a name="3"><b class="cmd">::string token chomp</b> <i class=
+"arg">lex</i> <i class="arg">startvar</i> <i class="arg">string</i>
+<i class="arg">resultvar</i></a></dt>
+
+<dd>
+<p>This command is the work horse underlying <b class=
+"cmd">::string token text</b> above. It is exposed to enable users
+to write their own lexers, which, for example may apply different
+lexing dictionaries according to some internal state, etc.</p>
+
+<p>The command takes an ordered dictionary <i class="arg">lex</i>
+mapping regular expressions to labels, a variable <i class=
+"arg">startvar</i> which indicates where to start lexing in the
+input <i class="arg">string</i>, and a result variable <i class=
+"arg">resultvar</i> to extend.</p>
+
+<p>The result of the command is a tri-state numeric code indicating
+one of</p>
+
+<dl class="definitions">
+<dt><b class="const">0</b></dt>
+
+<dd>
+<p>No token found.</p>
+</dd>
+
+<dt><b class="const">1</b></dt>
+
+<dd>
+<p>Token found.</p>
+</dd>
+
+<dt><b class="const">2</b></dt>
+
+<dd>
+<p>End of string reached.</p>
+</dd>
+</dl>
+
+<p>Note that recognition of a token from <i class="arg">lex</i> is
+started at the character index in <i class="arg">startvar</i>.</p>
+
+<p>If a token was recognized (status <b class="const">1</b>) the
+command will update the index in <i class="arg">startvar</i> to
+point to the first character of the <i class="arg">string</i> past
+the recognized token, and it will further extend the <i class=
+"arg">resultvar</i> with a 3-element list containing the label
+associated with the regular expression of the token, and the start-
+and end-character-indices of the token in <i class=
+"arg">string</i>.</p>
+
+<p>Neither <i class="arg">startvar</i> nor <i class=
+"arg">resultvar</i> will be updated if no token is recognized at
+all.</p>
+
+<p>Note that the regular expressions are applied (tested) in the
+order they are specified in <i class="arg">lex</i>, and the first
+matching pattern stops the process. Because of this it is
+recommended to specify the patterns to lex with from the most
+specific to the most general.</p>
+
+<p>Further note that all regex patterns are implicitly prefixed
+with the constraint escape <b class="const">A</b> to ensure that a
+match starts exactly at the character index found in <i class=
+"arg">startvar</i>.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">Bugs, Ideas, Feedback</a></h2>
+
+<p>This document, and the package it describes, will undoubtedly
+contain bugs and other problems. Please report such in the category
+<em>textutil</em> of the <a href=
+"http://core.tcl.tk/tcllib/reportlist">Tcllib Trackers</a>. Please
+also report any ideas for enhancements you may have for either
+package and/or documentation.</p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../index.html#key440">lexing</a>, <a href=
+"../index.html#key609">regex</a>, <a href=
+"../index.html#key716">string</a>, <a href=
+"../index.html#key774">tokenization</a></p>
+</div>
+
+<div id="category" class="section">
+<h2><a name="category">Category</a></h2>
+
+<p>Text processing</p>
+</div>
+
+<h4>Copyright &copy; 2015 <a href="http://www.activestate.com">for
+compilation: ActiveState</a></h4>
+</div>
+</body>
+</html>
+

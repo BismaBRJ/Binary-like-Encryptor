@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - llength manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> llength</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+llength - Count the number of elements in a list 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>llength</b> <i>list</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+Treats <i>list</i> as a list and returns a decimal string giving
+the number of elements in it. 
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+The result is the number of elements: 
+
+<pre>
+% <b>llength</b> {a b c d e}
+5
+% <b>llength</b> {a b c}
+3
+% <b>llength</b> {}
+0
+</pre>
+
+<p>Elements are not guaranteed to be exactly words in a dictionary
+sense of course, especially when quoting is used:</p>
+
+<pre>
+% <b>llength</b> {a b {c d} e}
+4
+% <b>llength</b> {a b { } c d e}
+6
+</pre>
+
+<p>An empty list is not necessarily an empty string:</p>
+
+<pre>
+% set var { }; puts "[string length $var],[<b>llength</b> $var]"
+1,0
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/list.htm">list</a></b>, <b><a href=
+"../TclCmd/lappend.htm">lappend</a></b>, <b><a href=
+"../TclCmd/lindex.htm">lindex</a></b>, <b><a href=
+"../TclCmd/linsert.htm">linsert</a></b>, <b><a href=
+"../TclCmd/lsearch.htm">lsearch</a></b>, <b><a href=
+"../TclCmd/lset.htm">lset</a></b>, <b><a href=
+"../TclCmd/lsort.htm">lsort</a></b>, <b><a href=
+"../TclCmd/lrange.htm">lrange</a></b>, <b><a href=
+"../TclCmd/lreplace.htm">lreplace</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/E.htm#element">element</a>, <a href=
+"../Keywords/L.htm#list">list</a>, <a href=
+"../Keywords/L.htm#length">length</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+2001 Kevin B. Kenny &lt;kennykb(at)acm.org&gt;. All rights
+reserved.</div>
+</body>
+</html>
+

@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk::style manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_style</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_style.htm#M2" name="L1991">NAME</a> 
+
+<dl>
+<dd>ttk::style - Manipulate style database</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_style.htm#M3" name="L1992">SYNOPSIS</a> 
+
+<dl>
+<dd><b>ttk::style</b> <i>option</i> ?<i>args</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_style.htm#M4" name="L1993">NOTES</a></dd>
+
+<dd><a href="ttk_style.htm#M5" name="L1994">DEFINITIONS</a></dd>
+
+<dd><a href="ttk_style.htm#M6" name="L1995">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="ttk_style.htm#M7" name="L1996"><b>ttk::style
+configure</b> <i>style</i> ?<i>-option</i> ?<i>value option
+value...</i>? ?</a></dd>
+
+<dd><a href="ttk_style.htm#M8" name="L1997"><b>ttk::style map</b>
+<i>style</i> ?<i>-option</i> <b>{</b> <i>statespec value...</i>
+<b>}</b>?</a></dd>
+
+<dd><a href="ttk_style.htm#M9" name="L1998"><b>ttk::style
+lookup</b> <i>style</i> <i>-option</i> ?<i>state</i>
+?<i>default</i>??</a></dd>
+
+<dd><a href="ttk_style.htm#M10" name="L1999"><b>ttk::style
+layout</b> <i>style</i> ?<i>layoutSpec</i>?</a></dd>
+
+<dd><a href="ttk_style.htm#M11" name="L2000"><b>ttk::style element
+create</b> <i>elementName</i> <i>type</i> ?<i>args...</i>?</a></dd>
+
+<dd><a href="ttk_style.htm#M12" name="L2001"><b>ttk::style element
+names</b></a></dd>
+
+<dd><a href="ttk_style.htm#M13" name="L2002"><b>ttk::style element
+options</b> <i>element</i></a></dd>
+
+<dd><a href="ttk_style.htm#M14" name="L2003"><b>ttk::style theme
+create</b> <i>themeName</i> ?<b>-parent</b> <i>basedon</i>?
+?<b>-settings</b> <i>script...</i> ?</a></dd>
+
+<dd><a href="ttk_style.htm#M15" name="L2004"><b>ttk::style theme
+settings</b> <i>themeName</i> <i>script</i></a></dd>
+
+<dd><a href="ttk_style.htm#M16" name="L2005"><b>ttk::style theme
+names</b></a></dd>
+
+<dd><a href="ttk_style.htm#M17" name="L2006"><b>ttk::style theme
+use</b> ?<i>themeName</i>?</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_style.htm#M18" name="L2007">LAYOUTS</a> 
+
+<dl class="layouts">
+<dd><a href="ttk_style.htm#M19" name="L2008"><b>-side</b>
+<i>side</i></a></dd>
+
+<dd><a href="ttk_style.htm#M20" name="L2009"><b>-sticky</b>
+<b>[</b><i>nswe</i><b>]</b></a></dd>
+
+<dd><a href="ttk_style.htm#M21" name="L2010"><b>-children {</b>
+<i>sublayout...</i> <b>}</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_style.htm#M22" name="L2011">SEE ALSO</a></dd>
+
+<dd><a href="ttk_style.htm#M23" name="L2012">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk::style - Manipulate style database 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>ttk::style</b> <i>option</i> ?<i>args</i>?<br>
+<h3><a name="M4">NOTES</a></h3>
+
+See also the Tcl'2004 conference presentation, available at
+http://tktable.sourceforge.net/tile/tile-tcl2004.pdf 
+
+<h3><a name="M5">DEFINITIONS</a></h3>
+
+Each widget is assigned a <i>style</i>, which specifies the set of
+elements making up the widget and how they are arranged, along with
+dynamic and default settings for element options. By default, the
+style name is the same as the widget's class; this may be
+overridden by the <b>-style</b> option. 
+
+<p>A <i>theme</i> is a collection of elements and styles which
+controls the overall look and feel of an application.</p>
+
+<h3><a name="M6">DESCRIPTION</a></h3>
+
+The <b>ttk::style</b> command takes the following arguments: 
+
+<dl class="description">
+<dt><a name="M7"><b>ttk::style configure</b> <i>style</i>
+?<i>-option</i> ?<i>value option value...</i>? ?</a></dt>
+
+<dd>Sets the default value of the specified option(s) in
+<i>style</i>.</dd>
+
+<dt><a name="M8"><b>ttk::style map</b> <i>style</i> ?<i>-option</i>
+<b>{</b> <i>statespec value...</i> <b>}</b>?</a></dt>
+
+<dd>Sets dynamic values of the specified option(s) in <i>style</i>.
+Each <i>statespec / value</i> pair is examined in order; the value
+corresponding to the first matching <i>statespec</i> is used.</dd>
+
+<dt><a name="M9"><b>ttk::style lookup</b> <i>style</i>
+<i>-option</i> ?<i>state</i> ?<i>default</i>??</a></dt>
+
+<dd>Returns the value specified for <i>-option</i> in style
+<i>style</i> in state <i>state</i>, using the standard lookup rules
+for element options. <i>state</i> is a list of state names; if
+omitted, it defaults to all bits off (the &ldquo;normal&rdquo;
+state). If the <i>default</i> argument is present, it is used as a
+fallback value in case no specification for <i>-option</i> is
+found.</dd>
+
+<dt><a name="M10"><b>ttk::style layout</b> <i>style</i>
+?<i>layoutSpec</i>?</a></dt>
+
+<dd>Define the widget layout for style <i>style</i>. See
+<b>LAYOUTS</b> below for the format of <i>layoutSpec</i>. If
+<i>layoutSpec</i> is omitted, return the layout specification for
+style <i>style</i>.</dd>
+
+<dt><a name="M11"><b>ttk::style element create</b>
+<i>elementName</i> <i>type</i> ?<i>args...</i>?</a></dt>
+
+<dd>Creates a new element in the current theme of type <i>type</i>.
+The only cross-platform built-in element type is <i>image</i> (see
+<b><a href="../TkCmd/ttk_image.htm">ttk_image</a></b>(n)) but
+themes may define other element types (see
+<b>Ttk_RegisterElementFactory</b>). On suitable versions of Windows
+an element factory is registered to create Windows theme elements
+(see <b><a href=
+"../TkCmd/ttk_vsapi.htm">ttk_vsapi</a></b>(n)).</dd>
+
+<dt><a name="M12"><b>ttk::style element names</b></a></dt>
+
+<dd>Returns the list of elements defined in the current theme.</dd>
+
+<dt><a name="M13"><b>ttk::style element options</b>
+<i>element</i></a></dt>
+
+<dd>Returns the list of <i>element</i>'s options.</dd>
+
+<dt><a name="M14"><b>ttk::style theme create</b> <i>themeName</i>
+?<b>-parent</b> <i>basedon</i>? ?<b>-settings</b> <i>script...</i>
+?</a></dt>
+
+<dd>Creates a new theme. It is an error if <i>themeName</i> already
+exists. If <b>-parent</b> is specified, the new theme will inherit
+styles, elements, and layouts from the parent theme <i>basedon</i>.
+If <b>-settings</b> is present, <i>script</i> is evaluated in the
+context of the new theme as per <b>ttk::style theme
+settings</b>.</dd>
+
+<dt><a name="M15"><b>ttk::style theme settings</b> <i>themeName</i>
+<i>script</i></a></dt>
+
+<dd>Temporarily sets the current theme to <i>themeName</i>,
+evaluate <i>script</i>, then restore the previous theme. Typically
+<i>script</i> simply defines styles and elements, though arbitrary
+Tcl code may appear.</dd>
+
+<dt><a name="M16"><b>ttk::style theme names</b></a></dt>
+
+<dd>Returns a list of all known themes.</dd>
+
+<dt><a name="M17"><b>ttk::style theme use</b>
+?<i>themeName</i>?</a></dt>
+
+<dd>Without an argument the result is the name of the current
+theme. Otherwise this command sets the current theme to
+<i>themeName</i>, and refreshes all widgets.</dd>
+</dl>
+
+<h3><a name="M18">LAYOUTS</a></h3>
+
+A <i>layout</i> specifies a list of elements, each followed by one
+or more options specifying how to arrange the element. The layout
+mechanism uses a simplified version of the <b><a href=
+"../TkCmd/pack.htm">pack</a></b> geometry manager: given an initial
+cavity, each element is allocated a parcel. Valid options are: 
+
+<dl class="layouts">
+<dt><a name="M19"><b>-side</b> <i>side</i></a></dt>
+
+<dd>Specifies which side of the cavity to place the element; one of
+<b>left</b>, <b>right</b>, <b>top</b>, or <b>bottom</b>. If
+omitted, the element occupies the entire cavity.</dd>
+
+<dt><a name="M20"><b>-sticky</b>
+<b>[</b><i>nswe</i><b>]</b></a></dt>
+
+<dd>Specifies where the element is placed inside its allocated
+parcel.</dd>
+
+<dt><a name="M21"><b>-children {</b> <i>sublayout...</i>
+<b>}</b></a></dt>
+
+<dd>Specifies a list of elements to place inside the element.</dd>
+</dl>
+
+<p>For example:</p>
+
+<pre>
+ttk::style layout Horizontal.TScrollbar {
+    Scrollbar.trough -children {
+        Scrollbar.leftarrow -side left
+        Scrollbar.rightarrow -side right
+        Horizontal.Scrollbar.thumb -side left -sticky ew
+    }
+}
+</pre>
+
+<h3><a name="M22">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_intro.htm">ttk::intro</a></b>, <b><a href=
+"../TkCmd/ttk_widget.htm">ttk::widget</a></b>, <b><a href=
+"../TkCmd/photo.htm">photo</a></b>, <b><a href=
+"../TkCmd/ttk_image.htm">ttk_image</a></b> 
+
+<h3><a name="M23">KEYWORDS</a></h3>
+
+<a href="../Keywords/S.htm#style">style</a>, <a href=
+"../Keywords/T.htm#theme">theme</a>, <a href=
+"../Keywords/A.htm#appearance">appearance</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2004 Joe English</div>
+</body>
+</html>
+

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - if manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> if</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+if - Execute scripts conditionally 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>if</b> <i>expr1</i> ?<b>then</b>? <i>body1</i> <b>elseif</b>
+<i>expr2</i> ?<b>then</b>? <i>body2</i> <b>elseif</b> ...
+?<b>else</b>? ?<i>bodyN</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <i>if</i> command evaluates <i>expr1</i> as an expression (in
+the same way that <b><a href="../TclCmd/expr.htm">expr</a></b>
+evaluates its argument). The value of the expression must be a
+boolean (a numeric value, where 0 is false and anything is true, or
+a string value such as <b>true</b> or <b>yes</b> for true and
+<b>false</b> or <b>no</b> for false); if it is true then
+<i>body1</i> is executed by passing it to the Tcl interpreter.
+Otherwise <i>expr2</i> is evaluated as an expression and if it is
+true then <b>body2</b> is executed, and so on. If none of the
+expressions evaluates to true then <i>bodyN</i> is executed. The
+<b>then</b> and <b>else</b> arguments are optional &ldquo;noise
+words&rdquo; to make the command easier to read. There may be any
+number of <b>elseif</b> clauses, including zero. <i>BodyN</i> may
+also be omitted as long as <b>else</b> is omitted too. The return
+value from the command is the result of the body script that was
+executed, or an empty string if none of the expressions was
+non-zero and there was no <i>bodyN</i>. 
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+A simple conditional: 
+
+<pre>
+<b>if</b> {$vbl == 1} { puts "vbl is one" }
+</pre>
+
+<p>With an <b>else</b>-clause:</p>
+
+<pre>
+<b>if</b> {$vbl == 1} {
+   puts "vbl is one"
+} <b>else</b> {
+   puts "vbl is not one"
+}
+</pre>
+
+<p>With an <b>elseif</b>-clause too:</p>
+
+<pre>
+<b>if</b> {$vbl == 1} {
+   puts "vbl is one"
+} <b>elseif</b> {$vbl == 2} {
+   puts "vbl is two"
+} <b>else</b> {
+   puts "vbl is not one or two"
+}
+</pre>
+
+<p>Remember, expressions can be multi-line, but in that case it can
+be a good idea to use the optional <b>then</b> keyword for
+clarity:</p>
+
+<pre>
+<b>if</b> {
+   $vbl == 1 || $vbl == 2 || $vbl == 3
+} <b>then</b> {
+   puts "vbl is one, two or three"
+}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/expr.htm">expr</a></b>, <b><a href=
+"../TclCmd/for.htm">for</a></b>, <b><a href=
+"../TclCmd/foreach.htm">foreach</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#boolean">boolean</a>, <a href=
+"../Keywords/C.htm#conditional">conditional</a>, <a href=
+"../Keywords/E.htm#else">else</a>, <a href=
+"../Keywords/F.htm#false">false</a>, <a href=
+"../Keywords/I.htm#if">if</a>, <a href=
+"../Keywords/T.htm#true">true</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

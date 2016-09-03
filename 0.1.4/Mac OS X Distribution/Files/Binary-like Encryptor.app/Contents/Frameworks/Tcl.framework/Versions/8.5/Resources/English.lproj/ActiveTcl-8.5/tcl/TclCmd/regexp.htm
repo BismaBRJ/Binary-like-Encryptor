@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - regexp manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> regexp</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="regexp.htm#M2" name="L1355">NAME</a> 
+
+<dl>
+<dd>regexp - Match a regular expression against a string</dd>
+</dl>
+</dd>
+
+<dd><a href="regexp.htm#M3" name="L1356">SYNOPSIS</a> 
+
+<dl>
+<dd><b>regexp</b> ?<i>switches</i>? <i>exp string</i>
+?<i>matchVar</i>? ?<i>subMatchVar subMatchVar ...</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="regexp.htm#M4" name="L1357">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="regexp.htm#M5" name="L1358"><b>-about</b></a></dd>
+
+<dd><a href="regexp.htm#M6" name="L1359"><b>-expanded</b></a></dd>
+
+<dd><a href="regexp.htm#M7" name="L1360"><b>-indices</b></a></dd>
+
+<dd><a href="regexp.htm#M8" name="L1361"><b>-line</b></a></dd>
+
+<dd><a href="regexp.htm#M9" name="L1362"><b>-linestop</b></a></dd>
+
+<dd><a href="regexp.htm#M10" name=
+"L1363"><b>-lineanchor</b></a></dd>
+
+<dd><a href="regexp.htm#M11" name="L1364"><b>-nocase</b></a></dd>
+
+<dd><a href="regexp.htm#M12" name="L1365"><b>-all</b></a></dd>
+
+<dd><a href="regexp.htm#M13" name="L1366"><b>-inline</b></a></dd>
+
+<dd><a href="regexp.htm#M14" name="L1367"><b>-start</b>
+<i>index</i></a></dd>
+
+<dd><a href="regexp.htm#M15" name="L1368"><b>--</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="regexp.htm#M16" name="L1369">EXAMPLES</a></dd>
+
+<dd><a href="regexp.htm#M17" name="L1370">SEE ALSO</a></dd>
+
+<dd><a href="regexp.htm#M18" name="L1371">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+regexp - Match a regular expression against a string 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>regexp</b> ?<i>switches</i>? <i>exp string</i> ?<i>matchVar</i>?
+?<i>subMatchVar subMatchVar ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+Determines whether the regular expression <i>exp</i> matches part
+or all of <i>string</i> and returns 1 if it does, 0 if it does not,
+unless <b>-inline</b> is specified (see below). (Regular expression
+matching is described in the <b><a href=
+"../TclCmd/re_syntax.htm">re_syntax</a></b> reference page.) 
+
+<p>If additional arguments are specified after <i>string</i> then
+they are treated as the names of variables in which to return
+information about which part(s) of <i>string</i> matched
+<i>exp</i>. <i>MatchVar</i> will be set to the range of
+<i>string</i> that matched all of <i>exp</i>. The first
+<i>subMatchVar</i> will contain the characters in <i>string</i>
+that matched the leftmost parenthesized subexpression within
+<i>exp</i>, the next <i>subMatchVar</i> will contain the characters
+that matched the next parenthesized subexpression to the right in
+<i>exp</i>, and so on.</p>
+
+<p>If the initial arguments to <b>regexp</b> start with <b>-</b>
+then they are treated as switches. The following switches are
+currently supported:</p>
+
+<dl class="description">
+<dt><a name="M5"><b>-about</b></a></dt>
+
+<dd>Instead of attempting to match the regular expression, returns
+a list containing information about the regular expression. The
+first element of the list is a subexpression count. The second
+element is a list of property names that describe various
+attributes of the regular expression. This switch is primarily
+intended for debugging purposes.</dd>
+
+<dt><a name="M6"><b>-expanded</b></a></dt>
+
+<dd>Enables use of the expanded regular expression syntax where
+whitespace and comments are ignored. This is the same as specifying
+the <b>(?x)</b> embedded option (see the <b><a href=
+"../TclCmd/re_syntax.htm">re_syntax</a></b> manual page).</dd>
+
+<dt><a name="M7"><b>-indices</b></a></dt>
+
+<dd>Changes what is stored in the <i>subMatchVar</i>s. Instead of
+storing the matching characters from <i>string</i>, each variable
+will contain a list of two decimal strings giving the indices in
+<i>string</i> of the first and last characters in the matching
+range of characters.</dd>
+
+<dt><a name="M8"><b>-line</b></a></dt>
+
+<dd>Enables newline-sensitive matching. By default, newline is a
+completely ordinary character with no special meaning. With this
+flag, &ldquo;[^&rdquo; bracket expressions and &ldquo;.&rdquo;
+never match newline, &ldquo;^&rdquo; matches an empty string after
+any newline in addition to its normal function, and &ldquo;$&rdquo;
+matches an empty string before any newline in addition to its
+normal function. This flag is equivalent to specifying both
+<b>-linestop</b> and <b>-lineanchor</b>, or the <b>(?n)</b>
+embedded option (see the <b><a href=
+"../TclCmd/re_syntax.htm">re_syntax</a></b> manual page).</dd>
+
+<dt><a name="M9"><b>-linestop</b></a></dt>
+
+<dd>Changes the behavior of &ldquo;[^&rdquo; bracket expressions
+and &ldquo;.&rdquo; so that they stop at newlines. This is the same
+as specifying the <b>(?p)</b> embedded option (see the <b><a href=
+"../TclCmd/re_syntax.htm">re_syntax</a></b> manual page).</dd>
+
+<dt><a name="M10"><b>-lineanchor</b></a></dt>
+
+<dd>Changes the behavior of &ldquo;^&rdquo; and &ldquo;$&rdquo;
+(the &ldquo;anchors&rdquo;) so they match the beginning and end of
+a line respectively. This is the same as specifying the <b>(?w)</b>
+embedded option (see the <b><a href=
+"../TclCmd/re_syntax.htm">re_syntax</a></b> manual page).</dd>
+
+<dt><a name="M11"><b>-nocase</b></a></dt>
+
+<dd>Causes upper-case characters in <i>string</i> to be treated as
+lower case during the matching process.</dd>
+
+<dt><a name="M12"><b>-all</b></a></dt>
+
+<dd>Causes the regular expression to be matched as many times as
+possible in the string, returning the total number of matches
+found. If this is specified with match variables, they will contain
+information for the last match only.</dd>
+
+<dt><a name="M13"><b>-inline</b></a></dt>
+
+<dd>Causes the command to return, as a list, the data that would
+otherwise be placed in match variables. When using <b>-inline</b>,
+match variables may not be specified. If used with <b>-all</b>, the
+list will be concatenated at each iteration, such that a flat list
+is always returned. For each match iteration, the command will
+append the overall match data, plus one element for each
+subexpression in the regular expression. Examples are: 
+
+<pre>
+<b>regexp</b> -inline -- {\w(\w)} " inlined "
+      <i><font size="+1">&rarr;</font> in n</i>
+<b>regexp</b> -all -inline -- {\w(\w)} " inlined "
+      <i><font size="+1">&rarr;</font> in n li i ne e</i>
+</pre>
+</dd>
+
+<dt><a name="M14"><b>-start</b> <i>index</i></a></dt>
+
+<dd>Specifies a character index offset into the string to start
+matching the regular expression at. The <i>index</i> value is
+interpreted in the same manner as the <i>index</i> argument to
+<b><a href="../TclCmd/string.htm">string index</a></b>. When using
+this switch, &ldquo;^&rdquo; will not match the beginning of the
+line, and \A will still match the start of the string at
+<i>index</i>. If <b>-indices</b> is specified, the indices will be
+indexed starting from the absolute beginning of the input string.
+<i>index</i> will be constrained to the bounds of the input
+string.</dd>
+
+<dt><a name="M15"><b>--</b></a></dt>
+
+<dd>Marks the end of switches. The argument following this one will
+be treated as <i>exp</i> even if it starts with a <b>-</b>.</dd>
+</dl>
+
+<p>If there are more <i>subMatchVar</i>s than parenthesized
+subexpressions within <i>exp</i>, or if a particular subexpression
+in <i>exp</i> does not match the string (e.g. because it was in a
+portion of the expression that was not matched), then the
+corresponding <i>subMatchVar</i> will be set to &ldquo;<b>-1
+-1</b>&rdquo; if <b>-indices</b> has been specified or to an empty
+string otherwise.</p>
+
+<h3><a name="M16">EXAMPLES</a></h3>
+
+Find the first occurrence of a word starting with <b>foo</b> in a
+string that is not actually an instance of <b>foobar</b>, and get
+the letters following it up to the end of the word into a variable:
+
+
+<pre>
+<b>regexp</b> {\mfoo(?!bar\M)(\w*)} $string -&gt; restOfWord
+</pre>
+
+Note that the whole matched substring has been placed in the
+variable &ldquo;<b>-&gt;</b>&rdquo;, which is a name chosen to look
+nice given that we are not actually interested in its contents. 
+
+<p>Find the index of the word <b>badger</b> (in any case) within a
+string and store that in the variable <b>location</b>:</p>
+
+<pre>
+<b>regexp</b> -indices {(?i)\mbadger\M} $string location
+</pre>
+
+This could also be written as a <i>basic</i> regular expression (as
+opposed to using the default syntax of <i>advanced</i> regular
+expressions) match by prefixing the expression with a suitable
+flag: 
+
+<pre>
+<b>regexp</b> -indices {(?ib)\&lt;badger\&gt;} $string location
+</pre>
+
+<p>This counts the number of octal digits in a string:</p>
+
+<pre>
+<b>regexp</b> -all {[0-7]} $string
+</pre>
+
+<p>This lists all words (consisting of all sequences of
+non-whitespace characters) in a string, and is useful as a more
+powerful version of the <b><a href=
+"../TclCmd/split.htm">split</a></b> command:</p>
+
+<pre>
+<b>regexp</b> -all -inline {\S+} $string
+</pre>
+
+<h3><a name="M17">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/re_syntax.htm">re_syntax</a></b>, <b><a href=
+"../TclCmd/regsub.htm">regsub</a></b>, <b>string</b> 
+
+<h3><a name="M18">KEYWORDS</a></h3>
+
+<a href="../Keywords/M.htm#match">match</a>, <a href=
+"../Keywords/P.htm#parsing">parsing</a>, <a href=
+"../Keywords/P.htm#pattern">pattern</a>, <a href=
+"../Keywords/R.htm#regular expression">regular expression</a>, <a
+href="../Keywords/S.htm#splitting">splitting</a>, <a href=
+"../Keywords/S.htm#string">string</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1998 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

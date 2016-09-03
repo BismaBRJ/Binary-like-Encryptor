@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - lreplace manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> lreplace</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+lreplace - Replace elements in a list with new elements 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>lreplace</b> <i>list first last</i> ?<i>element element
+...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+<b>lreplace</b> returns a new list formed by replacing one or more
+elements of <i>list</i> with the <i>element</i> arguments.
+<i>first</i> and <i>last</i> are index values specifying the first
+and last elements of the range to replace. The index values
+<i>first</i> and <i>last</i> are interpreted the same as index
+values for the command <b><a href="../TclCmd/string.htm">string
+index</a></b>, supporting simple index arithmetic and indices
+relative to the end of the list. 0 refers to the first element of
+the list, and <b>end</b> refers to the last element of the list. If
+<i>list</i> is empty, then <i>first</i> and <i>last</i> are
+ignored. 
+
+<p>If <i>first</i> is less than zero, it is considered to refer to
+before the first element of the list. For non-empty lists, the
+element indicated by <i>first</i> must exist or <i>first</i> must
+indicate before the start of the list.</p>
+
+<p>If <i>last</i> is less than <i>first</i>, then any specified
+elements will be inserted into the list at the point specified by
+<i>first</i> with no elements being deleted.</p>
+
+<p>The <i>element</i> arguments specify zero or more new arguments
+to be added to the list in place of those that were deleted. Each
+<i>element</i> argument will become a separate element of the list.
+If no <i>element</i> arguments are specified, then the elements
+between <i>first</i> and <i>last</i> are simply deleted. If
+<i>list</i> is empty, any <i>element</i> arguments are added to the
+end of the list.</p>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+Replacing an element of a list with another: 
+
+<pre>
+% <b>lreplace</b> {a b c d e} 1 1 foo
+a foo c d e
+</pre>
+
+<p>Replacing two elements of a list with three:</p>
+
+<pre>
+% <b>lreplace</b> {a b c d e} 1 2 three more elements
+a three more elements d e
+</pre>
+
+<p>Deleting the last element from a list in a variable:</p>
+
+<pre>
+% set var {a b c d e}
+a b c d e
+% set var [<b>lreplace</b> $var end end]
+a b c d
+</pre>
+
+<p>A procedure to delete a given element from a list:</p>
+
+<pre>
+proc lremove {listVariable value} {
+    upvar 1 $listVariable var
+    set idx [lsearch -exact $var $value]
+    set var [<b>lreplace</b> $var $idx $idx]
+}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/list.htm">list</a></b>, <b><a href=
+"../TclCmd/lappend.htm">lappend</a></b>, <b><a href=
+"../TclCmd/lindex.htm">lindex</a></b>, <b><a href=
+"../TclCmd/linsert.htm">linsert</a></b>, <b><a href=
+"../TclCmd/llength.htm">llength</a></b>, <b><a href=
+"../TclCmd/lsearch.htm">lsearch</a></b>, <b><a href=
+"../TclCmd/lset.htm">lset</a></b>, <b><a href=
+"../TclCmd/lrange.htm">lrange</a></b>, <b><a href=
+"../TclCmd/lsort.htm">lsort</a></b>, <b><a href=
+"../TclCmd/string.htm">string</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/E.htm#element">element</a>, <a href=
+"../Keywords/L.htm#list">list</a>, <a href=
+"../Keywords/R.htm#replace">replace</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+2001 Kevin B. Kenny &lt;kennykb(at)acm.org&gt;. All rights
+reserved.</div>
+</body>
+</html>
+

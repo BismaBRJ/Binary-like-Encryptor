@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>itk - itkvars (n)</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<center>
+<h1>[incr\ Tk]</h1>
+</center>
+
+<h3>NAME</h3>
+
+itkvars - variables used by [incrTk] 
+
+<h3>DESCRIPTION</h3>
+
+<p>The following global variables are created and managed
+automatically by the <b>[incrTk]</b> library. Except where noted
+below, these variables should normally be treated as read-only by
+application-specific code and by users.</p>
+
+<dl>
+<dt><b>itk::library</b></dt>
+
+<dd>When an interpreter is created, <b>[incrTk]</b> initializes
+this variable to hold the name of a directory containing the system
+library of <b>[incrTk]</b> scripts. The initial value of
+<b>itk::library</b> is set from the ITK_LIBRARY environment
+variable if it exists, or from a compiled-in value otherwise.<br>
+When <b>[incrTk]</b> is added to an interpreter, it executes the
+script "init.itk" in this directory. This script, in turn, looks
+for other script files with the name "init.<i>xxx</i>". Mega-widget
+libraries will be automatically initialized if they install a
+script named "init.<i>xxx</i>" in this directory, where
+"<i>xxx</i>" is the name of the mega-widget library. For example,
+the <b>[incrWidgets]</b> library installs the script
+"init.iwidgets" in this directory. This script establishes the
+"iwidgets" namespace, and sets up autoloading for all
+<b>[incrWidgets]</b> commands.</dd>
+</dl>
+
+<h3>KEYWORDS</h3>
+
+itcl, itk, variables 
+
+<hr>
+[ <a href="../itk/contents.html">itk</a> ] 
+
+<hr>
+<pre>
+Copyright &copy; 1989-1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.
+</pre>
+</body>
+</html>
+

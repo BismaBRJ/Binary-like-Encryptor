@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - pkg::create manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> packagens</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="packagens.htm#M2" name="L1162">NAME</a> 
+
+<dl>
+<dd>pkg::create - Construct an appropriate 'package ifneeded'
+command for a given package specification</dd>
+</dl>
+</dd>
+
+<dd><a href="packagens.htm#M3" name="L1163">SYNOPSIS</a> 
+
+<dl>
+<dd><b>::pkg::create</b> <i>-name packageName</i> <i>-version
+packageVersion</i> ?<i>-load filespec</i>? ... ?<i>-source
+filespec</i>? ...</dd>
+</dl>
+</dd>
+
+<dd><a href="packagens.htm#M4" name="L1164">DESCRIPTION</a></dd>
+
+<dd><a href="packagens.htm#M5" name="L1165">OPTIONS</a> 
+
+<dl class="options">
+<dd><a href="packagens.htm#M6" name="L1166"><b>-name</b>
+<i>packageName</i></a></dd>
+
+<dd><a href="packagens.htm#M7" name="L1167"><b>-version</b>
+<i>packageVersion</i></a></dd>
+
+<dd><a href="packagens.htm#M8" name="L1168"><b>-load</b>
+<i>filespec</i></a></dd>
+
+<dd><a href="packagens.htm#M9" name="L1169"><b>-source</b>
+<i>filespec</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="packagens.htm#M10" name="L1170">SEE ALSO</a></dd>
+
+<dd><a href="packagens.htm#M11" name="L1171">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+pkg::create - Construct an appropriate 'package ifneeded' command
+for a given package specification 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>::pkg::create</b> <i>-name packageName</i> <i>-version
+packageVersion</i> ?<i>-load filespec</i>? ... ?<i>-source
+filespec</i>? ...<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+<b>::pkg::create</b> is a utility procedure that is part of the
+standard Tcl library. It is used to create an appropriate
+<b>package ifneeded</b> command for a given package specification.
+It can be used to construct a <b>pkgIndex.tcl</b> file for use with
+the <b><a href="../TclCmd/package.htm">package</a></b> mechanism. 
+
+<h3><a name="M5">OPTIONS</a></h3>
+
+The parameters supported are: 
+
+<dl class="options">
+<dt><a name="M6"><b>-name</b> <i>packageName</i></a></dt>
+
+<dd>This parameter specifies the name of the package. It is
+required.</dd>
+
+<dt><a name="M7"><b>-version</b> <i>packageVersion</i></a></dt>
+
+<dd>This parameter specifies the version of the package. It is
+required.</dd>
+
+<dt><a name="M8"><b>-load</b> <i>filespec</i></a></dt>
+
+<dd>This parameter specifies a binary library that must be loaded
+with the <b><a href="../TclCmd/load.htm">load</a></b> command.
+<i>filespec</i> is a list with two elements. The first element is
+the name of the file to load. The second, optional element is a
+list of commands supplied by loading that file. If the list of
+procedures is empty or omitted, <b>::pkg::create</b> will set up
+the library for direct loading (see <b>pkg_mkIndex</b>). Any number
+of <b>-load</b> parameters may be specified.</dd>
+
+<dt><a name="M9"><b>-source</b> <i>filespec</i></a></dt>
+
+<dd>This parameter is similar to the <b>-load</b> parameter, except
+that it specifies a Tcl library that must be loaded with the <b><a
+href="../TclCmd/source.htm">source</a></b> command. Any number of
+<b>-source</b> parameters may be specified.</dd>
+</dl>
+
+<p>At least one <b>-load</b> or <b>-source</b> parameter must be
+given.</p>
+
+<h3><a name="M10">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/package.htm">package</a></b> 
+
+<h3><a name="M11">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#auto-load">auto-load</a>, <a href=
+"../Keywords/I.htm#index">index</a>, <a href=
+"../Keywords/P.htm#package">package</a>, <a href=
+"../Keywords/V.htm#version">version</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1998-2000 by Scriptics Corporation.</div>
+</body>
+</html>
+

@@ -1,0 +1,492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>ComboBox</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>ComboBox</b> - ComboBox widget</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>ComboBox</b></a> <i>pathName</i> ?<i>option
+value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i><a href="ArrowButton.html">OPTIONS from
+<b>ArrowButton</b></a></i></dt>
+
+<dd>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;-background or -bg</td>
+<td>&nbsp;&nbsp;-disabledforeground</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-foreground or -fg</td>
+<td>&nbsp;&nbsp;-state</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="Entry.html">OPTIONS from <b>Entry</b></a></i></dt>
+
+<dd>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;-command</td>
+<td>&nbsp;&nbsp;-disabledforeground</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-dragenabled</td>
+<td>&nbsp;&nbsp;-dragendcmd</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-dragevent</td>
+<td>&nbsp;&nbsp;-draginitcmd</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-dragtype</td>
+<td>&nbsp;&nbsp;-dropcmd</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-dropenabled</td>
+<td>&nbsp;&nbsp;-dropovercmd</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-droptypes</td>
+<td>&nbsp;&nbsp;-editable</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-entrybg (see <b>-background</b>)</td>
+<td>&nbsp;&nbsp;-entryfg (see <b>-foreground</b>)</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-exportselection</td>
+<td>&nbsp;&nbsp;-font</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-helptext</td>
+<td>&nbsp;&nbsp;-helptype</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-helpvar</td>
+<td>&nbsp;&nbsp;-highlightbackground</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-highlightcolor</td>
+<td>&nbsp;&nbsp;-highlightthickness</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-insertbackground</td>
+<td>&nbsp;&nbsp;-insertborderwidth</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-insertofftime</td>
+<td>&nbsp;&nbsp;-insertontime</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-insertwidth</td>
+<td>&nbsp;&nbsp;-justify</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-selectbackground</td>
+<td>&nbsp;&nbsp;-selectborderwidth</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-selectforeground</td>
+<td>&nbsp;&nbsp;-show</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-state</td>
+<td>&nbsp;&nbsp;-takefocus</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-text</td>
+<td>&nbsp;&nbsp;-textvariable</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-width</td>
+<td>&nbsp;&nbsp;-xscrollcommand</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-autocomplete">-autocomplete</a></td>
+<td>&nbsp;&nbsp;<a href="#-autopost">-autopost</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-bwlistbox">-bwlistbox</a></td>
+<td>&nbsp;&nbsp;<a href="#-expand">-expand</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-height">-height</a></td>
+<td>&nbsp;&nbsp;<a href="#-hottrack">-hottrack</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-images">-images</a></td>
+<td>&nbsp;&nbsp;<a href="#-listboxwidth">-listboxwidth</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-modifycmd">-modifycmd</a></td>
+<td>&nbsp;&nbsp;<a href="#-postcommand">-postcommand</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-values">-values</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#bind"><b>bind</b></a>
+?<i>arg...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href=
+"#clearvalue"><b>clearvalue</b></a></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#get"><b>get</b></a></dd>
+
+<dd><i>pathName</i> <a href="#getentry"><b>getentry</b></a></dd>
+
+<dd><i>pathName</i> <a href=
+"#getlistbox"><b>getlistbox</b></a></dd>
+
+<dd><i>pathName</i> <a href="#getvalue"><b>getvalue</b></a></dd>
+
+<dd><i>pathName</i> <a href="#icursor"><b>icursor</b></a>
+<i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#post"><b>post</b></a></dd>
+
+<dd><i>pathName</i> <a href="#setvalue"><b>setvalue</b></a>
+<i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#unpost"><b>unpost</b></a></dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>ComboBox widget enables the user to select a value among a list
+given by the <b>values</b> option. The list of possible values can
+be popped by pressing the ArrowButton or by clicking in the entry
+when <b>editable</b> value of the ComboBox is <b>false</b>.<br>
+ If <b>editable</b> value of the ComboBox is <b>true</b> and the
+entry has the focus, the user can press the top and bottom arrow
+keys to modify its value. If the current value exactly match a
+value in the list, then the previous (for top arrow key) or then
+next (for bottom arrow key) value in the list is displayed. If the
+current value match the beginning of a value in the list, then this
+value is displayed. If the current value doesnt match anything,
+then the first value is displayed.</p>
+
+<br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-autocomplete"><b>-autocomplete</b></a></dt>
+
+<dd>Specifies whether or not the combobox should attempt to
+auto-complete the value in the entry field as the user types. If
+true, the combobox will fill in a value that it finds in its value
+list as the user types into the entry.</dd>
+</dl>
+
+<dl>
+<dt><a name="-autopost"><b>-autopost</b></a></dt>
+
+<dd>Specifies whether or not the combobox should post the drop down
+as the user types. If true, the combobox will post and scroll to
+the entry that most closely matches the user entry.</dd>
+</dl>
+
+<dl>
+<dt><a name="-bwlistbox"><b>-bwlistbox</b></a></dt>
+
+<dd>Specifies that the combobox should use a BWidget listbox in its
+drop down instead of the standard Tk option. This option is enabled
+by default if the <b>-images</b> option is not empty.</dd>
+</dl>
+
+<dl>
+<dt><a name="-expand"><b>-expand</b></a></dt>
+
+<dd>Specifies the value expansion behavior for the window. It must
+be <b>none</b> (default) or <b>tab</b>. If <b>tab</b> is specified,
+then a Tab binding is added to attempt to expand the current value
+based on the other values in <b>-values</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-height"><b>-height</b></a></dt>
+
+<dd>Specifies the desired height for the window, in lines. If zero
+or less, then the desired height for the window is made just large
+enough to hold all the elements in the listbox.</dd>
+
+<dd>
+<dl>
+<dt><a name="-hottrack"><b>-hottrack</b></a></dt>
+
+<dd>The selection in the drop down listbox will follow the mouse
+cursor as it moves.</dd>
+</dl>
+
+<dl>
+<dt><a name="-images"><b>-images</b></a></dt>
+
+<dd>A list of images that correspond to the <b>-values</b> option.
+Each image will be drawn next to its value in the drop down. This
+option enables the <b>-bwlistbox</b> by default as it is needed to
+display images.</dd>
+</dl>
+
+<dl>
+<dt><a name="-listboxwidth"><b>-listboxwidth</b></a></dt>
+
+<dd>Specifies the width of the listbox in the drop down. Defaults
+to the same size as the combobox.</dd>
+</dl>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="-modifycmd"><b>-modifycmd</b></a></dt>
+
+<dd>Specifies a Tcl command called when the user modify the value
+of the ComboBox by selecting it in the listbox or pressing arrow
+key.</dd>
+</dl>
+
+<dl>
+<dt><a name="-postcommand"><b>-postcommand</b></a></dt>
+
+<dd>Specifies a Tcl command called before the listbox of the
+ComboBox is mapped.</dd>
+</dl>
+
+<dl>
+<dt><a name="-values"><b>-values</b></a></dt>
+
+<dd>Specifies the values to display in the listbox of the
+ComboBox.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="bind"><i>pathName</i> <b>bind</b></a>
+?<i>arg...</i>?</dt>
+
+<dd>Set bindings on the entry widget.</dd>
+</dl>
+
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="clearvalue"><i>pathName</i> <b>clearvalue</b></a></dt>
+
+<dd>Clears the current text of the ComboBox.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="get"><i>pathName</i> <b>get</b></a></dt>
+
+<dd>Returns the current contents of the entry.</dd>
+</dl>
+
+<dl>
+<dt><a name="getentry"><i>pathName</i> <b>getentry</b></a></dt>
+
+<dd>Returns the path to the contained entry widget.</dd>
+</dl>
+
+<dl>
+<dt><a name="getlistbox"><i>pathName</i> <b>getlistbox</b></a></dt>
+
+<dd>Returns the path to the listbox in the drop down.</dd>
+</dl>
+
+<dl>
+<dt><a name="getvalue"><i>pathName</i> <b>getvalue</b></a></dt>
+
+<dd>Returns the index of the current text of the ComboBox in the
+list of values, or -1 if it doesn't match any value.</dd>
+</dl>
+
+<dl>
+<dt><a name="icursor"><i>pathName</i> <b>icursor</b></a>
+<i>index</i></dt>
+
+<dd>Arrange for the insertion cursor to be displayed just before
+the character given by <i>index</i>. Returns an empty string.</dd>
+</dl>
+
+<dl>
+<dt><a name="post"><i>pathName</i> <b>post</b></a></dt>
+
+<dd>Post the drop down.</dd>
+</dl>
+
+<dl>
+<dt><a name="setvalue"><i>pathName</i> <b>setvalue</b></a>
+<i>index</i></dt>
+
+<dd>Set the text of the ComboBox to the value indicated by
+<i>index</i> in the list of values. <i>index</i> may be specified
+in any of the following forms: 
+
+<dl compact>
+<dt><b>last</b></dt>
+
+<dd>Specifies the last element of the list of values.</dd>
+
+<dt><b>first</b></dt>
+
+<dd>Specifies the first element of the list of values.</dd>
+
+<dt><b>next</b></dt>
+
+<dd>Specifies the element following the current (ie returned by
+<b>getvalue</b>) in the list of values.</dd>
+
+<dt><b>previous</b></dt>
+
+<dd>Specifies the element preceding the current (ie returned by
+<b>getvalue</b>) in the list of values.</dd>
+
+<dt>@<i>number</i></dt>
+
+<dd>Specifies the integer index in the list of values.</dd>
+</dl>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="unpost"><i>pathName</i> <b>unpost</b></a></dt>
+
+<dd>Unpost the drop down.</dd>
+</dl>
+
+<hr>
+<br>
+<b>BINDINGS</b><br>
+<br>
+ When Entry of the ComboBox has the input focus, it has the
+following bindings, in addition to the default Entry bindings: 
+
+<ul>
+<li>Page up set the value of the ComboBox to the first value.</li>
+
+<li>Page down set the value of the ComboBox to the last value.</li>
+
+<li>Arrow up set the value of the ComboBox to the previous
+value.</li>
+
+<li>Arrow down set the value of the ComboBox to the next
+value.</li>
+
+<li>If <b>-autopost</b> is enabled, Escape unposts the
+listbox.</li>
+</ul>
+
+If the listbox is not mapped and ComboBox is not editable or
+disabled, mouse button 1 on the Entry cause the listbox to popup,
+as if the user press the ArrowButton.
+</body>
+</html>
+

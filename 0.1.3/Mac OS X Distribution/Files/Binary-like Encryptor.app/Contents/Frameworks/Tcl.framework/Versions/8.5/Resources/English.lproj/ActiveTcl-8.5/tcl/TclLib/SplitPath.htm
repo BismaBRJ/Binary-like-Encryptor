@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_SplitPath manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> SplitPath</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_SplitPath, Tcl_JoinPath, Tcl_GetPathType - manipulate
+platform-dependent file paths 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+<b>Tcl_SplitPath</b>(<i>path, argcPtr, argvPtr</i>)<br>
+char *<br>
+<b>Tcl_JoinPath</b>(<i>argc, argv, resultPtr</i>)<br>
+Tcl_PathType<br>
+<b>Tcl_GetPathType</b>(<i>path</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>const char <b>*path</b> (in)</dt>
+
+<dd>File path in a form appropriate for the current platform (see
+the <b><a href="../TclCmd/filename.htm">filename</a></b> manual
+entry for acceptable forms for path names).</dd>
+
+<dt>int <b>*argcPtr</b> (out)</dt>
+
+<dd>Filled in with number of path elements in <i>path</i>.</dd>
+
+<dt>const char <b>***argvPtr</b> (out)</dt>
+
+<dd><i>*argvPtr</i> will be filled in with the address of an array
+of pointers to the strings that are the extracted elements of
+<i>path</i>. There will be <i>*argcPtr</i> valid entries in the
+array, followed by a NULL entry.</dd>
+
+<dt>int <b>argc</b> (in)</dt>
+
+<dd>Number of elements in <i>argv</i>.</dd>
+
+<dt>const char *const <b>*argv</b> (in)</dt>
+
+<dd>Array of path elements to merge together into a single
+path.</dd>
+
+<dt>Tcl_DString <b>*resultPtr</b> (in/out)</dt>
+
+<dd>A pointer to an initialized <b>Tcl_DString</b> to which the
+result of <b>Tcl_JoinPath</b> will be appended.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These procedures have been superceded by the objectified procedures
+in the <b>FileSystem</b> man page, which are more efficient. 
+
+<p>These procedures may be used to disassemble and reassemble file
+paths in a platform independent manner: they provide C-level access
+to the same functionality as the <b><a href=
+"../TclCmd/file.htm">file split</a></b>, <b><a href=
+"../TclCmd/file.htm">file join</a></b>, and <b><a href=
+"../TclCmd/file.htm">file pathtype</a></b> commands.</p>
+
+<p><b>Tcl_SplitPath</b> breaks a path into its constituent
+elements, returning an array of pointers to the elements using
+<i>argcPtr</i> and <i>argvPtr</i>. The area of memory pointed to by
+<i>*argvPtr</i> is dynamically allocated; in addition to the array
+of pointers, it also holds copies of all the path elements. It is
+the caller's responsibility to free all of this storage. For
+example, suppose that you have called <b>Tcl_SplitPath</b> with the
+following code:</p>
+
+<pre>
+int argc;
+char *path;
+char **argv;
+    ...
+Tcl_SplitPath(string, &amp;argc, &amp;argv);
+</pre>
+
+Then you should eventually free the storage with a call like the
+following: 
+
+<pre>
+<a href="../TclLib/Alloc.htm">Tcl_Free</a>((char *) argv);
+</pre>
+
+<p><b>Tcl_JoinPath</b> is the inverse of <b>Tcl_SplitPath</b>: it
+takes a collection of path elements given by <i>argc</i> and
+<i>argv</i> and generates a result string that is a properly
+constructed path. The result string is appended to
+<i>resultPtr</i>. <i>ResultPtr</i> must refer to an initialized
+<b>Tcl_DString</b>.</p>
+
+<p>If the result of <b>Tcl_SplitPath</b> is passed to
+<b>Tcl_JoinPath</b>, the result will refer to the same location,
+but may not be in the same form. This is because
+<b>Tcl_SplitPath</b> and <b>Tcl_JoinPath</b> eliminate duplicate
+path separators and return a normalized form for each platform.</p>
+
+<p><b>Tcl_GetPathType</b> returns the type of the specified
+<i>path</i>, where <b>Tcl_PathType</b> is one of
+<b>TCL_PATH_ABSOLUTE</b>, <b>TCL_PATH_RELATIVE</b>, or
+<b>TCL_PATH_VOLUME_RELATIVE</b>. See the <b><a href=
+"../TclCmd/filename.htm">filename</a></b> manual entry for a
+description of the path types for each platform.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/F.htm#file">file</a>, <a href=
+"../Keywords/F.htm#filename">filename</a>, <a href=
+"../Keywords/J.htm#join">join</a>, <a href=
+"../Keywords/P.htm#path">path</a>, <a href=
+"../Keywords/S.htm#split">split</a>, <a href=
+"../Keywords/T.htm#type">type</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

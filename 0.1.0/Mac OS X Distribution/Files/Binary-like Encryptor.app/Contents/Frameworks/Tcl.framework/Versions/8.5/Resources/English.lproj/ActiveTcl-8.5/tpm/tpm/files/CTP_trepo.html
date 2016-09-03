@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>teapot-trepo - TEA Package Management</title>
+<link rel="stylesheet" href="../aspn.css" type="text/css">
+</head>
+<body>
+<div class="doctools">
+<hr>
+[ 
+
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+ <a href="../../toc.html">Main Table Of Contents</a> | <a href=
+"../toc.html">Table Of Contents</a> | <a href=
+"../../index.html">Keyword Index</a> ] 
+
+<hr>
+<h1 class="title">teapot-trepo(n) 1.0 tpm "TEA Package
+Management"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>teapot-trepo - TEApot Transparent Repository Structure</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">Base directory</a></li>
+
+<li class="section"><a href="#section3">Location details</a> 
+
+<ul>
+<li class="subsection"><a href="#subsection1">Zip archives</a></li>
+
+<li class="subsection"><a href="#subsection2">Packages, Tcl
+Modules</a></li>
+
+<li class="subsection"><a href="#subsection3">Applications, Tcl
+Modules</a></li>
+</ul>
+</li>
+
+<li class="section"><a href="#section4">Summary</a></li>
+
+<li class="section"><a href="#section5">BUGS, IDEAS,
+FEEDBACK</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>This document specifies the directory structure used by <i
+class="term"><a href="../../index.html#key13">transparent</a></i>
+repositories (i.e. <i class="term"><a href=
+"../../index.html#key21">installation</a></i> repositories) to
+store entities.</p>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">Base directory</a></h2>
+
+<p>Assuming that the main directory of the repository is "<b class=
+"file">FOO/</b>" the stored entities are first sorted by their
+entity type, then their architecture, and at last according to
+their storage format (Tcl Module, vs. Zip archive). This means that
+the base path for an entity X is:</p>
+
+<ul class="itemized">
+<li>
+<p>"<b class=
+"file">FOO/&lt;entity-type&gt;/&lt;architecture&gt;/&lt;storage&gt;/</b>"</p>
+</li>
+</ul>
+
+<p>The first two, entity type and architecture, are pulled out of
+the meta data contained in the archive, whereas the last is
+determined by the file type and translated into the path segment
+per the list in the next paragraph</p>
+
+<dl class="definitions">
+<dt>Tcl Module</dt>
+
+<dd>
+<p>teapot</p>
+</dd>
+
+<dt>Zip archive</dt>
+
+<dd>
+<p>lib</p>
+</dd>
+</dl>
+
+<p>In the following sections we will write "<b class=
+"file">BASE/</b>" as a shorthand for this directory.</p>
+
+<p>Examples:</p>
+
+<ol class="enumerated">
+<li>
+<p>The Tcl application BAR, coming in a Tcl Module will be stored
+under the directory "<b class=
+"file">FOO/application/tcl/teapot/</b>".</p>
+</li>
+
+<li>
+<p>The linux-glibc2.2-ix86 package <b class="package">Trf</b>,
+coming in a Zip archive will be stored under the directory "<b
+class="file">FOO/package/linux-glibc2.2-ix86/lib/</b>"</p>
+</li>
+</ol>
+
+<p>Note that while <i class="term">profiles</i> could principally
+be stored in a transparent repository this is forbidden, and the <b
+class="syscmd"><a href="CTP_teacup.html">teacup</a></b> client
+prevents it from happening.</p>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">Location details</a></h2>
+
+<p>Now that the base directory for an entity is known the exact
+location inside of the base directory can be fully specified. This
+continues to be dependent on the entity type and storage format,
+with further dependencies on entity name, version, and its
+dependencies.</p>
+
+<div id="subsection1" class="subsection">
+<h3><a name="subsection1">Zip archives</a></h3>
+
+<p>For all entities X coming in a zip archive a directory D is
+created under the base directory and the zip archive is expanded
+into this directory. The name of this directory D is of the form
+NAME-VERSION, using name and version of the entity, as per its
+TEAPOT meta data. Examples:</p>
+
+<ol class="enumerated">
+<li>
+<p>The exact location of the linux-glibc2.2-ix86 package Trf,
+version 2.1, coming in a Zip archive is the directory "<b class=
+"file">BASE/Trf-2.1/</b>".</p>
+</li>
+
+<li>
+<p>The exact location of version 1 of the Tcl application BAR,
+coming in a Zip archive is the directory "<b class=
+"file">BASE/BAR-1/</b>".</p>
+</li>
+</ol>
+</div>
+
+<div id="subsection2" class="subsection">
+<h3><a name="subsection2">Packages, Tcl Modules</a></h3>
+
+<p>For packages coming in as Tcl Modules the directory structure
+under the base directory is as specified by <a href=
+"http://tip.tcl.tk/189">TIP 189</a>, i.e.</p>
+
+<pre class="example">
+"<b class="file">BASE/tcl8/8.1/</b>"
+"<b class="file">BASE/tcl8/8.2/</b>"
+"<b class="file">BASE/tcl8/8.3/</b>"
+"<b class="file">BASE/tcl8/8.4/</b>"
+"<b class="file">BASE/tcl8/8.4/</b>"
+"<b class="file">BASE/tcl8/8.5/</b>"
+...
+</pre>
+
+<p>and with the file name the name and version of the package, also
+encoded as per TIP 189, and extension "<b class="file">.tm</b>".
+The proper subdirectory depends on the minimal version of Tcl the
+package depends on, information which is pulled out of the
+package's meta data, i.e. the package's dependencies.</p>
+
+<p>Example:</p>
+
+<ol class="enumerated">
+<li>
+<p>The tcl package <b class="package">doctools::toc</b>, version
+1.0, depending on Tcl 8.2, is stored in the file "<b class=
+"file">BASE/tcl8/8.2/doctools/toc-1.0.tm</b>".</p>
+</li>
+</ol>
+</div>
+
+<div id="subsection3" class="subsection">
+<h3><a name="subsection3">Applications, Tcl Modules</a></h3>
+
+<p>For applications coming in as Tcl Modules the directory
+structure under the base directory is simplified, i.e. there are no
+subdirectories to sort the applications by the version of Tcl they
+depend on. The encoding of the application name and version into a
+file name is however also done by the rules of TIP 189.</p>
+
+<p>Example:</p>
+
+<ol class="enumerated">
+<li>
+<p>The Tcl application BAR, version 2, coming in a Tcl Module is
+stored in the file "<b class="file">BASE/BAR-2.tm</b>".</p>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="section4" class="section">
+<h2><a name="section4">Summary</a></h2>
+
+<p>Pulling everything together the structure of a transparent
+repository is</p>
+
+<pre class="example">
+FOO/
+    package/ARCHITECTURE/                        Packages
+                         lib/NAME-VERSION/         Zip archive, expanded
+                         teapot/tcl8/8.y/PKG.tm    Tcl Module, TIP 189
+    application/ARCHITECTURE/                    Applications
+                             lib/NAME-VERSION/     Zip archive, expanded
+                             teapot/APP.tm         Tcl Module, TIP 189
+</pre>
+</div>
+
+<div id="section5" class="section">
+<h2><a name="section5">BUGS, IDEAS, FEEDBACK</a></h2>
+
+<p>This document will undoubtedly contain bugs and other problems.
+Please report such at the <a href=
+"http://bugs.activestate.com/query.cgi?set_product=ActiveTcl">ActiveState
+ActiveTcl Bug Tracker</a>. The relevant component is
+<em>teapot</em>. Please also report any ideas for enhancements you
+may have for either application and/or documentation.</p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="CTP_teacup.html">teacup</a>, <a href=
+"CTP_metadata.html">teapot-md</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../../index.html#key2">TEAPOT</a>, <a href=
+"../../index.html#key1">package management</a>, <a href=
+"../../index.html#key7">repository</a>, <a href=
+"../../index.html#key13">transparent</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 2007-2008 ActiveState Software Inc.</p>
+</div>
+</div>
+</body>
+</html>
+

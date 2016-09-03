@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - concat manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> concat</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+concat - Join lists together 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>concat</b> ?<i>arg arg ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command joins each of its arguments together with spaces after
+trimming leading and trailing white-space from each of them. If all
+the arguments are lists, this has the same effect as concatenating
+them into a single list. It permits any number of arguments; if no
+<i>arg</i>s are supplied, the result is an empty string. 
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+Although <b>concat</b> will concatenate lists, flattening them in
+the process (so giving the following interactive session): 
+
+<pre>
+<i>%</i> <b>concat</b> a b {c d e} {f {g h}}
+<i>a b c d e f {g h}</i>
+</pre>
+
+<p>it will also concatenate things that are not lists, as can be
+seen from this session:</p>
+
+<pre>
+<i>%</i> <b>concat</b> " a b {c   " d "  e} f"
+<i>a b {c d e} f</i>
+</pre>
+
+<p>Note also that the concatenation does not remove spaces from the
+middle of values, as can be seen here:</p>
+
+<pre>
+<i>%</i> <b>concat</b> "a   b   c" { d e f }
+<i>a   b   c d e f</i>
+</pre>
+
+<p>(i.e., there are three spaces between each of the <b>a</b>, the
+<b>b</b> and the <b>c</b>).</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/append.htm">append</a></b>, <b><a href=
+"../TclCmd/eval.htm">eval</a></b>, <b><a href=
+"../TclCmd/join.htm">join</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#concatenate">concatenate</a>, <a href=
+"../Keywords/J.htm#join">join</a>, <a href=
+"../Keywords/L.htm#lists">lists</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

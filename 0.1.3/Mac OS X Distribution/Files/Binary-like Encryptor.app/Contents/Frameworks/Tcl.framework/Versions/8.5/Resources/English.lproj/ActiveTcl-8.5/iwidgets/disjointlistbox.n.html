@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>iwidgets::disjointlistbox - Create and manipulate a
+disjointlistbox widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>iwidgets::disjointlistbox - Create and manipulate a
+disjointlistbox widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>iwidgets::disjointlistbox pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- iwidgets::Disjointlistbox 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b><br>
+activeForeground<br>
+buttonPlacement<br>
+highlightColor<br>
+</b></td>
+<td valign="top">activeBackground<br>
+activeRelief<br>
+clientData<br>
+highlightThickness<br>
+</td>
+<td valign="top">selectBorderWidth<br>
+background<br>
+cursor<br>
+disabledForeground<br>
+</td>
+<td valign="top">selectForeground<br>
+borderWidth<br>
+foreground<br>
+elementBorderWidth<br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>lhsButtonLabel</b><br>
+</td>
+<td valign="top"><b>rhsButtonLabel</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/button.n.html">"button"</a>
+widget manual entry for details on the above associated
+options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>labelFont</b><br>
+</td>
+<td valign="top"><b>lhsLabelText</b><br>
+</td>
+<td valign="top"><b>rhsLabelText</b><br>
+</td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the "label" widget manual entry for details on the above
+associated options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>jump</b><br>
+</td>
+<td valign="top"><b>troughColor</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/scrollbar.n.html">"scrollbar"</a>
+widget class manual entry for details on the above associated
+options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>textBackground</b><br>
+</td>
+<td valign="top"><b>textFont</b><br>
+</td>
+<td valign="top"><b>lhsItems</b><br>
+</td>
+<td valign="top"><b>rhsItems</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="scrolledlistbox.n.html">"scrolledlistbox"</a>
+widget manual entry for details on the above associated
+options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>buttonPlacement</b>
+Class:                  <b>ButtonPlacement</b>
+Command-Line Switch:    <b>-buttonplacement</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the placement of the
+insertion and removal buttons relative to the scrolledlistbox
+widgets<b>n</b>, <b>bottom</b>, or <b>center</b>. The default is
+bottom.</div>
+
+<pre>
+Name:                   <b>lhsLabelText</b>
+Class:                  <b>LabelText</b>
+Command-Line Switch:    <b>-lhslabeltext</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text for the label of
+the lhs scrolledlistbox. The default is "Available".</div>
+
+<pre>
+Name:                   <b>rhsLabelText</b>
+Class:                  <b>LabelText</b>
+Command-Line Switch:    <b>-rhslabeltext</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text for the label of
+the rhs scrolledlistbox. The default is "Available".</div>
+
+<pre>
+Name:                   <b>lhsButtonLabel</b>
+Class:                  <b>LabelText</b>
+Command-Line Switch:    <b>-lhsbuttonlabel</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text for the button of
+the lhs scrolledlistbox. The default is "Insert &gt;&gt;".</div>
+
+<pre>
+Name:                   <b>rhsButtonLabel</b>
+Class:                  <b>LabelText</b>
+Command-Line Switch:    <b>-rhsbuttonlabel</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text for the button of
+the rhs scrolledlistbox. The default is "&lt;&lt; Remove".</div>
+
+<pre>
+Name:                   <b>lhsSortOption</b>
+Class:                  <b>LhsSortOption</b>
+Command-Line Switch:    <b>-lhssortoption</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the sort function to be
+applied to the lhs scrolledlistbox after items are inserted.
+Accepts the same sort options as the scrolledlistbox sort method
+(Tcl's lsort command). If "none" is specified, the inserted items
+are appended to the end of the list, and no sorting is performed.
+The default is "increasing".</div>
+
+<pre>
+Name:                   <b>rhsSortOption</b>
+Class:                  <b>RhsSortOption</b>
+Command-Line Switch:    <b>-rhssortoption</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the sort function to be
+applied to the rhs scrolledlistbox after items are inserted.
+Accepts the same sort options as the scrolledlistbox sort method
+(Tcl's lsort command). If "none" is specified, the inserted items
+are appended to the end of the list, and no sorting is performed.
+The default is "increasing".</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>iwidgets::disjointlistbox</b> command creates a disjoint
+pair of listboxs similar to the OSF/Motif "Book" printing dialog of
+the "FrameMaker" program. It is implementation constists of a two
+Scrolledlistboxs, 2 buttons, and 2 labels. The disjoint behavior of
+this widget exists between the interaction of the two
+Scrolledlistboxes with one another. That is, a given instance of a
+Disjointlistbox will never exist, without the aid of a hack
+magician, which has Scrolledlistbox widgets with items in common.
+That means the relationship between the two is maintained similar
+to that of disjoint sets. Users may transfer items between the two
+Listbox widgets using the the two buttons. Options exists which
+include the ability to configure the "items" displayed by the 2
+Scrolledlistboxes and to control the placement of the insertion and
+removal buttons.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>iwidgets::disjointlistbox</b> command creates a new Tcl
+command whose name is <i>pathName</i>. This command may be used to
+invoke various operations on the widget. It has the following
+general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for
+disjointlistbox widgets: 
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>iwidgets::disjointlistbox</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>iwidgets::disjointlistbox</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>setlhs</b></i></dt>
+
+<dd>Set the current contents of the left-most Scrolledlistbox with
+the input list of items. Removes all (if any) items from the
+right-most Scrolledlistbox which exist in the input list option to
+maintain the disjoint property between the two</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>setrhs</b></i></dt>
+
+<dd>Set the current contents of the right-most Scrolledlistbox with
+the input list of items. Removes all (if any) items from the
+left-most Scrolledlistbox which exist in the input list option to
+maintain the disjoint property between the two</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>getlhs</b></i></dt>
+
+<dd>Returns the current contents of the left-most
+Scrolledlistbox</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>getrhs</b></i></dt>
+
+<dd>Returns the current contents of the right-most
+Scrolledlistbox</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>insertlhs</b></i></dt>
+
+<dd>Add the input list of items to the current contents of the
+left-most Scrolledlistbox. Removes all (if any) items from the
+right-most Scrolledlistbox which exist in the input list option to
+maintain the disjoint property between the two</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>insertrhs</b></i></dt>
+
+<dd>Add the input list of items to the current contents of the
+right-most Scrolledlistbox. Removes all (if any) items from the
+left-most Scrolledlistbox which exist in the input list option to
+maintain the disjoint property between the two.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>lhs</b>
+Class:                  <b>Scrolledlistbox</b>
+</pre>
+
+<div style="margin-left: 2em">The lhs component is the
+scrolledlistbox for the rhs button. See the <a href=
+"scrolledlistbox.n.html">"scrolledlistbox"</a> widget manual entry
+for details on the lhs component item.</div>
+
+<pre>
+Name:                   <b>rhs</b>
+Class:                  <b>Scrolledlistbox</b>
+</pre>
+
+<div style="margin-left: 2em">The rhs component is the
+scrolledlistbox for the rhs button. See the <a href=
+"scrolledlistbox.n.html">"scrolledlistbox"</a> widget manual entry
+for details on the rhs component item.</div>
+
+<pre>
+Name:                   <b>lhsbutton</b>
+Class:                  <b>utton</b>
+</pre>
+
+<div style="margin-left: 2em">The lhsbutton component is the button
+for users to remove selected items from the lhs Scrolledlistbox.
+See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/button.n.html">"button"</a>
+widget manual entry for details on the lhs button component.</div>
+
+<pre>
+Name:                   <b>rhsbutton</b>
+Class:                  <b>Button</b>
+</pre>
+
+<div style="margin-left: 2em">The rhsbutton component is the button
+for users to remove selected items from the rhs Scrolledlistbox.
+See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/button.n.html">"button"</a>
+widget manual entry for details on the rhs button component.</div>
+
+<pre>
+Name:                   <b>lhsCount</b>
+Class:                  <b>Label</b>
+</pre>
+
+<div style="margin-left: 2em">The lhsCount component is the label
+for displaying a count of the current items in the Scrolledlistbox.
+See the "Label" widget manual entry for details on the lhsCount
+label component.</div>
+
+<pre>
+Name:                   <b>rhsCount</b>
+Class:                  <b>Label</b>
+</pre>
+
+<div style="margin-left: 2em">The rhsCount component is the label
+for displaying a count of the current items in the Scrolledlistbox.
+See the "Label" widget manual entry for details on the rhsCount
+label component.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+package require Iwidgets 4.0
+iwidgets::disjointlistbox .dlb
+pack .dlb -padx 10 -pady 10 -fill both -expand yes 
+</pre>
+
+<h2>AUTHOR(S)</h2>
+
+John A. Tucker Anthony Parent 
+
+<h2>KEYWORDS</h2>
+
+disjointlistbox, widget
+</body>
+</html>
+

@@ -1,0 +1,387 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>Expect for Windows - Tutorial</title>
+<link rel="stylesheet" type="text/css" href="aspn.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body marginheight="5" topmargin="5" marginwidth="10" leftmargin=
+"10">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/Products/Expect/"><img src=
+"images/expect_logo.gif" border="0" align="left" alt="Expect"></a>
+</td>
+<td align="center" class="heading">Expect for
+Windows<sup><small>&reg;</small></sup> User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="images/AS_logo.gif" border=
+"0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<a name="top"></a> 
+
+<h1>Tutorial: Remote Directory Lister</h1>
+
+<ul>
+<li><a class="doc" href="#intro">Introduction</a></li>
+
+<li><a class="doc" href="#variables">Including the Expect Package
+and Setting Variables</a></li>
+
+<li><a class="doc" href="#help">Displaying Command-Line
+Help</a></li>
+
+<li><a class="doc" href="#parse">Parsing Command-Line
+Arguments</a></li>
+
+<li><a class="doc" href="#spawn">Spawning the Session</a></li>
+
+<li><a class="doc" href="#errors">Handling Errors</a></li>
+
+<li><a class="doc" href="#request">Sending the Request</a></li>
+
+<li><a class="doc" href="#close">Closing the Spawned
+Session</a></li>
+</ul>
+
+<h2><a name="intro">Introduction</a></h2>
+
+<p>This tutorial shows how the Expect package can be used within a
+Tcl command-line script to log on to a remote machine via Telnet or
+SSH and return the contents of the current working directory.</p>
+
+<p><strong>Note:</strong> To run this script, you must have
+ActiveState Expect for Windows and ActiveTcl 8.4 or later installed
+on your machine. You also require remote access to a Unix machine
+that is running Telnet or SSH.</p>
+
+<p>First, run the Tcl script "remotels.tcl" to see how it operates.
+Then progress through the rest of the tutorial, which examines
+essential portions of the code and explains how Expect is
+incorporated.</p>
+
+<p></p>
+
+<p>The command-line syntax required to run "remotels.tcl" varies
+depending on whether you are accessing the remote machine via
+Telnet or SSH.</p>
+
+<p>For example, if you are using Telnet (the default
+<code>-login</code> option), and are running "remotels.tcl" from
+its default location, enter the following at the command
+prompt.</p>
+
+<blockquote><code>C:\Tcl\bin\remotels.tcl -host <em>hostname</em>
+-user <em>username</em></code><br>
+<br>
+</blockquote>
+
+<p>If, instead, you are accessing the remote host via SSH, you must
+also specify "ssh" as the login type using the <code>-login</code>
+option.</p>
+
+<p>In both cases, the program prompts for a password.</p>
+
+<p>When the script runs, it returns the number of files and
+directories in the current working directory, along with a list of
+their names.</p>
+
+<p>For a demonstration of a similar, GUI-based script, see
+"tkremotels.tcl" in the <a class="doc" href="demos.html">Demos</a>
+section of the ActiveState Expect for Windows User Guide.</p>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="variables">Including the Expect Package and Setting
+Variables</a></h2>
+
+<p>The <a class="doc" href="expect.html#usage">package require
+Expect</a> statement makes the Expect package available to the
+"remotels.tcl" application. It should appear along with other
+necessary package commands near the beginning of any Tcl script
+that uses Expect. Since a version is not specified, the highest
+available version of Expect is loaded.</p>
+
+<p>A number of variables are set, including
+<em>exp::winnt_debug</em>, which Expect uses to enable viewing of a
+controlled console. If this variable is not set, the console
+remains hidden.</p>
+
+<p>The <a class="doc" href=
+"http://tcl.activestate.com/man/tcl8.4/TclCmd/ array.htm#M11">array
+set</a> command initializes the variables that are passed through
+the script so that the local machine can access a directory on a
+remote machine. Note that the <em>ls</em> variable is defined as
+"bin/ls/ -A1". This runs Unix's <code>ls</code> command on the
+remote machine and specifies how the information is to be
+displayed.</p>
+
+<blockquote>
+<pre>
+package require Expect
+
+exp_log_user 0
+
+set exp::nt_debug 1
+
+set timeout 10
+
+set env(TERM) dumb
+
+array set OPTS {
+    host    ""
+    user    ""
+    passwd  ""
+    login   telnet
+    prompt  "(%|#|&gt;|\\$) $"
+    ls      "/bin/ls -A1"
+}
+</pre>
+</blockquote>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="help">Displaying Command-Line Help</a></h2>
+
+<p>The <code>proc usage</code> procedure establishes the
+command-line options for "remotels.tcl". If the script is run
+without any options, a list of options and their definitions are
+displayed on the command line.</p>
+
+<blockquote>
+<pre>
+proc usage {code} {
+    global OPTS
+    puts [expr {$code ? "stderr" : "stdout"}] \
+    "$::argv0 -user username -host hostname ?options?
+    -passwd password (you will be prompted if none is given)
+    -login  type     (telnet, ssh, rlogin, slogin {$OPTS(login)})
+    -prompt prompt   (RE of prompt to expect on host {$OPTS(prompt)})
+    -log    bool     (display expect log info {[exp_log_user]})
+    -ls     lspath   (path to ls on host {$OPTS(ls)})
+    -help            (print out this message)"
+    exit $code
+}
+</pre>
+</blockquote>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="parse">Parsing Command-Line Arguments</a></h2>
+
+<p>The first part of this section uses <code>proc parseargs</code>
+to specify which patterns must be exactly matched for the
+command-line arguments to be parsed. Another significant code block
+in this section involves the <code>stty -echo</code> command. This
+command disables echoing. When a user types a password at the
+command prompt, the terminal mode is altered so that typed
+characters are hidden. Once the password is read with the <a class=
+"doc" href=
+"http://tcl.activestate.com/man/tcl8.4/TclCmd/gets.htm">gets</a>
+command, the <code>stty echo</code> command re-enables echoing.</p>
+
+<blockquote>
+<pre>
+proc parseargs {argc argv} {
+    global OPTS
+    foreach {key val} $argv {
+    switch -exact -- $key {
+        "-user"   { set OPTS(user)   $val }
+        "-host"   { set OPTS(host)   $val }
+        "-passwd" { set OPTS(passwd) $val }
+        "-login"  { set OPTS(login)  $val }
+        "-prompt" { set OPTS(prompt) $val }
+        "-ls"     { set OPTS(ls)     $val }
+        "-log"    { exp_log_user $val }
+        "-help"   { usage 0 }
+    }
+    }
+}
+parseargs $argc $argv
+
+if {$OPTS(host) == "" || $OPTS(user) == ""} {
+    usage 1
+}
+
+if {$OPTS(passwd) == ""} {
+    stty -echo; 
+    puts -nonewline "password required for $OPTS(host): "
+    flush stdout
+    gets stdin ::OPTS(passwd)
+    stty echo
+}
+
+proc timedout {{msg {none}}} {
+    send_user "Timed out (reason: $msg)\n"
+    if {[info exists ::expect_out]} {
+    parray ::expect_out
+    }
+    exit 1
+}
+</pre>
+</blockquote>
+
+<p><strong>Note</strong>: Although the <code>stty</code> and
+<code>send_user</code> commands shown above are Expect commands,
+they do not include the <code>exp</code> prefix. This is to
+demonstrate that, while it is considered best practice to use the
+prefix, commands without the prefix are equally valid. The
+exception is when you are using another Tcl extension (such as Tk)
+that includes a command with the same name. If a collision occurs,
+the Expect command is likely to be overridden by the command in
+another extension.</p>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="spawn">Spawning the Session</a></h2>
+
+<p>If you are logging on to the remote machine using "ssh",
+"slogin" or "rlogin", the information gets processed in a slightly
+different manner. With any of these methods, it is necessary to
+include an additional <code>-l</code> option to specify a
+username.</p>
+
+<p>Next, the <a class="doc" href=
+"expect.html#exp_spawn">$spawn_id</a> variable is captured, storing
+information about this spawn session in memory for future
+reference.</p>
+
+<p>If you are logging in via Telnet, the final code block in this
+section is required to pass the username to Telnet. If the login is
+completed before the script times out, the <a class="doc" href=
+"expect.html#exp_send">exp_send</a> command passes the
+username.</p>
+
+<blockquote>
+<pre>
+switch -exact $OPTS(login) {
+    "telnet" { set pid [spawn telnet $OPTS(host)] }
+    "ssh"    -
+    "slogin" -
+    "rlogin" { set pid [spawn $OPTS(login) $OPTS(host) -l $OPTS(user)] }
+}
+
+set id $spawn_id
+
+if {$OPTS(login) == "telnet"} {
+    expect -i $id timeout {
+    timedout "in user login"
+    } eof {
+    timedout "spawn failed with eof on login"
+    } -re "(login|Username):.*" {
+    exp_send -i $id -- "$OPTS(user)\r"
+    }
+}
+</pre>
+</blockquote>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="errors">Handling Errors</a></h2>
+
+<p>The error-handling section of the script is a <code>while</code>
+loop that anticipates a number of problems that could occur during
+login. This section is not exhaustive. For example, you could also
+add provisions for invalid usernames and passwords.</p>
+
+<p>If the login is not completed during the allotted 10-second time
+frame, which is set at the beginning of "remotels.tcl" (<code>set
+timeout 10</code>) and specified with <code>expect -i $id
+timeout</code>, the program displays an appropriate error
+message.</p>
+
+<p>The remainder of this loop makes use of the <a class="doc" href=
+"expect.html#exp_send">exp_send</a> command to allow for other
+scenarios, such as the user typing "yes" when prompted to proceed
+with the connection, entering a password, or resetting the terminal
+mode.</p>
+
+<blockquote>
+<pre>
+set logged_in 0
+while {!$logged_in} {
+    expect -i $id timeout {
+    timedout "in while loop"
+    break
+    } eof {
+    timedout "spawn failed with eof"
+    break
+    } "Are you sure you want to continue connecting (yes/no)? " {
+    exp_send -i $id -- "yes\r"
+    } "\[Pp\]assword*" {
+    exp_send -i $id -- "$OPTS(passwd)\r"
+    } "TERM = (*) " {
+    exp_send -i $id -- "$env(TERM)\r"
+    } -re $OPTS(prompt) {
+    set logged_in 1
+    }
+}
+</pre>
+</blockquote>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="request">Sending the Request</a></h2>
+
+<p>If the login is successful, the code in the <code>if</code>
+statement below is used to send the "ls" request to display files
+and directories. After the request is sent with <a class="doc"
+href="expect.html#exp_send">exp_send</a>, the resulting output is
+captured in the <code>dir</code> variable, which is set on the
+fourth line of the code shown below.</p>
+
+<blockquote>
+<pre>
+if {$logged_in} {
+    exp_send -i $id -- "$OPTS(ls)\r"
+    expect -i $id timeout {timedout "on prompt"} -re $OPTS(prompt) {
+    set dir $expect_out(buffer)
+    }
+    exp_send -i $id -- "exit\r"
+    if {[info exists dir]} {
+    regsub "\r" $dir "" dir
+    set files [split $dir \n]
+    set files [lrange $files 1 [expr {[llength $files]-2}]]
+    puts "\n[llength $files] FILES AND DIRS:"
+    puts $files
+    }
+}
+</pre>
+</blockquote>
+
+<a class="topText" href="#Top"><img src="images/top.gif" height=
+"11" width="11" border="0">Top</a> 
+
+<h2><a name="close">Closing the Spawned Session</a></h2>
+
+<p>The <a class="doc" href="expect.html#exp_close">exp_close</a>
+command ends the session spawned by "remotels.tcl". Just to be sure
+that session does indeed close, the <a class="doc" href=
+"expect.html#exp_wait">exp_wait</a> command causes the script to
+continue running until a result is obtained from the system
+processes. If the system hangs, it is likely because
+<code>exp_close</code> was not able to close the spawned process,
+and you may need to kill it manually.</p>
+
+<blockquote>
+<pre>
+exp_close -i $id
+
+exp_wait -i $id
+</pre>
+</blockquote>
+</body>
+</html>
+

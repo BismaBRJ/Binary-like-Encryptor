@@ -1,0 +1,1197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> Tcl Library</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | Tcl Library | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<table>
+<tr>
+<td><a href="Alloc.htm">attemptckalloc</a></td>
+<td><a href="FileSystem.htm">Tcl_FSEvalFile</a></td>
+<td><a href="Utf.htm">Tcl_NumUtfChars</a></td>
+</tr>
+
+<tr>
+<td><a href="Alloc.htm">attemptckrealloc</a></td>
+<td><a href="FileSystem.htm">Tcl_FSEvalFileEx</a></td>
+<td><a href="SetVar.htm">Tcl_ObjGetVar2</a></td>
+</tr>
+
+<tr>
+<td><a href="Alloc.htm">ckalloc</a></td>
+<td><a href="FileSystem.htm">Tcl_FSFileAttrsGet</a></td>
+<td><a href="StringObj.htm">Tcl_ObjPrintf</a></td>
+</tr>
+
+<tr>
+<td><a href="Alloc.htm">ckfree</a></td>
+<td><a href="FileSystem.htm">Tcl_FSFileAttrsSet</a></td>
+<td><a href="SetVar.htm">Tcl_ObjSetVar2</a></td>
+</tr>
+
+<tr>
+<td><a href="Alloc.htm">ckrealloc</a></td>
+<td><a href="FileSystem.htm">Tcl_FSFileAttrStrings</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_OpenCommandChannel</a></td>
+</tr>
+
+<tr>
+<td><a href="Access.htm">Tcl_Access</a></td>
+<td><a href="FileSystem.htm">Tcl_FSFileSystemInfo</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_OpenFileChannel</a></td>
+</tr>
+
+<tr>
+<td><a href="AddErrInfo.htm">Tcl_AddErrorInfo</a></td>
+<td><a href="FileSystem.htm">Tcl_FSGetCwd</a></td>
+<td><a href="OpenTcp.htm">Tcl_OpenTcpClient</a></td>
+</tr>
+
+<tr>
+<td><a href="AddErrInfo.htm">Tcl_AddObjErrorInfo</a></td>
+<td><a href="FileSystem.htm">Tcl_FSGetFileSystemForPath</a></td>
+<td><a href="OpenTcp.htm">Tcl_OpenTcpServer</a></td>
+</tr>
+
+<tr>
+<td><a href="Notifier.htm">Tcl_AlertNotifier</a></td>
+<td><a href="FileSystem.htm">Tcl_FSGetInternalRep</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_OutputBuffered</a></td>
+</tr>
+
+<tr>
+<td><a href="Alloc.htm">Tcl_Alloc</a></td>
+<td><a href="FileSystem.htm">Tcl_FSGetNativePath</a></td>
+<td><a href="Panic.htm">Tcl_Panic</a></td>
+</tr>
+
+<tr>
+<td><a href="FileSystem.htm">Tcl_AllocStatBuf</a></td>
+<td><a href="FileSystem.htm">Tcl_FSGetNormalizedPath</a></td>
+<td><a href="Panic.htm">Tcl_PanicVA</a></td>
+</tr>
+
+<tr>
+<td><a href="AllowExc.htm">Tcl_AllowExceptions</a></td>
+<td><a href="FileSystem.htm">Tcl_FSGetPathType</a></td>
+<td><a href="ParseCmd.htm">Tcl_ParseBraces</a></td>
+</tr>
+
+<tr>
+<td><a href="ObjectType.htm">Tcl_AppendAllObjTypes</a></td>
+<td><a href="FileSystem.htm">Tcl_FSGetTranslatedPath</a></td>
+<td><a href="ParseCmd.htm">Tcl_ParseCommand</a></td>
+</tr>
+
+<tr>
+<td><a href="SetResult.htm">Tcl_AppendElement</a></td>
+<td><a href="FileSystem.htm">Tcl_FSGetTranslatedStringPath</a></td>
+<td><a href="ParseCmd.htm">Tcl_ParseExpr</a></td>
+</tr>
+
+<tr>
+<td><a href="Namespace.htm">Tcl_AppendExportList</a></td>
+<td><a href="FileSystem.htm">Tcl_FSJoinPath</a></td>
+<td><a href="ParseCmd.htm">Tcl_ParseQuotedString</a></td>
+</tr>
+
+<tr>
+<td><a href="StringObj.htm">Tcl_AppendFormatToObj</a></td>
+<td><a href="FileSystem.htm">Tcl_FSJoinToPath</a></td>
+<td><a href="ParseCmd.htm">Tcl_ParseVar</a></td>
+</tr>
+
+<tr>
+<td><a href="StringObj.htm">Tcl_AppendLimitedToObj</a></td>
+<td><a href="FileSystem.htm">Tcl_FSLink</a></td>
+<td><a href="ParseCmd.htm">Tcl_ParseVarName</a></td>
+</tr>
+
+<tr>
+<td><a href="AddErrInfo.htm">Tcl_AppendObjToErrorInfo</a></td>
+<td><a href="FileSystem.htm">Tcl_FSListVolumes</a></td>
+<td><a href="PkgRequire.htm">Tcl_PkgPresent</a></td>
+</tr>
+
+<tr>
+<td><a href="StringObj.htm">Tcl_AppendObjToObj</a></td>
+<td><a href="FileSystem.htm">Tcl_FSLoadFile</a></td>
+<td><a href="PkgRequire.htm">Tcl_PkgPresentEx</a></td>
+</tr>
+
+<tr>
+<td><a href="StringObj.htm">Tcl_AppendPrintfToObj</a></td>
+<td><a href="FileSystem.htm">Tcl_FSLstat</a></td>
+<td><a href="PkgRequire.htm">Tcl_PkgProvide</a></td>
+</tr>
+
+<tr>
+<td><a href="SetResult.htm">Tcl_AppendResult</a></td>
+<td><a href="FileSystem.htm">Tcl_FSMatchInDirectory</a></td>
+<td><a href="PkgRequire.htm">Tcl_PkgProvideEx</a></td>
+</tr>
+
+<tr>
+<td><a href="SetResult.htm">Tcl_AppendResultVA</a></td>
+<td><a href="FileSystem.htm">Tcl_FSMountsChanged</a></td>
+<td><a href="PkgRequire.htm">Tcl_PkgRequire</a></td>
+</tr>
+
+<tr>
+<td><a href="StringObj.htm">Tcl_AppendStringsToObj</a></td>
+<td><a href="FileSystem.htm">Tcl_FSNewNativePath</a></td>
+<td><a href="PkgRequire.htm">Tcl_PkgRequireEx</a></td>
+</tr>
+
+<tr>
+<td><a href="StringObj.htm">Tcl_AppendStringsToObjVA</a></td>
+<td><a href="FileSystem.htm">Tcl_FSOpenFileChannel</a></td>
+<td><a href="PkgRequire.htm">Tcl_PkgRequireProc</a></td>
+</tr>
+
+<tr>
+<td><a href="StringObj.htm">Tcl_AppendToObj</a></td>
+<td><a href="FileSystem.htm">Tcl_FSPathSeparator</a></td>
+<td><a href="AddErrInfo.htm">Tcl_PosixError</a></td>
+</tr>
+
+<tr>
+<td><a href="StringObj.htm">Tcl_AppendUnicodeToObj</a></td>
+<td><a href="FileSystem.htm">Tcl_FSRegister</a></td>
+<td><a href="Preserve.htm">Tcl_Preserve</a></td>
+</tr>
+
+<tr>
+<td><a href="AppInit.htm">Tcl_AppInit</a></td>
+<td><a href="FileSystem.htm">Tcl_FSRemoveDirectory</a></td>
+<td><a href="PrintDbl.htm">Tcl_PrintDouble</a></td>
+</tr>
+
+<tr>
+<td><a href="Async.htm">Tcl_AsyncCreate</a></td>
+<td><a href="FileSystem.htm">Tcl_FSRenameFile</a></td>
+<td><a href="Environment.htm">Tcl_PutEnv</a></td>
+</tr>
+
+<tr>
+<td><a href="Async.htm">Tcl_AsyncDelete</a></td>
+<td><a href="FileSystem.htm">Tcl_FSSplitPath</a></td>
+<td><a href="GetTime.htm">Tcl_QueryTimeProc</a></td>
+</tr>
+
+<tr>
+<td><a href="Async.htm">Tcl_AsyncInvoke</a></td>
+<td><a href="FileSystem.htm">Tcl_FSStat</a></td>
+<td><a href="Notifier.htm">Tcl_QueueEvent</a></td>
+</tr>
+
+<tr>
+<td><a href="Async.htm">Tcl_AsyncMark</a></td>
+<td><a href="FileSystem.htm">Tcl_FSUnregister</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_Read</a></td>
+</tr>
+
+<tr>
+<td><a href="Async.htm">Tcl_AsyncReady</a></td>
+<td><a href="FileSystem.htm">Tcl_FSUtime</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_ReadChars</a></td>
+</tr>
+
+<tr>
+<td><a href="Alloc.htm">Tcl_AttemptAlloc</a></td>
+<td><a href="CrtSlave.htm">Tcl_GetAlias</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_ReadRaw</a></td>
+</tr>
+
+<tr>
+<td><a href="Alloc.htm">Tcl_AttemptRealloc</a></td>
+<td><a href="CrtSlave.htm">Tcl_GetAliasObj</a></td>
+<td><a href="Alloc.htm">Tcl_Realloc</a></td>
+</tr>
+
+<tr>
+<td><a href="StringObj.htm">Tcl_AttemptSetObjLength</a></td>
+<td><a href="AssocData.htm">Tcl_GetAssocData</a></td>
+<td><a href="DetachPids.htm">Tcl_ReapDetachedProcs</a></td>
+</tr>
+
+<tr>
+<td><a href="BackgdErr.htm">Tcl_BackgroundError</a></td>
+<td><a href="IntObj.htm">Tcl_GetBignumFromObj</a></td>
+<td><a href="RecordEval.htm">Tcl_RecordAndEval</a></td>
+</tr>
+
+<tr>
+<td><a href="Backslash.htm">Tcl_Backslash</a></td>
+<td><a href="GetInt.htm">Tcl_GetBoolean</a></td>
+<td><a href="RecEvalObj.htm">Tcl_RecordAndEvalObj</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_BadChannelOption</a></td>
+<td><a href="BoolObj.htm">Tcl_GetBooleanFromObj</a></td>
+<td><a href="RegExp.htm">Tcl_RegExpCompile</a></td>
+</tr>
+
+<tr>
+<td><a href="CallDel.htm">Tcl_CallWhenDeleted</a></td>
+<td><a href="ByteArrObj.htm">Tcl_GetByteArrayFromObj</a></td>
+<td><a href="RegExp.htm">Tcl_RegExpExec</a></td>
+</tr>
+
+<tr>
+<td><a href="DoWhenIdle.htm">Tcl_CancelIdleCall</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_GetChannel</a></td>
+<td><a href="RegExp.htm">Tcl_RegExpExecObj</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelBlockModeProc</a></td>
+<td><a href="CrtChannel.htm">Tcl_GetChannelBufferSize</a></td>
+<td><a href="RegExp.htm">Tcl_RegExpGetInfo</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelBuffered</a></td>
+<td><a href="SetChanErr.htm">Tcl_GetChannelError</a></td>
+<td><a href="RegExp.htm">Tcl_RegExpMatch</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelClose2Proc</a></td>
+<td><a href="SetChanErr.htm">Tcl_GetChannelErrorInterp</a></td>
+<td><a href="RegExp.htm">Tcl_RegExpMatchObj</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelCloseProc</a></td>
+<td><a href="CrtChannel.htm">Tcl_GetChannelHandle</a></td>
+<td><a href="RegExp.htm">Tcl_RegExpRange</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelFlushProc</a></td>
+<td><a href="CrtChannel.htm">Tcl_GetChannelInstanceData</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_RegisterChannel</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelGetHandleProc</a></td>
+<td><a href="CrtChannel.htm">Tcl_GetChannelMode</a></td>
+<td><a href="RegConfig.htm">Tcl_RegisterConfig</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelGetOptionProc</a></td>
+<td><a href="CrtChannel.htm">Tcl_GetChannelName</a></td>
+<td><a href="ObjectType.htm">Tcl_RegisterObjType</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelHandlerProc</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_GetChannelNames</a></td>
+<td><a href="Preserve.htm">Tcl_Release</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelInputProc</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_GetChannelNamesEx</a></td>
+<td><a href="SetResult.htm">Tcl_ResetResult</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelName</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_GetChannelOption</a></td>
+<td><a href="SaveResult.htm">Tcl_RestoreInterpState</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelOutputProc</a></td>
+<td><a href="CrtChannel.htm">Tcl_GetChannelThread</a></td>
+<td><a href="SaveResult.htm">Tcl_RestoreResult</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelSeekProc</a></td>
+<td><a href="CrtChannel.htm">Tcl_GetChannelType</a></td>
+<td><a href="SaveResult.htm">Tcl_SaveInterpState</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelSetOptionProc</a></td>
+<td><a href="StringObj.htm">Tcl_GetCharLength</a></td>
+<td><a href="SaveResult.htm">Tcl_SaveResult</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelThreadActionProc</a></td>
+<td><a href="CrtObjCmd.htm">Tcl_GetCommandFromObj</a></td>
+<td><a href="SplitList.htm">Tcl_ScanCountedElement</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelTruncateProc</a></td>
+<td><a href="CrtObjCmd.htm">Tcl_GetCommandFullName</a></td>
+<td><a href="SplitList.htm">Tcl_ScanElement</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelVersion</a></td>
+<td><a href="CrtObjCmd.htm">Tcl_GetCommandInfo</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_Seek</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelWatchProc</a></td>
+<td><a href="CrtObjCmd.htm">Tcl_GetCommandInfoFromToken</a></td>
+<td><a href="Notifier.htm">Tcl_ServiceAll</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ChannelWideSeekProc</a></td>
+<td><a href="CrtObjCmd.htm">Tcl_GetCommandName</a></td>
+<td><a href="Notifier.htm">Tcl_ServiceEvent</a></td>
+</tr>
+
+<tr>
+<td><a href="GetCwd.htm">Tcl_Chdir</a></td>
+<td><a href="Namespace.htm">Tcl_GetCurrentNamespace</a></td>
+<td><a href="AssocData.htm">Tcl_SetAssocData</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_ClearChannelHandlers</a></td>
+<td><a href="Notifier.htm">Tcl_GetCurrentThread</a></td>
+<td><a href="IntObj.htm">Tcl_SetBignumObj</a></td>
+</tr>
+
+<tr>
+<td><a href="OpenFileChnl.htm">Tcl_Close</a></td>
+<td><a href="GetCwd.htm">Tcl_GetCwd</a></td>
+<td><a href="BoolObj.htm">Tcl_SetBooleanObj</a></td>
+</tr>
+
+<tr>
+<td><a href="CmdCmplt.htm">Tcl_CommandComplete</a></td>
+<td><a href="Encoding.htm">Tcl_GetDefaultEncodingDir</a></td>
+<td><a href="ByteArrObj.htm">Tcl_SetByteArrayLength</a></td>
+</tr>
+
+<tr>
+<td><a href="TraceCmd.htm">Tcl_CommandTraceInfo</a></td>
+<td><a href="GetInt.htm">Tcl_GetDouble</a></td>
+<td><a href="ByteArrObj.htm">Tcl_SetByteArrayObj</a></td>
+</tr>
+
+<tr>
+<td><a href="Concat.htm">Tcl_Concat</a></td>
+<td><a href="DoubleObj.htm">Tcl_GetDoubleFromObj</a></td>
+<td><a href="CrtChannel.htm">Tcl_SetChannelBufferSize</a></td>
+</tr>
+
+<tr>
+<td><a href="StringObj.htm">Tcl_ConcatObj</a></td>
+<td><a href="Encoding.htm">Tcl_GetEncoding</a></td>
+<td><a href="SetChanErr.htm">Tcl_SetChannelError</a></td>
+</tr>
+
+<tr>
+<td><a href="Thread.htm">Tcl_ConditionFinalize</a></td>
+<td><a href="Encoding.htm">Tcl_GetEncodingFromObj</a></td>
+<td><a href="SetChanErr.htm">Tcl_SetChannelErrorInterp</a></td>
+</tr>
+
+<tr>
+<td><a href="Thread.htm">Tcl_ConditionNotify</a></td>
+<td><a href="Encoding.htm">Tcl_GetEncodingName</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_SetChannelOption</a></td>
+</tr>
+
+<tr>
+<td><a href="Thread.htm">Tcl_ConditionWait</a></td>
+<td><a href=
+"Encoding.htm">Tcl_GetEncodingNameFromEnvironment</a></td>
+<td><a href="CrtObjCmd.htm">Tcl_SetCommandInfo</a></td>
+</tr>
+
+<tr>
+<td><a href="SplitList.htm">Tcl_ConvertCountedElement</a></td>
+<td><a href="Encoding.htm">Tcl_GetEncodingNames</a></td>
+<td><a href="CrtObjCmd.htm">Tcl_SetCommandInfoFromToken</a></td>
+</tr>
+
+<tr>
+<td><a href="SplitList.htm">Tcl_ConvertElement</a></td>
+<td><a href="Encoding.htm">Tcl_GetEncodingSearchPath</a></td>
+<td><a href="Encoding.htm">Tcl_SetDefaultEncodingDir</a></td>
+</tr>
+
+<tr>
+<td><a href="ObjectType.htm">Tcl_ConvertToType</a></td>
+<td><a href="Ensemble.htm">Tcl_GetEnsembleFlags</a></td>
+<td><a href="DoubleObj.htm">Tcl_SetDoubleObj</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtSlave.htm">Tcl_CreateAlias</a></td>
+<td><a href="Ensemble.htm">Tcl_GetEnsembleMappingDict</a></td>
+<td><a href="Encoding.htm">Tcl_SetEncodingSearchPath</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtSlave.htm">Tcl_CreateAliasObj</a></td>
+<td><a href="Ensemble.htm">Tcl_GetEnsembleNamespace</a></td>
+<td><a href="Ensemble.htm">Tcl_SetEnsembleFlags</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_CreateChannel</a></td>
+<td><a href="Ensemble.htm">Tcl_GetEnsembleSubcommandList</a></td>
+<td><a href="Ensemble.htm">Tcl_SetEnsembleMappingDict</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChnlHdlr.htm">Tcl_CreateChannelHandler</a></td>
+<td><a href="Ensemble.htm">Tcl_GetEnsembleUnknownHandler</a></td>
+<td><a href="Ensemble.htm">Tcl_SetEnsembleSubcommandList</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtCloseHdlr.htm">Tcl_CreateCloseHandler</a></td>
+<td><a href="SetErrno.htm">Tcl_GetErrno</a></td>
+<td><a href="Ensemble.htm">Tcl_SetEnsembleUnknownHandler</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtCommand.htm">Tcl_CreateCommand</a></td>
+<td><a href="Namespace.htm">Tcl_GetGlobalNamespace</a></td>
+<td><a href="SetErrno.htm">Tcl_SetErrno</a></td>
+</tr>
+
+<tr>
+<td><a href="Encoding.htm">Tcl_CreateEncoding</a></td>
+<td><a href="Hash.htm">Tcl_GetHashKey</a></td>
+<td><a href="AddErrInfo.htm">Tcl_SetErrorCode</a></td>
+</tr>
+
+<tr>
+<td><a href="Ensemble.htm">Tcl_CreateEnsemble</a></td>
+<td><a href="Hash.htm">Tcl_GetHashValue</a></td>
+<td><a href="AddErrInfo.htm">Tcl_SetErrorCodeVA</a></td>
+</tr>
+
+<tr>
+<td><a href="Notifier.htm">Tcl_CreateEventSource</a></td>
+<td><a href="GetHostName.htm">Tcl_GetHostName</a></td>
+<td><a href="Exit.htm">Tcl_SetExitProc</a></td>
+</tr>
+
+<tr>
+<td><a href="Exit.htm">Tcl_CreateExitHandler</a></td>
+<td><a href="GetIndex.htm">Tcl_GetIndexFromObj</a></td>
+<td><a href="Hash.htm">Tcl_SetHashValue</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtFileHdlr.htm">Tcl_CreateFileHandler</a></td>
+<td><a href="GetIndex.htm">Tcl_GetIndexFromObjStruct</a></td>
+<td><a href="IntObj.htm">Tcl_SetIntObj</a></td>
+</tr>
+
+<tr>
+<td><a href="Hash.htm">Tcl_CreateHashEntry</a></td>
+<td><a href="GetInt.htm">Tcl_GetInt</a></td>
+<td><a href="ListObj.htm">Tcl_SetListObj</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtInterp.htm">Tcl_CreateInterp</a></td>
+<td><a href="CrtSlave.htm">Tcl_GetInterpPath</a></td>
+<td><a href="IntObj.htm">Tcl_SetLongObj</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtMathFnc.htm">Tcl_CreateMathFunc</a></td>
+<td><a href="IntObj.htm">Tcl_GetIntFromObj</a></td>
+<td><a href="Tcl_Main.htm">Tcl_SetMainLoop</a></td>
+</tr>
+
+<tr>
+<td><a href="Namespace.htm">Tcl_CreateNamespace</a></td>
+<td><a href="IntObj.htm">Tcl_GetLongFromObj</a></td>
+<td><a href="Notifier.htm">Tcl_SetMaxBlockTime</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtObjCmd.htm">Tcl_CreateObjCommand</a></td>
+<td><a href="CrtSlave.htm">Tcl_GetMaster</a></td>
+<td><a href="Namespace.htm">Tcl_SetNamespaceUnknownHandler</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtTrace.htm">Tcl_CreateObjTrace</a></td>
+<td><a href="CrtMathFnc.htm">Tcl_GetMathFuncInfo</a></td>
+<td><a href="AddErrInfo.htm">Tcl_SetObjErrorCode</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtSlave.htm">Tcl_CreateSlave</a></td>
+<td><a href="FindExec.htm">Tcl_GetNameOfExecutable</a></td>
+<td><a href="StringObj.htm">Tcl_SetObjLength</a></td>
+</tr>
+
+<tr>
+<td><a href="Thread.htm">Tcl_CreateThread</a></td>
+<td><a href="Namespace.htm">Tcl_GetNamespaceUnknownHandler</a></td>
+<td><a href="SetResult.htm">Tcl_SetObjResult</a></td>
+</tr>
+
+<tr>
+<td><a href="Exit.htm">Tcl_CreateThreadExitHandler</a></td>
+<td><a href="SetResult.htm">Tcl_GetObjResult</a></td>
+<td><a href="Panic.htm">Tcl_SetPanicProc</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtTimerHdlr.htm">Tcl_CreateTimerHandler</a></td>
+<td><a href="ObjectType.htm">Tcl_GetObjType</a></td>
+<td><a href="SetRecLmt.htm">Tcl_SetRecursionLimit</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtTrace.htm">Tcl_CreateTrace</a></td>
+<td><a href="GetOpnFl.htm">Tcl_GetOpenFile</a></td>
+<td><a href="SetResult.htm">Tcl_SetResult</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChannel.htm">Tcl_CutChannel</a></td>
+<td><a href="SplitPath.htm">Tcl_GetPathType</a></td>
+<td><a href="AddErrInfo.htm">Tcl_SetReturnOptions</a></td>
+</tr>
+
+<tr>
+<td><a href="Object.htm">Tcl_DecrRefCount</a></td>
+<td><a href="StringObj.htm">Tcl_GetRange</a></td>
+<td><a href="Notifier.htm">Tcl_SetServiceMode</a></td>
+</tr>
+
+<tr>
+<td><a href="AssocData.htm">Tcl_DeleteAssocData</a></td>
+<td><a href="RegExp.htm">Tcl_GetRegExpFromObj</a></td>
+<td><a href="GetStdChan.htm">Tcl_SetStdChannel</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtChnlHdlr.htm">Tcl_DeleteChannelHandler</a></td>
+<td><a href="AddErrInfo.htm">Tcl_GetReturnOptions</a></td>
+<td><a href="StringObj.htm">Tcl_SetStringObj</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtCloseHdlr.htm">Tcl_DeleteCloseHandler</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_Gets</a></td>
+<td><a href="Encoding.htm">Tcl_SetSystemEncoding</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtObjCmd.htm">Tcl_DeleteCommand</a></td>
+<td><a href="Notifier.htm">Tcl_GetServiceMode</a></td>
+<td><a href="GetTime.htm">Tcl_SetTimeProc</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtObjCmd.htm">Tcl_DeleteCommandFromToken</a></td>
+<td><a href="CrtSlave.htm">Tcl_GetSlave</a></td>
+<td><a href="Notifier.htm">Tcl_SetTimer</a></td>
+</tr>
+
+<tr>
+<td><a href="Notifier.htm">Tcl_DeleteEvents</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_GetsObj</a></td>
+<td><a href="StringObj.htm">Tcl_SetUnicodeObj</a></td>
+</tr>
+
+<tr>
+<td><a href="Notifier.htm">Tcl_DeleteEventSource</a></td>
+<td><a href="ChnlStack.htm">Tcl_GetStackedChannel</a></td>
+<td><a href="SetVar.htm">Tcl_SetVar</a></td>
+</tr>
+
+<tr>
+<td><a href="Exit.htm">Tcl_DeleteExitHandler</a></td>
+<td><a href="GetStdChan.htm">Tcl_GetStdChannel</a></td>
+<td><a href="SetVar.htm">Tcl_SetVar2</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtFileHdlr.htm">Tcl_DeleteFileHandler</a></td>
+<td><a href="StringObj.htm">Tcl_GetString</a></td>
+<td><a href="SetVar.htm">Tcl_SetVar2Ex</a></td>
+</tr>
+
+<tr>
+<td><a href="Hash.htm">Tcl_DeleteHashEntry</a></td>
+<td><a href="StringObj.htm">Tcl_GetStringFromObj</a></td>
+<td><a href="IntObj.htm">Tcl_SetWideIntObj</a></td>
+</tr>
+
+<tr>
+<td><a href="Hash.htm">Tcl_DeleteHashTable</a></td>
+<td><a href="SetResult.htm">Tcl_GetStringResult</a></td>
+<td><a href="Signal.htm">Tcl_SignalId</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtInterp.htm">Tcl_DeleteInterp</a></td>
+<td><a href="Thread.htm">Tcl_GetThreadData</a></td>
+<td><a href="Signal.htm">Tcl_SignalMsg</a></td>
+</tr>
+
+<tr>
+<td><a href="Namespace.htm">Tcl_DeleteNamespace</a></td>
+<td><a href="GetTime.htm">Tcl_GetTime</a></td>
+<td><a href="Sleep.htm">Tcl_Sleep</a></td>
+</tr>
+
+<tr>
+<td><a href="Exit.htm">Tcl_DeleteThreadExitHandler</a></td>
+<td><a href="ChnlStack.htm">Tcl_GetTopChannel</a></td>
+<td><a href="SourceRCFile.htm">Tcl_SourceRCFile</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtTimerHdlr.htm">Tcl_DeleteTimerHandler</a></td>
+<td><a href="StringObj.htm">Tcl_GetUniChar</a></td>
+<td><a href="CrtChannel.htm">Tcl_SpliceChannel</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtTrace.htm">Tcl_DeleteTrace</a></td>
+<td><a href="StringObj.htm">Tcl_GetUnicode</a></td>
+<td><a href="SplitList.htm">Tcl_SplitList</a></td>
+</tr>
+
+<tr>
+<td><a href="OpenFileChnl.htm">Tcl_DetachChannel</a></td>
+<td><a href="StringObj.htm">Tcl_GetUnicodeFromObj</a></td>
+<td><a href="SplitPath.htm">Tcl_SplitPath</a></td>
+</tr>
+
+<tr>
+<td><a href="DetachPids.htm">Tcl_DetachPids</a></td>
+<td><a href="SetVar.htm">Tcl_GetVar</a></td>
+<td><a href="ChnlStack.htm">Tcl_StackChannel</a></td>
+</tr>
+
+<tr>
+<td><a href="DictObj.htm">Tcl_DictObjDone</a></td>
+<td><a href="SetVar.htm">Tcl_GetVar2</a></td>
+<td><a href="StdChannels.htm">Tcl_StandardChannels</a></td>
+</tr>
+
+<tr>
+<td><a href="DictObj.htm">Tcl_DictObjFirst</a></td>
+<td><a href="SetVar.htm">Tcl_GetVar2Ex</a></td>
+<td><a href="Access.htm">Tcl_Stat</a></td>
+</tr>
+
+<tr>
+<td><a href="DictObj.htm">Tcl_DictObjGet</a></td>
+<td><a href="GetVersion.htm">Tcl_GetVersion</a></td>
+<td><a href="StaticPkg.htm">Tcl_StaticPackage</a></td>
+</tr>
+
+<tr>
+<td><a href="DictObj.htm">Tcl_DictObjNext</a></td>
+<td><a href="IntObj.htm">Tcl_GetWideIntFromObj</a></td>
+<td><a href="StrMatch.htm">Tcl_StringCaseMatch</a></td>
+</tr>
+
+<tr>
+<td><a href="DictObj.htm">Tcl_DictObjPut</a></td>
+<td><a href="Eval.htm">Tcl_GlobalEval</a></td>
+<td><a href="StrMatch.htm">Tcl_StringMatch</a></td>
+</tr>
+
+<tr>
+<td><a href="DictObj.htm">Tcl_DictObjPutKeyList</a></td>
+<td><a href="Eval.htm">Tcl_GlobalEvalObj</a></td>
+<td><a href="SubstObj.htm">Tcl_SubstObj</a></td>
+</tr>
+
+<tr>
+<td><a href="DictObj.htm">Tcl_DictObjRemove</a></td>
+<td><a href="Hash.htm">Tcl_HashStats</a></td>
+<td><a href="IntObj.htm">Tcl_TakeBignumFromObj</a></td>
+</tr>
+
+<tr>
+<td><a href="DictObj.htm">Tcl_DictObjRemoveKeyList</a></td>
+<td><a href="CrtSlave.htm">Tcl_HideCommand</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_Tell</a></td>
+</tr>
+
+<tr>
+<td><a href="DictObj.htm">Tcl_DictObjSize</a></td>
+<td><a href="Namespace.htm">Tcl_Import</a></td>
+<td><a href="Notifier.htm">Tcl_ThreadAlert</a></td>
+</tr>
+
+<tr>
+<td><a href="SaveResult.htm">Tcl_DiscardInterpState</a></td>
+<td><a href="Object.htm">Tcl_IncrRefCount</a></td>
+<td><a href="Notifier.htm">Tcl_ThreadQueueEvent</a></td>
+</tr>
+
+<tr>
+<td><a href="SaveResult.htm">Tcl_DiscardResult</a></td>
+<td><a href="Init.htm">Tcl_Init</a></td>
+<td><a href="TraceCmd.htm">Tcl_TraceCommand</a></td>
+</tr>
+
+<tr>
+<td><a href="CallDel.htm">Tcl_DontCallWhenDeleted</a></td>
+<td><a href="Hash.htm">Tcl_InitCustomHashTable</a></td>
+<td><a href="TraceVar.htm">Tcl_TraceVar</a></td>
+</tr>
+
+<tr>
+<td><a href="DoOneEvent.htm">Tcl_DoOneEvent</a></td>
+<td><a href="Hash.htm">Tcl_InitHashTable</a></td>
+<td><a href="TraceVar.htm">Tcl_TraceVar2</a></td>
+</tr>
+
+<tr>
+<td><a href="DoWhenIdle.htm">Tcl_DoWhenIdle</a></td>
+<td><a href="DumpActiveMemory.htm">Tcl_InitMemory</a></td>
+<td><a href="Translate.htm">Tcl_TranslateFileName</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringAppend</a></td>
+<td><a href="Notifier.htm">Tcl_InitNotifier</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_TruncateChannel</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringAppendElement</a></td>
+<td><a href="Hash.htm">Tcl_InitObjHashTable</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_Ungets</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringEndSublist</a></td>
+<td><a href="InitStubs.htm">Tcl_InitStubs</a></td>
+<td><a href="Utf.htm">Tcl_UniChar</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringFree</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_InputBlocked</a></td>
+<td><a href="Utf.htm">Tcl_UniCharAtIndex</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringGetResult</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_InputBuffered</a></td>
+<td><a href="Utf.htm">Tcl_UniCharCaseMatch</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringInit</a></td>
+<td><a href="Interp.htm">Tcl_Interp</a></td>
+<td><a href="UniCharIsAlpha.htm">Tcl_UniCharIsAlnum</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringLength</a></td>
+<td><a href="CrtInterp.htm">Tcl_InterpDeleted</a></td>
+<td><a href="UniCharIsAlpha.htm">Tcl_UniCharIsAlpha</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringResult</a></td>
+<td><a href="Object.htm">Tcl_InvalidateStringRep</a></td>
+<td><a href="UniCharIsAlpha.htm">Tcl_UniCharIsControl</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringSetLength</a></td>
+<td><a href="CrtChannel.htm">Tcl_IsChannelExisting</a></td>
+<td><a href="UniCharIsAlpha.htm">Tcl_UniCharIsDigit</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringStartSublist</a></td>
+<td><a href="CrtChannel.htm">Tcl_IsChannelRegistered</a></td>
+<td><a href="UniCharIsAlpha.htm">Tcl_UniCharIsGraph</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringTrunc</a></td>
+<td><a href="CrtChannel.htm">Tcl_IsChannelShared</a></td>
+<td><a href="UniCharIsAlpha.htm">Tcl_UniCharIsLower</a></td>
+</tr>
+
+<tr>
+<td><a href="DString.htm">Tcl_DStringValue</a></td>
+<td><a href="Ensemble.htm">Tcl_IsEnsemble</a></td>
+<td><a href="UniCharIsAlpha.htm">Tcl_UniCharIsPrint</a></td>
+</tr>
+
+<tr>
+<td><a href="DumpActiveMemory.htm">Tcl_DumpActiveMemory</a></td>
+<td><a href="CrtSlave.htm">Tcl_IsSafe</a></td>
+<td><a href="UniCharIsAlpha.htm">Tcl_UniCharIsPunct</a></td>
+</tr>
+
+<tr>
+<td><a href="Object.htm">Tcl_DuplicateObj</a></td>
+<td><a href="Object.htm">Tcl_IsShared</a></td>
+<td><a href="UniCharIsAlpha.htm">Tcl_UniCharIsSpace</a></td>
+</tr>
+
+<tr>
+<td><a href="OpenFileChnl.htm">Tcl_Eof</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_IsStandardChannel</a></td>
+<td><a href="UniCharIsAlpha.htm">Tcl_UniCharIsUpper</a></td>
+</tr>
+
+<tr>
+<td><a href="SetErrno.htm">Tcl_ErrnoId</a></td>
+<td><a href="SplitPath.htm">Tcl_JoinPath</a></td>
+<td><a href="UniCharIsAlpha.htm">Tcl_UniCharIsWordChar</a></td>
+</tr>
+
+<tr>
+<td><a href="SetErrno.htm">Tcl_ErrnoMsg</a></td>
+<td><a href="Thread.htm">Tcl_JoinThread</a></td>
+<td><a href="Utf.htm">Tcl_UniCharLen</a></td>
+</tr>
+
+<tr>
+<td><a href="Eval.htm">Tcl_Eval</a></td>
+<td><a href="Limit.htm">Tcl_LimitAddHandler</a></td>
+<td><a href="Utf.htm">Tcl_UniCharNcasecmp</a></td>
+</tr>
+
+<tr>
+<td><a href="Eval.htm">Tcl_EvalEx</a></td>
+<td><a href="Limit.htm">Tcl_LimitCheck</a></td>
+<td><a href="Utf.htm">Tcl_UniCharNcmp</a></td>
+</tr>
+
+<tr>
+<td><a href="Eval.htm">Tcl_EvalFile</a></td>
+<td><a href="Limit.htm">Tcl_LimitExceeded</a></td>
+<td><a href="ToUpper.htm">Tcl_UniCharToLower</a></td>
+</tr>
+
+<tr>
+<td><a href="Eval.htm">Tcl_EvalObjEx</a></td>
+<td><a href="Limit.htm">Tcl_LimitGetCommands</a></td>
+<td><a href="ToUpper.htm">Tcl_UniCharToTitle</a></td>
+</tr>
+
+<tr>
+<td><a href="Eval.htm">Tcl_EvalObjv</a></td>
+<td><a href="Limit.htm">Tcl_LimitGetGranularity</a></td>
+<td><a href="ToUpper.htm">Tcl_UniCharToUpper</a></td>
+</tr>
+
+<tr>
+<td><a href="ParseCmd.htm">Tcl_EvalTokens</a></td>
+<td><a href="Limit.htm">Tcl_LimitGetTime</a></td>
+<td><a href="Utf.htm">Tcl_UniCharToUtf</a></td>
+</tr>
+
+<tr>
+<td><a href="ParseCmd.htm">Tcl_EvalTokensStandard</a></td>
+<td><a href="Limit.htm">Tcl_LimitReady</a></td>
+<td><a href="Utf.htm">Tcl_UniCharToUtfDString</a></td>
+</tr>
+
+<tr>
+<td><a href="Preserve.htm">Tcl_EventuallyFree</a></td>
+<td><a href="Limit.htm">Tcl_LimitRemoveHandler</a></td>
+<td><a href="LinkVar.htm">Tcl_UnlinkVar</a></td>
+</tr>
+
+<tr>
+<td><a href="Exit.htm">Tcl_Exit</a></td>
+<td><a href="Limit.htm">Tcl_LimitSetCommands</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_UnregisterChannel</a></td>
+</tr>
+
+<tr>
+<td><a href="Exit.htm">Tcl_ExitThread</a></td>
+<td><a href="Limit.htm">Tcl_LimitSetGranularity</a></td>
+<td><a href="SetVar.htm">Tcl_UnsetVar</a></td>
+</tr>
+
+<tr>
+<td><a href="Namespace.htm">Tcl_Export</a></td>
+<td><a href="Limit.htm">Tcl_LimitSetTime</a></td>
+<td><a href="SetVar.htm">Tcl_UnsetVar2</a></td>
+</tr>
+
+<tr>
+<td><a href="CrtSlave.htm">Tcl_ExposeCommand</a></td>
+<td><a href="Limit.htm">Tcl_LimitTypeEnabled</a></td>
+<td><a href="ChnlStack.htm">Tcl_UnstackChannel</a></td>
+</tr>
+
+<tr>
+<td><a href="ExprLong.htm">Tcl_ExprBoolean</a></td>
+<td><a href="Limit.htm">Tcl_LimitTypeExceeded</a></td>
+<td><a href="TraceCmd.htm">Tcl_UntraceCommand</a></td>
+</tr>
+
+<tr>
+<td><a href="ExprLongObj.htm">Tcl_ExprBooleanObj</a></td>
+<td><a href="Limit.htm">Tcl_LimitTypeReset</a></td>
+<td><a href="TraceVar.htm">Tcl_UntraceVar</a></td>
+</tr>
+
+<tr>
+<td><a href="ExprLong.htm">Tcl_ExprDouble</a></td>
+<td><a href="Limit.htm">Tcl_LimitTypeSet</a></td>
+<td><a href="TraceVar.htm">Tcl_UntraceVar2</a></td>
+</tr>
+
+<tr>
+<td><a href="ExprLongObj.htm">Tcl_ExprDoubleObj</a></td>
+<td><a href="LinkVar.htm">Tcl_LinkVar</a></td>
+<td><a href="LinkVar.htm">Tcl_UpdateLinkedVar</a></td>
+</tr>
+
+<tr>
+<td><a href="ExprLong.htm">Tcl_ExprLong</a></td>
+<td><a href="CrtMathFnc.htm">Tcl_ListMathFuncs</a></td>
+<td><a href="UpVar.htm">Tcl_UpVar</a></td>
+</tr>
+
+<tr>
+<td><a href="ExprLongObj.htm">Tcl_ExprLongObj</a></td>
+<td><a href="ListObj.htm">Tcl_ListObjAppendElement</a></td>
+<td><a href="UpVar.htm">Tcl_UpVar2</a></td>
+</tr>
+
+<tr>
+<td><a href="ExprLongObj.htm">Tcl_ExprObj</a></td>
+<td><a href="ListObj.htm">Tcl_ListObjAppendList</a></td>
+<td><a href="Utf.htm">Tcl_UtfAtIndex</a></td>
+</tr>
+
+<tr>
+<td><a href="ExprLong.htm">Tcl_ExprString</a></td>
+<td><a href="ListObj.htm">Tcl_ListObjGetElements</a></td>
+<td><a href="Utf.htm">Tcl_UtfBackslash</a></td>
+</tr>
+
+<tr>
+<td><a href="Encoding.htm">Tcl_ExternalToUtf</a></td>
+<td><a href="ListObj.htm">Tcl_ListObjIndex</a></td>
+<td><a href="Utf.htm">Tcl_UtfCharComplete</a></td>
+</tr>
+
+<tr>
+<td><a href="Encoding.htm">Tcl_ExternalToUtfDString</a></td>
+<td><a href="ListObj.htm">Tcl_ListObjLength</a></td>
+<td><a href="Utf.htm">Tcl_UtfFindFirst</a></td>
+</tr>
+
+<tr>
+<td><a href="Exit.htm">Tcl_Finalize</a></td>
+<td><a href="ListObj.htm">Tcl_ListObjReplace</a></td>
+<td><a href="Utf.htm">Tcl_UtfFindLast</a></td>
+</tr>
+
+<tr>
+<td><a href="Notifier.htm">Tcl_FinalizeNotifier</a></td>
+<td><a href="AddErrInfo.htm">Tcl_LogCommandInfo</a></td>
+<td><a href="Utf.htm">Tcl_UtfNext</a></td>
+</tr>
+
+<tr>
+<td><a href="Exit.htm">Tcl_FinalizeThread</a></td>
+<td><a href="Tcl_Main.htm">Tcl_Main</a></td>
+<td><a href="Utf.htm">Tcl_UtfPrev</a></td>
+</tr>
+
+<tr>
+<td><a href="Namespace.htm">Tcl_FindCommand</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_MakeFileChannel</a></td>
+<td><a href="Encoding.htm">Tcl_UtfToExternal</a></td>
+</tr>
+
+<tr>
+<td><a href="Ensemble.htm">Tcl_FindEnsemble</a></td>
+<td><a href="CrtSlave.htm">Tcl_MakeSafe</a></td>
+<td><a href="Encoding.htm">Tcl_UtfToExternalDString</a></td>
+</tr>
+
+<tr>
+<td><a href="FindExec.htm">Tcl_FindExecutable</a></td>
+<td><a href="OpenTcp.htm">Tcl_MakeTcpClientChannel</a></td>
+<td><a href="ToUpper.htm">Tcl_UtfToLower</a></td>
+</tr>
+
+<tr>
+<td><a href="Hash.htm">Tcl_FindHashEntry</a></td>
+<td><a href="TCL_MEM_DEBUG.htm">TCL_MEM_DEBUG</a></td>
+<td><a href="ToUpper.htm">Tcl_UtfToTitle</a></td>
+</tr>
+
+<tr>
+<td><a href="Namespace.htm">Tcl_FindNamespace</a></td>
+<td><a href="SplitList.htm">Tcl_Merge</a></td>
+<td><a href="Utf.htm">Tcl_UtfToUniChar</a></td>
+</tr>
+
+<tr>
+<td><a href="Hash.htm">Tcl_FirstHashEntry</a></td>
+<td><a href="Thread.htm">Tcl_MutexFinalize</a></td>
+<td><a href="Utf.htm">Tcl_UtfToUniCharDString</a></td>
+</tr>
+
+<tr>
+<td><a href="OpenFileChnl.htm">Tcl_Flush</a></td>
+<td><a href="Thread.htm">Tcl_MutexLock</a></td>
+<td><a href="ToUpper.htm">Tcl_UtfToUpper</a></td>
+</tr>
+
+<tr>
+<td><a href="Namespace.htm">Tcl_ForgetImport</a></td>
+<td><a href="Thread.htm">Tcl_MutexUnlock</a></td>
+<td><a href="DumpActiveMemory.htm">Tcl_ValidateAllMemory</a></td>
+</tr>
+
+<tr>
+<td><a href="StringObj.htm">Tcl_Format</a></td>
+<td><a href="IntObj.htm">Tcl_NewBignumObj</a></td>
+<td><a href="Eval.htm">Tcl_VarEval</a></td>
+</tr>
+
+<tr>
+<td><a href="Alloc.htm">Tcl_Free</a></td>
+<td><a href="BoolObj.htm">Tcl_NewBooleanObj</a></td>
+<td><a href="Eval.htm">Tcl_VarEvalVA</a></td>
+</tr>
+
+<tr>
+<td><a href="Encoding.htm">Tcl_FreeEncoding</a></td>
+<td><a href="ByteArrObj.htm">Tcl_NewByteArrayObj</a></td>
+<td><a href="TraceVar.htm">Tcl_VarTraceInfo</a></td>
+</tr>
+
+<tr>
+<td><a href="ParseCmd.htm">Tcl_FreeParse</a></td>
+<td><a href="DictObj.htm">Tcl_NewDictObj</a></td>
+<td><a href="TraceVar.htm">Tcl_VarTraceInfo2</a></td>
+</tr>
+
+<tr>
+<td><a href="SetResult.htm">Tcl_FreeResult</a></td>
+<td><a href="DoubleObj.htm">Tcl_NewDoubleObj</a></td>
+<td><a href="Notifier.htm">Tcl_WaitForEvent</a></td>
+</tr>
+
+<tr>
+<td><a href="FileSystem.htm">Tcl_FSAccess</a></td>
+<td><a href="IntObj.htm">Tcl_NewIntObj</a></td>
+<td><a href="DetachPids.htm">Tcl_WaitPid</a></td>
+</tr>
+
+<tr>
+<td><a href="FileSystem.htm">Tcl_FSChdir</a></td>
+<td><a href="ListObj.htm">Tcl_NewListObj</a></td>
+<td><a href="Encoding.htm">Tcl_WinTCharToUtf</a></td>
+</tr>
+
+<tr>
+<td><a href="FileSystem.htm">Tcl_FSConvertToPathType</a></td>
+<td><a href="IntObj.htm">Tcl_NewLongObj</a></td>
+<td><a href="Encoding.htm">Tcl_WinUtfToTChar</a></td>
+</tr>
+
+<tr>
+<td><a href="FileSystem.htm">Tcl_FSCopyDirectory</a></td>
+<td><a href="Object.htm">Tcl_NewObj</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_Write</a></td>
+</tr>
+
+<tr>
+<td><a href="FileSystem.htm">Tcl_FSCopyFile</a></td>
+<td><a href="StringObj.htm">Tcl_NewStringObj</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_WriteChars</a></td>
+</tr>
+
+<tr>
+<td><a href="FileSystem.htm">Tcl_FSCreateDirectory</a></td>
+<td><a href="StringObj.htm">Tcl_NewUnicodeObj</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_WriteObj</a></td>
+</tr>
+
+<tr>
+<td><a href="FileSystem.htm">Tcl_FSData</a></td>
+<td><a href="IntObj.htm">Tcl_NewWideIntObj</a></td>
+<td><a href="OpenFileChnl.htm">Tcl_WriteRaw</a></td>
+</tr>
+
+<tr>
+<td><a href="FileSystem.htm">Tcl_FSDeleteFile</a></td>
+<td><a href="Hash.htm">Tcl_NextHashEntry</a></td>
+<td><a href="WrongNumArgs.htm">Tcl_WrongNumArgs</a></td>
+</tr>
+
+<tr>
+<td><a href="FileSystem.htm">Tcl_FSEqualPaths</a></td>
+<td><a href="CrtChannel.htm">Tcl_NotifyChannel</a></td>
+</tr>
+</table>
+
+<div class="copy">Copyright &copy; 1989-1994 The Regents of the
+University of California Copyright &copy; 1992-1999 Karl Lehenbauer
+and Mark Diekhans Copyright &copy; 1994-1998 Sun Microsystems, Inc
+Copyright &copy; 1995-1997 Roger E. Critchlow Jr Copyright &copy;
+1997-2000 Ajuba Solutions Copyright &copy; 1998-2000 Scriptics
+Corporation Copyright &copy; 2001 ActiveState Corporation Copyright
+&copy; 2001 ActiveState Tool Corp Copyright &copy; 2001 Vincent
+Darley Copyright &copy; 2001-2002 Kevin B. Kenny
+&lt;kennykb(at)acm.org&gt; Copyright &copy; 2001-2005 Donal K.
+Fellows Copyright &copy; 2002-2005 Andreas Kupries
+&lt;andreas_kupries(at)users.sourceforge.net&gt;</div>
+</body>
+</html>
+

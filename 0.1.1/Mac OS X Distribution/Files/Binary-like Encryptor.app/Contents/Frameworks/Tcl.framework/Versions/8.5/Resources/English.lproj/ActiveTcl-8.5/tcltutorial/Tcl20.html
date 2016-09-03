@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Regular Expressions 101</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2 class="title">Regular Expressions 101</h2>
+
+<div class="nav"><a href="Tcl19.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl20a.html">Next
+lesson</a></div>
+
+<p>Tcl also supports string operations known as <i>regular
+expressions</i> Several commands can access these methods with a
+-regexp argument, see the man pages for which commands support
+regular expressions.</p>
+
+<p>There are also two explicit commands for parsing regular
+expressions.</p>
+
+<dl>
+<dt><code class="keyword">regexp</code> <code class=
+"arg">?switches?</code> <code class="arg">exp</code> <code class=
+"arg">string</code> <code class="arg">?matchVar?</code> <code
+class="arg">?subMatch1 ... subMatchN?</code></dt>
+
+<dd>Searches <code class="arg">string</code> for the regular
+expression <code class="arg">exp</code>. If a parameter <code
+class="arg">matchVar</code> is given, then the substring that
+matches the regular expression is copied to <code class=
+"arg">matchVar</code>. If <code class="arg">subMatchN</code>
+variables exist, then the parenthetical parts of the matching
+string are copied to the <code class="arg">subMatch</code>
+variables, working from left to right.</dd>
+
+<dt><code class="keyword">regsub</code> <code class=
+"arg">?switches?</code> <code class="arg">exp</code> <code class=
+"arg">string</code> <code class="arg">subSpec</code> <code class=
+"arg">varName</code></dt>
+
+<dd>Searches <code class="arg">string</code> for substrings that
+match the regular expression <code class="arg">exp</code> and
+replaces them with <code class="arg">subSpec</code>. The resulting
+string is copied into <code class="arg">varName</code>.</dd>
+</dl>
+
+<p>Regular expressions can be expressed in just a few rules.</p>
+
+<dl>
+<dt>^</dt>
+
+<dd>Matches the beginning of a string</dd>
+
+<dt>$</dt>
+
+<dd>Matches the end of a string</dd>
+
+<dt>.</dt>
+
+<dd>Matches any single character</dd>
+
+<dt>*</dt>
+
+<dd>Matches any count (0-n) of the previous character</dd>
+
+<dt>+</dt>
+
+<dd>Matches any count, but at least 1 of the previous
+character</dd>
+
+<dt>[...]</dt>
+
+<dd>Matches any character of a set of characters</dd>
+
+<dt>[^...]</dt>
+
+<dd>Matches any character *NOT* a member of the set of characters
+following the ^.</dd>
+
+<dt>(...)</dt>
+
+<dd>Groups a set of characters into a subSpec.</dd>
+</dl>
+
+<p>Regular expressions are similar to the globbing that was
+discussed in lessons 16 and 18. The main difference is in the way
+that sets of matched characters are handled. In globbing the only
+way to select sets of unknown text is the <code class=
+"keyword">*</code> symbol. This matches to any quantity of any
+character.</p>
+
+<p>In regular expression parsing, the <code class=
+"keyword">*</code> symbol matches zero or more occurrences of the
+character immediately proceeding the <code class=
+"keyword">*</code>. For example <code class="keyword">a*</code>
+would match a, aaaaa, or a blank string. If the character directly
+before the <code class="keyword">*</code> is a set of characters
+within square brackets, then the <code class="keyword">*</code>
+will match any quantity of all of these characters. For example,
+<code class="keyword">[a-c]*</code> would match aa, abc, aabcabc,
+or again, an empty string.</p>
+
+<p>The <code class="keyword">+</code> symbol behaves roughly the
+same as the <code class="keyword">*</code>, except that it requires
+at least one character to match. For example, <code class=
+"keyword">[a-c]+</code> would match a, abc, or aabcabc, but not an
+empty string.</p>
+
+<p>Regular expression parsing is more powerful than globbing. With
+globbing you can use square brackets to enclose a set of characters
+any of which will be a match. Regular expression parsing also
+includes a method of selecting any character <i>not</i> in a set.
+If the first character after the <code class="keyword">[</code> is
+a caret (<code class="keyword">^</code>), then the regular
+expression parser will match any character not in the set of
+characters between the square brackets. A caret can be included in
+the set of characters to match (or not) by placing it in any
+position other than the first.</p>
+
+<p>The <code class="keyword">regexp</code> command is similar to
+the <code class="keyword">string match</code> command in that it
+matches an <code class="keyword">exp</code> against a string. It is
+different in that it can match a portion of a string, instead of
+the entire string, and will place the characters matched into the
+<code class="keyword">matchVar</code> variable.</p>
+
+<p>If a match is found to the portion of a regular expression
+enclosed within parentheses, <code class="keyword">regexp</code>
+will copy the subset of matching characters is to the <code class=
+"keyword">subSpec</code> argument. This can be used to parse simple
+strings.</p>
+
+<p><code class="keyword">Regsub</code> will copy the contents of
+the string to a new variable, substituting the characters that
+match <code class="keyword">exp</code> with the characters in <code
+class="keyword">subSpec</code>. If <code class="arg">subSpec</code>
+contains a <code class="keyword">&amp;</code> or <code class=
+"keyword">\0</code>, then those characters will be replaced by the
+characters that matched <code class="arg">exp</code>. If the number
+following a backslash is 1-9, then that backslash sequence will be
+replaced by the appropriate portion of <code class="arg">exp</code>
+that is enclosed within parentheses.</p>
+
+<p>Note that the <code class="keyword">exp</code> argument to <code
+class="keyword">regexp</code> or <code class=
+"keyword">regsub</code> is processed by the Tcl substitution pass.
+Therefore quite often the expression is enclosed in braces to
+prevent any special processing by Tcl.</p>
+
+<hr>
+<h3>Example</h3>
+
+<pre class="example">
+set sample "Where there is a will, There is a way."
+
+#
+# Match the first substring with lowercase letters only
+#
+set result [regexp {[a-z]+} $sample match]
+puts "Result: $result match: $match"
+
+#
+# Match the first two words, the first one allows uppercase
+set result [regexp {([A-Za-z]+) +([a-z]+)} $sample match sub1 sub2 ]
+puts "Result: $result Match: $match 1: $sub1 2: $sub2"
+
+#
+# Replace a word
+#
+regsub "way" $sample "lawsuit" sample2
+puts "New: $sample2"
+
+#
+# Use the -all option to count the number of "words"
+#
+puts "Number of words: [regexp -all {[^ ]} $sample]"
+   
+</pre>
+
+<div class="nav"><a href="Tcl19.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl20a.html">Next
+lesson</a></div>
+</body>
+</html>
+

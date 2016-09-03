@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - destroy manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> destroy</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+destroy - Destroy one or more windows 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>destroy</b> ?<i>window window ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command deletes the windows given by the <i>window</i>
+arguments, plus all of their descendants. If a <i>window</i>
+&ldquo;.&rdquo; is deleted then all windows will be destroyed and
+the application will (normally) exit. The <i>window</i>s are
+destroyed in order, and if an error occurs in destroying a window
+the command aborts without destroying the remaining windows. No
+error is returned if <i>window</i> does not exist. 
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+Destroy all checkbuttons that are direct children of the given
+widget: 
+
+<pre>
+proc killCheckbuttonChildren {parent} {
+   foreach w [winfo children $parent] {
+      if {[winfo class $w] eq "Checkbutton"} {
+         <b>destroy</b> $w
+      }
+   }
+}
+</pre>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#application">application</a>, <a href=
+"../Keywords/D.htm#destroy">destroy</a>, <a href=
+"../Keywords/W.htm#window">window</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

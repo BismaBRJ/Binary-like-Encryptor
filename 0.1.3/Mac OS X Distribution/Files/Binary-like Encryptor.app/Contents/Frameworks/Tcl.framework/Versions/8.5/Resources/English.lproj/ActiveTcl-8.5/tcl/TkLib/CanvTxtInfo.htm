@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_CanvasTextInfo manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> CanvTxtInfo</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_CanvasTextInfo - additional information for managing text items
+in canvases 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+Tk_CanvasTextInfo *<br>
+<b>Tk_CanvasGetTextInfo</b>(<i>canvas</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Canvas <b><a href="../TkCmd/canvas.htm">canvas</a></b>
+(in)</dt>
+
+<dd>A token that identifies a particular canvas widget.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+Textual canvas items are somewhat more complicated to manage than
+other items, due to things like the selection and the input focus.
+<b>Tk_CanvasGetTextInfo</b> may be invoked by a type manager to
+obtain additional information needed for items that display text.
+The return value from <b>Tk_CanvasGetTextInfo</b> is a pointer to a
+structure that is shared between Tk and all the items that display
+text. The structure has the following form: 
+
+<pre>
+typedef struct Tk_CanvasTextInfo {
+    Tk_3DBorder <i>selBorder</i>;
+    int <i>selBorderWidth</i>;
+    XColor *<i>selFgColorPtr</i>;
+    Tk_Item *<i>selItemPtr</i>;
+    int <i>selectFirst</i>;
+    int <i>selectLast</i>;
+    Tk_Item *<i>anchorItemPtr</i>;
+    int <i>selectAnchor</i>;
+    Tk_3DBorder <i>insertBorder</i>;
+    int <i>insertWidth</i>;
+    int <i>insertBorderWidth</i>;
+    Tk_Item *<i>focusItemPtr</i>;
+    int <i>gotFocus</i>;
+    int <i>cursorOn</i>;
+} Tk_CanvasTextInfo;
+</pre>
+
+The <b>selBorder</b> field identifies a Tk_3DBorder that should be
+used for drawing the background under selected text.
+<i>selBorderWidth</i> gives the width of the raised border around
+selected text, in pixels. <i>selFgColorPtr</i> points to an XColor
+that describes the foreground color to be used when drawing
+selected text. <i>selItemPtr</i> points to the item that is
+currently selected, or NULL if there is no item selected or if the
+canvas does not have the selection. <i>selectFirst</i> and
+<i>selectLast</i> give the indices of the first and last selected
+characters in <i>selItemPtr</i>, as returned by the
+<i>indexProc</i> for that item. <i>anchorItemPtr</i> points to the
+item that currently has the selection anchor; this is not
+necessarily the same as <i>selItemPtr</i>. <i>selectAnchor</i> is
+an index that identifies the anchor position within
+<i>anchorItemPtr</i>. <i>insertBorder</i> contains a Tk_3DBorder to
+use when drawing the insertion cursor; <i>insertWidth</i> gives the
+total width of the insertion cursor in pixels, and
+<i>insertBorderWidth</i> gives the width of the raised border
+around the insertion cursor. <i>focusItemPtr</i> identifies the
+item that currently has the input focus, or NULL if there is no
+such item. <i>gotFocus</i> is 1 if the canvas widget has the input
+focus and 0 otherwise. <i>cursorOn</i> is 1 if the insertion cursor
+should be drawn in <i>focusItemPtr</i> and 0 if it should not be
+drawn; this field is toggled on and off by Tk to make the cursor
+blink. 
+
+<p>The structure returned by <b>Tk_CanvasGetTextInfo</b> is shared
+between Tk and the type managers; typically the type manager calls
+<b>Tk_CanvasGetTextInfo</b> once when an item is created and then
+saves the pointer in the item's record. Tk will update information
+in the Tk_CanvasTextInfo; for example, a <b>configure</b> widget
+command might change the <i>selBorder</i> field, or a <b>select</b>
+widget command might change the <i>selectFirst</i> field, or Tk
+might change <i>cursorOn</i> in order to make the insertion cursor
+flash on and off during successive redisplays.</p>
+
+<p>Type managers should treat all of the fields of the
+Tk_CanvasTextInfo structure as read-only, except for
+<i>selItemPtr</i>, <i>selectFirst</i>, <i>selectLast</i>, and
+<i>selectAnchor</i>. Type managers may change <i>selectFirst</i>,
+<i>selectLast</i>, and <i>selectAnchor</i> to adjust for insertions
+and deletions in the item (but only if the item is the current
+owner of the selection or anchor, as determined by
+<i>selItemPtr</i> or <i>anchorItemPtr</i>). If all of the selected
+text in the item is deleted, the item should set <i>selItemPtr</i>
+to NULL to indicate that there is no longer a selection.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#canvas">canvas</a>, <a href=
+"../Keywords/F.htm#focus">focus</a>, <a href=
+"../Keywords/I.htm#insertion cursor">insertion cursor</a>, <a href=
+"../Keywords/S.htm#selection">selection</a>, <a href=
+"../Keywords/S.htm#selection anchor">selection anchor</a>, <a href=
+"../Keywords/T.htm#text">text</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

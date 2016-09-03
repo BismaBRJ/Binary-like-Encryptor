@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Adding new commands to Tcl - proc</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Adding new commands to Tcl - proc</h1>
+
+<div class="nav"><a href="Tcl10.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl12.html">Next
+lesson</a></div>
+
+<p>In Tcl there is actually no distinction between commands (often
+known as 'functions' in other languages) and "syntax". There are no
+reserved words (like if and while) as exist in C, Java, Python,
+Perl, etc... When the Tcl interpreter starts up there is a list of
+known commands that the interpreter uses to parse a line. These
+commands include <code>while, for, set, puts,</code> and so on.
+They are, however, still just regular Tcl commands that obey the
+same syntax rules as all Tcl commands, both built-in, and those
+that you create yourself with the <code class="keyword">proc</code>
+command.</p>
+
+<p>The <code class="keyword">proc</code> command creates a new
+command. The syntax for the <code class="keyword">proc</code>
+command is:</p>
+
+<ul>
+<li><code class="keyword">proc</code> <code class="arg">name</code>
+<code class="arg">args</code> <code class="arg">body</code></li>
+</ul>
+
+<p>When <code class="keyword">proc</code> is evaluated, it creates
+a new command with name <code class="arg">name</code> that takes
+arguments <code class="arg">args</code>. When the procedure <code
+class="arg">name</code> is called, it then runs the code contained
+in <code class="arg">body</code>.</p>
+
+<p><code class="arg">Args</code> is a list of arguments which will
+be passed to <code class="arg">name</code>. When <code class=
+"arg">name</code> is invoked, local variables with these names will
+be created, and the values to be passed to <code class=
+"arg">name</code> will be copied to the local variables.</p>
+
+<p>The value that the <code class="arg">body</code> of a proc
+returns can be defined with the <code class="keyword">return</code>
+command. The <code class="keyword">return</code> command will
+return its argument to the calling program. If there is no return,
+then <code class="arg">body</code> will return to the caller when
+the last of its commands has been executed. The return value of the
+last command becomes the return value of the procedure.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+proc sum {arg1 arg2} {
+    set x [expr {$arg1 + $arg2}];
+    return $x
+}
+
+puts " The sum of 2 + 3 is: [sum 2 3]\n\n"
+
+proc for {a b c} {
+    puts "The for command has been replaced by a puts";
+    puts "The arguments were: $a\n$b\n$c\n"
+}
+
+for {set i 1} {$i &lt; 10} {incr i}
+</pre>
+
+<div class="nav"><a href="Tcl10.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl12.html">Next
+lesson</a></div>
+</body>
+</html>
+

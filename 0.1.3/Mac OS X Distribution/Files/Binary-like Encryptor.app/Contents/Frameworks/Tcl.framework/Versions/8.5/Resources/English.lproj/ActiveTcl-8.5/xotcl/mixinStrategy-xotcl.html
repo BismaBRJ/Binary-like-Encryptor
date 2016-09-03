@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>XOTcl - Documentation --
+xotcl/library/lib/mixinStrategy.xotcl</title>
+<link rel="StyleSheet" href="xotcl-doc.css" type="text/css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1><img src="./logo-100.jpg" alt=
+"xotcl/library/lib/mixinStrategy.xotcl" align="MIDDLE">
+xotcl/library/lib/mixinStrategy.xotcl</h1>
+
+<hr>
+<h2>Package/File Information</h2>
+
+<b>No package provided/required</b> <br>
+ <br>
+ <b>Defined Objects/Classes:</b> 
+
+<ul>
+<li><a href="#Object"><em>Object</em>:</a> <a href=
+"#Object-add">add</a>, <a href=
+"#Object-mixinQueryStrategy">mixinQueryStrategy</a>, <a href=
+"#Object-mixinStrategy">mixinStrategy</a>, <a href=
+"#Object-remove">remove</a>.<br>
+</li>
+</ul>
+
+<br>
+ <b>Filename:</b> <a href=
+"xotcl/library/lib/mixinStrategy.xotcl">xotcl/library/lib/mixinStrategy.xotcl</a>
+<br>
+ <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">These methods provide support for managing
+"strategies", i.e. mixin-classes, where only one kind of a family
+of conformant mixins should be registered. 
+
+<p>Naming convertions for strategies: All strategies must follow
+the naming convention 'kind=implementation'. Examples are the
+persistency strategy 'eager' specfied as 'persistent=eager' or the
+persistency strategy 'lazy' (specified as 'persistent=lazy')</p>
+</td>
+</tr>
+</table>
+
+<br>
+ 
+
+<hr>
+<p><a name="Object"></a></p>
+
+<h2>Class: <em>Object</em></h2>
+
+<b>Procs/Instprocs:</b> <a href="#Object-add">add</a>, <a href=
+"#Object-mixinQueryStrategy">mixinQueryStrategy</a>, <a href=
+"#Object-mixinStrategy">mixinStrategy</a>, <a href=
+"#Object-remove">remove</a>. 
+
+<h3>Instprocs</h3>
+
+<ul>
+<li><a name="Object-mixinStrategy"></a> <b>mixinStrategy</b>
+<em>strategy</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>strategy</b>: Strategy to be added</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">This method adds or replaces a new strategy from
+the mixin list. Strategies are named following the convention
+mentioned above.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">old strategy</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-mixinQueryStrategy"></a>
+<b>mixinQueryStrategy</b> <em>kind</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>kind</b>: strategy kind</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">This method searches the mixin list for a mixin of
+this kind (starting with $kind=)</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">returns the maching strategy</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-add"></a> <b>add</b> <em>construct</em>
+<em>args</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>construct</b>: (inst) 'filter' or 'mixin'</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"></td>
+<td valign="top"><b>args</b>: to be added</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">add the specified (inst) 'filters' or
+'mixins'</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">empty</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-remove"></a> <b>remove</b> <em>construct</em>
+<em>args</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>construct</b>: (inst) 'filter' or 'mixin'</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"></td>
+<td valign="top"><b>args</b>: to be removed</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">remove the specified (inst) 'filters' or
+'mixins'</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">empty</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<br>
+<br>
+ <br>
+ <br>
+<br>
+ 
+
+<hr>
+<a href="./index.html">Back to index page.</a> <br>
+ 
+
+<hr>
+</body>
+</html>
+

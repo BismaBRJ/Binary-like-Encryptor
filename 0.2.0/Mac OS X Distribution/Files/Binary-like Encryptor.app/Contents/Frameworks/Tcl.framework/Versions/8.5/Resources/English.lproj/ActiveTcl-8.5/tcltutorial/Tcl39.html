@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Timing scripts</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Timing scripts</h1>
+
+<div class="nav"><a href="Tcl38.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl40.html">Next
+lesson</a></div>
+
+<p>The simplest method of making a script run faster is to buy a
+faster processor. Unfortunately, this isn't always an option. You
+may need to optimize your script to run faster. This is difficult
+if you can't measure the time it takes to run the portion of the
+script that you are trying to optimize.</p>
+
+<p>The <code class="keyword">time</code> command is the solution to
+this problem. <code class="keyword">time</code> will measure the
+length of time that it takes to execute a script. You can then
+modify the script, rerun <code class="keyword">time</code> and see
+how much you improved it.</p>
+
+<p>After you've run the example, play with the size of the loop
+counters in <code class="keyword">timetst1</code> and <code class=
+"keyword">timetst2</code>. If you make the inner loop counter 5 or
+less, it may take longer to execute <code class=
+"keyword">timetst2</code> than it takes for <code class=
+"keyword">timetst1</code>. This is because it takes time to
+calculate and assign the variable <code class="keyword">k</code>,
+and if the inner loop is too small, then the gain in not doing the
+multiply inside the loop is lost in the time it takes to do the
+outside the loop calculation.</p>
+
+<dl>
+<dt><code class="keyword">time</code> <code class=
+"arg">script</code> <code class="arg">?count?</code></dt>
+
+<dd>Returns the number of milliseconds it took to execute <code
+class="arg">script</code>. If <code class="arg">count</code> is
+specified, it will run the script <code class="arg">count</code>
+times, and average the result. The time is elapsed time, not CPU
+time.</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+proc timetst1 {lst} {
+    set x [lsearch $lst "5000"]
+    return $x
+}
+
+proc timetst2 {array} {
+    upvar $array a
+    return $a(5000);
+}
+
+# Make a long list and a large array.
+for {set i 0} {$i &lt; 5001} {incr i} {
+    set array($i) $i
+    lappend list $i
+}
+
+puts "Time for list search: [ time {timetst1 $list} 10]"
+puts "Time for array index: [ time {timetst2 array} 10]"
+</pre>
+
+<div class="nav"><a href="Tcl38.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl40.html">Next
+lesson</a></div>
+</body>
+</html>
+

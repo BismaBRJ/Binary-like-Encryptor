@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_DoubleObj manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> DoubleObj</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_NewDoubleObj, Tcl_SetDoubleObj, Tcl_GetDoubleFromObj -
+manipulate Tcl objects as floating-point values 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+Tcl_Obj *<br>
+<b>Tcl_NewDoubleObj</b>(<i>doubleValue</i>)<br>
+<b>Tcl_SetDoubleObj</b>(<i>objPtr, doubleValue</i>)<br>
+int<br>
+<b>Tcl_GetDoubleFromObj</b>(<i>interp, objPtr, doublePtr</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>double <b>doubleValue</b> (in)</dt>
+
+<dd>A double-precision floating-point value used to initialize or
+set a Tcl object.</dd>
+
+<dt>Tcl_Obj <b>*objPtr</b> (in/out)</dt>
+
+<dd>For <b>Tcl_SetDoubleObj</b>, this points to the object in which
+to store a double value. For <b>Tcl_GetDoubleFromObj</b>, this
+refers to the object from which to retrieve a double value.</dd>
+
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in/out)</dt>
+
+<dd>When non-NULL, an error message is left here when double value
+retrieval fails.</dd>
+
+<dt>double <b>*doublePtr</b> (out)</dt>
+
+<dd>Points to place to store the double value obtained from
+<i>objPtr</i>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These procedures are used to create, modify, and read Tcl objects
+that hold double-precision floating-point values. 
+
+<p><b>Tcl_NewDoubleObj</b> creates and returns a new Tcl object
+initialized to the double value <i>doubleValue</i>. The returned
+Tcl object is unshared.</p>
+
+<p><b>Tcl_SetDoubleObj</b> sets the value of an existing Tcl object
+pointed to by <i>objPtr</i> to the double value <i>doubleValue</i>.
+The <i>objPtr</i> argument must point to an unshared Tcl object.
+Any attempt to set the value of a shared Tcl object violates Tcl's
+copy-on-write policy. Any existing string representation or
+internal representation in the unshared Tcl object will be freed as
+a consequence of setting the new value.</p>
+
+<p><b>Tcl_GetDoubleFromObj</b> attempts to retrieve a double value
+from the Tcl object <i>objPtr</i>. If the attempt succeeds, then
+<b>TCL_OK</b> is returned, and the double value is written to the
+storage pointed to by <i>doublePtr</i>. If the attempt fails, then
+<b>TCL_ERROR</b> is returned, and if <i>interp</i> is non-NULL, an
+error message is left in <i>interp</i>. The <b>Tcl_ObjType</b> of
+<i>objPtr</i> may be changed to make subsequent calls to
+<b>Tcl_GetDoubleFromObj</b> more efficient.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclLib/Object.htm">Tcl_NewObj</a></b>, <b><a href=
+"../TclLib/Object.htm">Tcl_DecrRefCount</a></b>, <b><a href=
+"../TclLib/Object.htm">Tcl_IncrRefCount</a></b>, <b><a href=
+"../TclLib/SetResult.htm">Tcl_GetObjResult</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/D.htm#double">double</a>, <a href=
+"../Keywords/D.htm#double object">double object</a>, <a href=
+"../Keywords/D.htm#double type">double type</a>, <a href=
+"../Keywords/I.htm#internal representation">internal
+representation</a>, <a href="../Keywords/O.htm#object">object</a>,
+<a href="../Keywords/O.htm#object type">object type</a>, <a href=
+"../Keywords/S.htm#string representation">string representation</a>
+
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1996-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

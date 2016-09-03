@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk::menubutton manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_menubutton</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_menubutton.htm#M2" name="L1765">NAME</a> 
+
+<dl>
+<dd>ttk::menubutton - Widget that pops down a menu when
+pressed</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_menubutton.htm#M3" name="L1766">SYNOPSIS</a> 
+
+<dl>
+<dd><b>ttk::menubutton</b> <i>pathName</i> ?<i>options</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_menubutton.htm#M4" name=
+"L1767">DESCRIPTION</a></dd>
+
+<dd><a href="ttk_menubutton.htm#M5" name="L1768">STANDARD
+OPTIONS</a> 
+
+<dl>
+<dd><a href="options.htm#M-class">-class</a></dd>
+
+<dd><a href="options.htm#M-compound">-compound, compound,
+Compound</a></dd>
+
+<dd><a href="options.htm#M-cursor">-cursor, cursor, Cursor</a></dd>
+
+<dd><a href="options.htm#M-image">-image, image, Image</a></dd>
+
+<dd><a href="options.htm#M-state">-state</a></dd>
+
+<dd><a href="options.htm#M-style">-style</a></dd>
+
+<dd><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></dd>
+
+<dd><a href="options.htm#M-text">-text, text, Text</a></dd>
+
+<dd><a href="options.htm#M-textvariable">-textvariable,
+textVariable, Variable</a></dd>
+
+<dd><a href="options.htm#M-underline">-underline, underline,
+Underline</a></dd>
+
+<dd><a href="options.htm#M-width">-width</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_menubutton.htm#M10" name="L1773">WIDGET-SPECIFIC
+OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_menubutton.htm#M11" name="L1774">-direction,
+direction, Direction</a></dd>
+
+<dd><a href="ttk_menubutton.htm#M12" name="L1775">-menu, menu,
+Menu</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_menubutton.htm#M13" name="L1776">WIDGET
+COMMAND</a></dd>
+
+<dd><a href="ttk_menubutton.htm#M14" name="L1777">STANDARD
+STYLES</a></dd>
+
+<dd><a href="ttk_menubutton.htm#M15" name="L1778">SEE ALSO</a></dd>
+
+<dd><a href="ttk_menubutton.htm#M16" name="L1779">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk::menubutton - Widget that pops down a menu when pressed 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>ttk::menubutton</b> <i>pathName</i> ?<i>options</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+A <b>ttk::menubutton</b> widget displays a textual label and/or
+image, and displays a menu when pressed. 
+
+<h3><a name="M5">STANDARD OPTIONS</a></h3>
+
+<dl>
+<dt><b><a href="options.htm#M-class">-class</a></b></dt>
+
+<dt><b><a href="options.htm#M-compound">-compound, compound,
+Compound</a></b></dt>
+
+<dt><b><a href="options.htm#M-cursor">-cursor, cursor,
+Cursor</a></b></dt>
+
+<dt><b><a href="options.htm#M-image">-image, image,
+Image</a></b></dt>
+
+<dt><b><a href="options.htm#M-state">-state</a></b></dt>
+
+<dt><b><a href="options.htm#M-style">-style</a></b></dt>
+
+<dt><b><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></b></dt>
+
+<dt><b><a href="options.htm#M-text">-text, text, Text</a></b></dt>
+
+<dt><b><a href="options.htm#M-textvariable">-textvariable,
+textVariable, Variable</a></b></dt>
+
+<dt><b><a href="options.htm#M-underline">-underline, underline,
+Underline</a></b></dt>
+
+<dt><b><a href="options.htm#M-width">-width</a></b></dt>
+</dl>
+
+<h3><a name="M10">WIDGET-SPECIFIC OPTIONS</a></h3>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M11">-direction</a></b></dt>
+
+<dt>Database Name: <b>direction</b></dt>
+
+<dt>Database Class: <b>Direction</b></dt>
+
+<dd>Specifies where the menu is to be popped up relative to the
+menubutton. One of: <b>above</b>, <b>below</b>, <b>left</b>,
+<b>right</b>, or <b><a href="../TclCmd/flush.htm">flush</a></b>.
+The default is <b>below</b>. <b><a href=
+"../TclCmd/flush.htm">flush</a></b> pops the menu up directly over
+the menubutton.</dd>
+
+<dt>Command-Line Name: <b><a name="M12">-menu</a></b></dt>
+
+<dt>Database Name: <b><a href="../TkCmd/menu.htm">menu</a></b></dt>
+
+<dt>Database Class: <b><a href=
+"../TkCmd/menu.htm">Menu</a></b></dt>
+
+<dd>Specifies the path name of the menu associated with the
+menubutton. To be on the safe side, the menu ought to be a direct
+child of the menubutton.</dd>
+</dl>
+
+<h3><a name="M13">WIDGET COMMAND</a></h3>
+
+Menubutton widgets support the standard <b>cget</b>,
+<b>configure</b>, <b>identify</b>, <b>instate</b>, and <b>state</b>
+methods. No other widget methods are used. 
+
+<h3><a name="M14">STANDARD STYLES</a></h3>
+
+<b>Ttk::menubutton</b> widgets support the <b>Toolbutton</b> style
+in all standard themes, which is useful for creating widgets for
+toolbars. 
+
+<h3><a name="M15">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_widget.htm">ttk::widget</a></b>, <b><a
+href="../TkCmd/menu.htm">menu</a></b>, <b><a href=
+"../TkCmd/menubutton.htm">menubutton</a></b> 
+
+<h3><a name="M16">KEYWORDS</a></h3>
+
+<a href="../Keywords/W.htm#widget">widget</a>, <a href=
+"../Keywords/B.htm#button">button</a>, <a href=
+"../Keywords/M.htm#menu">menu</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2004 Joe English</div>
+</body>
+</html>
+

@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk::intro manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_intro</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk::intro - Introduction to the Tk theme engine 
+
+<h3><a name="M3">OVERVIEW</a></h3>
+
+The Tk themed widget set is based on a revised and enhanced version
+of TIP #48 (http://tip.tcl.tk/48) specified style engine. The main
+concepts are described below. The basic idea is to separate, to the
+extent possible, the code implementing a widget's behavior from the
+code implementing its appearance. Widget class bindings are
+primarily responsible for maintaining the widget state and invoking
+callbacks; all aspects of the widget's appearance are controlled by
+the style of the widget (i.e. the style of the elements of the
+widget). 
+
+<h3><a name="M4">THEMES</a></h3>
+
+A <i>theme</i> is a collection of elements and styles that
+determine the look and feel of the widget set. Themes can be used
+to: 
+
+<dl class="themes">
+<dd>&bull;&nbsp; isolate platform differences (X11 vs. classic
+Windows vs. XP vs. Aqua ...)</dd>
+
+<dd>&bull;&nbsp; adapt to display limitations (low-color,
+grayscale, monochrome, tiny screens)</dd>
+
+<dd>&bull;&nbsp; accessibility (high contrast, large type)</dd>
+
+<dd>&bull;&nbsp; application suite branding</dd>
+
+<dd>&bull;&nbsp; blend in with the rest of the desktop (Gnome, KDE,
+Java)</dd>
+
+<dd>&bull;&nbsp; and, of course: eye candy.</dd>
+</dl>
+
+<h3><a name="M5">ELEMENTS</a></h3>
+
+An <i>element</i> displays an individual part of a widget. For
+example, a vertical scrollbar widget contains <b>uparrow</b>,
+<b>downarrow</b>, <b>trough</b> and <b>slider</b> elements. 
+
+<p>Element names use a recursive dotted notation. For example,
+<b>uparrow</b> identifies a generic arrow element, and
+<b>Scrollbar.uparrow</b> and <b>Combobox.uparrow</b> identify
+widget-specific elements. When looking for an element, the style
+engine looks for the specific name first, and if an element of that
+name is not found it looks for generic elements by stripping off
+successive leading components of the element name.</p>
+
+<p>Like widgets, elements have <i>options</i> which specify what to
+display and how to display it. For example, the <b><a href=
+"../TkCmd/text.htm">text</a></b> element (which displays a text
+string) has <b>-text</b>, <b>-font</b>, <b>-foreground</b>,
+<b>-background</b>, <b>-underline</b>, and <b>-width</b> options.
+The value of an element option is taken from:</p>
+
+<dl class="elements">
+<dd>&bull;&nbsp; an option of the same name and type in the widget
+containing the element;</dd>
+
+<dd>&bull;&nbsp; a dynamic setting specified by <b>style map</b>
+and the current state;</dd>
+
+<dd>&bull;&nbsp; the default setting specified by <b>style
+configure</b>; or</dd>
+
+<dd>&bull;&nbsp; the element's built-in default value for the
+option.</dd>
+</dl>
+
+<h3><a name="M6">LAYOUTS</a></h3>
+
+A <i>layout</i> specifies which elements make up a widget and how
+they are arranged. The layout engine uses a simplified version of
+the <b><a href="../TkCmd/pack.htm">pack</a></b> algorithm: starting
+with an initial cavity equal to the size of the widget, elements
+are allocated a parcel within the cavity along the side specified
+by the <b>-side</b> option, and placed within the parcel according
+to the <b>-sticky</b> option. For example, the layout for a
+horizontal scrollbar is: 
+
+<pre>
+ttk::<b>style layout</b> Horizontal.TScrollbar {
+    Scrollbar.trough -children {
+    Scrollbar.leftarrow -side left -sticky w
+    Scrollbar.rightarrow -side right -sticky e
+    Scrollbar.thumb -side left -expand true -sticky ew
+    }
+}
+</pre>
+
+<p>By default, the layout for a widget is the same as its class
+name. Some widgets may override this (for example, the <b><a href=
+"../TkCmd/ttk_scrollbar.htm">ttk::scrollbar</a></b> widget chooses
+different layouts based on the <b>-orient</b> option).</p>
+
+<h3><a name="M7">STATES</a></h3>
+
+In standard Tk, many widgets have a <b>-state</b> option which (in
+most cases) is either <b>normal</b> or <b>disabled</b>. Some
+widgets support additional states, such as the <b><a href=
+"../TkCmd/entry.htm">entry</a></b> widget which has a
+<b>readonly</b> state and the various flavors of buttons which have
+<b>active</b> state. 
+
+<p>The themed Tk widgets generalizes this idea: every widget has a
+bitmap of independent state flags. Widget state flags include
+<b>active</b>, <b>disabled</b>, <b>pressed</b>, <b><a href=
+"../TkCmd/focus.htm">focus</a></b>, etc., (see
+<i>ttk::widget(n)</i> for the full list of state flags).</p>
+
+<p>Instead of a <b>-state</b> option, every widget now has a
+<b>state</b> widget command which is used to set or query the
+state. A <i>state specification</i> is a list of symbolic state
+names indicating which bits are set, each optionally prefixed with
+an exclamation point indicating that the bit is cleared
+instead.</p>
+
+<p>For example, the class bindings for the <b><a href=
+"../TkCmd/ttk_button.htm">ttk::button</a></b> widget are:</p>
+
+<pre>
+bind TButton &lt;Enter&gt;     { %W state active }
+bind TButton &lt;Leave&gt;      { %W state !active }
+bind TButton &lt;ButtonPress-1&gt;  { %W state pressed }
+bind TButton &lt;Button1-Leave&gt;  { %W state !pressed }
+bind TButton &lt;Button1-Enter&gt;  { %W state pressed }
+bind TButton &lt;ButtonRelease-1&gt;    \
+    { %W instate {pressed} { %W state !pressed ; %W invoke } }
+</pre>
+
+<p>This specifies that the widget becomes <b>active</b> when the
+pointer enters the widget, and inactive when it leaves. Similarly
+it becomes <b>pressed</b> when the mouse button is pressed, and
+<b>!pressed</b> on the ButtonRelease event. In addition, the button
+unpresses if pointer is dragged outside the widget while Button-1
+is held down, and represses if it's dragged back in. Finally, when
+the mouse button is released, the widget's <b>-command</b> is
+invoked, but only if the button is currently in the <b>pressed</b>
+state. (The actual bindings are a little more complicated than the
+above, but not by much).</p>
+
+<h3><a name="M8">STYLES</a></h3>
+
+Each widget is associated with a <i>style</i>, which specifies
+values for element options. Style names use a recursive dotted
+notation like layouts and elements; by default, widgets use the
+class name to look up a style in the current theme. For example: 
+
+<pre>
+ttk::<b>style configure</b> TButton \
+    -background #d9d9d9 \
+    -foreground black \
+    -relief raised \
+    ;
+</pre>
+
+<p>Many elements are displayed differently depending on the widget
+state. For example, buttons have a different background when they
+are active, a different foreground when disabled, and a different
+relief when pressed. The <b>style map</b> command specifies dynamic
+option settings for a particular style:</p>
+
+<pre>
+ttk::<b>style map</b> TButton \
+    -background [list disabled #d9d9d9  active #ececec] \
+    -foreground [list disabled #a3a3a3] \
+    -relief [list {pressed !disabled} sunken] \
+    ;
+</pre>
+
+<h3><a name="M9">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_widget.htm">ttk::widget</a></b>, <b><a
+href="../TkCmd/ttk_style.htm">ttk::style</a></b> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2004 Joe English</div>
+</body>
+</html>
+

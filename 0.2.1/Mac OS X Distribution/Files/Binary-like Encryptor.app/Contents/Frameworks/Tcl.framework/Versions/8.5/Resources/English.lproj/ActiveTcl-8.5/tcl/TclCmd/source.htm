@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - source manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> source</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+source - Evaluate a file or resource as a Tcl script 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>source</b> <i>fileName</i><br>
+<b>source</b> <b>-encoding</b> <i>encodingName fileName</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command takes the contents of the specified file or resource
+and passes it to the Tcl interpreter as a text script. The return
+value from <b>source</b> is the return value of the last command
+executed in the script. If an error occurs in evaluating the
+contents of the script then the <b>source</b> command will return
+that error. If a <b><a href="../TclCmd/return.htm">return</a></b>
+command is invoked from within the script then the remainder of the
+file will be skipped and the <b>source</b> command will return
+normally with the result from the <b><a href=
+"../TclCmd/return.htm">return</a></b> command. 
+
+<p>The end-of-file character for files is &ldquo;\32&rdquo; (^Z)
+for all platforms. The source command will read files up to this
+character. This restriction does not exist for the <b><a href=
+"../TclCmd/read.htm">read</a></b> or <b><a href=
+"../TclCmd/gets.htm">gets</a></b> commands, allowing for files
+containing code and data segments (scripted documents). If you
+require a &ldquo;^Z&rdquo; in code for string comparison, you can
+use &ldquo;\032&rdquo; or &ldquo;\u001a&rdquo;, which will be
+safely substituted by the Tcl interpreter into
+&ldquo;^Z&rdquo;.</p>
+
+<p>The <b>-encoding</b> option is used to specify the encoding of
+the data stored in <i>fileName</i>. When the <b>-encoding</b>
+option is omitted, the system encoding is assumed.</p>
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+Run the script in the file <b>foo.tcl</b> and then the script in
+the file <b>bar.tcl</b>: 
+
+<pre>
+<b>source</b> foo.tcl
+<b>source</b> bar.tcl
+</pre>
+
+Alternatively: 
+
+<pre>
+foreach scriptFile {foo.tcl bar.tcl} {
+   <b>source</b> $scriptFile
+}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/file.htm">file</a></b>, <b><a href=
+"../TclCmd/cd.htm">cd</a></b>, <b><a href=
+"../TclCmd/encoding.htm">encoding</a></b>, <b><a href=
+"../TclCmd/info.htm">info</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/F.htm#file">file</a>, <a href=
+"../Keywords/S.htm#script">script</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+2000 Scriptics Corporation.</div>
+</body>
+</html>
+

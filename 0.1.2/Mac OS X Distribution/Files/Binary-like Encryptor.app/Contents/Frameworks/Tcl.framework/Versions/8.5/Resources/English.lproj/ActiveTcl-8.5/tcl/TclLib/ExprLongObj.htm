@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_ExprLongObj manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> ExprLongObj</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_ExprLongObj, Tcl_ExprDoubleObj, Tcl_ExprBooleanObj, Tcl_ExprObj
+- evaluate an expression 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_ExprLongObj</b>(<i>interp, objPtr, longPtr</i>)<br>
+int<br>
+<b>Tcl_ExprDoubleObj</b>(<i>interp, objPtr, doublePtr</i>)<br>
+int<br>
+<b>Tcl_ExprBooleanObj</b>(<i>interp, objPtr, booleanPtr</i>)<br>
+int<br>
+<b>Tcl_ExprObj</b>(<i>interp, objPtr, resultPtrPtr</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Interpreter in whose context to evaluate <i>objPtr</i>.</dd>
+
+<dt>Tcl_Obj <b>*objPtr</b> (in)</dt>
+
+<dd>Pointer to an object containing the expression to
+evaluate.</dd>
+
+<dt>long <b>*longPtr</b> (out)</dt>
+
+<dd>Pointer to location in which to store the integer value of the
+expression.</dd>
+
+<dt>int <b>*doublePtr</b> (out)</dt>
+
+<dd>Pointer to location in which to store the floating-point value
+of the expression.</dd>
+
+<dt>int <b>*booleanPtr</b> (out)</dt>
+
+<dd>Pointer to location in which to store the 0/1 boolean value of
+the expression.</dd>
+
+<dt>Tcl_Obj <b>**resultPtrPtr</b> (out)</dt>
+
+<dd>Pointer to location in which to store a pointer to the object
+that is the result of the expression.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These four procedures all evaluate an expression, returning the
+result in one of four different forms. The expression is given by
+the <i>objPtr</i> argument, and it can have any of the forms
+accepted by the <b><a href="../TclCmd/expr.htm">expr</a></b>
+command. 
+
+<p>The <i>interp</i> argument refers to an interpreter used to
+evaluate the expression (e.g. for variables and nested Tcl
+commands) and to return error information.</p>
+
+<p>For all of these procedures the return value is a standard Tcl
+result: <b>TCL_OK</b> means the expression was successfully
+evaluated, and <b>TCL_ERROR</b> means that an error occurred while
+evaluating the expression. If <b>TCL_ERROR</b> is returned, then a
+message describing the error can be retrieved using <b><a href=
+"../TclLib/SetResult.htm">Tcl_GetObjResult</a></b>. If an error
+occurs while executing a Tcl command embedded in the expression
+then that error will be returned.</p>
+
+<p>If the expression is successfully evaluated, then its value is
+returned in one of four forms, depending on which procedure is
+invoked. <b>Tcl_ExprLongObj</b> stores an integer value at
+<i>*longPtr</i>. If the expression's actual value is a
+floating-point number, then it is truncated to an integer. If the
+expression's actual value is a non-numeric string then an error is
+returned.</p>
+
+<p><b>Tcl_ExprDoubleObj</b> stores a floating-point value at
+<i>*doublePtr</i>. If the expression's actual value is an integer,
+it is converted to floating-point. If the expression's actual value
+is a non-numeric string then an error is returned.</p>
+
+<p><b>Tcl_ExprBooleanObj</b> stores a 0/1 integer value at
+<i>*booleanPtr</i>. If the expression's actual value is an integer
+or floating-point number, then they store 0 at <i>*booleanPtr</i>
+if the value was zero and 1 otherwise. If the expression's actual
+value is a non-numeric string then it must be one of the values
+accepted by <b><a href=
+"../TclLib/GetInt.htm">Tcl_GetBoolean</a></b> such as
+&ldquo;yes&rdquo; or &ldquo;no&rdquo;, or else an error occurs.</p>
+
+<p>If <b>Tcl_ExprObj</b> successfully evaluates the expression, it
+stores a pointer to the Tcl object containing the expression's
+value at <i>*resultPtrPtr</i>. In this case, the caller is
+responsible for calling <b><a href=
+"../TclLib/Object.htm">Tcl_DecrRefCount</a></b> to decrement the
+object's reference count when it is finished with the object.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclLib/ExprLong.htm">Tcl_ExprLong</a></b>, <b><a
+href="../TclLib/ExprLong.htm">Tcl_ExprDouble</a></b>, <b><a href=
+"../TclLib/ExprLong.htm">Tcl_ExprBoolean</a></b>, <b><a href=
+"../TclLib/ExprLong.htm">Tcl_ExprString</a></b>, <b><a href=
+"../TclLib/SetResult.htm">Tcl_GetObjResult</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#boolean">boolean</a>, <a href=
+"../Keywords/D.htm#double">double</a>, <a href=
+"../Keywords/E.htm#evaluate">evaluate</a>, <a href=
+"../Keywords/E.htm#expression">expression</a>, <a href=
+"../Keywords/I.htm#integer">integer</a>, <a href=
+"../Keywords/O.htm#object">object</a>, <a href=
+"../Keywords/S.htm#string">string</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1996-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

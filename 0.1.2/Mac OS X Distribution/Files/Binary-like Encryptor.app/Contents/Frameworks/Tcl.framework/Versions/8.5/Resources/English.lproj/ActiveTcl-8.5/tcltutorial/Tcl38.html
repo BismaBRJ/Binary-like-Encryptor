@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Command line arguments and environment strings</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Command line arguments and environment
+strings</h1>
+
+<div class="nav"><a href="Tcl37.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl39.html">Next
+lesson</a></div>
+
+<p>Scripts are much more useful if they can be called with
+different values in the command line.</p>
+
+<p>For instance, a script that extracts a particular value from a
+file could be written so that it prompts for a file name, reads the
+file name, and then extracts the data. Or, it could be written to
+loop through as many files as are in the command line, and extract
+the data from each file, and print the file name and data.</p>
+
+<p>The second method of writing the program can easily be used from
+other scripts. This makes it more useful.</p>
+
+<p>The number of command line arguments to a Tcl script is passed
+as the global variable <code class="keyword">argc</code> . The name
+of a Tcl script is passed to the script as the global variable
+<code class="keyword">argv0</code> , and the rest of the command
+line arguments are passed as a list in <code class=
+"keyword">argv</code>. The name of the executable that runs the
+script, such as <code class="keyword">tclsh</code> is given by the
+command <code class="keyword">info nameofexecutable</code></p>
+
+<p>Another method of passing information to a script is with
+<strong>environment variables</strong>. For instance, suppose you
+are writing a program in which a user provides some sort of comment
+to go into a record. It would be friendly to allow the user to edit
+their comments in their favorite editor. If the user has defined an
+<code class="keyword">EDITOR</code> environment variable, then you
+can invoke that editor for them to use.</p>
+
+<p>Environment variables are available to Tcl scripts in a global
+associative array <code class="keyword">env</code> . The index into
+<code class="keyword">env</code> is the name of the environment
+variable. The command <code>puts&nbsp;"$env(PATH)"</code> would
+print the contents of the <code class="keyword">PATH</code>
+environment variable.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+puts "There are $argc arguments to this script"
+puts "The name of this script is $argv0"
+if {$argc &gt; 0} {puts "The other arguments are: $argv" }
+
+puts "You have these environment variables set:"
+foreach index [array names env] {
+    puts "$index: $env($index)"
+}
+</pre>
+
+<div class="nav"><a href="Tcl37.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl39.html">Next
+lesson</a></div>
+</body>
+</html>
+

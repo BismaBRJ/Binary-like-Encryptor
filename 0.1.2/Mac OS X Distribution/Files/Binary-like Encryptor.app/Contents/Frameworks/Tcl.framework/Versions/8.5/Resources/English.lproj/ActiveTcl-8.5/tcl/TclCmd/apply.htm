@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - apply manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> apply</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+apply - Apply an anonymous function 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>apply</b> <i>func</i> ?<i>arg1 arg2 ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The command <b>apply</b> applies the function <i>func</i> to the
+arguments <i>arg1 arg2 ...</i> and returns the result. 
+
+<p>The function <i>func</i> is a two element list <i>{args
+body}</i> or a three element list <i>{args body namespace}</i> (as
+if the <b><a href="../TclCmd/list.htm">list</a></b> command had
+been used). The first element <i>args</i> specifies the formal
+arguments to <i>func</i>. The specification of the formal arguments
+<i>args</i> is shared with the <b><a href=
+"../TclCmd/proc.htm">proc</a></b> command, and is described in
+detail in the corresponding manual page.</p>
+
+<p>The contents of <i>body</i> are executed by the Tcl interpreter
+after the local variables corresponding to the formal arguments are
+given the values of the actual parameters <i>arg1 arg2 ...</i>.
+When <i>body</i> is being executed, variable names normally refer
+to local variables, which are created automatically when referenced
+and deleted when <b>apply</b> returns. One local variable is
+automatically created for each of the function's arguments. Global
+variables can only be accessed by invoking the <b><a href=
+"../TclCmd/global.htm">global</a></b> command or the <b><a href=
+"../TclCmd/upvar.htm">upvar</a></b> command. Namespace variables
+can only be accessed by invoking the <b><a href=
+"../TclCmd/variable.htm">variable</a></b> command or the <b><a
+href="../TclCmd/upvar.htm">upvar</a></b> command.</p>
+
+<p>The invocation of <b>apply</b> adds a call frame to Tcl's
+evaluation stack (the stack of frames accessed via <b><a href=
+"../TclCmd/uplevel.htm">uplevel</a></b>). The execution of
+<i>body</i> proceeds in this call frame, in the namespace given by
+<i>namespace</i> or in the global namespace if none was specified.
+If given, <i>namespace</i> is interpreted relative to the global
+namespace even if its name does not start with
+&ldquo;::&rdquo;.</p>
+
+<p>The semantics of <b>apply</b> can also be described by:</p>
+
+<pre>
+proc apply {fun args} {
+   set len [llength $fun]
+   if {($len &lt; 2) || ($len &gt; 3)} {
+      error "can't interpret \"$fun\" as anonymous function"
+   }
+   lassign $fun argList body ns
+   set name ::$ns::[getGloballyUniqueName]
+   set body0 {
+      rename [lindex [info level 0] 0] {}
+   }
+   proc $name $argList ${body0}$body
+   set code [catch {uplevel 1 $name $args} res opt]
+   return -options $opt $res
+}
+</pre>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+This shows how to make a simple general command that applies a
+transformation to each element of a list. 
+
+<pre>
+proc map {lambda list} {
+   set result {}
+   foreach item $list {
+      lappend result [<b>apply</b> $lambda $item]
+   }
+   return $result
+}
+map {x {return [string length $x]:$x}} {a bb ccc dddd}
+      <i><font size="+1">&rarr;</font> 1:a 2:bb 3:ccc 4:dddd</i>
+map {x {expr {$x**2 + 3*$x - 2}}} {-4 -3 -2 -1 0 1 2 3 4}
+      <i><font size="+1">&rarr;</font> 2 -2 -4 -4 -2 2 8 16 26</i>
+</pre>
+
+<p>The <b>apply</b> command is also useful for defining callbacks
+for use in the <b><a href="../TclCmd/trace.htm">trace</a></b>
+command:</p>
+
+<pre>
+set vbl "123abc"
+trace add variable vbl write {<b>apply</b> {{v1 v2 op} {
+   upvar 1 $v1 v
+   puts "updated variable to \"$v\""
+}}}
+set vbl 123
+set vbl abc
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/proc.htm">proc</a></b>, <b><a href=
+"../TclCmd/uplevel.htm">uplevel</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#argument">argument</a>, <a href=
+"../Keywords/P.htm#procedure">procedure</a>, <a href=
+"../Keywords/A.htm#anonymous function">anonymous function</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2006 Miguel Sofer Copyright &copy; 2006 Donal K.
+Fellows</div>
+</body>
+</html>
+

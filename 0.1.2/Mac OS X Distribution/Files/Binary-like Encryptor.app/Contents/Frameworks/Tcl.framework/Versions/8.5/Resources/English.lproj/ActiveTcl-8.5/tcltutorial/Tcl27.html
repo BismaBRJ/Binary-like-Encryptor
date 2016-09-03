@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Learning the existence of commands and variables ? -
+info</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Learning the existence of commands and variables
+? - info</h1>
+
+<div class="nav"><a href="Tcl26.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl28.html">Next
+lesson</a></div>
+
+<p>Tcl provides a number of commands for <i>introspection</i> -
+commands that tell what is going on in your program, what the
+implementation is of your procedures, which variables have been set
+and so on.</p>
+
+<p>The <code class="keyword">info</code> command allows a Tcl
+program to obtain information from the Tcl interpreter. The next
+three lessons cover aspects of the <code class=
+"keyword">info</code> command. (Other commands allowing
+introspection involve: traces, namespaces, commands scheduled for
+later execution via the <code class="keyword">after</code> command
+and so on.)</p>
+
+<p>This lesson covers the <code class="keyword">info</code>
+subcommands that return information about which procs, variables,
+or commands are currently in existence in this instance of the
+interpreter. By using these subcommands you can determine if a
+variable or proc exists before you try to access it.</p>
+
+<p>The code below shows how to use the <code class=
+"keyword">info</code> exists command to make an incr that will
+never return a <i>no such variable</i> error, since it checks to be
+certain that the variable exists before incrementing it:</p>
+
+<pre class="example">
+proc safeIncr {val {amount 1}} {
+    upvar $val v
+    if { [info exists v] } {
+        incr v $amount
+    }  else {
+        set v $amount
+    }
+}
+</pre>
+
+<p><b>Info commands that return lists of visible commands and
+variables.</b></p>
+
+<p>Almost all these commands take a pattern that follow the <code
+class="keyword">string</code> <code class="arg">match</code> rules.
+If <code class="arg">pattern</code> is not provided, a list of all
+items is returned (as if the pattern was "*").</p>
+
+<dl>
+<dt><code class="keyword">info</code> <code class=
+"arg">commands</code> <code class="arg">?pattern?</code></dt>
+
+<dd>Returns a list of the commands, both internal commands and
+procedures, whose names match <code class=
+"arg">pattern</code>.</dd>
+
+<dt><code class="keyword">info</code> <code class=
+"arg">exists</code> <code class="arg">varName</code></dt>
+
+<dd>Returns 1 if <code class="arg">varName</code> exists as a
+variable (or an array element) in the current context, otherwise
+returns 0.</dd>
+
+<dt><code class="keyword">info</code> <code class=
+"arg">functions</code> <code class="arg">?pattern?</code></dt>
+
+<dd>Returns a list of the mathematical functions available via the
+<code class="keyword">expr</code> command that match <code class=
+"arg">pattern</code>.</dd>
+
+<dt><code class="keyword">info</code> <code class=
+"arg">globals</code> <code class="arg">?pattern?</code></dt>
+
+<dd>Returns a list of the global variables that match <code class=
+"arg">pattern</code>.</dd>
+
+<dt><code class="keyword">info</code> <code class=
+"arg">locals</code> <code class="arg">?pattern?</code></dt>
+
+<dd>Returns a list of the local variables that match <code class=
+"arg">pattern</code>.</dd>
+
+<dt><code class="keyword">info</code> <code class=
+"arg">procs</code> <code class="arg">?pattern?</code></dt>
+
+<dd>Returns a list of the Tcl procedures that match <code class=
+"arg">pattern</code>.</dd>
+
+<dt><code class="keyword">info</code> <code class="arg">vars</code>
+<code class="arg">?pattern?</code></dt>
+
+<dd>Returns a list of the local and global variables that match
+<code class="arg">pattern</code>.</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+if {[info procs safeIncr] eq "safeIncr"} {
+     safeIncr a
+}
+
+puts "After calling SafeIncr with a non existent variable: $a"
+
+set a 100
+safeIncr a
+puts "After calling SafeIncr with a variable with a value of 100: $a"
+
+safeIncr b -3
+puts "After calling safeIncr with a non existent variable by -3: $b"
+
+set b 100
+safeIncr b -3
+puts "After calling safeIncr with a variable whose value is 100 by -3: $b"
+
+puts "\nThese variables have been defined: [lsort [info vars]]"
+puts "\nThese globals have been defined:   [lsort [info globals]]"
+
+set exist [info procs localproc]
+if {$exist == ""} {
+    puts "\nlocalproc does not exist at point 1"
+}
+
+proc localproc {} {
+    global argv
+
+    set loc1 1
+    set loc2 2
+    puts "\nLocal variables accessible in this proc are: [lsort [info locals]]"
+    puts "\nVariables accessible from this proc are:     [lsort [info vars]]"
+    puts "\nGlobal variables visible from this proc are: [lsort [info globals]]"
+}
+
+set exist [info procs localproc]
+if {$exist != ""} {
+    puts "localproc does exist at point 2"
+}
+
+localproc
+</pre>
+
+<div class="nav"><a href="Tcl26.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl28.html">Next
+lesson</a></div>
+</body>
+</html>
+

@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Adding &amp; Deleting members of a list</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Adding &amp; Deleting members of a list</h1>
+
+<div class="nav"><a href="Tcl14.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl16.html">Next
+lesson</a></div>
+
+<p>The commands for adding and deleting list members are:</p>
+
+<dl>
+<dt><code class="keyword">concat</code> <code class="arg">?arg1
+arg2 ... argn?</code></dt>
+
+<dd>Concatenates the <code class="arg">args</code> into a single
+list. It also eliminates leading and trailing spaces in the args
+and adds a single separator space between args. The <code class=
+"arg">args</code> to <code class="keyword">concat</code> may be
+either individual elements, or lists. If an <code class=
+"arg">arg</code> is already a list, the contents of that list is
+concatenated with the other <code class="arg">args</code>.</dd>
+
+<dt><code class="keyword">lappend</code> <code class=
+"arg">listName</code> <code class="arg">?arg1 arg2 ...
+argn?</code></dt>
+
+<dd>Appends the <code class="arg">args</code> to the list <code
+class="arg">listName</code> treating each <code class=
+"arg">arg</code> as a list element.</dd>
+
+<dt><code class="keyword">linsert</code> <code class=
+"arg">listName</code> <code class="arg">index</code> <code class=
+"arg">arg1</code> <code class="arg">?arg2 ... argn?</code></dt>
+
+<dd>Returns a new list with the new list elements inserted just
+before the <code class="arg">index</code> th element of <code
+class="arg">listName</code>. Each element argument will become a
+separate element of the new list. If index is less than or equal to
+zero, then the new elements are inserted at the beginning of the
+list. If index has the value <code class="arg">end</code> , or if
+it is greater than or equal to the number of elements in the list,
+then the new elements are appended to the list.</dd>
+
+<dt><code class="keyword">lreplace</code> <code class=
+"arg">listName</code> <code class="arg">first</code> <code class=
+"arg">last</code> <code class="arg">?arg1 ... argn?</code></dt>
+
+<dd>Returns a new list with N elements of <code class=
+"arg">listName</code> replaced by the <code class=
+"arg">args</code>. If <code class="arg">first</code> is less than
+or equal to 0, lreplace starts replacing from the first element of
+the list. If <code class="arg">first</code> is greater than the end
+of the list, or the word <b>end</b>, then lreplace behaves like
+lappend. If there are fewer <code class="arg">args</code> than the
+number of positions between <code class="arg">first</code> and
+<code class="arg">last</code>, then the positions for which there
+are no <code class="arg">args</code> are deleted.</dd>
+
+<dt><code class="keyword">lset</code> <code class=
+"arg">varName</code> <code class="arg">index</code> <code class=
+"arg">newValue</code></dt>
+
+<dd>The <code class="keyword">lset</code> command can be used to
+set elements of a list directly, instead of using <code class=
+"keyword">lreplace</code>.</dd>
+</dl>
+
+<p>Lists in Tcl are the right data structure to use when you have
+an arbitrary number of things, and you'd like to access them
+according to their order in the list. In C, you would use an array.
+In Tcl, arrays are associated arrays - hash tables, as you'll see
+in the coming sections. If you want to have a collection of things,
+and refer to the Nth thing (give me the 10th element in this group
+of numbers), or go through them in order via <code class=
+"keyword">foreach</code>.</p>
+
+<p>Take a look at the example code, and pay special attention to
+the way that sets of characters are grouped into single list
+elements.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set b [list a b {c d e} {f {g h}}]
+puts "Treated as a list: $b\n"
+
+set b [split "a b {c d e} {f {g h}}"]
+puts "Transformed by split: $b\n"
+
+set a [concat a b {c d e} {f {g h}}]
+puts "Concated: $a\n"
+
+lappend a {ij K lm}                        ;# Note: {ij K lm} is a single element
+puts "After lappending: $a\n"
+
+set b [linsert $a 3 "1 2 3"]               ;# "1 2 3" is a single element
+puts "After linsert at position 3: $b\n"
+
+set b [lreplace $b 3 5 "AA" "BB"]
+puts "After lreplacing 3 positions with 2 values at position 3: $b\n"
+</pre>
+
+<div class="nav"><a href="Tcl14.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl16.html">Next
+lesson</a></div>
+</body>
+</html>
+

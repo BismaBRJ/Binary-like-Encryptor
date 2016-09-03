@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>More Debugging - trace</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">More Debugging - trace</h1>
+
+<div class="nav"><a href="Tcl36.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl38.html">Next
+lesson</a></div>
+
+<p>When you are debugging Tcl code, sometimes it's useful to be
+able to trace either the execution of the code, or simply inspect
+the state of a variable when various things happen to it. The <code
+class="keyword">trace</code> command provides these facilities. It
+is a very powerful command that can be used in many interesting
+ways. It also risks being abused, and can lead to very difficult to
+understand code if it is used improperly (for instance, variables
+seemingly changing magically), so use it with care.</p>
+
+<p>There are three principle operations that may be performed with
+the trace command:</p>
+
+<ul>
+<li><code class="keyword">add</code>, which has the general form:
+<code class="keyword">trace</code> <code class="keyword">add</code>
+<code class="arg">type</code> <code class="arg">ops</code> <code
+class="arg">?args?</code></li>
+
+<li><code class="keyword">info</code>, which has the general form:
+<code class="keyword">trace</code> <code class=
+"keyword">info</code> <code class="arg">type</code> <code class=
+"arg">name</code></li>
+
+<li><code class="keyword">remove</code>, which has the general
+form: <code class="keyword">trace</code> <code class=
+"keyword">remove</code> <code class="arg">type</code> <code class=
+"arg">name</code> <code class="arg">opList</code> <code class=
+"arg">command</code></li>
+</ul>
+
+<p>Which are for adding traces, retrieving information about
+traces, and removing traces, respectively. Traces can be added to
+three kinds of "things":</p>
+
+<ul>
+<li><code class="keyword">variable</code> - Traces added to
+variables are called when some event occurs to the variable, such
+as being written to or read.</li>
+
+<li><code class="keyword">command</code> - Traces added to commands
+are executed whenever the named command is renamed or deleted.</li>
+
+<li><code class="keyword">execution</code> - Traces on "execution"
+are called whenever the named command is run.</li>
+</ul>
+
+<p>Traces on variables are invoked on four separate conditions -
+when a variable is accessed or modified via the <code class=
+"keyword">array</code> command, when the variable is read or
+written, or when it's unset. For instance, to set a trace on a
+variable so that when it's written to, the value doesn't change,
+you could do this:</p>
+
+<pre class="example">
+proc vartrace {oldval varname element op} {
+    upvar $varname localvar
+    set localvar $oldval
+}
+
+set tracedvar 1
+trace add variable tracedvar write [list vartrace $tracedvar]
+
+set tracedvar 2
+puts "tracedvar is $tracedvar"
+</pre>
+
+<p>In the above example, we create a proc that takes four
+arguments. We supply the first, the old value of the variable,
+because write traces are triggered <strong>after</strong> the
+variable's value has already been changed, so we need to preserve
+the original value ourselves. The other three arguments are the
+variable's name, the element name if the variable is an array
+(which it isn't in our example), and the operation to trace - in
+this case, <code class="keyword">write</code>. When the trace is
+called, we simply set the variable's value back to its old value.
+We could also do something like generate an error, thus warning
+people that this variable shouldn't be written to. Infact, this
+would probably be better. If someone else is attempting to
+understand your program, they could become quite confused when they
+find that a simple <code class="keyword">set</code> command no
+longer functions!</p>
+
+<p>The command and execution traces are intended for expert users -
+perhaps those writing debuggers for Tcl in Tcl itself - and are
+therefore not covered in this tutorial, see the trace <!-- FIXME
+      --> man page for further information.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+proc traceproc {variableName arrayElement operation} {
+    set op(write) Write
+    set op(unset) Unset
+    set op(read) Read
+
+    set level [info level]
+    incr level -1
+    if {$level &gt; 0} {
+    set procid [info level $level]
+    } else {
+    set procid "main"
+    }
+
+    if {![string match $arrayElement ""]} {
+    puts "TRACE: $op($operation) $variableName($arrayElement) in $procid"
+    } else {
+    puts "TRACE: $op($operation) $variableName in $procid"
+    }
+}
+
+proc testProc {input1 input2} {
+    upvar $input1 i
+    upvar $input2 j
+
+    set i 2
+    set k $j
+}
+
+trace add variable i1 write traceproc
+trace add variable i2 read traceproc
+trace add variable i2 write traceproc
+
+set i2 "testvalue"
+
+puts "\ncall testProc"
+testProc i1 i2
+
+puts "\nTraces on i1: [trace info variable i1]"
+puts "Traces on i2: [trace info variable i2]\n"
+
+trace remove variable i2 read traceproc
+puts "Traces on i2 after vdelete: [trace info variable i2]"
+
+puts "\ncall testProc again"
+testProc i1 i2
+</pre>
+
+<div class="nav"><a href="Tcl36.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl38.html">Next
+lesson</a></div>
+</body>
+</html>
+

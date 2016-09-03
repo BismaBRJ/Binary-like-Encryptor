@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - gets manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> gets</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+gets - Read a line from a channel 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>gets</b> <i>channelId</i> ?<i>varName</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command reads the next line from <i>channelId</i>, returns
+everything in the line up to (but not including) the end-of-line
+character(s), and discards the end-of-line character(s). 
+
+<p><i>ChannelId</i> must be an identifier for an open channel such
+as the Tcl standard input channel (<b>stdin</b>), the return value
+from an invocation of <b><a href="../TclCmd/open.htm">open</a></b>
+or <b><a href="../TclCmd/socket.htm">socket</a></b>, or the result
+of a channel creation command provided by a Tcl extension. The
+channel must have been opened for input.</p>
+
+<p>If <i>varName</i> is omitted the line is returned as the result
+of the command. If <i>varName</i> is specified then the line is
+placed in the variable by that name and the return value is a count
+of the number of characters returned.</p>
+
+<p>If end of file occurs while scanning for an end of line, the
+command returns whatever input is available up to the end of file.
+If <i>channelId</i> is in nonblocking mode and there is not a full
+line of input available, the command returns an empty string and
+does not consume any input. If <i>varName</i> is specified and an
+empty string is returned in <i>varName</i> because of end-of-file
+or because of insufficient data in nonblocking mode, then the
+return count is -1. Note that if <i>varName</i> is not specified
+then the end-of-file and no-full-line-available cases can produce
+the same results as if there were an input line consisting only of
+the end-of-line character(s). The <b><a href=
+"../TclCmd/eof.htm">eof</a></b> and <b><a href=
+"../TclCmd/fblocked.htm">fblocked</a></b> commands can be used to
+distinguish these three cases.</p>
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+This example reads a file one line at a time and prints it out with
+the current line number attached to the start of each line. 
+
+<pre>
+set chan [open "some.file.txt"]
+set lineNumber 0
+while {[<b>gets</b> $chan line] &gt;= 0} {
+    puts "[incr lineNumber]: $line"
+}
+close $chan
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/file.htm">file</a></b>, <b><a href=
+"../TclCmd/eof.htm">eof</a></b>, <b><a href=
+"../TclCmd/fblocked.htm">fblocked</a></b>, <b><a href=
+"../TclLib/StdChannels.htm">Tcl_StandardChannels</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#blocking">blocking</a>, <a href=
+"../Keywords/C.htm#channel">channel</a>, <a href=
+"../Keywords/E.htm#end of file">end of file</a>, <a href=
+"../Keywords/E.htm#end of line">end of line</a>, <a href=
+"../Keywords/L.htm#line">line</a>, <a href=
+"../Keywords/N.htm#nonblocking">nonblocking</a>, <a href=
+"../Keywords/R.htm#read">read</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

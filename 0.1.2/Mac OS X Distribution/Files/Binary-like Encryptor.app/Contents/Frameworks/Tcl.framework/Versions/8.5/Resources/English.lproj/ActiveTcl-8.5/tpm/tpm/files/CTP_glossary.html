@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>teapot-glossary - TEA Package Management</title>
+<link rel="stylesheet" href="../aspn.css" type="text/css">
+</head>
+<body>
+<div class="doctools">
+<hr>
+[ 
+
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+ <a href="../../toc.html">Main Table Of Contents</a> | <a href=
+"../toc.html">Table Of Contents</a> | <a href=
+"../../index.html">Keyword Index</a> ] 
+
+<hr>
+<h1 class="title">teapot-glossary(n) 1.0 tpm "TEA Package
+Management"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>teapot-glossary - TEApot Glossary of Terms</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">Workflows</a> 
+
+<ul>
+<li class="subsection"><a href="#subsection1">Package
+developer</a></li>
+
+<li class="subsection"><a href="#subsection2">Package user</a></li>
+</ul>
+</li>
+
+<li class="section"><a href="#section3">BUGS, IDEAS,
+FEEDBACK</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>This document is the central glossary of terms used throughout
+the documentation of the TEApot package management.</p>
+
+<p>The list is sorted alphabetically.</p>
+
+<dl class="definitions">
+<dt><i class="term">admin client</i></dt>
+
+<dd>
+<p>The application for the administrative management of <i class=
+"term"><a href="../../index.html#key23">opaque</a></i> <i class=
+"term">local</i> repositories. Its name is <b class="syscmd"><a
+href="CTP_teastir.html">teapot-admin</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../../index.html#key27">application</a></i></dt>
+
+<dd>
+<p>An application is one class of entities which can be stored in a
+repository. It is, as the name suggests, an executable script (or
+starkit), or a binary executable (starpack), although extended with
+TEApot meta data.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../../index.html#key4">archive</a></i></dt>
+
+<dt><i class="term"><a href="../../index.html#key35">archive
+repository</a></i></dt>
+
+<dd>
+<p>An <i class="term"><a href=
+"../../index.html#key4">archive</a></i> is a <i class="term"><a
+href="../../index.html#key7">repository</a></i> where a person or
+organization stores entities and their meta data for distribution
+to and access by users of said entities.</p>
+
+<p>All types of repositories can be used as archives, however <i
+class="term"><a href="../../index.html#key23">opaque</a></i>
+repositories are the most general.</p>
+
+<p>The distinction between <i class="term"><a href=
+"../../index.html#key4">archive</a></i> and <i class="term"><a
+href="../../index.html#key21">installation</a></i> repository is
+mainly made by <b class="syscmd"><a href=
+"CTP_teacup.html">teacup</a></b>, the <i class="term"><a href=
+"../../index.html#key31">repository client</a></i>. Archives are
+the origin of entities, installations the destination.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../../index.html#key14">client</a></i></dt>
+
+<dd>
+<p>See <i class="term"><a href="../../index.html#key31">repository
+client</a></i>.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../../index.html#key28">daemon</a></i></dt>
+
+<dd>
+<p>See <i class="term"><a href="../../index.html#key44">repository
+server</a></i>.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../../index.html#key30">entity</a></i></dt>
+
+<dd>
+<p>The general term used for all things which can be stored in a
+repository. Currently these are <i class="term">packages</i> and <i
+class="term">applications</i>.</p>
+</dd>
+
+<dt><i class="term"><a href="../../index.html#key43">filesystem
+repository</a></i></dt>
+
+<dd>
+<p>See <i class="term"><a href="../../index.html#key36">local
+repository</a></i>.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../../index.html#key21">installation</a></i></dt>
+
+<dt><i class="term"><a href="../../index.html#key34">installation
+repository</a></i></dt>
+
+<dd>
+<p>An <i class="term"><a href=
+"../../index.html#key21">installation</a></i> is a <i class=
+"term"><a href="../../index.html#key7">repository</a></i> where a
+person puts the packages which should be automatically used by the
+tcl shells that person has access to. The above implies that
+installations are <i class="term"><a href=
+"../../index.html#key13">transparent</a></i> repositories, as
+otherwise a tcl shell has no documented way of accessing and
+loading the packages in the repository.</p>
+
+<p>Installations are managed by the <i class="term"><a href=
+"../../index.html#key31">repository client</a></i>. By default this
+application sets up a standard installation in the directory "<b
+class="file">~/.teapot/repository</b>", however other installations
+can be accessed as well, by overriding the default through command
+line options. <em>Take note</em> that the client is restricted to
+the handling of <i class="term">local</i> installations, as implied
+by the previous sentence.</p>
+</dd>
+
+<dt><i class="term"><a href="../../index.html#key36">local
+repository</a></i></dt>
+
+<dd>
+<p>A <i class="term">local</i> repository is a <i class="term"><a
+href="../../index.html#key7">repository</a></i> which is accessible
+to a tool through the filesystem of the host the tool is executed
+on. In other words, this is equivalent to a <i class="term"><a
+href="../../index.html#key43">filesystem repository</a></i>.</p>
+</dd>
+
+<dt><i class="term"><a href="../../index.html#key20">network
+repository</a></i></dt>
+
+<dd>
+<p>See <i class="term"><a href="../../index.html#key39">remote
+repository</a></i>.</p>
+</dd>
+
+<dt><i class="term"><a href="../../index.html#key11">meta
+data</a></i></dt>
+
+<dd>
+<p>The information associated with <i class="term">entities</i>,
+like <i class="term">packages</i>, <i class=
+"term">applications</i>, or <i class="term">profiles</i>, etc.,
+which describes the entity. In terms of a library of books this is
+the information you would find in the library catalog.</p>
+</dd>
+
+<dt><i class="term"><a href="../../index.html#key24">opaque
+repository</a></i></dt>
+
+<dd>
+<p>An <i class="term"><a href="../../index.html#key24">opaque
+repository</a></i> is a <i class="term"><a href=
+"../../index.html#key7">repository</a></i> whose internal structure
+is not disclosed to the users.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../../index.html#key26">package</a></i></dt>
+
+<dd>
+<p>A package is one class of entities which can be stored in a
+repository. It is, as the name suggests, simply a Tcl package,
+extended with TEApot meta data.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../../index.html#key18">profile</a></i></dt>
+
+<dd>
+<p>A <i class="term"><a href=
+"../../index.html#key18">profile</a></i> is a named collection of
+entities. It consists of only TEApot meta data. The referenced
+entities are specified as its dependencies, required, or
+recommended.</p>
+
+<p>Profiles are never installed, only their dependencies will be
+(If not profiles themselves). This makes them repository-level
+bundles of packages and applications, and an easy way to name and
+install larger collections.</p>
+</dd>
+
+<dt><i class="term"><a href="../../index.html#key39">remote
+repository</a></i></dt>
+
+<dd>
+<p>A <i class="term"><a href="../../index.html#key39">remote
+repository</a></i> is a <i class="term"><a href=
+"../../index.html#key7">repository</a></i> which is accessible to a
+tool through the network. In other words, this is equivalent to a
+<i class="term"><a href="../../index.html#key20">network
+repository</a></i>.</p>
+
+<p>Most often this means that the repository will be under the
+control of an external person, company, etc.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../../index.html#key7">repository</a></i></dt>
+
+<dd>
+<p>A repository is a collection of entities and their meta data.
+Repositories can be classified according to their</p>
+
+<ol class="enumerated">
+<li>
+<p>Internal structure: <i class="term"><a href=
+"../../index.html#key23">opaque</a></i> vs. <i class="term"><a
+href="../../index.html#key13">transparent</a></i>.</p>
+</li>
+
+<li>
+<p>Location (relative to a tool using it): <i class=
+"term">local</i> vs. <i class="term"><a href=
+"../../index.html#key25">remote</a></i>.</p>
+</li>
+
+<li>
+<p>Type of access: <i class="term"><a href=
+"../../index.html#key42">filesystem</a></i> vs. <i class="term"><a
+href="../../index.html#key33">network</a></i>.</p>
+</li>
+
+<li>
+<p>Type of use by a tool: <i class="term"><a href=
+"../../index.html#key4">archive</a></i> vs. <i class="term"><a
+href="../../index.html#key21">installation</a></i>.</p>
+</li>
+</ol>
+</dd>
+
+<dt><i class="term"><a href="../../index.html#key31">repository
+client</a></i></dt>
+
+<dd>
+<p>The application for the management of <i class=
+"term">installations</i>, retrieving and installing the requested
+packages from <i class="term">archives</i>. This is <b class=
+"syscmd"><a href="CTP_teacup.html">teacup</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../../index.html#key38">repository
+daemon</a></i></dt>
+
+<dt><i class="term"><a href="../../index.html#key44">repository
+server</a></i></dt>
+
+<dd>
+<p>The application for the export of <i class="term"><a href=
+"../../index.html#key23">opaque</a></i> <i class="term">local</i>
+repositories as <i class="term">network repositories</i>. This is
+<b class="syscmd"><a href="CTP_teapot.html">teapot</a></b>.</p>
+</dd>
+
+<dt><b class="cmd"><a href="CTP_teacup.html">teacup</a></b></dt>
+
+<dd>
+<p>See <i class="term"><a href="../../index.html#key31">repository
+client</a></i>.</p>
+</dd>
+
+<dt><b class="cmd"><a href="CTP_teapot.html">teapot</a></b></dt>
+
+<dd>
+<p>See <i class="term"><a href="../../index.html#key44">repository
+server</a></i>.</p>
+</dd>
+
+<dt><b class="cmd"><a href=
+"CTP_teastir.html">teapot-admin</a></b></dt>
+
+<dd>
+<p>See <i class="term"><a href=
+"../../index.html#key29">admin-client</a></i>.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../../index.html#key10">server</a></i></dt>
+
+<dd>
+<p>See <i class="term"><a href="../../index.html#key44">repository
+server</a></i>.</p>
+</dd>
+
+<dt><i class="term"><a href="../../index.html#key32">transparent
+repository</a></i></dt>
+
+<dd>
+<p>A <i class="term"><a href="../../index.html#key32">transparent
+repository</a></i> is a <i class="term"><a href=
+"../../index.html#key7">repository</a></i> whose internal structure
+is</p>
+
+<ol class="enumerated">
+<li>
+<p>publicly documented and accessible to users, and</p>
+</li>
+
+<li>
+<p>specified such that a tcl shell can directly load packages which
+have been stored in the repository.</p>
+</li>
+</ol>
+</dd>
+</dl>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">Workflows</a></h2>
+
+<p>The system currently considers only two flows, for developers
+and users of packages.</p>
+
+<div id="subsection1" class="subsection">
+<h3><a name="subsection1">Package developer</a></h3>
+
+<pre class="example">
+               (1)           (2)
++---------+    +--------+    +--------+    /------------\ 
+| Develop | -&gt; | Build  | -&gt; | Upload | -&gt; | Repository |
+| Code    |    | Entity |    | Entity |    |            |
++---------+    +--------+    +--------+    \------------/
+</pre>
+
+<p>Step (1) is handled by <b class="cmd">teapot-pkggen</b>, and
+step (2) by <b class="cmd"><a href=
+"CTP_teastir.html">teapot-admin</a></b>. The repository is <i
+class="term">local</i> and <i class="term"><a href=
+"../../index.html#key23">opaque</a></i>.</p>
+</div>
+
+<div id="subsection2" class="subsection">
+<h3><a name="subsection2">Package user</a></h3>
+
+<pre class="example">
+                (3)            (4)             
+/---------\    +----------+    +---------+    /--------------\    +---------+
+| Archive | -&gt; | Retrieve | -&gt; | Unpack&amp; | -&gt; | Installation | -&gt; | Run/Use |
+|         |    | Entity   |    | Install |    |              |    |         |
+\---------/    +----------+    +---------+    \--------------/    +---------+
+</pre>
+
+<p>Steps (3) and (4) are both handled by <b class="cmd"><a href=
+"CTP_teacup.html">teacup</a></b>. The <i class="term"><a href=
+"../../index.html#key21">installation</a></i> repository is <i
+class="term">local</i> and <i class="term"><a href=
+"../../index.html#key13">transparent</a></i>.</p>
+</div>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">BUGS, IDEAS, FEEDBACK</a></h2>
+
+<p>This document will undoubtedly contain bugs and other problems.
+Please report such at the <a href=
+"http://bugs.activestate.com/query.cgi?set_product=ActiveTcl">ActiveState
+ActiveTcl Bug Tracker</a>. The relevant component is
+<em>teapot</em>. Please also report any ideas for enhancements you
+may have for either application and/or documentation.</p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="CTP_teacup.html">teacup</a>, <a href=
+"CTP_teapot.html">teapot</a>, <a href=
+"CTP_teastir.html">teapot-admin</a>, <a href=
+"CTP_metadata.html">teapot-md</a>, <a href=
+"CTP_teazip.html">teapot-pkg</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../../index.html#key3">TEA</a>, <a href=
+"../../index.html#key2">TEAPOT</a>, <a href=
+"../../index.html#key29">admin-client</a>, <a href=
+"../../index.html#key27">application</a>, <a href=
+"../../index.html#key4">archive</a>, <a href=
+"../../index.html#key35">archive repository</a>, <a href=
+"../../index.html#key14">client</a>, <a href=
+"../../index.html#key28">daemon</a>, <a href=
+"../../index.html#key30">entity</a>, <a href=
+"../../index.html#key42">filesystem</a>, <a href=
+"../../index.html#key43">filesystem repository</a>, <a href=
+"../../index.html#key40">glossary</a>, <a href=
+"../../index.html#key21">installation</a>, <a href=
+"../../index.html#key34">installation repository</a>, <a href=
+"../../index.html#key36">local repository</a>, <a href=
+"../../index.html#key11">meta data</a>, <a href=
+"../../index.html#key33">network</a>, <a href=
+"../../index.html#key20">network repository</a>, <a href=
+"../../index.html#key23">opaque</a>, <a href=
+"../../index.html#key24">opaque repository</a>, <a href=
+"../../index.html#key26">package</a>, <a href=
+"../../index.html#key1">package management</a>, <a href=
+"../../index.html#key18">profile</a>, <a href=
+"../../index.html#key25">remote</a>, <a href=
+"../../index.html#key39">remote repository</a>, <a href=
+"../../index.html#key7">repository</a>, <a href=
+"../../index.html#key31">repository client</a>, <a href=
+"../../index.html#key38">repository daemon</a>, <a href=
+"../../index.html#key44">repository server</a>, <a href=
+"../../index.html#key10">server</a>, <a href=
+"../../index.html#key19">teacup</a>, <a href=
+"../../index.html#key41">teapot</a>, <a href=
+"../../index.html#key22">teapot-admin</a>, <a href=
+"../../index.html#key37">terms</a>, <a href=
+"../../index.html#key13">transparent</a>, <a href=
+"../../index.html#key32">transparent repository</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 2006-2008 ActiveState Software Inc.</p>
+</div>
+</div>
+</body>
+</html>
+

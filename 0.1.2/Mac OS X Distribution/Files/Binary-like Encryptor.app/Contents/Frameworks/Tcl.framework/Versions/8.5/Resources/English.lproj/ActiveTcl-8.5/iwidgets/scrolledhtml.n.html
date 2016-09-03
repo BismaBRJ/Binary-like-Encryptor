@@ -1,0 +1,459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>scrolledhtml - Create and manipulate a scrolled text widget
+with the capability</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>scrolledhtml - Create and manipulate a scrolled text widget
+with the capability</h1>
+
+of displaying HTML formatted documents. 
+
+<h2>SYNOPSIS</h2>
+
+<b>scrolledhtml pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- Labeledwidget &lt;- Scrolledtext &lt;-
+Scrolledhtml 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeBackground</b><br>
+<b>exportSelection</b><br>
+<b>insertBackground</b><br>
+<b>insertWidth</b><br>
+<b>repeatDelay</b><br>
+<b>selectForeground</b><br>
+</td>
+<td valign="top"><b>background</b><br>
+<b>foreground</b><br>
+<b>insertBorderWidth</b><br>
+<b>padX</b><br>
+<b>repeatInterval</b><br>
+<b>setGrid</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>highlightColor</b><br>
+<b>insertOffTime</b><br>
+<b>padY</b><br>
+<b>selectBackground</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>highlightThickness</b><br>
+<b>insertOnTime</b><br>
+<b>relief</b><br>
+<b>selectBorderWidth</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeRelief</b><br>
+</td>
+<td valign="top"><b>elementBorderWidth</b><br>
+</td>
+<td valign="top"><b>jump</b><br>
+</td>
+<td valign="top"><b>troughColor</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/scrollbar.n.html">"scrollbar"</a>
+widget manual entry for details on the above associated
+options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>spacing1</b><br>
+<b>tabs</b><br>
+</td>
+<td valign="top"><b>spacing2</b><br>
+<b>wrap</b><br>
+</td>
+<td valign="top"><b>spacing3</b><br>
+</td>
+<td valign="top"><b>state</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/text.n.html">"text"</a>
+widget manual entry for details on the above associated
+options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>labelBitmap</b><br>
+<b>labelPos</b><br>
+<b>hscrollMode</b><br>
+<b>vscrollMode</b><br>
+</td>
+<td valign="top"><b>labelFont</b><br>
+<b>labelText</b><br>
+<b>sbWidth</b><br>
+<b>width</b><br>
+</td>
+<td valign="top"><b>labelImage</b><br>
+<b>labelVariable</b><br>
+<b>scrollMargin</b><br>
+</td>
+<td valign="top"><b>labelMargin</b><br>
+<b>height</b><br>
+<b>visibleitems</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="scrolledtext.n.html">"scrolledtext"</a> class
+manual entry for details on the inherited options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>feedback</b>
+Class:                  <b>FeedBack</b>
+Command-Line Switch:    <b>-feedback</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the callback command to use
+to give feedback on current status. The command is executed in the
+form <i>command</i> <i>&lt;number of characters
+remaining&gt;</i></div>
+
+<pre>
+Name:                   <b>fixedfont</b>
+Class:                  <b>FixedFont</b>
+Command-Line Switch:    <b>-fixedfont</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the name of the font to be
+used for fixed-width character text (such as
+&lt;pre&gt;...&lt;/pre&gt; or &lt;tt&gt;...&lt;/tt&gt;.) The size,
+style, and other font attributes are determined by the format tags
+in the document. The default is courier.</div>
+
+<pre>
+Name:                   <b>fontname</b>
+Class:                  <b>FontName</b>
+Command-Line Switch:    <b>-fontname</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the name of the font to be
+used for normal-width character spaced text. The size, style, and
+other font attributes are determined by the format tags in the
+document. The default is times.</div>
+
+<pre>
+Name:                   <b>fontsize</b>
+Class:                  <b>FontSize</b>
+Command-Line Switch:    <b>-fontsize</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the general size of the
+fonts used. One of small, medium, large, or huge. The default is
+medium.</div>
+
+<pre>
+Name:                   <b>foreground</b>
+Class:                  <b>Foreground</b>
+Command-Line Switch:    <b>-foreground</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the color of text other
+than hypertext links, in any of the forms acceptable to
+<b>Tk_GetColor</b>. This value may be overridden in a particular
+document by the <i>text</i> attribute of the <b>Body</b> HTML
+tag.</div>
+
+<pre>
+Name:                   <b>link</b>
+Class:                  <b>Link</b>
+Command-Line Switch:    <b>-link</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the default color of
+hypertext links in any of the forms acceptable to
+<b>Tk_GetColor</b>. This value may be overridden in a particular
+document by the <i>link</i> attribute of the <b>Body</b> HTML tag.
+The default is blue.</div>
+
+<pre>
+Name:                   <b>linkcommand</b>
+Class:                  <b>LinkCommand</b>
+Command-Line Switch:    <b>-linkcommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the command to execute when
+the user clicks on a hypertext link. Execution is of the form
+<b>linkcommand href</b>, where <b>href</b> is the value given in
+the <i>href</i> attribute of the <b>A</b> HTML tag.</div>
+
+<pre>
+Name:                   <b>alink</b>
+Class:                  <b>alink</b>
+Command-Line Switch:    <b>-alink</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the color of hypertext
+links when the cursor is over the link in any of the forms
+acceptable to <b>Tk_GetColor</b>. The default is red.</div>
+
+<pre>
+Name:                   <b>textBackground</b>
+Class:                  <b>Background</b>
+Command-Line Switch:    <b>-textbackground</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the background color for
+the text area in any of the forms acceptable to <b>Tk_GetColor</b>.
+This value may be overridden in a particular document by the
+<i>bgcolor</i> attribute of the <b>Body</b> HTML tag.</div>
+
+<pre>
+Name:                   <b>unknownimage</b>
+Class:                  <b>UnknownImage</b>
+Command-Line Switch:    <b>-unknownimage</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the name of the image file
+to display when an <b>img</b> specified in the html document cannot
+be loaded.</div>
+
+<pre>
+Name:                   <b>update</b>
+Class:                  <b>Update</b>
+Command-Line Switch:    <b>-alink</b>
+</pre>
+
+<div style="margin-left: 2em">A boolean value indicating whether to
+call update during html rendering.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>scrolledhtml</b> command creates a scrolled text widget
+with the additional capability to display html formatted documents.
+An import method is provided to read an html document file, and a
+render method is provided to display a html formatted text
+string.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>scrolledhtml</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for scrolledhtml
+widgets: 
+
+<h2>ASSOCIATED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>bbox</b><br>
+<b>dlineinfo</b><br>
+<b>mark</b><br>
+<b>tag</b><br>
+</td>
+<td valign="top"><b>compare</b><br>
+<b>get</b><br>
+<b>scan</b><br>
+<b>window</b><br>
+</td>
+<td valign="top"><b>debug</b><br>
+<b>index</b><br>
+<b>search</b><br>
+<b>xview</b><br>
+</td>
+<td valign="top"><b>delete</b><br>
+<b>insert</b><br>
+<b>see</b><br>
+<b>yview</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/text.n.html">"text"</a>
+manual entry for details on the standard methods.</p>
+
+<h2>INHERITED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>export</b><br>
+</td>
+<td valign="top"><b>clear</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the "scrolledhtml" manual entry for details on the inherited
+methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>scrolledhtml</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>scrolledhtml</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>import</b> ?<i>option</i>? <i>href</i></dt>
+
+<dd>Load html formatted text from a file. <i>Href</i> must exist.
+If <i>option</i> is -link, <i>href</i> is assumed to be relative to
+the application's current working directory. Otherwise, <i>href</i>
+is assumed to be relative to the path of the last page loaded.
+<i>Href</i> is either a filename, or a reference of the form
+<i>filename</i>#<i>anchorname</i>. In the latter form, fIFilename
+and/or <i>anchorname</i> may be empty. If <i>filename</i> is empty,
+the current document is assumed. If <i>anchorname</i> is empty, the
+top of the document is assumed.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>pwd</b></dt>
+
+<dd>Print the current working directory of the widget, i.e. the
+directory of the last page loaded.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>render</b> <i>htmltext</i> ?<i>wd</i>?</dt>
+
+<dd>Display HTML formatted text <i>htmltext</i>. <i>Wd</i> gives
+the base path to use for all links and images in the document.
+<i>Wd</i> defaults to the application's current working
+directory.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>title</b></dt>
+
+<dd>Return the title of the current page, as given in the
+&lt;title&gt;...&lt;/title&gt; field in the document.</dd>
+</dl>
+
+<h2>HTML COMPLIANCE</h2>
+
+<p>This widget is compliant with HTML 3.2 with the following
+exceptions:</p>
+
+<p>No features requiring a connection to an http server are
+supported.</p>
+
+<p>Some image alignments aren't supported, because they are not
+supported by the text widget.</p>
+
+<p>The &lt;br&gt; attributes dealing with image alignments aren't
+supported.</p>
+
+<p>Automatic table sizing is not supported very well, due to
+limitations of the text widget</p>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ option add *textBackground white
+
+ scrolledhtml .sh -fontname helvetica -linkcommand "this import -link"
+
+ pack .sh -padx 10 -pady 10 -fill both -expand yes
+
+ .sh import ~/public_html/index.html
+</pre>
+
+<h2>BUGS</h2>
+
+<div style="margin-left: 2em">Cells in a table can be caused to
+overlap. ex: &lt;table border width="100%"&gt;
+&lt;tr&gt;&lt;td&gt;cell1&lt;/td&gt;&lt;td align=right
+rowspan=2&gt;cell2&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td
+colspan=2&gt;cell3 w/ overlap&lt;/td&gt; &lt;/table&gt; It hasn't
+been fixed because 1) it's a pain to fix, 2) it will slow tables
+down by a significant amount, and 3) netscape has the same bug, as
+of V3.01.</div>
+
+<h2>ACKNOWLEDGEMENTS</h2>
+
+Sam Shen 
+
+<div style="margin-left: 2em">This code is based largely on his
+tkhtml.tcl code from tk inspect. Tkhtml is copyright 1995 Lawrence
+Berkeley Laboratory.</div>
+
+<h2>AUTHOR</h2>
+
+Kris Raney 
+
+<h2>KEYWORDS</h2>
+
+scrolledhtml, html, text, widget
+</body>
+</html>
+

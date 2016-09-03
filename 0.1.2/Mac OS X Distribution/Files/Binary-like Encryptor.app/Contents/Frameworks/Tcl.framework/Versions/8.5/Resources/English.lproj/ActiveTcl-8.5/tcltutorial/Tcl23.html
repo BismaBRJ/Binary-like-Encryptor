@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>More On Arrays - Iterating and use in procedures</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">More Array Commands - Iterating and use in
+procedures</h1>
+
+<div class="nav"><a href="Tcl22.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl23a.html">Next
+lesson</a></div>
+
+Often you will want to loop through the contents of an associative
+array - without having to specify the elements explicitly. For this
+the <code class="keyword">array names</code> and <code class=
+"keyword">array get</code> commands are very useful. With both you
+can give a (glob-style) pattern to select what elements you need:
+<br>
+<br>
+<pre class="example">
+foreach name [array names mydata] {
+    puts "Data on \"$name\": $mydata($name)"
+}
+
+#
+# Get names and values directly
+#
+foreach {name value} [array get mydata] {
+    puts "Data on \"$name\": $value"
+}
+</pre>
+
+Note, however, that the elements will not be returned in any
+predictable order: this has to do with the underlying "hash table".
+If you want a particular ordering (alphabetical for instance), use
+code like: 
+
+<pre class="example">
+foreach name [lsort [array names mydata]] {
+    puts "Data on \"$name\": $mydata($name)"
+}
+</pre>
+
+While arrays are great as a storage facility for some purposes,
+they are a bit tricky when you pass them to a procedure: they are
+actually collections of variables. This will not work: 
+
+<pre class="example">
+proc print12 {a} {
+   puts "$a(1), $a(2)"
+}
+
+set array(1) "A"
+set array(2) "B"
+
+print12 $array
+</pre>
+
+The reason is very simple: an array does not have a value. Instead
+the above code should be: 
+
+<pre class="example">
+proc print12 {array} {
+   upvar $array a
+   puts "$a(1), $a(2)"
+}
+
+set array(1) "A"
+set array(2) "B"
+
+print12 array
+</pre>
+
+So, instead of passing a "value" for the array, you pass the
+<i>name</i>. This gets aliased (via the upvar command) to a local
+variable (that behaves the as original array). You can make changes
+to the original array in this way too. 
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+#
+# The example of the previous lesson revisited - to get a
+# more general "database"
+#
+
+proc addname {db first last} {
+    upvar $db name
+
+    # Create a new ID (stored in the name array too for easy access)
+
+    incr name(ID)
+    set id $name(ID)
+
+    set name($id,first) $first   ;# The index is simply a string!
+    set name($id,last)  $last    ;# So we can use both fixed and
+                                 ;# varying parts
+}
+
+proc report {db} {
+    upvar $db name
+
+    # Loop over the last names: make a map from last name to ID
+
+    foreach n [array names name "*,last"] {
+        #
+        # Split the name to get the ID - the first part of the name!
+        #
+        regexp {^[^,]+} $n id
+
+        #
+        # Store in a temporary array:
+        # an "inverse" map of last name to ID)
+        #
+        set last       $name($n)
+        set tmp($last) $id
+    }
+
+    #
+    # Now we can easily print the names in the order we want!
+    #
+    foreach last [lsort [array names tmp]] {
+        set id $tmp($last)
+        puts "   $name($id,first) $name($id,last)"
+    }
+}
+
+#
+# Initialise the array and add a few names
+#
+set fictional_name(ID) 0
+set historical_name(ID) 0
+
+addname fictional_name Mary Poppins
+addname fictional_name Uriah Heep
+addname fictional_name Frodo Baggins
+
+addname historical_name Rene Descartes
+addname historical_name Richard Lionheart
+addname historical_name Leonardo "da Vinci"
+addname historical_name Charles Baudelaire
+addname historical_name Julius Caesar
+
+#
+# Some simple reporting
+#
+puts "Fictional characters:"
+report fictional_name
+puts "Historical characters:"
+report historical_name
+</pre>
+
+<div class="nav"><a href="Tcl22.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl23a.html">Next
+lesson</a></div>
+</body>
+</html>
+

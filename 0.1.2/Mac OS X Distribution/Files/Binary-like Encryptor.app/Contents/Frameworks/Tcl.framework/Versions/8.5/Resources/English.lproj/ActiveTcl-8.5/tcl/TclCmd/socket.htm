@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - socket manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> socket</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="socket.htm#M2" name="L1496">NAME</a> 
+
+<dl>
+<dd>socket - Open a TCP network connection</dd>
+</dl>
+</dd>
+
+<dd><a href="socket.htm#M3" name="L1497">SYNOPSIS</a> 
+
+<dl>
+<dd><b>socket</b> ?<i>options</i>? <i>host port</i></dd>
+
+<dd><b>socket</b> <b>-server</b> <i>command</i> ?<i>options</i>?
+<i>port</i></dd>
+</dl>
+</dd>
+
+<dd><a href="socket.htm#M4" name="L1498">DESCRIPTION</a></dd>
+
+<dd><a href="socket.htm#M5" name="L1499">CLIENT SOCKETS</a> 
+
+<dl class="client sockets">
+<dd><a href="socket.htm#M6" name="L1500"><b>-myaddr</b>
+<i>addr</i></a></dd>
+
+<dd><a href="socket.htm#M7" name="L1501"><b>-myport</b>
+<i>port</i></a></dd>
+
+<dd><a href="socket.htm#M8" name="L1502"><b>-async</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="socket.htm#M9" name="L1503">SERVER SOCKETS</a> 
+
+<dl class="server sockets">
+<dd><a href="socket.htm#M10" name="L1504"><b>-myaddr</b>
+<i>addr</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="socket.htm#M11" name="L1505">CONFIGURATION OPTIONS</a>
+
+
+<dl class="configuration options">
+<dd><a href="socket.htm#M12" name="L1506"><b>-error</b></a></dd>
+
+<dd><a href="socket.htm#M13" name="L1507"><b>-sockname</b></a></dd>
+
+<dd><a href="socket.htm#M14" name="L1508"><b>-peername</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="socket.htm#M15" name="L1509">EXAMPLES</a></dd>
+
+<dd><a href="socket.htm#M16" name="L1510">SEE ALSO</a></dd>
+
+<dd><a href="socket.htm#M17" name="L1511">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+socket - Open a TCP network connection 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>socket</b> ?<i>options</i>? <i>host port</i><br>
+<b>socket</b> <b>-server</b> <i>command</i> ?<i>options</i>?
+<i>port</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command opens a network socket and returns a channel
+identifier that may be used in future invocations of commands like
+<b><a href="../TclCmd/read.htm">read</a></b>, <b><a href=
+"../TclCmd/puts.htm">puts</a></b> and <b><a href=
+"../TclCmd/flush.htm">flush</a></b>. At present only the TCP
+network protocol is supported; future releases may include support
+for additional protocols. The <b>socket</b> command may be used to
+open either the client or server side of a connection, depending on
+whether the <b>-server</b> switch is specified. 
+
+<p>Note that the default encoding for <i>all</i> sockets is the
+system encoding, as returned by <b>encoding system</b>. Most of the
+time, you will need to use <b><a href=
+"../TclCmd/fconfigure.htm">fconfigure</a></b> to alter this to
+something else, such as <i>utf-8</i> (ideal for communicating with
+other Tcl processes) or <i>iso8859-1</i> (useful for many network
+protocols, especially the older ones).</p>
+
+<h3><a name="M5">CLIENT SOCKETS</a></h3>
+
+If the <b>-server</b> option is not specified, then the client side
+of a connection is opened and the command returns a channel
+identifier that can be used for both reading and writing.
+<i>Port</i> and <i>host</i> specify a port to connect to; there
+must be a server accepting connections on this port. <i>Port</i> is
+an integer port number (or service name, where supported and
+understood by the host operating system) and <i>host</i> is either
+a domain-style name such as <b>www.tcl.tk</b> or a numerical IP
+address such as <b>127.0.0.1</b>. Use <i>localhost</i> to refer to
+the host on which the command is invoked. 
+
+<p>The following options may also be present before <i>host</i> to
+specify additional information about the connection:</p>
+
+<dl class="client sockets">
+<dt><a name="M6"><b>-myaddr</b> <i>addr</i></a></dt>
+
+<dd><i>Addr</i> gives the domain-style name or numerical IP address
+of the client-side network interface to use for the connection.
+This option may be useful if the client machine has multiple
+network interfaces. If the option is omitted then the client-side
+interface will be chosen by the system software.</dd>
+
+<dt><a name="M7"><b>-myport</b> <i>port</i></a></dt>
+
+<dd><i>Port</i> specifies an integer port number (or service name,
+where supported and understood by the host operating system) to use
+for the client's side of the connection. If this option is omitted,
+the client's port number will be chosen at random by the system
+software.</dd>
+
+<dt><a name="M8"><b>-async</b></a></dt>
+
+<dd>The <b>-async</b> option will cause the client socket to be
+connected asynchronously. This means that the socket will be
+created immediately but may not yet be connected to the server,
+when the call to <b>socket</b> returns. When a <b><a href=
+"../TclCmd/gets.htm">gets</a></b> or <b><a href=
+"../TclCmd/flush.htm">flush</a></b> is done on the socket before
+the connection attempt succeeds or fails, if the socket is in
+blocking mode, the operation will wait until the connection is
+completed or fails. If the socket is in nonblocking mode and a
+<b><a href="../TclCmd/gets.htm">gets</a></b> or <b><a href=
+"../TclCmd/flush.htm">flush</a></b> is done on the socket before
+the connection attempt succeeds or fails, the operation returns
+immediately and <b><a href=
+"../TclCmd/fblocked.htm">fblocked</a></b> on the socket returns 1.
+Synchronous client sockets may be switched (after they have
+connected) to operating in asynchronous mode using: 
+
+<pre>
+<b>fconfigure</b> <i>chan</i> <b>-blocking 0</b>
+</pre>
+
+<p>See the <b><a href="../TclCmd/fconfigure.htm">fconfigure</a></b>
+command for more details.</p>
+</dd>
+</dl>
+
+<h3><a name="M9">SERVER SOCKETS</a></h3>
+
+If the <b>-server</b> option is specified then the new socket will
+be a server for the port given by <i>port</i> (either an integer or
+a service name, where supported and understood by the host
+operating system; if <i>port</i> is zero, the operating system will
+allocate a free port to the server socket which may be discovered
+by using <b><a href="../TclCmd/fconfigure.htm">fconfigure</a></b>
+to read the <b>-sockname</b> option). Tcl will automatically accept
+connections to the given port. For each connection Tcl will create
+a new channel that may be used to communicate with the client. Tcl
+then invokes <i>command</i> with three additional arguments: the
+name of the new channel, the address, in network address notation,
+of the client's host, and the client's port number. 
+
+<p>The following additional option may also be specified before
+<i>port</i>:</p>
+
+<dl class="server sockets">
+<dt><a name="M10"><b>-myaddr</b> <i>addr</i></a></dt>
+
+<dd><i>Addr</i> gives the domain-style name or numerical IP address
+of the server-side network interface to use for the connection.
+This option may be useful if the server machine has multiple
+network interfaces. If the option is omitted then the server socket
+is bound to the special address INADDR_ANY so that it can accept
+connections from any interface.</dd>
+</dl>
+
+<p>Server channels cannot be used for input or output; their sole
+use is to accept new client connections. The channels created for
+each incoming client connection are opened for input and output.
+Closing the server channel shuts down the server so that no new
+connections will be accepted; however, existing connections will be
+unaffected.</p>
+
+<p>Server sockets depend on the Tcl event mechanism to find out
+when new connections are opened. If the application does not enter
+the event loop, for example by invoking the <b><a href=
+"../TclCmd/vwait.htm">vwait</a></b> command or calling the C
+procedure <b><a href=
+"../TclLib/DoOneEvent.htm">Tcl_DoOneEvent</a></b>, then no
+connections will be accepted.</p>
+
+<p>If <i>port</i> is specified as zero, the operating system will
+allocate an unused port for use as a server socket. The port number
+actually allocated may be retrieved from the created server socket
+using the <b><a href="../TclCmd/fconfigure.htm">fconfigure</a></b>
+command to retrieve the <b>-sockname</b> option as described
+below.</p>
+
+<h3><a name="M11">CONFIGURATION OPTIONS</a></h3>
+
+The <b><a href="../TclCmd/fconfigure.htm">fconfigure</a></b>
+command can be used to query several readonly configuration options
+for socket channels: 
+
+<dl class="configuration options">
+<dt><a name="M12"><b>-error</b></a></dt>
+
+<dd>This option gets the current error status of the given socket.
+This is useful when you need to determine if an asynchronous
+connect operation succeeded. If there was an error, the error
+message is returned. If there was no error, an empty string is
+returned. Note that the error status is reset by the read
+operation; this mimics the underlying getsockopt(SO_ERROR)
+call.</dd>
+
+<dt><a name="M13"><b>-sockname</b></a></dt>
+
+<dd>This option returns a list of three elements, the address, the
+host name and the port number for the socket. If the host name
+cannot be computed, the second element is identical to the address,
+the first element of the list.</dd>
+
+<dt><a name="M14"><b>-peername</b></a></dt>
+
+<dd>This option is not supported by server sockets. For client and
+accepted sockets, this option returns a list of three elements;
+these are the address, the host name and the port to which the peer
+socket is connected or bound. If the host name cannot be computed,
+the second element of the list is identical to the address, its
+first element.</dd>
+</dl>
+
+<h3><a name="M15">EXAMPLES</a></h3>
+
+Here is a very simple time server: 
+
+<pre>
+proc Server {channel clientaddr clientport} {
+   puts "Connection from $clientaddr registered"
+   puts $channel [clock format [clock seconds]]
+   close $channel
+}
+
+<b>socket</b> -server Server 9900
+vwait forever
+</pre>
+
+<p>And here is the corresponding client to talk to the server:</p>
+
+<pre>
+set server localhost
+set sockChan [<b>socket</b> $server 9900]
+gets $sockChan line
+close $sockChan
+puts "The time on $server is $line"
+</pre>
+
+<h3><a name="M16">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/fconfigure.htm">fconfigure</a></b>, <b><a
+href="../TclCmd/flush.htm">flush</a></b>, <b><a href=
+"../TclCmd/open.htm">open</a></b>, <b><a href=
+"../TclCmd/read.htm">read</a></b> 
+
+<h3><a name="M17">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#bind">bind</a>, <a href=
+"../Keywords/C.htm#channel">channel</a>, <a href=
+"../Keywords/C.htm#connection">connection</a>, <a href=
+"../Keywords/D.htm#domain name">domain name</a>, <a href=
+"../Keywords/H.htm#host">host</a>, <a href=
+"../Keywords/N.htm#network address">network address</a>, <a href=
+"../Keywords/S.htm#socket">socket</a>, <a href=
+"../Keywords/T.htm#tcp">tcp</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1996 Sun Microsystems, Inc. Copyright &copy;
+1998-1999 by Scriptics Corporation.</div>
+</body>
+</html>
+

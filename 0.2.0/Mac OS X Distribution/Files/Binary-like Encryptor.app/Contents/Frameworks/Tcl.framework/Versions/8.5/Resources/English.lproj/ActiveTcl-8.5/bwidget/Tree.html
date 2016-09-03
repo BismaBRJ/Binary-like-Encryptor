@@ -1,0 +1,1040 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Tree</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>Tree</b> - Tree widget</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>Tree</b></a> <i>pathName</i> ?<i>option
+value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i>STANDARD OPTIONS</i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-background">-background or -bg</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-borderwidth">-borderwidth or
+-bd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-cursor">-cursor</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightbackground">-highlightbackground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightcolor">-highlightcolor</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightthickness">-highlightthickness</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-relief">-relief</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-selectbackground">-selectbackground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-selectforeground">-selectforeground</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-takefocus">-takefocus</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-xscrollcommand">-xscrollcommand</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-yscrollcommand">-yscrollcommand</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-closecmd">-closecmd</a></td>
+<td>&nbsp;&nbsp;<a href="#-crossfill">-crossfill</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"#-crossclosebitmap">-crossclosebitmap</a></td>
+<td>&nbsp;&nbsp;<a href=
+"#-crosscloseimage">-crosscloseimage</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"#-crossopenbitmap">-crossopenbitmap</a></td>
+<td>&nbsp;&nbsp;<a href="#-crossopenimage">-crossopenimage</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-deltax">-deltax</a></td>
+<td>&nbsp;&nbsp;<a href="#-deltay">-deltay</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dragenabled">-dragenabled</a></td>
+<td>&nbsp;&nbsp;<a href="#-dragendcmd">-dragendcmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dragevent">-dragevent</a></td>
+<td>&nbsp;&nbsp;<a href="#-draginitcmd">-draginitcmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dragtype">-dragtype</a></td>
+<td>&nbsp;&nbsp;<a href="#-dropcmd">-dropcmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dropenabled">-dropenabled</a></td>
+<td>&nbsp;&nbsp;<a href="#-dropovercmd">-dropovercmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dropovermode">-dropovermode</a></td>
+<td>&nbsp;&nbsp;<a href="#-droptypes">-droptypes</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-height">-height</a></td>
+<td>&nbsp;&nbsp;<a href="#-linesfill">-linesfill</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-linestipple">-linestipple</a></td>
+<td>&nbsp;&nbsp;<a href="#-opencmd">-opencmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-padx">-padx</a></td>
+<td>&nbsp;&nbsp;<a href="#-redraw">-redraw</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-selectcommand">-selectcommand</a></td>
+<td>&nbsp;&nbsp;<a href="#-selectfill">-selectfill</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-showlines">-showlines</a></td>
+<td>&nbsp;&nbsp;<a href="#-width">-width</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#bindArea"><b>bindArea</b></a>
+<i>event</i> <i>script</i></dd>
+
+<dd><i>pathName</i> <a href="#bindImage"><b>bindImage</b></a>
+<i>event</i> <i>script</i></dd>
+
+<dd><i>pathName</i> <a href="#bindText"><b>bindText</b></a>
+<i>event</i> <i>script</i></dd>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href="#closetree"><b>closetree</b></a>
+<i>node</i></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#delete"><b>delete</b></a>
+?<i>arg...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#edit"><b>edit</b></a> <i>node</i>
+<i>text</i> ?<i>verifycmd</i>? ?<i>clickres</i>?
+?<i>select</i>?</dd>
+
+<dd><i>pathName</i> <a href="#exists"><b>exists</b></a>
+<i>node</i></dd>
+
+<dd><i>pathName</i> <a href="#find"><b>find</b></a> <i>findinfo</i>
+?<i>confine</i>?</dd>
+
+<dd><i>pathName</i> <a href="#index"><b>index</b></a>
+<i>node</i></dd>
+
+<dd><i>pathName</i> <a href="#insert"><b>insert</b></a>
+<i>index</i> <i>parent</i> <i>node</i> ?<i>option
+value...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#itemcget"><b>itemcget</b></a>
+<i>node</i> <i>option</i></dd>
+
+<dd><i>pathName</i> <a href=
+"#itemconfigure"><b>itemconfigure</b></a> <i>node</i>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#line"><b>line</b></a>
+<i>node</i></dd>
+
+<dd><i>pathName</i> <a href="#move"><b>move</b></a> <i>parent</i>
+<i>node</i> <i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#nodes"><b>nodes</b></a> <i>node</i>
+?<i>first</i>? ?<i>last</i>?</dd>
+
+<dd><i>pathName</i> <a href="#opentree"><b>opentree</b></a>
+<i>node</i></dd>
+
+<dd><i>pathName</i> <a href="#parent"><b>parent</b></a>
+<i>node</i></dd>
+
+<dd><i>pathName</i> <a href="#reorder"><b>reorder</b></a>
+<i>node</i> <i>neworder</i></dd>
+
+<dd><i>pathName</i> <a href="#see"><b>see</b></a> <i>node</i></dd>
+
+<dd><i>pathName</i> <a href="#selection"><b>selection</b></a>
+<i>cmd</i> ?<i>arg...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#toggle"><b>toggle</b></a>
+<i>node</i></dd>
+
+<dd><i>pathName</i> <a href="#visible"><b>visible</b></a>
+<i>node</i></dd>
+
+<dd><i>pathName</i> <a href="#xview"><b>xview</b></a>
+?<i>arg...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#yview"><b>yview</b></a>
+?<i>arg...</i>?</dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p><b>Tree</b> widget uses canvas to display a hierarchical list of
+items (called nodes). Each node is composed of a label with its own
+font and foreground attributes, and an optional image or window.
+Each node can have a list of subnodes, which can be collapsed or
+expanded. Each node is drawn in a single line, whose height is
+defined by the <b>deltay</b> option, so they must have at most this
+height. A node is uniquely identified by a string given at creation
+(by the <b>insert</b> command). The node named <i>root</i> is the
+root of the tree and is not drawn. The tree structure is directly
+maintained by the widget.</p>
+
+<br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-closecmd"><b>-closecmd</b></a></dt>
+
+<dd>Specifies a command to be called when user close a node. The
+closed node is appended to the command.</dd>
+</dl>
+
+<dl>
+<dt><a name="-crossfill"><b>-crossfill</b></a></dt>
+
+<dd>Specifies a foreground color for the cross bitmap.</dd>
+</dl>
+
+<dl>
+<dt><a name="-crossclosebitmap"><b>-crossclosebitmap</b></a></dt>
+
+<dd>Specifies a bitmap to be displayed in place of the standard
+cross when a node is closed.</dd>
+</dl>
+
+<dl>
+<dt><a name="-crosscloseimage"><b>-crosscloseimage</b></a></dt>
+
+<dd>Specifies an image to be displayed in place of the standard
+cross when a node is closed. Overrides the -crossclosebitmap
+option.</dd>
+</dl>
+
+<dl>
+<dt><a name="-crossopenbitmap"><b>-crossopenbitmap</b></a></dt>
+
+<dd>Specifies a bitmap to be displayed in place of the standard
+cross when a node is open.</dd>
+</dl>
+
+<dl>
+<dt><a name="-crossopenimage"><b>-crossopenimage</b></a></dt>
+
+<dd>Specifies an image to be displayed in place of the standard
+cross when a node is open. Overrides the -crossopenbitmap
+option.</dd>
+</dl>
+
+<dl>
+<dt><a name="-deltax"><b>-deltax</b></a></dt>
+
+<dd>Specifies horizontal indentation between a node and its
+children.</dd>
+</dl>
+
+<dl>
+<dt><a name="-deltay"><b>-deltay</b></a></dt>
+
+<dd>Specifies vertical size of the nodes.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dragenabled"><b>-dragenabled</b></a></dt>
+
+<dd>A boolean specifying if drag is enabled.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dragendcmd"><b>-dragendcmd</b></a></dt>
+
+<dd>Specifies a command to be called when drag ended.
+<b>dragendcmd</b> must be a command conforming to the description
+of the option <b>dragendcmd</b> of <b>DragSite::<a href=
+"DragSite.html#register">register</a></b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dragevent"><b>-dragevent</b></a></dt>
+
+<dd>Specifies the number of the mouse button associated to the
+drag. Must be <b>1</b>, <b>2</b> or <b>3</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-draginitcmd"><b>-draginitcmd</b></a></dt>
+
+<dd>Tree has a command wrapper for <i>drag-init</i> events. This
+command refused the drag if no node is designated. In other
+cases:<br>
+If <b>draginitcmd</b> is empty, it returns: 
+
+<ul>
+<li>the value of option <b>dragtype</b> or <i>TREE_NODE</i> if
+empty as the data type,</li>
+
+<li><i>{copy move link}</i> as the operations,</li>
+
+<li>the node identifier as the data.</li>
+</ul>
+
+If <b>draginitcmd</b> is not empty, it is called with the following
+arguments: 
+
+<ul>
+<li>the pathname of the tree,</li>
+
+<li>the identifier of the dragged node,</li>
+
+<li>the toplevel created to represent dragged data.</li>
+</ul>
+
+and must return a value conforming to <b>draginitcmd</b> option
+described in <b>DragSite::<a href=
+"DragSite.html#register">register</a></b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dragtype"><b>-dragtype</b></a></dt>
+
+<dd>Specifies an alternate type of dragged object.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dropcmd"><b>-dropcmd</b></a></dt>
+
+<dd>Tree has a command wrapper for <i>drop</i> events. This command
+stops auto scrolling and extract node and position.<br>
+If <b>dropcmd</b> is not empty, it is called with the following
+arguments: 
+
+<ul>
+<li>the pathname of the tree,</li>
+
+<li>the pathname of the drag source,</li>
+
+<li>a list describing where the drop occurs. It can be: 
+
+<ul>
+<li><i>{</i><b>widget</b><i>}</i>,</li>
+
+<li><i>{</i><b>node</b> <i>node}</i> or</li>
+
+<li><i>{</i><b>position</b> <i>node index}</i>.</li>
+</ul>
+</li>
+
+<li>the current operation,</li>
+
+<li>the data type,</li>
+
+<li>the data.</li>
+</ul>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="-dropenabled"><b>-dropenabled</b></a></dt>
+
+<dd>A boolean specifying if drop is enabled.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dropovercmd"><b>-dropovercmd</b></a></dt>
+
+<dd>Tree has a command wrapper for <i>drag-over</i> events. This
+command enables auto scrolling and position extraction during the
+<i>drag-over</i>. If <b>dropovercmd</b> is not empty, the command
+is called with the following aguments: 
+
+<ul>
+<li>the pathname of the tree,</li>
+
+<li>the pathname of the drag source,</li>
+
+<li>a list describing where the drop can occur, whose elements are:
+
+
+<ul>
+<li>the string <i>widget</i> if <b>dropovertype</b> option contains
+<i>w</i>, else empty string.</li>
+
+<li>the targeted node if drag icon points a node and
+<b>dropovertype</b> option contains <i>n</i>, else empty
+string.</li>
+
+<li>a list containing a node and the position within the children
+of the node where drag icon points to if <b>dropovertype</b> option
+contains <i>p</i>, else empty string.</li>
+
+<li>optionally, the preferred method if drop can occur both inside
+a node and between two nodes. The value is <i>position</i> or
+<i>node</i>.</li>
+</ul>
+</li>
+
+<li>the current operation,</li>
+
+<li>the data type,</li>
+
+<li>the data.</li>
+</ul>
+
+The command must return a list with two elements: 
+
+<ul>
+<li>the drop status, conforming to those described in
+<b>dropovercmd</b> option of <b>DropSite::<a href=
+"DropSite.html#register">register</a></b>,</li>
+
+<li>the choosen method: <i>widget</i>, <i>node</i> or
+<i>position</i>.</li>
+</ul>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="-dropovermode"><b>-dropovermode</b></a></dt>
+
+<dd>Specifies the type of <i>drop-over</i> interaction. Must be a
+combination of <b>w</b>, which specifies that drop can occurs
+everywhere on widget, <b>p</b>, which specifies that drop can
+occurs between two nodes, and <b>n</b>, which specifies that drop
+occurs inside nodes.</dd>
+</dl>
+
+<dl>
+<dt><a name="-droptypes"><b>-droptypes</b></a></dt>
+
+<dd>Specifies a list of accepted dropped object/operation. See
+option <b>droptypes</b> of <b>DropSite::<a href=
+"DropSite.html#register">register</a></b>. for more
+infromation.<br>
+Default is <i>TREE_NODE</i> with operations <b>copy</b> and
+<b>move</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-height"><b>-height</b></a></dt>
+
+<dd>Specifies the desired height for the tree in units of
+<b>deltay</b> pixels.</dd>
+</dl>
+
+<dl>
+<dt><a name="-linesfill"><b>-linesfill</b></a></dt>
+
+<dd>Specifies a foreground color for the lines between nodes.</dd>
+</dl>
+
+<dl>
+<dt><a name="-linestipple"><b>-linestipple</b></a></dt>
+
+<dd>Specifies a stipple bitmap for the lines between nodes.</dd>
+</dl>
+
+<dl>
+<dt><a name="-opencmd"><b>-opencmd</b></a></dt>
+
+<dd>Specifies a command to be called when the user opens a node.
+The name of the opened node is appended to the command.</dd>
+</dl>
+
+<dl>
+<dt><a name="-padx"><b>-padx</b></a></dt>
+
+<dd>Specifies distance between image or window and text of the
+nodes.</dd>
+</dl>
+
+<dl>
+<dt><a name="-redraw"><b>-redraw</b></a></dt>
+
+<dd>Specifies wether or not the tree should be redrawn when
+entering idle. Set it to false if you call <b>update</b> while
+modifying the tree.</dd>
+</dl>
+
+<dl>
+<dt><a name="-selectcommand"><b>-selectcommand</b></a></dt>
+
+<dd>Specifies a command to be called when the selection is changed.
+The path of the tree widget and the selected nodes are appended to
+the command.</dd>
+</dl>
+
+<dl>
+<dt><a name="-selectfill"><b>-selectfill</b></a></dt>
+
+<dd>If true, the selection box will be drawn across the entire tree
+from left-to-right instead of just around the item text.</dd>
+</dl>
+
+<dl>
+<dt><a name="-showlines"><b>-showlines</b></a></dt>
+
+<dd>Specifies whether or not lines should be drawn between
+nodes.</dd>
+</dl>
+
+<dl>
+<dt><a name="-width"><b>-width</b></a></dt>
+
+<dd>Specifies the desired width for the tree in units of 8
+pixels.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+ <b><a name="nodes">NODE NAMES</a></b><br>
+<p>Certain special characters in node names are automatically
+substituted by the tree during operation. These characters are
+<b>&amp; | ^ !</b>. They are all substituted with a <b>_</b>
+character. This is only to avoid errors because the characters are
+special to the tree widget.</p>
+
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="bindArea"><i>pathName</i> <b>bindArea</b></a>
+<i>event</i> <i>script</i></dt>
+
+<dd>This command associates a command to execute whenever the event
+sequence given by <i>event</i> occurs anywhere within the Tree
+area.</dd>
+</dl>
+
+<dl>
+<dt><a name="bindImage"><i>pathName</i> <b>bindImage</b></a>
+<i>event</i> <i>script</i></dt>
+
+<dd>This command associates a command to execute whenever the event
+sequence given by <i>event</i> occurs on the image of a node. The
+node idenfier on which the event occurs is appended to the command
+and may be used to manipulate the tree (e.g. don't use <b>%W</b>). 
+
+<p>If <b>-selectfill</b> is given, an eventual binding of the
+background box by <b>bindText</b> is overwritten.</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="bindText"><i>pathName</i> <b>bindText</b></a>
+<i>event</i> <i>script</i></dt>
+
+<dd>This command associates a command to execute whenever the event
+sequence given by <i>event</i> occurs on the label of a node. The
+node idenfier on which the event occurs is appended to the command
+and may be used to manipulate the tree (e.g. don't use <b>%W</b>). 
+
+<p>If <b>-selectfill</b> is given, an eventual binding of the
+background box by <b>bindImage</b> is overwritten.</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="closetree"><i>pathName</i> <b>closetree</b></a>
+<i>node</i> ?<i>recurse</i>?</dt>
+
+<dd>This command close all the subtree given by <i>node</i>.
+Recurse through the tree starting at <i>node</i> and set
+<b>open</b> option to 0 depending on <i>recurse</i>. Default value
+of <i>recurse</i> is <i>true</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="delete"><i>pathName</i> <b>delete</b></a>
+?<i>arg...</i>?</dt>
+
+<dd>Deletes all nodes (and children of them) in <i>arg</i>.
+<i>arg</i> can be a list of nodes or a list of list of nodes. To
+delete all the tree, do <i>$pathName delete [$pathName nodes
+root]</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="edit"><i>pathName</i> <b>edit</b></a> <i>node</i>
+<i>text</i> ?<i>verifycmd</i>? ?<i>clickres</i>?
+?<i>select</i>?</dt>
+
+<dd>Provides a way for the user to edit in place the label of a
+node. This is possible only if <i>node</i> is visible (all its
+parents are open).<br>
+The command takes the initial text as argument and does not modify
+the label of the edited node, but returns an empty string if
+edition is canceled, or the typed text if edition is accepted.<br>
+When editing, the user can cancel by pressing Escape, or accept by
+pressing Return.<br>
+<i>clickres</i> specifies what to do if the user click outside the
+editable area. If <i>clickres</i> is 0 (the default), the edition
+is canceled. If <i>clickres</i> is 1, the edition is accepted. In
+all other case, the edition continues.<br>
+If edition is accepted and <i>modifycmd</i> is not empty, then it
+is called with the new text as argument and must return 1 to accept
+the new text, 0 to refuse it and continue edition.<br>
+<i>select</i> specifies wether or not the initial text should be
+selected. Default is 1.</dd>
+</dl>
+
+<dl>
+<dt><a name="exists"><i>pathName</i> <b>exists</b></a>
+<i>node</i></dt>
+
+<dd>Returns whether or not <i>node</i> exists in the tree.</dd>
+</dl>
+
+<dl>
+<dt><a name="find"><i>pathName</i> <b>find</b></a> <i>findinfo</i>
+?<i>confine</i>?</dt>
+
+<dd>
+<p>Returns the node given by the position <i>findinfo</i>.
+<i>findinfo</i> can take the form of a pixel position <i>@x,y</i>
+or of the line number of a currently visible Tree node. The first
+line of the Tree has the value of zero.</p>
+
+<p>If <i>confine</i> is non-empty, then confine <i>findinfo</i> to
+only match pixel positions for the area consumed by Tree labels,
+not just anywhere on their lines. (<i>confine</i> has no effect if
+<i>findinfo</i> is a line number.)</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="index"><i>pathName</i> <b>index</b></a>
+<i>node</i></dt>
+
+<dd>Returns the position of <i>node</i> in its parent.</dd>
+</dl>
+
+<dl>
+<dt><a name="insert"><i>pathName</i> <b>insert</b></a> <i>index</i>
+<i>parent</i> <i>node</i> ?<i>option value...</i>?</dt>
+
+<dd>
+<p>Inserts a new node identified by <i>node</i> in the children
+list of <i>parent</i> at position <i>index</i>.</p>
+
+<p>Any instance of <i>#auto</i> within the node name will be
+replaced by the number of the item in the order of insertion. The
+non-printable characters \1 to \5 are reserved for internal use and
+should not be present in node names.</p>
+
+<dl>
+<dt><a name="Node-anchor"><b>-anchor</b></a></dt>
+
+<dd>Specifies the anchor of the image or window of the node.
+Defaults to w.</dd>
+</dl>
+
+<dl>
+<dt><a name="Node-data"><b>-data</b></a></dt>
+
+<dd>User data associated to the node.</dd>
+</dl>
+
+<dl>
+<dt><a name="-deltax"><b>-deltax</b></a></dt>
+
+<dd>Specifies the horizontal indentation of the node. If the value
+is -1, the node will be drawn with the deltax for the entire
+tree.</dd>
+</dl>
+
+<dl>
+<dt><a name="Node-drawcross"><b>-drawcross</b></a></dt>
+
+<dd>Specifies how the cross used to expand or collapse the children
+of a node should be drawn. Must be one of <b>auto</b>,
+<b>always</b> or <b>never</b>.<br>
+If <b>auto</b>, the cross is drawn only if the node has children.
+If <b>always</b>, the cross is always drawn. If <b>never</b>, the
+cross is never drawn. To maintain compatibility with older versions
+of this widget, <b>allways</b> is a deprecated synonym to
+<b>always</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="Node-fill"><b>-fill</b></a></dt>
+
+<dd>Specifies the foreground color of the label of the node.</dd>
+</dl>
+
+<dl>
+<dt><a name="Node-font"><b>-font</b></a></dt>
+
+<dd>Specifies a font for the label of the node.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helpcmd"><b>-helpcmd</b></a></dt>
+
+<dd>If specified, refers to a command to execute to get the help
+text to display. The command must return a string to display. If
+the command returns an empty string, no help is displayed. See also
+<a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helptext"><b>-helptext</b></a></dt>
+
+<dd>Text for dynamic help. See also <a href=
+"DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helptype"><b>-helptype</b></a></dt>
+
+<dd>Type of dynamic help. Use <i>balloon</i> or <i>variable</i>.
+See also <a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helpvar"><b>-helpvar</b></a></dt>
+
+<dd>Variable to use when <b>helptype</b> option is <i>variable</i>.
+See also <a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="Node-image"><b>-image</b></a></dt>
+
+<dd>Specifies an image to display at the left of the label of the
+node. <b>window</b> option override <b>image</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="Node-open"><b>-open</b></a></dt>
+
+<dd>Specifies wether or not the children of the node should be
+drawn.</dd>
+</dl>
+
+<dl>
+<dt><a name="-padx"><b>-padx</b></a></dt>
+
+<dd>Specifies the distance between image or window and the text of
+the node. If the value is -1, the node will be drawn with the padx
+for the entire tree.</dd>
+</dl>
+
+<dl>
+<dt><a name="Node-selectable"><b>-selectable</b></a></dt>
+
+<dd>Specifies if the node can be selected or not.</dd>
+</dl>
+
+<dl>
+<dt><a name="Node-text"><b>-text</b></a></dt>
+
+<dd>Specifies the label of the node.</dd>
+</dl>
+
+<dl>
+<dt><a name="Node-window"><b>-window</b></a></dt>
+
+<dd>Specifies a pathname to display at the left of the label of the
+node. <b>window</b> option override <b>image</b>.</dd>
+</dl>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="itemcget"><i>pathName</i> <b>itemcget</b></a>
+<i>node</i> <i>option</i></dt>
+
+<dd>Returns the current value of a configuration option for the
+item. <i>Option</i> may have any of the values accepted by the item
+creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="itemconfigure"><i>pathName</i>
+<b>itemconfigure</b></a> <i>node</i> ?<i>option</i>? ?<i>value</i>
+<i>option</i> <i>value</i> ...?</dt>
+
+<dd>This command is similar to the <b>configure</b> command, except
+that it applies to the options for an individual item, whereas
+<b>configure</b> applies to the options for the widget as a whole.
+<b>Options</b> may have any of the values accepted by the item
+creation widget command. If options are specified, options are
+modified as indicated in the command and the command returns an
+empty string. If no options are specified, returns a list
+describing the current options for the item. Read-only options are
+not be modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="line"><i>pathName</i> <b>line</b></a> <i>node</i></dt>
+
+<dd>
+<p>Returns the line number where <i>node</i> was drawn. If the node
+is not visible then return -1. The first line of the tree has the
+value of 0.</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="move"><i>pathName</i> <b>move</b></a> <i>parent</i>
+<i>node</i> <i>index</i></dt>
+
+<dd>Moves <i>node</i> to the children list of <i>parent</i> at
+position <i>index</i>. <i>parent</i> can not be a descendant of
+<i>node</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="nodes"><i>pathName</i> <b>nodes</b></a> <i>node</i>
+?<i>first</i>? ?<i>last</i>?</dt>
+
+<dd>Returns parts of the children of <i>node</i>, following
+<i>first</i> and <i>last</i>.<br>
+If <i>first</i> and <i>last</i> are omitted, returns the list of
+all children. If <i>first</i> is specified and <i>last</i> omitted,
+returns the child at index <i>first</i>, or an empty string if
+<i>first</i> refers to a non-existent element. If <i>first</i> and
+<i>last</i> are specified, the command returns a list whose
+elements are all of the children between <i>first</i> and
+<i>last</i>, inclusive. Both <i>first</i> and <i>last</i> may have
+any of the standard forms for indices.</dd>
+</dl>
+
+<dl>
+<dt><a name="opentree"><i>pathName</i> <b>opentree</b></a>
+<i>node</i> ?<i>recurse</i>?</dt>
+
+<dd>This command open all the subtree given by <i>node</i>. Recurse
+through the tree starting at <i>node</i> and set <b>open</b> option
+to 1 depending on value of <i>recurse</i>. Default value of
+<i>recurse</i> is <i>true</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="parent"><i>pathName</i> <b>parent</b></a>
+<i>node</i></dt>
+
+<dd>Returns the parent of <i>node</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="reorder"><i>pathName</i> <b>reorder</b></a>
+<i>node</i> <i>neworder</i></dt>
+
+<dd>Modifies the order of children of <i>node</i> given by
+<i>neworder</i>. Children of <i>node</i> that do not appear in
+<i>neworder</i> are no moved.</dd>
+</dl>
+
+<dl>
+<dt><a name="see"><i>pathName</i> <b>see</b></a> <i>node</i></dt>
+
+<dd>Arrange the scrolling area to make <i>node</i> visible.</dd>
+</dl>
+
+<dl>
+<dt><a name="selection"><i>pathName</i> <b>selection</b></a>
+<i>cmd</i> ?<i>arg...</i>?</dt>
+
+<dd>Modifies the list of selected nodes following <i>cmd</i>: 
+
+<dl>
+<dt><b>add</b></dt>
+
+<dd>Adds all nodes in <i>arg</i> to the selection.</dd>
+
+<dt><b>clear</b></dt>
+
+<dd>Removes all nodes from the selection.</dd>
+
+<dt><b>get</b></dt>
+
+<dd>Returns a list containing the indices of current selected
+nodes.</dd>
+
+<dt><b>includes</b></dt>
+
+<dd>Tests if the specified node is selected. Returns true if the
+answer is yes, and false else.</dd>
+
+<dt><b>range</b></dt>
+
+<dd>Sets the selection to all nodes between the two specified
+ones.</dd>
+
+<dt><b>remove</b></dt>
+
+<dd>Removes all nodes in <i>arg</i> from the selection.</dd>
+
+<dt><b>set</b></dt>
+
+<dd>Sets the selection to all nodes in <i>arg</i>.</dd>
+
+<dt><b>toggle</b></dt>
+
+<dd>Toggles the selection status of all nodes in <i>arg</i>.</dd>
+</dl>
+
+The subcommands <b>add</b>, <b>range</b>, and <b>set</b> silently
+ignore nodes which are declared unselectable. See the node option
+<a href="#Node-selectable">-selectable</a> to influence this.</dd>
+</dl>
+
+<dl>
+<dt><a name="toggle"><i>pathName</i> <b>toggle</b></a>
+<i>node</i></dt>
+
+<dd>Toggle the open/close status of the given <i>node</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="visible"><i>pathName</i> <b>visible</b></a>
+<i>node</i></dt>
+
+<dd>Returns whether or not <i>node</i> is visible (all its parents
+are open).</dd>
+</dl>
+
+<dl>
+<dt><a name="xview"><i>pathName</i> <b>xview</b></a>
+?<i>arg...</i>?</dt>
+
+<dd>Standard command to enable horizontal scrolling of
+<i>pathName</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="yview"><i>pathName</i> <b>yview</b></a>
+?<i>arg...</i>?</dt>
+
+<dd>Standard command to enable vertical scrolling of
+<i>pathName</i>.</dd>
+</dl>
+
+<b><a name="nodes">BINDINGS</a></b><br>
+ 
+
+<p>A <b>&lt;&lt;TreeSelect&gt;&gt;</b> virtual event is generated
+any time the selection in the tree changes. This is the default
+behavior of an item in the tree, but it can be overridden with the
+bindText or bindImage command. If the button 1 binding is
+overridden, this event may not be generated.</p>
+
+<p>The tree has all the standard mouse wheel bindings when it has
+focus.</p>
+</body>
+</html>
+

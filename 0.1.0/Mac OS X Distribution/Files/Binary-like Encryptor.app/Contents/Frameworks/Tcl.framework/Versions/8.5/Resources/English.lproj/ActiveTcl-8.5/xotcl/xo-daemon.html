@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>XOTcl - Documentation -- xotcl/apps/utils/xo-daemon</title>
+<link rel="StyleSheet" href="xotcl-doc.css" type="text/css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1><img src="./logo-100.jpg" alt="xotcl/apps/utils/xo-daemon"
+align="MIDDLE"> xotcl/apps/utils/xo-daemon</h1>
+
+<hr>
+<h2>Package/File Information</h2>
+
+<b>No package provided/required</b> <br>
+ <br>
+ <b>Filename:</b> <a href=
+"xotcl/apps/utils/xo-daemon">xotcl/apps/utils/xo-daemon</a> <br>
+ <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">This script can be used to start/stop/restart
+xotcl daemons and maintains the process IDs, log files and means
+for easy restart. 
+
+<p>It receives as first parameter the name of the xotcl script to
+be executed followed by the desired action and optional parameters.
+The specified action can be</p>
+
+<ul>
+<li><em>start</em>: the specified script is started in the
+background, an entry to restart is generated in the run-directory
+as well as the process id of the started script. In addition a
+logfile is created in the log directory. If the start of the script
+fails, the error messages are shown.</li>
+
+<li><em>startall</em>: all scripts that were started before via
+this script, are started</li>
+
+<li><em>stop</em> terminates te specified script.</li>
+
+<li><em>stopall</em> terminates all scripts started via this
+command</li>
+
+<li><em>restart</em> tries to restart the specified script.</li>
+</ul>
+
+The optional parameters are: 
+
+<ul>
+<li><em>-logir</em> specifies the directory for logging. The
+default is ~/.xotcl/log.</li>
+
+<li><em>-rundir</em> specifies the directory where the information
+about the running processes is kept. The default is
+~/.xotcl/run.</li>
+</ul>
+</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Authors:</em> </td>
+<td valign="top">Gustaf Neumann, Gustaf.Neumann@wu-wien.ac.at</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Date:</em> </td>
+<td valign="top">[::xotcl::rcs date {$Date: 2006/02/18 22:17:32
+$}]</td>
+</tr>
+</table>
+
+<br>
+ <br>
+ <br>
+<br>
+ 
+
+<hr>
+<a href="./index.html">Back to index page.</a> <br>
+ 
+
+<hr>
+</body>
+</html>
+

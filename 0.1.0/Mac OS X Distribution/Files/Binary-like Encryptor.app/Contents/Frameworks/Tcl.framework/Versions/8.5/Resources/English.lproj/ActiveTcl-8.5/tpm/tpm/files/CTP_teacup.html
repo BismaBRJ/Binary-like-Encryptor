@@ -1,0 +1,1765 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>teacup - TEA Package Management</title>
+<link rel="stylesheet" href="../aspn.css" type="text/css">
+</head>
+<body>
+<div class="doctools">
+<hr>
+[ 
+
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+ <a href="../../toc.html">Main Table Of Contents</a> | <a href=
+"../toc.html">Table Of Contents</a> | <a href=
+"../../index.html">Keyword Index</a> ] 
+
+<hr>
+<h1 class="title">teacup(n) 1.0 tpm "TEA Package Management"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>teacup - TEApot Repository Client</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">OVERVIEW</a></li>
+
+<li class="section"><a href="#section3">Commands</a> 
+
+<ul>
+<li class="subsection"><a href="#subsection1">General inquiries and
+getting new revisions</a></li>
+
+<li class="subsection"><a href="#subsection2">Management of
+installation repositories</a></li>
+
+<li class="subsection"><a href="#subsection3">Management of
+archives</a></li>
+
+<li class="subsection"><a href="#subsection4">Configuration
+management</a></li>
+
+<li class="subsection"><a href="#subsection5">Package
+management</a></li>
+
+<li class="subsection"><a href="#subsection6">Trouble
+Shooting</a></li>
+
+<li class="subsection"><a href="#subsection7">Common
+options</a></li>
+</ul>
+</li>
+
+<li class="section"><a href="#section4">Searching for packages and
+other things</a></li>
+
+<li class="section"><a href="#section5">BUGS, IDEAS,
+FEEDBACK</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">teacup</b> <b class=
+"method">help</b></a></li>
+
+<li><a href="#2"><b class="cmd">teacup</b> <b class=
+"method">version</b></a></li>
+
+<li><a href="#3"><b class="cmd">teacup</b> <b class=
+"method">who</b></a></li>
+
+<li><a href="#4"><b class="cmd">teacup</b> <b class=
+"method">update-self</b> <span class="opt">?<b class=
+"option">-v</b>?</span></a></li>
+
+<li><a href="#5"><b class="cmd">teacup</b> <b class=
+"method">setup</b> <i class="arg">shell</i></a></li>
+
+<li><a href="#6"><b class="cmd">teacup</b> <b class=
+"method">create</b> <span class="opt">?<i class=
+"arg">dir</i>?</span></a></li>
+
+<li><a href="#7"><b class="cmd">teacup</b> <b class=
+"method">delete</b> <i class="arg">dir</i></a></li>
+
+<li><a href="#8"><b class="cmd">teacup</b> <b class="method">link
+make</b> <i class="arg">dir</i> <i class="arg">shell</i></a></li>
+
+<li><a href="#9"><b class="cmd">teacup</b> <b class="method">link
+cut</b> (<i class="arg">dir</i>|<i class="arg">shell</i>) (<i
+class="arg">dir</i>|<i class="arg">shell</i>) ...</a></li>
+
+<li><a href="#10"><b class="cmd">teacup</b> <b class="method">link
+info</b> <i class="arg">dir</i>|<i class="arg">shell</i></a></li>
+
+<li><a href="#11"><b class="cmd">teacup</b> <b class=
+"method">default</b> <span class="opt">?<i class=
+"arg">dir</i>?</span></a></li>
+
+<li><a href="#12"><b class="cmd">teacup</b> <b class=
+"method">archive list</b></a></li>
+
+<li><a href="#13"><b class="cmd">teacup</b> <b class=
+"method">archive add</b> <i class="arg">url</i></a></li>
+
+<li><a href="#14"><b class="cmd">teacup</b> <b class=
+"method">archive remove</b> <i class="arg">url</i></a></li>
+
+<li><a href="#15"><b class="cmd">teacup</b> <b class="method">cache
+on</b> <span class="opt">?<i class="arg">dir</i>?</span></a></li>
+
+<li><a href="#16"><b class="cmd">teacup</b> <b class="method">cache
+off</b></a></li>
+
+<li><a href="#17"><b class="cmd">teacup</b> <b class="method">cache
+clear</b></a></li>
+
+<li><a href="#18"><b class="cmd">teacup</b> <b class="method">cache
+status</b></a></li>
+
+<li><a href="#19"><b class="cmd">teacup</b> <b class=
+"method">proxy</b> <span class="opt">?<i class="arg">host</i> <i
+class="arg">port</i>?</span></a></li>
+
+<li><a href="#20"><b class="cmd">teacup</b> <b class=
+"method">timeout</b> <span class="opt">?<i class=
+"arg">seconds</i>?</span></a></li>
+
+<li><a href="#21"><b class="cmd">teacup</b> <b class=
+"method">install</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--dry-run</b>?</span> <span class=
+"opt">?<b class="option">--force</b>?</span> <span class="opt">?<b
+class="option">--at</b> <i class="arg">dir</i>?</span> <span class=
+"opt">?<b class="option">--with-recommends</b>?</span> (<i class=
+"arg">url</i> | <i class="arg">path</i> | (<i class="arg">name</i>
+<span class="opt">?<span class="opt">?<b class=
+"option">-exact</b>?</span> <i class="arg">version</i>?</span>
+<span class="opt">?-is <i class="arg">entity</i>?</span>))</a></li>
+
+<li><a href="#22"><b class="cmd">teacup</b> <b class=
+"method">remove</b> <span class="opt">?<b class=
+"option">--dry-run</b>?</span> <span class="opt">?<b class=
+"option">--at</b> <i class="arg">dir</i>?</span> <span class=
+"opt">?<b class="option">--is</b> <i class="arg">entity</i>?</span>
+<span class="opt">?<i class="arg">name</i> <span class="opt">?<i
+class="arg">version</i> <span class="opt">?<i class=
+"arg">architecture</i>?</span>?</span>?</span></a></li>
+
+<li><a href="#23"><b class="cmd">teacup</b> <b class=
+"method">update</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--dry-run</b>?</span> <span class=
+"opt">?<b class="option">--only</b> <b class=
+"const">uninstalled</b>|<b class="const">newer</b>|<b class=
+"const">unknown</b>|<b class="const">update</b>?</span> <span
+class="opt">?<b class="option">--at</b> <i class=
+"arg">dir</i>?</span></a></li>
+
+<li><a href="#24"><b class="cmd">teacup</b> <b class=
+"method">describe</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class="arg">dir</i>?</span>
+<span class="opt">?<b class="option">--is</b> <i class=
+"arg">entity</i>?</span> <span class="opt">?<b class=
+"option">--all</b>?</span> <i class="arg">name</i> <span class=
+"opt">?<i class="arg">version</i> <span class="opt">?<i class=
+"arg">arch</i>?</span>?</span></a></li>
+
+<li><a href="#25"><b class="cmd">teacup</b> <b class=
+"method">list</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--all-platforms</b>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class="arg">dir</i>?</span>
+<span class="opt">?<b class="option">--is</b> <i class=
+"arg">entity</i>?</span> <span class="opt">?<b class=
+"option">--as</b> <b class="const">csv</b>|<b class=
+"const">profile</b>|<b class="const">table</b>?</span> <span class=
+"opt">?<b class="option">--only</b> <b class=
+"const">uninstalled</b>|<b class="const">newer</b>|<b class=
+"const">unknown</b>|<b class="const">update</b>?</span> <span
+class="opt">?<i class="arg">name</i> <span class="opt">?<i class=
+"arg">version</i>?</span>?</span></a></li>
+
+<li><a href="#26"><b class="cmd">teacup</b> <b class=
+"method">get</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class="arg">dir</i>?</span>
+<span class="opt">?<b class="option">--is</b> <i class=
+"arg">entity</i>?</span> <span class="opt">?<b class=
+"option">--output</b> <i class="arg">outdir</i>?</span> <span
+class="opt">?<i class="arg">name</i> <span class="opt">?<i class=
+"arg">version</i> <span class="opt">?<i class=
+"arg">architecture</i>?</span>?</span>?</span></a></li>
+
+<li><a href="#27"><b class="cmd">teacup</b> <b class=
+"method">profiles</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class=
+"arg">dir</i>?</span></a></li>
+
+<li><a href="#28"><b class="cmd">teacup</b> <b class=
+"method">search</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class="arg">dir</i>?</span>
+<span class="opt">?<b class="option">--as</b> <b class=
+"const">csv</b>|<b class="const">profile</b>|<b class=
+"const">table</b>?</span> <i class="arg">query</i>...</a></li>
+
+<li><a href="#29"><b class="cmd">teacup</b> <b class=
+"method">keys</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class=
+"arg">dir</i>?</span></a></li>
+
+<li><a href="#30"><b class="cmd">teacup</b> <b class="method">log
+show</b> <span class="opt">?<b class="option">-l|--last</b> <i
+class="arg">n</i>?</span> <span class="opt">?<b class=
+"option">-s|--since</b> <i class="arg">timestamp</i>?</span> <span
+class="opt">?<b class="option">--at</b> <i class=
+"arg">dir</i>?</span></a></li>
+
+<li><a href="#31"><b class="cmd">teacup</b> <b class="method">log
+purge</b> <span class="opt">?<b class="option">--keep-last</b> <i
+class="arg">n</i>?</span> <span class="opt">?<b class=
+"option">--keep-since</b> <i class="arg">timestamp</i>?</span>
+<span class="opt">?<b class="option">--at</b> <i class=
+"arg">dir</i>?</span></a></li>
+
+<li><a href="#32"><b class="cmd">teacup</b> <b class=
+"method">verify</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--at</b> <i class="arg">dir</i>?</span></a></li>
+
+<li><a href="#33"><b class="cmd">teacup</b> <b class=
+"method">regenerate</b> <span class="opt">?<b class=
+"option">--at</b> <i class="arg">dir</i>?</span></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>This document is reference documentation for the TEApot client
+application. It assumes that the reader has read at least the <i
+class="term"><a href="CTP_introduction.html">TEApot
+Introduction</a></i>, the <i class="term"><a href=
+"CTP_glossary.html">TEApot Glossary of Terms</a></i>, and possibly
+the <i class="term"><a href="CTP_metadata.html">TEApot Meta Data
+Specification</a></i>.</p>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">OVERVIEW</a></h2>
+
+<p>This tool is used to manage a user's personal TEApot
+installation. It will also be used by administrators to manage
+centralized installations, if so desired.</p>
+
+<p>As such it sits squarely between two distinct sets of TEApot
+repositories, namely:</p>
+
+<ol class="enumerated">
+<li>
+<p>On the one side are the <i class="term"><a href=
+"../../index.html#key21">installation</a></i> repositories, which
+are the repositories packages are installed into. One of these
+repositories will be the default destination for doing package
+installations.</p>
+
+<p>An installation repository is one source of packages for Tcl
+installations, like ActiveTcl, which allow one to invoke 'package
+require' to load a package from the repository. For ActiveTcl, the
+necessary code is already part of the tclsh's "<b class=
+"file">init.tcl</b>". For other installations, the relevant code
+can installed by using <b class="syscmd">teacup</b>'s <b class=
+"method">setup</b> method. See also the <i class="term"><a href=
+"CTP_faq.html">TEApot FAQ</a></i> for more information.</p>
+
+<p>Please see the section <span class="sectref"><a href=
+"#subsection2">Management of installation repositories</a></span>
+for the <b class="syscmd">teacup</b> commands relevant to their
+direct management, and the option <b class="option">--at</b> in
+section <span class="sectref"><a href="#subsection7">Common
+options</a></span> when having to deal with installation
+repositories other than the default.</p>
+</li>
+
+<li>
+<p>On the other side we have the <i class="term">archives</i>,
+which are repositories to search when the TEApot client is asked to
+perform an installation. Please see the section <span class=
+"sectref"><a href="#subsection3">Management of archives</a></span>
+for the <b class="syscmd">teacup</b> commands relevant to their
+management.</p>
+
+<p>Archives can be either <i class="term">local</i> or <i class=
+"term"><a href="../../index.html#key33">network</a></i>
+repositories. For local repositories both <i class="term"><a href=
+"../../index.html#key23">opaque</a></i> and <i class="term"><a
+href="../../index.html#key13">transparent</a></i> repositories are
+acceptable.</p>
+
+<p>Note however that while the above makes it possible to add an
+installation repository to the set of archives known to <b class=
+"syscmd">teacup</b> this makes sense only when packages for an
+installation A should be drawn from a different installation B. It
+makes no sense whatsoever to put an installation repository A into
+the set of archives when A is also the destination for packages to
+install.</p>
+</li>
+</ol>
+
+<p>The behaviour of the application can be configured in various
+ways for the environment it is in, with the settings persisting
+across invocations. The commands for doing so, and where this
+configuration is stored, are explained in the section <span class=
+"sectref"><a href="#subsection4">Configuration
+management</a></span>.</p>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">Commands</a></h2>
+
+<div id="subsection1" class="subsection">
+<h3><a name="subsection1">General inquiries and getting new
+revisions</a></h3>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">teacup</b> <b class=
+"method">help</b></a></dt>
+
+<dd>
+<p>Information about the available commands and their syntax is
+printed to the standard output.</p>
+</dd>
+
+<dt><a name="2"><b class="cmd">teacup</b> <b class=
+"method">version</b></a></dt>
+
+<dd>
+<p>Prints the version number of the application to the standard
+output.</p>
+</dd>
+
+<dt><a name="3"><b class="cmd">teacup</b> <b class=
+"method">who</b></a></dt>
+
+<dd>
+<p>Prints the complete teapot meta data of the application to the
+standard output.</p>
+</dd>
+
+<dt><a name="4"><b class="cmd">teacup</b> <b class=
+"method">update-self</b> <span class="opt">?<b class=
+"option">-v</b>?</span></a></dt>
+
+<dd>
+<p>The command locates the newest revision of the application in
+the known set of archives, retrieves it, and overwrites itself with
+it. The application saves itself with the extension .bak before
+doing the update, to allow an easy restoration in case something
+goes wrong.</p>
+
+<p>For the unexplained option see section <b class=
+"sectref">Options</b>.</p>
+</dd>
+</dl>
+</div>
+
+<div id="subsection2" class="subsection">
+<h3><a name="subsection2">Management of installation
+repositories</a></h3>
+
+<p>Installation (repositories) are the repositories packages are
+installed into. One of these repositories will be the default
+destination for doing package installations.</p>
+
+<dl class="definitions">
+<dt><a name="5"><b class="cmd">teacup</b> <b class=
+"method">setup</b> <i class="arg">shell</i></a></dt>
+
+<dd>
+<p>While ActiveTcl's tcl shell comes already prepared with all the
+code necessary to be able to look for and use installation
+repositories, most Tcl shells, especially self-built ones, do not.
+This command takes the path to a valid Tcl <i class="arg">shell</i>
+and then adds the appropriate code, enabling it to look for and use
+installation repositories as well.</p>
+</dd>
+
+<dt><a name="6"><b class="cmd">teacup</b> <b class=
+"method">create</b> <span class="opt">?<i class=
+"arg">dir</i>?</span></a></dt>
+
+<dd>
+<p>This command creates a <i class="term">local</i> <i class=
+"term"><a href="../../index.html#key21">installation</a></i>
+repository at the directory <i class="arg">dir</i>. If no directory
+is specified then a platform-specific standard location is
+used:</p>
+
+<dl class="definitions">
+<dt>Unix</dt>
+
+<dd>
+<p>"<b class="file">~/.teapot/repository</b>"</p>
+</dd>
+
+<dt>Windows</dt>
+
+<dd>
+<p>"<b class="file">$USERPROFILE/Teapot/repository</b>".</p>
+</dd>
+
+<dt>OS X</dt>
+
+<dd>
+<p>"<b class="file">~/Library/Application
+Support/ActiveState/Teapot/repository</b>"</p>
+
+<p>(Note the space between "Application" and "Support").</p>
+</dd>
+</dl>
+</dd>
+
+<dt><a name="7"><b class="cmd">teacup</b> <b class=
+"method">delete</b> <i class="arg">dir</i></a></dt>
+
+<dd>
+<p>This command deletes the <i class="term">local</i> <i class=
+"term"><a href="../../index.html#key21">installation</a></i>
+repository at the directory <i class="arg">dir</i>. It takes care
+to break the connections to all shells using the repository before
+deleting it from the filesystem.</p>
+</dd>
+
+<dt><a name="8"><b class="cmd">teacup</b> <b class="method">link
+make</b> <i class="arg">dir</i> <i class="arg">shell</i></a></dt>
+
+<dd>
+<p>Create a connection between the installation repository at <i
+class="arg">dir</i> and the tcl <i class="arg">shell</i>. After
+this command is executed, the <i class="arg">shell</i> will search
+the installation repository at <i class="arg">dir</i> when a
+package is required, and the repository records the <i class=
+"arg">shell</i>'s location and platform information. The latter
+means that teacup will accept only packages compatible with the
+shell's platform before attempting to install a package, and it
+will ask the shell for the list of all packages it can use when
+checking if a package is already installed.</p>
+</dd>
+
+<dt><a name="9"><b class="cmd">teacup</b> <b class="method">link
+cut</b> (<i class="arg">dir</i>|<i class="arg">shell</i>) (<i
+class="arg">dir</i>|<i class="arg">shell</i>) ...</a></dt>
+
+<dd>
+<p>Removes the connection between the installation repository at <i
+class="arg">dir</i> and the tcl <i class="arg">shell</i>. From then
+on the <i class="arg">shell</i> will <em>not</em> search the
+repository when a package is required, and <b class=
+"syscmd">teacup</b> will not check the shell anymore when
+installing a package.</p>
+
+<p>Note that it is allowed to specify an arbitrary number of <i
+class="arg">shell</i>s and repository <i class="arg">dir</i>s, in
+arbitrary order. The command will disconnect all possible
+pairs.</p>
+</dd>
+
+<dt><a name="10"><b class="cmd">teacup</b> <b class="method">link
+info</b> <i class="arg">dir</i>|<i class="arg">shell</i></a></dt>
+
+<dd>
+<p>Prints either the list of shells the repository at <i class=
+"arg">dir</i> is connected to, or the list of repositories the <i
+class="arg">shell</i> is using.</p>
+</dd>
+
+<dt><a name="11"><b class="cmd">teacup</b> <b class=
+"method">default</b> <span class="opt">?<i class=
+"arg">dir</i>?</span></a></dt>
+
+<dd>
+<p>This command sets or queries which installation is the <i class=
+"term">default installation</i> repository.</p>
+
+<p>When called with the <i class="arg">dir</i> specified all future
+calls will use the <i class="term"><a href=
+"../../index.html#key21">installation</a></i> at that location by
+default.</p>
+
+<p>The command always prints the data of the <i class=
+"term">default installation</i> to stdout. In this way an
+invocation without <i class="arg">dir</i> simply queries the
+current settings.</p>
+</dd>
+</dl>
+</div>
+
+<div id="subsection3" class="subsection">
+<h3><a name="subsection3">Management of archives</a></h3>
+
+<p>The <i class="term">archives</i> are the repositories the
+packages to install are searched in and <em>drawn from</em>. For
+their management we have three commands, to list the current set,
+and add/remove repositories to/from the set.</p>
+
+<dl class="definitions">
+<dt><a name="12"><b class="cmd">teacup</b> <b class=
+"method">archive list</b></a></dt>
+
+<dd>
+<p>This command prints a list of all the archives known to the
+client to stdout.</p>
+</dd>
+
+<dt><a name="13"><b class="cmd">teacup</b> <b class=
+"method">archive add</b> <i class="arg">url</i></a></dt>
+
+<dd>
+<p>This command adds the <i class="term"><a href=
+"../../index.html#key4">archive</a></i> at location <i class=
+"arg">url</i> to the set of archives to query when searching for
+packages.</p>
+
+<p>The url can be a path in the local filesystem, a <b class=
+"const">file://</b>-url in the local filesystem, or a <b class=
+"const">http://</b>-url referring to a <i class="term"><a href=
+"../../index.html#key33">network</a></i> repository provided by a
+<b class="cmd"><a href="CTP_teapot.html">teapot</a></b> server
+running on some host.</p>
+</dd>
+
+<dt><a name="14"><b class="cmd">teacup</b> <b class=
+"method">archive remove</b> <i class="arg">url</i></a></dt>
+
+<dd>
+<p>This command removes the <i class="term"><a href=
+"../../index.html#key4">archive</a></i> at location <i class=
+"arg">url</i> from the set of archives to query when searching for
+packages.</p>
+
+<p>The url can be a path in the local filesystem, a <b class=
+"const">file://</b>-url in the local filesystem, or a <b class=
+"const">http://</b>-url referring to a <i class="term"><a href=
+"../../index.html#key33">network</a></i> repository provided by a
+<b class="cmd"><a href="CTP_teapot.html">teapot</a></b> server
+running on some host.</p>
+</dd>
+</dl>
+</div>
+
+<div id="subsection4" class="subsection">
+<h3><a name="subsection4">Configuration management</a></h3>
+
+<p>The behaviour of the application can be configured in various
+ways for the environment it is in, with the settings persisting
+across invocations. The commands for doing so, and where this
+configuration is stored, are explained here.</p>
+
+<p>The related commands to manage the <i class="term">default
+installation</i> and the set of <i class="term">archives</i> are
+not explained here, but in the sections <span class="sectref"><a
+href="#subsection2">Management of installation
+repositories</a></span> and <span class="sectref"><a href=
+"#subsection3">Management of archives</a></span> respectively. They
+use however the same underlying mechanisms as the configuration
+command to persist their settings.</p>
+
+<p>The configurable settings are</p>
+
+<ol class="enumerated">
+<li>
+<p>Whether to cache the indices of remote archives or not, and
+where.</p>
+</li>
+
+<li>
+<p>The timeout to use when accessing network repositories.</p>
+</li>
+
+<li>
+<p>If or what http-proxy to use when accessing network
+repositories.</p>
+</li>
+</ol>
+
+<p>On Unix the configuration is stored in a platform specific
+directory, whereas on Windows the registry is used. The internal
+structure of either directory or registry tree are not part of the
+public API and therefore not documented.</p>
+
+<dl class="definitions">
+<dt>Unix</dt>
+
+<dd>
+<p>"<b class="file">~/.teapot/config</b>"</p>
+</dd>
+
+<dt>Windows</dt>
+
+<dd>
+<p><b class=
+"variable">HKEY_CURRENT_USER\Software\ActiveState\TEAPOT</b></p>
+</dd>
+
+<dt>OS X</dt>
+
+<dd>
+<p>"<b class="file">~/Library/Application
+Support/ActiveState/Teapot/config</b>"</p>
+
+<p>(Note the space between "Application" and "Support").</p>
+</dd>
+</dl>
+
+<p>The commands to access the configuration are</p>
+
+<dl class="definitions">
+<dt><a name="15"><b class="cmd">teacup</b> <b class="method">cache
+on</b> <span class="opt">?<i class="arg">dir</i>?</span></a></dt>
+
+<dd>
+<p>This command enables the caching of the index databases from
+remote archives on the local system. This happens by default under
+the directory "<b class="file">~/.teapot/indexcache</b>", but this
+can be overridden by explicitly specifying a directory <i class=
+"arg">dir</i>.</p>
+</dd>
+
+<dt><a name="16"><b class="cmd">teacup</b> <b class="method">cache
+off</b></a></dt>
+
+<dd>
+<p>This command disables the caching of the index databases from
+remote archives on the local system. Existing cached indices and
+associated stati are not deleted, allowing their reuse if this
+feature is activated again.</p>
+
+<p>We do not recommend to deactivate the cache, as this will make
+searches in network repositories slow (The query has to be passed
+to the repository server for execution, the result has to be
+transfered back, and the server can become a bottleneck due to
+higher load).</p>
+</dd>
+
+<dt><a name="17"><b class="cmd">teacup</b> <b class="method">cache
+clear</b></a></dt>
+
+<dd>
+<p>This command deletes all cached indices and associated stati
+from the local filesystem. This command fails when caching is
+disabled, as at that time it is not known where to look for the
+index files.</p>
+
+<p>To get a clear disabled state clear the cache first, then
+disable it.</p>
+</dd>
+
+<dt><a name="18"><b class="cmd">teacup</b> <b class="method">cache
+status</b></a></dt>
+
+<dd>
+<p>This command prints the status of local caching of remote meta
+data. I.e. whether this is active or not, the path used for the
+cached information, timestamps for the cached indices.</p>
+</dd>
+
+<dt><a name="19"><b class="cmd">teacup</b> <b class=
+"method">proxy</b> <span class="opt">?<i class="arg">host</i> <i
+class="arg">port</i>?</span></a></dt>
+
+<dd>
+<p>Query or set the host and port used for proxying. Note that even
+if no proxying is set here the teacup will obey a proxying
+configuration set in the environment and/or registry, per the
+Tcllib package <b class="package">autoproxy</b>.</p>
+</dd>
+
+<dt><a name="20"><b class="cmd">teacup</b> <b class=
+"method">timeout</b> <span class="opt">?<i class=
+"arg">seconds</i>?</span></a></dt>
+
+<dd>
+<p>Query or set the number of seconds after which a remote
+operation times out. A negative value (including zero) disables the
+timeout, i.e. sets it to infinity.</p>
+</dd>
+</dl>
+</div>
+
+<div id="subsection5" class="subsection">
+<h3><a name="subsection5">Package management</a></h3>
+
+<dl class="definitions">
+<dt><a name="21"><b class="cmd">teacup</b> <b class=
+"method">install</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--dry-run</b>?</span> <span class=
+"opt">?<b class="option">--force</b>?</span> <span class="opt">?<b
+class="option">--at</b> <i class="arg">dir</i>?</span> <span class=
+"opt">?<b class="option">--with-recommends</b>?</span> (<i class=
+"arg">url</i> | <i class="arg">path</i> | (<i class="arg">name</i>
+<span class="opt">?<span class="opt">?<b class=
+"option">-exact</b>?</span> <i class="arg">version</i>?</span>
+<span class="opt">?-is <i class="arg">entity</i>?</span>))</a></dt>
+
+<dd>
+<p>Get and install the entity <i class="arg">name</i>, either the
+highest version, or at least <i class="arg">version</i>, or the
+exact version, and all its required dependencies (recursive).
+Recommended dependencies are not installed by default. The
+destination is either the <i class="term">default installation
+repository</i>, or the <i class="term"><a href=
+"../../index.html#key34">installation repository</a></i> specified
+via the option <b class="option">--at</b>.</p>
+
+<p>Assumes by default that a <i class="term"><a href=
+"../../index.html#key26">package</a></i> is installed, however this
+can be overridden by explictly specifying the type of the <i class=
+"arg">entity</i> with option <b class="option">-is</b>.</p>
+
+<p><em>Note</em>: When installing a newer version of an already
+installed entity it is <em>required</em> to specify not only the
+name, but the version number as well. With only a name the command
+will find the installed version of the entity in question and
+therefore see no need to install anything at all.</p>
+
+<p>For the options not explained below see section <b class=
+"sectref">Options</b>.</p>
+
+<dl class="options">
+<dt><b class="option">--force</b></dt>
+
+<dd>
+<p>Ensures the installation of the package even if the declared
+dependencies could not be met, i.e. if one or more required
+packages are not found in the set of configured archives.</p>
+
+<p>This option has no effect if <b class="syscmd">teacup</b>
+decided that there was no need to install an entity, i.e. when the
+entity is already installed. It is there to overcome missing
+dependencies, not to force the installation of an already installed
+entity.</p>
+</dd>
+
+<dt><b class="option">--with-recommends</b></dt>
+
+<dd>
+<p>Forces the handling of recommended dependencies as if they were
+required dependencies, i.e. forces their installation.</p>
+</dd>
+</dl>
+
+<p>If a <i class="arg">path</i> or <i class="arg">url</i> is
+specified it is considered as a package to install directly,
+without retrieving it from an archive. Note however that the
+dependency resolution for the package in the specified file is
+still done through the configured archives, and all the missing
+dependent packages are retrieved from the archives and installed as
+well.</p>
+
+<p>Some examples:</p>
+
+<p>To get all of ActiveTcl use</p>
+
+<pre class="example">
+    teacup install ActiveState::ActiveTcl
+</pre>
+
+<p>Or, if only the packages in Tcllib are needed, use</p>
+
+<pre class="example">
+    teacup install tcllib
+</pre>
+
+<p>See the <b class="method">profiles</b> command to determine what
+other profiles are available for the convenient installation of
+large bundles of packages. See the <b class="method">list</b> and
+<b class="method">search</b> commands to look up specific
+packages.</p>
+
+<p>If you wish to get all packages we have, beyond ActiveTcl, see
+the <b class="method">update</b> command.</p>
+</dd>
+
+<dt><a name="22"><b class="cmd">teacup</b> <b class=
+"method">remove</b> <span class="opt">?<b class=
+"option">--dry-run</b>?</span> <span class="opt">?<b class=
+"option">--at</b> <i class="arg">dir</i>?</span> <span class=
+"opt">?<b class="option">--is</b> <i class="arg">entity</i>?</span>
+<span class="opt">?<i class="arg">name</i> <span class="opt">?<i
+class="arg">version</i> <span class="opt">?<i class=
+"arg">architecture</i>?</span>?</span>?</span></a></dt>
+
+<dd>
+<p>Removes all or specified versions of the entity <i class=
+"arg">name</i> from the chosen <i class="term"><a href=
+"../../index.html#key21">installation</a></i>. It is possible to
+restrict the removal to a specific architecture of the package. It
+can furhter be forced to remove all packages in the target
+repository (by specifying neither <i class="arg">name</i> nor <i
+class="arg">version</i> nor <i class="arg">architecture</i>).</p>
+
+<p>For the options not explained below see section <b class=
+"sectref">Options</b>.</p>
+</dd>
+
+<dt><a name="23"><b class="cmd">teacup</b> <b class=
+"method">update</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--dry-run</b>?</span> <span class=
+"opt">?<b class="option">--only</b> <b class=
+"const">uninstalled</b>|<b class="const">newer</b>|<b class=
+"const">unknown</b>|<b class="const">update</b>?</span> <span
+class="opt">?<b class="option">--at</b> <i class=
+"arg">dir</i>?</span></a></dt>
+
+<dd>
+<p>This command is in essence a combination of</p>
+
+<ul class="itemized">
+<li>
+<p><b class="cmd">teacup</b> list --only uninstalled</p>
+</li>
+
+<li>
+<p><b class="cmd">teacup</b> list --only newer</p>
+</li>
+
+<li>
+<p><b class="cmd">teacup</b> install --force</p>
+</li>
+</ul>
+
+<p>It finds all packages which are not installed locally but
+present in the configured archives and installs them. It further
+finds the highest versions of all installed packages in the
+configured archives and install any not yet installed locally.</p>
+
+<p>By default both uninstalled and newer packages are installed,
+however by using the option --only the user can restrict this to
+either of the two.</p>
+
+<p>For the options not explained here see section <b class=
+"sectref">Options</b>.</p>
+</dd>
+
+<dt><a name="24"><b class="cmd">teacup</b> <b class=
+"method">describe</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class="arg">dir</i>?</span>
+<span class="opt">?<b class="option">--is</b> <i class=
+"arg">entity</i>?</span> <span class="opt">?<b class=
+"option">--all</b>?</span> <i class="arg">name</i> <span class=
+"opt">?<i class="arg">version</i> <span class="opt">?<i class=
+"arg">arch</i>?</span>?</span></a></dt>
+
+<dd>
+<p>Prints the contents of the meta data keyword <b class=
+"const">Description</b> for package <i class="arg">name</i>, or <i
+class="arg">name</i>+<i class="arg">version</i>, as found in the
+configured set of <i class="term">archives</i>.</p>
+
+<p>The output can be restricted to a specific <i class=
+"arg">version</i> or <i class="arg">arch</i>itecture of the
+package. If no architecture was specified the command will consider
+only instances for the current architecture. Using the string <b
+class="const">ALL</b> as architecture will cause description of all
+instances regardless of architecture.</p>
+
+<p>For the options not explained below see section <b class=
+"sectref">Options</b>.</p>
+
+<dl class="options">
+<dt><b class="option">--all</b></dt>
+
+<dd>
+<p>causes printing of all meta data for the package in
+question.</p>
+</dd>
+</dl>
+</dd>
+
+<dt><a name="25"><b class="cmd">teacup</b> <b class=
+"method">list</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--all-platforms</b>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class="arg">dir</i>?</span>
+<span class="opt">?<b class="option">--is</b> <i class=
+"arg">entity</i>?</span> <span class="opt">?<b class=
+"option">--as</b> <b class="const">csv</b>|<b class=
+"const">profile</b>|<b class="const">table</b>?</span> <span class=
+"opt">?<b class="option">--only</b> <b class=
+"const">uninstalled</b>|<b class="const">newer</b>|<b class=
+"const">unknown</b>|<b class="const">update</b>?</span> <span
+class="opt">?<i class="arg">name</i> <span class="opt">?<i class=
+"arg">version</i>?</span>?</span></a></dt>
+
+<dd>
+<p>Lists all occurences of the <i class="arg">name</i>d package in
+the configured set of <i class="term">archives</i>. The output can
+be restricted to a specific <i class="arg">version</i> of the
+package, or forced to contain all packages (by specifying neither
+<i class="arg">name</i> nor <i class="arg">version</i>).</p>
+
+<p>If a <i class="arg">name</i> was specified, but nothing was
+found the command does a case-insensitive substring search for
+candidate names and then re-does the operation for all found
+candidates. This fixes typos like 'bwidget' instead of 'BWidget',
+but also means that 'zlib' will find 'zlibtcl', etc.</p>
+
+<p>For the options not explained here see section <b class=
+"sectref">Options</b>.</p>
+
+<p><em>Limiters</em></p>
+
+<dl class="options">
+<dt><b class="option">--all-platforms</b></dt>
+
+<dd>
+<p>By default the output is limited to packages which can be
+installed on the local platform, as defined by the shells the
+installation repository is linked to. By specifying this option all
+packages in the archives are shown, even for platforms which are
+not relevant here.</p>
+</dd>
+
+<dt><b class="option">--only</b> <b class="const">unknown</b></dt>
+
+<dt><b class="option">--only</b> <b class=
+"const">uninstalled</b></dt>
+
+<dd>
+<p>If this option is specified the tool will remove all entities
+from the output which are known to be installed in the installation
+repository, and all which cannot be installed (wrong architecture,
+and profiles), leaving only those entities in the output which can
+be installed locally, but are not.</p>
+
+<p><em>Note</em> that the command will look not only at the
+installation repository itself for installed packages, but also
+query the tcl shells connected to that repository.</p>
+</dd>
+
+<dt><b class="option">--only</b> <b class="const">update</b></dt>
+
+<dt><b class="option">--only</b> <b class="const">newer</b></dt>
+
+<dd>
+<p>If this option is specified the tool will remove all entities
+from the output which are not installed in the installation
+repository, all which cannot be installed (wrong architecture, and
+profiles), and all those whose version number is less or equal to
+their installed version, leaving only those entities in the output
+which are installed and for which a newer version is available in
+the archives.</p>
+
+<p><em>Note</em> that the command will look not only at the
+installation repository itself for installed packages, but also
+query the tcl shells connected to that repository.</p>
+</dd>
+</dl>
+</dd>
+
+<dt><a name="26"><b class="cmd">teacup</b> <b class=
+"method">get</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class="arg">dir</i>?</span>
+<span class="opt">?<b class="option">--is</b> <i class=
+"arg">entity</i>?</span> <span class="opt">?<b class=
+"option">--output</b> <i class="arg">outdir</i>?</span> <span
+class="opt">?<i class="arg">name</i> <span class="opt">?<i class=
+"arg">version</i> <span class="opt">?<i class=
+"arg">architecture</i>?</span>?</span>?</span></a></dt>
+
+<dd>
+<p>Retrieve the package files for all occurences of the <i class=
+"arg">name</i>d package in the configured set of <i class=
+"term">archives</i>. The retrieval can be restricted to a specific
+<i class="arg">version</i> of the package, and even a specific <i
+class="arg">architecture</i> of that. It can also be forced to
+retrieve all packages (by specifying neither <i class=
+"arg">name</i> nor <i class="arg">version</i> nor <i class=
+"arg">architecture</i>).</p>
+
+<p>For the options not explained here see section <b class=
+"sectref">Options</b>.</p>
+
+<p>The retrieved files are placed into the directory specified via
+option <b class="option">--output</b>, with file names constructed
+from the package name, version, architecture, and type of archive.
+If the option <b class="option">--output</b> is not present the
+application will default to the current directory.</p>
+
+<p>The name of the package archive for an entity with type <b
+class="variable">T</b>, name <b class="variable">N</b>, version <b
+class="variable">V</b>, and architecture <b class="variable">A</b>
+is</p>
+
+<pre class="example">
+    T-N'-V-A.EXT
+</pre>
+
+<p>where <b class="variable">N'</b> is derived from <b class=
+"variable">N</b> by encoding the "<b class="const">:</b>"-character
+as <b class="const">%3a</b>. This is necessary to avoid problems on
+Windows, which does't allow "<b class="const">:</b>" within
+filenames. The extension <b class="variable">EXT</b> is either <b
+class="const">tm</b>, or <b class="const">zip</b>, depending on the
+file format. This last information is currently not directly
+available in the meta data.</p>
+
+<p>Also note that the architecture <b class="variable">A</b> may
+contain dashes (<b class="const">-</b>) as well.</p>
+</dd>
+
+<dt><a name="27"><b class="cmd">teacup</b> <b class=
+"method">profiles</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class=
+"arg">dir</i>?</span></a></dt>
+
+<dd>
+<p>Prints a list of all <i class="term"><a href=
+"../../index.html#key18">profile</a></i> packages found in the
+configured set of <i class="term">archives</i> to stdout. This is a
+shorthand for</p>
+
+<pre class="example">
+    teapot search -has Profile
+</pre>
+
+<p>For the options not explained here see section <b class=
+"sectref">Options</b>.</p>
+</dd>
+
+<dt><a name="28"><b class="cmd">teacup</b> <b class=
+"method">search</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class="arg">dir</i>?</span>
+<span class="opt">?<b class="option">--as</b> <b class=
+"const">csv</b>|<b class="const">profile</b>|<b class=
+"const">table</b>?</span> <i class="arg">query</i>...</a></dt>
+
+<dd>
+<p>Print a lists of all entities found in the configured set of <i
+class="term">archives</i> to stdout which match the conditions of
+the query.</p>
+
+<p>For the options not explained here see section <b class=
+"sectref">Options</b>.</p>
+
+<p>The simplest possible <i class="arg">query</i> consists of a
+single word, for example <b class="const">FOO</b>. This will run a
+case-insensitive substring search for the <i class="term">name</i>
+FOO.</p>
+
+<p>A more complex <i class="arg">query</i> consists of a series of
+options interspersed with regular words as arguments. The
+fundamental queries are</p>
+
+<dl class="options">
+<dt><b class="option">-is</b> ENTITY</dt>
+
+<dd>
+<p>The entity is of type ENTITY.</p>
+</dd>
+
+<dt><b class="option">-nis</b> ENTITY</dt>
+
+<dd>
+<p>The entity is not of type ENTITY.</p>
+</dd>
+
+<dt><b class="option">-has</b> KEY</dt>
+
+<dd>
+<p>The entity has key in its meta data.</p>
+</dd>
+
+<dt><b class="option">-nhas</b> KEY</dt>
+
+<dd>
+<p>The entity does not have the key in its meta data.</p>
+</dd>
+
+<dt><b class="option">-eq</b> KEY VAL</dt>
+
+<dd>
+<p>The entity's value for key is equal to VAL.</p>
+</dd>
+
+<dt><b class="option">-re</b> KEY PAT</dt>
+
+<dd>
+<p>The entity's value for key matches regexp pattern.</p>
+</dd>
+
+<dt><b class="option">-glob</b> KEY PAT</dt>
+
+<dd>
+<p>The entity's value for key matches glob pattern.</p>
+</dd>
+
+<dt><b class="option">-in</b> KEY VAL</dt>
+
+<dd>
+<p>The entity's value for key is list containing the value</p>
+</dd>
+
+<dt><b class="option">-ne</b> KEY VAL</dt>
+
+<dt><b class="option">-nre</b> KEY PAT</dt>
+
+<dt><b class="option">-nglob</b> KEY PAT</dt>
+
+<dt><b class="option">-ni</b> KEY PAT</dt>
+
+<dd>
+<p>negations of the four previous conditions</p>
+</dd>
+
+<dt><b class="option">-lt</b> KEY VAL</dt>
+
+<dd>
+<p>The entity's value for key is less than VAL.</p>
+</dd>
+
+<dt><b class="option">-gt</b> KEY VAL</dt>
+
+<dd>
+<p>The entity's value for key is greater than VAL.</p>
+</dd>
+
+<dt><b class="option">-le</b> KEY VAL</dt>
+
+<dd>
+<p>The entity's value for key is less than or equal to VAL.</p>
+</dd>
+
+<dt><b class="option">-ge</b> KEY VAL</dt>
+
+<dd>
+<p>The entity's value for key is greater than or equal to VAL.</p>
+</dd>
+</dl>
+
+<p>All these conditions imply that a matching entity also has the
+specified key in their meta data.</p>
+
+<p>Composite queries, also known as complex queries, can be put
+together with the operators <b class="option">-a</b>, <b class=
+"option">-and</b>, <b class="option">-o</b>, and <b class=
+"option">-or</b> ("and", and "or"). The operators <b class=
+"option">-a</b> and <b class="option">-and</b> are equivalent and
+are binding tighter than the operator <b class="option">-o</b> (and
+its equivalent operator <b class="option">-or</b>). This can be
+changed by grouping expressions with round parentheses, i.e. "(",
+and ")".</p>
+
+<p><em>Note</em> that parentheses are often special to the shell
+used to invoke <b class="syscmd">teacup</b>, i.e. they may require
+quoting to be passed unchanged to <b class="syscmd">teacup</b>.</p>
+
+<p>All operators can be also used with and without their dash (<b
+class="const">-</b>). The only exceptions are the short combinators
+<b class="option">-a</b> and <b class="option">-o</b>. As example,
+the two following queries are equivalent:</p>
+
+<pre class="example">
+  <b class="syscmd">teacup</b> search -in subject hashing
+  <b class="syscmd">teacup</b> search in subject hashing
+</pre>
+
+<p>Similarly the simple case-insensitive substring search shown at
+the beginning, i.e.</p>
+
+<pre class="example">
+  <b class="syscmd">teacup</b> search FOO
+</pre>
+
+<p>internally expands to a long form using Tcl's advanced regular
+expressions:</p>
+
+<pre class="example">
+  <b class="syscmd">teacup</b> search -re name '(?i)FOO'
+</pre>
+</dd>
+
+<dt><a name="29"><b class="cmd">teacup</b> <b class=
+"method">keys</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--timeout</b> <i class="arg">sec</i>?</span> <span class=
+"opt">?<b class="option">--http-proxy</b> <i class=
+"arg">host</i>:<i class="arg">port</i>?</span> <span class=
+"opt">?<b class="option">--at-default</b>?</span> <span class=
+"opt">?<b class="option">--at</b> <i class=
+"arg">dir</i>?</span></a></dt>
+
+<dd>
+<p>Prints a list of all keywords found in the meta data of all
+instances stored in the configured set of <i class=
+"term">archives</i>.</p>
+
+<p>For the options not explained here see section <b class=
+"sectref">Options</b>.</p>
+</dd>
+
+<dt><a name="30"><b class="cmd">teacup</b> <b class="method">log
+show</b> <span class="opt">?<b class="option">-l|--last</b> <i
+class="arg">n</i>?</span> <span class="opt">?<b class=
+"option">-s|--since</b> <i class="arg">timestamp</i>?</span> <span
+class="opt">?<b class="option">--at</b> <i class=
+"arg">dir</i>?</span></a></dt>
+
+<dd>
+<p>Show the log of installed/removed packages of either the default
+installation repository, or the repository pointed to by <b class=
+"option">--at</b>.</p>
+
+<p>Normally the whole log is shown, but this can be restricted to
+either the last <i class="arg">n</i> entries, or the entries made
+after a given date and time (<i class="arg">timestamp</i>). The
+restrictions cannot be combined. When specifying more than one the
+last one will be used.</p>
+
+<p>The log will be printed to the standard output in a simple
+tabular format, with the oldest entries coming last. I.e. the
+newest entries can be found at the top of the log.</p>
+
+<p>The argument <i class="arg">n</i> has to be an integer number
+greater than zero.</p>
+
+<p>The argument <i class="arg">timestamp</i> may have one of the
+following forms:</p>
+
+<dl class="definitions">
+<dt>INTEGER</dt>
+
+<dd>
+<p>Unix epoch value.</p>
+</dd>
+
+<dt>YYYY-MM-DD HH:MM:SS</dt>
+
+<dd>
+<p>ISO DATE+TIME</p>
+</dd>
+
+<dt>YYYY-MM-DD</dt>
+
+<dd>
+<p>ISO DATE only, the time defaults to midnight.</p>
+</dd>
+
+<dt>HH:MM:SS</dt>
+
+<dd>
+<p>ISO TIME only, the date defaults to today.</p>
+</dd>
+</dl>
+
+<p>An example of the output format is</p>
+
+<pre class="example">
+2007-03-02 14:16:12 1 remove  package udp      1.0.8 linux-glibc2.2-ix86
+2007-03-02 14:10:04 1 install package udp      1.0.8 linux-glibc2.2-ix86
+2007-03-02 14:09:50 1 install package Diagrams 0.2   tcl
+</pre>
+
+<p>The columns are DATE, TIME, SERIAL, ACTION, ENTITY, NAME,
+VERSION, ARCH; in this order.</p>
+
+<dl class="definitions">
+<dt>DATE, and TIME</dt>
+
+<dd>
+<p>are the date &amp; time when the log entry was made.</p>
+</dd>
+
+<dt>SERIAL</dt>
+
+<dd>
+<p>is a serial number which distinguishes entries should they
+happen to be made in the same second. It is counted from 1 up, per
+invocation of <b class="cmd">teacup</b>.</p>
+</dd>
+
+<dt>ACTION</dt>
+
+<dd>
+<p>is either <b class="const">install</b>, or <b class=
+"const">remove</b>.</p>
+</dd>
+
+<dt>ENTITY</dt>
+
+<dd>
+<p>is the type of the entity installed/removed, currently either <b
+class="const">package</b> or <b class="const">application</b>.</p>
+</dd>
+
+<dt>NAME, VERSION, and ARCH</dt>
+
+<dd>
+<p>identify the entity more, by name, version and architecture,
+also known as platform.</p>
+</dd>
+</dl>
+
+<p>The lengths and positions of the columns SERIAL, ENTITY, NAME,
+VERSION, and ARCH are dynamically determined from the entries
+printed. The other columns all have fixed lengths, but may change
+position.</p>
+
+<dl class="definitions">
+<dt>DATE</dt>
+
+<dd>
+<p>10 chars.</p>
+</dd>
+
+<dt>TIME</dt>
+
+<dd>
+<p>8 chars.</p>
+</dd>
+
+<dt>ACTION</dt>
+
+<dd>
+<p>7 chars.</p>
+</dd>
+</dl>
+</dd>
+
+<dt><a name="31"><b class="cmd">teacup</b> <b class="method">log
+purge</b> <span class="opt">?<b class="option">--keep-last</b> <i
+class="arg">n</i>?</span> <span class="opt">?<b class=
+"option">--keep-since</b> <i class="arg">timestamp</i>?</span>
+<span class="opt">?<b class="option">--at</b> <i class=
+"arg">dir</i>?</span></a></dt>
+
+<dd>
+<p>Purges the log of installed/removed packages of either the
+default installation repository, or the repository pointed to by <b
+class="option">--at</b>. Normally the whole log is purged, but this
+can be restricted to all but the last <i class="arg">n</i> entries,
+or all but the entries made after a given date and time (<i class=
+"arg">timestamp</i>). I.e. either the last <i class="arg">n</i>
+entries are kept in the log, or the entries made after the given
+date and time are kept in the log. The restrictions cannot be
+combined. When specifying more than one the last one will be
+used.</p>
+
+<p>The argument <i class="arg">n</i> has to be an integer number
+greater than zero.</p>
+
+<p>The argument <i class="arg">timestamp</i> may have the same
+forms as described for <b class="method">log show</b> above.</p>
+</dd>
+</dl>
+</div>
+
+<div id="subsection6" class="subsection">
+<h3><a name="subsection6">Trouble Shooting</a></h3>
+
+<p>While most of the introspection commands found in the management
+sections are useful when trying to determine the source of some
+trouble, there are two commands which are explicitly just for
+trouble-shooting.</p>
+
+<dl class="definitions">
+<dt><a name="32"><b class="cmd">teacup</b> <b class=
+"method">verify</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <span class="opt">?<b class=
+"option">--at</b> <i class="arg">dir</i>?</span></a></dt>
+
+<dd>
+<p>This command goes through the specified local repository and
+checks it for consistency. I.e. are all the packages listed in the
+database found in the filesystem and vice versa, are the necessary
+package index files present, etc.</p>
+</dd>
+
+<dt><a name="33"><b class="cmd">teacup</b> <b class=
+"method">regenerate</b> <span class="opt">?<b class=
+"option">--at</b> <i class="arg">dir</i>?</span></a></dt>
+
+<dd>
+<p>This command checks that the <i class="term">Consolidated Local
+Index of Packages</i> is not broken, and repairs it if it was. This
+is a "<b class="file">pkgIdex.tcl</b>" file maintained by teacup in
+the various "<b class="file">lib/</b>" directories of a repository
+to quickly source the indices of all the installed packages.</p>
+</dd>
+</dl>
+</div>
+
+<div id="subsection7" class="subsection">
+<h3><a name="subsection7">Common options</a></h3>
+
+<dl class="options">
+<dt><b class="option">--as</b> profile|table|csv</dt>
+
+<dd>
+<p>This option determines the format of the output for <b class=
+"method">list</b> and <b class="method">search</b> commands. By
+default a human readable <b class="const">table</b> it can be
+switched to be either a .tm <b class="const">profile</b> package
+listing all found instances as its dependencies, or a table of
+comma-separated values (<b class="const">csv</b>).</p>
+</dd>
+
+<dt><b class="option">--at</b> <i class="arg">dir</i></dt>
+
+<dd>
+<p>This option causes the application to use the <i class=
+"term">local installation</i> at <i class="arg">dir</i> instead of
+the default installation. I.e. it can be used instead of <b class=
+"option">--at-default</b>.</p>
+</dd>
+
+<dt><b class="option">--at-default</b></dt>
+
+<dd>
+<p>This option causes the application to use the <i class=
+"term">local default installation</i> instead of the configured set
+of <i class="term">archives</i>.</p>
+</dd>
+
+<dt><b class="option">--dry-run</b></dt>
+
+<dd>
+<p>This option is like <b class="syscmd">make -n</b>. It causes the
+application to simulate the requested actions, but to not change
+any state.</p>
+</dd>
+
+<dt><b class="option">--http-proxy</b> <i class="arg">host</i>:<i
+class="arg">port</i></dt>
+
+<dd>
+<p>This option overrides all proxy settings from environment,
+teacup configuration, etc. with a setting just for the current
+command.</p>
+</dd>
+
+<dt><b class="option">--is</b> <i class="arg">entity</i></dt>
+
+<dd>
+<p>This option causes the application to restrict itself to
+entities of the specified type. If this option is not specified
+actions influence all entities matching the name, version, etc.,
+independent of their type.</p>
+</dd>
+
+<dt><b class="option">--timeout</b> <i class="arg">seconds</i></dt>
+
+<dd>
+<p>This option forces the use of a specific timeout when retrieving
+information from a remote repository. It overrides the settings
+from the configuration, and the hardwired defaults. A value &lt;= 0
+disables timeouts, allowing for infinite waiting.</p>
+</dd>
+
+<dt><b class="option">-v</b></dt>
+
+<dd>
+<p>This option activates a more verbose mode where teacup provides
+a bit more information about its internal activities.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="section4" class="section">
+<h2><a name="section4">Searching for packages and other
+things</a></h2>
+
+<p>The client application currently supports a number of predefined
+searches, shown below, and free-form searches over the entire
+stored meta data via the subcommand <b class="method">search</b>.
+As part of the list of predefined searches we also demonstrate how
+they could be implemented in terms of <b class=
+"method">search</b>.</p>
+
+<dl class="definitions">
+<dt>list --is <i class="arg">entity</i> <i class="arg">name</i> <i
+class="arg">version</i></dt>
+
+<dd>
+<p><b class="cmd">search -is <i class="arg">entity</i> -a -eq name
+<i class="arg">name</i> -a -eq version <i class=
+"arg">version</i></b></p>
+
+<p><b class="cmd">search -eq entity <i class="arg">entity</i> -a
+-eq name <i class="arg">name</i> -a -eq version <i class=
+"arg">version</i></b></p>
+
+<p>Show all entities of type <i class="arg">entity</i> with the
+specified exact <i class="arg">name</i> and exact <i class=
+"arg">version</i>. For example:</p>
+
+<pre class="example">
+    list   --is       application             base-tcl                8.4
+    search -is        application -a -eq Name base-tcl -a -eq Version 8.4
+    search -eq Entity application -a -eq Name base-tcl -a -eq Version 8.4
+</pre>
+</dd>
+
+<dt>list --is <i class="arg">entity</i> <i class=
+"arg">name</i></dt>
+
+<dd>
+<p><b class="cmd">search -is <i class="arg">entity</i> -a -eq Name
+<i class="arg">name</i></b></p>
+
+<p><b class="cmd">search -eq Entity <i class="arg">entity</i> -a
+-eq Name <i class="arg">name</i></b></p>
+
+<p>Show all entities of type <i class="arg">entity</i> with the
+specified exact <i class="arg">name</i>, regardless of version. For
+example:</p>
+
+<pre class="example">
+    list   --is       package             zlibtcl
+    search -is        package -a -eq Name zlibtcl
+    search -eq Entity package -a -eq Name zlibtcl
+</pre>
+</dd>
+
+<dt>list --is <i class="arg">entity</i></dt>
+
+<dd>
+<p><b class="cmd">search -is <i class="arg">entity</i></b></p>
+
+<p><b class="cmd">search -eq Entity <i class=
+"arg">entity</i></b></p>
+
+<p>Show all entities of type <i class="arg">entity</i>, regardless
+of name or version. For example:</p>
+
+<pre class="example">
+    list   --is       package
+    search -is        package
+    search -eq Entity package
+</pre>
+</dd>
+
+<dt>list <i class="arg">name</i> <i class="arg">version</i></dt>
+
+<dd>
+<p><b class="cmd">search -eq Name <i class="arg">name</i> -a -eq
+Version <i class="arg">version</i></b></p>
+
+<p>Show all entities with the specified exact <i class=
+"arg">name</i> and exact <i class="arg">version</i>, regardless of
+entity-type. For example:</p>
+
+<pre class="example">
+    list            XOTcl                1.3.5
+    search -eq Name XOTcl -a -eq Version 1.3.5
+</pre>
+</dd>
+
+<dt>list <i class="arg">name</i></dt>
+
+<dd>
+<p><b class="cmd">search -eq Name <i class="arg">name</i></b></p>
+
+<p>Show all entities with the specified exact <i class=
+"arg">name</i>, regardless of version or entity-type. For
+example:</p>
+
+<pre class="example">
+    list            XOTcl
+    search -eq name XOTcl
+</pre>
+</dd>
+
+<dt>list</dt>
+
+<dd>
+<p>Show all entities regardless of name, version or
+entity-type.</p>
+</dd>
+
+<dt>list --only uninstalled</dt>
+
+<dd>
+<p>Show all entities which are known to the archives, are not
+installed locally, and can be installed locally.</p>
+</dd>
+
+<dt>list --only newer</dt>
+
+<dd>
+<p>Show all entities which are installed locally and for which we
+can find newer versions in the archives.</p>
+</dd>
+
+<dt>profiles</dt>
+
+<dd>
+<p><b class="cmd">search -has Profile</b></p>
+
+<p>Show all entities regardless of name, version or entity-type,
+which are profiles.</p>
+</dd>
+</dl>
+
+<p>The <b class="method">install</b> command internally performs
+searches as well, similar to the list searches above, however the
+architecture is implicitly constrained to the architectures
+acceptable to selected installation repository, and the highest
+possible version is selected if no exact version was requested.</p>
+
+<p>In contrast to <b class="method">install</b> the method <b
+class="method">get</b> will retrieve all possible versions, and
+architectures.</p>
+</div>
+
+<div id="section5" class="section">
+<h2><a name="section5">BUGS, IDEAS, FEEDBACK</a></h2>
+
+<p>This document, and the application it describes, will
+undoubtedly contain bugs and other problems. Please report such at
+the <a href=
+"http://bugs.activestate.com/query.cgi?set_product=ActiveTcl">ActiveState
+ActiveTcl Bug Tracker</a>. The relevant component is
+<em>teapot</em>. Please also report any ideas for enhancements you
+may have for either application and/or documentation.</p>
+
+<p>The version number of the teacup application with the problem in
+question can be queried with the command <b class=
+"method">version</b>, as explained in section <span class=
+"sectref"><a href="#subsection1">General inquiries and getting new
+revisions</a></span>.</p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="CTP_teapot.html">teapot</a>, <a href=
+"CTP_teastir.html">teapot-admin</a>, <a href=
+"CTP_metadata.html">teapot-md</a>, <a href=
+"CTP_teazip.html">teapot-pkg</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../../index.html#key3">TEA</a>, <a href=
+"../../index.html#key2">TEAPOT</a>, <a href=
+"../../index.html#key14">client</a>, <a href=
+"../../index.html#key1">package management</a>, <a href=
+"../../index.html#key7">repository</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 2006-2008 ActiveState Software Inc.</p>
+</div>
+</div>
+</body>
+</html>
+

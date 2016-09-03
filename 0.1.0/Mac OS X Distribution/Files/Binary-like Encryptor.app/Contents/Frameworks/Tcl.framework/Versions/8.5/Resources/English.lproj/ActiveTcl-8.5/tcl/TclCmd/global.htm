@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - global manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> global</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+global - Access global variables 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>global</b> <i>varname</i> ?<i>varname ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command has no effect unless executed in the context of a proc
+body. If the <b>global</b> command is executed in the context of a
+proc body, it creates local variables linked to the corresponding
+global variables (though these linked variables, like those created
+by <b><a href="../TclCmd/upvar.htm">upvar</a></b>, are not included
+in the list returned by <b><a href="../TclCmd/info.htm">info
+locals</a></b>). 
+
+<p>If <i>varname</i> contains namespace qualifiers, the local
+variable's name is the unqualified name of the global variable, as
+determined by the <b>namespace tail</b> command.</p>
+
+<p><i>varname</i> is always treated as the name of a variable, not
+an array element. An error is returned if the name looks like an
+array element, such as <b>a(b)</b>.</p>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+This procedure sets the namespace variable <i>::a::x</i> 
+
+<pre>
+proc reset {} {
+    <b>global</b> a::x
+    set x 0
+}
+</pre>
+
+<p>This procedure accumulates the strings passed to it in a global
+buffer, separated by newlines. It is useful for situations when you
+want to build a message piece-by-piece (as if with <b><a href=
+"../TclCmd/puts.htm">puts</a></b>) but send that full message in a
+single piece (e.g. over a connection opened with <b><a href=
+"../TclCmd/socket.htm">socket</a></b> or as part of a counted HTTP
+response).</p>
+
+<pre>
+proc accum {string} {
+    <b>global</b> accumulator
+    append accumulator $string \n
+}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/namespace.htm">namespace</a></b>, <b><a href=
+"../TclCmd/upvar.htm">upvar</a></b>, <b><a href=
+"../TclCmd/variable.htm">variable</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/G.htm#global">global</a>, <a href=
+"../Keywords/N.htm#namespace">namespace</a>, <a href=
+"../Keywords/P.htm#procedure">procedure</a>, <a href=
+"../Keywords/V.htm#variable">variable</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

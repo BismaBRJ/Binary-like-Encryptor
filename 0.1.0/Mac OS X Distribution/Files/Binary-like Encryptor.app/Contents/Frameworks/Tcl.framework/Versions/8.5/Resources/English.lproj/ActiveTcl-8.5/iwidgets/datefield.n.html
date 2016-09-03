@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>datefield - Create and manipulate a date field
+widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>datefield - Create and manipulate a date field widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>datefield pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- LabeledWidget &lt;- datefield 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>background</b><br>
+<b>foreground</b><br>
+<b>justify</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>highlightColor</b><br>
+<b>relief</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>highlightThickness</b><br>
+</td>
+<td valign="top"><b>exportSelection</b><br>
+<b>insertBackground</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>disabledForeground</b><br>
+<b>labelMargin</b><br>
+<b>state</b><br>
+</td>
+<td valign="top"><b>labelBitmap</b><br>
+<b>labelPos</b><br>
+</td>
+<td valign="top"><b>labelFont</b><br>
+<b>labelText</b><br>
+</td>
+<td valign="top"><b>labelImage</b><br>
+<b>labelVariable</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="labeledwidget.n.html">"labeledwidget"</a> class
+manual entry for details on the inherited options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>childSitePos</b>
+Class:                  <b>Position</b>
+Command-Line Switch:    <b>-childsitepos</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the position of the child
+site in the date field: <b>n</b>, <b>s</b>, <b>e</b>, or <b>w</b>.
+The default is e.</div>
+
+<pre>
+Name:                   <b>command</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-command</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command to be
+executed upon detection of a Return key press event.</div>
+
+<pre>
+Name:                   <b>gmt</b>
+Class:                  <b>GMT</b>
+Command-Line Switch:    <b>-gmt</b>
+</pre>
+
+<div style="margin-left: 2em">Determines whether the date is
+calculated relative to Greenwich Mean Time. Accepts a boolean
+value. The default is no.</div>
+
+<pre>
+Name:                   <b>int</b>
+Class:                  <b>DateFormat</b>
+Command-Line Switch:    <b>-int</b>
+</pre>
+
+<div style="margin-left: 2em">Used to specify international date
+formats. This option must be a boolean value. When set to true, the
+date is formatted as YYYY-MM-DD. When set to false, it is formatted
+as MM/DD/YYYY. Note that this format is driven by the 'clock scan'
+command and that YYYY-MM-DD is supported in Tk 8.4 or later. The
+default is no.</div>
+
+<pre>
+Name:                   <b>iq</b>
+Class:                  <b>Iq</b>
+Command-Line Switch:    <b>-iq</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the level of intelligence
+to be shown in the actions taken by the datefield during the
+processing of keypress events. Valid settings include <b>high</b>,
+<b>average</b>, and <b>low</b>. With a high iq,the date prevents
+the user from typing in an invalid date. For example, if the
+current date is 05/31/1997 and the user changes the month to 04,
+then the day will be instantly modified for them to be 30. In
+addition, leap years are fully taken into account. With average iq,
+the month is limited to the values of 01-12, but it is possible to
+type in an invalid day. A setting of low iq instructs the widget to
+do no validity checking at all during date entry. With both average
+and low iq levels, it is assumed that the validity will be
+determined at a later time using the date's <b>isvalid</b>
+command.</div>
+
+<pre>
+Name:                   <b>state</b>
+Class:                  <b>State</b>
+Command-Line Switch:    <b>-state</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies one of two states for the
+datefield: <b>normal</b> or <b>disabled</b>. If the datefield is
+disabled then input is not accepted. The default is normal.</div>
+
+<pre>
+Name:                   <b>textBackground</b>
+Class:                  <b>Background</b>
+Command-Line Switch:    <b>-textbackground</b>
+</pre>
+
+<div style="margin-left: 2em">Background color for inside textual
+portion of the entry field. The value may be given in any of the
+forms acceptable to <b>Tk_GetColor</b>.</div>
+
+<pre>
+Name:                   <b>textFont</b>
+Class:                  <b>Font</b>
+Command-Line Switch:    <b>-textfont</b>
+</pre>
+
+<div style="margin-left: 2em">Name of font to use for display of
+text in datefield. The value may be given in any of the forms
+acceptable to <b>Tk_GetFont</b>.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>datefield</b> command creates an enhanced text entry
+widget for the purpose of date entry with various degrees of
+built-in intelligence.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>datefield</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for datefield
+widgets: 
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>datefield</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>datefield</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>get</b> ?<b>format</b>?</i></dt>
+
+<dd>Returns the current contents of the datefield in a format of
+string or as an integer clock value using the <b>-string</b> and
+<b>-clicks</b> format options respectively. The default is by
+string. Reference the clock command for more information on
+obtaining dates and their formats.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>isvalid</b></i></dt>
+
+<dd>Returns a boolean indication of the validity of the currently
+displayed date value. For example, 03/03/1960 is valid whereas
+02/29/1997 is invalid.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>show</b></i> date</dt>
+
+<dd>Changes the currently displayed date to be that of the date
+argument. The date may be specified either as a string, an integer
+clock value or the keyword "now". Reference the clock command for
+more information on obtaining dates and their formats.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>date</b>
+Class:                  <b>Entry</b>
+</pre>
+
+<div style="margin-left: 2em">The date component provides the entry
+field for date input and display. See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/entry.n.html">"entry"</a>
+widget manual entry for details on the date component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ proc returnCmd {} {
+   puts [.df get]
+ }
+
+ datefield .df -command returnCmd
+ pack .df -fill x -expand yes -padx 10 -pady 10
+</pre>
+
+<h2>AUTHOR</h2>
+
+Mark L. Ulferts 
+
+<h2>KEYWORDS</h2>
+
+datefield, widget
+</body>
+</html>
+

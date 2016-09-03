@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>StatusBar</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>StatusBar</b> - status bar widget</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>StatusBar</b></a> <i>pathName</i>
+?<i>option value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i>STANDARD OPTIONS</i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-background">-background or -bg</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-borderwidth">-borderwidth or
+-bd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-foreground">-foreground or -fg</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-orient">-orient</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-relief">-relief</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-troughcolor">-troughcolor</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-height">-height</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-showresize">-showresize</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-ipad">-ipad</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-pad">-pad</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-width">-width</a> </td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+ 
+
+<p>StatusBar widget is a simple container widget with a corner
+resize control, meant to be placed at the bottom of a toplevel
+dialog.</p>
+
+<br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-height"><b>-height</b></a></dt>
+
+<dd>Specifies the desired height for the widget.</dd>
+</dl>
+
+<dl>
+<dt><a name="-showresize"><b>-showresize</b></a></dt>
+
+<dd>Specifies whether to show the corner resize control.</dd>
+</dl>
+
+<dl>
+<dt><a name="-pad"><b>-pad</b></a></dt>
+
+<dd>The spacing to place around the status bar.</dd>
+</dl>
+
+<dl>
+<dt><a name="-ipad"><b>-ipad</b></a></dt>
+
+<dd>The spacing to place around individual status bar items.</dd>
+</dl>
+
+<dl>
+<dt><a name="-width"><b>-width</b></a></dt>
+
+<dd>Specifies the desired width for the widget.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="add"><i>pathName</i> <b>add</b></a> <b>widget</b>
+?<i>option</i> <i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Add a widget to the status bar. Possible options are: 
+
+<dl>
+<dt><b>-weight</b></dt>
+
+<dd>Weighting of this item for resizing (passed to
+<b>grid</b>).</dd>
+
+<dt><b>-separator</b></dt>
+
+<dd>Whether to use a separator for this item.</dd>
+
+<dt><b>-sticky</b></dt>
+
+<dd>Passed on to grid.</dd>
+
+<dt><b>-pad</b></dt>
+
+<dd>Override of the widget's <b>-ipad</b> option for this
+item.</dd>
+</dl>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="delete"><i>pathName</i> <b>delete</b></a>
+<b>widget</b> ?<i>widget</i> ...?</dt>
+
+<dd>Delete a widget and associated state from the status bar.</dd>
+</dl>
+
+<dl>
+<dt><a name="getframe"><i>pathName</i> <b>getframe</b></a></dt>
+
+<dd>Get the frame widget for the status bar in which status bar
+items should be created.</dd>
+</dl>
+
+<dl>
+<dt><a name="items"><i>pathName</i> <b>items</b></a></dt>
+
+<dd>List of items in the status bar.</dd>
+</dl>
+</body>
+</html>
+

@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>itcl - code (n)</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<center>
+<h1>[incr\ Tcl]</h1>
+</center>
+
+<h3>NAME</h3>
+
+code - capture the namespace context for a code fragment 
+
+<h3>SYNOPSIS</h3>
+
+<b>itcl::code</b> ?<b>-namespace</b> <i>name</i>? <i>command</i>
+?<i>arg arg ...</i>? 
+
+<h3>DESCRIPTION</h3>
+
+<p>Creates a scoped value for the specified <i>command</i> and its
+associated <i>arg</i> arguments. A scoped value is a list with
+three elements: the "@scope" keyword, a namespace context, and a
+value string. For example, the command</p>
+
+<blockquote>
+<pre>
+namespace foo {
+    code puts "Hello World!"
+}
+</pre>
+</blockquote>
+
+produces the scoped value: 
+
+<blockquote>
+<pre>
+@scope ::foo {puts {Hello World!}}
+</pre>
+</blockquote>
+
+Note that the <b>code</b> command captures the current namespace
+context. If the <b>-namespace</b> flag is specified, then the
+current context is ignored, and the <i>name</i> string is used as
+the namespace context. 
+
+<p>Extensions like Tk execute ordinary code fragments in the global
+namespace. A scoped value captures a code fragment together with
+its namespace context in a way that allows it to be executed
+properly later. It is needed, for example, to wrap up code
+fragments when a Tk widget is used within a namespace:</p>
+
+<blockquote>
+<pre>
+namespace foo {
+    private proc report {mesg} {
+        puts "click: $mesg"
+    }
+
+    button .b1 -text "Push Me" 
+        -command [code report "Hello World!"]
+    pack .b1
+}
+</pre>
+</blockquote>
+
+The code fragment associated with button .b1 only makes sense in
+the context of namespace "foo". Furthermore, the "report" procedure
+is private, and can only be accessed within that namespace. The
+<b>code</b> command wraps up the code fragment in a way that allows
+it to be executed properly when the button is pressed. 
+
+<p>Also, note that the <b>code</b> command preserves the integrity
+of arguments on the command line. This makes it a natural
+replacement for the <b>list</b> command, which is often used to
+format Tcl code fragments. In other words, instead of using the
+<b>list</b> command like this:</p>
+
+<blockquote>
+<pre>
+after 1000 [list puts "Hello $name!"]
+</pre>
+</blockquote>
+
+use the <b>code</b> command like this: 
+
+<blockquote>
+<pre>
+after 1000 [code puts "Hello $name!"]
+</pre>
+</blockquote>
+
+This not only formats the command correctly, but also captures its
+namespace context. 
+
+<p>Scoped commands can be invoked like ordinary code fragments,
+with or without the <b>eval</b> command. For example, the following
+statements work properly:</p>
+
+<blockquote>
+<pre>
+set cmd {@scope ::foo .b1}
+$cmd configure -background red
+
+set opts {-bg blue -fg white}
+eval $cmd configure $opts
+</pre>
+</blockquote>
+
+Note that scoped commands by-pass the usual protection mechanisms;
+the command: 
+
+<blockquote>
+<pre>
+@scope ::foo {report {Hello World!}}
+</pre>
+</blockquote>
+
+can be used to access the "foo::report" proc from any namespace
+context, even though it is private. 
+
+<h3>KEYWORDS</h3>
+
+scope, callback, namespace, public, protected, private 
+
+<hr>
+[ <a href="../itcl/contents.html">itcl</a> ] 
+
+<hr>
+<pre>
+Copyright &copy; 1989-1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.
+</pre>
+</body>
+</html>
+

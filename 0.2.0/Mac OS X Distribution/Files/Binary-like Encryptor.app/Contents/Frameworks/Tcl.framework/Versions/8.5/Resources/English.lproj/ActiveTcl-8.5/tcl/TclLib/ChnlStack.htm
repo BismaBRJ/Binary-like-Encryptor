@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_StackChannel manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> ChnlStack</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_StackChannel, Tcl_UnstackChannel, Tcl_GetStackedChannel,
+Tcl_GetTopChannel - manipulate stacked I/O channels 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+Tcl_Channel<br>
+<b>Tcl_StackChannel</b>(<i>interp, typePtr, clientData, mask,
+channel</i>)<br>
+int<br>
+<b>Tcl_UnstackChannel</b>(<i>interp, channel</i>)<br>
+Tcl_Channel<br>
+<b>Tcl_GetStackedChannel</b>(<i>channel</i>)<br>
+Tcl_Channel<br>
+<b>Tcl_GetTopChannel</b>(<i>channel</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Interpreter for error reporting.</dd>
+
+<dt>Tcl_ChannelType <b>*typePtr</b> (in)</dt>
+
+<dd>The new channel I/O procedures to use for <i>channel</i>.</dd>
+
+<dt>ClientData <b>clientData</b> (in)</dt>
+
+<dd>Arbitrary one-word value to pass to channel I/O
+procedures.</dd>
+
+<dt>int <b>mask</b> (in)</dt>
+
+<dd>Conditions under which <i>channel</i> will be used: OR-ed
+combination of <b>TCL_READABLE</b>, <b>TCL_WRITABLE</b> and
+<b>TCL_EXCEPTION</b>. This can be a subset of the operations
+currently allowed on <i>channel</i>.</dd>
+
+<dt>Tcl_Channel <b>channel</b> (in)</dt>
+
+<dd>An existing Tcl channel such as returned by <b><a href=
+"../TclLib/CrtChannel.htm">Tcl_CreateChannel</a></b>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These functions are for use by extensions that add processing
+layers to Tcl I/O channels. Examples include compression and
+encryption modules. These functions transparently stack and unstack
+a new channel on top of an existing one. Any number of channels can
+be stacked together. 
+
+<p>The implementation of the Tcl channel code was rewritten in
+8.3.2 to correct some problems with the previous implementation
+with regard to stacked channels. Anyone using stacked channels or
+creating stacked channel drivers should update to the new
+<b>TCL_CHANNEL_VERSION_2</b> <b>Tcl_ChannelType</b> structure. See
+<b><a href="../TclLib/CrtChannel.htm">Tcl_CreateChannel</a></b> for
+details.</p>
+
+<p><b>Tcl_StackChannel</b> stacks a new <i>channel</i> on an
+existing channel with the same name that was registered for
+<i>channel</i> by <b><a href=
+"../TclLib/OpenFileChnl.htm">Tcl_RegisterChannel</a></b>.</p>
+
+<p><b>Tcl_StackChannel</b> works by creating a new channel
+structure and placing itself on top of the channel stack. EOL
+translation, encoding and buffering options are shared between all
+channels in the stack. The hidden channel does no buffering,
+newline translations, or character set encoding. Instead, the
+buffering, newline translations, and encoding functions all remain
+at the top of the channel stack. A pointer to the new top channel
+structure is returned. If an error occurs when stacking the
+channel, NULL is returned instead.</p>
+
+<p>The <i>mask</i> parameter specifies the operations that are
+allowed on the new channel. These can be a subset of the operations
+allowed on the original channel. For example, a read-write channel
+may become read-only after the <b>Tcl_StackChannel</b> call.</p>
+
+<p>Closing a channel closes the channels stacked below it. The
+close of stacked channels is executed in a way that allows buffered
+data to be properly flushed.</p>
+
+<p><b>Tcl_UnstackChannel</b> reverses the process. The old channel
+is associated with the channel name, and the processing module
+added by <b>Tcl_StackChannel</b> is destroyed. If there is no old
+channel, then <b>Tcl_UnstackChannel</b> is equivalent to <b><a
+href="../TclLib/OpenFileChnl.htm">Tcl_Close</a></b>. If an error
+occurs unstacking the channel, <b>TCL_ERROR</b> is returned,
+otherwise <b>TCL_OK</b> is returned.</p>
+
+<p><b>Tcl_GetTopChannel</b> returns the top channel in the stack of
+channels the supplied channel is part of.</p>
+
+<p><b>Tcl_GetStackedChannel</b> returns the channel in the stack of
+channels which is just below the supplied channel.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b>Notifier</b>, <b><a href=
+"../TclLib/CrtChannel.htm">Tcl_CreateChannel</a></b>, <b><a href=
+"../TclLib/OpenFileChnl.htm">Tcl_OpenFileChannel</a></b>,
+<b>vwait(n).</b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#channel">channel</a>, <a href=
+"../Keywords/C.htm#compression">compression</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1999-2000 Ajuba Solutions.</div>
+</body>
+</html>
+

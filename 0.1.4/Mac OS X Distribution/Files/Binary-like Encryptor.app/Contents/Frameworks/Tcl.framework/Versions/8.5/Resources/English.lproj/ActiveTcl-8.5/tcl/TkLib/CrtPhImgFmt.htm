@@ -1,0 +1,390 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_CreatePhotoImageFormat manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> CrtPhImgFmt</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="CrtPhImgFmt.htm#M2" name="L159">NAME</a> 
+
+<dl>
+<dd>Tk_CreatePhotoImageFormat - define new file format for photo
+images</dd>
+</dl>
+</dd>
+
+<dd><a href="CrtPhImgFmt.htm#M3" name="L160">SYNOPSIS</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M4" name="L161">ARGUMENTS</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M5" name="L162">DESCRIPTION</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M6" name="L163">NAME</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M7" name="L164">FILEMATCHPROC</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M8" name=
+"L165">STRINGMATCHPROC</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M9" name="L166">FILEREADPROC</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M10" name=
+"L167">STRINGREADPROC</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M11" name=
+"L168">FILEWRITEPROC</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M12" name=
+"L169">STRINGWRITEPROC</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M13" name="L170">LEGACY INTERFACE
+SUPPORT</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M14" name="L171">SEE ALSO</a></dd>
+
+<dd><a href="CrtPhImgFmt.htm#M15" name="L172">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_CreatePhotoImageFormat - define new file format for photo images
+
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+<b>Tk_CreatePhotoImageFormat</b>(<i>formatPtr</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_PhotoImageFormat <b>*formatPtr</b> (in)</dt>
+
+<dd>Structure that defines the new file format.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tk_CreatePhotoImageFormat</b> is invoked to define a new file
+format for image data for use with photo images. The code that
+implements an image file format is called an image file format
+handler, or handler for short. The photo image code maintains a
+list of handlers that can be used to read and write data to or from
+a file. Some handlers may also support reading image data from a
+string or converting image data to a string format. The user can
+specify which handler to use with the <b>-format</b> image
+configuration option or the <b>-format</b> option to the <b><a
+href="../TclCmd/read.htm">read</a></b> and <b>write</b> photo image
+subcommands. 
+
+<p>An image file format handler consists of a collection of
+procedures plus a Tk_PhotoImageFormat structure, which contains the
+name of the image file format and pointers to six procedures
+provided by the handler to deal with files and strings in this
+format. The Tk_PhotoImageFormat structure contains the following
+fields:</p>
+
+<pre>
+typedef struct Tk_PhotoImageFormat {
+    char *<i>name</i>;
+    Tk_ImageFileMatchProc *<i>fileMatchProc</i>;
+    Tk_ImageStringMatchProc *<i>stringMatchProc</i>;
+    Tk_ImageFileReadProc *<i>fileReadProc</i>;
+    Tk_ImageStringReadProc *<i>stringReadProc</i>;
+    Tk_ImageFileWriteProc *<i>fileWriteProc</i>;
+    Tk_ImageStringWriteProc *<i>stringWriteProc</i>;
+} Tk_PhotoImageFormat;
+</pre>
+
+<p>The handler need not provide implementations of all six
+procedures. For example, the procedures that handle string data
+would not be provided for a format in which the image data are
+stored in binary, and could therefore contain null characters. If
+any procedure is not implemented, the corresponding pointer in the
+Tk_PhotoImageFormat structure should be set to NULL. The handler
+must provide the <i>fileMatchProc</i> procedure if it provides the
+<i>fileReadProc</i> procedure, and the <i>stringMatchProc</i>
+procedure if it provides the <i>stringReadProc</i> procedure.</p>
+
+<h3><a name="M6">NAME</a></h3>
+
+<p><i>formatPtr-&gt;name</i> provides a name for the image type.
+Once <b>Tk_CreatePhotoImageFormat</b> returns, this name may be
+used in the <b>-format</b> photo image configuration and subcommand
+option. The manual page for the photo image (photo(n)) describes
+how image file formats are chosen based on their names and the
+value given to the <b>-format</b> option. The first character of
+<i>formatPtr-&gt;name</i> must not be an uppercase character from
+the ASCII character set (that is, one of the characters
+<b>A</b>-<b>Z</b>). Such names are used only for legacy interface
+support (see below).</p>
+
+<h3><a name="M7">FILEMATCHPROC</a></h3>
+
+<i>formatPtr-&gt;fileMatchProc</i> provides the address of a
+procedure for Tk to call when it is searching for an image file
+format handler suitable for reading data in a given file.
+<i>formatPtr-&gt;fileMatchProc</i> must match the following
+prototype: 
+
+<pre>
+typedef int Tk_ImageFileMatchProc(
+    Tcl_Channel <i>chan</i>,
+    const char *<i>fileName</i>,
+    Tcl_Obj *<i>format</i>,
+    int *<i>widthPtr</i>,
+    int *<i>heightPtr</i>,
+    <a href="../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>);
+</pre>
+
+The <i>fileName</i> argument is the name of the file containing the
+image data, which is open for reading as <i>chan</i>. The
+<i>format</i> argument contains the value given for the
+<b>-format</b> option, or NULL if the option was not specified. If
+the data in the file appears to be in the format supported by this
+handler, the <i>formatPtr-&gt;fileMatchProc</i> procedure should
+store the width and height of the image in *<i>widthPtr</i> and
+*<i>heightPtr</i> respectively, and return 1. Otherwise it should
+return 0. 
+
+<h3><a name="M8">STRINGMATCHPROC</a></h3>
+
+<i>formatPtr-&gt;stringMatchProc</i> provides the address of a
+procedure for Tk to call when it is searching for an image file
+format handler for suitable for reading data from a given string.
+<i>formatPtr-&gt;stringMatchProc</i> must match the following
+prototype: 
+
+<pre>
+typedef int Tk_ImageStringMatchProc(
+    Tcl_Obj *<i>data</i>,
+    Tcl_Obj *<i>format</i>,
+    int *<i>widthPtr</i>,
+    int *<i>heightPtr</i>,
+    <a href="../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>);
+</pre>
+
+The <i>data</i> argument points to the object containing the image
+data. The <i>format</i> argument contains the value given for the
+<b>-format</b> option, or NULL if the option was not specified. If
+the data in the string appears to be in the format supported by
+this handler, the <i>formatPtr-&gt;stringMatchProc</i> procedure
+should store the width and height of the image in *<i>widthPtr</i>
+and *<i>heightPtr</i> respectively, and return 1. Otherwise it
+should return 0. 
+
+<h3><a name="M9">FILEREADPROC</a></h3>
+
+<i>formatPtr-&gt;fileReadProc</i> provides the address of a
+procedure for Tk to call to read data from an image file into a
+photo image. <i>formatPtr-&gt;fileReadProc</i> must match the
+following prototype: 
+
+<pre>
+typedef int Tk_ImageFileReadProc(
+    <a href="../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>,
+    Tcl_Channel <i>chan</i>,
+    const char *<i>fileName</i>,
+    Tcl_Obj *<i>format</i>,
+    PhotoHandle <i>imageHandle</i>,
+    int <i>destX</i>, int <i>destY</i>,
+    int <i>width</i>, int <i>height</i>,
+    int <i>srcX</i>, int <i>srcY</i>);
+</pre>
+
+The <i>interp</i> argument is the interpreter in which the command
+was invoked to read the image; it should be used for reporting
+errors. The image data is in the file named <i>fileName</i>, which
+is open for reading as <i>chan</i>. The <i>format</i> argument
+contains the value given for the <b>-format</b> option, or NULL if
+the option was not specified. The image data in the file, or a
+subimage of it, is to be read into the photo image identified by
+the handle <i>imageHandle</i>. The subimage of the data in the file
+is of dimensions <i>width</i> x <i>height</i> and has its top-left
+corner at coordinates (<i>srcX</i>,<i>srcY</i>). It is to be stored
+in the photo image with its top-left corner at coordinates
+(<i>destX</i>,<i>destY</i>) using the <b><a href=
+"../TkLib/FindPhoto.htm">Tk_PhotoPutBlock</a></b> procedure. The
+return value is a standard Tcl return value. 
+
+<h3><a name="M10">STRINGREADPROC</a></h3>
+
+<i>formatPtr-&gt;stringReadProc</i> provides the address of a
+procedure for Tk to call to read data from a string into a photo
+image. <i>formatPtr-&gt;stringReadProc</i> must match the following
+prototype: 
+
+<pre>
+typedef int Tk_ImageStringReadProc(
+    <a href="../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>,
+    Tcl_Obj *<i>data</i>,
+    Tcl_Obj *<i>format</i>,
+    PhotoHandle <i>imageHandle</i>,
+    int <i>destX</i>, int <i>destY</i>,
+    int <i>width</i>, int <i>height</i>,
+    int <i>srcX</i>, int <i>srcY</i>);
+</pre>
+
+The <i>interp</i> argument is the interpreter in which the command
+was invoked to read the image; it should be used for reporting
+errors. The <i>data</i> argument points to the image data in object
+form. The <i>format</i> argument contains the value given for the
+<b>-format</b> option, or NULL if the option was not specified. The
+image data in the string, or a subimage of it, is to be read into
+the photo image identified by the handle <i>imageHandle</i>. The
+subimage of the data in the string is of dimensions <i>width</i> x
+<i>height</i> and has its top-left corner at coordinates
+(<i>srcX</i>,<i>srcY</i>). It is to be stored in the photo image
+with its top-left corner at coordinates (<i>destX</i>,<i>destY</i>)
+using the <b><a href=
+"../TkLib/FindPhoto.htm">Tk_PhotoPutBlock</a></b> procedure. The
+return value is a standard Tcl return value. 
+
+<h3><a name="M11">FILEWRITEPROC</a></h3>
+
+<i>formatPtr-&gt;fileWriteProc</i> provides the address of a
+procedure for Tk to call to write data from a photo image to a
+file. <i>formatPtr-&gt;fileWriteProc</i> must match the following
+prototype: 
+
+<pre>
+typedef int Tk_ImageFileWriteProc(
+    <a href="../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>,
+    const char *<i>fileName</i>,
+    Tcl_Obj *<i>format</i>,
+    Tk_PhotoImageBlock *<i>blockPtr</i>);
+</pre>
+
+The <i>interp</i> argument is the interpreter in which the command
+was invoked to write the image; it should be used for reporting
+errors. The image data to be written are in memory and are
+described by the Tk_PhotoImageBlock structure pointed to by
+<i>blockPtr</i>; see the manual page FindPhoto(3) for details. The
+<i>fileName</i> argument points to the string giving the name of
+the file in which to write the image data. The <i>format</i>
+argument contains the value given for the <b>-format</b> option, or
+NULL if the option was not specified. The format string can contain
+extra characters after the name of the format. If appropriate, the
+<i>formatPtr-&gt;fileWriteProc</i> procedure may interpret these
+characters to specify further details about the image file. The
+return value is a standard Tcl return value. 
+
+<h3><a name="M12">STRINGWRITEPROC</a></h3>
+
+<i>formatPtr-&gt;stringWriteProc</i> provides the address of a
+procedure for Tk to call to translate image data from a photo image
+into a string. <i>formatPtr-&gt;stringWriteProc</i> must match the
+following prototype: 
+
+<pre>
+typedef int Tk_ImageStringWriteProc(
+    <a href="../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>,
+    Tcl_Obj *<i>format</i>,
+    Tk_PhotoImageBlock *<i>blockPtr</i>);
+</pre>
+
+The <i>interp</i> argument is the interpreter in which the command
+was invoked to convert the image; it should be used for reporting
+errors. The image data to be converted are in memory and are
+described by the Tk_PhotoImageBlock structure pointed to by
+<i>blockPtr</i>; see the manual page FindPhoto(3) for details. The
+data for the string should be put in the interpreter <i>interp</i>
+result. The <i>format</i> argument contains the value given for the
+<b>-format</b> option, or NULL if the option was not specified. The
+format string can contain extra characters after the name of the
+format. If appropriate, the <i>formatPtr-&gt;stringWriteProc</i>
+procedure may interpret these characters to specify further details
+about the image file. The return value is a standard Tcl return
+value. 
+
+<h3><a name="M13">LEGACY INTERFACE SUPPORT</a></h3>
+
+In Tk 8.2 and earlier, the definition of all the function pointer
+types stored in fields of a <b>Tk_PhotoImageFormat</b> struct were
+incompatibly different. Legacy programs and libraries dating from
+those days may still contain code that defines extended Tk photo
+image formats using the old interface. The Tk header file will
+still support this legacy interface if the code is compiled with
+the macro <b>USE_OLD_IMAGE</b> defined. Alternatively, the legacy
+interfaces are used if the first character of
+<i>formatPtr-&gt;name</i> is an uppercase ASCII character
+(<b>A</b>-<b>Z</b>), and explicit casts are used to forgive the
+type mismatch. For example, 
+
+<pre>
+static Tk_PhotoImageFormat myFormat = {
+    "MyFormat",
+    (Tk_ImageFileMatchProc *) FileMatch,
+    NULL,
+    (Tk_ImageFileReadProc *) FileRead,
+    NULL,
+    NULL,
+    NULL
+};
+</pre>
+
+would define a minimal <b>Tk_PhotoImageFormat</b> that operates
+provide only file reading capability, where <b>FileMatch</b> and
+<b>FileRead</b> are written according to the legacy interfaces of
+Tk 8.2 or earlier. 
+
+<p>Any stub-enabled extension providing an extended photo image
+format via the legacy interface enabled by the <b>USE_OLD_IMAGE</b>
+macro that is compiled against Tk 8.5 headers and linked against
+the Tk 8.5 stub library will produce a file that can be loaded only
+into interps with Tk 8.5 or later; that is, the normal
+stub-compatibility rules. If a developer needs to generate from
+such code a file that is loadable into interps with Tk 8.4 or
+earlier, they must use Tk 8.4 headers and stub libraries to do
+so.</p>
+
+<p>Any new code written today should not make use of the legacy
+interfaces. Expect their support to go away in Tk 9.</p>
+
+<h3><a name="M14">SEE ALSO</a></h3>
+
+<b><a href="../TkLib/FindPhoto.htm">Tk_FindPhoto</a></b>, <b><a
+href="../TkLib/FindPhoto.htm">Tk_PhotoPutBlock</a></b> 
+
+<h3><a name="M15">KEYWORDS</a></h3>
+
+<a href="../Keywords/P.htm#photo image">photo image</a>, <a href=
+"../Keywords/I.htm#image file">image file</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994 The Australian National University Copyright
+&copy; 1994-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

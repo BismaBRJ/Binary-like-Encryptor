@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>img-ps - Img</title>
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+</head>
+<body>
+<div class="doctools">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<hr>
+[ <a href="../../at.pkg_index.html">Main table Of Contents</a> | <a
+href="../toc.html">Img Table Of Contents</a> | <a href=
+"../index.html">Img Index</a> ] 
+
+<hr>
+<h1 class="title">img-ps(n) 1.4 "Img"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>img-ps - Img, Adobe PostScript Format (ps)</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">PostScript OPTIONS</a></li>
+
+<li class="section"><a href="#section3">REQUIREMENTS</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tk</b></li>
+
+<li>package require <b class="pkgname">img::ps <span class=
+"opt">?1.4?</span></b></li>
+</ul>
+
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">image</b> <b class="method">create
+photo</b> <span class="opt">?<i class="arg">name</i>?</span> <span
+class="opt">?<i class="arg">options</i>?</span></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>The package <b class="package">img::ps</b> is a sub-package of
+<b class="package">Img</b>. It can be loaded as a part of the
+complete Img support, via <b class="cmd">package require Img</b>,
+or on its own, via <b class="cmd">package require img::ps</b>.</p>
+
+<p>Like all packages of <b class="package">Img</b> it does
+<em>not</em> provide new commands, but extends the existing <b
+class="package"><a href="../index.html#key20">Tk</a></b> command <b
+class="cmd">image</b> so that it supports files containing raster
+images in the Adobe PostScript Format (ps). More specifically <b
+class="package">img::ps</b> extends <b class="package"><a href=
+"../index.html#key20">Tk</a></b>'s <b class="cmd">photo</b> image
+type.</p>
+
+<p>The name of the new format handler is <b class="const">ps</b>.
+This handler provides new additional configuration options. See
+section <span class="sectref"><a href="#section2">PostScript
+OPTIONS</a></span> for more detailed explanations.</p>
+
+<p>Note that this package provides a <b class="const">pdf</b>
+handler too, i.e. a handler for the Adobe Portable Document Format.
+That handler accepts the same options as the <b class=
+"const">ps</b> handler.</p>
+
+<p>The package delegates the actual conversion of data in
+PostScript and PDF format into a raster image to the <b class=
+"syscmd"><a href="../index.html#key2">ghostscript</a></b>
+application. It therefore depends upon the presence of said
+application and is non-functional is <b class="syscmd"><a href=
+"../index.html#key2">ghostscript</a></b> is not present.</p>
+
+<p>All of the above means that in a call like</p>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">image</b> <b class="method">create
+photo</b> <span class="opt">?<i class="arg">name</i>?</span> <span
+class="opt">?<i class="arg">options</i>?</span></a></dt>
+</dl>
+
+<ol class="enumerated">
+<li>
+<p>Image data in ps and PDF format (options <b class=
+"option">-data</b> and <b class="option">-file</b>) is detected
+automatically.</p>
+</li>
+
+<li>
+<p>The format names <b class="const">ps</b> and <b class=
+"const">pdf</b> are recognized by the option <b class=
+"option">-format</b>. In addition the value for the option is
+treated as list and may contain any of the special options listed
+in section <span class="sectref"><a href="#section2">PostScript
+OPTIONS</a></span>.</p>
+</li>
+</ol>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">PostScript OPTIONS</a></h2>
+
+<p>The handler provides two options, both influencing the reading
+of PostScript or PDF images. The handler is <em>not</em> able to
+write images in PostScript or PDF.</p>
+
+<dl class="definitions">
+<dt><b class="option">-index</b> <i class="arg">n</i></dt>
+
+<dd>
+<p>This option is for reading from PostScript/PDF data containing
+more than one page. When specified it will read the <i class=
+"arg">n</i>'th page in the data. The first page is at index <b
+class="const">0</b> and will be read by default, i.e. when the
+option is not specified.</p>
+
+<p><em>Note:</em> This option is not yet implemented.</p>
+</dd>
+
+<dt><b class="option">-zoom</b> <i class="arg">X</i> <i class=
+"arg">Y</i></dt>
+
+<dd>
+<p>Multiply image size by the given scale factors. If <i class=
+"arg">Y</i> is missing, the default is the same as <i class=
+"arg">X</i>. <i class="arg">X</i> and <i class="arg">Y</i> are
+allowed to be in floating point format, but they are rounded to the
+nearest practically possible value. For postscript this means the
+zoom factors should be multiples of 1/72.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">REQUIREMENTS</a></h2>
+
+<p>The code provided by Img does not perform the interpretation and
+rasterizing of the input by itself but delegates this to the <b
+class="syscmd"><a href="../index.html#key4">gs</a></b> application.
+This is the GhostScript implementation of PostScript (and PDF).</p>
+
+<p>If <b class="syscmd"><a href="../index.html#key4">gs</a></b> is
+not installed this format handler cannot be used.</p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="img-bmp.html">img-bmp</a>, <a href=
+"img-gif.html">img-gif</a>, <a href="img-ico.html">img-ico</a>, <a
+href="img.html">img-intro</a>, <a href=
+"img-jpeg.html">img-jpeg</a>, <a href="img-pcx.html">img-pcx</a>,
+<a href="img-pixmap.html">img-pixmap</a>, <a href=
+"img-png.html">img-png</a>, <a href="img-ppm.html">img-ppm</a>,
+img-ps, <a href="img-sgi.html">img-sgi</a>, <a href=
+"img-sun.html">img-sun</a>, <a href="img-tga.html">img-tga</a>, <a
+href="img-tiff.html">img-tiff</a>, <a href=
+"img-window.html">img-window</a>, <a href=
+"img-xbm.html">img-xbm</a>, <a href="img-xpm.html">img-xpm</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../index.html#key2">ghostscript</a>, <a href=
+"../index.html#key4">gs</a>, <a href="../index.html#key6">image
+handling</a>, <a href="../index.html#key9">pdf</a>, <a href=
+"../index.html#key12">postscript</a>, <a href=
+"../index.html#key14">ps</a>, <a href=
+"../index.html#key20">tk</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 1995-2009 Jan Nijtmans
+&lt;nijtmans@users.sourceforge.net&gt;</p>
+</div>
+
+<h4>Copyright &copy; 2015 <a href="http://www.activestate.com">for
+compilation: ActiveState</a></h4>
+</div>
+</body>
+</html>
+

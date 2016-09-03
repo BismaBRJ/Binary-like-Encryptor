@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>NoteBook</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>NoteBook</b> - Notebook manager widget</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>NoteBook</b></a> <i>pathName</i> ?<i>option
+value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i>STANDARD OPTIONS</i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-font">-font</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="ArrowButton.html">OPTIONS from
+<b>ArrowButton</b></a></i></dt>
+
+<dd>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;-activebackground</td>
+<td>&nbsp;&nbsp;-activeforeground</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-background or -bg</td>
+<td>&nbsp;&nbsp;-borderwidth or -bd</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-disabledforeground</td>
+<td>&nbsp;&nbsp;-foreground or -fg</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-repeatdelay</td>
+<td>&nbsp;&nbsp;-repeatinterval</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-arcradius">-arcradius</a></td>
+<td>&nbsp;&nbsp;<a href="#-height">-height</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-homogeneous">-homogeneous</a></td>
+<td>&nbsp;&nbsp;<a href="#-side">-side</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-tabbevelsize">-tabbevelsize</a></td>
+<td>&nbsp;&nbsp;<a href="#-tabpady">-tabpady</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-width">-width</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#bindtabs"><b>bindtabs</b></a>
+<i>event</i> <i>script</i></dd>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href=
+"#compute_size"><b>compute_size</b></a></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#delete"><b>delete</b></a> <i>page</i>
+?<i>destroyframe</i>?</dd>
+
+<dd><i>pathName</i> <a href="#getframe"><b>getframe</b></a>
+<i>page</i></dd>
+
+<dd><i>pathName</i> <a href="#index"><b>index</b></a>
+<i>page</i></dd>
+
+<dd><i>pathName</i> <a href="#insert"><b>insert</b></a>
+<i>index</i> <i>page</i> ?<i>option value...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#itemcget"><b>itemcget</b></a>
+<i>page</i> <i>option</i></dd>
+
+<dd><i>pathName</i> <a href=
+"#itemconfigure"><b>itemconfigure</b></a> <i>page</i>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#move"><b>move</b></a> <i>page</i>
+<i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#page"><b>page</b></a> <i>first</i>
+?<i>last</i>?</dd>
+
+<dd><i>pathName</i> <a href="#pages"><b>pages</b></a>
+?<i>first</i>? ?<i>last</i>?</dd>
+
+<dd><i>pathName</i> <a href="#raise"><b>raise</b></a>
+?<i>page</i>?</dd>
+
+<dd><i>pathName</i> <a href="#see"><b>see</b></a> <i>page</i></dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>NoteBook widget manage a set of pages and displays one of
+them.</p>
+
+<br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-arcradius"><b>-arcradius</b></a></dt>
+
+<dd>Specifies the amount of rounding effect at the corners of a
+tab. This value can be adjusted from 0 to 8 pixels with the default
+being 2 pixels. Usually, small values are preferable.</dd>
+</dl>
+
+<dl>
+<dt><a name="-height"><b>-height</b></a></dt>
+
+<dd>Specifies the desired height for the pages. If this option is
+equal to zero (the default) then the window will not request any
+size at all. In this case, user may want to call
+NoteBook::<b>compute_size</b> to make NoteBook larger enough to
+contains the largest page.</dd>
+</dl>
+
+<dl>
+<dt><a name="-homogeneous"><b>-homogeneous</b></a></dt>
+
+<dd>Specifies wether or not the label of the pages must have the
+same width.</dd>
+</dl>
+
+<dl>
+<dt><a name="-side"><b>-side</b></a></dt>
+
+<dd>Specifies the side where to place the label of the pages. Must
+be one of <b>top</b> or <b>bottom</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-tabbevelsize"><b>-tabbevelsize</b></a></dt>
+
+<dd>Specifies the amount of bevel the tabs should have. This value
+can be adjusted from 0 to 8 pixels with the default being 0 pixels.
+A zero pixel bevel is essentially rectangular while non-zero bevel
+size will look trapezoidal.</dd>
+</dl>
+
+<dl>
+<dt><a name="-tabpady"><b>-tabpady</b></a></dt>
+
+<dd>Specifies the padding between the text in the tab and the top
+and bottom of the tab. Padding may be a list of two values to
+specify padding for top and bottom separately. Padding defaults to
+{0 6}.</dd>
+</dl>
+
+<dl>
+<dt><a name="-width"><b>-width</b></a></dt>
+
+<dd>Specifies the desired width for the pages. If this option is
+equal to zero (the default) then the window will not request any
+size at all. In this case, user may want to call
+NoteBook::<b>compute_size</b> to make NoteBook larger enough to
+contains the largest page.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="bindtabs"><i>pathName</i> <b>bindtabs</b></a>
+<i>event</i> <i>script</i></dt>
+
+<dd>This command associates a command to execute whenever the event
+sequence given by <i>event</i> occurs on a tab. The page identifier
+on which the event occurs is appended to the command.</dd>
+</dl>
+
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="compute_size"><i>pathName</i>
+<b>compute_size</b></a></dt>
+
+<dd>This command can be called to make the NoteBook large enough to
+contain the largest page. Note that if all pages use -createcmd,
+they will have no requested size.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="delete"><i>pathName</i> <b>delete</b></a> <i>page</i>
+?<i>destroyframe</i>?</dt>
+
+<dd>Deletes the page <i>page</i>. If <i>destroyframe</i> is 1 (the
+default), the frame associated to <i>page</i> is destroyed. If
+<i>destroyframe</i> is 0, the frame is not destroyed and is reused
+by further call to <b>insert</b> with the same <i>page</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="getframe"><i>pathName</i> <b>getframe</b></a>
+<i>page</i></dt>
+
+<dd>Returns the pathname of the page <i>page</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="index"><i>pathName</i> <b>index</b></a>
+<i>page</i></dt>
+
+<dd>Return the numerical index corresponding to the item.</dd>
+</dl>
+
+<dl>
+<dt><a name="insert"><i>pathName</i> <b>insert</b></a> <i>index</i>
+<i>page</i> ?<i>option value...</i>?</dt>
+
+<dd>Insert a new page idendified by <i>page</i> at position
+<i>index</i> in the pages list. <i>index</i> must be numeric or
+<b>end</b>. The pathname of the new page is returned. 
+
+<dl>
+<dt><a name="Page-createcmd"><b>-createcmd</b></a></dt>
+
+<dd>Specifies a command to be called the first time the page is
+raised.</dd>
+</dl>
+
+<dl>
+<dt><a name="Page-image"><b>-image</b></a></dt>
+
+<dd>Specifies an image to display for the page at the left of the
+label</dd>
+</dl>
+
+<dl>
+<dt><a name="Page-leavecmd"><b>-leavecmd</b></a></dt>
+
+<dd>Specifies a command to be called when a page is about to be
+leaved. The command must return 0 if the page can not be leaved, or
+1 if it can.</dd>
+</dl>
+
+<dl>
+<dt><a name="Page-raisecmd"><b>-raisecmd</b></a></dt>
+
+<dd>Specifies a command to be called each time the page is
+raised.</dd>
+</dl>
+
+<dl>
+<dt><a name="Page-state"><b>-state</b></a></dt>
+
+<dd>Specifies the state of the page. Must be <b>normal</b> or
+<b>disabled</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="Page-text"><b>-text</b></a></dt>
+
+<dd>Specifies a label to display for the page.</dd>
+</dl>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="itemcget"><i>pathName</i> <b>itemcget</b></a>
+<i>page</i> <i>option</i></dt>
+
+<dd>Returns the current value of a configuration option for the
+item. <i>Option</i> may have any of the values accepted by the item
+creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="itemconfigure"><i>pathName</i>
+<b>itemconfigure</b></a> <i>page</i> ?<i>option</i>? ?<i>value</i>
+<i>option</i> <i>value</i> ...?</dt>
+
+<dd>This command is similar to the <b>configure</b> command, except
+that it applies to the options for an individual item, whereas
+<b>configure</b> applies to the options for the widget as a whole.
+<b>Options</b> may have any of the values accepted by the item
+creation widget command. If options are specified, options are
+modified as indicated in the command and the command returns an
+empty string. If no options are specified, returns a list
+describing the current options for the item. Read-only options are
+not be modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="move"><i>pathName</i> <b>move</b></a> <i>page</i>
+<i>index</i></dt>
+
+<dd>Moves <i>page</i> tab to index <i>index</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="page"><i>pathName</i> <b>page</b></a> <i>first</i>
+?<i>last</i>?</dt>
+
+<dd><b>Its use is deprecated. Use <i>pages</i> instead.</b><br>
+If <i>last</i> is omitted, returns the page at index <i>first</i>,
+or an empty string if <i>first</i> refers to a non-existent
+element. If <i>last</i> is specified, the command returns a list
+whose elements are all of the pages between <i>first</i> and
+<i>last</i>, inclusive. Both <i>first</i> and <i>last</i> may have
+any of the standard forms for indices.</dd>
+</dl>
+
+<dl>
+<dt><a name="pages"><i>pathName</i> <b>pages</b></a> ?<i>first</i>?
+?<i>last</i>?</dt>
+
+<dd>If <i>first</i> and <i>last</i> are omitted, returns the list
+of all pages. If <i>first</i> is specified and <i>last</i> omitted,
+returns the page at index <i>first</i>, or an empty string if
+<i>first</i> refers to a non-existent element. If <i>first</i> and
+<i>last</i> are specified, the command returns a list whose
+elements are all of the pages between <i>first</i> and <i>last</i>,
+inclusive. Both <i>first</i> and <i>last</i> may have any of the
+standard forms for indices.</dd>
+</dl>
+
+<dl>
+<dt><a name="raise"><i>pathName</i> <b>raise</b></a>
+?<i>page</i>?</dt>
+
+<dd>Raise the page <i>page</i>, or return the raised page if
+<i>page</i> is omitted.</dd>
+</dl>
+
+<dl>
+<dt><a name="see"><i>pathName</i> <b>see</b></a> <i>page</i></dt>
+
+<dd>Scrolls labels to make the label of the page <i>page</i>
+visible.</dd>
+</dl>
+</body>
+</html>
+

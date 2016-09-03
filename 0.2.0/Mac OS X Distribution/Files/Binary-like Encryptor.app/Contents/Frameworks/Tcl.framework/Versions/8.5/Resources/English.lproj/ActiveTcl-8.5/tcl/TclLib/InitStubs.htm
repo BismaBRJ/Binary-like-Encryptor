@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_InitStubs manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> InitStubs</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="InitStubs.htm#M2" name="L385">NAME</a> 
+
+<dl>
+<dd>Tcl_InitStubs - initialize the Tcl stubs mechanism</dd>
+</dl>
+</dd>
+
+<dd><a href="InitStubs.htm#M3" name="L386">SYNOPSIS</a></dd>
+
+<dd><a href="InitStubs.htm#M4" name="L387">ARGUMENTS</a></dd>
+
+<dd><a href="InitStubs.htm#M5" name="L388">INTRODUCTION</a> 
+
+<dl class="introduction">
+<dd><a href="InitStubs.htm#M6" name="L389">1)</a></dd>
+
+<dd><a href="InitStubs.htm#M7" name="L390">2)</a></dd>
+</dl>
+
+<dl class="introduction">
+<dd><a href="InitStubs.htm#M8" name="L391">1)</a></dd>
+
+<dd><a href="InitStubs.htm#M9" name="L392">2)</a></dd>
+
+<dd><a href="InitStubs.htm#M10" name="L393">3)</a></dd>
+</dl>
+</dd>
+
+<dd><a href="InitStubs.htm#M11" name="L394">DESCRIPTION</a></dd>
+
+<dd><a href="InitStubs.htm#M12" name="L395">SEE ALSO</a></dd>
+
+<dd><a href="InitStubs.htm#M13" name="L396">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_InitStubs - initialize the Tcl stubs mechanism 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+const char *<br>
+<b>Tcl_InitStubs</b>(<i>interp, version, exact</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Tcl interpreter handle.</dd>
+
+<dt>const char <b>*version</b> (in)</dt>
+
+<dd>A version string consisting of one or more decimal numbers
+separated by dots.</dd>
+
+<dt>int <b>exact</b> (in)</dt>
+
+<dd>Non-zero means that only the particular version specified by
+<i>version</i> is acceptable. Zero means that versions newer than
+<i>version</i> are also acceptable as long as they have the same
+major version number as <i>version</i>.</dd>
+</dl>
+
+<h3><a name="M5">INTRODUCTION</a></h3>
+
+The Tcl stubs mechanism defines a way to dynamically bind
+extensions to a particular Tcl implementation at run time. This
+provides two significant benefits to Tcl users: 
+
+<dl class="introduction">
+<dt><a name="M6">1)</a></dt>
+
+<dd>Extensions that use the stubs mechanism can be loaded into
+multiple versions of Tcl without being recompiled or relinked.</dd>
+
+<dt><a name="M7">2)</a></dt>
+
+<dd>Extensions that use the stubs mechanism can be dynamically
+loaded into statically-linked Tcl applications.</dd>
+</dl>
+
+<p>The stubs mechanism accomplishes this by exporting function
+tables that define an interface to the Tcl API. The extension then
+accesses the Tcl API through offsets into the function table, so
+there are no direct references to any of the Tcl library's symbols.
+This redirection is transparent to the extension, so an extension
+writer can continue to use all public Tcl functions as
+documented.</p>
+
+<p>The stubs mechanism requires no changes to applications
+incorporating Tcl interpreters. Only developers creating C-based
+Tcl extensions need to take steps to use the stubs mechanism with
+their extensions.</p>
+
+<p>Enabling the stubs mechanism for an extension requires the
+following steps:</p>
+
+<dl class="introduction">
+<dt><a name="M8">1)</a></dt>
+
+<dd>Call <b>Tcl_InitStubs</b> in the extension before calling any
+other Tcl functions.</dd>
+
+<dt><a name="M9">2)</a></dt>
+
+<dd>Define the <b>USE_TCL_STUBS</b> symbol. Typically, you would
+include the <b>-DUSE_TCL_STUBS</b> flag when compiling the
+extension.</dd>
+
+<dt><a name="M10">3)</a></dt>
+
+<dd>Link the extension with the Tcl stubs library instead of the
+standard Tcl library. On Unix platforms, the library name is
+<i>libtclstub8.5.a</i>; on Windows platforms, the library name is
+<i>tclstub85.lib</i>.</dd>
+</dl>
+
+<p>If the extension also requires the Tk API, it must also call
+<b><a href="../TkLib/TkInitStubs.htm">Tk_InitStubs</a></b> to
+initialize the Tk stubs interface and link with the Tk stubs
+libraries. See the <b><a href=
+"../TkLib/TkInitStubs.htm">Tk_InitStubs</a></b> page for more
+information.</p>
+
+<h3><a name="M11">DESCRIPTION</a></h3>
+
+<b>Tcl_InitStubs</b> attempts to initialize the stub table pointers
+and ensure that the correct version of Tcl is loaded. In addition
+to an interpreter handle, it accepts as arguments a version number
+and a Boolean flag indicating whether the extension requires an
+exact version match or not. If <i>exact</i> is 0, then the
+extension is indicating that newer versions of Tcl are acceptable
+as long as they have the same major version number as
+<i>version</i>; non-zero means that only the specified
+<i>version</i> is acceptable. <b>Tcl_InitStubs</b> returns a string
+containing the actual version of Tcl satisfying the request, or
+NULL if the Tcl version is not acceptable, does not support stubs,
+or any other error condition occurred. 
+
+<h3><a name="M12">SEE ALSO</a></h3>
+
+<b><a href="../TkLib/TkInitStubs.htm">Tk_InitStubs</a></b> 
+
+<h3><a name="M13">KEYWORDS</a></h3>
+
+<a href="../Keywords/S.htm#stubs">stubs</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1998-1999 Scriptics Corporation</div>
+</body>
+</html>
+

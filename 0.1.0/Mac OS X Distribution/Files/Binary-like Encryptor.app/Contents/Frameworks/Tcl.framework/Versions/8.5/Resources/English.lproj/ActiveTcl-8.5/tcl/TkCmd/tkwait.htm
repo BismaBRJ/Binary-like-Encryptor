@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - tkwait manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> tkwait</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+tkwait - Wait for variable to change or window to be destroyed 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>tkwait variable</b> <i>name</i><br>
+<b>tkwait visibility</b> <i>name</i><br>
+<b>tkwait window</b> <i>name</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>tkwait</b> command waits for one of several things to
+happen, then it returns without taking any other actions. The
+return value is always an empty string. If the first argument is
+<b><a href="../TclCmd/variable.htm">variable</a></b> (or any
+abbreviation of it) then the second argument is the name of a
+global variable and the command waits for that variable to be
+modified. If the first argument is <b>visibility</b> (or any
+abbreviation of it) then the second argument is the name of a
+window and the <b>tkwait</b> command waits for a change in its
+visibility state (as indicated by the arrival of a VisibilityNotify
+event). This form is typically used to wait for a newly-created
+window to appear on the screen before taking some action. If the
+first argument is <b>window</b> (or any abbreviation of it) then
+the second argument is the name of a window and the <b>tkwait</b>
+command waits for that window to be destroyed. This form is
+typically used to wait for a user to finish interacting with a
+dialog box before using the result of that interaction. 
+
+<p>While the <b>tkwait</b> command is waiting it processes events
+in the normal fashion, so the application will continue to respond
+to user interactions. If an event handler invokes <b>tkwait</b>
+again, the nested call to <b>tkwait</b> must complete before the
+outer call can complete.</p>
+
+<h3><a name="M5">KEYWORDS</a></h3>
+
+<a href="../Keywords/V.htm#variable">variable</a>, <a href=
+"../Keywords/V.htm#visibility">visibility</a>, <a href=
+"../Keywords/W.htm#wait">wait</a>, <a href=
+"../Keywords/W.htm#window">window</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1992 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

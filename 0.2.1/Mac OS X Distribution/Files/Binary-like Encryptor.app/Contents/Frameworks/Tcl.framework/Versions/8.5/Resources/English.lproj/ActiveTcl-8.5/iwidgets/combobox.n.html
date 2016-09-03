@@ -1,0 +1,545 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>combobox - Create and manipulate combination box
+widgets</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>combobox - Create and manipulate combination box widgets</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>combobox pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- LabeledWidget &lt;- Entryfield &lt;- Combobox 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><br>
+cursor<br>
+highlightColor<br>
+insertWidth<br>
+insertWidth<br>
+selectBorderWidth<br>
+</td>
+<td valign="top"><b><br>
+justify<br>
+highlightThickness<br>
+insertBackground<br>
+insertBorderWidth<br>
+textVariable<br>
+</b></td>
+<td valign="top">background<br>
+exportSelection<br>
+relief<br>
+insertOffTime<br>
+selectForeground<br>
+<br>
+</td>
+<td valign="top">borderWidth<br>
+foreground<br>
+width<br>
+insertOnTime<br>
+selectBackground<br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>hscrollmode</b><br>
+</td>
+<td valign="top"><b>textBackground</b><br>
+</td>
+<td valign="top"><b>textFont</b><br>
+</td>
+<td valign="top"><b>vscrollmode</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="scrolledlistbox.n.html">"scrolledlistbox"</a>
+manual entry for details on the above inherited options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>show</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/entry.n.html">"entry"</a>
+manual entry for details on the above inherited option.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>childSitePos</b><br>
+<b>invalid</b><br>
+</td>
+<td valign="top"><b>command</b><br>
+<b>textBackground</b><br>
+</td>
+<td valign="top"><b>fixed</b><br>
+<b>textFont</b><br>
+</td>
+<td valign="top"><b>focusCommand</b><br>
+<b>validate</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="entryfield.n.html">"entryfield"</a> class
+manual entry for details on the inherited options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>labelBitmap</b><br>
+<b>labelPos</b><br>
+</td>
+<td valign="top"><b>labelFont</b><br>
+<b>labelText</b><br>
+</td>
+<td valign="top"><b>labelImage</b><br>
+<b>labelVariable</b><br>
+</td>
+<td valign="top"><b>labelMargin</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="labeledwidget.n.html">"labeledwidget"</a> class
+manual entry for details on the inherited options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>arrowRelief</b>
+Class:                  <b>Relief</b>
+Command-Line Switch:    <b>-arrowrelief</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the relief style to use for
+a dropdown Combobox's arrow button in a normal (not depressed)
+state. Acceptable values are <b>raised</b>, <b>sunken</b>,
+<b>flat</b>, <b>ridge</b>, and <b>groove</b>. Sunken is discouraged
+as this is the relief used to indicate a depressed state. This
+option has no effect on simple Comboboxes. The default is
+raised.</div>
+
+<pre>
+Name:                   <b>completion</b>
+Class:                  <b>Completion</b>
+Command-Line Switch:    <b>-completion</b>
+</pre>
+
+<div style="margin-left: 2em">Boolean given in any of the forms
+acceptable to <b>Tcl_GetBoolean</b> which determines whether
+insertions into the entry field, whether from the keyboard or
+programmatically via the <b>insert</b> method, are automatically
+completed with the first matching item from the listbox. The
+default is true.</div>
+
+<pre>
+Name:                   <b>dropdown</b>
+Class:                  <b>Dropdown</b>
+Command-Line Switch:    <b>-dropdown</b>
+</pre>
+
+<div style="margin-left: 2em">Boolean describing the Combobox
+layout style given in any of the forms acceptable to
+<b>Tcl_GetBoolean</b>. If true, the Combobox will be a dropdown
+style widget which displays an entry field and an arrow button
+which when activated will pop up a scrollable list of items. If
+false, a simple Combobox style will be used which has an entry
+field and a scrollable list beneath it which is always visible.
+Both styles allow an optional label for the entry field area. The
+default is true.</div>
+
+<pre>
+Name:                   <b>editable</b>
+Class:                  <b>Editable</b>
+Command-Line Switch:    <b>-editable</b>
+</pre>
+
+<div style="margin-left: 2em">Boolean describing whether or not the
+text entry area is editable by the user. If true the user can add
+items to the combobox by entering text into the entry area and then
+pressing Return. If false, the list of items is non-editable and
+can only be changed by calling the insert or delete methods. (The
+value in the entry field can still be modified by selecting from
+the list.) Given in any of the forms acceptable to
+<b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<pre>
+Name:                   <b>grab</b>
+Class:                  <b>Grab</b>
+Command-Line Switch:    <b>-grab</b>
+</pre>
+
+<div style="margin-left: 2em">This option sets the grab scope for
+the appearance of the listbox in drop-down comboboxes. It can be
+either global or local. The default is local.</div>
+
+<pre>
+Name:                   <b>listHeight</b>
+Class:                  <b>Height</b>
+Command-Line Switch:    <b>-listheight</b>
+</pre>
+
+<div style="margin-left: 2em">Height of the listbox specified in
+any of the forms acceptable to <b>Tk_GetPixels</b>. The default is
+150 pixels.</div>
+
+<pre>
+Name:                   <b>margin</b>
+Class:                  <b>Margin</b>
+Command-Line Switch:    <b>-margin</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width in pixels between
+the entry component and the arrow button for a dropdown Combobox
+given in any of the forms acceptable to <b>Tk_GetPixels</b>. This
+option has no effect on a simple Combobox. The default is 1.</div>
+
+<pre>
+Name:                   <b>popupCursor</b>
+Class:                  <b>Cursor</b>
+Command-Line Switch:    <b>-popupcursor</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the cursor to be used for
+dropdown style listboxes. The value may have any of the forms
+acceptable to <b>Tk_GetCursor</b>. The default is arrow.</div>
+
+<pre>
+Name:                   <b>selectionCommand</b>
+Class:                  <b>SelectionCommand</b>
+Command-Line Switch:    <b>-selectioncommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command procedure
+which is called when an item in the listbox area is selected. The
+item will be selected in the list, the listbox will be removed if
+it is a dropdown Combobox, and the selected item's text will be
+inserted into the entry field before the -selectioncommand proc is
+called. The default is {}.</div>
+
+<pre>
+Name:                   <b>state</b>
+Class:                  <b>State</b>
+Command-Line Switch:    <b>-state</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the overall state of the
+Combobox megawidget. Can be either normal or disabled. If the
+Combobox is disabled, no text can be entered into the entry field,
+no selection can be made in the listbox, and the arrowBtn component
+is disabled. The default is normal.</div>
+
+<pre>
+Name:                   <b>unique</b>
+Class:                  <b>Unique</b>
+Command-Line Switch:    <b>-unique</b>
+</pre>
+
+<div style="margin-left: 2em">Boolean describing whether or not
+duplicate items are allowed in the combobox list. If true, then
+duplicates are not allowed to be inserted. If false, a duplicate
+entry causes selection of the item. Given in any of the forms
+acceptable to <b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>combobox</b> command creates an enhanced entry field
+widget with an optional associated label and a scrollable list.
+When an item is selected in the list area of a Combobox, its value
+is then displayed in the entry field text area. Functionally
+similar to an Optionmenu, the Combobox adds (optional) list
+scrolling and (optional) item editing and inserting
+capabilities.</p>
+
+<p>There are two basic styles of Comboboxes (determined by the
+-dropdown option): dropdown and simple. The dropdown style adds an
+arrow button to the right of the entry field which when activated
+will pop up (and down) the scrolled listbox beneath the entry
+field. The simple (non-dropdown) Combobox permanently displays the
+listbox beneath the entry field and has no arrow button. Either
+style allows an optional entry field label.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>combobox</b> command creates a new Tcl command whose name
+is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for Combobox
+widgets: 
+
+<h2>ASSOCIATED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>icursor</b><br>
+</td>
+<td valign="top"><b>scan</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/entry.n.html">"entry"</a>
+manual entries for details on the above associated methods.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>curselection</b><br>
+<b>xview</b><br>
+</td>
+<td valign="top"><b>index</b><br>
+<b>yview</b><br>
+</td>
+<td valign="top"><b>see</b><br>
+</td>
+<td valign="top"><b>size</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/listbox.n.html">"listbox"</a>
+manual entries for details on the above associated methods.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>getcurselection</b><br>
+</td>
+<td valign="top"><b>justify</b><br>
+</td>
+<td valign="top"><b>sort</b><br>
+</td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="scrolledlistbox.n.html">"scrolledlistbox"</a>
+manual entries for details on the above associated methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>combobox</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>clear</b> ?<b>component</b>?</i></dt>
+
+<dd>Clears the contents from one or both components. Valid
+component values are <b>list</b>, or <b>entry</b>. With no
+component specified, both are cleared.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>combobox</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>delete <i>component</i> <i>first</i>
+?<i>last</i>?</b></i></dt>
+
+<dd>Delete one or more elements from a given component, <b>list</b>
+or <b>entry</b>. If a list item to be removed is currently selected
+(displayed in the entry field area), the entry field will be
+cleared.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>get ?<i>index</i>?</b></i></dt>
+
+<dd>With no arguments, returns the contents currently in the entry
+field area. With a single argument, returns the contents of the
+listbox item at the indicated index.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>insert</b></i> component <i>index</i>
+<i>element</i> ?<i>element element ...</i>?</dt>
+
+<dd>Insert one or more new elements into the given component,
+<b>list</b> or <b>entry</b>, just before the element given by
+<i>index</i>.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>selection</b></i> option <i>first</i>
+?<i>last</i>?</dt>
+
+<dd>Adjust the selection within the listbox component and updates
+the contents of the entry field component to the value of the
+selected item. See the "listbox" manual entry for more details on
+parameter options.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>entry</b>
+Class:                  <b>Entry</b>
+</pre>
+
+<div style="margin-left: 2em">Text entry area where the current
+selection is displayed. If the Combobox is editable and its state
+is normal, the user can edit the contents of this item.</div>
+
+<pre>
+Name:                   <b>list</b>
+Class:                  <b>Scrolledlistbox</b>
+</pre>
+
+<div style="margin-left: 2em">Scrollable list which stores all the
+items which the user can select from. For dropdown Comboboxes, this
+component is hidden until the user pops it up by pressing on the
+arrow button to the right of the entry component. For simple
+Comboboxes this component is always visible just beneath the entry
+component.</div>
+
+<h2>DEFAULT BINDINGS</h2>
+
+<p>The Combobox generally has the same bindings as its primary
+component items - the Scrolledlistbox and Entryfield. However it
+also adds these:</p>
+
+<p>[1] Button-1 mouse press on the arrow key of a dropdown Combobox
+causes the list to be popped up. If the combobox is non-editable, a
+Button-1 press on the entry field area will also pop up the
+list.</p>
+
+<p>[2] Button-1 mouse press anywhere on the display removes a
+dropdown listbox which has been popped up, unless the keypress is
+upon one of the Combobox scrollbars which scrolls the list. If it
+is pressed upon an item in the list area, that item will be
+selected before the list is removed.</p>
+
+<p>[3] Button-3 mouse press on the arrow key of a dropdown Combobox
+causes the next item to be selected. Shift-Button-3 causes the
+previous item to be selected.</p>
+
+<p>[4] Escape keypress removes a dropdown list which has been
+popped up.</p>
+
+<p>[5] The &lt;space&gt; and &lt;Return&gt; keystrokes select the
+current item. They also remove the popped up list for dropdown
+comboboxes.</p>
+
+<p>[6] Up and Down arrow keypresses from the entry field and arrow
+button component cause the previous and next items in the listbox
+to be selected respectively. Ctl-P and Ctl-N are similarly mapped
+for emacs emulation.</p>
+
+<p>[7] Entry field and arrow button component Shift-Up and
+Shift-Down arrow keys pop up and down the listbox of a dropdown
+Combobox. The arrow button component also maps &lt;Return&gt; and
+&lt;space&gt; similarly.</p>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ proc selectCmd {} {
+    puts stdout "[.cb2 getcurselection]"
+ }
+
+ #
+ # Non-editable Dropdown Combobox
+ #
+ combobox .cb1 -labeltext Month: \\
+     -selectioncommand {puts "selected: [.cb1 getcurselection]"} \\
+     -editable false -listheight 185 -popupcursor hand1 
+ .cb1 insert list end Jan Feb Mar Apr May June Jul Aug Sept Oct Nov Dec
+    
+ #
+ # Editable Dropdown Combobox
+ #
+ combobox .cb2 -labeltext "Operating System:" -selectioncommand selectCmd
+ .cb2 insert list end Linux HP-UX SunOS Solaris Irix
+ .cb2 insert entry end L
+
+ pack .cb1 -padx 10 -pady 10 -fill x 
+ pack .cb2 -padx 10 -pady 10 -fill x
+
+</pre>
+
+<h2>ORIGINAL AUTHOR</h2>
+
+John S. Sigler 
+
+<h2>CURRENT MAINTAINER</h2>
+
+Mitch Gorman (logain@erols.com) 
+
+<h2>KEYWORDS</h2>
+
+combobox, entryfield, scrolledlistbox, itk::Widget, entry, listbox,
+widget, iwidgets
+</body>
+</html>
+

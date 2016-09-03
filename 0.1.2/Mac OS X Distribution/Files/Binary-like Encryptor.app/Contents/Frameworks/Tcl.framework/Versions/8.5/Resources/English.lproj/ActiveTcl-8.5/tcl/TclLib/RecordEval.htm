@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_RecordAndEval manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> RecordEval</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_RecordAndEval - save command on history list before evaluating 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_RecordAndEval</b>(<i>interp, cmd, flags</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Tcl interpreter in which to evaluate command.</dd>
+
+<dt>const char <b>*cmd</b> (in)</dt>
+
+<dd>Command (or sequence of commands) to execute.</dd>
+
+<dt>int <b>flags</b> (in)</dt>
+
+<dd>An OR'ed combination of flag bits. <b>TCL_NO_EVAL</b> means
+record the command but do not evaluate it. <b>TCL_EVAL_GLOBAL</b>
+means evaluate the command at global level instead of the current
+stack level.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_RecordAndEval</b> is invoked to record a command as an event
+on the history list and then execute it using <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b> (or <b><a href=
+"../TclLib/Eval.htm">Tcl_GlobalEval</a></b> if the
+<b>TCL_EVAL_GLOBAL</b> bit is set in <i>flags</i>). It returns a
+completion code such as <b>TCL_OK</b> just like <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b> and it leaves information in
+the interpreter's result. If you do not want the command recorded
+on the history list then you should invoke <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b> instead of
+<b>Tcl_RecordAndEval</b>. Normally <b>Tcl_RecordAndEval</b> is only
+called with top-level commands typed by the user, since the purpose
+of history is to allow the user to re-issue recently-invoked
+commands. If the <i>flags</i> argument contains the
+<b>TCL_NO_EVAL</b> bit then the command is recorded without being
+evaluated. 
+
+<p>Note that <b>Tcl_RecordAndEval</b> has been largely replaced by
+the object-based procedure <b><a href=
+"../TclLib/RecEvalObj.htm">Tcl_RecordAndEvalObj</a></b>. That
+object-based procedure records and optionally executes a command
+held in a Tcl object instead of a string.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclLib/RecEvalObj.htm">Tcl_RecordAndEvalObj</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#command">command</a>, <a href=
+"../Keywords/E.htm#event">event</a>, <a href=
+"../Keywords/E.htm#execute">execute</a>, <a href=
+"../Keywords/H.htm#history">history</a>, <a href=
+"../Keywords/I.htm#interpreter">interpreter</a>, <a href=
+"../Keywords/R.htm#record">record</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1989-1993 The Regents of the University of
+California. Copyright &copy; 1994-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

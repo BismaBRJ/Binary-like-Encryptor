@@ -1,0 +1,777 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - event manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> event</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="event.htm#M2" name="L492">NAME</a> 
+
+<dl>
+<dd>event - Miscellaneous event facilities: define virtual events
+and generate events</dd>
+</dl>
+</dd>
+
+<dd><a href="event.htm#M3" name="L493">SYNOPSIS</a> 
+
+<dl>
+<dd><b>event</b> <i>option</i> ?<i>arg arg ...</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="event.htm#M4" name="L494">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="event.htm#M5" name="L495"><b>event add
+&lt;&lt;</b><i>virtual</i><b>&gt;&gt;</b> <i>sequence</i>
+?<i>sequence ...</i>?</a></dd>
+
+<dd><a href="event.htm#M6" name="L496"><b>event delete
+&lt;&lt;</b><i>virtual</i><b>&gt;&gt;</b> ?<i>sequence</i>
+<i>sequence ...</i>?</a></dd>
+
+<dd><a href="event.htm#M7" name="L497"><b>event generate</b>
+<i>window event</i> ?<i>option value option value ...</i>?</a></dd>
+
+<dd><a href="event.htm#M8" name="L498"><b>event info</b>
+?<b>&lt;&lt;</b><i>virtual</i><b>&gt;&gt;</b>?</a></dd>
+</dl>
+</dd>
+
+<dd><a href="event.htm#M9" name="L499">EVENT FIELDS</a> 
+
+<dl class="event fields">
+<dd><a href="event.htm#M10" name="L500"><b>-above</b>
+<i>window</i></a></dd>
+
+<dd><a href="event.htm#M11" name="L501"><b>-borderwidth</b>
+<i>size</i></a></dd>
+
+<dd><a href="event.htm#M12" name="L502"><b>-button</b>
+<i>number</i></a></dd>
+
+<dd><a href="event.htm#M13" name="L503"><b>-count</b>
+<i>number</i></a></dd>
+
+<dd><a href="event.htm#M14" name="L504"><b>-data</b>
+<i>string</i></a></dd>
+
+<dd><a href="event.htm#M15" name="L505"><b>-delta</b>
+<i>number</i></a></dd>
+
+<dd><a href="event.htm#M16" name="L506"><b>-detail</b>
+<i>detail</i></a></dd>
+
+<dd><a href="event.htm#M17" name="L507"><b>-focus</b>
+<i>boolean</i></a></dd>
+
+<dd><a href="event.htm#M18" name="L508"><b>-height</b>
+<i>size</i></a></dd>
+
+<dd><a href="event.htm#M19" name="L509"><b>-keycode</b>
+<i>number</i></a></dd>
+
+<dd><a href="event.htm#M20" name="L510"><b>-keysym</b>
+<i>name</i></a></dd>
+
+<dd><a href="event.htm#M21" name="L511"><b>-mode</b>
+<i>notify</i></a></dd>
+
+<dd><a href="event.htm#M22" name="L512"><b>-override</b>
+<i>boolean</i></a></dd>
+
+<dd><a href="event.htm#M23" name="L513"><b>-place</b>
+<i>where</i></a></dd>
+
+<dd><a href="event.htm#M24" name="L514"><b>-root</b>
+<i>window</i></a></dd>
+
+<dd><a href="event.htm#M25" name="L515"><b>-rootx</b>
+<i>coord</i></a></dd>
+
+<dd><a href="event.htm#M26" name="L516"><b>-rooty</b>
+<i>coord</i></a></dd>
+
+<dd><a href="event.htm#M27" name="L517"><b>-sendevent</b>
+<i>boolean</i></a></dd>
+
+<dd><a href="event.htm#M28" name="L518"><b>-serial</b>
+<i>number</i></a></dd>
+
+<dd><a href="event.htm#M29" name="L519"><b>-state</b>
+<i>state</i></a></dd>
+
+<dd><a href="event.htm#M30" name="L520"><b>-subwindow</b>
+<i>window</i></a></dd>
+
+<dd><a href="event.htm#M31" name="L521"><b>-time</b>
+<i>integer</i></a></dd>
+
+<dd><a href="event.htm#M32" name="L522"><b>-warp</b>
+<i>boolean</i></a></dd>
+
+<dd><a href="event.htm#M33" name="L523"><b>-width</b>
+<i>size</i></a></dd>
+
+<dd><a href="event.htm#M34" name="L524"><b>-when</b>
+<i>when</i></a> 
+
+<dl class="event fields">
+<dd><a href="event.htm#M35" name="L525"><b>now</b></a></dd>
+
+<dd><a href="event.htm#M36" name="L526"><b>tail</b></a></dd>
+
+<dd><a href="event.htm#M37" name="L527"><b>head</b></a></dd>
+
+<dd><a href="event.htm#M38" name="L528"><b>mark</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="event.htm#M39" name="L529"><b>-x</b>
+<i>coord</i></a></dd>
+
+<dd><a href="event.htm#M40" name="L530"><b>-y</b>
+<i>coord</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="event.htm#M41" name="L531">PREDEFINED VIRTUAL
+EVENTS</a> 
+
+<dl class="predefined virtual events">
+<dd><a href="event.htm#M42" name=
+"L532"><b>&lt;&lt;AltUnderlined&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M43" name=
+"L533"><b>&lt;&lt;Invoke&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M44" name=
+"L534"><b>&lt;&lt;ListboxSelect&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M45" name=
+"L535"><b>&lt;&lt;MenuSelect&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M46" name=
+"L536"><b>&lt;&lt;Modified&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M47" name=
+"L537"><b>&lt;&lt;Selection&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M48" name=
+"L538"><b>&lt;&lt;ThemeChanged&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M49" name=
+"L539"><b>&lt;&lt;TraverseIn&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M50" name=
+"L540"><b>&lt;&lt;TraverseOut&gt;&gt;</b></a></dd>
+</dl>
+
+<dl class="predefined virtual events">
+<dd><a href="event.htm#M51" name=
+"L541"><b>&lt;&lt;Clear&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M52" name=
+"L542"><b>&lt;&lt;Copy&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M53" name=
+"L543"><b>&lt;&lt;Cut&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M54" name=
+"L544"><b>&lt;&lt;Paste&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M55" name=
+"L545"><b>&lt;&lt;PasteSelection&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M56" name=
+"L546"><b>&lt;&lt;PrevWindow&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M57" name=
+"L547"><b>&lt;&lt;Redo&gt;&gt;</b></a></dd>
+
+<dd><a href="event.htm#M58" name=
+"L548"><b>&lt;&lt;Undo&gt;&gt;</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="event.htm#M59" name="L549">VIRTUAL EVENT
+EXAMPLES</a></dd>
+
+<dd><a href="event.htm#M60" name="L550">SEE ALSO</a></dd>
+
+<dd><a href="event.htm#M61" name="L551">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+event - Miscellaneous event facilities: define virtual events and
+generate events 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>event</b> <i>option</i> ?<i>arg arg ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>event</b> command provides several facilities for dealing
+with window system events, such as defining virtual events and
+synthesizing events. The command has several different forms,
+determined by the first argument. The following forms are currently
+supported: 
+
+<dl class="description">
+<dt><a name="M5"><b>event add
+&lt;&lt;</b><i>virtual</i><b>&gt;&gt;</b> <i>sequence</i>
+?<i>sequence ...</i>?</a></dt>
+
+<dd>Associates the virtual event <i>virtual</i> with the physical
+event sequence(s) given by the <i>sequence</i> arguments, so that
+the virtual event will trigger whenever any one of the
+<i>sequence</i>s occurs. <i>Virtual</i> may be any string value and
+<i>sequence</i> may have any of the values allowed for the
+<i>sequence</i> argument to the <b><a href=
+"../TkCmd/bind.htm">bind</a></b> command. If <i>virtual</i> is
+already defined, the new physical event sequences add to the
+existing sequences for the event.</dd>
+
+<dt><a name="M6"><b>event delete
+&lt;&lt;</b><i>virtual</i><b>&gt;&gt;</b> ?<i>sequence</i>
+<i>sequence ...</i>?</a></dt>
+
+<dd>Deletes each of the <i>sequence</i>s from those associated with
+the virtual event given by <i>virtual</i>. <i>Virtual</i> may be
+any string value and <i>sequence</i> may have any of the values
+allowed for the <i>sequence</i> argument to the <b><a href=
+"../TkCmd/bind.htm">bind</a></b> command. Any <i>sequence</i>s not
+currently associated with <i>virtual</i> are ignored. If no
+<i>sequence</i> argument is provided, all physical event sequences
+are removed for <i>virtual</i>, so that the virtual event will not
+trigger anymore.</dd>
+
+<dt><a name="M7"><b>event generate</b> <i>window event</i>
+?<i>option value option value ...</i>?</a></dt>
+
+<dd>Generates a window event and arranges for it to be processed
+just as if it had come from the window system. <i>Window</i> gives
+the path name of the window for which the event will be generated;
+it may also be an identifier (such as returned by <b><a href=
+"../TkCmd/winfo.htm">winfo id</a></b>) as long as it is for a
+window in the current application. <i>Event</i> provides a basic
+description of the event, such as <b>&lt;Shift-Button-2&gt;</b> or
+<b>&lt;&lt;Paste&gt;&gt;</b>. If <i>Window</i> is empty the whole
+screen is meant, and coordinates are relative to the screen.
+<i>Event</i> may have any of the forms allowed for the
+<i>sequence</i> argument of the <b><a href=
+"../TkCmd/bind.htm">bind</a></b> command except that it must
+consist of a single event pattern, not a sequence.
+<i>Option-value</i> pairs may be used to specify additional
+attributes of the event, such as the x and y mouse position; see
+<b>EVENT FIELDS</b> below. If the <b>-when</b> option is not
+specified, the event is processed immediately: all of the handlers
+for the event will complete before the <b>event generate</b>
+command returns. If the <b>-when</b> option is specified then it
+determines when the event is processed. Certain events, such as key
+events, require that the window has focus to receive the event
+properly.</dd>
+
+<dt><a name="M8"><b>event info</b>
+?<b>&lt;&lt;</b><i>virtual</i><b>&gt;&gt;</b>?</a></dt>
+
+<dd>Returns information about virtual events. If the
+<b>&lt;&lt;</b><i>virtual</i><b>&gt;&gt;</b> argument is omitted,
+the return value is a list of all the virtual events that are
+currently defined. If <b>&lt;&lt;</b><i>virtual</i><b>&gt;&gt;</b>
+is specified then the return value is a list whose elements are the
+physical event sequences currently defined for the given virtual
+event; if the virtual event is not defined then an empty string is
+returned. 
+
+<p>Note that virtual events that that are not bound to physical
+event sequences are <i>not</i> returned by <b>event info</b>.</p>
+</dd>
+</dl>
+
+<h3><a name="M9">EVENT FIELDS</a></h3>
+
+The following options are supported for the <b>event generate</b>
+command. These correspond to the &ldquo;%&rdquo; expansions allowed
+in binding scripts for the <b><a href=
+"../TkCmd/bind.htm">bind</a></b> command. 
+
+<dl class="event fields">
+<dt><a name="M10"><b>-above</b> <i>window</i></a></dt>
+
+<dd><i>Window</i> specifies the <i>above</i> field for the event,
+either as a window path name or as an integer window id. Valid for
+<b>Configure</b> events. Corresponds to the <b>%a</b> substitution
+for binding scripts.</dd>
+
+<dt><a name="M11"><b>-borderwidth</b> <i>size</i></a></dt>
+
+<dd><i>Size</i> must be a screen distance; it specifies the
+<i>border_width</i> field for the event. Valid for <b>Configure</b>
+events. Corresponds to the <b>%B</b> substitution for binding
+scripts.</dd>
+
+<dt><a name="M12"><b>-button</b> <i>number</i></a></dt>
+
+<dd><i>Number</i> must be an integer; it specifies the
+<i>detail</i> field for a <b>ButtonPress</b> or
+<b>ButtonRelease</b> event, overriding any button number provided
+in the base <i>event</i> argument. Corresponds to the <b>%b</b>
+substitution for binding scripts.</dd>
+
+<dt><a name="M13"><b>-count</b> <i>number</i></a></dt>
+
+<dd><i>Number</i> must be an integer; it specifies the <i>count</i>
+field for the event. Valid for <b>Expose</b> events. Corresponds to
+the <b>%c</b> substitution for binding scripts.</dd>
+
+<dt><a name="M14"><b>-data</b> <i>string</i></a></dt>
+
+<dd><i>String</i> may be any value; it specifies the
+<i>user_data</i> field for the event. Only valid for virtual
+events. Corresponds to the <b>%d</b> substitution for virtual
+events in binding scripts.</dd>
+
+<dt><a name="M15"><b>-delta</b> <i>number</i></a></dt>
+
+<dd><i>Number</i> must be an integer; it specifies the <i>delta</i>
+field for the <b>MouseWheel</b> event. The <i>delta</i> refers to
+the direction and magnitude the mouse wheel was rotated. Note the
+value is not a screen distance but are units of motion in the mouse
+wheel. Typically these values are multiples of 120. For example,
+120 should scroll the text widget up 4 lines and -240 would scroll
+the text widget down 8 lines. Of course, other widgets may define
+different behaviors for mouse wheel motion. This field corresponds
+to the <b>%D</b> substitution for binding scripts.</dd>
+
+<dt><a name="M16"><b>-detail</b> <i>detail</i></a></dt>
+
+<dd><i>Detail</i> specifies the <i>detail</i> field for the event
+and must be one of the following: 
+
+<pre>
+<b>NotifyAncestor</b>  <b>NotifyNonlinearVirtual</b>
+<b>NotifyDetailNone</b> <b>NotifyPointer</b>
+<b>NotifyInferior</b>   <b>NotifyPointerRoot</b>
+<b>NotifyNonlinear</b>  <b>NotifyVirtual</b>
+</pre>
+
+Valid for <b>Enter</b>, <b>Leave</b>, <b>FocusIn</b> and
+<b>FocusOut</b> events. Corresponds to the <b>%d</b> substitution
+for binding scripts.</dd>
+
+<dt><a name="M17"><b>-focus</b> <i>boolean</i></a></dt>
+
+<dd><i>Boolean</i> must be a boolean value; it specifies the
+<i>focus</i> field for the event. Valid for <b>Enter</b> and
+<b>Leave</b> events. Corresponds to the <b>%f</b> substitution for
+binding scripts.</dd>
+
+<dt><a name="M18"><b>-height</b> <i>size</i></a></dt>
+
+<dd><i>Size</i> must be a screen distance; it specifies the
+<i>height</i> field for the event. Valid for <b>Configure</b>
+events. Corresponds to the <b>%h</b> substitution for binding
+scripts.</dd>
+
+<dt><a name="M19"><b>-keycode</b> <i>number</i></a></dt>
+
+<dd><i>Number</i> must be an integer; it specifies the
+<i>keycode</i> field for the event. Valid for <b>KeyPress</b> and
+<b>KeyRelease</b> events. Corresponds to the <b>%k</b> substitution
+for binding scripts.</dd>
+
+<dt><a name="M20"><b>-keysym</b> <i>name</i></a></dt>
+
+<dd><i>Name</i> must be the name of a valid keysym, such as
+<b>g</b>, <b>space</b>, or <b><a href=
+"../TclCmd/return.htm">Return</a></b>; its corresponding keycode
+value is used as the <i>keycode</i> field for event, overriding any
+detail specified in the base <i>event</i> argument. Valid for
+<b>KeyPress</b> and <b>KeyRelease</b> events. Corresponds to the
+<b>%K</b> substitution for binding scripts.</dd>
+
+<dt><a name="M21"><b>-mode</b> <i>notify</i></a></dt>
+
+<dd><i>Notify</i> specifies the <i>mode</i> field for the event and
+must be one of <b>NotifyNormal</b>, <b>NotifyGrab</b>,
+<b>NotifyUngrab</b>, or <b>NotifyWhileGrabbed</b>. Valid for
+<b>Enter</b>, <b>Leave</b>, <b>FocusIn</b>, and <b>FocusOut</b>
+events. Corresponds to the <b>%m</b> substitution for binding
+scripts.</dd>
+
+<dt><a name="M22"><b>-override</b> <i>boolean</i></a></dt>
+
+<dd><i>Boolean</i> must be a boolean value; it specifies the
+<i>override_redirect</i> field for the event. Valid for <b>Map</b>,
+<b>Reparent</b>, and <b>Configure</b> events. Corresponds to the
+<b>%o</b> substitution for binding scripts.</dd>
+
+<dt><a name="M23"><b>-place</b> <i>where</i></a></dt>
+
+<dd><i>Where</i> specifies the <i>place</i> field for the event; it
+must be either <b>PlaceOnTop</b> or <b>PlaceOnBottom</b>. Valid for
+<b>Circulate</b> events. Corresponds to the <b>%p</b> substitution
+for binding scripts.</dd>
+
+<dt><a name="M24"><b>-root</b> <i>window</i></a></dt>
+
+<dd><i>Window</i> must be either a window path name or an integer
+window identifier; it specifies the <i>root</i> field for the
+event. Valid for <b>KeyPress</b>, <b>KeyRelease</b>,
+<b>ButtonPress</b>, <b>ButtonRelease</b>, <b>Enter</b>,
+<b>Leave</b>, and <b>Motion</b> events. Corresponds to the
+<b>%R</b> substitution for binding scripts.</dd>
+
+<dt><a name="M25"><b>-rootx</b> <i>coord</i></a></dt>
+
+<dd><i>Coord</i> must be a screen distance; it specifies the
+<i>x_root</i> field for the event. Valid for <b>KeyPress</b>,
+<b>KeyRelease</b>, <b>ButtonPress</b>, <b>ButtonRelease</b>,
+<b>Enter</b>, <b>Leave</b>, and <b>Motion</b> events. Corresponds
+to the <b>%X</b> substitution for binding scripts.</dd>
+
+<dt><a name="M26"><b>-rooty</b> <i>coord</i></a></dt>
+
+<dd><i>Coord</i> must be a screen distance; it specifies the
+<i>y_root</i> field for the event. Valid for <b>KeyPress</b>,
+<b>KeyRelease</b>, <b>ButtonPress</b>, <b>ButtonRelease</b>,
+<b>Enter</b>, <b>Leave</b>, and <b>Motion</b> events. Corresponds
+to the <b>%Y</b> substitution for binding scripts.</dd>
+
+<dt><a name="M27"><b>-sendevent</b> <i>boolean</i></a></dt>
+
+<dd><i>Boolean</i> must be a boolean value; it specifies the
+<i>send_event</i> field for the event. Valid for all events.
+Corresponds to the <b>%E</b> substitution for binding scripts.</dd>
+
+<dt><a name="M28"><b>-serial</b> <i>number</i></a></dt>
+
+<dd><i>Number</i> must be an integer; it specifies the
+<i>serial</i> field for the event. Valid for all events.
+Corresponds to the <b>%#</b> substitution for binding scripts.</dd>
+
+<dt><a name="M29"><b>-state</b> <i>state</i></a></dt>
+
+<dd><i>State</i> specifies the <i>state</i> field for the event.
+For <b>KeyPress</b>, <b>KeyRelease</b>, <b>ButtonPress</b>,
+<b>ButtonRelease</b>, <b>Enter</b>, <b>Leave</b>, and <b>Motion</b>
+events it must be an integer value. For <b>Visibility</b> events it
+must be one of <b>VisibilityUnobscured</b>,
+<b>VisibilityPartiallyObscured</b>, or
+<b>VisibilityFullyObscured</b>. This option overrides any modifiers
+such as <b>Meta</b> or <b>Control</b> specified in the base
+<i>event</i>. Corresponds to the <b>%s</b> substitution for binding
+scripts.</dd>
+
+<dt><a name="M30"><b>-subwindow</b> <i>window</i></a></dt>
+
+<dd><i>Window</i> specifies the <i>subwindow</i> field for the
+event, either as a path name for a Tk widget or as an integer
+window identifier. Valid for <b>KeyPress</b>, <b>KeyRelease</b>,
+<b>ButtonPress</b>, <b>ButtonRelease</b>, <b>Enter</b>,
+<b>Leave</b>, and <b>Motion</b> events. Similar to <b>%S</b>
+substitution for binding scripts.</dd>
+
+<dt><a name="M31"><b>-time</b> <i>integer</i></a></dt>
+
+<dd><i>Integer</i> must be an integer value; it specifies the
+<i>time</i> field for the event. Valid for <b>KeyPress</b>,
+<b>KeyRelease</b>, <b>ButtonPress</b>, <b>ButtonRelease</b>,
+<b>Enter</b>, <b>Leave</b>, <b>Motion</b>, and <b>Property</b>
+events. Corresponds to the <b>%t</b> substitution for binding
+scripts.</dd>
+
+<dt><a name="M32"><b>-warp</b> <i>boolean</i></a></dt>
+
+<dd><i>boolean</i> must be a boolean value; it specifies whether
+the screen pointer should be warped as well. Valid for
+<b>KeyPress</b>, <b>KeyRelease</b>, <b>ButtonPress</b>,
+<b>ButtonRelease</b>, and <b>Motion</b> events. The pointer will
+only warp to a window if it is mapped.</dd>
+
+<dt><a name="M33"><b>-width</b> <i>size</i></a></dt>
+
+<dd><i>Size</i> must be a screen distance; it specifies the
+<i>width</i> field for the event. Valid for <b>Configure</b>
+events. Corresponds to the <b>%w</b> substitution for binding
+scripts.</dd>
+
+<dt><a name="M34"><b>-when</b> <i>when</i></a></dt>
+
+<dd><i>When</i> determines when the event will be processed; it
+must have one of the following values: 
+
+<dl class="event fields">
+<dt><a name="M35"><b>now</b></a></dt>
+
+<dd>Process the event immediately, before the command returns. This
+also happens if the <b>-when</b> option is omitted.</dd>
+
+<dt><a name="M36"><b>tail</b></a></dt>
+
+<dd>Place the event on Tcl's event queue behind any events already
+queued for this application.</dd>
+
+<dt><a name="M37"><b>head</b></a></dt>
+
+<dd>Place the event at the front of Tcl's event queue, so that it
+will be handled before any other events already queued.</dd>
+
+<dt><a name="M38"><b>mark</b></a></dt>
+
+<dd>Place the event at the front of Tcl's event queue but behind
+any other events already queued with <b>-when mark</b>. This option
+is useful when generating a series of events that should be
+processed in order but at the front of the queue.</dd>
+</dl>
+</dd>
+
+<dt><a name="M39"><b>-x</b> <i>coord</i></a></dt>
+
+<dd><i>Coord</i> must be a screen distance; it specifies the
+<i>x</i> field for the event. Valid for <b>KeyPress</b>,
+<b>KeyRelease</b>, <b>ButtonPress</b>, <b>ButtonRelease</b>,
+<b>Motion</b>, <b>Enter</b>, <b>Leave</b>, <b>Expose</b>,
+<b>Configure</b>, <b>Gravity</b>, and <b>Reparent</b> events.
+Corresponds to the <b>%x</b> substitution for binding scripts. If
+<i>Window</i> is empty the coordinate is relative to the screen,
+and this option corresponds to the <b>%X</b> substitution for
+binding scripts.</dd>
+
+<dt><a name="M40"><b>-y</b> <i>coord</i></a></dt>
+
+<dd><i>Coord</i> must be a screen distance; it specifies the
+<i>y</i> field for the event. Valid for <b>KeyPress</b>,
+<b>KeyRelease</b>, <b>ButtonPress</b>, <b>ButtonRelease</b>,
+<b>Motion</b>, <b>Enter</b>, <b>Leave</b>, <b>Expose</b>,
+<b>Configure</b>, <b>Gravity</b>, and <b>Reparent</b> events.
+Corresponds to the <b>%y</b> substitution for binding scripts. If
+<i>Window</i> is empty the coordinate is relative to the screen,
+and this option corresponds to the <b>%Y</b> substitution for
+binding scripts.</dd>
+</dl>
+
+<p>Any options that are not specified when generating an event are
+filled with the value 0, except for <i>serial</i>, which is filled
+with the next X event serial number.</p>
+
+<h3><a name="M41">PREDEFINED VIRTUAL EVENTS</a></h3>
+
+Tk defines the following virtual events for the purposes of
+notification: 
+
+<dl class="predefined virtual events">
+<dt><a name="M42"><b>&lt;&lt;AltUnderlined&gt;&gt;</b></a></dt>
+
+<dd>This is sent to widget to notify it that the letter it has
+underlined (as an accelerator indicator) with the <b>-underline</b>
+option has been pressed in combination with the Alt key. The usual
+response to this is to either focus into the widget (or some
+related widget) or to invoke the widget.</dd>
+
+<dt><a name="M43"><b>&lt;&lt;Invoke&gt;&gt;</b></a></dt>
+
+<dd>This can be sent to some widgets (e.g. button, listbox, menu)
+as an alternative to &lt;space&gt;.</dd>
+
+<dt><a name="M44"><b>&lt;&lt;ListboxSelect&gt;&gt;</b></a></dt>
+
+<dd>This is sent to a listbox when the set of selected item(s) in
+the listbox is updated.</dd>
+
+<dt><a name="M45"><b>&lt;&lt;MenuSelect&gt;&gt;</b></a></dt>
+
+<dd>This is sent to a menu when the currently selected item in the
+menu changes. It is intended for use with context-sensitive help
+systems.</dd>
+
+<dt><a name="M46"><b>&lt;&lt;Modified&gt;&gt;</b></a></dt>
+
+<dd>This is sent to a text widget when the contents of the widget
+are changed.</dd>
+
+<dt><a name="M47"><b>&lt;&lt;Selection&gt;&gt;</b></a></dt>
+
+<dd>This is sent to a text widget when the selection in the widget
+is changed.</dd>
+
+<dt><a name="M48"><b>&lt;&lt;ThemeChanged&gt;&gt;</b></a></dt>
+
+<dd>This is sent to a text widget when the ttk (Tile) theme
+changed.</dd>
+
+<dt><a name="M49"><b>&lt;&lt;TraverseIn&gt;&gt;</b></a></dt>
+
+<dd>This is sent to a widget when the focus enters the widget
+because of a user-driven &ldquo;tab to widget&rdquo; action.</dd>
+
+<dt><a name="M50"><b>&lt;&lt;TraverseOut&gt;&gt;</b></a></dt>
+
+<dd>This is sent to a widget when the focus leaves the widget
+because of a user-driven &ldquo;tab to widget&rdquo; action.</dd>
+</dl>
+
+<p>Tk defines the following virtual events for the purposes of
+unifying bindings across multiple platforms. Users expect them to
+behave in the following way:</p>
+
+<dl class="predefined virtual events">
+<dt><a name="M51"><b>&lt;&lt;Clear&gt;&gt;</b></a></dt>
+
+<dd>Delete the currently selected widget contents.</dd>
+
+<dt><a name="M52"><b>&lt;&lt;Copy&gt;&gt;</b></a></dt>
+
+<dd>Copy the currently selected widget contents to the
+clipboard.</dd>
+
+<dt><a name="M53"><b>&lt;&lt;Cut&gt;&gt;</b></a></dt>
+
+<dd>Move the currently selected widget contents to the
+clipboard.</dd>
+
+<dt><a name="M54"><b>&lt;&lt;Paste&gt;&gt;</b></a></dt>
+
+<dd>Replace the currently selected widget contents with the
+contents of the clipboard.</dd>
+
+<dt><a name="M55"><b>&lt;&lt;PasteSelection&gt;&gt;</b></a></dt>
+
+<dd>Insert the contents of the selection at the mouse location.
+(This event has meaningful <b>%x</b> and <b>%y</b>
+substitutions).</dd>
+
+<dt><a name="M56"><b>&lt;&lt;PrevWindow&gt;&gt;</b></a></dt>
+
+<dd>Traverse to the previous window.</dd>
+
+<dt><a name="M57"><b>&lt;&lt;Redo&gt;&gt;</b></a></dt>
+
+<dd>Redo one undone action.</dd>
+
+<dt><a name="M58"><b>&lt;&lt;Undo&gt;&gt;</b></a></dt>
+
+<dd>Undo the last action.</dd>
+</dl>
+
+<h3><a name="M59">VIRTUAL EVENT EXAMPLES</a></h3>
+
+In order for a virtual event binding to trigger, two things must
+happen. First, the virtual event must be defined with the <b>event
+add</b> command. Second, a binding must be created for the virtual
+event with the <b><a href="../TkCmd/bind.htm">bind</a></b> command.
+Consider the following virtual event definitions: 
+
+<pre>
+event add &lt;&lt;Paste&gt;&gt; &lt;Control-y&gt;
+event add &lt;&lt;Paste&gt;&gt; &lt;Button-2&gt;
+event add &lt;&lt;Save&gt;&gt; &lt;Control-X&gt;&lt;Control-S&gt;
+event add &lt;&lt;Save&gt;&gt; &lt;Shift-F12&gt;
+</pre>
+
+In the <b><a href="../TkCmd/bind.htm">bind</a></b> command, a
+virtual event can be bound like any other builtin event type as
+follows: 
+
+<pre>
+bind Entry &lt;&lt;Paste&gt;&gt; {%W insert [selection get]}
+</pre>
+
+The double angle brackets are used to specify that a virtual event
+is being bound. If the user types Control-y or presses button 2, or
+if a <b>&lt;&lt;Paste&gt;&gt;</b> virtual event is synthesized with
+<b>event generate</b>, then the <b>&lt;&lt;Paste&gt;&gt;</b>
+binding will be invoked. 
+
+<p>If a virtual binding has the exact same sequence as a separate
+physical binding, then the physical binding will take precedence.
+Consider the following example:</p>
+
+<pre>
+event add &lt;&lt;Paste&gt;&gt; &lt;Control-y&gt; &lt;Meta-Control-y&gt;
+bind Entry &lt;Control-y&gt; {puts Control-y}
+bind Entry &lt;&lt;Paste&gt;&gt; {puts Paste}
+</pre>
+
+When the user types Control-y the <b>&lt;Control-y&gt;</b> binding
+will be invoked, because a physical event is considered more
+specific than a virtual event, all other things being equal.
+However, when the user types Meta-Control-y the
+<b>&lt;&lt;Paste&gt;&gt;</b> binding will be invoked, because the
+<b>Meta</b> modifier in the physical pattern associated with the
+virtual binding is more specific than the <b>&lt;Control-y</b>&gt;
+sequence for the physical event. 
+
+<p>Bindings on a virtual event may be created before the virtual
+event exists. Indeed, the virtual event never actually needs to be
+defined, for instance, on platforms where the specific virtual
+event would meaningless or ungeneratable.</p>
+
+<p>When a definition of a virtual event changes at run time, all
+windows will respond immediately to the new definition. Starting
+from the preceding example, if the following code is executed:</p>
+
+<pre>
+bind &lt;Entry&gt; &lt;Control-y&gt; {}
+event add &lt;&lt;Paste&gt;&gt; &lt;Key-F6&gt;
+</pre>
+
+the behavior will change such in two ways. First, the shadowed
+<b>&lt;&lt;Paste&gt;&gt;</b> binding will emerge. Typing Control-y
+will no longer invoke the <b>&lt;Control-y&gt;</b> binding, but
+instead invoke the virtual event <b>&lt;&lt;Paste&gt;&gt;</b>.
+Second, pressing the F6 key will now also invoke the
+<b>&lt;&lt;Paste&gt;&gt;</b> binding. 
+
+<h3><a name="M60">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/bind.htm">bind</a></b> 
+
+<h3><a name="M61">KEYWORDS</a></h3>
+
+<a href="../Keywords/E.htm#event">event</a>, <a href=
+"../Keywords/B.htm#binding">binding</a>, <a href=
+"../Keywords/D.htm#define">define</a>, <a href=
+"../Keywords/H.htm#handle">handle</a>, <a href=
+"../Keywords/V.htm#virtual event">virtual event</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1996 Sun Microsystems, Inc. Copyright &copy;
+1998-2000 Ajuba Solutions.</div>
+</body>
+</html>
+

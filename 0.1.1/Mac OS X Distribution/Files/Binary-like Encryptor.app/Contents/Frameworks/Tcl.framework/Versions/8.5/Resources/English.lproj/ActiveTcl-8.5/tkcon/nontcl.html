@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>tkcon for Non-Tcl Users</title>
+<link rel="STYLESHEET" type="text/css" href="./style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<table width="100%" border="0" cellspacing="2" cellpadding="0"
+bgcolor="#000000">
+<tr>
+<td><!-- start header info -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0"
+bgcolor="#FFFFFF">
+<tr>
+<th><font size="+3">tkcon: Non-Tcl Usage</font></th>
+<td align="right"><a href="http://tkcon.sourceforge.net/"><img src=
+"http://sourceforge.net/sflogo.php?group_id=11462&amp;type=1"
+width="88" height="31" border="0" alt="SourceForge Logo"></a> </td>
+</tr>
+</table>
+
+<!-- end header info -->
+</td>
+</tr>
+
+<tr>
+<td><!-- start main navigation table -->
+<table border="1" cellpadding="2" cellspacing="2" bgcolor="#CCCCCC"
+width="100%">
+<tr>
+<th><a href="index.html">Documentation</a></th>
+<th><a href="purpose.html">Purpose &amp; Features</a></th>
+<th><a href="limits.html">Limitations</a></th>
+<th><a href="todo.html">To&nbsp;Do</a></th>
+<th><a href="license.terms">License</a></th>
+</tr>
+
+<tr>
+<th colspan="2"><a href="plugin.html">Online Demo</a> (requires <a
+href="http://www.tcl.tk/software/plugin/">Tk plugin</a>)</th>
+<th colspan="3" class="hi"><a href="nontcl.html" class="hi">Using
+TkCon with other Tk Languages</a></th>
+</tr>
+</table>
+
+<!-- end main navigation table -->
+</td>
+</tr>
+
+<tr>
+<td bgcolor="#FFFFFF">
+<div class="indent"><i>This document is for those users who are
+trying to use TkCon with a non-Tcl based Tk language (ie -
+SchemeTk, PerlTk, PythonTk...).</i> 
+
+<p>TkCon requires <a href="http://tcl.activestate.com/">Tcl/Tk
+8.4+</a> to run. However, it can attach to any language with Tk4+
+embedded into it with the use of the Tk 'send' command. I have been
+able to succesfully talk to SchemeTk-3.0 and Perl/Tk. When using
+TkCon attached to these interpreters, you must remember to talk to
+the connected interpreter in its language.</p>
+
+<p>I welcome further comments from users of Tk-embedded languages
+on their experiences or ideas. Of course, you can always try to
+port TkCon in full to your language. I'd like to see the results
+from any such efforts.</p>
+
+<h3>Special Language Notes:</h3>
+
+<h4>Perl Tk</h4>
+
+Read the man page on Perl/Tk's send command. You have to define
+Tk::Receive before it will work. <a href=
+"mailto:lusol@turkey.cc.lehigh.edu">Stephen Lidie
+(lusol@Turkey.CC.Lehigh.EDU)</a> contributed a <a href=
+"perl.txt">companion Perl/Tk program</a> that does the trick with
+some extras.</div>
+</td>
+</tr>
+</table>
+
+<hr noshade size="1">
+<address><font size="2">&copy; Jeffrey Hobbs</font></address>
+</body>
+</html>
+

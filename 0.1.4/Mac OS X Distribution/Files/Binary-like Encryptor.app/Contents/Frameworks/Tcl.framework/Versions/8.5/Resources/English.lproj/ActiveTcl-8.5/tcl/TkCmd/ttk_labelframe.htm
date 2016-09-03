@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk::labelframe manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_labelframe</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_labelframe.htm#M2" name="L1748">NAME</a> 
+
+<dl>
+<dd>ttk::labelframe - Container widget with optional label</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_labelframe.htm#M3" name="L1749">SYNOPSIS</a> 
+
+<dl>
+<dd><b>ttk::labelframe</b> <i>pathName</i> ?<i>options</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_labelframe.htm#M4" name=
+"L1750">DESCRIPTION</a></dd>
+
+<dd><a href="ttk_labelframe.htm#M5" name="L1751">STANDARD
+OPTIONS</a> 
+
+<dl>
+<dd><a href="options.htm#M-class">-class</a></dd>
+
+<dd><a href="options.htm#M-cursor">-cursor, cursor, Cursor</a></dd>
+
+<dd><a href="options.htm#M-style">-style</a></dd>
+
+<dd><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_labelframe.htm#M8" name="L1754">WIDGET-SPECIFIC
+OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_labelframe.htm#M9" name="L1755">-labelanchor,
+labelAnchor, LabelAnchor</a></dd>
+
+<dd><a href="ttk_labelframe.htm#M10" name="L1756">-text, text,
+Text</a></dd>
+
+<dd><a href="ttk_labelframe.htm#M11" name="L1757">-underline,
+underline, Underline</a></dd>
+
+<dd><a href="ttk_labelframe.htm#M12" name="L1758">-padding,
+padding, Padding</a></dd>
+
+<dd><a href="ttk_labelframe.htm#M13" name="L1759">-labelwidget,
+labelWidget, LabelWidget</a></dd>
+
+<dd><a href="ttk_labelframe.htm#M14" name="L1760">-width, width,
+Width</a></dd>
+
+<dd><a href="ttk_labelframe.htm#M15" name="L1761">-height, height,
+Height</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_labelframe.htm#M16" name="L1762">WIDGET
+COMMAND</a></dd>
+
+<dd><a href="ttk_labelframe.htm#M17" name="L1763">SEE ALSO</a></dd>
+
+<dd><a href="ttk_labelframe.htm#M18" name="L1764">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk::labelframe - Container widget with optional label 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>ttk::labelframe</b> <i>pathName</i> ?<i>options</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+A <b>ttk::labelframe</b> widget is a container used to group other
+widgets together. It has an optional label, which may be a plain
+text string or another widget. 
+
+<h3><a name="M5">STANDARD OPTIONS</a></h3>
+
+<dl>
+<dt><b><a href="options.htm#M-class">-class</a></b></dt>
+
+<dt><b><a href="options.htm#M-cursor">-cursor, cursor,
+Cursor</a></b></dt>
+
+<dt><b><a href="options.htm#M-style">-style</a></b></dt>
+
+<dt><b><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></b></dt>
+</dl>
+
+<h3><a name="M8">WIDGET-SPECIFIC OPTIONS</a></h3>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M9">-labelanchor</a></b></dt>
+
+<dt>Database Name: <b>labelAnchor</b></dt>
+
+<dt>Database Class: <b>LabelAnchor</b></dt>
+
+<dd>Specifies where to place the label. Allowed values are
+(clockwise from the top upper left corner): <b>nw</b>, <b>n</b>,
+<b>ne</b>, <b>en</b>, <b>e</b>, <b>es</b>, <b>se</b>,
+<b>s</b>,<b>sw</b>, <b>ws</b>, <b>w</b> and <b>wn</b>. The default
+value is theme-dependent.</dd>
+
+<dt>Command-Line Name: <b><a name="M10">-text</a></b></dt>
+
+<dt>Database Name: <b><a href="../TkCmd/text.htm">text</a></b></dt>
+
+<dt>Database Class: <b><a href=
+"../TkCmd/text.htm">Text</a></b></dt>
+
+<dd>Specifies the text of the label.</dd>
+
+<dt>Command-Line Name: <b><a name="M11">-underline</a></b></dt>
+
+<dt>Database Name: <b>underline</b></dt>
+
+<dt>Database Class: <b>Underline</b></dt>
+
+<dd>If set, specifies the integer index (0-based) of a character to
+underline in the text string. The underlined character is used for
+mnemonic activation. Mnemonic activation for a
+<b>ttk::labelframe</b> sets the keyboard focus to the first child
+of the <b>ttk::labelframe</b> widget.</dd>
+
+<dt>Command-Line Name: <b><a name="M12">-padding</a></b></dt>
+
+<dt>Database Name: <b>padding</b></dt>
+
+<dt>Database Class: <b>Padding</b></dt>
+
+<dd>Additional padding to include inside the border.</dd>
+
+<dt>Command-Line Name: <b><a name="M13">-labelwidget</a></b></dt>
+
+<dt>Database Name: <b>labelWidget</b></dt>
+
+<dt>Database Class: <b>LabelWidget</b></dt>
+
+<dd>The name of a widget to use for the label. If set, overrides
+the <b>-text</b> option. The <b>-labelwidget</b> must be a child of
+the <b><a href="../TkCmd/labelframe.htm">labelframe</a></b> widget
+or one of the <b><a href=
+"../TkCmd/labelframe.htm">labelframe</a></b>'s ancestors, and must
+belong to the same top-level widget as the <b><a href=
+"../TkCmd/labelframe.htm">labelframe</a></b>.</dd>
+
+<dt>Command-Line Name: <b><a name="M14">-width</a></b></dt>
+
+<dt>Database Name: <b>width</b></dt>
+
+<dt>Database Class: <b>Width</b></dt>
+
+<dd>If specified, the widget's requested width in pixels.</dd>
+
+<dt>Command-Line Name: <b><a name="M15">-height</a></b></dt>
+
+<dt>Database Name: <b>height</b></dt>
+
+<dt>Database Class: <b>Height</b></dt>
+
+<dd>If specified, the widget's requested height in pixels. (See
+<i>ttk::frame(n)</i> for further notes on <b>-width</b> and
+<b>-height</b>).</dd>
+</dl>
+
+<h3><a name="M16">WIDGET COMMAND</a></h3>
+
+Supports the standard widget commands <b>configure</b>,
+<b>cget</b>, <b>identify</b>, <b>instate</b>, and <b>state</b>; see
+<i>ttk::widget(n)</i>. 
+
+<h3><a name="M17">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_widget.htm">ttk::widget</a></b>, <b><a
+href="../TkCmd/ttk_frame.htm">ttk::frame</a></b>, <b><a href=
+"../TkCmd/labelframe.htm">labelframe</a></b> 
+
+<h3><a name="M18">KEYWORDS</a></h3>
+
+<a href="../Keywords/W.htm#widget">widget</a>, <a href=
+"../Keywords/F.htm#frame">frame</a>, <a href=
+"../Keywords/C.htm#container">container</a>, <a href=
+"../Keywords/L.htm#label">label</a>, <a href=
+"../Keywords/G.htm#groupbox">groupbox</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2005 Joe English</div>
+</body>
+</html>
+

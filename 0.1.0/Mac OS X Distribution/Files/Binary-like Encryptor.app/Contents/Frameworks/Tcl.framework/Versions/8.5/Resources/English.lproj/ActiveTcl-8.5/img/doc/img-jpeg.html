@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>img-jpeg - Img</title>
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+</head>
+<body>
+<div class="doctools">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<hr>
+[ <a href="../../at.pkg_index.html">Main table Of Contents</a> | <a
+href="../toc.html">Img Table Of Contents</a> | <a href=
+"../index.html">Img Index</a> ] 
+
+<hr>
+<h1 class="title">img-jpeg(n) 1.4 "Img"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>img-jpeg - Img, Joint Picture Expert Group format (jpeg)</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">JPEG OPTIONS</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tk</b></li>
+
+<li>package require <b class="pkgname">img::jpeg <span class=
+"opt">?1.4?</span></b></li>
+</ul>
+
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">image</b> <b class="method">create
+photo</b> <span class="opt">?<i class="arg">name</i>?</span> <span
+class="opt">?<i class="arg">options</i>?</span></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>The package <b class="package">img::jpeg</b> is a sub-package of
+<b class="package">Img</b>. It can be loaded as a part of the
+complete Img support, via <b class="cmd">package require Img</b>,
+or on its own, via <b class="cmd">package require
+img::jpeg</b>.</p>
+
+<p>Like all packages of <b class="package">Img</b> it does
+<em>not</em> provide new commands, but extends the existing <b
+class="package"><a href="../index.html#key20">Tk</a></b> command <b
+class="cmd">image</b> so that it supports files containing raster
+images in the Joint Picture Expert Group format (jpeg). More
+specifically <b class="package">img::jpeg</b> extends <b class=
+"package"><a href="../index.html#key20">Tk</a></b>'s <b class=
+"cmd">photo</b> image type.</p>
+
+<p>The name of the new format handler is <b class="const">jpeg</b>.
+This handler provides new additional configuration options. See
+section <span class="sectref"><a href="#section2">JPEG
+OPTIONS</a></span> for more detailed explanations.</p>
+
+<p>All of the above means that in a call like</p>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">image</b> <b class="method">create
+photo</b> <span class="opt">?<i class="arg">name</i>?</span> <span
+class="opt">?<i class="arg">options</i>?</span></a></dt>
+</dl>
+
+<ol class="enumerated">
+<li>
+<p>Image data in jpeg format (options <b class="option">-data</b>
+and <b class="option">-file</b>) is detected automatically.</p>
+</li>
+
+<li>
+<p>The format name <b class="const">jpeg</b> is recognized by the
+option <b class="option">-format</b>. In addition the value for the
+option is treated as list and may contain any of the special
+options listed in section <span class="sectref"><a href=
+"#section2">JPEG OPTIONS</a></span>.</p>
+</li>
+</ol>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">JPEG OPTIONS</a></h2>
+
+<p>The handler provides six options, two effective when reading
+from a JPEG image, and five influencing the writing of such. One
+option is usable for both reading an writing.</p>
+
+<dl class="definitions">
+<dt><b class="option">-fast</b></dt>
+
+<dd>
+<p>This option is for reading from JPEG data. It usage activates a
+processing mode which is fast, but also provides only low-quality
+information.</p>
+</dd>
+
+<dt><b class="option">-grayscale</b></dt>
+
+<dd>
+<p>This option can be used for both reading and writing of JPEG
+data. Usage of this option forces incoming images to grayscale, and
+written images will be monochrome.</p>
+</dd>
+
+<dt><b class="option">-quality</b> <i class="arg">n</i></dt>
+
+<dd>
+<p>This option is for writing JPEG data. It specifies the
+compression level as a quality percentage. The higher the quality,
+the less the compression. The nominal range for <i class=
+"arg">n</i> is <b class="const">0</b>...<b class="const">100</b>.
+Useful values are in the range <b class="const">5</b>...<b class=
+"const">95</b>. The default value is <b class="const">75</b>.</p>
+</dd>
+
+<dt><b class="option">-smooth</b> <i class="arg">n</i></dt>
+
+<dd>
+<p>This option is for writing JPEG data. When used the writer will
+smooth the image before performing the compression. Values in the
+<b class="const">10</b>...<b class="const">30</b> are usually
+enough. The default is <b class="const">0</b>, i.e no
+smoothing.</p>
+</dd>
+
+<dt><b class="option">-optimize</b></dt>
+
+<dd>
+<p>This option is for writing JPEG data. It usage causes the writer
+to optimize the huffman table used to encode the jpeg
+coefficients.</p>
+</dd>
+
+<dt><b class="option">-progressive</b></dt>
+
+<dd>
+<p>This option is for writing JPEG data. It usage causes the
+creation of a <i class="term">progressive</i> JPEG file.</p>
+</dd>
+</dl>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="img-bmp.html">img-bmp</a>, <a href=
+"img-dted.html">img-dted</a>, <a href="img-gif.html">img-gif</a>,
+<a href="img-ico.html">img-ico</a>, <a href=
+"img.html">img-intro</a>, img-jpeg, <a href=
+"img-pcx.html">img-pcx</a>, <a href=
+"img-pixmap.html">img-pixmap</a>, <a href=
+"img-png.html">img-png</a>, <a href="img-ppm.html">img-ppm</a>, <a
+href="img-ps.html">img-ps</a>, <a href="img-raw.html">img-raw</a>,
+<a href="img-sgi.html">img-sgi</a>, <a href=
+"img-sun.html">img-sun</a>, <a href="img-tga.html">img-tga</a>, <a
+href="img-tiff.html">img-tiff</a>, <a href=
+"img-window.html">img-window</a>, <a href=
+"img-xbm.html">img-xbm</a>, <a href="img-xpm.html">img-xpm</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../index.html#key6">image handling</a>, <a href=
+"../index.html#key7">jpeg</a>, <a href=
+"../index.html#key20">tk</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 1995-2009 Jan Nijtmans
+&lt;nijtmans@users.sourceforge.net&gt;</p>
+</div>
+
+<h4>Copyright &copy; 2015 <a href="http://www.activestate.com">for
+compilation: ActiveState</a></h4>
+</div>
+</body>
+</html>
+

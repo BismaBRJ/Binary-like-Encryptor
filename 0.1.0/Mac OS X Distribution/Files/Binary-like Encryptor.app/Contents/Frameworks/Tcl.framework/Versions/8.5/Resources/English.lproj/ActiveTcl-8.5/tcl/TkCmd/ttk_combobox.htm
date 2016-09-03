@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk::combobox manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_combobox</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_combobox.htm#M2" name="L1607">NAME</a> 
+
+<dl>
+<dd>ttk::combobox - text field with popdown selection list</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_combobox.htm#M3" name="L1608">SYNOPSIS</a> 
+
+<dl>
+<dd><b>ttk::combobox</b> <i>pathName</i> ?<i>options</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_combobox.htm#M4" name="L1609">DESCRIPTION</a></dd>
+
+<dd><a href="ttk_combobox.htm#M5" name="L1610">STANDARD OPTIONS</a>
+
+
+<dl>
+<dd><a href="options.htm#M-class">-class</a></dd>
+
+<dd><a href="options.htm#M-cursor">-cursor, cursor, Cursor</a></dd>
+
+<dd><a href="options.htm#M-style">-style</a></dd>
+
+<dd><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_combobox.htm#M8" name="L1613">WIDGET-SPECIFIC
+OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_combobox.htm#M9" name="L1614">-exportselection,
+exportSelection, ExportSelection</a></dd>
+
+<dd><a href="ttk_combobox.htm#M10" name="L1615">-justify, justify,
+Justify</a></dd>
+
+<dd><a href="ttk_combobox.htm#M11" name="L1616">-height, height,
+Height</a></dd>
+
+<dd><a href="ttk_combobox.htm#M12" name="L1617">-postcommand,
+postCommand, PostCommand</a></dd>
+
+<dd><a href="ttk_combobox.htm#M13" name="L1618">-state, state,
+State</a></dd>
+
+<dd><a href="ttk_combobox.htm#M14" name="L1619">-textvariable,
+textVariable, TextVariable</a></dd>
+
+<dd><a href="ttk_combobox.htm#M15" name="L1620">-values, values,
+Values</a></dd>
+
+<dd><a href="ttk_combobox.htm#M16" name="L1621">-width, width,
+Width</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_combobox.htm#M17" name="L1622">WIDGET COMMAND</a> 
+
+<dl class="widget command">
+<dd><a href="ttk_combobox.htm#M18" name="L1623"><i>pathName</i>
+<b>current</b> ?<i>newIndex</i>?</a></dd>
+
+<dd><a href="ttk_combobox.htm#M19" name="L1624"><i>pathName</i>
+<b>get</b></a></dd>
+
+<dd><a href="ttk_combobox.htm#M20" name="L1625"><i>pathName</i>
+<b>set</b> <i>value</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_combobox.htm#M21" name="L1626">VIRTUAL
+EVENTS</a></dd>
+
+<dd><a href="ttk_combobox.htm#M22" name="L1627">SEE ALSO</a></dd>
+
+<dd><a href="ttk_combobox.htm#M23" name="L1628">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk::combobox - text field with popdown selection list 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>ttk::combobox</b> <i>pathName</i> ?<i>options</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+A <b>ttk::combobox</b> combines a text field with a pop-down list
+of values; the user may select the value of the text field from
+among the values in the list. 
+
+<h3><a name="M5">STANDARD OPTIONS</a></h3>
+
+<dl>
+<dt><b><a href="options.htm#M-class">-class</a></b></dt>
+
+<dt><b><a href="options.htm#M-cursor">-cursor, cursor,
+Cursor</a></b></dt>
+
+<dt><b><a href="options.htm#M-style">-style</a></b></dt>
+
+<dt><b><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></b></dt>
+</dl>
+
+<h3><a name="M8">WIDGET-SPECIFIC OPTIONS</a></h3>
+
+<dl>
+<dt>Command-Line Name: <b><a name=
+"M9">-exportselection</a></b></dt>
+
+<dt>Database Name: <b>exportSelection</b></dt>
+
+<dt>Database Class: <b>ExportSelection</b></dt>
+
+<dd>Boolean value. If set, the widget selection is linked to the X
+selection.</dd>
+
+<dt>Command-Line Name: <b><a name="M10">-justify</a></b></dt>
+
+<dt>Database Name: <b>justify</b></dt>
+
+<dt>Database Class: <b>Justify</b></dt>
+
+<dd>Specifies how the text is aligned within the widget. Must be
+one of <b>left</b>, <b>center</b>, or <b>right</b>.</dd>
+
+<dt>Command-Line Name: <b><a name="M11">-height</a></b></dt>
+
+<dt>Database Name: <b>height</b></dt>
+
+<dt>Database Class: <b>Height</b></dt>
+
+<dd>Specifies the height of the pop-down listbox, in rows.</dd>
+
+<dt>Command-Line Name: <b><a name="M12">-postcommand</a></b></dt>
+
+<dt>Database Name: <b>postCommand</b></dt>
+
+<dt>Database Class: <b>PostCommand</b></dt>
+
+<dd>A Tcl script to evaluate immediately before displaying the
+listbox. The <b>-postcommand</b> script may specify the
+<b>-values</b> to display.</dd>
+
+<dt>Command-Line Name: <b><a name="M13">-state</a></b></dt>
+
+<dt>Database Name: <b>state</b></dt>
+
+<dt>Database Class: <b>State</b></dt>
+
+<dd>One of <b>normal</b>, <b>readonly</b>, or <b>disabled</b>. In
+the <b>readonly</b> state, the value may not be edited directly,
+and the user can only select one of the <b>-values</b> from the
+dropdown list. In the <b>normal</b> state, the text field is
+directly editable. In the <b>disabled</b> state, no interaction is
+possible.</dd>
+
+<dt>Command-Line Name: <b><a name="M14">-textvariable</a></b></dt>
+
+<dt>Database Name: <b>textVariable</b></dt>
+
+<dt>Database Class: <b>TextVariable</b></dt>
+
+<dd>Specifies the name of a global variable whose value is linked
+to the widget value. Whenever the variable changes value the widget
+value is updated, and vice versa.</dd>
+
+<dt>Command-Line Name: <b><a name="M15">-values</a></b></dt>
+
+<dt>Database Name: <b>values</b></dt>
+
+<dt>Database Class: <b>Values</b></dt>
+
+<dd>Specifies the list of values to display in the drop-down
+listbox.</dd>
+
+<dt>Command-Line Name: <b><a name="M16">-width</a></b></dt>
+
+<dt>Database Name: <b>width</b></dt>
+
+<dt>Database Class: <b>Width</b></dt>
+
+<dd>Specifies an integer value indicating the desired width of the
+entry window, in average-size characters of the widget's font.</dd>
+</dl>
+
+<h3><a name="M17">WIDGET COMMAND</a></h3>
+
+The following subcommands are possible for combobox widgets: 
+
+<dl class="widget command">
+<dt><a name="M18"><i>pathName</i> <b>current</b>
+?<i>newIndex</i>?</a></dt>
+
+<dd>If <i>newIndex</i> is supplied, sets the combobox value to the
+element at position <i>newIndex</i> in the list of <b>-values</b>.
+Otherwise, returns the index of the current value in the list of
+<b>-values</b> or <b>-1</b> if the current value does not appear in
+the list.</dd>
+
+<dt><a name="M19"><i>pathName</i> <b>get</b></a></dt>
+
+<dd>Returns the current value of the combobox.</dd>
+
+<dt><a name="M20"><i>pathName</i> <b>set</b> <i>value</i></a></dt>
+
+<dd>Sets the value of the combobox to <i>value</i>.</dd>
+</dl>
+
+<p>The combobox widget also supports the following <b><a href=
+"../TkCmd/ttk_entry.htm">ttk::entry</a></b> widget subcommands (see
+<i>ttk::entry(n)</i> for details):</p>
+
+<pre>
+<b>bbox</b>    <b>delete</b>   <b>icursor</b>
+<b>index</b>    <b>insert</b>   <b><a href=
+"../TkCmd/selection.htm">selection</a></b>
+<b>xview</b>
+</pre>
+
+The combobox widget also supports the following generic <b><a href=
+"../TkCmd/ttk_widget.htm">ttk::widget</a></b> widget subcommands
+(see <i>ttk::widget(n)</i> for details): 
+
+<pre>
+<b>cget</b>    <b>configure</b>    <b>identify</b>
+<b>instate</b>  <b>state</b>
+</pre>
+
+<h3><a name="M21">VIRTUAL EVENTS</a></h3>
+
+The combobox widget generates a
+<b>&lt;&lt;ComboboxSelected&gt;&gt;</b> virtual event when the user
+selects an element from the list of values. If the selection action
+unposts the listbox, this event is delivered after the listbox is
+unposted. 
+
+<h3><a name="M22">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_widget.htm">ttk::widget</a></b>, <b><a
+href="../TkCmd/ttk_entry.htm">ttk::entry</a></b> 
+
+<h3><a name="M23">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#choice">choice</a>, <a href=
+"../Keywords/E.htm#entry">entry</a>, <a href=
+"../Keywords/L.htm#list box">list box</a>, <a href=
+"../Keywords/T.htm#text box">text box</a>, <a href=
+"../Keywords/W.htm#widget">widget</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2004 Joe English</div>
+</body>
+</html>
+

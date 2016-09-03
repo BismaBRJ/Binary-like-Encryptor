@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Library Procedures - Tk_SetClass manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> SetClass</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_SetClass, Tk_Class - set or retrieve a window's class 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+<b>Tk_SetClass</b>(<i>tkwin, class</i>)<br>
+<a href="../TkLib/GetUid.htm">Tk_Uid</a><br>
+<b>Tk_Class</b>(<i>tkwin</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Window <b>tkwin</b> (in)</dt>
+
+<dd>Token for window.</dd>
+
+<dt>char <b>*class</b> (in)</dt>
+
+<dd>New class name for window.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tk_SetClass</b> is called to associate a class with a particular
+window. The <i>class</i> string identifies the type of the window;
+all windows with the same general class of behavior (button, menu,
+etc.) should have the same class. By convention all class names
+start with a capital letter, and there exists a Tcl command with
+the same name as each class (except all in lower-case) which can be
+used to create and manipulate windows of that class. A window's
+class string is initialized to NULL when the window is created. 
+
+<p>For main windows, Tk automatically propagates the name and class
+to the WM_CLASS property used by window managers. This happens
+either when a main window is actually created (e.g. in <b><a href=
+"../TkLib/CrtWindow.htm">Tk_MakeWindowExist</a></b>), or when
+<b>Tk_SetClass</b> is called, whichever occurs later. If a main
+window has not been assigned a class then Tk will not set the
+WM_CLASS property for the window.</p>
+
+<p><b>Tk_Class</b> is a macro that returns the current value of
+<i>tkwin</i>'s class. The value is returned as a <a href=
+"../TkLib/GetUid.htm">Tk_Uid</a>, which may be used just like a
+string pointer but also has the properties of a unique identifier
+(see the manual entry for <b><a href=
+"../TkLib/GetUid.htm">Tk_GetUid</a></b> for details). If
+<i>tkwin</i> has not yet been given a class, then <b>Tk_Class</b>
+will return NULL.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#class">class</a>, <a href=
+"../Keywords/U.htm#unique identifier">unique identifier</a>, <a
+href="../Keywords/W.htm#window">window</a>, <a href=
+"../Keywords/W.htm#window manager">window manager</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

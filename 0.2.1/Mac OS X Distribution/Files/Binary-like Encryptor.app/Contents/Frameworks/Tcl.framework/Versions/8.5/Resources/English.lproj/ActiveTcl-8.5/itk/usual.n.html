@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>itk - usual (n)</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<center>
+<h1>[incr\ Tk]</h1>
+</center>
+
+<h3>NAME</h3>
+
+usual - access default option-handling commands <br>
+for a mega-widget component 
+
+<h3>SYNOPSIS</h3>
+
+<b>usual ?</b><i>tag</i>? ?<i>commands</i>? 
+
+<h3>DESCRIPTION</h3>
+
+<p>The <b>usual</b> command is used outside of an <b>[incrTcl]</b>
+class definition to define the usual set of option-handling
+commands for a component widget. Option-handling commands are used
+when a component is registered with the <b><a href=
+"Archetype.n.html">Archetype</a></b> base class via the
+"<b>itk_component add</b>" method. They specify how the component's
+configuration options should be integrated into the composite
+option list for the mega-widget. Options can be kept, renamed, or
+ignored, as described in the <b><a href=
+"Archetype.n.html">Archetype</a></b> man page.</p>
+
+<p>It is tedious to include the same declarations again and again
+whenever components are added. The <b>usual</b> command allows a
+standard code fragment to be registered for each widget class,
+which is used by default to handle the options. All of the standard
+Tk widgets have <b>usual</b> declarations defined in the
+<b>[incrTk]</b> library. Similar <b>usual</b> declarations should
+be created whenever a new mega-widget class is conceived. Only the
+most-generic options should be included in the <b>usual</b>
+declaration.</p>
+
+<p>The <i>tag</i> name is usually the name of a widget class, which
+starts with a capital letter; however, any string registered here
+can be used later with the <b>usual</b> command described on the
+<b><a href="Archetype.n.html">Archetype</a></b> man page.</p>
+
+<p>If the <i>commands</i> argument is specified, it is associated
+with the <i>tag</i> string, and can be accessed later via
+<b>itk_component add</b>.</p>
+
+<p>If only the <i>tag</i> argument is specified, this command looks
+for an existing <i>tag</i> name and returns the commands associated
+with it. If there are no commands associated with <i>tag</i>, this
+command returns the null string.</p>
+
+<p>If no arguments are specified, this command returns a list of
+all <i>tag</i> names previously registered.</p>
+
+<h3>EXAMPLE</h3>
+
+Following is the <b>usual</b> declaration for the standard Tk
+button widget: 
+
+<blockquote>
+<pre>
+itk::usual Button {
+    keep -background -cursor -foreground -font
+    keep -activebackground -activeforeground -disabledforeground
+    keep -highlightcolor -highlightthickness
+    rename -highlightbackground -background background Background
+}
+</pre>
+</blockquote>
+
+Only the options that would be common to all buttons in a single
+mega-widget are kept or renamed. Options like "-text" that would be
+unique to a particular button are ignored. 
+
+<h3>KEYWORDS</h3>
+
+itk, Archetype, component, mega-widget 
+
+<hr>
+[ <a href="../itk/contents.html">itk</a> ] 
+
+<hr>
+<pre>
+Copyright &copy; 1989-1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.
+</pre>
+</body>
+</html>
+

@@ -1,0 +1,519 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - library manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> library</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="library.htm#M2" name="L794">NAME</a> 
+
+<dl>
+<dd>auto_execok, auto_import, auto_load, auto_mkindex,
+auto_mkindex_old, auto_qualify, auto_reset, tcl_findLibrary,
+parray, tcl_endOfWord, tcl_startOfNextWord,
+tcl_startOfPreviousWord, tcl_wordBreakAfter, tcl_wordBreakBefore -
+standard library of Tcl procedures</dd>
+</dl>
+</dd>
+
+<dd><a href="library.htm#M3" name="L795">SYNOPSIS</a> 
+
+<dl>
+<dd><b>auto_execok</b> <i>cmd</i></dd>
+
+<dd><b>auto_import</b> <i>pattern</i></dd>
+
+<dd><b>auto_load</b> <i>cmd</i></dd>
+
+<dd><b>auto_mkindex</b> <i>dir pattern pattern ...</i></dd>
+
+<dd><b>auto_mkindex_old</b> <i>dir pattern pattern ...</i></dd>
+
+<dd><b>auto_qualify</b> <i>command namespace</i></dd>
+
+<dd><b>auto_reset</b></dd>
+
+<dd><b>tcl_findLibrary</b> <i>basename version patch initScript
+enVarName varName</i></dd>
+
+<dd><b>parray</b> <i>arrayName</i></dd>
+
+<dd><b>tcl_endOfWord</b> <i>str start</i></dd>
+
+<dd><b>tcl_startOfNextWord</b> <i>str start</i></dd>
+
+<dd><b>tcl_startOfPreviousWord</b> <i>str start</i></dd>
+
+<dd><b>tcl_wordBreakAfter</b> <i>str start</i></dd>
+
+<dd><b>tcl_wordBreakBefore</b> <i>str start</i></dd>
+</dl>
+</dd>
+
+<dd><a href="library.htm#M4" name="L796">INTRODUCTION</a></dd>
+
+<dd><a href="library.htm#M5" name="L797">COMMAND PROCEDURES</a> 
+
+<dl class="command procedures">
+<dd><a href="library.htm#M6" name="L798"><b>auto_execok</b>
+<i>cmd</i></a></dd>
+
+<dd><a href="library.htm#M7" name="L799"><b>auto_import</b>
+<i>pattern</i></a></dd>
+
+<dd><a href="library.htm#M8" name="L800"><b>auto_load</b>
+<i>cmd</i></a></dd>
+
+<dd><a href="library.htm#M9" name="L801"><b>auto_mkindex</b> <i>dir
+pattern pattern ...</i></a></dd>
+
+<dd><a href="library.htm#M10" name=
+"L802"><b>auto_reset</b></a></dd>
+
+<dd><a href="library.htm#M11" name="L803"><b>auto_qualify</b>
+<i>command namespace</i></a></dd>
+
+<dd><a href="library.htm#M12" name="L804"><b>tcl_findLibrary</b>
+<i>basename version patch initScript enVarName varName</i></a></dd>
+
+<dd><a href="library.htm#M13" name="L805"><b>parray</b>
+<i>arrayName</i></a></dd>
+
+<dd><a href="library.htm#M14" name="L806"><b>tcl_endOfWord</b>
+<i>str start</i></a></dd>
+
+<dd><a href="library.htm#M15" name=
+"L807"><b>tcl_startOfNextWord</b> <i>str start</i></a></dd>
+
+<dd><a href="library.htm#M16" name=
+"L808"><b>tcl_startOfPreviousWord</b> <i>str start</i></a></dd>
+
+<dd><a href="library.htm#M17" name="L809"><b>tcl_wordBreakAfter</b>
+<i>str start</i></a></dd>
+
+<dd><a href="library.htm#M18" name=
+"L810"><b>tcl_wordBreakBefore</b> <i>str start</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="library.htm#M19" name="L811">VARIABLES</a> 
+
+<dl class="variables">
+<dd><a href="library.htm#M20" name=
+"L812"><b>auto_execs</b></a></dd>
+
+<dd><a href="library.htm#M21" name=
+"L813"><b>auto_index</b></a></dd>
+
+<dd><a href="library.htm#M22" name=
+"L814"><b>auto_noexec</b></a></dd>
+
+<dd><a href="library.htm#M23" name=
+"L815"><b>auto_noload</b></a></dd>
+
+<dd><a href="library.htm#M24" name="L816"><b>auto_path</b></a></dd>
+
+<dd><a href="library.htm#M25" name=
+"L817"><b>env(TCL_LIBRARY)</b></a></dd>
+
+<dd><a href="library.htm#M26" name=
+"L818"><b>env(TCLLIBPATH)</b></a></dd>
+
+<dd><a href="library.htm#M27" name=
+"L819"><b>tcl_nonwordchars</b></a></dd>
+
+<dd><a href="library.htm#M28" name=
+"L820"><b>tcl_wordchars</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="library.htm#M29" name="L821">SEE ALSO</a></dd>
+
+<dd><a href="library.htm#M30" name="L822">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+auto_execok, auto_import, auto_load, auto_mkindex,
+auto_mkindex_old, auto_qualify, auto_reset, tcl_findLibrary,
+parray, tcl_endOfWord, tcl_startOfNextWord,
+tcl_startOfPreviousWord, tcl_wordBreakAfter, tcl_wordBreakBefore -
+standard library of Tcl procedures 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>auto_execok</b> <i>cmd</i><br>
+<b>auto_import</b> <i>pattern</i><br>
+<b>auto_load</b> <i>cmd</i><br>
+<b>auto_mkindex</b> <i>dir pattern pattern ...</i><br>
+<b>auto_mkindex_old</b> <i>dir pattern pattern ...</i><br>
+<b>auto_qualify</b> <i>command namespace</i><br>
+<b>auto_reset</b><br>
+<b>tcl_findLibrary</b> <i>basename version patch initScript
+enVarName varName</i><br>
+<b>parray</b> <i>arrayName</i><br>
+<b>tcl_endOfWord</b> <i>str start</i><br>
+<b>tcl_startOfNextWord</b> <i>str start</i><br>
+<b>tcl_startOfPreviousWord</b> <i>str start</i><br>
+<b>tcl_wordBreakAfter</b> <i>str start</i><br>
+<b>tcl_wordBreakBefore</b> <i>str start</i><br>
+<h3><a name="M4">INTRODUCTION</a></h3>
+
+Tcl includes a library of Tcl procedures for commonly-needed
+functions. The procedures defined in the Tcl library are generic
+ones suitable for use by many different applications. The location
+of the Tcl library is returned by the <b><a href=
+"../TclCmd/info.htm">info library</a></b> command. In addition to
+the Tcl library, each application will normally have its own
+library of support procedures as well; the location of this library
+is normally given by the value of the
+<b>$</b><i>app</i><b>_library</b> global variable, where <i>app</i>
+is the name of the application. For example, the location of the Tk
+library is kept in the variable <b>$tk_library</b>. 
+
+<p>To access the procedures in the Tcl library, an application
+should source the file <b>init.tcl</b> in the library, for example
+with the Tcl command</p>
+
+<pre>
+<b>source [file join [info library] init.tcl]</b>
+</pre>
+
+If the library procedure <b><a href=
+"../TclLib/Init.htm">Tcl_Init</a></b> is invoked from an
+application's <b><a href=
+"../TclLib/AppInit.htm">Tcl_AppInit</a></b> procedure, this happens
+automatically. The code in <b>init.tcl</b> will define the <b><a
+href="../TclCmd/unknown.htm">unknown</a></b> procedure and arrange
+for the other procedures to be loaded on-demand using the auto-load
+mechanism defined below. 
+
+<h3><a name="M5">COMMAND PROCEDURES</a></h3>
+
+The following procedures are provided in the Tcl library: 
+
+<dl class="command procedures">
+<dt><a name="M6"><b>auto_execok</b> <i>cmd</i></a></dt>
+
+<dd>Determines whether there is an executable file or shell builtin
+by the name <i>cmd</i>. If so, it returns a list of arguments to be
+passed to <b><a href="../TclCmd/exec.htm">exec</a></b> to execute
+the executable file or shell builtin named by <i>cmd</i>. If not,
+it returns an empty string. This command examines the directories
+in the current search path (given by the PATH environment variable)
+in its search for an executable file named <i>cmd</i>. On Windows
+platforms, the search is expanded with the same directories and
+file extensions as used by <b><a href=
+"../TclCmd/exec.htm">exec</a></b>. <b>Auto_execok</b> remembers
+information about previous searches in an array named
+<b>auto_execs</b>; this avoids the path search in future calls for
+the same <i>cmd</i>. The command <b>auto_reset</b> may be used to
+force <b>auto_execok</b> to forget its cached information.</dd>
+
+<dt><a name="M7"><b>auto_import</b> <i>pattern</i></a></dt>
+
+<dd><b>Auto_import</b> is invoked during <b>namespace import</b> to
+see if the imported commands specified by <i>pattern</i> reside in
+an autoloaded library. If so, the commands are loaded so that they
+will be available to the interpreter for creating the import links.
+If the commands do not reside in an autoloaded library,
+<b>auto_import</b> does nothing. The pattern matching is performed
+according to the matching rules of <b>namespace import</b>.</dd>
+
+<dt><a name="M8"><b>auto_load</b> <i>cmd</i></a></dt>
+
+<dd>This command attempts to load the definition for a Tcl command
+named <i>cmd</i>. To do this, it searches an <i>auto-load path</i>,
+which is a list of one or more directories. The auto-load path is
+given by the global variable <b>$auto_path</b> if it exists. If
+there is no <b>$auto_path</b> variable, then the TCLLIBPATH
+environment variable is used, if it exists. Otherwise the auto-load
+path consists of just the Tcl library directory. Within each
+directory in the auto-load path there must be a file
+<b>tclIndex</b> that describes one or more commands defined in that
+directory and a script to evaluate to load each of the commands.
+The <b>tclIndex</b> file should be generated with the
+<b>auto_mkindex</b> command. If <i>cmd</i> is found in an index
+file, then the appropriate script is evaluated to create the
+command. The <b>auto_load</b> command returns 1 if <i>cmd</i> was
+successfully created. The command returns 0 if there was no index
+entry for <i>cmd</i> or if the script did not actually define
+<i>cmd</i> (e.g. because index information is out of date). If an
+error occurs while processing the script, then that error is
+returned. <b>Auto_load</b> only reads the index information once
+and saves it in the array <b>auto_index</b>; future calls to
+<b>auto_load</b> check for <i>cmd</i> in the array rather than
+re-reading the index files. The cached index information may be
+deleted with the command <b>auto_reset</b>. This will force the
+next <b>auto_load</b> command to reload the index database from
+disk.</dd>
+
+<dt><a name="M9"><b>auto_mkindex</b> <i>dir pattern pattern
+...</i></a></dt>
+
+<dd>Generates an index suitable for use by <b>auto_load</b>. The
+command searches <i>dir</i> for all files whose names match any of
+the <i>pattern</i> arguments (matching is done with the <b><a href=
+"../TclCmd/glob.htm">glob</a></b> command), generates an index of
+all the Tcl command procedures defined in all the matching files,
+and stores the index information in a file named <b>tclIndex</b> in
+<i>dir</i>. If no pattern is given a pattern of <b>*.tcl</b> will
+be assumed. For example, the command 
+
+<pre>
+<b>auto_mkindex foo *.tcl</b>
+</pre>
+
+<p>will read all the <b>.tcl</b> files in subdirectory <b>foo</b>
+and generate a new index file <b>foo/tclIndex</b>.</p>
+
+<p><b>Auto_mkindex</b> parses the Tcl scripts by sourcing them into
+a slave interpreter and monitoring the proc and namespace commands
+that are executed. Extensions can use the (undocumented)
+auto_mkindex_parser package to register other commands that can
+contribute to the auto_load index. You will have to read through
+auto.tcl to see how this works.</p>
+
+<p><b>Auto_mkindex_old</b> parses the Tcl scripts in a relatively
+unsophisticated way: if any line contains the word <b><a href=
+"../TclCmd/proc.htm">proc</a></b> as its first characters then it
+is assumed to be a procedure definition and the next word of the
+line is taken as the procedure's name. Procedure definitions that
+do not appear in this way (e.g. they have spaces before the <b><a
+href="../TclCmd/proc.htm">proc</a></b>) will not be indexed. If
+your script contains &ldquo;dangerous&rdquo; code, such as global
+initialization code or procedure names with special characters like
+<b>$</b>, <b>*</b>, <b>[</b> or <b>]</b>, you are safer using
+auto_mkindex_old.</p>
+</dd>
+
+<dt><a name="M10"><b>auto_reset</b></a></dt>
+
+<dd>Destroys all the information cached by <b>auto_execok</b> and
+<b>auto_load</b>. This information will be re-read from disk the
+next time it is needed. <b>Auto_reset</b> also deletes any
+procedures listed in the auto-load index, so that fresh copies of
+them will be loaded the next time that they are used.</dd>
+
+<dt><a name="M11"><b>auto_qualify</b> <i>command
+namespace</i></a></dt>
+
+<dd>Computes a list of fully qualified names for <i>command</i>.
+This list mirrors the path a standard Tcl interpreter follows for
+command lookups: first it looks for the command in the current
+namespace, and then in the global namespace. Accordingly, if
+<i>command</i> is relative and <i>namespace</i> is not <b>::</b>,
+the list returned has two elements: <i>command</i> scoped by
+<i>namespace</i>, as if it were a command in the <i>namespace</i>
+namespace; and <i>command</i> as if it were a command in the global
+namespace. Otherwise, if either <i>command</i> is absolute (it
+begins with <b>::</b>), or <i>namespace</i> is <b>::</b>, the list
+contains only <i>command</i> as if it were a command in the global
+namespace. 
+
+<p><b>Auto_qualify</b> is used by the auto-loading facilities in
+Tcl, both for producing auto-loading indexes such as
+<i>pkgIndex.tcl</i>, and for performing the actual auto-loading of
+functions at runtime.</p>
+</dd>
+
+<dt><a name="M12"><b>tcl_findLibrary</b> <i>basename version patch
+initScript enVarName varName</i></a></dt>
+
+<dd>This is a standard search procedure for use by extensions
+during their initialization. They call this procedure to look for
+their script library in several standard directories. The last
+component of the name of the library directory is normally
+<i>basenameversion</i> (e.g., tk8.0), but it might be
+&ldquo;library&rdquo; when in the build hierarchies. The
+<i>initScript</i> file will be sourced into the interpreter once it
+is found. The directory in which this file is found is stored into
+the global variable <i>varName</i>. If this variable is already
+defined (e.g., by C code during application initialization) then no
+searching is done. Otherwise the search looks in these directories:
+the directory named by the environment variable <i>enVarName</i>;
+relative to the Tcl library directory; relative to the executable
+file in the standard installation bin or bin/<i>arch</i> directory;
+relative to the executable file in the current build tree; relative
+to the executable file in a parallel build tree.</dd>
+
+<dt><a name="M13"><b>parray</b> <i>arrayName</i></a></dt>
+
+<dd>Prints on standard output the names and values of all the
+elements in the array <i>arrayName</i>. <b>ArrayName</b> must be an
+array accessible to the caller of <b>parray</b>. It may be either
+local or global.</dd>
+
+<dt><a name="M14"><b>tcl_endOfWord</b> <i>str start</i></a></dt>
+
+<dd>Returns the index of the first end-of-word location that occurs
+after a starting index <i>start</i> in the string <i>str</i>. An
+end-of-word location is defined to be the first non-word character
+following the first word character after the starting point.
+Returns -1 if there are no more end-of-word locations after the
+starting point. See the description of <b>tcl_wordchars</b> and
+<b>tcl_nonwordchars</b> below for more details on how Tcl
+determines which characters are word characters.</dd>
+
+<dt><a name="M15"><b>tcl_startOfNextWord</b> <i>str
+start</i></a></dt>
+
+<dd>Returns the index of the first start-of-word location that
+occurs after a starting index <i>start</i> in the string
+<i>str</i>. A start-of-word location is defined to be the first
+word character following a non-word character. Returns -1 if there
+are no more start-of-word locations after the starting point.</dd>
+
+<dt><a name="M16"><b>tcl_startOfPreviousWord</b> <i>str
+start</i></a></dt>
+
+<dd>Returns the index of the first start-of-word location that
+occurs before a starting index <i>start</i> in the string
+<i>str</i>. Returns -1 if there are no more start-of-word locations
+before the starting point.</dd>
+
+<dt><a name="M17"><b>tcl_wordBreakAfter</b> <i>str
+start</i></a></dt>
+
+<dd>Returns the index of the first word boundary after the starting
+index <i>start</i> in the string <i>str</i>. Returns -1 if there
+are no more boundaries after the starting point in the given
+string. The index returned refers to the second character of the
+pair that comprises a boundary.</dd>
+
+<dt><a name="M18"><b>tcl_wordBreakBefore</b> <i>str
+start</i></a></dt>
+
+<dd>Returns the index of the first word boundary before the
+starting index <i>start</i> in the string <i>str</i>. Returns -1 if
+there are no more boundaries before the starting point in the given
+string. The index returned refers to the second character of the
+pair that comprises a boundary.</dd>
+</dl>
+
+<h3><a name="M19">VARIABLES</a></h3>
+
+The following global variables are defined or used by the
+procedures in the Tcl library: 
+
+<dl class="variables">
+<dt><a name="M20"><b>auto_execs</b></a></dt>
+
+<dd>Used by <b>auto_execok</b> to record information about whether
+particular commands exist as executable files.</dd>
+
+<dt><a name="M21"><b>auto_index</b></a></dt>
+
+<dd>Used by <b>auto_load</b> to save the index information read
+from disk.</dd>
+
+<dt><a name="M22"><b>auto_noexec</b></a></dt>
+
+<dd>If set to any value, then <b><a href=
+"../TclCmd/unknown.htm">unknown</a></b> will not attempt to
+auto-exec any commands.</dd>
+
+<dt><a name="M23"><b>auto_noload</b></a></dt>
+
+<dd>If set to any value, then <b><a href=
+"../TclCmd/unknown.htm">unknown</a></b> will not attempt to
+auto-load any commands.</dd>
+
+<dt><a name="M24"><b>auto_path</b></a></dt>
+
+<dd>If set, then it must contain a valid Tcl list giving
+directories to search during auto-load operations. This variable is
+initialized during startup to contain, in order: the directories
+listed in the TCLLIBPATH environment variable, the directory named
+by the $tcl_library variable, the parent directory of $tcl_library,
+the directories listed in the $tcl_pkgPath variable.</dd>
+
+<dt><a name="M25"><b>env(TCL_LIBRARY)</b></a></dt>
+
+<dd>If set, then it specifies the location of the directory
+containing library scripts (the value of this variable will be
+assigned to the <b>tcl_library</b> variable and therefore returned
+by the command <b><a href="../TclCmd/info.htm">info
+library</a></b>). If this variable is not set then a default value
+is used.</dd>
+
+<dt><a name="M26"><b>env(TCLLIBPATH)</b></a></dt>
+
+<dd>If set, then it must contain a valid Tcl list giving
+directories to search during auto-load operations. Directories must
+be specified in Tcl format, using &ldquo;/&rdquo; as the path
+separator, regardless of platform. This variable is only used when
+initializing the <b>auto_path</b> variable.</dd>
+
+<dt><a name="M27"><b>tcl_nonwordchars</b></a></dt>
+
+<dd>This variable contains a regular expression that is used by
+routines like <b>tcl_endOfWord</b> to identify whether a character
+is part of a word or not. If the pattern matches a character, the
+character is considered to be a non-word character. On Windows
+platforms, spaces, tabs, and newlines are considered non-word
+characters. Under Unix, everything but numbers, letters and
+underscores are considered non-word characters.</dd>
+
+<dt><a name="M28"><b>tcl_wordchars</b></a></dt>
+
+<dd>This variable contains a regular expression that is used by
+routines like <b>tcl_endOfWord</b> to identify whether a character
+is part of a word or not. If the pattern matches a character, the
+character is considered to be a word character. On Windows
+platforms, words are comprised of any character that is not a
+space, tab, or newline. Under Unix, words are comprised of numbers,
+letters or underscores.</dd>
+</dl>
+
+<h3><a name="M29">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/info.htm">info</a></b>, <b><a href=
+"../TclCmd/re_syntax.htm">re_syntax</a></b> 
+
+<h3><a name="M30">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#auto-exec">auto-exec</a>, <a href=
+"../Keywords/A.htm#auto-load">auto-load</a>, <a href=
+"../Keywords/L.htm#library">library</a>, <a href=
+"../Keywords/U.htm#unknown">unknown</a>, <a href=
+"../Keywords/W.htm#word">word</a>, <a href=
+"../Keywords/W.htm#whitespace">whitespace</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1991-1993 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_WindowId manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> WindowId</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_WindowId, Tk_Parent, Tk_Display, Tk_DisplayName,
+Tk_ScreenNumber, Tk_Screen, Tk_X, Tk_Y, Tk_Width, Tk_Height,
+Tk_Changes, Tk_Attributes, Tk_IsContainer, Tk_IsEmbedded,
+Tk_IsMapped, Tk_IsTopLevel, Tk_ReqWidth, Tk_ReqHeight,
+Tk_MinReqWidth, Tk_MinReqHeight, Tk_InternalBorderLeft,
+Tk_InternalBorderRight, Tk_InternalBorderTop,
+Tk_InternalBorderBottom, Tk_Visual, Tk_Depth, Tk_Colormap,
+Tk_Interp - retrieve information from Tk's local data structure 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+Window<br>
+<b>Tk_WindowId</b>(<i>tkwin</i>)<br>
+Tk_Window<br>
+<b>Tk_Parent</b>(<i>tkwin</i>)<br>
+Display *<br>
+<b>Tk_Display</b>(<i>tkwin</i>)<br>
+const char *<br>
+<b>Tk_DisplayName</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_ScreenNumber</b>(<i>tkwin</i>)<br>
+Screen *<br>
+<b>Tk_Screen</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_X</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_Y</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_Width</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_Height</b>(<i>tkwin</i>)<br>
+XWindowChanges *<br>
+<b>Tk_Changes</b>(<i>tkwin</i>)<br>
+XSetWindowAttributes *<br>
+<b>Tk_Attributes</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_IsContainer</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_IsEmbedded</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_IsMapped</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_IsTopLevel</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_ReqWidth</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_ReqHeight</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_MinReqWidth</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_MinReqHeight</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_InternalBorderLeft</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_InternalBorderRight</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_InternalBorderTop</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_InternalBorderBottom</b>(<i>tkwin</i>)<br>
+Visual *<br>
+<b>Tk_Visual</b>(<i>tkwin</i>)<br>
+int<br>
+<b>Tk_Depth</b>(<i>tkwin</i>)<br>
+Colormap<br>
+<b>Tk_Colormap</b>(<i>tkwin</i>)<br>
+<a href="../TclLib/Interp.htm">Tcl_Interp</a> *<br>
+<b>Tk_Interp</b>(<i>tkwin</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Window <b>tkwin</b> (in)</dt>
+
+<dd>Token for window.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tk_WindowId</b> and the other names listed above are all macros
+that return fields from Tk's local data structure for <i>tkwin</i>.
+None of these macros requires any interaction with the server; it
+is safe to assume that all are fast. 
+
+<p><b>Tk_WindowId</b> returns the X identifier for <i>tkwin</i>, or
+<b>NULL</b> if no X window has been created for <i>tkwin</i>
+yet.</p>
+
+<p><b>Tk_Parent</b> returns Tk's token for the logical parent of
+<i>tkwin</i>. The parent is the token that was specified when
+<i>tkwin</i> was created, or NULL for main windows.</p>
+
+<p><b>Tk_Interp</b> returns the Tcl interpreter associated with a
+<i>tkwin</i> or NULL if there is an error.</p>
+
+<p><b>Tk_Display</b> returns a pointer to the Xlib display
+structure corresponding to <i>tkwin</i>. <b>Tk_DisplayName</b>
+returns an ASCII string identifying <i>tkwin</i>'s display.
+<b>Tk_ScreenNumber</b> returns the index of <i>tkwin</i>'s screen
+among all the screens of <i>tkwin</i>'s display. <b>Tk_Screen</b>
+returns a pointer to the Xlib structure corresponding to
+<i>tkwin</i>'s screen.</p>
+
+<p><b>Tk_X</b>, <b>Tk_Y</b>, <b>Tk_Width</b>, and <b>Tk_Height</b>
+return information about <i>tkwin's</i> location within its parent
+and its size. The location information refers to the upper-left
+pixel in the window, or its border if there is one. The width and
+height information refers to the interior size of the window, not
+including any border. <b>Tk_Changes</b> returns a pointer to a
+structure containing all of the above information plus a few other
+fields. <b>Tk_Attributes</b> returns a pointer to an
+XSetWindowAttributes structure describing all of the attributes of
+the <i>tkwin</i>'s window, such as background pixmap, event mask,
+and so on (Tk keeps track of all this information as it is changed
+by the application). Note: it is essential that applications use Tk
+procedures like <b><a href=
+"../TkLib/ConfigWind.htm">Tk_ResizeWindow</a></b> instead of X
+procedures like <b>XResizeWindow</b>, so that Tk can keep its data
+structures up-to-date.</p>
+
+<p><b>Tk_IsContainer</b> returns a non-zero value if <i>tkwin</i>
+is a container, and that some other application may be embedding
+itself inside <i>tkwin</i>.</p>
+
+<p><b>Tk_IsEmbedded</b> returns a non-zero value if <i>tkwin</i> is
+not a free-standing window, but rather is embedded in some other
+application.</p>
+
+<p><b>Tk_IsMapped</b> returns a non-zero value if <i>tkwin</i> is
+mapped and zero if <i>tkwin</i> is not mapped.</p>
+
+<p><b>Tk_IsTopLevel</b> returns a non-zero value if <i>tkwin</i> is
+a top-level window (its X parent is the root window of the screen)
+and zero if <i>tkwin</i> is not a top-level window.</p>
+
+<p><b>Tk_ReqWidth</b> and <b>Tk_ReqHeight</b> return information
+about the window's requested size. These values correspond to the
+last call to <b><a href=
+"../TkLib/GeomReq.htm">Tk_GeometryRequest</a></b> for
+<i>tkwin</i>.</p>
+
+<p><b>Tk_MinReqWidth</b> and <b>Tk_MinReqHeight</b> return
+information about the window's minimum requested size. These values
+correspond to the last call to <b><a href=
+"../TkLib/GeomReq.htm">Tk_SetMinimumRequestSize</a></b> for
+<i>tkwin</i>.</p>
+
+<p><b>Tk_InternalBorderLeft</b>, <b>Tk_InternalBorderRight</b>,
+<b>Tk_InternalBorderTop</b> and <b>Tk_InternalBorderBottom</b>
+return the width of one side of the internal border that has been
+requested for <i>tkwin</i>, or 0 if no internal border was
+requested. The return value is simply the last value passed to
+<b><a href="../TkLib/GeomReq.htm">Tk_SetInternalBorder</a></b> or
+<b><a href="../TkLib/GeomReq.htm">Tk_SetInternalBorderEx</a></b>
+for <i>tkwin</i>.</p>
+
+<p><b>Tk_Visual</b>, <b>Tk_Depth</b>, and <b>Tk_Colormap</b> return
+information about the visual characteristics of a window.
+<b>Tk_Visual</b> returns the visual type for the window,
+<b>Tk_Depth</b> returns the number of bits per pixel, and
+<b>Tk_Colormap</b> returns the current colormap for the window. The
+visual characteristics are normally set from the defaults for the
+window's screen, but they may be overridden by calling <b><a href=
+"../TkLib/SetVisual.htm">Tk_SetWindowVisual</a></b>.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#attributes">attributes</a>, <a href=
+"../Keywords/C.htm#colormap">colormap</a>, <a href=
+"../Keywords/D.htm#depth">depth</a>, <a href=
+"../Keywords/D.htm#display">display</a>, <a href=
+"../Keywords/H.htm#height">height</a>, <a href=
+"../Keywords/G.htm#geometry manager">geometry manager</a>, <a href=
+"../Keywords/I.htm#identifier">identifier</a>, <a href=
+"../Keywords/M.htm#mapped">mapped</a>, <a href=
+"../Keywords/R.htm#requested size">requested size</a>, <a href=
+"../Keywords/S.htm#screen">screen</a>, <a href=
+"../Keywords/T.htm#top-level">top-level</a>, <a href=
+"../Keywords/V.htm#visual">visual</a>, <a href=
+"../Keywords/W.htm#width">width</a>, <a href=
+"../Keywords/W.htm#window">window</a>, <a href=
+"../Keywords/X.htm#x">x</a>, <a href="../Keywords/Y.htm#y">y</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990-1993 The Regents of the University of
+California. Copyright &copy; 1994-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

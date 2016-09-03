@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>String Subcommands - length index range</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">String Subcommands - length index range</h1>
+
+<div class="nav"><a href="Tcl16a.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl18.html">Next
+lesson</a></div>
+
+<p>Tcl commands often have "subcommands". The <code class=
+"keyword">string</code> command is an example of one of these. The
+<code class="keyword">string</code> command treats its first
+argument as a subcommand. Utilizing subcommands is a good way to
+make one command do multiple things without using cryptic names.
+For instance, Tcl has <code class="keyword">string length</code>
+instead of, say, <code class="keyword">slength</code>.</p>
+
+<p>This lesson covers these string subcommands:</p>
+
+<dl>
+<dt><code class="keyword">string length</code> <code class=
+"arg">string</code></dt>
+
+<dd>Returns the length of <code class="arg">string</code>.</dd>
+
+<dt><code class="keyword">string index</code> <code class=
+"arg">string</code> <code class="arg">index</code></dt>
+
+<dd>Returns the <code class="arg">index</code>th character from
+<code class="arg">string</code>.</dd>
+
+<dt><code class="keyword">string range</code> <code class=
+"arg">string</code> <code class="arg">first</code> <code class=
+"arg">last</code></dt>
+
+<dd>Returns a string composed of the characters from <code class=
+"arg">first</code> to <code class="arg">last</code>.</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set string "this is my test string"
+
+puts "There are [string length $string] characters in \"$string\""
+
+puts "[string index $string 1] is the second character in \"$string\""
+
+puts "\"[string range $string 5 10]\" are characters between the 5'th and 10'th"
+   
+</pre>
+
+<div class="nav"><a href="Tcl16a.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl18.html">Next
+lesson</a></div>
+</body>
+</html>
+

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Modularization - source</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Modularization - source</h1>
+
+<div class="nav"><a href="Tcl29.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl31.html">Next
+lesson</a></div>
+
+<p>The <code class="keyword">source</code> command will load a file
+and execute it. This allows a program to be broken up into multiple
+files, with each file defining procedures and variables for a
+particular area of functionality. For instance, you might have a
+file called <code>database.tcl</code> that contains all the
+procedures for dealing with a database, or a file called
+<code>gui.tcl</code> that handles creating a graphical user
+interface with Tk. The main script can then simply include each
+file using the <code class="keyword">source</code> command. More
+powerful techniques for program modularization are discussed in the
+next lesson on packages.</p>
+
+<p>This command can be used to:</p>
+
+<ul>
+<li>separate a program into multiple files.</li>
+
+<li>make a library file that contains all the procs for a
+particular set of functions.</li>
+
+<li>configure programs.</li>
+
+<li>load data files.</li>
+</ul>
+
+<dl>
+<dt><code class="keyword">source</code> <code class=
+"arg">fileName</code></dt>
+
+<dd>Reads the script in <code class="arg">fileName</code> and
+executes it. If the script executes successfully, <code class=
+"keyword">source</code> returns the value of the last statement in
+the script.</dd>
+
+<dd>If there is an error in the script, <code class=
+"keyword">source</code> will return that error.</dd>
+
+<dd>If there is a return (other than within a <code class=
+"keyword">proc</code> definition) then <code class=
+"keyword">source</code> will return immediately, without executing
+the remainder of the script.</dd>
+
+<dd>If <code class="arg">fileName</code> starts with a tilde
+(<code>~</code>) then <code>$env(HOME)</code> will substituted for
+the tilde, as is done in the <code class="keyword">file</code>
+command.</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<p>sourcedata.tcl:</p>
+
+<pre class="example">
+# Example data file to be sourced
+set scr [info script]
+proc testproc {} {
+    global scr
+    puts "testproc source file: $scr"
+}
+set abc 1
+return
+set aaaa 1
+</pre>
+
+<p>sourcemain.tcl:</p>
+
+<pre class="example">
+set filename "sourcedata.tcl"
+puts "Global variables visible before sourcing $filename:"
+puts "[lsort [info globals]]\n"
+
+if {[info procs testproc] eq ""} {
+    puts "testproc does not exist.  sourcing $filename"
+    source $filename
+}
+
+puts "\nNow executing testproc"
+testproc
+
+puts "Global variables visible after sourcing $filename:"
+puts "[lsort [info globals]]\n"
+</pre>
+
+<div class="nav"><a href="Tcl29.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl31.html">Next
+lesson</a></div>
+</body>
+</html>
+

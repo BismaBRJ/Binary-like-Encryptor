@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>counter - Counters and Histograms</title>
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+</head>
+<body>
+<div class="doctools">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<hr>
+[ <a href="../../at.pkg_index.html">Main table Of Contents</a> | <a
+href="../toc.html">Tcllib Table Of Contents</a> | <a href=
+"../index.html">Tcllib Index</a> ] 
+
+<hr>
+<h1 class="title">counter(n) 2.0.4 "Counters and Histograms"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>counter - Procedures for counters and histograms</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">Bugs, Ideas,
+Feedback</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#category">Category</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tcl 8</b></li>
+
+<li>package require <b class="pkgname">counter <span class=
+"opt">?2.0.4?</span></b></li>
+</ul>
+
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">::counter::init</b> <i class=
+"arg">tag args</i></a></li>
+
+<li><a href="#2"><b class="cmd">::counter::count</b> <i class=
+"arg">tag</i> <span class="opt">?<i class="arg">delta</i>?</span>
+<span class="opt">?<i class="arg">instance</i>?</span></a></li>
+
+<li><a href="#3"><b class="cmd">::counter::start</b> <i class=
+"arg">tag instance</i></a></li>
+
+<li><a href="#4"><b class="cmd">::counter::stop</b> <i class=
+"arg">tag instance</i></a></li>
+
+<li><a href="#5"><b class="cmd">::counter::get</b> <i class=
+"arg">tag args</i></a></li>
+
+<li><a href="#6"><b class="cmd">::counter::exists</b> <i class=
+"arg">tag</i></a></li>
+
+<li><a href="#7"><b class="cmd">::counter::names</b></a></li>
+
+<li><a href="#8"><b class="cmd">::counter::histHtmlDisplay</b> <i
+class="arg">tag args</i></a></li>
+
+<li><a href="#9"><b class="cmd">::counter::reset</b> <i class=
+"arg">tag args</i></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>The <b class="package">counter</b> package provides a counter
+facility and can compute statistics and histograms over the
+collected data.</p>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">::counter::init</b> <i class=
+"arg">tag args</i></a></dt>
+
+<dd>
+<p>This defines a counter with the name <i class="arg">tag</i>. The
+<i class="arg">args</i> determines the characteristics of the
+counter. The <i class="arg">args</i> are</p>
+
+<dl class="definitions">
+<dt><b class="option">-group</b> <i class="arg">name</i></dt>
+
+<dd>
+<p>Keep a grouped counter where the name of the histogram bucket is
+passed into <b class="cmd">::counter::count</b>.</p>
+</dd>
+
+<dt><b class="option">-hist</b> <i class="arg">bucketsize</i></dt>
+
+<dd>
+<p>Accumulate the counter into histogram buckets of size <i class=
+"arg">bucketsize</i>. For example, if the samples are millisecond
+time values and <i class="arg">bucketsize</i> is 10, then each
+histogram bucket represents time values of 0 to 10 msec, 10 to 20
+msec, 20 to 30 msec, and so on.</p>
+</dd>
+
+<dt><b class="option">-hist2x</b> <i class=
+"arg">bucketsize</i></dt>
+
+<dd>
+<p>Accumulate the statistic into histogram buckets. The size of the
+first bucket is <i class="arg">bucketsize</i>, each other bucket
+holds values 2 times the size of the previous bucket. For example,
+if <i class="arg">bucketsize</i> is 10, then each histogram bucket
+represents time values of 0 to 10 msec, 10 to 20 msec, 20 to 40
+msec, 40 to 80 msec, and so on.</p>
+</dd>
+
+<dt><b class="option">-hist10x</b> <i class=
+"arg">bucketsize</i></dt>
+
+<dd>
+<p>Accumulate the statistic into histogram buckets. The size of the
+first bucket is <i class="arg">bucketsize</i>, each other bucket
+holds values 10 times the size of the previous bucket. For example,
+if <i class="arg">bucketsize</i> is 10, then each histogram bucket
+represents time values of 0 to 10 msec, 10 to 100 msec, 100 to 1000
+msec, and so on.</p>
+</dd>
+
+<dt><b class="option">-lastn</b> <i class="arg">N</i></dt>
+
+<dd>
+<p>Save the last <i class="arg">N</i> values of the counter to
+maintain a "running average" over the last <i class="arg">N</i>
+values.</p>
+</dd>
+
+<dt><b class="option">-timehist</b> <i class=
+"arg">secsPerMinute</i></dt>
+
+<dd>
+<p>Keep a time-based histogram. The counter is summed into a
+histogram bucket based on the current time. There are 60 per-minute
+buckets that have a size determined by <i class=
+"arg">secsPerMinute</i>, which is normally 60, but for testing
+purposes can be less. Every "hour" (i.e., 60 "minutes") the
+contents of the per-minute buckets are summed into the next hourly
+bucket. Every 24 "hours" the contents of the per-hour buckets are
+summed into the next daily bucket. The counter package keeps all
+time-based histograms in sync, so the first <i class=
+"arg">secsPerMinute</i> value seen by the package is used for all
+subsequent time-based histograms.</p>
+</dd>
+</dl>
+</dd>
+
+<dt><a name="2"><b class="cmd">::counter::count</b> <i class=
+"arg">tag</i> <span class="opt">?<i class="arg">delta</i>?</span>
+<span class="opt">?<i class="arg">instance</i>?</span></a></dt>
+
+<dd>
+<p>Increment the counter identified by <i class="arg">tag</i>. The
+default increment is 1, although you can increment by any value,
+integer or real, by specifying <i class="arg">delta</i>. You must
+declare each counter with <b class="cmd">::counter::init</b> to
+define the characteristics of counter before you start to use it.
+If the counter type is <b class="option">-group</b>, then the
+counter identified by <i class="arg">instance</i> is
+incremented.</p>
+</dd>
+
+<dt><a name="3"><b class="cmd">::counter::start</b> <i class=
+"arg">tag instance</i></a></dt>
+
+<dd>
+<p>Record the starting time of an interval. The <i class=
+"arg">tag</i> is the name of the counter defined as a <b class=
+"option">-hist</b> value-based histogram. The <i class=
+"arg">instance</i> is used to distinguish this interval from any
+other intervals that might be overlapping this one.</p>
+</dd>
+
+<dt><a name="4"><b class="cmd">::counter::stop</b> <i class=
+"arg">tag instance</i></a></dt>
+
+<dd>
+<p>Record the ending time of an interval. The delta time since the
+corresponding <b class="cmd">::counter::start</b> call for <i
+class="arg">instance</i> is recorded in the histogram identified by
+<i class="arg">tag</i>.</p>
+</dd>
+
+<dt><a name="5"><b class="cmd">::counter::get</b> <i class=
+"arg">tag args</i></a></dt>
+
+<dd>
+<p>Return statistics about a counter identified by <i class=
+"arg">tag</i>. The <i class="arg">args</i> determine what value to
+return:</p>
+
+<dl class="definitions">
+<dt><b class="option">-total</b></dt>
+
+<dd>
+<p>Return the total value of the counter. This is the default if <i
+class="arg">args</i> is not specified.</p>
+</dd>
+
+<dt><b class="option">-totalVar</b></dt>
+
+<dd>
+<p>Return the name of the total variable. Useful for specifying
+with -textvariable in a Tk widget.</p>
+</dd>
+
+<dt><b class="option">-N</b></dt>
+
+<dd>
+<p>Return the number of samples accumulated into the counter.</p>
+</dd>
+
+<dt><b class="option">-avg</b></dt>
+
+<dd>
+<p>Return the average of samples accumulated into the counter.</p>
+</dd>
+
+<dt><b class="option">-avgn</b></dt>
+
+<dd>
+<p>Return the average over the last <i class="arg">N</i> samples
+taken. The <i class="arg">N</i> value is set in the <b class=
+"cmd">::counter::init</b> call.</p>
+</dd>
+
+<dt><b class="option">-hist</b> <i class="arg">bucket</i></dt>
+
+<dd>
+<p>If <i class="arg">bucket</i> is specified, then the value in
+that bucket of the histogram is returned. Otherwise the complete
+histogram is returned in array get format sorted by bucket.</p>
+</dd>
+
+<dt><b class="option">-histVar</b></dt>
+
+<dd>
+<p>Return the name of the histogram array variable.</p>
+</dd>
+
+<dt><b class="option">-histHour</b></dt>
+
+<dd>
+<p>Return the complete hourly histogram in array get format sorted
+by bucket.</p>
+</dd>
+
+<dt><b class="option">-histHourVar</b></dt>
+
+<dd>
+<p>Return the name of the hourly histogram array variable.</p>
+</dd>
+
+<dt><b class="option">-histDay</b></dt>
+
+<dd>
+<p>Return the complete daily histogram in array get format sorted
+by bucket.</p>
+</dd>
+
+<dt><b class="option">-histDayVar</b></dt>
+
+<dd>
+<p>Return the name of the daily histogram array variable.</p>
+</dd>
+
+<dt><b class="option">-resetDate</b></dt>
+
+<dd>
+<p>Return the clock seconds value recorded when the counter was
+last reset.</p>
+</dd>
+
+<dt><b class="option">-all</b></dt>
+
+<dd>
+<p>Return an array get of the array used to store the counter. This
+includes the total, the number of samples (N), and any
+type-specific information. This does not include the histogram
+array.</p>
+</dd>
+</dl>
+</dd>
+
+<dt><a name="6"><b class="cmd">::counter::exists</b> <i class=
+"arg">tag</i></a></dt>
+
+<dd>
+<p>Returns 1 if the counter is defined.</p>
+</dd>
+
+<dt><a name="7"><b class="cmd">::counter::names</b></a></dt>
+
+<dd>
+<p>Returns a list of all counters defined.</p>
+</dd>
+
+<dt><a name="8"><b class="cmd">::counter::histHtmlDisplay</b> <i
+class="arg">tag args</i></a></dt>
+
+<dd>
+<p>Generate HTML to display a histogram for a counter. The <i
+class="arg">args</i> control the format of the display. They
+are:</p>
+
+<dl class="definitions">
+<dt><b class="option">-title</b> <i class="arg">string</i></dt>
+
+<dd>
+<p>Label to display above bar chart</p>
+</dd>
+
+<dt><b class="option">-unit</b> <i class="arg">unit</i></dt>
+
+<dd>
+<p>Specify <b class="const">minutes</b>, <b class=
+"const">hours</b>, or <b class="const">days</b> for the time-base
+histograms. For value-based histograms, the <i class="arg">unit</i>
+is used in the title.</p>
+</dd>
+
+<dt><b class="option">-images</b> <i class="arg">url</i></dt>
+
+<dd>
+<p>URL of /images directory.</p>
+</dd>
+
+<dt><b class="option">-gif</b> <i class="arg">filename</i></dt>
+
+<dd>
+<p>Image for normal histogram bars. The <i class="arg">filename</i>
+is relative to the <b class="option">-images</b> directory.</p>
+</dd>
+
+<dt><b class="option">-ongif</b> <i class="arg">filename</i></dt>
+
+<dd>
+<p>Image for the active histogram bar. The <i class=
+"arg">filename</i> is relative to the <b class="option">-images</b>
+directory.</p>
+</dd>
+
+<dt><b class="option">-max</b> <i class="arg">N</i></dt>
+
+<dd>
+<p>Maximum number of value-based buckets to display.</p>
+</dd>
+
+<dt><b class="option">-height</b> <i class="arg">N</i></dt>
+
+<dd>
+<p>Pixel height of the highest bar.</p>
+</dd>
+
+<dt><b class="option">-width</b> <i class="arg">N</i></dt>
+
+<dd>
+<p>Pixel width of each bar.</p>
+</dd>
+
+<dt><b class="option">-skip</b> <i class="arg">N</i></dt>
+
+<dd>
+<p>Buckets to skip when labeling value-based histograms.</p>
+</dd>
+
+<dt><b class="option">-format</b> <i class="arg">string</i></dt>
+
+<dd>
+<p>Format used to display labels of buckets.</p>
+</dd>
+
+<dt><b class="option">-text</b> <i class="arg">boolean</i></dt>
+
+<dd>
+<p>If 1, a text version of the histogram is dumped, otherwise a
+graphical one is generated.</p>
+</dd>
+</dl>
+</dd>
+
+<dt><a name="9"><b class="cmd">::counter::reset</b> <i class=
+"arg">tag args</i></a></dt>
+
+<dd>
+<p>Resets the counter with the name <i class="arg">tag</i> to an
+initial state. The <i class="arg">args</i> determine the new
+characteristics of the counter. They have the same meaning as
+described for <b class="cmd">::counter::init</b>.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">Bugs, Ideas, Feedback</a></h2>
+
+<p>This document, and the package it describes, will undoubtedly
+contain bugs and other problems. Please report such in the category
+<em>counter</em> of the <a href=
+"http://core.tcl.tk/tcllib/reportlist">Tcllib Trackers</a>. Please
+also report any ideas for enhancements you may have for either
+package and/or documentation.</p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../index.html#key220">counting</a>, <a href=
+"../index.html#key375">histogram</a>, <a href=
+"../index.html#key710">statistics</a>, <a href=
+"../index.html#key738">tallying</a></p>
+</div>
+
+<div id="category" class="section">
+<h2><a name="category">Category</a></h2>
+
+<p>Data structures</p>
+</div>
+
+<h4>Copyright &copy; 2015 <a href="http://www.activestate.com">for
+compilation: ActiveState</a></h4>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,390 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - toplevel manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> toplevel</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="toplevel.htm#M2" name="L1548">NAME</a> 
+
+<dl>
+<dd>toplevel - Create and manipulate toplevel widgets</dd>
+</dl>
+</dd>
+
+<dd><a href="toplevel.htm#M3" name="L1549">SYNOPSIS</a> 
+
+<dl>
+<dd><b>toplevel</b> <i>pathName</i> ?<i>options</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="toplevel.htm#M4" name="L1550">STANDARD OPTIONS</a> 
+
+<dl>
+<dd><a href="options.htm#M-borderwidth">-borderwidth or -bd,
+borderWidth, BorderWidth</a></dd>
+
+<dd><a href="options.htm#M-cursor">-cursor, cursor, Cursor</a></dd>
+
+<dd><a href=
+"options.htm#M-highlightbackground">-highlightbackground,
+highlightBackground, HighlightBackground</a></dd>
+
+<dd><a href="options.htm#M-highlightcolor">-highlightcolor,
+highlightColor, HighlightColor</a></dd>
+
+<dd><a href="options.htm#M-highlightthickness">-highlightthickness,
+highlightThickness, HighlightThickness</a></dd>
+
+<dd><a href="options.htm#M-padx">-padx, padX, Pad</a></dd>
+
+<dd><a href="options.htm#M-pady">-pady, padY, Pad</a></dd>
+
+<dd><a href="options.htm#M-relief">-relief, relief, Relief</a></dd>
+
+<dd><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></dd>
+</dl>
+</dd>
+
+<dd><a href="toplevel.htm#M5" name="L1551">WIDGET-SPECIFIC
+OPTIONS</a> 
+
+<dl>
+<dd><a href="toplevel.htm#M6" name="L1552">-background, background,
+Background</a></dd>
+
+<dd><a href="toplevel.htm#M7" name="L1553">-class, class,
+Class</a></dd>
+
+<dd><a href="toplevel.htm#M8" name="L1554">-colormap, colormap,
+Colormap</a></dd>
+
+<dd><a href="toplevel.htm#M9" name="L1555">-container, container,
+Container</a></dd>
+
+<dd><a href="toplevel.htm#M10" name="L1556">-height, height,
+Height</a></dd>
+
+<dd><a href="toplevel.htm#M11" name="L1557">-menu, menu,
+Menu</a></dd>
+
+<dd><a href="toplevel.htm#M12" name="L1558">-screen, ,</a></dd>
+
+<dd><a href="toplevel.htm#M13" name="L1559">-use, use, Use</a></dd>
+
+<dd><a href="toplevel.htm#M14" name="L1560">-visual, visual,
+Visual</a></dd>
+
+<dd><a href="toplevel.htm#M15" name="L1561">-width, width,
+Width</a></dd>
+</dl>
+</dd>
+
+<dd><a href="toplevel.htm#M16" name="L1562">DESCRIPTION</a></dd>
+
+<dd><a href="toplevel.htm#M17" name="L1563">WIDGET COMMAND</a> 
+
+<dl class="widget command">
+<dd><a href="toplevel.htm#M18" name="L1564"><i>pathName</i>
+<b>cget</b> <i>option</i></a></dd>
+
+<dd><a href="toplevel.htm#M19" name="L1565"><i>pathName</i>
+<b>configure</b> ?<i>option</i>? ?<i>value option value
+...</i>?</a></dd>
+</dl>
+</dd>
+
+<dd><a href="toplevel.htm#M20" name="L1566">BINDINGS</a></dd>
+
+<dd><a href="toplevel.htm#M21" name="L1567">SEE ALSO</a></dd>
+
+<dd><a href="toplevel.htm#M22" name="L1568">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+toplevel - Create and manipulate toplevel widgets 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>toplevel</b> <i>pathName</i> ?<i>options</i>?<br>
+<h3><a name="M4">STANDARD OPTIONS</a></h3>
+
+<dl>
+<dt><b><a href="options.htm#M-borderwidth">-borderwidth or -bd,
+borderWidth, BorderWidth</a></b></dt>
+
+<dt><b><a href="options.htm#M-cursor">-cursor, cursor,
+Cursor</a></b></dt>
+
+<dt><b><a href=
+"options.htm#M-highlightbackground">-highlightbackground,
+highlightBackground, HighlightBackground</a></b></dt>
+
+<dt><b><a href="options.htm#M-highlightcolor">-highlightcolor,
+highlightColor, HighlightColor</a></b></dt>
+
+<dt><b><a href=
+"options.htm#M-highlightthickness">-highlightthickness,
+highlightThickness, HighlightThickness</a></b></dt>
+
+<dt><b><a href="options.htm#M-padx">-padx, padX, Pad</a></b></dt>
+
+<dt><b><a href="options.htm#M-pady">-pady, padY, Pad</a></b></dt>
+
+<dt><b><a href="options.htm#M-relief">-relief, relief,
+Relief</a></b></dt>
+
+<dt><b><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></b></dt>
+</dl>
+
+<h3><a name="M5">WIDGET-SPECIFIC OPTIONS</a></h3>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M6">-background</a></b></dt>
+
+<dt>Database Name: <b>background</b></dt>
+
+<dt>Database Class: <b>Background</b></dt>
+
+<dd>This option is the same as the standard <b>background</b>
+option except that its value may also be specified as an empty
+string. In this case, the widget will display no background or
+border, and no colors will be consumed from its colormap for its
+background and border.</dd>
+
+<dt>Command-Line Name: <b><a name="M7">-class</a></b></dt>
+
+<dt>Database Name: <b>class</b></dt>
+
+<dt>Database Class: <b>Class</b></dt>
+
+<dd>Specifies a class for the window. This class will be used when
+querying the option database for the window's other options, and it
+will also be used later for other purposes such as bindings. The
+<b>class</b> option may not be changed with the <b>configure</b>
+widget command.</dd>
+
+<dt>Command-Line Name: <b><a name="M8">-colormap</a></b></dt>
+
+<dt>Database Name: <b>colormap</b></dt>
+
+<dt>Database Class: <b>Colormap</b></dt>
+
+<dd>Specifies a colormap to use for the window. The value may be
+either <b>new</b>, in which case a new colormap is created for the
+window and its children, or the name of another window (which must
+be on the same screen and have the same visual as <i>pathName</i>),
+in which case the new window will use the colormap from the
+specified window. If the <b>colormap</b> option is not specified,
+the new window uses the default colormap of its screen. This option
+may not be changed with the <b>configure</b> widget command.</dd>
+
+<dt>Command-Line Name: <b><a name="M9">-container</a></b></dt>
+
+<dt>Database Name: <b>container</b></dt>
+
+<dt>Database Class: <b>Container</b></dt>
+
+<dd>The value must be a boolean. If true, it means that this window
+will be used as a container in which some other application will be
+embedded (for example, a Tk toplevel can be embedded using the
+<b>-use</b> option). The window will support the appropriate window
+manager protocols for things like geometry requests. The window
+should not have any children of its own in this application. This
+option may not be changed with the <b>configure</b> widget
+command.</dd>
+
+<dt>Command-Line Name: <b><a name="M10">-height</a></b></dt>
+
+<dt>Database Name: <b>height</b></dt>
+
+<dt>Database Class: <b>Height</b></dt>
+
+<dd>Specifies the desired height for the window in any of the forms
+acceptable to <b><a href=
+"../TkLib/GetPixels.htm">Tk_GetPixels</a></b>. If this option is
+less than or equal to zero then the window will not request any
+size at all.</dd>
+
+<dt>Command-Line Name: <b><a name="M11">-menu</a></b></dt>
+
+<dt>Database Name: <b><a href="../TkCmd/menu.htm">menu</a></b></dt>
+
+<dt>Database Class: <b><a href=
+"../TkCmd/menu.htm">Menu</a></b></dt>
+
+<dd>Specifies a menu widget to be used as a menubar. On the
+Macintosh, the menubar will be displayed across the top of the main
+monitor. On Microsoft Windows and all UNIX platforms, the menu will
+appear across the toplevel window as part of the window dressing
+maintained by the window manager.</dd>
+
+<dt>Command-Line Name: <b><a name="M12">-screen</a></b></dt>
+
+<dt>Database Name:</dt>
+
+<dt>Database Class:</dt>
+
+<dd>Specifies the screen on which to place the new window. Any
+valid screen name may be used, even one associated with a different
+display. Defaults to the same screen as its parent. This option is
+special in that it may not be specified via the option database,
+and it may not be modified with the <b>configure</b> widget
+command.</dd>
+
+<dt>Command-Line Name: <b><a name="M13">-use</a></b></dt>
+
+<dt>Database Name: <b>use</b></dt>
+
+<dt>Database Class: <b>Use</b></dt>
+
+<dd>This option is used for embedding. If the value is not an empty
+string, it must be the window identifier of a container window,
+specified as a hexadecimal string like the ones returned by the
+<b><a href="../TkCmd/winfo.htm">winfo id</a></b> command. The
+toplevel widget will be created as a child of the given container
+instead of the root window for the screen. If the container window
+is in a Tk application, it must be a frame or toplevel widget for
+which the <b>-container</b> option was specified. This option may
+not be changed with the <b>configure</b> widget command.</dd>
+
+<dt>Command-Line Name: <b><a name="M14">-visual</a></b></dt>
+
+<dt>Database Name: <b>visual</b></dt>
+
+<dt>Database Class: <b>Visual</b></dt>
+
+<dd>Specifies visual information for the new window in any of the
+forms accepted by <b><a href=
+"../TkLib/GetVisual.htm">Tk_GetVisual</a></b>. If this option is
+not specified, the new window will use the default visual for its
+screen. The <b>visual</b> option may not be modified with the
+<b>configure</b> widget command.</dd>
+
+<dt>Command-Line Name: <b><a name="M15">-width</a></b></dt>
+
+<dt>Database Name: <b>width</b></dt>
+
+<dt>Database Class: <b>Width</b></dt>
+
+<dd>Specifies the desired width for the window in any of the forms
+acceptable to <b><a href=
+"../TkLib/GetPixels.htm">Tk_GetPixels</a></b>. If this option is
+less than or equal to zero then the window will not request any
+size at all.</dd>
+</dl>
+
+<h3><a name="M16">DESCRIPTION</a></h3>
+
+The <b>toplevel</b> command creates a new toplevel widget (given by
+the <i>pathName</i> argument). Additional options, described above,
+may be specified on the command line or in the option database to
+configure aspects of the toplevel such as its background color and
+relief. The <b>toplevel</b> command returns the path name of the
+new window. 
+
+<p>A toplevel is similar to a frame except that it is created as a
+top-level window: its X parent is the root window of a screen
+rather than the logical parent from its path name. The primary
+purpose of a toplevel is to serve as a container for dialog boxes
+and other collections of widgets. The only visible features of a
+toplevel are its background color and an optional 3-D border to
+make the toplevel appear raised or sunken.</p>
+
+<h3><a name="M17">WIDGET COMMAND</a></h3>
+
+The <b>toplevel</b> command creates a new Tcl command whose name is
+the same as the path name of the toplevel's window. This command
+may be used to invoke various operations on the widget. It has the
+following general form: 
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>PathName</i> is the name of the command, which is the same as
+the toplevel widget's path name. <i>Option</i> and the <i>arg</i>s
+determine the exact behavior of the command. The following commands
+are possible for toplevel widgets: 
+
+<dl class="widget command">
+<dt><a name="M18"><i>pathName</i> <b>cget</b>
+<i>option</i></a></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>toplevel</b> command.</dd>
+
+<dt><a name="M19"><i>pathName</i> <b>configure</b> ?<i>option</i>?
+?<i>value option value ...</i>?</a></dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b><a href=
+"../TkLib/ConfigWidg.htm">Tk_ConfigureInfo</a></b> for information
+on the format of this list). If <i>option</i> is specified with no
+<i>value</i>, then the command returns a list describing the one
+named option (this list will be identical to the corresponding
+sublist of the value returned if no <i>option</i> is specified). If
+one or more <i>option-value</i> pairs are specified, then the
+command modifies the given widget option(s) to have the given
+value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>toplevel</b> command.</dd>
+</dl>
+
+<h3><a name="M20">BINDINGS</a></h3>
+
+When a new toplevel is created, it has no default event bindings:
+toplevels are not intended to be interactive. 
+
+<h3><a name="M21">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/frame.htm">frame</a></b> 
+
+<h3><a name="M22">KEYWORDS</a></h3>
+
+<a href="../Keywords/T.htm#toplevel">toplevel</a>, <a href=
+"../Keywords/W.htm#widget">widget</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990-1994 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

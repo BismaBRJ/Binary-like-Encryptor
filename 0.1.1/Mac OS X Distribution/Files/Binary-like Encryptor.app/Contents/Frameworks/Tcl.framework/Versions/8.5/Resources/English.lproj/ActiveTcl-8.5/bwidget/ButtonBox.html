@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>ButtonBox</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>ButtonBox</b> - Set of buttons with horizontal or vertical
+layout</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>ButtonBox</b></a> <i>pathName</i>
+?<i>option value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-background">-background or -bg</a></td>
+<td>&nbsp;&nbsp;<a href="#-default">-default</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-homogeneous">-homogeneous</a></td>
+<td>&nbsp;&nbsp;<a href="#-orient">-orient</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-padx">-padx</a></td>
+<td>&nbsp;&nbsp;<a href="#-pady">-pady</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-spacing">-spacing</a></td>
+<td>&nbsp;&nbsp;<a href="#-state">-state</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#add"><b>add</b></a> ?<i>option
+value...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#delete"><b>delete</b></a>
+<i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#index"><b>index</b></a>
+<i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#insert"><b>insert</b></a>
+<i>index</i> ?<i>option value...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#invoke"><b>invoke</b></a>
+<i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#itemcget"><b>itemcget</b></a>
+<i>index</i> <i>option</i></dd>
+
+<dd><i>pathName</i> <a href=
+"#itemconfigure"><b>itemconfigure</b></a> <i>index</i>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#setfocus"><b>setfocus</b></a>
+<i>index</i></dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>ButtonBox layouts Button horizontally or vertically. Some
+commands take an <i>index</i> as argument indicating on which
+Button it work. This index may be specified in any of the following
+forms:</p>
+
+<dl compact>
+<dt><i>number</i></dt>
+
+<dd>Specifies the Button numerically, where 0 corresponds to the
+first added Button, 1 to the next, and so on.</dd>
+
+<dt><b>end</b> or <b>last</b></dt>
+
+<dd>Indicates the last item added.</dd>
+
+<dt><b>default</b></dt>
+
+<dd>Indicates the default Button.</dd>
+
+<dt><i>name</i></dt>
+
+<dd>Indicates the button whose <b>-name</b> option is
+<i>name</i>.</dd>
+
+<dt><i>text</i></dt>
+
+<dd>Indicates the button whose <b>-text</b> option is
+<i>text</i>.</dd>
+</dl>
+
+<br>
+<br>
+ <br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-background"><b>-background</b></a></dt>
+
+<dd>Specifies a default background color for all added buttons and
+for the frame.<br>
+For <i>themed</i> wigets, the button color is not set.</dd>
+</dl>
+
+<dl>
+<dt><a name="-default"><b>-default</b></a></dt>
+
+<dd>Specifies the default button of the button box. The value is an
+integer referencing the n-th added button, starting from 0. If this
+value is -1 (the default), all button wil be drawn with their
+-default option set to disabled, and this value can not be
+changed.<br>
+If this value is not -1, the associated button is drawn with
+-default option set to active and the others are drawn with
+-default option set to normal. The value can be changed by
+configure.</dd>
+</dl>
+
+<dl>
+<dt><a name="-homogeneous"><b>-homogeneous (read-only)</b></a></dt>
+
+<dd>Specifies wether or not buttons must have the same width for
+horizontal layout.</dd>
+</dl>
+
+<dl>
+<dt><a name="-orient"><b>-orient (read-only)</b></a></dt>
+
+<dd>Specifies the orientation of the button box. If this option is
+<b>horizontal</b> (the default), buttons are added from top to
+bottom. If this option is <b>vertical</b>, buttons are added from
+left to right.</dd>
+</dl>
+
+<dl>
+<dt><a name="-padx"><b>-padx</b></a></dt>
+
+<dd>Specifies a default value for the -padx option of all added
+buttons.<br>
+Option has no effect for <i>themed</i> wigets.</dd>
+</dl>
+
+<dl>
+<dt><a name="-pady"><b>-pady</b></a></dt>
+
+<dd>Specifies a default value for the -pady option of all added
+buttons.<br>
+Option has no effect for <i>themed</i> wigets.</dd>
+</dl>
+
+<dl>
+<dt><a name="-spacing"><b>-spacing</b></a></dt>
+
+<dd>Specifies the default spacing between buttons. This value can
+be changed before each call to <b>add</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-state"><b>-state</b></a></dt>
+
+<dd>Specifies a state for all the buttons in the button box. Can be
+any state supported by buttons.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="add"><i>pathName</i> <b>add</b></a> ?<i>option
+value...</i>?</dt>
+
+<dd>Add a button to the button box. 
+
+<p>See <a href="Button.html"><b>Button</b></a> for description of
+options.</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="delete"><i>pathName</i> <b>delete</b></a>
+<i>index</i></dt>
+
+<dd>Delete the button at <i>index</i> from the button box.</dd>
+</dl>
+
+<dl>
+<dt><a name="index"><i>pathName</i> <b>index</b></a>
+<i>index</i></dt>
+
+<dd>Return the numerical index corresponding to the item.</dd>
+</dl>
+
+<dl>
+<dt><a name="insert"><i>pathName</i> <b>insert</b></a> <i>index</i>
+?<i>option value...</i>?</dt>
+
+<dd>Insert a new button into the button box before the given
+index.</dd>
+</dl>
+
+<dl>
+<dt><a name="invoke"><i>pathName</i> <b>invoke</b></a>
+<i>index</i></dt>
+
+<dd>Invoke the Button given by <i>index</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="itemcget"><i>pathName</i> <b>itemcget</b></a>
+<i>index</i> <i>option</i></dt>
+
+<dd>Returns the current value of a configuration option for the
+item. <i>Option</i> may have any of the values accepted by the item
+creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="itemconfigure"><i>pathName</i>
+<b>itemconfigure</b></a> <i>index</i> ?<i>option</i>? ?<i>value</i>
+<i>option</i> <i>value</i> ...?</dt>
+
+<dd>This command is similar to the <b>configure</b> command, except
+that it applies to the options for an individual item, whereas
+<b>configure</b> applies to the options for the widget as a whole.
+<b>Options</b> may have any of the values accepted by the item
+creation widget command. If options are specified, options are
+modified as indicated in the command and the command returns an
+empty string. If no options are specified, returns a list
+describing the current options for the item. Read-only options are
+not be modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="setfocus"><i>pathName</i> <b>setfocus</b></a>
+<i>index</i></dt>
+
+<dd>Set the focus to the Button given by <i>index</i>.</dd>
+</dl>
+</body>
+</html>
+

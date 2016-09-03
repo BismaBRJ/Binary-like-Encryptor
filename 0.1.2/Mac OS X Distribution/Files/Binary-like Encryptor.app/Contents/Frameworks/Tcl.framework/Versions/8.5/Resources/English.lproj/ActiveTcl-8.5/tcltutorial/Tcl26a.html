@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Communicating with other programs - socket,
+fileevent</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Communicating with other programs - socket,
+fileevent</h1>
+
+<div class="nav"><a href="Tcl26.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl27.html">Next
+lesson</a></div>
+
+TODO: lesson on socket and fileevent (or "chan event" in 8.5). But
+see also <a href="Tcl40.html">Lesson 40: socket, fileevent,
+vwait</a>. 
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+#
+# A little echo server
+#
+proc accept {socket address port} {
+    puts "Accepted connection $socket from $address\:$port"
+    # Copy input from the socket directly back to the socket
+    fcopy $socket $socket -command [list finish $socket]
+}
+proc finish {socket args} {
+    puts "Closed $socket"
+    catch { close $socket }
+}
+socket -server accept 8080
+# Start the event loop by waiting on a non-existant variable 'forever'
+vwait forever
+</pre>
+
+<div class="nav"><a href="Tcl26.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl27.html">Next
+lesson</a></div>
+</body>
+</html>
+

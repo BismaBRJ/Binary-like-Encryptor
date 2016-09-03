@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Time and Date - clock</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Time and Date - clock</h1>
+
+<div class="nav"><a href="Tcl40.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl42.html">Next
+lesson</a></div>
+
+The <b>clock</b> command provides access to the time and date
+functions in Tcl. Depending on the subcommands invoked, it can
+acquire the current time, or convert between different
+representations of time and date. <br>
+<br>
+<p>The <b>clock</b> command is a platform independent method of
+getting the display functionality of the unix <b>date</b> command,
+and provides access to the values returned by a unix
+<b>gettime()</b> call.</p>
+
+<dl>
+<dt><b>clock seconds</b></dt>
+
+<dd>The <b>clock seconds</b> command returns the time in seconds
+since the epoch. The date of the epoch varies for different
+operating systems, thus this value is useful for comparison
+purposes, or as an input to the <b>clock format</b> command.<br>
+<br>
+</dd>
+
+<dt><b>clock format</b> <i>clockValue</i> ?<b>-gmt</b>
+<i>boolean</i>? ?<b>-format</b> <i>string</i>?</dt>
+
+<dd>The <b>format</b> subcommand formats a <i>clockvalue</i> (as
+returned by <b>clock clicks</b> into a human readable string.<br>
+<br>
+<p>The <b>-gmt</b> switch takes a boolean as the second argument.
+If the boolean is <b>1</b> or <b>True</b>, then the time will be
+formatted as Greenwich Mean Time, otherwise, it will be formatted
+as local time.</p>
+
+<p>The <b>-format</b> option controls what format the return will
+be in. The contents of the <i>string</i> argument to format has
+similar contents as the format statement (as discussed in lesson
+19, 33 and 34). In addition, there are several more <b>%*</b>
+descriptors that can be used to describe the output.</p>
+
+<p>These include:</p>
+
+<ul>
+<li><b>%a</b> . . . . Abbreviated weekday name (Mon, Tue,
+etc.)</li>
+
+<li><b>%A</b> . . . . Full weekday name (Monday, Tuesday,
+etc.)</li>
+
+<li><b>%b</b> . . . . Abbreviated month name (Jan, Feb, etc.)</li>
+
+<li><b>%B</b> . . . . Full month name (January, February,
+etc.)</li>
+
+<li><b>%d</b>. . . . . Day of month</li>
+
+<li><b>%j</b> . . . . . Julian day of year</li>
+
+<li><b>%m</b> . . . . Month number (01-12)</li>
+
+<li><b>%y</b>. . . . . Year in century</li>
+
+<li><b>%Y</b> . . . . Year with 4 digits<br>
+<br>
+</li>
+
+<li><b>%H</b> . . . . Hour (00-23)</li>
+
+<li><b>%I</b> . . . . . Hour (00-12)</li>
+
+<li><b>%M</b> . . . . Minutes (00-59)</li>
+
+<li><b>%S</b> . . . . . Seconds(00-59)</li>
+
+<li><b>%p</b> . . . . . PM or AM<br>
+<br>
+</li>
+
+<li><b>%D</b> . . . . Date as %m/%d/%y</li>
+
+<li><b>%r</b>. . . . . Time as %I:%M:%S %p</li>
+
+<li><b>%R</b> . . . . Time as %I:%M</li>
+
+<li><b>%T</b> . . . . Time as %I:%M:%S</li>
+
+<li><b>%Z</b> . . . . Time Zone Name</li>
+</ul>
+</dd>
+
+<dt><b>clock scan</b> <i>dateString</i></dt>
+
+<dd>The <b>scan</b> subcommand converts a human readable string to
+a system clock value, as would be returned by <b>clock
+seconds</b><br>
+<br>
+<p>The <i>dateString</i> argument contains strings in these
+forms:</p>
+
+<dl>
+<dt>time</dt>
+
+<dd>A time of day in one of the formats shown below. Meridian may
+be AM, or PM, or a capitalization variant. If it is not specified,
+then the hour (hh) is interpreted as a 24 hour clock. Zone may be a
+three letter description of a time zone, EST, PDT, etc. 
+
+<ul>
+<li>hh:mm:ss ?meridian? ?zone?</li>
+
+<li>hhmm ?meridian? ?zone?</li>
+</ul>
+</dd>
+
+<dt>date</dt>
+
+<dd>A date in one of the formats shown below. 
+
+<ul>
+<li>mm/dd/yy</li>
+
+<li>mm/dd</li>
+
+<li>monthname dd, yy</li>
+
+<li>monthname dd</li>
+
+<li>dd monthname yy</li>
+
+<li>dd monthname</li>
+
+<li>day, dd monthname yy</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set systemTime [clock seconds]
+
+puts "The time is: [clock format $systemTime -format %H:%M:%S]"
+puts "The date is: [clock format $systemTime -format %D]"
+puts [clock format $systemTime -format {Today is: %A, the %d of %B, %Y}]
+puts "\n the default format for the time is: [clock format $systemTime]\n"
+
+set halBirthBook "Jan 12, 1997"
+set halBirthMovie "Jan 12, 1992"
+set bookSeconds [clock scan $halBirthBook]
+set movieSeconds [clock scan $halBirthMovie]
+
+puts "The book and movie versions of '2001, A Space Oddysey' had a"
+puts "discrepancy of [expr {$bookSeconds - $movieSeconds}] seconds in how"
+puts "soon we would have sentient computers like the HAL 9000"
+</pre>
+
+<div class="nav"><a href="Tcl40.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl42.html">Next
+lesson</a></div>
+</body>
+</html>
+

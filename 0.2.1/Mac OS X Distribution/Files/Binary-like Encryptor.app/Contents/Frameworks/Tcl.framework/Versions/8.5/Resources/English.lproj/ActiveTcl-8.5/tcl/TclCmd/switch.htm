@@ -1,0 +1,277 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - switch manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> switch</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="switch.htm#M2" name="L1590">NAME</a> 
+
+<dl>
+<dd>switch - Evaluate one of several scripts, depending on a given
+value</dd>
+</dl>
+</dd>
+
+<dd><a href="switch.htm#M3" name="L1591">SYNOPSIS</a> 
+
+<dl>
+<dd><b>switch</b> ?<i>options</i>? <i>string pattern body</i>
+?<i>pattern body</i> ...?</dd>
+
+<dd><b>switch</b> ?<i>options</i>? <i>string</i> {<i>pattern
+body</i> ?<i>pattern body</i> ...?}</dd>
+</dl>
+</dd>
+
+<dd><a href="switch.htm#M4" name="L1592">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="switch.htm#M5" name="L1593"><b>-exact</b></a></dd>
+
+<dd><a href="switch.htm#M6" name="L1594"><b>-glob</b></a></dd>
+
+<dd><a href="switch.htm#M7" name="L1595"><b>-regexp</b></a></dd>
+
+<dd><a href="switch.htm#M8" name="L1596"><b>-nocase</b></a></dd>
+
+<dd><a href="switch.htm#M9" name="L1597"><b>-matchvar</b>
+<i>varName</i></a></dd>
+
+<dd><a href="switch.htm#M10" name="L1598"><b>-indexvar</b>
+<i>varName</i></a></dd>
+
+<dd><a href="switch.htm#M11" name="L1599"><b>--</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="switch.htm#M12" name="L1600">EXAMPLES</a></dd>
+
+<dd><a href="switch.htm#M13" name="L1601">SEE ALSO</a></dd>
+
+<dd><a href="switch.htm#M14" name="L1602">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+switch - Evaluate one of several scripts, depending on a given
+value 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>switch</b> ?<i>options</i>? <i>string pattern body</i>
+?<i>pattern body</i> ...?<br>
+<b>switch</b> ?<i>options</i>? <i>string</i> {<i>pattern body</i>
+?<i>pattern body</i> ...?}<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>switch</b> command matches its <i>string</i> argument
+against each of the <i>pattern</i> arguments in order. As soon as
+it finds a <i>pattern</i> that matches <i>string</i> it evaluates
+the following <i>body</i> argument by passing it recursively to the
+Tcl interpreter and returns the result of that evaluation. If the
+last <i>pattern</i> argument is <b>default</b> then it matches
+anything. If no <i>pattern</i> argument matches <i>string</i> and
+no default is given, then the <b>switch</b> command returns an
+empty string. 
+
+<p>If the initial arguments to <b>switch</b> start with <b>-</b>
+then they are treated as options unless there are exactly two
+arguments to <b>switch</b> (in which case the first must the
+<i>string</i> and the second must be the <i>pattern</i>/<i>body</i>
+list). The following options are currently supported:</p>
+
+<dl class="description">
+<dt><a name="M5"><b>-exact</b></a></dt>
+
+<dd>Use exact matching when comparing <i>string</i> to a pattern.
+This is the default.</dd>
+
+<dt><a name="M6"><b>-glob</b></a></dt>
+
+<dd>When matching <i>string</i> to the patterns, use glob-style
+matching (i.e. the same as implemented by the <b><a href=
+"../TclCmd/string.htm">string match</a></b> command).</dd>
+
+<dt><a name="M7"><b>-regexp</b></a></dt>
+
+<dd>When matching <i>string</i> to the patterns, use regular
+expression matching (as described in the <b><a href=
+"../TclCmd/re_syntax.htm">re_syntax</a></b> reference page).</dd>
+
+<dt><a name="M8"><b>-nocase</b></a></dt>
+
+<dd>Causes comparisons to be handled in a case-insensitive
+manner.</dd>
+
+<dt><a name="M9"><b>-matchvar</b> <i>varName</i></a></dt>
+
+<dd>This option (only legal when <b>-regexp</b> is also specified)
+specifies the name of a variable into which the list of matches
+found by the regular expression engine will be written. The first
+element of the list written will be the overall substring of the
+input string (i.e. the <i>string</i> argument to <b>switch</b>)
+matched, the second element of the list will be the substring
+matched by the first capturing parenthesis in the regular
+expression that matched, and so on. When a <b>default</b> branch is
+taken, the variable will have the empty list written to it. This
+option may be specified at the same time as the <b>-indexvar</b>
+option.</dd>
+
+<dt><a name="M10"><b>-indexvar</b> <i>varName</i></a></dt>
+
+<dd>This option (only legal when <b>-regexp</b> is also specified)
+specifies the name of a variable into which the list of indices
+referring to matching substrings found by the regular expression
+engine will be written. The first element of the list written will
+be a two-element list specifying the index of the start and index
+of the first character after the end of the overall substring of
+the input string (i.e. the <i>string</i> argument to <b>switch</b>)
+matched, in a similar way to the <b>-indices</b> option to the
+<b><a href="../TclCmd/regexp.htm">regexp</a></b> can obtain.
+Similarly, the second element of the list refers to the first
+capturing parenthesis in the regular expression that matched, and
+so on. When a <b>default</b> branch is taken, the variable will
+have the empty list written to it. This option may be specified at
+the same time as the <b>-matchvar</b> option.</dd>
+
+<dt><a name="M11"><b>--</b></a></dt>
+
+<dd>Marks the end of options. The argument following this one will
+be treated as <i>string</i> even if it starts with a <b>-</b>. This
+is not required when the matching patterns and bodies are grouped
+together in a single argument.</dd>
+</dl>
+
+<p>Two syntaxes are provided for the <i>pattern</i> and <i>body</i>
+arguments. The first uses a separate argument for each of the
+patterns and commands; this form is convenient if substitutions are
+desired on some of the patterns or commands. The second form places
+all of the patterns and commands together into a single argument;
+the argument must have proper list structure, with the elements of
+the list being the patterns and commands. The second form makes it
+easy to construct multi-line switch commands, since the braces
+around the whole list make it unnecessary to include a backslash at
+the end of each line. Since the <i>pattern</i> arguments are in
+braces in the second form, no command or variable substitutions are
+performed on them; this makes the behavior of the second form
+different than the first form in some cases.</p>
+
+<p>If a <i>body</i> is specified as &ldquo;<b>-</b>&rdquo; it means
+that the <i>body</i> for the next pattern should also be used as
+the body for this pattern (if the next pattern also has a body of
+&ldquo;<b>-</b>&rdquo; then the body after that is used, and so
+on). This feature makes it possible to share a single <i>body</i>
+among several patterns.</p>
+
+<p>Beware of how you place comments in <b>switch</b> commands.
+Comments should only be placed <b>inside</b> the execution body of
+one of the patterns, and not intermingled with the patterns.</p>
+
+<h3><a name="M12">EXAMPLES</a></h3>
+
+The <b>switch</b> command can match against variables and not just
+literals, as shown here (the result is <i>2</i>): 
+
+<pre>
+set foo "abc"
+<b>switch</b> abc a - b {expr {1}} $foo {expr {2}} default {expr {3}}
+</pre>
+
+<p>Using glob matching and the fall-through body is an alternative
+to writing regular expressions with alternations, as can be seen
+here (this returns <i>1</i>):</p>
+
+<pre>
+<b>switch</b> -glob aaab {
+   a*b     -
+   b       {expr {1}}
+   a*      {expr {2}}
+   default {expr {3}}
+}
+</pre>
+
+<p>Whenever nothing matches, the <b>default</b> clause (which must
+be last) is taken. This example has a result of <i>3</i>:</p>
+
+<pre>
+<b>switch</b> xyz {
+   a -
+   b {
+      # Correct Comment Placement
+      expr {1}
+   }
+   c {
+      expr {2}
+   }
+   default {
+      expr {3}
+   }
+}
+</pre>
+
+<p>When matching against regular expressions, information about
+what exactly matched is easily obtained using the <b>-matchvar</b>
+option:</p>
+
+<pre>
+<b>switch</b> -regexp -matchvar foo -- $bar {
+   a(b*)c {
+      puts "Found [string length [lindex $foo 1]] 'b's"
+   }
+   d(e*)f(g*)h {
+      puts "Found [string length [lindex $foo 1]] 'e's and\
+            [string length [lindex $foo 2]] 'g's"
+   }
+}
+</pre>
+
+<h3><a name="M13">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/for.htm">for</a></b>, <b><a href=
+"../TclCmd/if.htm">if</a></b>, <b><a href=
+"../TclCmd/regexp.htm">regexp</a></b> 
+
+<h3><a name="M14">KEYWORDS</a></h3>
+
+<a href="../Keywords/S.htm#switch">switch</a>, <a href=
+"../Keywords/M.htm#match">match</a>, <a href=
+"../Keywords/R.htm#regular expression">regular expression</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

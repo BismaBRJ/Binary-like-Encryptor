@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>DragSite</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>DragSite</b> - Commands set for Drag facilities</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">COMMAND</a></i></dt>
+
+<dd>DragSite::<a href="#include"><b>include</b></a> <i>class</i>
+<i>type</i> <i>event</i></dd>
+
+<dd>DragSite::<a href="#register"><b>register</b></a> <i>path</i>
+?<i>option value...</i>?</dd>
+
+<dd>DragSite::<a href="#setdrag"><b>setdrag</b></a> <i>path</i>
+<i>subpath</i> <i>initcmd</i> <i>endcmd</i> ?<i>force</i>?</dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>Commands of this namespace enable user to define a BWidget or a
+Tk widget as a drag site.</p>
+
+<hr width="50%">
+<br>
+<b><a name="wc">COMMAND</a></b><br>
+<dl>
+<dt><a name="include">DragSite::<b>include</b></a> <i>class</i>
+<i>type</i> <i>event</i></dt>
+
+<dd>This command provides a simple way to include options relatives
+to a drag site into BWidget resources definition. It includes the
+options needed for <b>register</b>: <i>-dragevent</i>, initialized
+to <i>event</i>, <i>-draginitcmd</i> and <i>-dragendcmd</i>,
+initialized to empty string, and two new options: 
+
+<table border="0" cellspacing="1">
+<tr>
+<td><i>-dragenabled</i></td>
+<td>Specifies wether or not drag is active (initialized to 0)</td>
+</tr>
+
+<tr>
+<td><i>-dragtype</i></td>
+<td>Default or alternate dragged data type (initialized to
+<i>type</i>)</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="register">DragSite::<b>register</b></a> <i>path</i>
+?<i>option value...</i>?</dt>
+
+<dd>This command is used to declare <i>path</i> as a drag site.
+Options are: 
+
+<dl>
+<dt><a name="DragSite-dragendcmd"><b>-dragendcmd</b></a></dt>
+
+<dd>Command called when drag terminates (ie when user release drag
+icon). This command is called with the following arguments: 
+
+<ul>
+<li>the pathname of the drag source (the widget itself),</li>
+
+<li>the pathname of the drop target,</li>
+
+<li>the operation,</li>
+
+<li>the type of the dragged data,</li>
+
+<li>the dragged data,</li>
+
+<li>result of the drop (result of the call to <b>-dropcmd</b> of
+the target),</li>
+</ul>
+
+If the drop does not occurs, the target and the operation are empty
+string and the result is 0.</dd>
+</dl>
+
+<dl>
+<dt><a name="DragSite-dragevent"><b>-dragevent</b></a></dt>
+
+<dd>Specifies the number of the mouse button associated to the
+drag. Must be <b>1</b>, <b>2</b> or <b>3</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="DragSite-draginitcmd"><b>-draginitcmd</b></a></dt>
+
+<dd>Command called when drag initiates. When the event of option
+<b>dragevent</b> occurs on <i>path</i>, this command is called with
+the following arguments: 
+
+<ul>
+<li>pathname of the drag source (<i>path</i>),</li>
+
+<li>root x-coordinate of pointer,</li>
+
+<li>root y-coordinate of pointer,</li>
+
+<li>a toplevel created to represent dragged data. When returning,
+if it has no children, a bitmap is automatically displayed.</li>
+</ul>
+
+If the command returns an empty string, then the drag will be
+suppressed. Otherwise the command must return a list containing
+three elements: 
+
+<ul>
+<li>the type of the data,</li>
+
+<li>the list of acceptable basic operations (<b>copy</b>,
+<b>move</b> and <b>link</b>)</li>
+
+<li>and the data.</li>
+</ul>
+
+Note that even if <b>copy</b> does not appear in the list of basic
+operation, it is considered as an acceptable operation, since
+<b>copy</b> semantic does not modify the drag source.</dd>
+</dl>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="setdrag">DragSite::<b>setdrag</b></a> <i>path</i>
+<i>subpath</i> <i>initcmd</i> <i>endcmd</i> ?<i>force</i>?</dt>
+
+<dd>This command provides a simple way to call <b>register</b>
+during a BWidget creation or configuration. 
+
+<ul>
+<li><i>path</i> is the pathname of the BWidget,</li>
+
+<li><i>subpath</i> is the pathname of the tk widget where drag
+event occurs,</li>
+
+<li><i>initcmd</i> BWidget command for <i>drag-init</i> event,</li>
+
+<li><i>endcmd</i> BWidget command for <i>drag-end</i> event,</li>
+
+<li><i>force</i> specifies wether or not to call <b>register</b>
+whenever no option value has changed (0 by default - for BWidget
+configuration, use 1 for BWidget creation).</li>
+</ul>
+
+<b>setdrag</b> verifies the modification flag of options
+<b>dragenabled</b> and <b>dragevent</b> and calls <b>register</b>
+if needed according to the options values and <i>initcmd</i> and
+<i>endcmd</i> arguments. <b>draginitcmd</b> and <b>dragendcmd</b>
+are not taken from options of widget because they are considered as
+user command, called by BWidget implementation of <i>drag-init</i>
+and <i>drag-end</i> events.</dd>
+</dl>
+</body>
+</html>
+

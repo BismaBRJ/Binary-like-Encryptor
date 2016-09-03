@@ -1,0 +1,1426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>zmq - A Tcl wrapper for the ZeroMQ messaging library</title>
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+</head>
+<body>
+<div class="doctools">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<hr>
+[ <a href="../../at.pkg_index.html">Main table Of Contents</a> | <a
+href="../toc.html">Zmq Table Of Contents</a> | <a href=
+"../index.html">Zmq Index</a> ] 
+
+<hr>
+<h1 class="title">zmq(n) 3.3.0 "A Tcl wrapper for the ZeroMQ
+messaging library"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>zmq - Zmq Package Reference</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">Contexts</a> 
+
+<ul>
+<li class="subsection"><a href="#subsection1">Context PACKAGE
+COMMANDS</a></li>
+
+<li class="subsection"><a href="#subsection2">Context OBJECT
+METHODS</a></li>
+</ul>
+</li>
+
+<li class="section"><a href="#section3">Sockets</a> 
+
+<ul>
+<li class="subsection"><a href="#subsection3">Socket PACKAGE
+COMMANDS</a></li>
+
+<li class="subsection"><a href="#subsection4">Socket OBJECT
+METHODS</a></li>
+</ul>
+</li>
+
+<li class="section"><a href="#section4">Messages</a> 
+
+<ul>
+<li class="subsection"><a href="#subsection5">Message PACKAGE
+COMMANDS</a></li>
+
+<li class="subsection"><a href="#subsection6">Message OBJECT
+METHODS</a></li>
+</ul>
+</li>
+
+<li class="section"><a href="#section5">Multi-part message helper
+functions</a></li>
+
+<li class="section"><a href="#section6">Polling</a></li>
+
+<li class="section"><a href="#section7">Devices</a></li>
+
+<li class="section"><a href="#section8">Miscellaneous</a></li>
+
+<li class="section"><a href="#section9">Examples</a></li>
+
+<li class="section"><a href="#section10">Bugs, ideas,
+feedback</a></li>
+
+<li class="section"><a href="#section11">License</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#category">Category</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tcl 8.5</b></li>
+
+<li>package require <b class="pkgname">zmq <span class=
+"opt">?3.3.0?</span></b></li>
+</ul>
+
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">zmq context</b> <span class=
+"opt">?<i class="arg">contextName</i>?</span> <span class="opt">?<i
+class="arg">-iothreads &lt;ioThreads&gt;</i>?</span></a></li>
+
+<li><a href="#2"><i class="arg">contextName</i> <b class=
+"method">cget</b> <i class="arg">optionName</i></a></li>
+
+<li><a href="#3"><i class="arg">contextName</i> <b class=
+"method">configure</b> <span class="opt">?<i class=
+"arg">optionName</i>?</span> <span class="opt">?<i class=
+"arg">optionValue optionName optionValue ...</i>?</span></a></li>
+
+<li><a href="#4"><i class="arg">contextName</i> <b class=
+"method">destroy</b></a></li>
+
+<li><a href="#5"><i class="arg">contextName</i> <b class=
+"method">get</b> <i class="arg">optionName</i></a></li>
+
+<li><a href="#6"><i class="arg">contextName</i> <b class=
+"method">set</b> <i class="arg">optionName</i> <i class=
+"arg">optionValue</i></a></li>
+
+<li><a href="#7"><b class="cmd">zmq socket</b> <span class=
+"opt">?<i class="arg">socketName</i>?</span> <i class=
+"arg">contextName</i> <i class="arg">socketType</i></a></li>
+
+<li><a href="#8"><i class="arg">socketName</i> <b class=
+"method">bind</b> <i class="arg">endPoint</i></a></li>
+
+<li><a href="#9"><i class="arg">socketName</i> <b class=
+"method">cget</b> <i class="arg">optionName</i></a></li>
+
+<li><a href="#10"><i class="arg">socketName</i> <b class=
+"method">close</b></a></li>
+
+<li><a href="#11"><i class="arg">socketName</i> <b class=
+"method">configure</b> <span class="opt">?<i class=
+"arg">optionName</i>?</span> <span class="opt">?<i class=
+"arg">optionValue optionName optionValue ...</i>?</span></a></li>
+
+<li><a href="#12"><i class="arg">socketName</i> <b class=
+"method">connect</b> <i class="arg">endPoint</i></a></li>
+
+<li><a href="#13"><i class="arg">socketName</i> <b class=
+"method">destroy</b></a></li>
+
+<li><a href="#14"><i class="arg">socketName</i> <b class=
+"method">disconnect</b> <i class="arg">endPoint</i></a></li>
+
+<li><a href="#15"><i class="arg">socketName</i> <b class=
+"method">dump</b></a></li>
+
+<li><a href="#16"><i class="arg">socketName</i> <b class=
+"method">get</b> <i class="arg">optionName</i></a></li>
+
+<li><a href="#17"><i class="arg">socketName</i> <b class=
+"method">readable</b> <span class="opt">?<i class=
+"arg">command</i>?</span></a></li>
+
+<li><a href="#18"><i class="arg">socketName</i> <b class=
+"method">recv</b> <span class="opt">?<i class=
+"arg">flagsList</i>?</span></a></li>
+
+<li><a href="#19"><i class="arg">socketName</i> <b class=
+"method">recv_msg</b> <i class="arg">message</i> <span class=
+"opt">?<i class="arg">flagsList</i>?</span></a></li>
+
+<li><a href="#20"><i class="arg">socketName</i> <b class=
+"method">send</b> <i class="arg">data</i> <span class="opt">?<i
+class="arg">flagsList</i>?</span></a></li>
+
+<li><a href="#21"><i class="arg">socketName</i> <b class=
+"method">send_msg</b> <i class="arg">message</i> <span class=
+"opt">?<i class="arg">flagsList</i>?</span></a></li>
+
+<li><a href="#22"><i class="arg">socketName</i> <b class=
+"method">sendmore</b> <i class="arg">data</i> <span class="opt">?<i
+class="arg">flagsList</i>?</span></a></li>
+
+<li><a href="#23"><i class="arg">socketName</i> <b class=
+"method">set</b> <i class="arg">optionName</i> <i class=
+"arg">optionValue</i> <span class="opt">?<i class=
+"arg">optionSize</i>?</span></a></li>
+
+<li><a href="#24"><i class="arg">socketName</i> <b class=
+"method">unbind</b> <i class="arg">endPoint</i></a></li>
+
+<li><a href="#25"><i class="arg">socketName</i> <b class=
+"method">writable</b> <span class="opt">?<i class=
+"arg">command</i>?</span></a></li>
+
+<li><a href="#26"><b class="cmd">zmq message</b> <span class=
+"opt">?<i class="arg">messageName</i>?</span> <span class="opt">?<i
+class="arg">-size &lt;integer&gt;</i>?</span> <span class="opt">?<i
+class="arg">-data &lt;string&gt;</i>?</span></a></li>
+
+<li><a href="#27"><i class="arg">messageName</i> <b class=
+"method">cget</b> <i class="arg">optionName</i></a></li>
+
+<li><a href="#28"><i class="arg">messageName</i> <b class=
+"method">close</b></a></li>
+
+<li><a href="#29"><i class="arg">messageName</i> <b class=
+"method">configure</b> <span class="opt">?<i class=
+"arg">optionName</i>?</span> <span class="opt">?<i class=
+"arg">optionValue optionName optionValue ...</i>?</span></a></li>
+
+<li><a href="#30"><i class="arg">messageName</i> <b class=
+"method">copy</b> <i class=
+"arg">destinationMessageName</i></a></li>
+
+<li><a href="#31"><i class="arg">messageName</i> <b class=
+"method">data</b></a></li>
+
+<li><a href="#32"><i class="arg">messageName</i> <b class=
+"method">destroy</b></a></li>
+
+<li><a href="#33"><i class="arg">messageName</i> <b class=
+"method">dump</b></a></li>
+
+<li><a href="#34"><i class="arg">messageName</i> <b class=
+"method">get</b> <i class="arg">optionName</i></a></li>
+
+<li><a href="#35"><i class="arg">messageName</i> <b class=
+"method">more</b></a></li>
+
+<li><a href="#36"><i class="arg">messageName</i> <b class=
+"method">move</b> <i class=
+"arg">destinationMessageName</i></a></li>
+
+<li><a href="#37"><i class="arg">messageName</i> <b class=
+"method">recv</b> <i class="arg">socketName</i> <span class=
+"opt">?<i class="arg">flagsList</i>?</span></a></li>
+
+<li><a href="#38"><i class="arg">messageName</i> <b class=
+"method">send</b> <i class="arg">socketName</i> <span class=
+"opt">?<i class="arg">flagsList</i>?</span></a></li>
+
+<li><a href="#39"><i class="arg">messageName</i> <b class=
+"method">sendmore</b> <i class="arg">socketName</i> <span class=
+"opt">?<i class="arg">flagsList</i>?</span></a></li>
+
+<li><a href="#40"><i class="arg">messageName</i> <b class=
+"method">set</b> <i class="arg">optionName</i> <i class=
+"arg">optionValue</i></a></li>
+
+<li><a href="#41"><i class="arg">messageName</i> <b class=
+"method">size</b></a></li>
+
+<li><a href="#42"><b class="cmd">zmsg add</b> <i class=
+"arg">messageList</i> <i class="arg">data</i></a></li>
+
+<li><a href="#43"><b class="cmd">zmsg dump</b> <i class=
+"arg">messageList</i></a></li>
+
+<li><a href="#44"><b class="cmd">zmsg pop</b> <i class=
+"arg">messageListName</i></a></li>
+
+<li><a href="#45"><b class="cmd">zmsg push</b> <i class=
+"arg">messageList</i> <i class="arg">data</i></a></li>
+
+<li><a href="#46"><b class="cmd">zmsg recv</b> <i class=
+"arg">socketName</i></a></li>
+
+<li><a href="#47"><b class="cmd">zmsg send</b> <i class=
+"arg">socketName</i> <i class="arg">messageList</i></a></li>
+
+<li><a href="#48"><b class="cmd">zmsg unwrap</b> <i class=
+"arg">messageListName</i></a></li>
+
+<li><a href="#49"><b class="cmd">zmsg wrap</b> <i class=
+"arg">messageList</i> <i class="arg">data</i></a></li>
+
+<li><a href="#50"><b class="cmd">zmq poll</b> <i class=
+"arg">pollList</i> <i class="arg">timeout</i> <span class="opt">?<i
+class="arg">timeoutUnit</i>?</span></a></li>
+
+<li><a href="#51"><b class="cmd">zmq device</b> <i class=
+"arg">deviceType</i> <i class="arg">inputSocketName</i> <i class=
+"arg">outputSocketName</i></a></li>
+
+<li><a href="#52"><b class="cmd">zmq version</b></a></li>
+
+<li><a href="#53"><b class="cmd">zmq errno</b></a></li>
+
+<li><a href="#54"><b class="cmd">zmq strerror</b> <i class=
+"arg">errorNumber</i></a></li>
+
+<li><a href="#55"><b class="cmd">zmq max_block_time</b> <i class=
+"arg">blockTime</i></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>The <i class="term">zmq</i> package is a wrapper for the ZeroMQ
+library. ZeroMQ can be found at <a href=
+"http://www.zeromq.org">http://www.zeromq.org</a>.</p>
+
+<p>The wrapper is based on version 3.3 of the ZeroMQ library. The
+package is written using <i class="term">critcl</i> 3.</p>
+
+<p>Use this documentation in combination with the ZeroMQ
+documentation for more details.</p>
+
+<p>All sockets in this documentation refer to ZeroMQ sockets.</p>
+
+<p>The ZeroMQ API use <i class="term">set</i> and <i class=
+"term">get</i> functions to set or get context, socket and message
+options. This wrapper provides <i class="term">set</i> and <i
+class="term">get</i> methods for contexts, sockets and message for
+compatibility with the ZeroMQ API but also provides the more Tcl
+style <i class="term">cget</i> and <i class="term">configure</i>
+methods.</p>
+
+<p>The ZeroMQ API uses <i class="term">destroy</i> for contexts and
+<i class="term">close</i> for sockets and messages. This wrapper
+provides the same methods for compatibility with the ZeroMQ API but
+also provides a <i class="term">destroy</i> method for sockets and
+messages.</p>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">Contexts</a></h2>
+
+<div id="subsection1" class="subsection">
+<h3><a name="subsection1">Context PACKAGE COMMANDS</a></h3>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">zmq context</b> <span class=
+"opt">?<i class="arg">contextName</i>?</span> <span class="opt">?<i
+class="arg">-iothreads &lt;ioThreads&gt;</i>?</span></a></dt>
+
+<dd>
+<p>This command creates a new ZeroMQ context object and associated
+Tcl object command whose name is <i class="arg">contextName</i> if
+specified or auto generated if not specified. The object command
+will be created under the current namespace if the <i class=
+"arg">contextName</i> is not fully qualified, and in the specified
+namespace otherwise. The object command name is returned by this
+command. The object command methods are explained in section <span
+class="sectref"><a href="#subsection2">Context OBJECT
+METHODS</a></span>.</p>
+</dd>
+</dl>
+</div>
+
+<div id="subsection2" class="subsection">
+<h3><a name="subsection2">Context OBJECT METHODS</a></h3>
+
+<dl class="definitions">
+<dt><a name="2"><i class="arg">contextName</i> <b class=
+"method">cget</b> <i class="arg">optionName</i></a></dt>
+
+<dd>
+<p>Get context option. See <b class="cmd">configure</b> method for
+list of supported options.</p>
+</dd>
+
+<dt><a name="3"><i class="arg">contextName</i> <b class=
+"method">configure</b> <span class="opt">?<i class=
+"arg">optionName</i>?</span> <span class="opt">?<i class=
+"arg">optionValue optionName optionValue ...</i>?</span></a></dt>
+
+<dd>
+<p>Query or modify context options. If no option is specified,
+returns a list describing all of the available options. If option
+is specified with no value, then the command returns the value for
+the specified option. If one or more option-value pairs are
+specified, then the command modifies the given context option(s) to
+have the given value(s); in this case the command returns an empty
+string. Supported options with associated data type are:</p>
+
+<dl class="options">
+<dt><b class="option">IO_THREADS</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">MAX_SOCKETS</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">MONITOR</b></dt>
+
+<dd>
+<p>command</p>
+</dd>
+</dl>
+
+<p>The <i class="term">zmq</i> wrapper will <b class=
+"cmd">lappend</b> the following data to the specified monitor
+callback command before calling it in case of monitor events:</p>
+
+<ol class="enumerated">
+<li>
+<p>context</p>
+</li>
+
+<li>
+<p>socket</p>
+</li>
+
+<li>
+<p>event flag</p>
+</li>
+
+<li>
+<p>event data</p>
+</li>
+</ol>
+
+<p>Known event flags are:</p>
+
+<dl class="options">
+<dt><b class="option">CONNECTED</b></dt>
+
+<dt><b class="option">CONNECT_DELAYED</b></dt>
+
+<dt><b class="option">CONNECT_RETRIED</b></dt>
+
+<dt><b class="option">LISTENING</b></dt>
+
+<dt><b class="option">BIND_FAILED</b></dt>
+
+<dt><b class="option">ACCEPTED</b></dt>
+
+<dt><b class="option">ACCEPT_FAILED</b></dt>
+
+<dt><b class="option">CLOSED</b></dt>
+
+<dt><b class="option">CLOSE_FAILED</b></dt>
+
+<dt><b class="option">DISCONNECTED</b></dt>
+
+<dt><b class="option">UNKNOWN_MONITOR_EVENT</b></dt>
+</dl>
+</dd>
+
+<dt><a name="4"><i class="arg">contextName</i> <b class=
+"method">destroy</b></a></dt>
+
+<dd>
+<p>Destroy the ZeroMQ context and delete the associated Tcl object
+command.</p>
+</dd>
+
+<dt><a name="5"><i class="arg">contextName</i> <b class=
+"method">get</b> <i class="arg">optionName</i></a></dt>
+
+<dd>
+<p>Get context option. See <b class="cmd">configure</b> method for
+list of supported options.</p>
+</dd>
+
+<dt><a name="6"><i class="arg">contextName</i> <b class=
+"method">set</b> <i class="arg">optionName</i> <i class=
+"arg">optionValue</i></a></dt>
+
+<dd>
+<p>Set context option. See <b class="cmd">configure</b> method for
+list of supported options.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">Sockets</a></h2>
+
+<div id="subsection3" class="subsection">
+<h3><a name="subsection3">Socket PACKAGE COMMANDS</a></h3>
+
+<dl class="definitions">
+<dt><a name="7"><b class="cmd">zmq socket</b> <span class="opt">?<i
+class="arg">socketName</i>?</span> <i class="arg">contextName</i>
+<i class="arg">socketType</i></a></dt>
+
+<dd>
+<p>This command creates a new ZeroMQ socket object and associated
+Tcl object command whose name is <i class="arg">socketName</i> if
+specified or auto generated if not specified within the specified
+context and of the specified type. The object command will be
+created under the current namespace if the <i class=
+"arg">socketName</i> is not fully qualified, and in the specified
+namespace otherwise. The object command name is returned by this
+command. The object command methods are explained in section <span
+class="sectref"><a href="#subsection4">Socket OBJECT
+METHODS</a></span>. Valid values for <i class="arg">socketType</i>
+are:</p>
+
+<dl class="options">
+<dt><b class="option">DEALER</b></dt>
+
+<dt><b class="option">PAIR</b></dt>
+
+<dt><b class="option">PUB</b></dt>
+
+<dt><b class="option">PULL</b></dt>
+
+<dt><b class="option">PUSH</b></dt>
+
+<dt><b class="option">REP</b></dt>
+
+<dt><b class="option">REQ</b></dt>
+
+<dt><b class="option">ROUTER</b></dt>
+
+<dt><b class="option">SUB</b></dt>
+
+<dt><b class="option">XPUB</b></dt>
+
+<dt><b class="option">XSUB</b></dt>
+</dl>
+</dd>
+</dl>
+</div>
+
+<div id="subsection4" class="subsection">
+<h3><a name="subsection4">Socket OBJECT METHODS</a></h3>
+
+<dl class="definitions">
+<dt><a name="8"><i class="arg">socketName</i> <b class=
+"method">bind</b> <i class="arg">endPoint</i></a></dt>
+
+<dd>
+<p>Accept connections on a socket for specified endpoint.</p>
+</dd>
+
+<dt><a name="9"><i class="arg">socketName</i> <b class=
+"method">cget</b> <i class="arg">optionName</i></a></dt>
+
+<dd>
+<p>Get socket option. See <b class="cmd">configure</b> method for
+list of supported options.</p>
+</dd>
+
+<dt><a name="10"><i class="arg">socketName</i> <b class=
+"method">close</b></a></dt>
+
+<dd>
+<p>See <b class="cmd">destroy</b> method.</p>
+</dd>
+
+<dt><a name="11"><i class="arg">socketName</i> <b class=
+"method">configure</b> <span class="opt">?<i class=
+"arg">optionName</i>?</span> <span class="opt">?<i class=
+"arg">optionValue optionName optionValue ...</i>?</span></a></dt>
+
+<dd>
+<p>Query or modify socket options. If no option is specified,
+returns a list describing all of the available options. If option
+is specified with no value, then the command returns the value for
+the specified option. If one or more option-value pairs are
+specified, then the command modifies the given socket option(s) to
+have the given value(s); in this case the command returns an empty
+string. Supported options with associated data type are:</p>
+
+<dl class="options">
+<dt><b class="option">AFFINITY</b></dt>
+
+<dd>
+<p>unsigned wide integer</p>
+</dd>
+
+<dt><b class="option">BACKLOG</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">DELAY_ATTACH_ON_CONNECT</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">EVENTS</b></dt>
+
+<dd>
+<p>list of poll flags: <i class="term">POLLIN</i>, <i class=
+"term">POLLOUT</i> or <i class="term">POLLERR</i></p>
+</dd>
+
+<dt><b class="option">ROUTER_BEHAVIOR</b></dt>
+
+<dd>
+<p>integer, write-only</p>
+</dd>
+
+<dt><b class="option">IDENTITY</b></dt>
+
+<dd>
+<p>binary</p>
+</dd>
+
+<dt><b class="option">IPV4ONLY</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">LAST_ENDPOINT</b></dt>
+
+<dd>
+<p>binary, read-only</p>
+</dd>
+
+<dt><b class="option">LINGER</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">MAXMSGSIZE</b></dt>
+
+<dd>
+<p>wide integer</p>
+</dd>
+
+<dt><b class="option">MULTICAST_HOPS</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">RATE</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">RCVBUF</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">RCVHWM</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">RCVMORE</b></dt>
+
+<dd>
+<p>integer, read-only</p>
+</dd>
+
+<dt><b class="option">RCVTIMEO</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">RECONNECT_IVL</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">RECONNECT_IVL_MAX</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">RECOVERY_IVL</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">SNDBUF</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">SNDHWM</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">SNDTIMEO</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">SUBSCRIBE</b></dt>
+
+<dd>
+<p>binary, write-only</p>
+</dd>
+
+<dt><b class="option">TCP_KEEPALIVE</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">TCP_KEEPALIVE_CNT</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">TCP_KEEPALIVE_IDLE</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">TCP_KEEPALIVE_INTVL</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">TYPE</b></dt>
+
+<dd>
+<p>integer</p>
+</dd>
+
+<dt><b class="option">UNSUBSCRIBE</b></dt>
+
+<dd>
+<p>binary, write-only</p>
+</dd>
+</dl>
+</dd>
+
+<dt><a name="12"><i class="arg">socketName</i> <b class=
+"method">connect</b> <i class="arg">endPoint</i></a></dt>
+
+<dd>
+<p>Connect to a socket on the specified endpoint.</p>
+</dd>
+
+<dt><a name="13"><i class="arg">socketName</i> <b class=
+"method">destroy</b></a></dt>
+
+<dd>
+<p>Close the ZeroMQ socket and delete the associated Tcl object
+command.</p>
+</dd>
+
+<dt><a name="14"><i class="arg">socketName</i> <b class=
+"method">disconnect</b> <i class="arg">endPoint</i></a></dt>
+
+<dd>
+<p>Disconnect from a socket on the specified endpoint.</p>
+</dd>
+
+<dt><a name="15"><i class="arg">socketName</i> <b class=
+"method">dump</b></a></dt>
+
+<dd>
+<p>Read message from the socket and return it in human readable
+debug format.</p>
+</dd>
+
+<dt><a name="16"><i class="arg">socketName</i> <b class=
+"method">get</b> <i class="arg">optionName</i></a></dt>
+
+<dd>
+<p>Get socket option. See <b class="cmd">configure</b> method for
+list of supported options.</p>
+</dd>
+
+<dt><a name="17"><i class="arg">socketName</i> <b class=
+"method">readable</b> <span class="opt">?<i class=
+"arg">command</i>?</span></a></dt>
+
+<dd>
+<p>If specified set, or if not specified get, the socket readable
+callback command.</p>
+</dd>
+
+<dt><a name="18"><i class="arg">socketName</i> <b class=
+"method">recv</b> <span class="opt">?<i class=
+"arg">flagsList</i>?</span></a></dt>
+
+<dd>
+<p>Read a message part from the socket and return it as a string.
+Only the <i class="term">DONTWAIT</i> flag is supported.</p>
+</dd>
+
+<dt><a name="19"><i class="arg">socketName</i> <b class=
+"method">recv_msg</b> <i class="arg">message</i> <span class=
+"opt">?<i class="arg">flagsList</i>?</span></a></dt>
+
+<dd>
+<p>Read a message part from the socket and place it in the
+specified message object. Only the <i class="term">DONTWAIT</i>
+flag is supported.</p>
+</dd>
+
+<dt><a name="20"><i class="arg">socketName</i> <b class=
+"method">send</b> <i class="arg">data</i> <span class="opt">?<i
+class="arg">flagsList</i>?</span></a></dt>
+
+<dd>
+<p>Send the specified data to the socket as message part. Supported
+flags are <i class="term">DONTWAIT</i> and <i class=
+"term">SNDMORE</i>.</p>
+</dd>
+
+<dt><a name="21"><i class="arg">socketName</i> <b class=
+"method">send_msg</b> <i class="arg">message</i> <span class=
+"opt">?<i class="arg">flagsList</i>?</span></a></dt>
+
+<dd>
+<p>Send the message part in the specified message object to the
+socket. Supported flags are <i class="term">DONTWAIT</i> and <i
+class="term">SNDMORE</i>.</p>
+</dd>
+
+<dt><a name="22"><i class="arg">socketName</i> <b class=
+"method">sendmore</b> <i class="arg">data</i> <span class="opt">?<i
+class="arg">flagsList</i>?</span></a></dt>
+
+<dd>
+<p>Send the specified data to the socket as message part and
+indicate there are more message parts to come. Supported flags are
+<i class="term">DONTWAIT</i> and <i class="term">SNDMORE</i>.</p>
+</dd>
+
+<dt><a name="23"><i class="arg">socketName</i> <b class=
+"method">set</b> <i class="arg">optionName</i> <i class=
+"arg">optionValue</i> <span class="opt">?<i class=
+"arg">optionSize</i>?</span></a></dt>
+
+<dd>
+<p>Set socket option. See <b class="cmd">configure</b> method for
+list of supported options.</p>
+</dd>
+
+<dt><a name="24"><i class="arg">socketName</i> <b class=
+"method">unbind</b> <i class="arg">endPoint</i></a></dt>
+
+<dd>
+<p>Stop accepting connections on a socket for the specified
+endpoint.</p>
+</dd>
+
+<dt><a name="25"><i class="arg">socketName</i> <b class=
+"method">writable</b> <span class="opt">?<i class=
+"arg">command</i>?</span></a></dt>
+
+<dd>
+<p>If specified set, or if not specified get, the socket writable
+callback command.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="section4" class="section">
+<h2><a name="section4">Messages</a></h2>
+
+<div id="subsection5" class="subsection">
+<h3><a name="subsection5">Message PACKAGE COMMANDS</a></h3>
+
+<dl class="definitions">
+<dt><a name="26"><b class="cmd">zmq message</b> <span class=
+"opt">?<i class="arg">messageName</i>?</span> <span class="opt">?<i
+class="arg">-size &lt;integer&gt;</i>?</span> <span class="opt">?<i
+class="arg">-data &lt;string&gt;</i>?</span></a></dt>
+
+<dd>
+<p>This command creates a new ZeroMQ message object and associated
+Tcl object command whose name is <i class="arg">messageName</i> if
+specified or auto generated if not specified with specified size
+and data. The object command will be created under the current
+namespace if the <i class="arg">messageName</i> is not fully
+qualified, and in the specified namespace otherwise. The object
+command name is returned by this command. The object command
+methods are explained in section <span class="sectref"><a href=
+"#subsection6">Message OBJECT METHODS</a></span>.</p>
+
+<p>The use of this message type is not needed with the wrapper.
+Check the <span class="sectref"><a href="#subsection4">Socket
+OBJECT METHODS</a></span> for socket commands directly reading and
+writing string and <b class="sectref">Message helper functions</b>
+for utility functions to read and write strings.</p>
+</dd>
+</dl>
+</div>
+
+<div id="subsection6" class="subsection">
+<h3><a name="subsection6">Message OBJECT METHODS</a></h3>
+
+<dl class="definitions">
+<dt><a name="27"><i class="arg">messageName</i> <b class=
+"method">cget</b> <i class="arg">optionName</i></a></dt>
+
+<dd>
+<p>Get message option. See <b class="cmd">configure</b> method for
+list of supported options.</p>
+</dd>
+
+<dt><a name="28"><i class="arg">messageName</i> <b class=
+"method">close</b></a></dt>
+
+<dd>
+<p>See <b class="cmd">destroy</b> method.</p>
+</dd>
+
+<dt><a name="29"><i class="arg">messageName</i> <b class=
+"method">configure</b> <span class="opt">?<i class=
+"arg">optionName</i>?</span> <span class="opt">?<i class=
+"arg">optionValue optionName optionValue ...</i>?</span></a></dt>
+
+<dd>
+<p>Query or modify message options. If no option is specified,
+returns a list describing all of the available options. If option
+is specified with no value, then the command returns the value for
+the specified option. If one or more option-value pairs are
+specified, then the command modifies the given message option(s) to
+have the given value(s); in this case the command returns an empty
+string. Supported options with associated data type are:</p>
+
+<dl class="options">
+<dt><b class="option">MORE</b></dt>
+
+<dd>
+<p>integer, read-only</p>
+</dd>
+</dl>
+</dd>
+
+<dt><a name="30"><i class="arg">messageName</i> <b class=
+"method">copy</b> <i class=
+"arg">destinationMessageName</i></a></dt>
+
+<dd>
+<p>Copy the message to the specified message.</p>
+</dd>
+
+<dt><a name="31"><i class="arg">messageName</i> <b class=
+"method">data</b></a></dt>
+
+<dd>
+<p>Get the message data as a (binary) string.</p>
+</dd>
+
+<dt><a name="32"><i class="arg">messageName</i> <b class=
+"method">destroy</b></a></dt>
+
+<dd>
+<p>Close the ZeroMQ message and delete the associated Tcl object
+command.</p>
+</dd>
+
+<dt><a name="33"><i class="arg">messageName</i> <b class=
+"method">dump</b></a></dt>
+
+<dd>
+<p>Get the message as a human readable string.</p>
+</dd>
+
+<dt><a name="34"><i class="arg">messageName</i> <b class=
+"method">get</b> <i class="arg">optionName</i></a></dt>
+
+<dd>
+<p>Get message option. See <b class="cmd">configure</b> method for
+list of supported options.</p>
+</dd>
+
+<dt><a name="35"><i class="arg">messageName</i> <b class=
+"method">more</b></a></dt>
+
+<dd>
+<p>Get indication if more messages are to be received as part of a
+multi part message.</p>
+</dd>
+
+<dt><a name="36"><i class="arg">messageName</i> <b class=
+"method">move</b> <i class=
+"arg">destinationMessageName</i></a></dt>
+
+<dd>
+<p>Move contents to the specified message.</p>
+</dd>
+
+<dt><a name="37"><i class="arg">messageName</i> <b class=
+"method">recv</b> <i class="arg">socketName</i> <span class=
+"opt">?<i class="arg">flagsList</i>?</span></a></dt>
+
+<dd>
+<p>Receive a message on the specified socket. Only the <i class=
+"term">DONTWAIT</i> flag is supported.</p>
+</dd>
+
+<dt><a name="38"><i class="arg">messageName</i> <b class=
+"method">send</b> <i class="arg">socketName</i> <span class=
+"opt">?<i class="arg">flagsList</i>?</span></a></dt>
+
+<dd>
+<p>Send a message to the specified socket as message part.
+Supported flags are <i class="term">DONTWAIT</i> and <i class=
+"term">SNDMORE</i>.</p>
+</dd>
+
+<dt><a name="39"><i class="arg">messageName</i> <b class=
+"method">sendmore</b> <i class="arg">socketName</i> <span class=
+"opt">?<i class="arg">flagsList</i>?</span></a></dt>
+
+<dd>
+<p>Send a message to the specified socket as message part and
+indicate there are more parts to come as part of a multi part
+message. Supported flags are <i class="term">DONTWAIT</i> and <i
+class="term">SNDMORE</i>.</p>
+</dd>
+
+<dt><a name="40"><i class="arg">messageName</i> <b class=
+"method">set</b> <i class="arg">optionName</i> <i class=
+"arg">optionValue</i></a></dt>
+
+<dd>
+<p>Set message option. See <b class="cmd">configure</b> method for
+list of supported options.</p>
+</dd>
+
+<dt><a name="41"><i class="arg">messageName</i> <b class=
+"method">size</b></a></dt>
+
+<dd>
+<p>Return the size of the message data part.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="section5" class="section">
+<h2><a name="section5">Multi-part message helper functions</a></h2>
+
+<p>ZeroMQ sends multi-part messages (e.g. when using envelopes).
+These helper functions can be used to make it easier to handle
+those. Data is specified as a (binary) string. A multi-part message
+is specified a a list of (binary) strings.</p>
+
+<dl class="definitions">
+<dt><a name="42"><b class="cmd">zmsg add</b> <i class=
+"arg">messageList</i> <i class="arg">data</i></a></dt>
+
+<dd>
+<p>Add a message part to a multi-part message. The updated
+multi-part message is returned.</p>
+</dd>
+
+<dt><a name="43"><b class="cmd">zmsg dump</b> <i class=
+"arg">messageList</i></a></dt>
+
+<dd>
+<p>Return the multi-part message in a human readable form.</p>
+</dd>
+
+<dt><a name="44"><b class="cmd">zmsg pop</b> <i class=
+"arg">messageListName</i></a></dt>
+
+<dd>
+<p>Pop a message part from the beginning of the specified
+multi-part message. The popped message part is returned and the
+specified multi-part message is modified.</p>
+</dd>
+
+<dt><a name="45"><b class="cmd">zmsg push</b> <i class=
+"arg">messageList</i> <i class="arg">data</i></a></dt>
+
+<dd>
+<p>Push a message part to the beginning of a multi-part message.
+The modified multi-part message is returned.</p>
+</dd>
+
+<dt><a name="46"><b class="cmd">zmsg recv</b> <i class=
+"arg">socketName</i></a></dt>
+
+<dd>
+<p>Receive a multi-part message on the specified socket. The
+received message is returned.</p>
+</dd>
+
+<dt><a name="47"><b class="cmd">zmsg send</b> <i class=
+"arg">socketName</i> <i class="arg">messageList</i></a></dt>
+
+<dd>
+<p>Send a multi-part message to the specified socket.</p>
+</dd>
+
+<dt><a name="48"><b class="cmd">zmsg unwrap</b> <i class=
+"arg">messageListName</i></a></dt>
+
+<dd>
+<p>Unwrap multi-part message. The unwrapped message part is
+returned. An empty message-part following the unwrapped message
+part (e.g as part of an envelope) is also removed.</p>
+</dd>
+
+<dt><a name="49"><b class="cmd">zmsg wrap</b> <i class=
+"arg">messageList</i> <i class="arg">data</i></a></dt>
+
+<dd>
+<p>Wrap the multi-part message with the specified data. An empty
+message part is inserted between the specified data and the
+spoecified multi-part message.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section6" class="section">
+<h2><a name="section6">Polling</a></h2>
+
+<dl class="definitions">
+<dt><a name="50"><b class="cmd">zmq poll</b> <i class=
+"arg">pollList</i> <i class="arg">timeout</i> <span class="opt">?<i
+class="arg">timeoutUnit</i>?</span></a></dt>
+
+<dd>
+<p>Poll the specified sockets for the specifed events. A maximum
+timeout must be specified. If the value of timeout is 0, the
+command returns immediately. If the value of timeout is -1, the
+command will block indefinitely until a specified event occurs. The
+polling list if specified as a list of poll requests. Such a poll
+request is a list of:</p>
+
+<ol class="enumerated">
+<li>
+<p>socket</p>
+</li>
+
+<li>
+<p>list of event flags</p>
+</li>
+</ol>
+
+<p>Supported event flags are:</p>
+
+<dl class="options">
+<dt><b class="option">POLLIN</b></dt>
+
+<dt><b class="option">POLLOUT</b></dt>
+</dl>
+
+<p>The poll command will return a list in the same format as the
+input polling list with list items for each item in the original
+list for which an event occured and in the list of event flags the
+events which occured.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section7" class="section">
+<h2><a name="section7">Devices</a></h2>
+
+<dl class="definitions">
+<dt><a name="51"><b class="cmd">zmq device</b> <i class=
+"arg">deviceType</i> <i class="arg">inputSocketName</i> <i class=
+"arg">outputSocketName</i></a></dt>
+
+<dd>
+<p>Start a built-in ZeroMQ device. Known devices are:</p>
+
+<dl class="options">
+<dt><b class="option">FORWARDER</b></dt>
+
+<dt><b class="option">QUEUE</b></dt>
+
+<dt><b class="option">STREAMER</b></dt>
+</dl>
+</dd>
+</dl>
+</div>
+
+<div id="section8" class="section">
+<h2><a name="section8">Miscellaneous</a></h2>
+
+<dl class="definitions">
+<dt><a name="52"><b class="cmd">zmq version</b></a></dt>
+
+<dd>
+<p>Return the ZeroMQ version used by the Tcl wrapper.</p>
+</dd>
+
+<dt><a name="53"><b class="cmd">zmq errno</b></a></dt>
+
+<dd>
+<p>Return the last returned ZeroMQ error code.</p>
+</dd>
+
+<dt><a name="54"><b class="cmd">zmq strerror</b> <i class=
+"arg">errorNumber</i></a></dt>
+
+<dd>
+<p>Return the human readable string for a ZeroMQ error code.</p>
+</dd>
+
+<dt><a name="55"><b class="cmd">zmq max_block_time</b> <i class=
+"arg">blockTime</i></a></dt>
+
+<dd>
+<p>Set maximum blocking time for the Tcl event loop waiting for
+ZeroMQ event in micro seconds. Default is 1000 micro seconds.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section9" class="section">
+<h2><a name="section9">Examples</a></h2>
+
+<p>A weather data publishing server, also found in the <a href=
+"http://zguide.zeromq.org/page:all#Getting-the-Message-Out">ZeroMQ
+Guide</a>:</p>
+
+<pre class="example">
+#
+# Weather update server
+# Binds PUB socket to tcp:#*:5556
+# Publishes random weather updates
+#
+package require zmq
+proc monitor {context socket event data} {
+    puts "Monitor callback: context=$context, socket=$socket, event=$event, data=$data"
+}
+# Prepare our context and publisher
+zmq context context
+context configure MONITOR monitor
+zmq socket publisher context PUB
+publisher bind "tcp://*:5556"
+if {$::tcl_platform(platform) ne "windows"} {
+    publisher bind "ipc://weather.ipc"
+}
+# Initialize random number generator
+expr {srand([clock seconds])}
+while {1} {
+    # Get values that will fool the boss
+    set zipcode [expr {int(rand()*100000)}]
+    set temperature [expr {int(rand()*215)-80}]
+    set relhumidity [expr {int(rand()*50)+50}]
+    # Send message to all subscribers
+    set data [format "%05d %d %d" $zipcode $temperature $relhumidity]
+    if {$zipcode eq "10001"} {
+    puts $data
+    }
+    zmq message msg -data $data
+    publisher send_msg msg
+    msg destroy
+    update idletasks
+}
+publisher destroy
+context destroy
+</pre>
+
+<p>And the corresponding client:</p>
+
+<pre class="example">
+#
+# Weather update client
+# Connects SUB socket to tcp:#localhost:5556
+# Collects weather updates and finds avg temp in zipcode
+#
+package require zmq
+# Socket to talk to server
+zmq context context
+zmq socket subscriber context SUB
+subscriber connect "tcp://localhost:5556"
+# Subscribe to zipcode, default is NYC, 10001
+if {[llength $argv]} {
+    set filter [lindex $argv 0]
+} else {
+    set filter "10001"
+}
+subscriber setsockopt SUBSCRIBE $filter
+# Process updates
+set total_temp 0
+for {set update_nbr 0} {$update_nbr &lt; 10} {incr update_nbr} {
+    zmq message msg
+    subscriber recv_msg msg
+    lassign [msg data] zipcode temperature relhumidity
+    puts [msg data]
+    msg close
+    incr total_temp $temperature
+}
+puts "Averate temperatur for zipcode $filter was [expr {$total_temp/$update_nbr}]F"
+subscriber destroy
+context destroy
+</pre>
+
+<p>Or the client rewritten to process the messages from the
+publisher asynchronously:</p>
+
+<pre class="example">
+#
+# Weather update client
+# Connects SUB socket to tcp:#localhost:5556
+# Collects weather updates and finds avg temp in zipcode
+#
+package require zmq
+# Socket to talk to server
+zmq context context
+zmq socket subscriber context SUB
+subscriber connect "tcp://localhost:5556"
+# Subscribe to zipcode, default is NYC, 10001
+if {[llength $argv]} {
+    set filter [lindex $argv 0]
+} else {
+    set filter "10001"
+}
+proc get_weather {} {
+    global total_temp cnt done
+    set data [subscriber recv]
+    puts $data
+    lassign $data zipcode temperature relhumidity
+    incr total_temp $temperature
+    incr cnt
+    if {$cnt &gt;= 10} {
+    set done 1
+    }
+}
+subscriber setsockopt SUBSCRIBE $filter
+set total_temp 0
+set cnt 0
+subscriber readable get_weather
+# Process updates
+vwait done
+puts "Averate temperatur for zipcode $filter was [expr {$total_temp/$cnt}]F"
+subscriber destroy
+context destroy
+</pre>
+
+<p>More Tcl example can be found in the <a href=
+"http://zguide.zeromq.org/page:all">ZeroMQ Guide</a>.</p>
+</div>
+
+<div id="section10" class="section">
+<h2><a name="section10">Bugs, ideas, feedback</a></h2>
+
+<p>This document, and the package it describes, will undoubtedly
+contain bugs and other problems. Please report such at the <a href=
+"https://github.com/jdc8/tclzmq/issues">Github tracker</a>. Please
+also report any ideas for enhancements you may have for either
+package and/or documentation.</p>
+</div>
+
+<div id="section11" class="section">
+<h2><a name="section11">License</a></h2>
+
+<p><i class="term">zmq</i> uses different licenses for different
+parts of the code. The 'core' of <i class="term">zmq</i> (located
+in <i class="term">zmq.tcl</i>) is licensed under LGPLv3. This just
+means that if you make any changes to how that code works, you must
+release those changes under the LGPL. If you just use <i class=
+"term">zmq</i>, then you can use any license you want for your own
+code. Check <i class="term">COPYING.LESSER</i> for more info.</p>
+
+<p>The restrictions imposed by the LGPL make no sense for the
+'non-core' functionality in <i class="term">zmq</i> (derivative
+code must also be LGPL or GPL), especially for examples, so all
+'non-core' code is relicensed under the more permissive BSD license
+(specifically Modified BSD aka New BSD aka 3-clause BSD), where
+possible. This means that you can copy this code and build your own
+apps without needing to license your own code with the LGPL or GPL.
+Check <i class="term">COPYING.BSD</i> for more info.</p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../index.html#key0">RPC</a>, <a href=
+"../index.html#key1">broadcast</a>, <a href=
+"../index.html#key2">communication</a>, <a href=
+"../index.html#key3">inter process communication</a>, <a href=
+"../index.html#key4">message queue</a>, <a href=
+"../index.html#key5">messaging</a>, <a href=
+"../index.html#key6">producer - consumer</a>, <a href=
+"../index.html#key7">publish - subscribe</a>, <a href=
+"../index.html#key8">queue</a></p>
+</div>
+
+<div id="category" class="section">
+<h2><a name="category">Category</a></h2>
+
+<p>Messaging</p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; Jos Decoster &lt;jos.decoster@gmail.com&gt;</p>
+</div>
+
+<h4>Copyright &copy; 2015 <a href="http://www.activestate.com">for
+compilation: ActiveState</a></h4>
+</div>
+</body>
+</html>
+

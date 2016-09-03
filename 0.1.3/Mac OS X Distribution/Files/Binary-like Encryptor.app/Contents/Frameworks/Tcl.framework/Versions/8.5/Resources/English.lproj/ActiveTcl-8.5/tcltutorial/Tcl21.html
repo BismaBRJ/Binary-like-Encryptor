@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>More Quoting Hell - Regular Expressions 102</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2 class="title">More Quoting Hell - Regular Expressions 102</h2>
+
+<div class="nav"><a href="Tcl20a.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl22.html">Next
+lesson</a></div>
+
+<dl>
+<dt><code class="keyword">regexp</code> <code class=
+"arg">?switches? exp string ?matchVar? ?subMatch1 ...
+subMatchN?</code></dt>
+
+<dd>Searches <code class="arg">string</code> for the regular
+expression <code class="arg">exp</code>. If a parameter <code
+class="arg">matchVar</code> is given, then the substring that
+matches the regular expression is copied to <code class=
+"arg">matchVar</code>. If <code class="arg">subMatchN</code>
+variables exist, then the parenthetical parts of the matching
+string are copied to the <code class="arg">subMatch</code>
+variables, working from left to right.</dd>
+
+<dt><code class="keyword">regsub</code> <code class=
+"arg">?switches? exp string subSpec varName</code></dt>
+
+<dd>Searches <code class="arg">string</code> for substrings that
+match the regular expression <code class="arg">exp</code> and
+replaces them with <code class="arg">subSpec</code>. The resulting
+string is copied into <code class="arg">varName</code>.</dd>
+</dl>
+
+<br>
+<br>
+<p>The regular expression (<code class="arg">exp</code>) in the two
+regular expression parsing commands is evaluated by the Tcl parser
+during the Tcl substitution phase. This can provide a great deal of
+power, and also requires a great deal of care.</p>
+
+<p>These examples show some of the trickier aspects of regular
+expression evaluation. The fields in each example are discussed in
+painful detail in the most verbose level.</p>
+
+<p>The points to remember as you read the examples are:</p>
+
+<ul>
+<li>A left square bracket ([) has meaning to the substitution
+phase, and to the regular expression parser.</li>
+
+<li>A set of parentheses, a plus sign, and a star have meaning to
+the regular expression parser, but not the Tcl substitution
+phase.</li>
+
+<li>A backslash sequence (\n, \t, etc) has meaning to the Tcl
+substitution phase, but not to the regular expression parser.</li>
+
+<li>A backslash escaped character (\[) has no special meaning to
+either the Tcl substitution phase or the regular expression
+parser.</li>
+</ul>
+
+<br>
+<br>
+<p>The phase at which a character has meaning affects how many
+escapes are necessary to match the character you wish to match. An
+escape can be either enclosing the phrase in braces, or placing a
+backslash before the escaped character.</p>
+
+<p>To pass a left bracket to the regular expression parser to
+evaluate as a range of characters takes 1 escape. To have the
+regular expression parser match a literal left bracket takes 2
+escapes (one to escape the bracket in the Tcl substitution phase,
+and one to escape the bracket in the regular expression parsing.).
+If you have the string placed within quotes, then a backslash that
+you wish passed to the regular expression parser must also be
+escaped with a backslash.</p>
+
+<p>Note: You can copy the code and run it in tclsh or wish to see
+the effects.</p>
+
+<hr>
+<h3>Example</h3>
+
+<pre class="example">
+#
+# Examine an overview of UNIX/Linux disks
+#
+set list1 [list \
+{/dev/wd0a        17086    10958     5272    68%    /}\
+{/dev/wd0f       179824   127798    48428    73%    /news}\
+{/dev/wd0h      1249244   967818   218962    82%    /usr}\
+{/dev/wd0g        98190    32836    60444    35%    /var}]
+
+foreach line $list1 {
+    regexp {[^ ]* *([0-9]+)[^/]*(/[a-z]*)} $line match size mounted;
+    puts "$mounted is $size blocks"
+}
+
+
+#
+# Extracting a hexadecimal value ...
+#
+set line {Interrupt Vector? [32(0x20)]}
+regexp "\[^\t]+\t\\\[\[0-9]+\\(0x(\[0-9a-fA-F]+)\\)]" $line match hexval
+puts "Hex Default is: 0x$hexval"
+
+#
+# Matching the special characters as if they were ordinary
+#
+set str2 "abc^def"
+regexp "\[^a-f]*def" $str2 match
+puts "using \[^a-f] the match is: $match"
+
+regexp "\[a-f^]*def" $str2 match
+puts "using \[a-f^] the match is: $match"
+
+regsub {\^} $str2 " is followed by: " str3
+puts "$str2 with the ^ substituted is: \"$str3\""
+
+regsub "(\[a-f]+)\\^(\[a-f]+)" $str2 "\\2 follows \\1" str3
+puts "$str2 is converted to \"$str3\""
+
+</pre>
+
+<div class="nav"><a href="Tcl20a.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl22.html">Next
+lesson</a></div>
+</body>
+</html>
+

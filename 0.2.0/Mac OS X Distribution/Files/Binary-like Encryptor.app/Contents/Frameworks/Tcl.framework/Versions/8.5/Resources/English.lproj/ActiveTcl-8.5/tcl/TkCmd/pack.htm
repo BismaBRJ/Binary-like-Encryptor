@@ -1,0 +1,463 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - pack manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> pack</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="pack.htm#M2" name="L970">NAME</a> 
+
+<dl>
+<dd>pack - Geometry manager that packs around edges of cavity</dd>
+</dl>
+</dd>
+
+<dd><a href="pack.htm#M3" name="L971">SYNOPSIS</a> 
+
+<dl>
+<dd><b>pack</b> <i>option arg</i> ?<i>arg ...</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="pack.htm#M4" name="L972">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="pack.htm#M5" name="L973"><b>pack</b> <i>slave</i>
+?<i>slave ...</i>? ?<i>options</i>?</a></dd>
+
+<dd><a href="pack.htm#M6" name="L974"><b>pack configure</b>
+<i>slave</i> ?<i>slave ...</i>? ?<i>options</i>?</a> 
+
+<dl class="description">
+<dd><a href="pack.htm#M7" name="L975"><b>-after</b>
+<i>other</i></a></dd>
+
+<dd><a href="pack.htm#M8" name="L976"><b>-anchor</b>
+<i>anchor</i></a></dd>
+
+<dd><a href="pack.htm#M9" name="L977"><b>-before</b>
+<i>other</i></a></dd>
+
+<dd><a href="pack.htm#M10" name="L978"><b>-expand</b>
+<i>boolean</i></a></dd>
+
+<dd><a href="pack.htm#M11" name="L979"><b>-fill</b>
+<i>style</i></a> 
+
+<dl class="description">
+<dd><a href="pack.htm#M12" name="L980"><b>none</b></a></dd>
+
+<dd><a href="pack.htm#M13" name="L981"><b>x</b></a></dd>
+
+<dd><a href="pack.htm#M14" name="L982"><b>y</b></a></dd>
+
+<dd><a href="pack.htm#M15" name="L983"><b>both</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="pack.htm#M16" name="L984"><b>-in</b>
+<i>other</i></a></dd>
+
+<dd><a href="pack.htm#M17" name="L985"><b>-ipadx</b>
+<i>amount</i></a></dd>
+
+<dd><a href="pack.htm#M18" name="L986"><b>-ipady</b>
+<i>amount</i></a></dd>
+
+<dd><a href="pack.htm#M19" name="L987"><b>-padx</b>
+<i>amount</i></a></dd>
+
+<dd><a href="pack.htm#M20" name="L988"><b>-pady</b>
+<i>amount</i></a></dd>
+
+<dd><a href="pack.htm#M21" name="L989"><b>-side</b>
+<i>side</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="pack.htm#M22" name="L990"><b>pack forget</b>
+<i>slave</i> ?<i>slave ...</i>?</a></dd>
+
+<dd><a href="pack.htm#M23" name="L991"><b>pack info</b>
+<i>slave</i></a></dd>
+
+<dd><a href="pack.htm#M24" name="L992"><b>pack propagate</b>
+<i>master</i> ?<i>boolean</i>?</a></dd>
+
+<dd><a href="pack.htm#M25" name="L993"><b>pack slaves</b>
+<i>master</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="pack.htm#M26" name="L994">THE PACKER
+ALGORITHM</a></dd>
+
+<dd><a href="pack.htm#M27" name="L995">EXPANSION</a></dd>
+
+<dd><a href="pack.htm#M28" name="L996">GEOMETRY
+PROPAGATION</a></dd>
+
+<dd><a href="pack.htm#M29" name="L997">RESTRICTIONS ON MASTER
+WINDOWS</a></dd>
+
+<dd><a href="pack.htm#M30" name="L998">PACKING ORDER</a></dd>
+
+<dd><a href="pack.htm#M31" name="L999">EXAMPLE</a></dd>
+
+<dd><a href="pack.htm#M32" name="L1000">SEE ALSO</a></dd>
+
+<dd><a href="pack.htm#M33" name="L1001">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+pack - Geometry manager that packs around edges of cavity 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>pack</b> <i>option arg</i> ?<i>arg ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>pack</b> command is used to communicate with the packer, a
+geometry manager that arranges the children of a parent by packing
+them in order around the edges of the parent. The <b>pack</b>
+command can have any of several forms, depending on the
+<i>option</i> argument: 
+
+<dl class="description">
+<dt><a name="M5"><b>pack</b> <i>slave</i> ?<i>slave ...</i>?
+?<i>options</i>?</a></dt>
+
+<dd>If the first argument to <b>pack</b> is a window name (any
+value starting with &ldquo;.&rdquo;), then the command is processed
+in the same way as <b>pack configure</b>.</dd>
+
+<dt><a name="M6"><b>pack configure</b> <i>slave</i> ?<i>slave
+...</i>? ?<i>options</i>?</a></dt>
+
+<dd>The arguments consist of the names of one or more slave windows
+followed by pairs of arguments that specify how to manage the
+slaves. See <b>THE PACKER ALGORITHM</b> below for details on how
+the options are used by the packer. The following options are
+supported: 
+
+<dl class="description">
+<dt><a name="M7"><b>-after</b> <i>other</i></a></dt>
+
+<dd><i>Other</i> must the name of another window. Use its master as
+the master for the slaves, and insert the slaves just after
+<i>other</i> in the packing order.</dd>
+
+<dt><a name="M8"><b>-anchor</b> <i>anchor</i></a></dt>
+
+<dd><i>Anchor</i> must be a valid anchor position such as <b>n</b>
+or <b>sw</b>; it specifies where to position each slave in its
+parcel. Defaults to <b>center</b>.</dd>
+
+<dt><a name="M9"><b>-before</b> <i>other</i></a></dt>
+
+<dd><i>Other</i> must the name of another window. Use its master as
+the master for the slaves, and insert the slaves just before
+<i>other</i> in the packing order.</dd>
+
+<dt><a name="M10"><b>-expand</b> <i>boolean</i></a></dt>
+
+<dd>Specifies whether the slaves should be expanded to consume
+extra space in their master. <i>Boolean</i> may have any proper
+boolean value, such as <b>1</b> or <b>no</b>. Defaults to 0.</dd>
+
+<dt><a name="M11"><b>-fill</b> <i>style</i></a></dt>
+
+<dd>If a slave's parcel is larger than its requested dimensions,
+this option may be used to stretch the slave. <i>Style</i> must
+have one of the following values: 
+
+<dl class="description">
+<dt><a name="M12"><b>none</b></a></dt>
+
+<dd>Give the slave its requested dimensions plus any internal
+padding requested with <b>-ipadx</b> or <b>-ipady</b>. This is the
+default.</dd>
+
+<dt><a name="M13"><b>x</b></a></dt>
+
+<dd>Stretch the slave horizontally to fill the entire width of its
+parcel (except leave external padding as specified by
+<b>-padx</b>).</dd>
+
+<dt><a name="M14"><b>y</b></a></dt>
+
+<dd>Stretch the slave vertically to fill the entire height of its
+parcel (except leave external padding as specified by
+<b>-pady</b>).</dd>
+
+<dt><a name="M15"><b>both</b></a></dt>
+
+<dd>Stretch the slave both horizontally and vertically.</dd>
+</dl>
+</dd>
+
+<dt><a name="M16"><b>-in</b> <i>other</i></a></dt>
+
+<dd>Insert the slave(s) at the end of the packing order for the
+master window given by <i>other</i>.</dd>
+
+<dt><a name="M17"><b>-ipadx</b> <i>amount</i></a></dt>
+
+<dd><i>Amount</i> specifies how much horizontal internal padding to
+leave on each side of the slave(s). <i>Amount</i> must be a valid
+screen distance, such as <b>2</b> or <b>.5c</b>. It defaults to
+0.</dd>
+
+<dt><a name="M18"><b>-ipady</b> <i>amount</i></a></dt>
+
+<dd><i>Amount</i> specifies how much vertical internal padding to
+leave on each side of the slave(s). <i>Amount</i> defaults to
+0.</dd>
+
+<dt><a name="M19"><b>-padx</b> <i>amount</i></a></dt>
+
+<dd><i>Amount</i> specifies how much horizontal external padding to
+leave on each side of the slave(s). <i>Amount</i> may be a list of
+two values to specify padding for left and right separately.
+<i>Amount</i> defaults to 0.</dd>
+
+<dt><a name="M20"><b>-pady</b> <i>amount</i></a></dt>
+
+<dd><i>Amount</i> specifies how much vertical external padding to
+leave on each side of the slave(s). <i>Amount</i> may be a list of
+two values to specify padding for top and bottom separately.
+<i>Amount</i> defaults to 0.</dd>
+
+<dt><a name="M21"><b>-side</b> <i>side</i></a></dt>
+
+<dd>Specifies which side of the master the slave(s) will be packed
+against. Must be <b>left</b>, <b>right</b>, <b>top</b>, or
+<b>bottom</b>. Defaults to <b>top</b>.</dd>
+</dl>
+
+<p>If no <b>-in</b>, <b>-after</b> or <b>-before</b> option is
+specified then each of the slaves will be inserted at the end of
+the packing list for its parent unless it is already managed by the
+packer (in which case it will be left where it is). If one of these
+options is specified then all the slaves will be inserted at the
+specified point. If any of the slaves are already managed by the
+geometry manager then any unspecified options for them retain their
+previous values rather than receiving default values.</p>
+</dd>
+
+<dt><a name="M22"><b>pack forget</b> <i>slave</i> ?<i>slave
+...</i>?</a></dt>
+
+<dd>Removes each of the <i>slave</i>s from the packing order for
+its master and unmaps their windows. The slaves will no longer be
+managed by the packer.</dd>
+
+<dt><a name="M23"><b>pack info</b> <i>slave</i></a></dt>
+
+<dd>Returns a list whose elements are the current configuration
+state of the slave given by <i>slave</i> in the same option-value
+form that might be specified to <b>pack configure</b>. The first
+two elements of the list are &ldquo;<b>-in</b> <i>master</i>&rdquo;
+where <i>master</i> is the slave's master.</dd>
+
+<dt><a name="M24"><b>pack propagate</b> <i>master</i>
+?<i>boolean</i>?</a></dt>
+
+<dd>If <i>boolean</i> has a true boolean value such as <b>1</b> or
+<b>on</b> then propagation is enabled for <i>master</i>, which must
+be a window name (see <b>GEOMETRY PROPAGATION</b> below). If
+<i>boolean</i> has a false boolean value then propagation is
+disabled for <i>master</i>. In either of these cases an empty
+string is returned. If <i>boolean</i> is omitted then the command
+returns <b>0</b> or <b>1</b> to indicate whether propagation is
+currently enabled for <i>master</i>. Propagation is enabled by
+default.</dd>
+
+<dt><a name="M25"><b>pack slaves</b> <i>master</i></a></dt>
+
+<dd>Returns a list of all of the slaves in the packing order for
+<i>master</i>. The order of the slaves in the list is the same as
+their order in the packing order. If <i>master</i> has no slaves
+then an empty string is returned.</dd>
+</dl>
+
+<h3><a name="M26">THE PACKER ALGORITHM</a></h3>
+
+For each master the packer maintains an ordered list of slaves
+called the <i>packing list</i>. The <b>-in</b>, <b>-after</b>, and
+<b>-before</b> configuration options are used to specify the master
+for each slave and the slave's position in the packing list. If
+none of these options is given for a slave then the slave is added
+to the end of the packing list for its parent. 
+
+<p>The packer arranges the slaves for a master by scanning the
+packing list in order. At the time it processes each slave, a
+rectangular area within the master is still unallocated. This area
+is called the <i>cavity</i>; for the first slave it is the entire
+area of the master.</p>
+
+<p>For each slave the packer carries out the following steps:</p>
+
+<dl class="the packer algorithm">
+<dt>[1]</dt>
+
+<dd>The packer allocates a rectangular <i>parcel</i> for the slave
+along the side of the cavity given by the slave's <b>-side</b>
+option. If the side is top or bottom then the width of the parcel
+is the width of the cavity and its height is the requested height
+of the slave plus the <b>-ipady</b> and <b>-pady</b> options. For
+the left or right side the height of the parcel is the height of
+the cavity and the width is the requested width of the slave plus
+the <b>-ipadx</b> and <b>-padx</b> options. The parcel may be
+enlarged further because of the <b>-expand</b> option (see
+<b>EXPANSION</b> below)</dd>
+
+<dt>[2]</dt>
+
+<dd>The packer chooses the dimensions of the slave. The width will
+normally be the slave's requested width plus twice its
+<b>-ipadx</b> option and the height will normally be the slave's
+requested height plus twice its <b>-ipady</b> option. However, if
+the <b>-fill</b> option is <b>x</b> or <b>both</b> then the width
+of the slave is expanded to fill the width of the parcel, minus
+twice the <b>-padx</b> option. If the <b>-fill</b> option is
+<b>y</b> or <b>both</b> then the height of the slave is expanded to
+fill the width of the parcel, minus twice the <b>-pady</b>
+option.</dd>
+
+<dt>[3]</dt>
+
+<dd>The packer positions the slave over its parcel. If the slave is
+smaller than the parcel then the <b>-anchor</b> option determines
+where in the parcel the slave will be placed. If <b>-padx</b> or
+<b>-pady</b> is non-zero, then the given amount of external padding
+will always be left between the slave and the edges of the
+parcel.</dd>
+</dl>
+
+<p>Once a given slave has been packed, the area of its parcel is
+subtracted from the cavity, leaving a smaller rectangular cavity
+for the next slave. If a slave does not use all of its parcel, the
+unused space in the parcel will not be used by subsequent slaves.
+If the cavity should become too small to meet the needs of a slave
+then the slave will be given whatever space is left in the cavity.
+If the cavity shrinks to zero size, then all remaining slaves on
+the packing list will be unmapped from the screen until the master
+window becomes large enough to hold them again.</p>
+
+<h4><a name="M27">EXPANSION</a></h4>
+
+If a master window is so large that there will be extra space left
+over after all of its slaves have been packed, then the extra space
+is distributed uniformly among all of the slaves for which the
+<b>-expand</b> option is set. Extra horizontal space is distributed
+among the expandable slaves whose <b>-side</b> is <b>left</b> or
+<b>right</b>, and extra vertical space is distributed among the
+expandable slaves whose <b>-side</b> is <b>top</b> or
+<b>bottom</b>. 
+
+<h4><a name="M28">GEOMETRY PROPAGATION</a></h4>
+
+The packer normally computes how large a master must be to just
+exactly meet the needs of its slaves, and it sets the requested
+width and height of the master to these dimensions. This causes
+geometry information to propagate up through a window hierarchy to
+a top-level window so that the entire sub-tree sizes itself to fit
+the needs of the leaf windows. However, the <b>pack propagate</b>
+command may be used to turn off propagation for one or more
+masters. If propagation is disabled then the packer will not set
+the requested width and height of the packer. This may be useful
+if, for example, you wish for a master window to have a fixed size
+that you specify. 
+
+<h3><a name="M29">RESTRICTIONS ON MASTER WINDOWS</a></h3>
+
+The master for each slave must either be the slave's parent (the
+default) or a descendant of the slave's parent. This restriction is
+necessary to guarantee that the slave can be placed over any part
+of its master that is visible without danger of the slave being
+clipped by its parent. 
+
+<h3><a name="M30">PACKING ORDER</a></h3>
+
+If the master for a slave is not its parent then you must make sure
+that the slave is higher in the stacking order than the master.
+Otherwise the master will obscure the slave and it will appear as
+if the slave has not been packed correctly. The easiest way to make
+sure the slave is higher than the master is to create the master
+window first: the most recently created window will be highest in
+the stacking order. Or, you can use the <b><a href=
+"../TkCmd/raise.htm">raise</a></b> and <b><a href=
+"../TkCmd/lower.htm">lower</a></b> commands to change the stacking
+order of either the master or the slave. 
+
+<h3><a name="M31">EXAMPLE</a></h3>
+
+<pre>
+# Make the widgets
+label .t -text "This widget is at the top"    -bg red
+label .b -text "This widget is at the bottom" -bg green
+label .l -text "Left\nHand\nSide"
+label .r -text "Right\nHand\nSide"
+text .mid
+    .mid insert end "This layout is like Java's BorderLayout"
+# Lay them out
+<b>pack</b> .t   -side top    -fill x
+<b>pack</b> .b   -side bottom -fill x
+<b>pack</b> .l   -side left   -fill y
+<b>pack</b> .r   -side right  -fill y
+<b>pack</b> .mid -expand 1    -fill both
+</pre>
+
+<h3><a name="M32">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/grid.htm">grid</a></b>, <b><a href=
+"../TkCmd/place.htm">place</a></b> 
+
+<h3><a name="M33">KEYWORDS</a></h3>
+
+<a href="../Keywords/G.htm#geometry manager">geometry manager</a>,
+<a href="../Keywords/L.htm#location">location</a>, <a href=
+"../Keywords/P.htm#packer">packer</a>, <a href=
+"../Keywords/P.htm#parcel">parcel</a>, <a href=
+"../Keywords/P.htm#propagation">propagation</a>, <a href=
+"../Keywords/S.htm#size">size</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990-1994 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

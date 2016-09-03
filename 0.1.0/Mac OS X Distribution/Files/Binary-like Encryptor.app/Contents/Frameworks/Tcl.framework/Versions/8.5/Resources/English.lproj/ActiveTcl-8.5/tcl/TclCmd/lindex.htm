@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - lindex manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> lindex</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+lindex - Retrieve an element from a list 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>lindex</b> <i>list ?index...?</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>lindex</b> command accepts a parameter, <i>list</i>, which
+it treats as a Tcl list. It also accepts zero or more
+<i>indices</i> into the list. The indices may be presented either
+consecutively on the command line, or grouped in a Tcl list and
+presented as a single argument. 
+
+<p>If no indices are presented, the command takes the form:</p>
+
+<pre>
+lindex list
+</pre>
+
+or 
+
+<pre>
+lindex list {}
+</pre>
+
+In this case, the return value of <b>lindex</b> is simply the value
+of the <i>list</i> parameter. 
+
+<p>When presented with a single index, the <b>lindex</b> command
+treats <i>list</i> as a Tcl list and returns the <i>index</i>'th
+element from it (0 refers to the first element of the list). In
+extracting the element, <b>lindex</b> observes the same rules
+concerning braces and quotes and backslashes as the Tcl command
+interpreter; however, variable substitution and command
+substitution do not occur. If <i>index</i> is negative or greater
+than or equal to the number of elements in <i>value</i>, then an
+empty string is returned. The interpretation of each simple
+<i>index</i> value is the same as for the command <b><a href=
+"../TclCmd/string.htm">string index</a></b>, supporting simple
+index arithmetic and indices relative to the end of the list.</p>
+
+<p>If additional <i>index</i> arguments are supplied, then each
+argument is used in turn to select an element from the previous
+indexing operation, allowing the script to select elements from
+sublists. The command,</p>
+
+<pre>
+lindex $a 1 2 3
+</pre>
+
+or 
+
+<pre>
+lindex $a {1 2 3}
+</pre>
+
+is synonymous with 
+
+<pre>
+lindex [lindex [lindex $a 1] 2] 3
+</pre>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+<pre>
+<b>lindex</b> {a b c}
+      <i><font size="+1">&rarr;</font> a b c</i>
+<b>lindex</b> {a b c} {}
+      <i><font size="+1">&rarr;</font> a b c</i>
+<b>lindex</b> {a b c} 0
+      <i><font size="+1">&rarr;</font> a</i>
+<b>lindex</b> {a b c} 2
+      <i><font size="+1">&rarr;</font> c</i>
+<b>lindex</b> {a b c} end
+      <i><font size="+1">&rarr;</font> c</i>
+<b>lindex</b> {a b c} end-1
+      <i><font size="+1">&rarr;</font> b</i>
+<b>lindex</b> {{a b c} {d e f} {g h i}} 2 1
+      <i><font size="+1">&rarr;</font> h</i>
+<b>lindex</b> {{a b c} {d e f} {g h i}} {2 1}
+      <i><font size="+1">&rarr;</font> h</i>
+<b>lindex</b> {{{a b} {c d}} {{e f} {g h}}} 1 1 0
+      <i><font size="+1">&rarr;</font> g</i>
+<b>lindex</b> {{{a b} {c d}} {{e f} {g h}}} {1 1 0}
+      <i><font size="+1">&rarr;</font> g</i>
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/list.htm">list</a></b>, <b><a href=
+"../TclCmd/lappend.htm">lappend</a></b>, <b><a href=
+"../TclCmd/linsert.htm">linsert</a></b>, <b><a href=
+"../TclCmd/llength.htm">llength</a></b>, <b><a href=
+"../TclCmd/lsearch.htm">lsearch</a></b>, <b><a href=
+"../TclCmd/lset.htm">lset</a></b>, <b><a href=
+"../TclCmd/lsort.htm">lsort</a></b>, <b><a href=
+"../TclCmd/lrange.htm">lrange</a></b>, <b><a href=
+"../TclCmd/lreplace.htm">lreplace</a></b>, <b><a href=
+"../TclCmd/string.htm">string</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/E.htm#element">element</a>, <a href=
+"../Keywords/I.htm#index">index</a>, <a href=
+"../Keywords/L.htm#list">list</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+2001 by Kevin B. Kenny &lt;kennykb(at)acm.org&gt;. All rights
+reserved.</div>
+</body>
+</html>
+

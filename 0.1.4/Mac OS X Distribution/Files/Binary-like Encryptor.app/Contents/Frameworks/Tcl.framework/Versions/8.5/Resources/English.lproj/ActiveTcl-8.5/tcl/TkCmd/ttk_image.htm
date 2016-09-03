@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk_image manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_image</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_image.htm#M2" name="L1708">NAME</a> 
+
+<dl>
+<dd>ttk_image - Define an element based on an image</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_image.htm#M3" name="L1709">SYNOPSIS</a> 
+
+<dl>
+<dd><b>ttk::style element create</b> <i>name</i> <b>image</b>
+<i>imageSpec</i> ?<i>options</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_image.htm#M4" name="L1710">DESCRIPTION</a></dd>
+
+<dd><a href="ttk_image.htm#M5" name="L1711">OPTIONS</a> 
+
+<dl class="options">
+<dd><a href="ttk_image.htm#M6" name="L1712"><b>-border</b>
+<i>padding</i></a></dd>
+
+<dd><a href="ttk_image.htm#M7" name="L1713"><b>-height</b>
+<i>height</i></a></dd>
+
+<dd><a href="ttk_image.htm#M8" name="L1714"><b>-padding</b>
+<i>padding</i></a></dd>
+
+<dd><a href="ttk_image.htm#M9" name="L1715"><b>-sticky</b>
+<i>spec</i></a></dd>
+
+<dd><a href="ttk_image.htm#M10" name="L1716"><b>-width</b>
+<i>width</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_image.htm#M11" name="L1717">IMAGE
+STRETCHING</a></dd>
+
+<dd><a href="ttk_image.htm#M12" name="L1718">EXAMPLE</a></dd>
+
+<dd><a href="ttk_image.htm#M13" name="L1719">SEE ALSO</a></dd>
+
+<dd><a href="ttk_image.htm#M14" name="L1720">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk_image - Define an element based on an image 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>ttk::style element create</b> <i>name</i> <b><a href=
+"../TkCmd/image.htm">image</a></b> <i>imageSpec</i>
+?<i>options</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <i>image</i> element factory creates a new element in the
+current theme whose visual appearance is determined by Tk images.
+<i>imageSpec</i> is a list of one or more elements. The first
+element is the default image name. The rest of the list is a
+sequence of <i>statespec / value</i> pairs specifying other images
+to use when the element is in a particular state or combination of
+states. 
+
+<h3><a name="M5">OPTIONS</a></h3>
+
+Valid <i>options</i> are: 
+
+<dl class="options">
+<dt><a name="M6"><b>-border</b> <i>padding</i></a></dt>
+
+<dd><i>padding</i> is a list of up to four integers, specifying the
+left, top, right, and bottom borders, respectively. See <b><a href=
+"../TkCmd/image.htm">IMAGE STRETCHING</a></b>, below.</dd>
+
+<dt><a name="M7"><b>-height</b> <i>height</i></a></dt>
+
+<dd>Specifies a minimum height for the element. If less than zero,
+the base image's height is used as a default.</dd>
+
+<dt><a name="M8"><b>-padding</b> <i>padding</i></a></dt>
+
+<dd>Specifies the element's interior padding. Defaults to
+<b>-border</b> if not specified.</dd>
+
+<dt><a name="M9"><b>-sticky</b> <i>spec</i></a></dt>
+
+<dd>Specifies how the image is placed within the final parcel.
+<i>spec</i> contains zero or more characters &ldquo;n&rdquo;,
+&ldquo;s&rdquo;, &ldquo;w&rdquo;, or &ldquo;e&rdquo;.</dd>
+
+<dt><a name="M10"><b>-width</b> <i>width</i></a></dt>
+
+<dd>Specifies a minimum width for the element. If less than zero,
+the base image's width is used as a default.</dd>
+</dl>
+
+<h3><a name="M11">IMAGE STRETCHING</a></h3>
+
+If the element's allocated parcel is larger than the image, the
+image will be placed in the parcel based on the <b>-sticky</b>
+option. If the image needs to stretch horizontally (i.e.,
+<b>-sticky ew</b>) or vertically (<b>-sticky ns</b>), subregions of
+the image are replicated to fill the parcel based on the
+<b>-border</b> option. The <b>-border</b> divides the image into 9
+regions: four fixed corners, top and left edges (which may be tiled
+horizontally), left and right edges (which may be tiled
+vertically), and the central area (which may be tiled in both
+directions). 
+
+<h3><a name="M12">EXAMPLE</a></h3>
+
+<pre>
+set img1 [image create photo -file button.png]
+set img2 [image create photo -file button-pressed.png]
+set img3 [image create photo -file button-active.png]
+style element create Button.button image \
+    [list $img1  pressed $img2  active $img3] \
+    -border {2 4} -sticky we
+</pre>
+
+<h3><a name="M13">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_intro.htm">ttk::intro</a></b>, <b><a href=
+"../TkCmd/ttk_style.htm">ttk::style</a></b>, <b><a href=
+"../TkCmd/ttk_vsapi.htm">ttk_vsapi</a></b>, <b><a href=
+"../TkCmd/image.htm">image</a></b>, <b><a href=
+"../TkCmd/photo.htm">photo</a></b> 
+
+<h3><a name="M14">KEYWORDS</a></h3>
+
+<a href="../Keywords/S.htm#style">style</a>, <a href=
+"../Keywords/T.htm#theme">theme</a>, <a href=
+"../Keywords/A.htm#appearance">appearance</a>, <a href=
+"../Keywords/P.htm#pixmap theme">pixmap theme</a>, <a href=
+"../Keywords/I.htm#image">image</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2004 Joe English</div>
+</body>
+</html>
+

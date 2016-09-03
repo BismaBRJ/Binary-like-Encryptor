@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_GetVRootGeometry manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> GetVRoot</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_GetVRootGeometry - Get location and size of virtual root for
+window 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+<b>Tk_GetVRootGeometry(</b><i>tkwin, xPtr, yPtr, widthPtr,
+heightPtr</i><b>)</b><br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Window <b>tkwin</b> (in)</dt>
+
+<dd>Token for window whose virtual root is to be queried.</dd>
+
+<dt>int <b>xPtr</b> (out)</dt>
+
+<dd>Points to word in which to store x-offset of virtual root.</dd>
+
+<dt>int <b>yPtr</b> (out)</dt>
+
+<dd>Points to word in which to store y-offset of virtual root.</dd>
+
+<dt>int <b>widthPtr</b> (out)</dt>
+
+<dd>Points to word in which to store width of virtual root.</dd>
+
+<dt>int <b>heightPtr</b> (out)</dt>
+
+<dd>Points to word in which to store height of virtual root.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tk_GetVRootGeometry</b> returns geometry information about the
+virtual root window associated with <i>tkwin</i>. The
+&ldquo;associated&rdquo; virtual root is the one in which
+<i>tkwin</i>'s nearest top-level ancestor (or <i>tkwin</i> itself
+if it is a top-level window) has been reparented by the window
+manager. This window is identified by a <b>__SWM_ROOT</b> or
+<b>__WM_ROOT</b> property placed on the top-level window by the
+window manager. If <i>tkwin</i> is not associated with a virtual
+root (e.g. because the window manager does not use virtual roots)
+then *<i>xPtr</i> and *<i>yPtr</i> will be set to 0 and
+*<i>widthPtr</i> and *<i>heightPtr</i> will be set to the
+dimensions of the screen containing <i>tkwin</i>. 
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/G.htm#geometry">geometry</a>, <a href=
+"../Keywords/H.htm#height">height</a>, <a href=
+"../Keywords/L.htm#location">location</a>, <a href=
+"../Keywords/V.htm#virtual root">virtual root</a>, <a href=
+"../Keywords/W.htm#width">width</a>, <a href=
+"../Keywords/W.htm#window manager">window manager</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

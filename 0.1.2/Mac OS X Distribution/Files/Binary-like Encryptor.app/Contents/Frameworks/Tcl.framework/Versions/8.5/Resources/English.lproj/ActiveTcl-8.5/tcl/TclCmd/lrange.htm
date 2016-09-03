@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - lrange manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> lrange</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+lrange - Return one or more adjacent elements from a list 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>lrange</b> <i>list first last</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+<i>List</i> must be a valid Tcl list. This command will return a
+new list consisting of elements <i>first</i> through <i>last</i>,
+inclusive. The index values <i>first</i> and <i>last</i> are
+interpreted the same as index values for the command <b><a href=
+"../TclCmd/string.htm">string index</a></b>, supporting simple
+index arithmetic and indices relative to the end of the list. If
+<i>first</i> is less than zero, it is treated as if it were zero.
+If <i>last</i> is greater than or equal to the number of elements
+in the list, then it is treated as if it were <b>end</b>. If
+<i>first</i> is greater than <i>last</i> then an empty string is
+returned. Note: &ldquo;<b>lrange</b> <i>list first first</i>&rdquo;
+does not always produce the same result as &ldquo;<b>lindex</b>
+<i>list first</i>&rdquo; (although it often does for simple fields
+that are not enclosed in braces); it does, however, produce exactly
+the same results as &ldquo;<b>list [lindex</b> <i>list
+first</i><b>]</b>&rdquo; 
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+Selecting the first two elements: 
+
+<pre>
+% <b>lrange</b> {a b c d e} 0 1
+a b
+</pre>
+
+<p>Selecting the last three elements:</p>
+
+<pre>
+% <b>lrange</b> {a b c d e} end-2 end
+c d e
+</pre>
+
+<p>Selecting everything except the first and last element:</p>
+
+<pre>
+% <b>lrange</b> {a b c d e} 1 end-1
+b c d
+</pre>
+
+<p>Selecting a single element with <b>lrange</b> is not the same as
+doing so with <b><a href="../TclCmd/lindex.htm">lindex</a></b>:</p>
+
+<pre>
+% set var {some {elements to} select}
+some {elements to} select
+% lindex $var 1
+elements to
+% <b>lrange</b> $var 1 1
+{elements to}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/list.htm">list</a></b>, <b><a href=
+"../TclCmd/lappend.htm">lappend</a></b>, <b><a href=
+"../TclCmd/lindex.htm">lindex</a></b>, <b><a href=
+"../TclCmd/linsert.htm">linsert</a></b>, <b><a href=
+"../TclCmd/llength.htm">llength</a></b>, <b><a href=
+"../TclCmd/lsearch.htm">lsearch</a></b>, <b><a href=
+"../TclCmd/lset.htm">lset</a></b>, <b><a href=
+"../TclCmd/lreplace.htm">lreplace</a></b>, <b><a href=
+"../TclCmd/lsort.htm">lsort</a></b>, <b><a href=
+"../TclCmd/string.htm">string</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/E.htm#element">element</a>, <a href=
+"../Keywords/L.htm#list">list</a>, <a href=
+"../Keywords/R.htm#range">range</a>, <a href=
+"../Keywords/S.htm#sublist">sublist</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+2001 Kevin B. Kenny &lt;kennykb(at)acm.org&gt;. All rights
+reserved.</div>
+</body>
+</html>
+

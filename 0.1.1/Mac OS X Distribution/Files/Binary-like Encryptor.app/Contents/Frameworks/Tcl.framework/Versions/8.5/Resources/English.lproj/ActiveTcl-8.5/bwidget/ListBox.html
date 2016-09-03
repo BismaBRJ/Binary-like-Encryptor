@@ -1,0 +1,775 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>ListBox</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>ListBox</b> - ListBox widget</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>ListBox</b></a> <i>pathName</i> ?<i>option
+value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i>STANDARD OPTIONS</i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-background">-background or -bg</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-borderwidth">-borderwidth or
+-bd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-cursor">-cursor</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightbackground">-highlightbackground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightcolor">-highlightcolor</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightthickness">-highlightthickness</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-relief">-relief</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-selectbackground">-selectbackground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-selectforeground">-selectforeground</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-takefocus">-takefocus</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-xscrollcommand">-xscrollcommand</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-yscrollcommand">-yscrollcommand</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-autofocus">-autofocus</a></td>
+<td>&nbsp;&nbsp;<a href="#-deltax">-deltax</a></td>
+<td>&nbsp;&nbsp;<a href="#-deltay">-deltay</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dragenabled">-dragenabled</a></td>
+<td>&nbsp;&nbsp;<a href="#-dragendcmd">-dragendcmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dragevent">-dragevent</a></td>
+<td>&nbsp;&nbsp;<a href="#-draginitcmd">-draginitcmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dragtype">-dragtype</a></td>
+<td>&nbsp;&nbsp;<a href="#-dropcmd">-dropcmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dropenabled">-dropenabled</a></td>
+<td>&nbsp;&nbsp;<a href="#-dropovercmd">-dropovercmd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-dropovermode">-dropovermode</a></td>
+<td>&nbsp;&nbsp;<a href="#-droptypes">-droptypes</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-height">-height</a></td>
+<td>&nbsp;&nbsp;<a href="#-multicolumn">-multicolumn</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-padx">-padx</a></td>
+<td>&nbsp;&nbsp;<a href="#-redraw">-redraw</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-selectfill">-selectfill</a></td>
+<td>&nbsp;&nbsp;<a href="#-selectmode">-selectmode</a></td>
+<td>&nbsp;&nbsp;<a href="#-width">-width</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#bindImage"><b>bindImage</b></a>
+<i>event</i> <i>script</i></dd>
+
+<dd><i>pathName</i> <a href="#bindText"><b>bindText</b></a>
+<i>event</i> <i>script</i></dd>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#delete"><b>delete</b></a>
+?<i>arg...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#edit"><b>edit</b></a> <i>item</i>
+<i>text</i> ?<i>verifycmd</i>? ?<i>clickres</i>?
+?<i>select</i>?</dd>
+
+<dd><i>pathName</i> <a href="#exists"><b>exists</b></a>
+<i>item</i></dd>
+
+<dd><i>pathName</i> <a href="#index"><b>index</b></a>
+<i>item</i></dd>
+
+<dd><i>pathName</i> <a href="#insert"><b>insert</b></a>
+<i>index</i> <i>item</i> ?<i>option value...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#item"><b>item</b></a> <i>first</i>
+?<i>last</i>?</dd>
+
+<dd><i>pathName</i> <a href="#itemcget"><b>itemcget</b></a>
+<i>item</i> <i>option</i></dd>
+
+<dd><i>pathName</i> <a href=
+"#itemconfigure"><b>itemconfigure</b></a> <i>item</i>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#items"><b>items</b></a>
+?<i>first</i>? ?<i>last</i>?</dd>
+
+<dd><i>pathName</i> <a href="#move"><b>move</b></a> <i>item</i>
+<i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#reorder"><b>reorder</b></a>
+<i>neworder</i></dd>
+
+<dd><i>pathName</i> <a href="#see"><b>see</b></a> <i>item</i></dd>
+
+<dd><i>pathName</i> <a href="#selection"><b>selection</b></a>
+<i>cmd</i> ?<i>arg...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#xview"><b>xview</b></a>
+?<i>arg...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#yview"><b>yview</b></a>
+?<i>arg...</i>?</dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p><b>ListBox</b> widget uses canvas to display a list of items.
+Each item is composed of a label with its own font and foreground
+attributes, and an optional image or window. Each item is drawn in
+a single line, whose height is defined by the <b>deltay</b> option,
+so they must have at most this height. A item is uniquely
+identified by a string given at creation (by the <b>insert</b>
+command). The ListBox can have one or more columns, depending on
+<b>multicolumn</b> option. The user do not handle columns; the
+number of columns is determined following the height of the ListBox
+in order to see each item vertically.</p>
+
+<br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-autofocus"><b>-autofocus (read-only)</b></a></dt>
+
+<dd>If this option is true, the listbox will take focus any time
+the user clicks in it. Without focus, the listbox's mouse wheel
+bindings will not work properly. The default is true.</dd>
+</dl>
+
+<dl>
+<dt><a name="-deltax"><b>-deltax</b></a></dt>
+
+<dd>Specifies horizontal pad between each columns.</dd>
+</dl>
+
+<dl>
+<dt><a name="-deltay"><b>-deltay</b></a></dt>
+
+<dd>Specifies vertical size of the items.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dragenabled"><b>-dragenabled</b></a></dt>
+
+<dd>A boolean specifying if drag is enabled.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dragendcmd"><b>-dragendcmd</b></a></dt>
+
+<dd>Specifies a command to be called when drag ended.
+<b>dragendcmd</b> must be a command conforming to the description
+of the option <b>dragendcmd</b> of <b>DragSite::<a href=
+"DragSite.html#register">register</a></b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dragevent"><b>-dragevent</b></a></dt>
+
+<dd>Specifies the number of the mouse button associated to the
+drag. Must be <b>1</b>, <b>2</b> or <b>3</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-draginitcmd"><b>-draginitcmd</b></a></dt>
+
+<dd>ListBox has a command wrapper for <i>drag-init</i> events. This
+command refused the drag if no item is designated. In other
+cases:<br>
+If <b>draginitcmd</b> is empty, it returns: 
+
+<ul>
+<li>the value of option <b>dragtype</b> or <i>LISTBOX_ITEM</i> if
+empty as the data type,</li>
+
+<li><i>{move copy link}</i> as the operations,</li>
+
+<li>the item identifier as the data.</li>
+</ul>
+
+If <b>draginitcmd</b> is not empty, it is called with the following
+arguments: 
+
+<ul>
+<li>the pathname of the listbox,</li>
+
+<li>the identifier of the dragged item,</li>
+
+<li>the toplevel created to represent dragged data.</li>
+</ul>
+
+and must return a value conforming to <b>draginitcmd</b> option
+described in <b>DragSite::<a href=
+"DragSite.html#register">register</a></b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dragtype"><b>-dragtype</b></a></dt>
+
+<dd>Specifies an alternate type of dragged object.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dropcmd"><b>-dropcmd</b></a></dt>
+
+<dd>ListBox has a command wrapper for <i>drop</i> events. This
+command stops auto scrolling and extract item and position.<br>
+If <b>dropcmd</b> is not empty, it is called with the following
+arguments: 
+
+<ul>
+<li>the pathname of the listbox,</li>
+
+<li>the pathname of the drag source,</li>
+
+<li>a list describing where the drop occurs. It can be: 
+
+<ul>
+<li><i>{</i><b>widget</b><i>}</i>,</li>
+
+<li><i>{</i><b>item</b> <i>item}</i> or</li>
+
+<li><i>{</i><b>position</b> <i>index}</i>.</li>
+</ul>
+</li>
+
+<li>the current operation,</li>
+
+<li>the data type,</li>
+
+<li>the data.</li>
+</ul>
+
+<p>The default drop command allows for drag-and-drop within the
+listbox but not to or from other widgets.</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="-dropenabled"><b>-dropenabled</b></a></dt>
+
+<dd>A boolean specifying if drop is enabled.</dd>
+</dl>
+
+<dl>
+<dt><a name="-dropovercmd"><b>-dropovercmd</b></a></dt>
+
+<dd>LsitBox has a command wrapper for <i>drag-over</i> events. This
+command enables auto scrolling and position extraction during the
+<i>drag-over</i>. If <b>dropovercmd</b> is not empty, the command
+is called with the following aguments: 
+
+<ul>
+<li>the pathname of the listbox,</li>
+
+<li>the pathname of the drag source,</li>
+
+<li>a list describing where the drop can occur, whose elements are:
+
+
+<ul>
+<li>the string <i>widget</i> if <b>dropovertype</b> option contains
+<i>w</i>, else empty string.</li>
+
+<li>the targeted item if drag icon points an item and
+<b>dropovertype</b> option contains <i>i</i>, else empty
+string.</li>
+
+<li>an index within two items where drag icon points to if
+<b>dropovertype</b> option contains <i>p</i>, else empty
+string.</li>
+
+<li>optionally, the preferred method if drop can occur both inside
+an item and between two items. The value is <i>position</i> or
+<i>item</i>.</li>
+</ul>
+</li>
+
+<li>the current operation,</li>
+
+<li>the data type,</li>
+
+<li>the data.</li>
+</ul>
+
+The command must return a list with two elements: 
+
+<ul>
+<li>the drop status, conforming to those described in
+<b>dropovercmd</b> option of <b>DropSite::<a href=
+"DropSite.html#register">register</a></b>,</li>
+
+<li>the choosen method: <i>widget</i>, <i>item</i> or
+<i>position</i>.</li>
+</ul>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="-dropovermode"><b>-dropovermode</b></a></dt>
+
+<dd>Specifies the type of <i>drop-over</i> interaction. Must be a
+combination of <b>w</b>, which specifies that drop can occurs
+everywhere on widget, <b>p</b>, which specifies that drop can
+occurs between two items, and <b>i</b>, which specifies that drop
+occurs inside items.</dd>
+</dl>
+
+<dl>
+<dt><a name="-droptypes"><b>-droptypes</b></a></dt>
+
+<dd>Specifies a list of accepted dropped object/operation. See
+option <b>droptypes</b> of <b>DropSite::<a href=
+"DropSite.html#register">register</a></b>. for more
+infromation.<br>
+Default is <i>LISTBOX_ITEM</i> with operations <b>copy</b> and
+<b>move</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-height"><b>-height</b></a></dt>
+
+<dd>Specifies the desired height for the listbox in units of
+<b>deltay</b> pixels.</dd>
+</dl>
+
+<dl>
+<dt><a name="-multicolumn"><b>-multicolumn</b></a></dt>
+
+<dd>Specifies wether or not ListBox layouts items in order to see
+each one vertically.</dd>
+</dl>
+
+<dl>
+<dt><a name="-padx"><b>-padx</b></a></dt>
+
+<dd>Specifies distance between image or window and text of the
+items.</dd>
+</dl>
+
+<dl>
+<dt><a name="-redraw"><b>-redraw</b></a></dt>
+
+<dd>Specifies wether or not the listbox should be redrawn when
+entering idle. Set it to false if you call <b>update</b> while
+modifying the listbox.</dd>
+</dl>
+
+<dl>
+<dt><a name="-selectfill"><b>-selectfill (read-only)</b></a></dt>
+
+<dd>If true, the listbox will draw a selection rectangle that fills
+the listbox from left-to-right instead of just drawing a box around
+the selected item. This more closely mimics the standard Tk
+listbox.</dd>
+</dl>
+
+<dl>
+<dt><a name="-selectmode"><b>-selectmode</b></a></dt>
+
+<dd>Specifies the desired selection-mode for the listbox. Must be
+one of <b>none</b>, <b>single</b> or <b>multiple</b>.
+<b>selectmode</b> <i>single</i> allows to select 1 item by its text
+or image. <b>selectmode</b> <i>multiple</i> allows to select
+multiple items by their text or image. For more info on selectmodes
+<i>single</i> or <i>multiple</i>, see the Tk <b>listbox</b>
+command. Default value for <b>selectmode</b> is <i>none</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-width"><b>-width</b></a></dt>
+
+<dd>Specifies the desired width for the listbox in units of 8
+pixels.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="bindImage"><i>pathName</i> <b>bindImage</b></a>
+<i>event</i> <i>script</i></dt>
+
+<dd>This command associates a command to execute whenever the event
+sequence given by <i>event</i> occurs on the image of a item. The
+item idenfier on which the event occurs is appended to the command.
+
+
+<p>Any occurrence of <b>%W</b> in <i>script</i> is substituted with
+the path of the listbox.</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="bindText"><i>pathName</i> <b>bindText</b></a>
+<i>event</i> <i>script</i></dt>
+
+<dd>This command associates a command to execute whenever the event
+sequence given by <i>event</i> occurs on the label of a item. The
+item idenfier on which the event occurs is appended to the command.
+
+
+<p>Any occurrence of <b>%W</b> in <i>script</i> is substituted with
+the path of the listbox.</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="delete"><i>pathName</i> <b>delete</b></a>
+?<i>arg...</i>?</dt>
+
+<dd>Deletes all items in <i>arg</i>. <i>arg</i> can be a list of
+items or a list of list of items. To delete all items, do
+<i>$pathName delete [$pathName items]</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="edit"><i>pathName</i> <b>edit</b></a> <i>item</i>
+<i>text</i> ?<i>verifycmd</i>? ?<i>clickres</i>?
+?<i>select</i>?</dt>
+
+<dd>Provides a way for the user to edit in place the label of an
+item.<br>
+The command takes the initial text as argument and does not modify
+the label of the edited node, but returns an empty string if
+edition is canceled, or the typed text if edition is accepted.<br>
+When editing, the user can cancel by pressing Escape, or accept by
+pressing Return.<br>
+<i>clickres</i> specifies what to do if the user click outside the
+editable area. If <i>clickres</i> is 0 (the default), the edition
+is canceled. If <i>clickres</i> is 1, the edition is accepted. In
+all other case, the edition continues.<br>
+If edition is accepted and <i>modifycmd</i> is not empty, then it
+is called with the new text as argument and must return 1 to accept
+the new text, 0 to refuse it and continue edition.<br>
+<i>select</i> specifies wether or not the initial text should be
+selected. Default is 1.</dd>
+</dl>
+
+<dl>
+<dt><a name="exists"><i>pathName</i> <b>exists</b></a>
+<i>item</i></dt>
+
+<dd>Returns 1 if <i>item</i> exists in the listbox, else 0.</dd>
+</dl>
+
+<dl>
+<dt><a name="index"><i>pathName</i> <b>index</b></a>
+<i>item</i></dt>
+
+<dd>Returns the position of <i>item</i> in the list.</dd>
+</dl>
+
+<dl>
+<dt><a name="insert"><i>pathName</i> <b>insert</b></a> <i>index</i>
+<i>item</i> ?<i>option value...</i>?</dt>
+
+<dd>
+<p>Inserts a new item identified by <i>item</i> in the list at
+position <i>index</i>.</p>
+
+<p>Any instance of <i>#auto</i> within the item name will be
+replaced by the number of the item in the order of insertion.</p>
+
+<dl>
+<dt><a name="Item-data"><b>-data</b></a></dt>
+
+<dd>User data associated to the item.</dd>
+</dl>
+
+<dl>
+<dt><a name="Item-fill"><b>-fill</b></a></dt>
+
+<dd>Specifies the foreground color of the label of the item.</dd>
+</dl>
+
+<dl>
+<dt><a name="Item-font"><b>-font</b></a></dt>
+
+<dd>Specifies a font for the label of the item.</dd>
+</dl>
+
+<dl>
+<dt><a name="Item-image"><b>-image</b></a></dt>
+
+<dd>Specifies an image to display at the left of the label of the
+item. <b>window</b> option override <b>image</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="Item-indent"><b>-indent</b></a></dt>
+
+<dd>Specifies the amount of extra space in pixels at the left of
+the item.</dd>
+</dl>
+
+<dl>
+<dt><a name="Item-text"><b>-text</b></a></dt>
+
+<dd>Specifies the label of the item.</dd>
+</dl>
+
+<dl>
+<dt><a name="Item-window"><b>-window</b></a></dt>
+
+<dd>Specifies a pathname to display at the left of the label of the
+item. <b>window</b> option override <b>image</b>.</dd>
+</dl>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="item"><i>pathName</i> <b>item</b></a> <i>first</i>
+?<i>last</i>?</dt>
+
+<dd><b>Its use is deprecated. Use <i>items</i> instead.</b><br>
+If <i>last</i> is omitted, returns the item at index <i>first</i>
+in the list, or an empty string if <i>first</i> refers to a
+non-existent element. If <i>last</i> is specified, the command
+returns a list whose elements are all of the items between
+<i>first</i> and <i>last</i>, inclusive. Both <i>first</i> and
+<i>last</i> may have any of the standard forms for indices.</dd>
+</dl>
+
+<dl>
+<dt><a name="itemcget"><i>pathName</i> <b>itemcget</b></a>
+<i>item</i> <i>option</i></dt>
+
+<dd>Returns the current value of a configuration option for the
+item. <i>Option</i> may have any of the values accepted by the item
+creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="itemconfigure"><i>pathName</i>
+<b>itemconfigure</b></a> <i>item</i> ?<i>option</i>? ?<i>value</i>
+<i>option</i> <i>value</i> ...?</dt>
+
+<dd>This command is similar to the <b>configure</b> command, except
+that it applies to the options for an individual item, whereas
+<b>configure</b> applies to the options for the widget as a whole.
+<b>Options</b> may have any of the values accepted by the item
+creation widget command. If options are specified, options are
+modified as indicated in the command and the command returns an
+empty string. If no options are specified, returns a list
+describing the current options for the item. Read-only options are
+not be modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="items"><i>pathName</i> <b>items</b></a> ?<i>first</i>?
+?<i>last</i>?</dt>
+
+<dd>If <i>first</i> and <i>last</i> are omitted, returns the list
+of all items. If <i>first</i> is specified and <i>last</i> omitted,
+returns the item at index <i>first</i>, or an empty string if
+<i>first</i> refers to a non-existent element. If <i>first</i> and
+<i>last</i> are specified, the command returns a list whose
+elements are all of the items between <i>first</i> and <i>last</i>,
+inclusive. Both <i>first</i> and <i>last</i> may have any of the
+standard forms for indices.</dd>
+</dl>
+
+<dl>
+<dt><a name="move"><i>pathName</i> <b>move</b></a> <i>item</i>
+<i>index</i></dt>
+
+<dd>Moves <i>item</i> at position <i>index</i> in the list.</dd>
+</dl>
+
+<dl>
+<dt><a name="reorder"><i>pathName</i> <b>reorder</b></a>
+<i>neworder</i></dt>
+
+<dd>Modifies the order of items in the listbox given by
+<i>neworder</i>. Items that do not appear in <i>neworder</i> are no
+moved.</dd>
+</dl>
+
+<dl>
+<dt><a name="see"><i>pathName</i> <b>see</b></a> <i>item</i></dt>
+
+<dd>Arrange the scrolling area to make <i>item</i> visible.</dd>
+</dl>
+
+<dl>
+<dt><a name="selection"><i>pathName</i> <b>selection</b></a>
+<i>cmd</i> ?<i>arg...</i>?</dt>
+
+<dd>Modifies the list of selected items following <i>cmd</i>: 
+
+<dl>
+<dt><b>clear</b></dt>
+
+<dd>remove all items of the selection.</dd>
+
+<dt><b>set</b></dt>
+
+<dd>set the selection to all items in <i>arg</i></dd>
+
+<dt><b>add</b></dt>
+
+<dd>add all items of <i>arg</i> in the selection</dd>
+
+<dt><b>remove</b></dt>
+
+<dd>remove all items of <i>arg</i> of the selection</dd>
+
+<dt><b>get</b></dt>
+
+<dd>return the current selected items</dd>
+</dl>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="xview"><i>pathName</i> <b>xview</b></a>
+?<i>arg...</i>?</dt>
+
+<dd>Standard command to enable horizontal scrolling of
+<i>pathName</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="yview"><i>pathName</i> <b>yview</b></a>
+?<i>arg...</i>?</dt>
+
+<dd>Standard command to enable vertical scrolling of
+<i>pathName</i>.</dd>
+</dl>
+
+<b>BINDINGS</b> 
+
+<p>A <b>&lt;&lt;ListboxSelect&gt;&gt;</b> virtual event is
+generated any time the selection in the listbox changes.</p>
+
+<p>The listbox has all the standard mouse wheel bindings when it
+has focus.</p>
+
+<br>
+<br>
+</body>
+</html>
+

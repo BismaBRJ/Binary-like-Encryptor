@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>DropSite</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>DropSite</b> - Commands set for Drop facilities</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">COMMAND</a></i></dt>
+
+<dd>DropSite::<a href="#include"><b>include</b></a> <i>class</i>
+<i>types</i></dd>
+
+<dd>DropSite::<a href="#register"><b>register</b></a> <i>path</i>
+?<i>option value...</i>?</dd>
+
+<dd>DropSite::<a href="#setcursor"><b>setcursor</b></a>
+<i>cursor</i></dd>
+
+<dd>DropSite::<a href="#setdrop"><b>setdrop</b></a> <i>path</i>
+<i>subpath</i> <i>dropover</i> <i>drop</i> ?<i>force</i>?</dd>
+
+<dd>DropSite::<a href="#setoperation"><b>setoperation</b></a>
+<i>op</i></dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>Commands of this namespace enable user to define a BWidget or a
+Tk widget as a drop site. A drop site is composed of the type of
+object that can be dropped and associated operation, a command
+called when drop occurs, and a command when an object is dragged
+over the widget. A drop site must have at least one type of
+acceptable object and a drop command.</p>
+
+<hr width="50%">
+<br>
+<b><a name="wc">COMMAND</a></b><br>
+<dl>
+<dt><a name="include">DropSite::<b>include</b></a> <i>class</i>
+<i>types</i></dt>
+
+<dd>This command provides a simple way to include options relatives
+to a drop site into BWidget resources definition. It includes the
+options needed for <b>register</b>, <i>-dropovercmd</i> and
+<i>-dropcmd</i>, initialized to empty string, and
+<i>-droptypes</i>, initialized to <i>types</i>, and one new option:
+
+
+<table border="0" cellspacing="1">
+<tr>
+<td><i>-dropenabled</i></td>
+<td>Specifies wether or not drop is active (initialized to 0)</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="register">DropSite::<b>register</b></a> <i>path</i>
+?<i>option value...</i>?</dt>
+
+<dd>This command is used to declare <i>path</i> as a drop site.
+Options are: 
+
+<dl>
+<dt><a name="DropSite-dropcmd"><b>-dropcmd</b></a></dt>
+
+<dd>This command is called when user release the drag icon over a
+valid drop target widget. Arguments passed to the command are: 
+
+<ul>
+<li>pathname of the drop target (the widget itself),</li>
+
+<li>pathname of the drag source,</li>
+
+<li>root x-coordinate of the pointer,</li>
+
+<li>root y-coordinate of the pointer,</li>
+
+<li>operation,</li>
+
+<li>type of the dragged data,</li>
+
+<li>dragged data.</li>
+</ul>
+
+Its return values is passed as a result to the <b>-dragendcmd</b>
+command of the drag source widget.</dd>
+</dl>
+
+<dl>
+<dt><a name="DropSite-dropovercmd"><b>-dropovercmd</b></a></dt>
+
+<dd>This command can be used to provide a dynamic drag while
+<i>drag-over</i> events. While a drag occurs, events &lt;Enter&gt;,
+&lt;Motion&gt; and &lt;Leave&gt; are catched. Arguments passed to
+the command are: 
+
+<ul>
+<li>pathname of the drop target (the widget itself),</li>
+
+<li>pathname of the drag source,</li>
+
+<li>event over the drop target: <i>enter</i>, <i>motion</i> or
+<i>leave</i>,</li>
+
+<li>root x-coordinate of the pointer,</li>
+
+<li>root y-coordinate of the pointer,</li>
+
+<li>operation,</li>
+
+<li>type of the dragged data,</li>
+
+<li>dragged data.</li>
+</ul>
+
+Command must the new status of the drag: 
+
+<ul>
+<li>0 if widget refuse this drag. Command will not be recalled on
+motion/leave event.</li>
+
+<li>1 if widget accept this drag. Command will not be recalled on
+motion/leave event.</li>
+
+<li>2 if widget refuse this drag. Command will be recalled on each
+motion event to reevaluate.</li>
+
+<li>3 if widget accept this drag. Command will be recalled on each
+motion event to reevaluate.</li>
+</ul>
+
+Here is a list of events and associated actions on a DropSite
+widget. This example assumes that dragged data type is valid for
+the drop target. <b>status</b> is the status of the drag on a
+DropSite. Its value is:<br>
+<br>
+ 
+
+<table border cellspacing="1" cellpadding="4">
+<tr>
+<td width="18%" valign="TOP" align="CENTER">Event</td>
+<td width="10%" valign="TOP" align="CENTER">Old status</td>
+<td width="48%" valign="TOP" align="CENTER">Action</td>
+<td width="24%" valign="TOP" align="CENTER">New status</td>
+</tr>
+
+<tr>
+<td width="18%" valign="TOP" rowspan="2"><font size=
+"2">&lt;Enter&gt;</font></td>
+<td width="10%" valign="TOP" rowspan="2"><font size=
+"2">-</font></td>
+<td width="48%" valign="TOP"><font size="2">if DropSite has
+<b>dropovercmd</b>, call it with <i>enter</i></font></td>
+<td width="24%" valign="TOP"><font size="2">result of
+<b>dropovercmd</b></font></td>
+</tr>
+
+<tr>
+<td width="48%" valign="TOP"><font size="2">else</font></td>
+<td width="24%" valign="TOP"><font size="2">1</font></td>
+</tr>
+
+<tr>
+<td width="18%" valign="TOP" rowspan="2"><font size=
+"2">&lt;Motion&gt;</font></td>
+<td width="10%" valign="TOP"><font size="2">0 or 1</font></td>
+<td width="48%" valign="TOP">&nbsp;</td>
+<td width="24%" valign="TOP"><font size="2">unchanged</font></td>
+</tr>
+
+<tr>
+<td width="10%" valign="TOP"><font size="2">2 or 3</font></td>
+<td width="48%" valign="TOP"><font size="2">call <b>dropovercmd</b>
+with <i>motion</i></font></td>
+<td width="24%" valign="TOP"><font size="2">result of
+<b>dropovercmd</b></font></td>
+</tr>
+
+<tr>
+<td width="18%" valign="TOP" rowspan="2"><font size=
+"2">&lt;Leave&gt;</font>&nbsp;</td>
+<td width="10%" valign="TOP"><font size="2">0 or 1</font></td>
+<td width="48%" valign="TOP">&nbsp;</td>
+<td width="24%" valign="TOP"><font size="2">-</font></td>
+</tr>
+
+<tr>
+<td width="10%" valign="TOP"><font size="2">2 or 3</font></td>
+<td width="48%" valign="TOP"><font size="2">call <b>dropovercmd</b>
+with <i>leave</i></font></td>
+<td width="24%" valign="TOP"><font size="2">-</font></td>
+</tr>
+
+<tr>
+<td width="18%" valign="TOP" rowspan="4"><font size=
+"2">&lt;Drop&gt;</font></td>
+<td width="10%" valign="TOP"><font size="2">0</font></td>
+<td width="48%" valign="TOP"><font size="2">call <b>dragendcmd</b>
+of drag source</font></td>
+<td width="24%" valign="TOP" rowspan="4"><font size=
+"2">-</font></td>
+</tr>
+
+<tr>
+<td width="10%" valign="TOP"><font size="2">1</font></td>
+<td width="48%" valign="TOP"><font size="2">call <b>dropcmd</b> and
+call <b>dragendcmd</b> of drag source</font></td>
+</tr>
+
+<tr>
+<td width="10%" valign="TOP"><font size="2">2</font></td>
+<td width="48%" valign="TOP"><font size="2">call <b>dropovercmd</b>
+with <i>leave</i> and call <b>dragendcmd</b> of drag
+source</font></td>
+</tr>
+
+<tr>
+<td width="10%" valign="TOP"><font size="2">3</font></td>
+<td width="48%" valign="TOP"><font size="2">call <b>dropcmd</b> and
+call <b>dragendcmd</b> of drag source</font></td>
+</tr>
+</table>
+
+<br>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="DropSite-droptypes"><b>-droptypes</b></a></dt>
+
+<dd>Specifies a list {<i>type</i> <i>oplist</i> ?<i>type</i>
+<i>oplist</i>? ...} of acceptable types and associated operations
+for the drop target. For each type, <i>oplist</i> is a list
+{<i>descops</i> <i>mod</i> ?<i>descops</i> <i>mod</i>? ...}
+describing operations and modifier keys for these operations.
+<i>descops</i> describe an operation. It can be a predefined
+operations (<b>copy</b>, <b>move</b> or <b>link</b>) or a new user
+defined operation, of the form {<i>subop</i> <b>baseop</b>
+?<i>bitmap</i>?}. <i>subop</i> is the name given to the sub
+operation, <i>baseop</i> is the name of the base operation
+(<b>copy</b>, <b>move</b> or <b>link</b>) and <i>bitmap</i> is a
+bitmap to display for the operation.<br>
+If <i>bitmap</i> is empty, the default bitmap of the base operation
+is used for the sub operation.<br>
+<i>subop</i> can be a base operation, in order to change the bitmap
+of a base operation. In this case, <i>baseop</i> must be empty or
+equal to <i>subop</i>.<br>
+<i>mod</i> is the modifer key for the operation. It can be: 
+
+<ul>
+<li><b>none</b> to specify that no modifier key is pressed. This
+modifier can only be used with a sub operation named <b>default</b>
+(and vice versa), which has the behaviour of not display any bitmap
+operation. For all type, if the modifier <b>none</b> is not given,
+it is automatically associated to the <b>default</b> sub operation
+of a <b>copy</b> base operation.</li>
+
+<li><b>program</b> to specifies a sub operation accessible only by
+<b>DropSite::setoperation</b>.</li>
+
+<li>A list combining <b>shift</b>, <b>control</b> and <b>alt</b>,
+which means their corresponding key.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="setcursor">DropSite::<b>setcursor</b></a>
+<i>cursor</i></dt>
+
+<dd>This command can be used within the script <b>dragovercmd</b>.
+It is usefull to provide visual effect about the state of the
+drag.</dd>
+</dl>
+
+<dl>
+<dt><a name="setdrop">DropSite::<b>setdrop</b></a> <i>path</i>
+<i>subpath</i> <i>dropover</i> <i>drop</i> ?<i>force</i>?</dt>
+
+<dd>This command provides a simple way to call <b>register</b>
+during a BWidget creation or configuration. 
+
+<ul>
+<li><i>path</i> is the pathname of the BWidget,</li>
+
+<li><i>subpath</i> is the pathname of the tk widget where drag
+event occurs,</li>
+
+<li><i>dropover</i> is a command for <i>drag-over</i> event,</li>
+
+<li><i>drop</i> is a command for <i>drop</i> event,</li>
+
+<li><i>force</i> specifies wether or not to call <b>register</b>
+whenever no option value has changed (0 by default - for BWidget
+configuration, use 1 for BWidget creation).</li>
+</ul>
+
+<b>setdrop</b> verifies the modification flag of options
+<b>dropenabled</b> and <b>droptypes</b> and calls <b>register</b>
+if needed according to the options values and <i>dropover</i> and
+<i>drop</i> arguments. <b>dropovercmd</b> and <b>dropcmd</b> are
+not taken from options of widget because they are considered as
+user command, called by BWidget implementation of <i>drag-over</i>
+and <i>drop</i> events.</dd>
+</dl>
+
+<dl>
+<dt><a name="setoperation">DropSite::<b>setoperation</b></a>
+<i>op</i></dt>
+
+<dd>Description text</dd>
+</dl>
+</body>
+</html>
+

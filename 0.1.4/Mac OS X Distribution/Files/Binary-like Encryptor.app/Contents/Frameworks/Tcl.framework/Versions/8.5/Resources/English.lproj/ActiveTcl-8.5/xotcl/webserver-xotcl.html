@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>XOTcl - Documentation --
+xotcl/apps/comm/webserver.xotcl</title>
+<link rel="StyleSheet" href="xotcl-doc.css" type="text/css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1><img src="./logo-100.jpg" alt="xotcl/apps/comm/webserver.xotcl"
+align="MIDDLE"> xotcl/apps/comm/webserver.xotcl</h1>
+
+<hr>
+<h2>Package/File Information</h2>
+
+<b>No package provided/required</b> <br>
+ <br>
+ <b>Defined Objects/Classes:</b> 
+
+<ul>
+<li><a href="#SpecializedWorker"><em>SpecializedWorker</em>:</a> <a
+href="#SpecializedWorker-respond">respond</a>.<br>
+</li>
+
+<li><a href="#h1"><em>h1</em>:</a><br>
+</li>
+
+<li><a href="#h2"><em>h2</em>:</a><br>
+</li>
+</ul>
+
+<br>
+ <b>Filename:</b> <a href=
+"xotcl/apps/comm/webserver.xotcl">xotcl/apps/comm/webserver.xotcl</a>
+<br>
+ <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">This small demo program starts two different
+webservers: 
+
+<ul>
+<li>Firstly, it provides a sample web server that povides the
+documents in ../../src/doc (or the files specified with -root) at
+port 8086 (or at the port specified via the -port option) as
+unprotected resources.</li>
+
+<li>Secondly, it starts a second webserver with basic access
+control (it accepts test/test as user/password) on port 9096 (or on
+the port specified via -protected-port). If it receives an request
+for an resource named "exit", it terminates. For all other requests
+it returns actual information about the user and the issued
+request.</li>
+</ul>
+
+To see, how it works, contact it e.g. from netscape.</td>
+</tr>
+</table>
+
+<br>
+ 
+
+<hr>
+<p><a name="SpecializedWorker"></a></p>
+
+<h2>Class: <em>SpecializedWorker</em></h2>
+
+<b>Class</b>: Class <br>
+ <b>Procs/Instprocs:</b> <a href=
+"#SpecializedWorker-respond">respond</a>. 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Specialized worker that can be passed to any
+webserver</td>
+</tr>
+</table>
+
+<h3>Instprocs</h3>
+
+<ul>
+<li><a name="SpecializedWorker-respond"></a> <b>respond</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">This method handles all responses from the
+webserver to the client. We implent here "exit", and we return the
+information about the actual request and user in HTML format for
+all other requests. 
+
+<p>This method is an example, how to access on the server side
+request specific infomation.</p>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="h1"></a></p>
+
+<h2>Object: <em>h1</em></h2>
+
+<b>Class</b>: Httpd <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">unprotected web server</td>
+</tr>
+</table>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="h2"></a></p>
+
+<h2>Object: <em>h2</em></h2>
+
+<b>Class</b>: Httpd <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Web server with basic authentication using the
+specialied worker</td>
+</tr>
+</table>
+
+<br>
+<br>
+ <br>
+ <br>
+<br>
+ 
+
+<hr>
+<a href="./index.html">Back to index page.</a> <br>
+ 
+
+<hr>
+</body>
+</html>
+

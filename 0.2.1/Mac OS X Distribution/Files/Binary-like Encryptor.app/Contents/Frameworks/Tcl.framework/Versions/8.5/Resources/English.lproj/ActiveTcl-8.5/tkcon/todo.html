@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>tkcon: To Do Ideas</title>
+<link rel="STYLESHEET" type="text/css" href="./style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<table width="100%" border="0" cellspacing="2" cellpadding="0"
+bgcolor="#000000">
+<tr>
+<td><!-- start header info -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0"
+bgcolor="#FFFFFF">
+<tr>
+<th><font size="+3">tkcon: To Do Ideas</font></th>
+<td align="right"><a href="http://tkcon.sourceforge.net/"><img src=
+"http://sourceforge.net/sflogo.php?group_id=11462&amp;type=1"
+width="88" height="31" border="0" alt="SourceForge Logo"></a> </td>
+</tr>
+</table>
+
+<!-- end header info -->
+</td>
+</tr>
+
+<tr>
+<td><!-- start main navigation table -->
+<table border="1" cellpadding="2" cellspacing="2" bgcolor="#CCCCCC"
+width="100%">
+<tr>
+<th><a href="index.html">Documentation</a></th>
+<th><a href="purpose.html">Purpose &amp; Features</a></th>
+<th><a href="limits.html">Limitations</a></th>
+<th class="hi"><a href="todo.html" class="hi">To&nbsp;Do</a></th>
+<th><a href="license.terms">License</a></th>
+</tr>
+
+<tr>
+<th colspan="2"><a href="plugin.html">Online Demo</a> (requires <a
+href="http://tcl.activestate.com/software/plugin/">Tk
+plugin</a>)</th>
+<th colspan="3"><a href="nontcl.html">Using TkCon with other Tk
+Languages</a></th>
+</tr>
+</table>
+
+<!-- end main navigation table -->
+</td>
+</tr>
+
+<tr>
+<td bgcolor="#FFFFFF">
+<div class="indent">
+<h3>Future Ideas</h3>
+
+<ul>
+<li>Add encoding auto-conversion to exec commands</li>
+
+<li>keep history file, also keep history of sourced files</li>
+
+<li>
+<pre>
+set mimetype(extension,au) "audio/u-law"
+set mimetype(extension,wav) "audio/wave"
+set mimetype(extension,mid) "audio/midi"
+/etc/magic
+proc run {file} {
+    global mimetype
+
+    if {[file executable $file]} {
+        exec $file
+        return
+    }
+
+    catch {set mimetype $mimetype(extension,[file extension $file])}
+
+    if {![info exists mimetype]} {
+        set mimetype $mimetype(magic,[exec /bin/file $file])
+    }
+
+    exec $mimetype(application,$mimetype) $file
+}
+</pre>
+</li>
+
+<li>Add socket level communication model</li>
+
+<li>Enhance the true debugging capabilities - I'm looking at
+tcl-debug and into what I can adopt from the tkInspect
+philosophy.</li>
+
+<li>I'm taking ideas...</li>
+</ul>
+
+<h3>Known Bugs/Quirks</h3>
+
+<ul>
+<li>Command highlighting isn't perfect because I try to make it too
+efficient.</li>
+
+<li>All interpreters have the same current working directory. This
+is a limitation of tcl.</li>
+
+<li>You can't 'attach' on machines where <code>send</code> does not
+exist. <a href="http://www.osf.org/~loverso/">John Loverso</a> has
+a comm.tcl replacement. In any case, you can still attach to
+internal interpreters and namespaces.</li>
+
+<li>Need to clean up checkpointed states when the associated interp
+dies. Works with slaves, but not foreign interps.</li>
+
+<li>Can't identify non-Tcl or pre-Tk4 interpreters
+automagically...</li>
+
+<li>You tell me...</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+
+<hr noshade size="1">
+<address><font size="2">&copy; Jeffrey Hobbs</font></address>
+</body>
+</html>
+

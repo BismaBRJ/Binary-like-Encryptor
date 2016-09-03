@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Looping 102 - For and incr</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Looping 102 - For and incr</h1>
+
+<div class="nav"><a href="Tcl9.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl11.html">Next
+lesson</a></div>
+
+<p>Tcl supports an iterated loop construct similar to the <code
+class="keyword">for</code> loop in C. The <code class=
+"keyword">for</code> command in Tcl takes four arguments; an
+initialization, a test, an increment, and the body of code to
+evaluate on each pass through the loop. The syntax for the <code
+class="keyword">for</code> command is:</p>
+
+<ul>
+<li><code class="keyword">for</code> <code class="arg">start</code>
+<code class="arg">test</code> <code class="arg">next</code> <code
+class="arg">body</code></li>
+</ul>
+
+<p>During evaluation of the <code class="keyword">for</code>
+command, the <code class="arg">start</code> code is evaluated once,
+before any other arguments are evaluated. After the start code has
+been evaluated, the <code class="arg">test</code> is evaluated. If
+the <code class="arg">test</code> evaluates to true, then the <code
+class="arg">body</code> is evaluated, and finally, the <code class=
+"arg">next</code> argument is evaluated. After evaluating the <code
+class="arg">next</code> argument, the interpreter loops back to the
+<code class="arg">test</code>, and repeats the process. If the
+<code class="arg">test</code> evaluates as false, then the loop
+will exit immediately.</p>
+
+<p><code class="arg">Start</code> is the initialization portion of
+the command. It is usually used to initialize the iteration
+variable, but can contain any code that you wish to execute before
+the loop starts.</p>
+
+<p>The <code class="arg">test</code> argument is evaluated as an
+expression, just as with the <code class="keyword">expr</code>
+<code class="keyword">while</code> and <code class=
+"keyword">if</code> commands.</p>
+
+<p><code class="arg">Next</code> is commonly an incrementing
+command, but may contain any command which the Tcl interpreter can
+evaluate.</p>
+
+<p><code class="arg">Body</code> is the body of code to
+execute.</p>
+
+<p>Since you commonly do not want the Tcl interpreter's
+substitution phase to change variables to their current values
+before passing control to the <code class="keyword">for</code>
+command, it is common to group the arguments with curly braces.
+When braces are used for grouping, the newline is not treated as
+the end of a Tcl command. This makes it simpler to write multiple
+line commands. However, the opening brace <strong>must</strong> be
+on the line with the <code class="keyword">for</code> command, or
+the Tcl interpreter will treat the close of the <code class=
+"arg">next</code> brace as the end of the command, and you will get
+an error. This is different than other languages like C or Perl,
+where it doesn't matter where you place your braces.</p>
+
+<p>Within the <code class="arg">body</code> code, the commands
+<code class="keyword">break</code> and <code class=
+"keyword">continue</code> may be used just as they are used with
+the <code class="keyword">while</code> command. When a <code class=
+"keyword">break</code> is encountered, the loop exits immediately.
+When a <code class="keyword">continue</code> is encountered,
+evaluation of the <code class="arg">body</code> ceases, and the
+<code class="arg">test</code> is re-evaluated.</p>
+
+<p>Because incrementing the iteration variable is so common, Tcl
+has a special command for this:</p>
+
+<ul>
+<li><code class="keyword">incr</code> <code class=
+"arg">varName</code> <code class="arg">?increment?</code></li>
+</ul>
+
+<p>This command adds the value in the second argument to the
+variable named in the first argument. If no value is given for the
+second argument, it defaults to 1.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+for {set i 0} {$i &lt; 10} {incr i} {
+    puts "I inside first loop: $i"
+}
+
+for {set i 3} {$i &lt; 2} {incr i} {
+    puts "I inside second loop: $i"
+}
+
+puts "Start"
+set i 0
+while {$i &lt; 10} {
+    puts "I inside first loop: $i"
+    incr i
+    puts "I after incr: $i"
+}
+
+set i 0
+incr i
+# This is equivalent to:
+set i [expr {$i + 1}]
+</pre>
+
+<div class="nav"><a href="Tcl9.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl11.html">Next
+lesson</a></div>
+</body>
+</html>
+

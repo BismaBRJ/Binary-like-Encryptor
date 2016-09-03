@@ -1,0 +1,430 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Button</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>Button</b> - Button widget with enhanced options</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>Button</b></a> <i>pathName</i> ?<i>option
+value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i>STANDARD OPTIONS</i></dt>
+
+<dt><i>Not themed</i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-activebackground">-activebackground</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-activeforeground">-activeforeground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-anchor">-anchor</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-background">-background or -bg</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-bitmap">-bitmap</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-borderwidth">-borderwidth or
+-bd</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-cursor">-cursor</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-disabledforeground">-disabledforeground</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-font">-font</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-foreground">-foreground or -fg</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightbackground">-highlightbackground</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightcolor">-highlightcolor</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-highlightthickness">-highlightthickness</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-image">-image</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-justify">-justify</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-padx">-padx</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-pady">-pady</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-repeatdelay">-repeatdelay</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-repeatinterval">-repeatinterval</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-takefocus">-takefocus</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-text">-text</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-textvariable">-textvariable</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-wraplength">-wraplength</a></td>
+</tr>
+</table>
+</dd>
+
+<dt><i>Themed</i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-compound">-compound</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-cursor">-cursor</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-image">-image</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-style">-style</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-repeatdelay">-repeatdelay</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-repeatinterval">-repeatinterval</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-takefocus">-takefocus</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-text">-text</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-textvariable">-textvariable</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-armcommand">-armcommand</a></td>
+<td>&nbsp;&nbsp;<a href="#-command">-command</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-default">-default</a></td>
+<td>&nbsp;&nbsp;<a href="#-disarmcommand">-disarmcommand</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-height">-height</a></td>
+<td>&nbsp;&nbsp;<a href="#-helptext">-helptext</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-helptype">-helptype</a></td>
+<td>&nbsp;&nbsp;<a href="#-helpvar">-helpvar</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-name">-name</a></td>
+<td>&nbsp;&nbsp;<a href="#-relief">-relief</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-state">-state</a></td>
+<td>&nbsp;&nbsp;<a href="#-underline">-underline</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-width">-width</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#invoke"><b>invoke</b></a></dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>Button widget extends the Tk button with new options. <a href=
+"DynamicHelp.html">DynamicHelp</a> options, a new relief style,
+callback for <b>arm</b>/<b>disarm</b>, and
+<b>repeatdelay</b>/<b>repeatinterval</b> options has been
+added.</p>
+
+<br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-armcommand"><b>-armcommand</b></a></dt>
+
+<dd>Specifies a Tcl command to associate with the Button when mouse
+button 1 is pressed over the Button. When <b>repeatdelay</b> or
+<b>repeatinterval</b> option is positive integer, this command is
+repeatedly called if mouse pointer is over the Button and until
+mouse button 1 is released.</dd>
+</dl>
+
+<dl>
+<dt><a name="-command"><b>-command</b></a></dt>
+
+<dd>Specifies a Tcl command to associate with the Button. This
+command is typically invoked when mouse button 1 is released over
+the Button window.</dd>
+</dl>
+
+<dl>
+<dt><a name="-default"><b>-default</b></a></dt>
+
+<dd>Specifies one of three states for the default ring:
+<b>normal</b>, <b>active</b>, or <b>disabled</b>. In active state,
+the button is drawn with the platform specific appearance for a
+default button. In normal state, the button is drawn with the
+platform specific appearance for a non-default button, leaving
+enough space to draw the default button appearance. The normal and
+active states will result in buttons of the same size. In disabled
+state, the button is drawn with the non-default button appearance
+without leaving space for the default appearance. The disabled
+state may result in a smaller button than the active state.</dd>
+</dl>
+
+<dl>
+<dt><a name="-disarmcommand"><b>-disarmcommand</b></a></dt>
+
+<dd>Specifies a Tcl command to associate with the Button when mouse
+button 1 is released. This command is called even if pointer is not
+over the Button, and always before the command specified by
+<b>command</b> option. It is typically used in conjuntion with
+<b>armcommand</b>, <b>repeatdelay</b> and
+<b>repeatinterval</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-height"><b>-height</b></a></dt>
+
+<dd>Specifies a desired height for the Button. If an image or
+bitmap is being displayed in the Button then the value is in screen
+units; for text it is in lines of text. If this option isn't
+specified, the Button's desired height is computed from the size of
+the image or bitmap or text being displayed in it.<br>
+Option not available when widget is <i>themed</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helptext"><b>-helptext</b></a></dt>
+
+<dd>Text for dynamic help. If empty, no help is available for this
+widget. See also <a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helptype"><b>-helptype</b></a></dt>
+
+<dd>Type of dynamic help. Use <i>balloon</i> or <i>variable</i>.
+See also <a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-helpvar"><b>-helpvar</b></a></dt>
+
+<dd>Variable to use when <b>helptype</b> option is <i>variable</i>.
+See also <a href="DynamicHelp.html">DynamicHelp</a>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-name"><b>-name</b></a></dt>
+
+<dd>Specifies a standard name for the button. If the option
+<b>*<i>name</i>Name</b> is found in the resources database, then
+<b>text</b> and <b>underline</b> options are extracted from its
+value.</dd>
+</dl>
+
+<dl>
+<dt><a name="-relief"><b>-relief</b></a></dt>
+
+<dd>Specifies the 3-D effect desired for the widget. Acceptable
+values are standard values for button relief (<b>raised</b>,
+<b>sunken</b>, <b>flat</b>, <b>ridge</b>, <b>solid</b>, and
+<b>groove</b>) and <b>link</b>, which specifies that button relief
+is <b>flat</b> when pointer is outside the button and <b>raised</b>
+when pointer is inside.<br>
+This option has only the following effect if the widget is
+<i>themed</i>: The value <b>link</b> used a style <b>Toolbutton</b>
+while any other value uses the standard effect.</dd>
+</dl>
+
+<dl>
+<dt><a name="-state"><b>-state</b></a></dt>
+
+<dd>Specifies one of three states for the Button: <b>normal</b>,
+<b>active</b>, or <b>disabled</b>. In normal state the Button is
+displayed using the <b>foreground</b> and <b>background</b>
+options. The active state is typically used when the pointer is
+over the Button. In active state the Button is displayed using the
+<b>activeforeground</b> and <b>activebackground</b> options.
+Disabled state means that the Button should be insensitive: the
+default bindings will refuse to activate the widget and will ignore
+mouse button presses. In this state the <b>disabledforeground</b>
+and <b>background</b> options determine how the Button is
+displayed.</dd>
+</dl>
+
+<dl>
+<dt><a name="-underline"><b>-underline</b></a></dt>
+
+<dd>Specifies the integer index of a character to underline in the
+label of the button. 0 corresponds to the first character of the
+text displayed, 1 to the next character, and so on.<br>
+The binding <b>&lt;Alt-<i>char</i>&gt;</b> is automatically set on
+the toplevel of the Button to call Button::<b>setfocus</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-width"><b>-width</b></a></dt>
+
+<dd>If an image or bitmap is being displayed in the Button then the
+value is in screen units; for text it is in characters. If this
+option isn't specified, the Button's desired width is computed from
+the size of the image or bitmap or text being displayed in it.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="invoke"><i>pathName</i> <b>invoke</b></a></dt>
+
+<dd>If Button <b>state</b> is not disabled, this invoke the
+commands of the Button. Button is redisplayed with active color and
+sunken relief, and <b>armcommand</b> is called. Then Button is
+redisplayed with normal color and its defined relief, and
+<b>disarmcommand</b> then <b>command</b> are called. 
+
+<p><b>invoke</b> is called when Button has input focus and user
+press the space bar.</p>
+</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">BINDINGS</a></b><br>
+<dl>
+<dt><a name="Invoke"><i>&lt;&lt;Invoke&gt;&gt;</i></a></dt>
+
+<dd>Invoke the <b>invoke</b> widget command.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+</body>
+</html>
+

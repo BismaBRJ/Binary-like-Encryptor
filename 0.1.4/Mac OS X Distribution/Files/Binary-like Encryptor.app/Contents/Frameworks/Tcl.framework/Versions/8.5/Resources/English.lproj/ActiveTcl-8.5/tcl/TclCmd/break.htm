@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - break manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> break</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+break - Abort looping command 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>break</b><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command is typically invoked inside the body of a looping
+command such as <b><a href="../TclCmd/for.htm">for</a></b> or <b><a
+href="../TclCmd/foreach.htm">foreach</a></b> or <b><a href=
+"../TclCmd/while.htm">while</a></b>. It returns a <b>TCL_BREAK</b>
+code, which causes a break exception to occur. The exception causes
+the current script to be aborted out to the innermost containing
+loop command, which then aborts its execution and returns normally.
+Break exceptions are also handled in a few other situations, such
+as the <b><a href="../TclCmd/catch.htm">catch</a></b> command, Tk
+event bindings, and the outermost scripts of procedure bodies. 
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+Print a line for each of the integers from 0 to 5: 
+
+<pre>
+for {set x 0} {$x&lt;10} {incr x} {
+   if {$x &gt; 5} {
+      <b>break</b>
+   }
+   puts "x is $x"
+}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/catch.htm">catch</a></b>, <b><a href=
+"../TclCmd/continue.htm">continue</a></b>, <b><a href=
+"../TclCmd/for.htm">for</a></b>, <b><a href=
+"../TclCmd/foreach.htm">foreach</a></b>, <b><a href=
+"../TclCmd/return.htm">return</a></b>, <b><a href=
+"../TclCmd/while.htm">while</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#abort">abort</a>, <a href=
+"../Keywords/B.htm#break">break</a>, <a href=
+"../Keywords/L.htm#loop">loop</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993-1994 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

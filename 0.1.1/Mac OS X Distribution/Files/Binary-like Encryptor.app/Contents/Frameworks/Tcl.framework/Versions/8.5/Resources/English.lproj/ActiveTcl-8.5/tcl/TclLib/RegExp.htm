@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_RegExpMatch manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> RegExp</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="RegExp.htm#M2" name="L580">NAME</a> 
+
+<dl>
+<dd>Tcl_RegExpMatch, Tcl_RegExpCompile, Tcl_RegExpExec,
+Tcl_RegExpRange, Tcl_GetRegExpFromObj, Tcl_RegExpMatchObj,
+Tcl_RegExpExecObj, Tcl_RegExpGetInfo - Pattern matching with
+regular expressions</dd>
+</dl>
+</dd>
+
+<dd><a href="RegExp.htm#M3" name="L581">SYNOPSIS</a></dd>
+
+<dd><a href="RegExp.htm#M4" name="L582">ARGUMENTS</a></dd>
+
+<dd><a href="RegExp.htm#M5" name="L583">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="RegExp.htm#M6" name=
+"L584"><b>TCL_REG_ADVANCED</b></a></dd>
+
+<dd><a href="RegExp.htm#M7" name=
+"L585"><b>TCL_REG_EXTENDED</b></a></dd>
+
+<dd><a href="RegExp.htm#M8" name=
+"L586"><b>TCL_REG_BASIC</b></a></dd>
+
+<dd><a href="RegExp.htm#M9" name=
+"L587"><b>TCL_REG_EXPANDED</b></a></dd>
+
+<dd><a href="RegExp.htm#M10" name=
+"L588"><b>TCL_REG_QUOTE</b></a></dd>
+
+<dd><a href="RegExp.htm#M11" name=
+"L589"><b>TCL_REG_NOCASE</b></a></dd>
+
+<dd><a href="RegExp.htm#M12" name=
+"L590"><b>TCL_REG_NEWLINE</b></a></dd>
+
+<dd><a href="RegExp.htm#M13" name=
+"L591"><b>TCL_REG_NLSTOP</b></a></dd>
+
+<dd><a href="RegExp.htm#M14" name=
+"L592"><b>TCL_REG_NLANCH</b></a></dd>
+
+<dd><a href="RegExp.htm#M15" name=
+"L593"><b>TCL_REG_NOSUB</b></a></dd>
+
+<dd><a href="RegExp.htm#M16" name=
+"L594"><b>TCL_REG_CANMATCH</b></a></dd>
+</dl>
+
+<dl class="description">
+<dd><a href="RegExp.htm#M17" name=
+"L595"><b>TCL_REG_NOTBOL</b></a></dd>
+
+<dd><a href="RegExp.htm#M18" name=
+"L596"><b>TCL_REG_NOTEOL</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="RegExp.htm#M19" name="L597">SEE ALSO</a></dd>
+
+<dd><a href="RegExp.htm#M20" name="L598">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_RegExpMatch, Tcl_RegExpCompile, Tcl_RegExpExec,
+Tcl_RegExpRange, Tcl_GetRegExpFromObj, Tcl_RegExpMatchObj,
+Tcl_RegExpExecObj, Tcl_RegExpGetInfo - Pattern matching with
+regular expressions 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_RegExpMatchObj</b>(<i>interp</i>, <i>textObj</i>,
+<i>patObj</i>)<br>
+int<br>
+<b>Tcl_RegExpMatch</b>(<i>interp</i>, <i>text</i>,
+<i>pattern</i>)<br>
+Tcl_RegExp<br>
+<b>Tcl_RegExpCompile</b>(<i>interp</i>, <i>pattern</i>)<br>
+int<br>
+<b>Tcl_RegExpExec</b>(<i>interp</i>, <i>regexp</i>, <i>text</i>,
+<i>start</i>)<br>
+void<br>
+<b>Tcl_RegExpRange</b>(<i>regexp</i>, <i>index</i>,
+<i>startPtr</i>, <i>endPtr</i>)<br>
+Tcl_RegExp<br>
+<b>Tcl_GetRegExpFromObj</b>(<i>interp</i>, <i>patObj</i>,
+<i>cflags</i>)<br>
+int<br>
+<b>Tcl_RegExpExecObj</b>(<i>interp</i>, <i>regexp</i>,
+<i>textObj</i>, <i>offset</i>, <i>nmatches</i>, <i>eflags</i>)<br>
+void<br>
+<b>Tcl_RegExpGetInfo</b>(<i>regexp</i>, <i>infoPtr</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Tcl interpreter to use for error reporting. The interpreter may
+be NULL if no error reporting is desired.</dd>
+
+<dt>Tcl_Obj <b>*textObj</b> (in/out)</dt>
+
+<dd>Refers to the object from which to get the text to search. The
+internal representation of the object may be converted to a form
+that can be efficiently searched.</dd>
+
+<dt>Tcl_Obj <b>*patObj</b> (in/out)</dt>
+
+<dd>Refers to the object from which to get a regular expression.
+The compiled regular expression is cached in the object.</dd>
+
+<dt>char <b>*text</b> (in)</dt>
+
+<dd>Text to search for a match with a regular expression.</dd>
+
+<dt>const char <b>*pattern</b> (in)</dt>
+
+<dd>String in the form of a regular expression pattern.</dd>
+
+<dt>Tcl_RegExp <b><a href="../TclCmd/regexp.htm">regexp</a></b>
+(in)</dt>
+
+<dd>Compiled regular expression. Must have been returned previously
+by <b>Tcl_GetRegExpFromObj</b> or <b>Tcl_RegExpCompile</b>.</dd>
+
+<dt>char <b>*start</b> (in)</dt>
+
+<dd>If <i>text</i> is just a portion of some other string, this
+argument identifies the beginning of the larger string. If it is
+not the same as <i>text</i>, then no &ldquo;<b>^</b>&rdquo; matches
+will be allowed.</dd>
+
+<dt>int <b>index</b> (in)</dt>
+
+<dd>Specifies which range is desired: 0 means the range of the
+entire match, 1 or greater means the range that matched a
+parenthesized sub-expression.</dd>
+
+<dt>const char <b>**startPtr</b> (out)</dt>
+
+<dd>The address of the first character in the range is stored here,
+or NULL if there is no such range.</dd>
+
+<dt>const char <b>**endPtr</b> (out)</dt>
+
+<dd>The address of the character just after the last one in the
+range is stored here, or NULL if there is no such range.</dd>
+
+<dt>int <b>cflags</b> (in)</dt>
+
+<dd>OR-ed combination of the compilation flags
+<b>TCL_REG_ADVANCED</b>, <b>TCL_REG_EXTENDED</b>,
+<b>TCL_REG_BASIC</b>, <b>TCL_REG_EXPANDED</b>,
+<b>TCL_REG_QUOTE</b>, <b>TCL_REG_NOCASE</b>,
+<b>TCL_REG_NEWLINE</b>, <b>TCL_REG_NLSTOP</b>,
+<b>TCL_REG_NLANCH</b>, <b>TCL_REG_NOSUB</b>, and
+<b>TCL_REG_CANMATCH</b>. See below for more information.</dd>
+
+<dt>int <b>offset</b> (in)</dt>
+
+<dd>The character offset into the text where matching should begin.
+The value of the offset has no impact on <b>^</b> matches. This
+behavior is controlled by <i>eflags</i>.</dd>
+
+<dt>int <b>nmatches</b> (in)</dt>
+
+<dd>The number of matching subexpressions that should be remembered
+for later use. If this value is 0, then no subexpression match
+information will be computed. If the value is -1, then all of the
+matching subexpressions will be remembered. Any other value will be
+taken as the maximum number of subexpressions to remember.</dd>
+
+<dt>int <b>eflags</b> (in)</dt>
+
+<dd>OR-ed combination of the execution flags <b>TCL_REG_NOTBOL</b>
+and <b>TCL_REG_NOTEOL</b>. See below for more information.</dd>
+
+<dt>Tcl_RegExpInfo <b>*infoPtr</b> (out)</dt>
+
+<dd>The address of the location where information about a previous
+match should be stored by <b>Tcl_RegExpGetInfo</b>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_RegExpMatch</b> determines whether its <i>pattern</i>
+argument matches <i>regexp</i>, where <i>regexp</i> is interpreted
+as a regular expression using the rules in the <b><a href=
+"../TclCmd/re_syntax.htm">re_syntax</a></b> reference page. If
+there is a match then <b>Tcl_RegExpMatch</b> returns 1. If there is
+no match then <b>Tcl_RegExpMatch</b> returns 0. If an error occurs
+in the matching process (e.g. <i>pattern</i> is not a valid regular
+expression) then <b>Tcl_RegExpMatch</b> returns -1 and leaves an
+error message in the interpreter result. <b>Tcl_RegExpMatchObj</b>
+is similar to <b>Tcl_RegExpMatch</b> except it operates on the Tcl
+objects <i>textObj</i> and <i>patObj</i> instead of UTF strings.
+<b>Tcl_RegExpMatchObj</b> is generally more efficient than
+<b>Tcl_RegExpMatch</b>, so it is the preferred interface. 
+
+<p><b>Tcl_RegExpCompile</b>, <b>Tcl_RegExpExec</b>, and
+<b>Tcl_RegExpRange</b> provide lower-level access to the regular
+expression pattern matcher. <b>Tcl_RegExpCompile</b> compiles a
+regular expression string into the internal form used for efficient
+pattern matching. The return value is a token for this compiled
+form, which can be used in subsequent calls to
+<b>Tcl_RegExpExec</b> or <b>Tcl_RegExpRange</b>. If an error occurs
+while compiling the regular expression then
+<b>Tcl_RegExpCompile</b> returns NULL and leaves an error message
+in the interpreter result. Note: the return value from
+<b>Tcl_RegExpCompile</b> is only valid up to the next call to
+<b>Tcl_RegExpCompile</b>; it is not safe to retain these values for
+long periods of time.</p>
+
+<p><b>Tcl_RegExpExec</b> executes the regular expression pattern
+matcher. It returns 1 if <i>text</i> contains a range of characters
+that match <i>regexp</i>, 0 if no match is found, and -1 if an
+error occurs. In the case of an error, <b>Tcl_RegExpExec</b> leaves
+an error message in the interpreter result. When searching a string
+for multiple matches of a pattern, it is important to distinguish
+between the start of the original string and the start of the
+current search. For example, when searching for the second
+occurrence of a match, the <i>text</i> argument might point to the
+character just after the first match; however, it is important for
+the pattern matcher to know that this is not the start of the
+entire string, so that it does not allow &ldquo;<b>^</b>&rdquo;
+atoms in the pattern to match. The <i>start</i> argument provides
+this information by pointing to the start of the overall string
+containing <i>text</i>. <i>Start</i> will be less than or equal to
+<i>text</i>; if it is less than <i>text</i> then no <b>^</b>
+matches will be allowed.</p>
+
+<p><b>Tcl_RegExpRange</b> may be invoked after
+<b>Tcl_RegExpExec</b> returns; it provides detailed information
+about what ranges of the string matched what parts of the pattern.
+<b>Tcl_RegExpRange</b> returns a pair of pointers in
+<i>*startPtr</i> and <i>*endPtr</i> that identify a range of
+characters in the source string for the most recent call to
+<b>Tcl_RegExpExec</b>. <i>Index</i> indicates which of several
+ranges is desired: if <i>index</i> is 0, information is returned
+about the overall range of characters that matched the entire
+pattern; otherwise, information is returned about the range of
+characters that matched the <i>index</i>'th parenthesized
+subexpression within the pattern. If there is no range
+corresponding to <i>index</i> then NULL is stored in
+<i>*startPtr</i> and <i>*endPtr</i>.</p>
+
+<p><b>Tcl_GetRegExpFromObj</b>, <b>Tcl_RegExpExecObj</b>, and
+<b>Tcl_RegExpGetInfo</b> are object interfaces that provide the
+most direct control of Henry Spencer's regular expression library.
+For users that need to modify compilation and execution options
+directly, it is recommended that you use these interfaces instead
+of calling the internal regexp functions. These interfaces handle
+the details of UTF to Unicode translations as well as providing
+improved performance through caching in the pattern and string
+objects.</p>
+
+<p><b>Tcl_GetRegExpFromObj</b> attempts to return a compiled
+regular expression from the <i>patObj</i>. If the object does not
+already contain a compiled regular expression it will attempt to
+create one from the string in the object and assign it to the
+internal representation of the <i>patObj</i>. The return value of
+this function is of type <b>Tcl_RegExp</b>. The return value is a
+token for this compiled form, which can be used in subsequent calls
+to <b>Tcl_RegExpExecObj</b> or <b>Tcl_RegExpGetInfo</b>. If an
+error occurs while compiling the regular expression then
+<b>Tcl_GetRegExpFromObj</b> returns NULL and leaves an error
+message in the interpreter result. The regular expression token can
+be used as long as the internal representation of <i>patObj</i>
+refers to the compiled form. The <i>cflags</i> argument is a
+bit-wise OR of zero or more of the following flags that control the
+compilation of <i>patObj</i>:</p>
+
+<dl class="description">
+<dt><a name="M6"><b>TCL_REG_ADVANCED</b></a></dt>
+
+<dd>Compile advanced regular expressions (&ldquo;ARE&rdquo;s). This
+mode corresponds to the normal regular expression syntax accepted
+by the Tcl <b><a href="../TclCmd/regexp.htm">regexp</a></b> and
+<b><a href="../TclCmd/regsub.htm">regsub</a></b> commands.</dd>
+
+<dt><a name="M7"><b>TCL_REG_EXTENDED</b></a></dt>
+
+<dd>Compile extended regular expressions (&ldquo;ERE&rdquo;s). This
+mode corresponds to the regular expression syntax recognized by Tcl
+8.0 and earlier versions.</dd>
+
+<dt><a name="M8"><b>TCL_REG_BASIC</b></a></dt>
+
+<dd>Compile basic regular expressions (&ldquo;BRE&rdquo;s). This
+mode corresponds to the regular expression syntax recognized by
+common Unix utilities like <b>sed</b> and <b>grep</b>. This is the
+default if no flags are specified.</dd>
+
+<dt><a name="M9"><b>TCL_REG_EXPANDED</b></a></dt>
+
+<dd>Compile the regular expression (basic, extended, or advanced)
+using an expanded syntax that allows comments and whitespace. This
+mode causes non-backslashed non-bracket-expression white space and
+#-to-end-of-line comments to be ignored.</dd>
+
+<dt><a name="M10"><b>TCL_REG_QUOTE</b></a></dt>
+
+<dd>Compile a literal string, with all characters treated as
+ordinary characters.</dd>
+
+<dt><a name="M11"><b>TCL_REG_NOCASE</b></a></dt>
+
+<dd>Compile for matching that ignores upper/lower case
+distinctions.</dd>
+
+<dt><a name="M12"><b>TCL_REG_NEWLINE</b></a></dt>
+
+<dd>Compile for newline-sensitive matching. By default, newline is
+a completely ordinary character with no special meaning in either
+regular expressions or strings. With this flag, &ldquo;[^&rdquo;
+bracket expressions and &ldquo;.&rdquo; never match newline,
+&ldquo;^&rdquo; matches an empty string after any newline in
+addition to its normal function, and &ldquo;$&rdquo; matches an
+empty string before any newline in addition to its normal function.
+<b>REG_NEWLINE</b> is the bit-wise OR of <b>REG_NLSTOP</b> and
+<b>REG_NLANCH</b>.</dd>
+
+<dt><a name="M13"><b>TCL_REG_NLSTOP</b></a></dt>
+
+<dd>Compile for partial newline-sensitive matching, with the
+behavior of &ldquo;[^&rdquo; bracket expressions and
+&ldquo;.&rdquo; affected, but not the behavior of &ldquo;^&rdquo;
+and &ldquo;$&rdquo;. In this mode, &ldquo;[^&rdquo; bracket
+expressions and &ldquo;.&rdquo; never match newline.</dd>
+
+<dt><a name="M14"><b>TCL_REG_NLANCH</b></a></dt>
+
+<dd>Compile for inverse partial newline-sensitive matching, with
+the behavior of &ldquo;^&rdquo; and &ldquo;$&rdquo; (the
+&ldquo;anchors&rdquo;) affected, but not the behavior of
+&ldquo;[^&rdquo; bracket expressions and &ldquo;.&rdquo;. In this
+mode &ldquo;^&rdquo; matches an empty string after any newline in
+addition to its normal function, and &ldquo;$&rdquo; matches an
+empty string before any newline in addition to its normal
+function.</dd>
+
+<dt><a name="M15"><b>TCL_REG_NOSUB</b></a></dt>
+
+<dd>Compile for matching that reports only success or failure, not
+what was matched. This reduces compile overhead and may improve
+performance. Subsequent calls to <b>Tcl_RegExpGetInfo</b> or
+<b>Tcl_RegExpRange</b> will not report any match information.</dd>
+
+<dt><a name="M16"><b>TCL_REG_CANMATCH</b></a></dt>
+
+<dd>Compile for matching that reports the potential to complete a
+partial match given more text (see below).</dd>
+</dl>
+
+<p>Only one of <b>TCL_REG_EXTENDED</b>, <b>TCL_REG_ADVANCED</b>,
+<b>TCL_REG_BASIC</b>, and <b>TCL_REG_QUOTE</b> may be
+specified.</p>
+
+<p><b>Tcl_RegExpExecObj</b> executes the regular expression pattern
+matcher. It returns 1 if <i>objPtr</i> contains a range of
+characters that match <i>regexp</i>, 0 if no match is found, and -1
+if an error occurs. In the case of an error,
+<b>Tcl_RegExpExecObj</b> leaves an error message in the interpreter
+result. The <i>nmatches</i> value indicates to the matcher how many
+subexpressions are of interest. If <i>nmatches</i> is 0, then no
+subexpression match information is recorded, which may allow the
+matcher to make various optimizations. If the value is -1, then all
+of the subexpressions in the pattern are remembered. If the value
+is a positive integer, then only that number of subexpressions will
+be remembered. Matching begins at the specified Unicode character
+index given by <i>offset</i>. Unlike <b>Tcl_RegExpExec</b>, the
+behavior of anchors is not affected by the offset value. Instead
+the behavior of the anchors is explicitly controlled by the
+<i>eflags</i> argument, which is a bit-wise OR of zero or more of
+the following flags:</p>
+
+<dl class="description">
+<dt><a name="M17"><b>TCL_REG_NOTBOL</b></a></dt>
+
+<dd>The starting character will not be treated as the beginning of
+a line or the beginning of the string, so &ldquo;^&rdquo; will not
+match there. Note that this flag has no effect on how
+&ldquo;<b>\A</b>&rdquo; matches.</dd>
+
+<dt><a name="M18"><b>TCL_REG_NOTEOL</b></a></dt>
+
+<dd>The last character in the string will not be treated as the end
+of a line or the end of the string, so &ldquo;$&rdquo; will not
+match there. Note that this flag has no effect on how
+&ldquo;<b>\Z</b>&rdquo; matches.</dd>
+</dl>
+
+<p><b>Tcl_RegExpGetInfo</b> retrieves information about the last
+match performed with a given regular expression <i>regexp</i>. The
+<i>infoPtr</i> argument contains a pointer to a structure that is
+defined as follows:</p>
+
+<pre>
+typedef struct Tcl_RegExpInfo {
+        int <i>nsubs</i>;
+        Tcl_RegExpIndices *<i>matches</i>;
+        long <i>extendStart</i>;
+} Tcl_RegExpInfo;
+</pre>
+
+<p>The <i>nsubs</i> field contains a count of the number of
+parenthesized subexpressions within the regular expression. If the
+<b>TCL_REG_NOSUB</b> was used, then this value will be zero. The
+<i>matches</i> field points to an array of <i>nsubs</i>+1 values
+that indicate the bounds of each subexpression matched. The first
+element in the array refers to the range matched by the entire
+regular expression, and subsequent elements refer to the
+parenthesized subexpressions in the order that they appear in the
+pattern. Each element is a structure that is defined as
+follows:</p>
+
+<pre>
+typedef struct Tcl_RegExpIndices {
+        long <i>start</i>;
+        long <i>end</i>;
+} Tcl_RegExpIndices;
+</pre>
+
+<p>The <i>start</i> and <i>end</i> values are Unicode character
+indices relative to the offset location within <i>objPtr</i> where
+matching began. The <i>start</i> index identifies the first
+character of the matched subexpression. The <i>end</i> index
+identifies the first character after the matched subexpression. If
+the subexpression matched the empty string, then <i>start</i> and
+<i>end</i> will be equal. If the subexpression did not participate
+in the match, then <i>start</i> and <i>end</i> will be set to
+-1.</p>
+
+<p>The <i>extendStart</i> field in <b>Tcl_RegExpInfo</b> is only
+set if the <b>TCL_REG_CANMATCH</b> flag was used. It indicates the
+first character in the string where a match could occur. If a match
+was found, this will be the same as the beginning of the current
+match. If no match was found, then it indicates the earliest point
+at which a match might occur if additional text is appended to the
+string. If it is no match is possible even with further text, this
+field will be set to -1.</p>
+
+<h3><a name="M19">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/re_syntax.htm">re_syntax</a></b> 
+
+<h3><a name="M20">KEYWORDS</a></h3>
+
+<a href="../Keywords/M.htm#match">match</a>, <a href=
+"../Keywords/P.htm#pattern">pattern</a>, <a href=
+"../Keywords/R.htm#regular expression">regular expression</a>, <a
+href="../Keywords/S.htm#string">string</a>, <a href=
+"../Keywords/S.htm#subexpression">subexpression</a>, <a href=
+"../Keywords/T.htm#Tcl_RegExpIndices">Tcl_RegExpIndices</a>, <a
+href="../Keywords/T.htm#Tcl_RegExpInfo">Tcl_RegExpInfo</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+1998-1999 Scriptics Corporation</div>
+</body>
+</html>
+

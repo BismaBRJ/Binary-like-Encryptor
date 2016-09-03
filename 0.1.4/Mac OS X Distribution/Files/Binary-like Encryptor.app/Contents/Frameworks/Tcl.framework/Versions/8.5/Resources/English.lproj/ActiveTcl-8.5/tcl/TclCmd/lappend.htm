@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - lappend manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> lappend</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+lappend - Append list elements onto a variable 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>lappend</b> <i>varName</i> ?<i>value value value ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command treats the variable given by <i>varName</i> as a list
+and appends each of the <i>value</i> arguments to that list as a
+separate element, with spaces between elements. If <i>varName</i>
+does not exist, it is created as a list with elements given by the
+<i>value</i> arguments. <b>Lappend</b> is similar to <b><a href=
+"../TclCmd/append.htm">append</a></b> except that the <i>value</i>s
+are appended as list elements rather than raw text. This command
+provides a relatively efficient way to build up large lists. For
+example, &ldquo;<b>lappend a $b</b>&rdquo; is much more efficient
+than &ldquo;<b>set a [concat $a [list $b]]</b>&rdquo; when
+<b>$a</b> is long. 
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+Using <b>lappend</b> to build up a list of numbers. 
+
+<pre>
+% set var 1
+1
+% <b>lappend</b> var 2
+1 2
+% <b>lappend</b> var 3 4 5
+1 2 3 4 5
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/list.htm">list</a></b>, <b><a href=
+"../TclCmd/lindex.htm">lindex</a></b>, <b><a href=
+"../TclCmd/linsert.htm">linsert</a></b>, <b><a href=
+"../TclCmd/llength.htm">llength</a></b>, <b><a href=
+"../TclCmd/lset.htm">lset</a></b>, <b><a href=
+"../TclCmd/lsort.htm">lsort</a></b>, <b><a href=
+"../TclCmd/lrange.htm">lrange</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#append">append</a>, <a href=
+"../Keywords/E.htm#element">element</a>, <a href=
+"../Keywords/L.htm#list">list</a>, <a href=
+"../Keywords/V.htm#variable">variable</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+2001 Kevin B. Kenny &lt;kennykb(at)acm.org&gt;. All rights
+reserved.</div>
+</body>
+</html>
+

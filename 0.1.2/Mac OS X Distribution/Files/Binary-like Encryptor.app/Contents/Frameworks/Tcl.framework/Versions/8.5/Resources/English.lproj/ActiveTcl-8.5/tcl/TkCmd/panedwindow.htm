@@ -1,0 +1,680 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - panedwindow manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> panedwindow</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="panedwindow.htm#M2" name="L1006">NAME</a> 
+
+<dl>
+<dd>panedwindow - Create and manipulate panedwindow widgets</dd>
+</dl>
+</dd>
+
+<dd><a href="panedwindow.htm#M3" name="L1007">SYNOPSIS</a> 
+
+<dl>
+<dd><b>panedwindow</b> <i>pathName</i> ?<i>options</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="panedwindow.htm#M4" name="L1008">STANDARD OPTIONS</a> 
+
+<dl>
+<dd><a href="options.htm#M-background">-background or -bg,
+background, Background</a></dd>
+
+<dd><a href="options.htm#M-borderwidth">-borderwidth or -bd,
+borderWidth, BorderWidth</a></dd>
+
+<dd><a href="options.htm#M-cursor">-cursor, cursor, Cursor</a></dd>
+
+<dd><a href="options.htm#M-orient">-orient, orient, Orient</a></dd>
+
+<dd><a href="options.htm#M-relief">-relief, relief, Relief</a></dd>
+</dl>
+</dd>
+
+<dd><a href="panedwindow.htm#M5" name="L1009">WIDGET-SPECIFIC
+OPTIONS</a> 
+
+<dl>
+<dd><a href="panedwindow.htm#M6" name="L1010">-handlepad,
+handlePad, HandlePad</a></dd>
+
+<dd><a href="panedwindow.htm#M7" name="L1011">-handlesize,
+handleSize, HandleSize</a></dd>
+
+<dd><a href="panedwindow.htm#M8" name="L1012">-height, height,
+Height</a></dd>
+
+<dd><a href="panedwindow.htm#M9" name="L1013">-opaqueresize,
+opaqueResize, OpaqueResize</a></dd>
+
+<dd><a href="panedwindow.htm#M10" name="L1014">-sashcursor,
+sashCursor, SashCursor</a></dd>
+
+<dd><a href="panedwindow.htm#M11" name="L1015">-sashpad, sashPad,
+SashPad</a></dd>
+
+<dd><a href="panedwindow.htm#M12" name="L1016">-sashrelief,
+sashRelief, SashRelief</a></dd>
+
+<dd><a href="panedwindow.htm#M13" name="L1017">-sashwidth,
+sashWidth, SashWidth</a></dd>
+
+<dd><a href="panedwindow.htm#M14" name="L1018">-showhandle,
+showHandle, ShowHandle</a></dd>
+
+<dd><a href="panedwindow.htm#M15" name="L1019">-width, width,
+Width</a></dd>
+</dl>
+</dd>
+
+<dd><a href="panedwindow.htm#M16" name="L1020">DESCRIPTION</a></dd>
+
+<dd><a href="panedwindow.htm#M17" name="L1021">WIDGET COMMAND</a> 
+
+<dl class="widget command">
+<dd><a href="panedwindow.htm#M18" name="L1022"><i>pathName</i>
+<b>add</b> <i>window ?window ...? ?option value ...?</i></a></dd>
+
+<dd><a href="panedwindow.htm#M19" name="L1023"><i>pathName</i>
+<b>cget</b> <i>option</i></a></dd>
+
+<dd><a href="panedwindow.htm#M20" name="L1024"><i>pathName</i>
+<b>configure</b> <i>?option? ?value option value ...?</i></a></dd>
+
+<dd><a href="panedwindow.htm#M21" name="L1025"><i>pathName</i>
+<b>forget</b> <i>window ?window ...?</i></a></dd>
+
+<dd><a href="panedwindow.htm#M22" name="L1026"><i>pathName</i>
+<b>identify</b> <i>x y</i></a></dd>
+
+<dd><a href="panedwindow.htm#M23" name="L1027"><i>pathName</i>
+<b>proxy</b> <i>?args?</i></a> 
+
+<dl class="widget command">
+<dd><a href="panedwindow.htm#M24" name="L1028"><i>pathName</i>
+<b>proxy coord</b></a></dd>
+
+<dd><a href="panedwindow.htm#M25" name="L1029"><i>pathName</i>
+<b>proxy forget</b></a></dd>
+
+<dd><a href="panedwindow.htm#M26" name="L1030"><i>pathName</i>
+<b>proxy place</b> <i>x y</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="panedwindow.htm#M27" name="L1031"><i>pathName</i>
+<b>sash</b> <i>?args?</i></a> 
+
+<dl class="widget command">
+<dd><a href="panedwindow.htm#M28" name="L1032"><i>pathName</i>
+<b>sash coord</b> <i>index</i></a></dd>
+
+<dd><a href="panedwindow.htm#M29" name="L1033"><i>pathName</i>
+<b>sash dragto</b> <i>index x y</i></a></dd>
+
+<dd><a href="panedwindow.htm#M30" name="L1034"><i>pathName</i>
+<b>sash mark</b> <i>index x y</i></a></dd>
+
+<dd><a href="panedwindow.htm#M31" name="L1035"><i>pathName</i>
+<b>sash place</b> <i>index x y</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="panedwindow.htm#M32" name="L1036"><i>pathName</i>
+<b>panecget</b> <i>window option</i></a></dd>
+
+<dd><a href="panedwindow.htm#M33" name="L1037"><i>pathName</i>
+<b>paneconfigure</b> <i>window ?option? ?value option value
+...?</i></a> 
+
+<dl class="widget command">
+<dd><a href="panedwindow.htm#M34" name="L1038"><b>-after</b>
+<i>window</i></a></dd>
+
+<dd><a href="panedwindow.htm#M35" name="L1039"><b>-before</b>
+<i>window</i></a></dd>
+
+<dd><a href="panedwindow.htm#M36" name="L1040"><b>-height</b>
+<i>size</i></a></dd>
+
+<dd><a href="panedwindow.htm#M37" name="L1041"><b>-hide</b>
+<i>boolean</i></a></dd>
+
+<dd><a href="panedwindow.htm#M38" name="L1042"><b>-minsize</b>
+<i>n</i></a></dd>
+
+<dd><a href="panedwindow.htm#M39" name="L1043"><b>-padx</b>
+<i>n</i></a></dd>
+
+<dd><a href="panedwindow.htm#M40" name="L1044"><b>-pady</b>
+<i>n</i></a></dd>
+
+<dd><a href="panedwindow.htm#M41" name="L1045"><b>-sticky</b>
+<i>style</i></a></dd>
+
+<dd><a href="panedwindow.htm#M42" name="L1046"><b>-stretch</b>
+<i>when</i></a> 
+
+<dl class="widget command">
+<dd><a href="panedwindow.htm#M43" name=
+"L1047"><b>always</b></a></dd>
+
+<dd><a href="panedwindow.htm#M44" name=
+"L1048"><b>first</b></a></dd>
+
+<dd><a href="panedwindow.htm#M45" name="L1049"><b>last</b></a></dd>
+
+<dd><a href="panedwindow.htm#M46" name=
+"L1050"><b>middle</b></a></dd>
+
+<dd><a href="panedwindow.htm#M47" name=
+"L1051"><b>never</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="panedwindow.htm#M48" name="L1052"><b>-width</b>
+<i>size</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="panedwindow.htm#M49" name="L1053"><i>pathName</i>
+<b>panes</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="panedwindow.htm#M50" name="L1054">RESIZING
+PANES</a></dd>
+
+<dd><a href="panedwindow.htm#M51" name="L1055">SEE ALSO</a></dd>
+
+<dd><a href="panedwindow.htm#M52" name="L1056">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+panedwindow - Create and manipulate panedwindow widgets 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>panedwindow</b> <i>pathName</i> ?<i>options</i>?<br>
+<h3><a name="M4">STANDARD OPTIONS</a></h3>
+
+<dl>
+<dt><b><a href="options.htm#M-background">-background or -bg,
+background, Background</a></b></dt>
+
+<dt><b><a href="options.htm#M-borderwidth">-borderwidth or -bd,
+borderWidth, BorderWidth</a></b></dt>
+
+<dt><b><a href="options.htm#M-cursor">-cursor, cursor,
+Cursor</a></b></dt>
+
+<dt><b><a href="options.htm#M-orient">-orient, orient,
+Orient</a></b></dt>
+
+<dt><b><a href="options.htm#M-relief">-relief, relief,
+Relief</a></b></dt>
+</dl>
+
+<h3><a name="M5">WIDGET-SPECIFIC OPTIONS</a></h3>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M6">-handlepad</a></b></dt>
+
+<dt>Database Name: <b>handlePad</b></dt>
+
+<dt>Database Class: <b>HandlePad</b></dt>
+
+<dd>When sash handles are drawn, specifies the distance from the
+top or left end of the sash (depending on the orientation of the
+widget) at which to draw the handle. May be any value accepted by
+<b><a href="../TkLib/GetPixels.htm">Tk_GetPixels</a></b>.</dd>
+
+<dt>Command-Line Name: <b><a name="M7">-handlesize</a></b></dt>
+
+<dt>Database Name: <b>handleSize</b></dt>
+
+<dt>Database Class: <b>HandleSize</b></dt>
+
+<dd>Specifies the side length of a sash handle. Handles are always
+drawn as squares. May be any value accepted by <b><a href=
+"../TkLib/GetPixels.htm">Tk_GetPixels</a></b>.</dd>
+
+<dt>Command-Line Name: <b><a name="M8">-height</a></b></dt>
+
+<dt>Database Name: <b>height</b></dt>
+
+<dt>Database Class: <b>Height</b></dt>
+
+<dd>Specifies a desired height for the overall panedwindow widget.
+May be any value accepted by <b><a href=
+"../TkLib/GetPixels.htm">Tk_GetPixels</a></b>. If an empty string,
+the widget will be made high enough to allow all contained widgets
+to have their natural height.</dd>
+
+<dt>Command-Line Name: <b><a name="M9">-opaqueresize</a></b></dt>
+
+<dt>Database Name: <b>opaqueResize</b></dt>
+
+<dt>Database Class: <b>OpaqueResize</b></dt>
+
+<dd>Specifies whether panes should be resized as a sash is moved
+(true), or if resizing should be deferred until the sash is placed
+(false).</dd>
+
+<dt>Command-Line Name: <b><a name="M10">-sashcursor</a></b></dt>
+
+<dt>Database Name: <b>sashCursor</b></dt>
+
+<dt>Database Class: <b>SashCursor</b></dt>
+
+<dd>Mouse cursor to use when over a sash. If null,
+<b>sb_h_double_arrow</b> will be used for horizontal panedwindows,
+and <b>sb_v_double_arrow</b> will be used for vertical
+panedwindows.</dd>
+
+<dt>Command-Line Name: <b><a name="M11">-sashpad</a></b></dt>
+
+<dt>Database Name: <b>sashPad</b></dt>
+
+<dt>Database Class: <b>SashPad</b></dt>
+
+<dd>Specifies the amount of padding to leave of each side of a
+sash. May be any value accepted by <b><a href=
+"../TkLib/GetPixels.htm">Tk_GetPixels</a></b>.</dd>
+
+<dt>Command-Line Name: <b><a name="M12">-sashrelief</a></b></dt>
+
+<dt>Database Name: <b>sashRelief</b></dt>
+
+<dt>Database Class: <b>SashRelief</b></dt>
+
+<dd>Relief to use when drawing a sash. May be any of the standard
+Tk relief values.</dd>
+
+<dt>Command-Line Name: <b><a name="M13">-sashwidth</a></b></dt>
+
+<dt>Database Name: <b>sashWidth</b></dt>
+
+<dt>Database Class: <b>SashWidth</b></dt>
+
+<dd>Specifies the width of each sash. May be any value accepted by
+<b><a href="../TkLib/GetPixels.htm">Tk_GetPixels</a></b>.</dd>
+
+<dt>Command-Line Name: <b><a name="M14">-showhandle</a></b></dt>
+
+<dt>Database Name: <b>showHandle</b></dt>
+
+<dt>Database Class: <b>ShowHandle</b></dt>
+
+<dd>Specifies whether sash handles should be shown. May be any
+valid Tcl boolean value.</dd>
+
+<dt>Command-Line Name: <b><a name="M15">-width</a></b></dt>
+
+<dt>Database Name: <b>width</b></dt>
+
+<dt>Database Class: <b>Width</b></dt>
+
+<dd>Specifies a desired width for the overall panedwindow widget.
+May be any value accepted by <b><a href=
+"../TkLib/GetPixels.htm">Tk_GetPixels</a></b>. If an empty string,
+the widget will be made wide enough to allow all contained widgets
+to have their natural width.</dd>
+</dl>
+
+<h3><a name="M16">DESCRIPTION</a></h3>
+
+The <b>panedwindow</b> command creates a new window (given by the
+<i>pathName</i> argument) and makes it into a panedwindow widget.
+Additional options, described above, may be specified on the
+command line or in the option database to configure aspects of the
+panedwindow such as its default background color and relief. The
+<b>panedwindow</b> command returns the path name of the new window.
+
+
+<p>A panedwindow widget contains any number of panes, arranged
+horizontally or vertically, according to the value of the
+<b>-orient</b> option. Each pane contains one widget, and each pair
+of panes is separated by a moveable (via mouse movements) sash.
+Moving a sash causes the widgets on either side of the sash to be
+resized.</p>
+
+<h3><a name="M17">WIDGET COMMAND</a></h3>
+
+The <b>panedwindow</b> command creates a new Tcl command whose name
+is the same as the path name of the panedwindow's window. This
+command may be used to invoke various operations on the widget. It
+has the following general form: 
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>PathName</i> is the name of the command, which is the same as
+the panedwindow widget's path name. <i>Option</i> and the
+<i>arg</i>s determine the exact behavior of the command. The
+following commands are possible for panedwindow widgets: 
+
+<dl class="widget command">
+<dt><a name="M18"><i>pathName</i> <b>add</b> <i>window ?window ...?
+?option value ...?</i></a></dt>
+
+<dd>Add one or more windows to the panedwindow, each in a separate
+pane. The arguments consist of the names of one or more windows
+followed by pairs of arguments that specify how to manage the
+windows. <i>Option</i> may have any of the values accepted by the
+<b>configure</b> subcommand.</dd>
+
+<dt><a name="M19"><i>pathName</i> <b>cget</b>
+<i>option</i></a></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>panedwindow</b> command.</dd>
+
+<dt><a name="M20"><i>pathName</i> <b>configure</b> <i>?option?
+?value option value ...?</i></a></dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b><a href=
+"../TkLib/ConfigWidg.htm">Tk_ConfigureInfo</a></b> for information
+on the format of this list). If <i>option</i> is specified with no
+<i>value</i>, then the command returns a list describing the one
+named option (this list will be identical to the corresponding
+sublist of the value returned if no <i>option</i> is specified). If
+one or more <i>option-value</i> pairs are specified, then the
+command modifies the given widget option(s) to have the given
+value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>panedwindow</b> command.</dd>
+
+<dt><a name="M21"><i>pathName</i> <b>forget</b> <i>window ?window
+...?</i></a></dt>
+
+<dd>Remove the pane containing <i>window</i> from the panedwindow.
+All geometry management options for <i>window</i> will be
+forgotten.</dd>
+
+<dt><a name="M22"><i>pathName</i> <b>identify</b> <i>x
+y</i></a></dt>
+
+<dd>Identify the panedwindow component underneath the point given
+by <i>x</i> and <i>y</i>, in window coordinates. If the point is
+over a sash or a sash handle, the result is a two element list
+containing the index of the sash or handle, and a word indicating
+whether it is over a sash or a handle, such as {0 sash} or {2
+handle}. If the point is over any other part of the panedwindow,
+the result is an empty list.</dd>
+
+<dt><a name="M23"><i>pathName</i> <b>proxy</b>
+<i>?args?</i></a></dt>
+
+<dd>This command is used to query and change the position of the
+sash proxy, used for rubberband-style pane resizing. It can take
+any of the following forms: 
+
+<dl class="widget command">
+<dt><a name="M24"><i>pathName</i> <b>proxy coord</b></a></dt>
+
+<dd>Return a list containing the x and y coordinates of the most
+recent proxy location.</dd>
+
+<dt><a name="M25"><i>pathName</i> <b>proxy forget</b></a></dt>
+
+<dd>Remove the proxy from the display.</dd>
+
+<dt><a name="M26"><i>pathName</i> <b>proxy place</b> <i>x
+y</i></a></dt>
+
+<dd>Place the proxy at the given <i>x</i> and <i>y</i>
+coordinates.</dd>
+</dl>
+</dd>
+
+<dt><a name="M27"><i>pathName</i> <b>sash</b>
+<i>?args?</i></a></dt>
+
+<dd>This command is used to query and change the position of sashes
+in the panedwindow. It can take any of the following forms: 
+
+<dl class="widget command">
+<dt><a name="M28"><i>pathName</i> <b>sash coord</b>
+<i>index</i></a></dt>
+
+<dd>Return the current x and y coordinate pair for the sash given
+by <i>index</i>. <i>Index</i> must be an integer between 0 and 1
+less than the number of panes in the panedwindow. The coordinates
+given are those of the top left corner of the region containing the
+sash.</dd>
+
+<dt><a name="M29"><i>pathName</i> <b>sash dragto</b> <i>index x
+y</i></a></dt>
+
+<dd>This command computes the difference between the given
+coordinates and the coordinates given to the last <b>sash mark</b>
+command for the given sash. It then moves that sash the computed
+difference. The return value is the empty string.</dd>
+
+<dt><a name="M30"><i>pathName</i> <b>sash mark</b> <i>index x
+y</i></a></dt>
+
+<dd>Records <i>x</i> and <i>y</i> for the sash given by
+<i>index</i>; used in conjunction with later <b>sash dragto</b>
+commands to move the sash.</dd>
+
+<dt><a name="M31"><i>pathName</i> <b>sash place</b> <i>index x
+y</i></a></dt>
+
+<dd>Place the sash given by <i>index</i> at the given
+coordinates.</dd>
+</dl>
+</dd>
+
+<dt><a name="M32"><i>pathName</i> <b>panecget</b> <i>window
+option</i></a></dt>
+
+<dd>Query a management option for <i>window</i>. <i>Option</i> may
+be any value allowed by the <b>paneconfigure</b> subcommand.</dd>
+
+<dt><a name="M33"><i>pathName</i> <b>paneconfigure</b> <i>window
+?option? ?value option value ...?</i></a></dt>
+
+<dd>Query or modify the management options for <i>window</i>. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b><a href=
+"../TkLib/ConfigWidg.htm">Tk_ConfigureInfo</a></b> for information
+on the format of this list). If <i>option</i> is specified with no
+<i>value</i>, then the command returns a list describing the one
+named option (this list will be identical to the corresponding
+sublist of the value returned if no <i>option</i> is specified). If
+one or more <i>option-value</i> pairs are specified, then the
+command modifies the given widget option(s) to have the given
+value(s); in this case the command returns an empty string. The
+following options are supported: 
+
+<dl class="widget command">
+<dt><a name="M34"><b>-after</b> <i>window</i></a></dt>
+
+<dd>Insert the window after the window specified. <i>window</i>
+should be the name of a window already managed by
+<i>pathName</i>.</dd>
+
+<dt><a name="M35"><b>-before</b> <i>window</i></a></dt>
+
+<dd>Insert the window before the window specified. <i>window</i>
+should be the name of a window already managed by
+<i>pathName</i>.</dd>
+
+<dt><a name="M36"><b>-height</b> <i>size</i></a></dt>
+
+<dd>Specify a height for the window. The height will be the outer
+dimension of the window including its border, if any. If
+<i>size</i> is an empty string, or if <b>-height</b> is not
+specified, then the height requested internally by the window will
+be used initially; the height may later be adjusted by the movement
+of sashes in the panedwindow. <i>Size</i> may be any value accepted
+by <b><a href="../TkLib/GetPixels.htm">Tk_GetPixels</a></b>.</dd>
+
+<dt><a name="M37"><b>-hide</b> <i>boolean</i></a></dt>
+
+<dd>Controls the visibility of a pane. When the <i>boolean</i> is
+true (according to <b><a href=
+"../TclLib/GetInt.htm">Tcl_GetBoolean</a></b>) the pane will not be
+visible, but it will still be maintained in the list of panes.</dd>
+
+<dt><a name="M38"><b>-minsize</b> <i>n</i></a></dt>
+
+<dd>Specifies that the size of the window cannot be made less than
+<i>n</i>. This constraint only affects the size of the widget in
+the paned dimension &mdash; the x dimension for horizontal
+panedwindows, the y dimension for vertical panedwindows. May be any
+value accepted by <b><a href=
+"../TkLib/GetPixels.htm">Tk_GetPixels</a></b>.</dd>
+
+<dt><a name="M39"><b>-padx</b> <i>n</i></a></dt>
+
+<dd>Specifies a non-negative value indicating how much extra space
+to leave on each side of the window in the X-direction. The value
+may have any of the forms accepted by <b><a href=
+"../TkLib/GetPixels.htm">Tk_GetPixels</a></b>.</dd>
+
+<dt><a name="M40"><b>-pady</b> <i>n</i></a></dt>
+
+<dd>Specifies a non-negative value indicating how much extra space
+to leave on each side of the window in the Y-direction. The value
+may have any of the forms accepted by <b><a href=
+"../TkLib/GetPixels.htm">Tk_GetPixels</a></b>.</dd>
+
+<dt><a name="M41"><b>-sticky</b> <i>style</i></a></dt>
+
+<dd>If a window's pane is larger than the requested dimensions of
+the window, this option may be used to position (or stretch) the
+window within its pane. <i>Style</i> is a string that contains zero
+or more of the characters <b>n</b>, <b>s</b>, <b>e</b> or <b>w</b>.
+The string can optionally contains spaces or commas, but they are
+ignored. Each letter refers to a side (north, south, east, or west)
+that the window will &ldquo;stick&rdquo; to. If both <b>n</b> and
+<b>s</b> (or <b>e</b> and <b>w</b>) are specified, the window will
+be stretched to fill the entire height (or width) of its
+cavity.</dd>
+
+<dt><a name="M42"><b>-stretch</b> <i>when</i></a></dt>
+
+<dd>Controls how extra space is allocated to each of the panes.
+<i>When</i> is one of <b>always</b>, <b>first</b>, <b>last</b>,
+<b>middle</b>, and <b>never</b>. The panedwindow will calculate the
+required size of all its panes. Any remaining (or deficit) space
+will be distributed to those panes marked for stretching. The space
+will be distributed based on each panes current ratio of the whole.
+The <i>when</i> values have the following definition: 
+
+<dl class="widget command">
+<dt><a name="M43"><b>always</b></a></dt>
+
+<dd>This pane will always stretch.</dd>
+
+<dt><a name="M44"><b>first</b></a></dt>
+
+<dd>Only if this pane is the first pane (left-most or top-most)
+will it stretch.</dd>
+
+<dt><a name="M45"><b>last</b></a></dt>
+
+<dd>Only if this pane is the last pane (right-most or bottom-most)
+will it stretch. This is the default value.</dd>
+
+<dt><a name="M46"><b>middle</b></a></dt>
+
+<dd>Only if this pane is not the first or last pane will it
+stretch.</dd>
+
+<dt><a name="M47"><b>never</b></a></dt>
+
+<dd>This pane will never stretch.</dd>
+</dl>
+</dd>
+
+<dt><a name="M48"><b>-width</b> <i>size</i></a></dt>
+
+<dd>Specify a width for the window. The width will be the outer
+dimension of the window including its border, if any. If
+<i>size</i> is an empty string, or if <b>-width</b> is not
+specified, then the width requested internally by the window will
+be used initially; the width may later be adjusted by the movement
+of sashes in the panedwindow. <i>Size</i> may be any value accepted
+by <b><a href="../TkLib/GetPixels.htm">Tk_GetPixels</a></b>.</dd>
+</dl>
+</dd>
+
+<dt><a name="M49"><i>pathName</i> <b>panes</b></a></dt>
+
+<dd>Returns an ordered list of the widgets managed by
+<i>pathName</i>.</dd>
+</dl>
+
+<h3><a name="M50">RESIZING PANES</a></h3>
+
+A pane is resized by grabbing the sash (or sash handle if present)
+and dragging with the mouse. This is accomplished via mouse motion
+bindings on the widget. When a sash is moved, the sizes of the
+panes on each side of the sash, and thus the widgets in those
+panes, are adjusted. 
+
+<p>When a pane is resized from outside (e.g. it is packed to expand
+and fill, and the containing toplevel is resized), space is added
+to the final (rightmost or bottommost) pane in the window.</p>
+
+<h3><a name="M51">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_panedwindow.htm">ttk::panedwindow</a></b> 
+
+<h3><a name="M52">KEYWORDS</a></h3>
+
+<a href="../Keywords/P.htm#panedwindow">panedwindow</a>, <a href=
+"../Keywords/W.htm#widget">widget</a>, <a href=
+"../Keywords/G.htm#geometry management">geometry management</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1992 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

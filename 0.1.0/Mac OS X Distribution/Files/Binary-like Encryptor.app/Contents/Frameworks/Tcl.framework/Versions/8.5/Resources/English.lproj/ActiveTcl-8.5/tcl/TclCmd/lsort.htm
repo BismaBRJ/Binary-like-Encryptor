@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - lsort manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> lsort</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="lsort.htm#M2" name="L914">NAME</a> 
+
+<dl>
+<dd>lsort - Sort the elements of a list</dd>
+</dl>
+</dd>
+
+<dd><a href="lsort.htm#M3" name="L915">SYNOPSIS</a> 
+
+<dl>
+<dd><b>lsort</b> ?<i>options</i>? <i>list</i></dd>
+</dl>
+</dd>
+
+<dd><a href="lsort.htm#M4" name="L916">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="lsort.htm#M5" name="L917"><b>-ascii</b></a></dd>
+
+<dd><a href="lsort.htm#M6" name="L918"><b>-dictionary</b></a></dd>
+
+<dd><a href="lsort.htm#M7" name="L919"><b>-integer</b></a></dd>
+
+<dd><a href="lsort.htm#M8" name="L920"><b>-real</b></a></dd>
+
+<dd><a href="lsort.htm#M9" name="L921"><b>-command</b>
+<i>command</i></a></dd>
+
+<dd><a href="lsort.htm#M10" name="L922"><b>-increasing</b></a></dd>
+
+<dd><a href="lsort.htm#M11" name="L923"><b>-decreasing</b></a></dd>
+
+<dd><a href="lsort.htm#M12" name="L924"><b>-indices</b></a></dd>
+
+<dd><a href="lsort.htm#M13" name="L925"><b>-index</b>
+<i>indexList</i></a></dd>
+
+<dd><a href="lsort.htm#M14" name="L926"><b>-nocase</b></a></dd>
+
+<dd><a href="lsort.htm#M15" name="L927"><b>-unique</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="lsort.htm#M16" name="L928">NOTES</a></dd>
+
+<dd><a href="lsort.htm#M17" name="L929">EXAMPLES</a></dd>
+
+<dd><a href="lsort.htm#M18" name="L930">SEE ALSO</a></dd>
+
+<dd><a href="lsort.htm#M19" name="L931">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+lsort - Sort the elements of a list 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>lsort</b> ?<i>options</i>? <i>list</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command sorts the elements of <i>list</i>, returning a new
+list in sorted order. The implementation of the <b>lsort</b>
+command uses the merge-sort algorithm which is a stable sort that
+has O(n log n) performance characteristics. 
+
+<p>By default ASCII sorting is used with the result returned in
+increasing order. However, any of the following options may be
+specified before <i>list</i> to control the sorting process (unique
+abbreviations are accepted):</p>
+
+<dl class="description">
+<dt><a name="M5"><b>-ascii</b></a></dt>
+
+<dd>Use string comparison with Unicode code-point collation order
+(the name is for backward-compatibility reasons.) This is the
+default.</dd>
+
+<dt><a name="M6"><b>-dictionary</b></a></dt>
+
+<dd>Use dictionary-style comparison. This is the same as
+<b>-ascii</b> except (a) case is ignored except as a tie-breaker
+and (b) if two strings contain embedded numbers, the numbers
+compare as integers, not characters. For example, in
+<b>-dictionary</b> mode, <b>bigBoy</b> sorts between <b>bigbang</b>
+and <b>bigboy</b>, and <b>x10y</b> sorts between <b>x9y</b> and
+<b>x11y</b>.</dd>
+
+<dt><a name="M7"><b>-integer</b></a></dt>
+
+<dd>Convert list elements to integers and use integer
+comparison.</dd>
+
+<dt><a name="M8"><b>-real</b></a></dt>
+
+<dd>Convert list elements to floating-point values and use floating
+comparison.</dd>
+
+<dt><a name="M9"><b>-command</b> <i>command</i></a></dt>
+
+<dd>Use <i>command</i> as a comparison command. To compare two
+elements, evaluate a Tcl script consisting of <i>command</i> with
+the two elements appended as additional arguments. The script
+should return an integer less than, equal to, or greater than zero
+if the first element is to be considered less than, equal to, or
+greater than the second, respectively.</dd>
+
+<dt><a name="M10"><b>-increasing</b></a></dt>
+
+<dd>Sort the list in increasing order (&ldquo;smallest&rdquo;items
+first). This is the default.</dd>
+
+<dt><a name="M11"><b>-decreasing</b></a></dt>
+
+<dd>Sort the list in decreasing order (&ldquo;largest&rdquo;items
+first).</dd>
+
+<dt><a name="M12"><b>-indices</b></a></dt>
+
+<dd>Return a list of indices into <i>list</i> in sorted order
+instead of the values themselves.</dd>
+
+<dt><a name="M13"><b>-index</b> <i>indexList</i></a></dt>
+
+<dd>If this option is specified, each of the elements of
+<i>list</i> must itself be a proper Tcl sublist. Instead of sorting
+based on whole sublists, <b>lsort</b> will extract the
+<i>indexList</i>'th element from each sublist (as if the overall
+element and the <i>indexList</i> were passed to <b><a href=
+"../TclCmd/lindex.htm">lindex</a></b>) and sort based on the given
+element. For example, 
+
+<pre>
+lsort -integer -index 1 \
+      {{First 24} {Second 18} {Third 30}}
+</pre>
+
+returns <b>{Second 18} {First 24} {Third 30}</b>, and 
+
+<pre>
+lsort -index end-1 \
+      {{a 1 e i} {b 2 3 f g} {c 4 5 6 d h}}
+</pre>
+
+returns <b>{c 4 5 6 d h} {a 1 e i} {b 2 3 f g}</b>, and 
+
+<pre>
+lsort -index {0 1} {
+   {{b i g} 12345}
+   {{d e m o} 34512}
+   {{c o d e} 54321}
+}
+</pre>
+
+returns <b>{{d e m o} 34512} {{b i g} 12345} {{c o d e} 54321}</b>
+(because <b>e</b> sorts before <b>i</b> which sorts before
+<b>o</b>.) This option is much more efficient than using
+<b>-command</b> to achieve the same effect.</dd>
+
+<dt><a name="M14"><b>-nocase</b></a></dt>
+
+<dd>Causes comparisons to be handled in a case-insensitive manner.
+Has no effect if combined with the <b>-dictionary</b>,
+<b>-integer</b>, or <b>-real</b> options.</dd>
+
+<dt><a name="M15"><b>-unique</b></a></dt>
+
+<dd>If this option is specified, then only the last set of
+duplicate elements found in the list will be retained. Note that
+duplicates are determined relative to the comparison used in the
+sort. Thus if <i>-index 0</i> is used, <b>{1 a}</b> and <b>{1
+b}</b> would be considered duplicates and only the second element,
+<b>{1 b}</b>, would be retained.</dd>
+</dl>
+
+<h3><a name="M16">NOTES</a></h3>
+
+The options to <b>lsort</b> only control what sort of comparison is
+used, and do not necessarily constrain what the values themselves
+actually are. This distinction is only noticeable when the list to
+be sorted has fewer than two elements. 
+
+<p>The <b>lsort</b> command is reentrant, meaning it is safe to use
+as part of the implementation of a command used in the
+<b>-command</b> option.</p>
+
+<h3><a name="M17">EXAMPLES</a></h3>
+
+Sorting a list using ASCII sorting: 
+
+<pre>
+% <b>lsort</b> {a10 B2 b1 a1 a2}
+B2 a1 a10 a2 b1
+</pre>
+
+<p>Sorting a list using Dictionary sorting:</p>
+
+<pre>
+% <b>lsort</b> -dictionary {a10 B2 b1 a1 a2}
+a1 a2 a10 b1 B2
+</pre>
+
+<p>Sorting lists of integers:</p>
+
+<pre>
+% <b>lsort</b> -integer {5 3 1 2 11 4}
+1 2 3 4 5 11
+% <b>lsort</b> -integer {1 2 0x5 7 0 4 -1}
+-1 0 1 2 4 0x5 7
+</pre>
+
+<p>Sorting lists of floating-point numbers:</p>
+
+<pre>
+% <b>lsort</b> -real {5 3 1 2 11 4}
+1 2 3 4 5 11
+% <b>lsort</b> -real {.5 0.07e1 0.4 6e-1}
+0.4 .5 6e-1 0.07e1
+</pre>
+
+<p>Sorting using indices:</p>
+
+<pre>
+% # Note the space character before the c
+% <b>lsort</b> {{a 5} { c 3} {b 4} {e 1} {d 2}}
+{ c 3} {a 5} {b 4} {d 2} {e 1}
+% <b>lsort</b> -index 0 {{a 5} { c 3} {b 4} {e 1} {d 2}}
+{a 5} {b 4} { c 3} {d 2} {e 1}
+% <b>lsort</b> -index 1 {{a 5} { c 3} {b 4} {e 1} {d 2}}
+{e 1} {d 2} { c 3} {b 4} {a 5}
+</pre>
+
+<p>Stripping duplicate values using sorting:</p>
+
+<pre>
+% <b>lsort</b> -unique {a b c a b c a b c}
+a b c
+</pre>
+
+<p>More complex sorting using a comparison function:</p>
+
+<pre>
+% proc compare {a b} {
+    set a0 [lindex $a 0]
+    set b0 [lindex $b 0]
+    if {$a0 &lt; $b0} {
+        return -1
+    } elseif {$a0 &gt; $b0} {
+        return 1
+    }
+    return [string compare [lindex $a 1] [lindex $b 1]]
+}
+% <b>lsort</b> -command compare \
+        {{3 apple} {0x2 carrot} {1 dingo} {2 banana}}
+{1 dingo} {2 banana} {0x2 carrot} {3 apple}
+</pre>
+
+<h3><a name="M18">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/list.htm">list</a></b>, <b><a href=
+"../TclCmd/lappend.htm">lappend</a></b>, <b><a href=
+"../TclCmd/lindex.htm">lindex</a></b>, <b><a href=
+"../TclCmd/linsert.htm">linsert</a></b>, <b><a href=
+"../TclCmd/llength.htm">llength</a></b>, <b><a href=
+"../TclCmd/lsearch.htm">lsearch</a></b>, <b><a href=
+"../TclCmd/lset.htm">lset</a></b>, <b><a href=
+"../TclCmd/lrange.htm">lrange</a></b>, <b><a href=
+"../TclCmd/lreplace.htm">lreplace</a></b> 
+
+<h3><a name="M19">KEYWORDS</a></h3>
+
+<a href="../Keywords/E.htm#element">element</a>, <a href=
+"../Keywords/L.htm#list">list</a>, <a href=
+"../Keywords/O.htm#order">order</a>, <a href=
+"../Keywords/S.htm#sort">sort</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+1999 Scriptics Corporation Copyright &copy; 2001 Kevin B. Kenny
+&lt;kennykb(at)acm.org&gt;. All rights reserved.</div>
+</body>
+</html>
+

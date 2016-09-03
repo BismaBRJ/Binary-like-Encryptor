@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - tk_optionMenu manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> optionMenu</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+tk_optionMenu - Create an option menubutton and its menu 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>tk_optionMenu</b> <i>pathName varName value</i> ?<i>value value
+...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This procedure creates an option menubutton whose name is
+<i>pathName</i>, plus an associated menu. Together they allow the
+user to select one of the values given by the <i>value</i>
+arguments. The current value will be stored in the global variable
+whose name is given by <i>varName</i> and it will also be displayed
+as the label in the option menubutton. The user can click on the
+menubutton to display a menu containing all of the <i>value</i>s
+and thereby select a new value. Once a new value is selected, it
+will be stored in the variable and appear in the option menubutton.
+The current value can also be changed by setting the variable. 
+
+<p>The return value from <b>tk_optionMenu</b> is the name of the
+menu associated with <i>pathName</i>, so that the caller can change
+its configuration options or manipulate it in other ways.</p>
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+<pre>
+tk_optionMenu .foo myVar Foo Bar Boo Spong Wibble
+pack .foo
+</pre>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/O.htm#option menu">option menu</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990-1994 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

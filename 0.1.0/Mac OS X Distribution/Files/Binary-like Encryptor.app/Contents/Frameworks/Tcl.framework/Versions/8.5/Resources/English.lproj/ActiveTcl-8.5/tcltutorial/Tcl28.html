@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>State of the interpreter - info</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">State of the interpreter - info</h1>
+
+<div class="nav"><a href="Tcl27.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl29.html">Next
+lesson</a></div>
+
+<p>There are a number of subcommands to the <code class=
+"keyword">info</code> command that provide information about the
+current state of the interpreter. These commands provide access to
+information like the current version and patchlevel, what script is
+currently being executed, how many commands have been executed, or
+how far down in the call tree the current proc is executing.</p>
+
+<p>The <code class="keyword">info</code> <code class=
+"arg">tclversion</code> and <code class="keyword">info</code> <code
+class="arg">patchlevel</code> can be used to find out if the
+revision level of the interpreter running your code has the support
+for features you are using. If you know that certain features are
+not available in certain revisions of the interpreter, you can
+define your own procs to handle this, or just exit the program with
+an error message.</p>
+
+<p>The <code class="keyword">info</code> <code class=
+"arg">cmdcount</code> and <code class="keyword">info</code> <code
+class="arg">level</code> can be used while optimizing a Tcl script
+to find out how many levels and commands were necessary to
+accomplish a function.</p>
+
+<p>Note that the <code class="keyword">pid</code> command is not
+part of the <code class="keyword">info</code> command, but a
+command in its own right.</p>
+
+<p><b>Subcommands that return information about the current state
+of the interpreter</b></p>
+
+<p>(Note: There are several other subcommands that can be useful at
+times)</p>
+
+<dl>
+<dt><code class="keyword">info</code> <code class=
+"arg">cmdcount</code></dt>
+
+<dd>Returns the total number of commands that have been executed by
+this interpreter.</dd>
+
+<dt><code class="keyword">info</code> <code class=
+"arg">level</code> <code class="arg">?number?</code></dt>
+
+<dd>Returns the stack level at which the compiler is currently
+evaluating code. 0 is the top level, 1 is a proc called from top, 2
+is a proc called from a proc, etc. 
+
+<p>If <code class="arg">number</code> is a positive value, <code
+class="keyword">info</code> <code class="arg">level</code> returns
+a the name and arguments of the proc at that level on the stack.
+<code class="arg">Number</code> is that same value that <code
+class="keyword">info</code> <code class="arg">level</code> would
+return if it were called in the proc being referenced.</p>
+
+<p>If <code class="arg">number</code> number is a negative value,
+it refers to the current level plus <code class=
+"arg">number</code>. Thus, <code class="keyword">info</code> <code
+class="arg">level</code> returns a the name and arguments of the
+proc at that level on the stack.</p>
+</dd>
+
+<dt><code class="keyword">info</code> <code class=
+"arg">patchlevel</code></dt>
+
+<dd>Returns the value of the global variable tcl_patchlevel. This
+is a three-levels version number identifying the Tcl version, like:
+"8.4.6"</dd>
+
+<dt><code class="keyword">info</code> <code class=
+"arg">script</code></dt>
+
+<dd>Returns the name of the file currently being evaluated, if one
+is being evaluated. If there is no file being evaluated, returns an
+empty string. 
+
+<p>This can be used for instance to determine the directory holding
+other scripts or files of interest (they often live in the same
+directory or in a related directory), without having to hardcode
+the paths.</p>
+</dd>
+
+<dt><code class="keyword">info</code> <code class=
+"arg">tclversion</code></dt>
+
+<dd>Returns the value of the global variable tcl_version. This is
+the revision number of this interpreter, like: "8.4".</dd>
+
+<dt><code class="keyword">pid</code></dt>
+
+<dd>Returns the process id of the current process.</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+puts "This is how many commands have been executed: [info cmdcount]"
+puts "Now  *THIS* many commands have been executed: [info cmdcount]"
+
+puts "\nThis interpreter is revision level: [info tclversion]"
+puts "This interpreter is at patch level: [info patchlevel]"
+
+puts "The process id for this program is [pid]"
+
+proc factorial {val} {
+    puts "Current level: [info level] - val: $val"
+    set lvl [info level]
+    if {$lvl == $val} {
+        return $val
+    }
+    return [expr {($val-$lvl) * [factorial $val]]}]
+}
+
+set count1 [info cmdcount]
+set fact [factorial 3]
+set count2 [info cmdcount]
+puts "The factorial of 3 is $fact"
+puts "Before calling the factorial proc, $count1 commands had been executed"
+puts "After calling the factorial proc, $count2 commands had been executed"
+puts "It took [expr $count2-$count1] commands to calculate this factorial"
+
+#
+# Use [info script] to determine where the other files of interest
+# reside
+#
+set sysdir [file root [info script]]
+source [file join $sysdir "utils.tcl"]
+
+</pre>
+
+<div class="nav"><a href="Tcl27.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl29.html">Next
+lesson</a></div>
+</body>
+</html>
+

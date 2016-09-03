@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>scrolledframe - Create and manipulate scrolled frame
+widgets</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>scrolledframe - Create and manipulate scrolled frame
+widgets</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>scrolledframe pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- Labeledwidget &lt;-Scrolledwidget &lt;-
+Scrolledframe 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeBackground</b><br>
+<b>font</b><br>
+<b>relief</b><br>
+</td>
+<td valign="top"><b>background</b><br>
+<b>foreground</b><br>
+<b>selectBackground</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>highlightColor</b><br>
+<b>selectBorderWidth</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>highlightThickness</b><br>
+<b>selectForeground</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeRelief</b><br>
+</td>
+<td valign="top"><b>elementBorderWidth</b><br>
+</td>
+<td valign="top"><b>jump</b><br>
+</td>
+<td valign="top"><b>troughColor</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/scrollbar.n.html">"scrollbar"</a>
+manual entry for details on the associated options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>LabelBitmap</b><br>
+<b>labelPos</b><br>
+</td>
+<td valign="top"><b>labelFont</b><br>
+<b>labelText</b><br>
+</td>
+<td valign="top"><b>labelImage</b><br>
+<b>labelVariable</b><br>
+</td>
+<td valign="top"><b>labelMargin</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="labeledwidget.n.html">"labeledwidget"</a> class
+manual entry for details on the inherited options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>height</b>
+Class:                  <b>Height</b>
+Command-Line Switch:    <b>-height</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the height of the scrolled
+frame widget in any of the forms acceptable to <b>Tk_GetPixels</b>.
+The default height is 100 pixels.</div>
+
+<pre>
+Name:                   <b>hscrollMode</b>
+Class:                  <b>ScrollMode</b>
+Command-Line Switch:    <b>-hscrollmode</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the the display mode to be
+used for the horizontal scrollbar: <b>static</b>, <b>dynamic</b>,
+or <b>none</b>. In static mode, the scroll bar is displayed at all
+times. Dynamic mode displays the scroll bar as required, and none
+disables the scroll bar display. The default is static.</div>
+
+<pre>
+Name:                   <b>sbWidth</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-sbwidth</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width of the scrollbar
+in any of the forms acceptable to <b>Tk_GetPixels</b>. The default
+width is 15 pixels.</div>
+
+<pre>
+Name:                   <b>scrollMargin</b>
+Class:                  <b>Margin</b>
+Command-Line Switch:    <b>-scrollmargin</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the distance between the
+frame and scrollbar in any of the forms acceptable to
+<b>Tk_GetPixels</b>. The default is 3 pixels.</div>
+
+<pre>
+Name:                   <b>vscrollMode</b>
+Class:                  <b>ScrollMode</b>
+Command-Line Switch:    <b>-vscrollmode</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the the display mode to be
+used for the vertical scrollbar: <b>static</b>, <b>dynamic</b>, or
+<b>none</b>. In static mode, the scroll bar is displayed at all
+times. Dynamic mode displays the scroll bar as required, and none
+disables the scroll bar display. The default is static.</div>
+
+<pre>
+Name:                   <b>width</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-width</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width of the scrolled
+frame widget in any of the forms acceptable to <b>Tk_GetPixels</b>.
+The default height is 100 pixels.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>scrolledframe</b> combines the functionallity of
+scrolling with that of a typical frame widget to implement a
+clipable viewing area whose visible region may be modified with the
+scroll bars. This enables the contruction of visually larger areas
+than which could normally be displayed, containing a heterogenous
+mix of other widgets. Options exist which allow full control over
+which scrollbars are displayed and the method, i.e. statically or
+dynamically. The frame itself may be accessed by the
+<b>childsite</b> method and then filled with other widget
+combinations.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>scrolledframe</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for scrolledframe
+widgets: 
+
+<h2>ASSOCIATED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>xview</b><br>
+</td>
+<td valign="top"><b>yview</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/canvas.n.html">"canvas"</a>
+manual entry for details on the associated methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>scrolledframe</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>childsite</b></i></dt>
+
+<dd>Return the path name of the child site.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>scrolledframe</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>justify <i>direction</i></b></i></dt>
+
+<dd>Justifies the frame contents via the scroll bars in one of four
+directions: <b>left</b>, <b>right</b>, <b>top</b>, or
+<b>bottom</b>.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>horizsb</b>
+Class:                  <b>Scrollbar</b>
+</pre>
+
+<div style="margin-left: 2em">The horizsb component is the
+horizontal scroll bar. See the "ScrollBar" widget manual entry for
+details on the horizsb component item.</div>
+
+<pre>
+Name:                   <b>vertsb</b>
+Class:                  <b>Scrollbar</b>
+</pre>
+
+<div style="margin-left: 2em">The vertsb component is the vertical
+scroll bar. See the "ScrollBar" widget manual entry for details on
+the vertsb component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+scrolledframe .sf -width 150 -height 180 -labelon yes -labeltext scrolledframe
+
+set cs [.sf childsite]
+pack [button $cs.b1 -text Hello] -pady 10
+pack [button $cs.b2 -text World] -pady 10
+pack [button $cs.b3 -text "This is a test"] -pady 10
+pack [button $cs.b4 -text "This is a really big button"] -pady 10
+pack [button $cs.b5 -text "This is another really big button"] -pady 10
+pack [button $cs.b6 -text "This is the last really big button"] -pady 10
+
+pack .sf -expand yes -fill both -padx 10 -pady 10
+</pre>
+
+<h2>AUTHORS</h2>
+
+Mark L. Ulferts 
+
+<p>Sue Yockey</p>
+
+<h2>KEYWORDS</h2>
+
+scrolledframe, frame, widget
+</body>
+</html>
+

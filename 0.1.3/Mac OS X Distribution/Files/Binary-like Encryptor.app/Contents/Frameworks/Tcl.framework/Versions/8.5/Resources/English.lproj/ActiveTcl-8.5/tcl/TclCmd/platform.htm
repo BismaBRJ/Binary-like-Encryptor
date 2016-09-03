@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Bundled Packages - platform manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> platform</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="platform.htm#M2" name="L1193">NAME</a> 
+
+<dl>
+<dd>platform - System identification support code and
+utilities</dd>
+</dl>
+</dd>
+
+<dd><a href="platform.htm#M3" name="L1194">SYNOPSIS</a> 
+
+<dl>
+<dd><b>package require platform ?1.0.4?</b></dd>
+
+<dd><b>platform::generic</b></dd>
+
+<dd><b>platform::identify</b></dd>
+
+<dd><b>platform::patterns</b> <i>identifier</i></dd>
+</dl>
+</dd>
+
+<dd><a href="platform.htm#M4" name="L1195">DESCRIPTION</a></dd>
+
+<dd><a href="platform.htm#M5" name="L1196">COMMANDS</a> 
+
+<dl class="commands">
+<dd><a href="platform.htm#M6" name=
+"L1197"><b>platform::identify</b></a></dd>
+
+<dd><a href="platform.htm#M7" name=
+"L1198"><b>platform::generic</b></a></dd>
+
+<dd><a href="platform.htm#M8" name=
+"L1199"><b>platform::patterns</b> <i>identifier</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="platform.htm#M9" name="L1200">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+platform - System identification support code and utilities 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>package require platform ?1.0.4?</b><br>
+<b>platform::generic</b><br>
+<b>platform::identify</b><br>
+<b>platform::patterns</b> <i>identifier</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>platform</b> package provides several utility commands
+useful for the identification of the architecture of a machine
+running Tcl. 
+
+<p>Whilst Tcl provides the <b>tcl_platform</b> array for
+identifying the current architecture (in particular, the platform
+and machine elements) this is not always sufficient. This is
+because (on Unix machines) <b>tcl_platform</b> reflects the values
+returned by the <b>uname</b> command and these are not standardized
+across platforms and architectures. In addition, on at least one
+platform (AIX) the <b>tcl_platform(machine)</b> contains the CPU
+serial number.</p>
+
+<p>Consequently, individual applications need to manipulate the
+values in <b>tcl_platform</b> (along with the output of system
+specific utilities) - which is both inconvenient for developers,
+and introduces the potential for inconsistencies in identifying
+architectures and in naming conventions.</p>
+
+<p>The <b>platform</b> package prevents such fragmentation - i.e.,
+it establishes a standard naming convention for architectures
+running Tcl and makes it more convenient for developers to identify
+the current architecture a Tcl program is running on.</p>
+
+<h3><a name="M5">COMMANDS</a></h3>
+
+<dl class="commands">
+<dt><a name="M6"><b>platform::identify</b></a></dt>
+
+<dd>This command returns an identifier describing the platform the
+Tcl core is running on. The returned identifier has the general
+format <i>OS</i>-<i>CPU</i>. The <i>OS</i> part of the identifier
+may contain details like kernel version, libc version, etc., and
+this information may contain dashes as well. The <i>CPU</i> part
+will not contain dashes, making the preceding dash the last dash in
+the result.</dd>
+
+<dt><a name="M7"><b>platform::generic</b></a></dt>
+
+<dd>This command returns a simplified identifier describing the
+platform the Tcl core is running on. In contrast to
+<b>platform::identify</b> it leaves out details like kernel
+version, libc version, etc. The returned identifier has the general
+format <i>OS</i>-<i>CPU</i>.</dd>
+
+<dt><a name="M8"><b>platform::patterns</b>
+<i>identifier</i></a></dt>
+
+<dd>This command takes an identifier as returned by
+<b>platform::identify</b> and returns a list of identifiers
+describing compatible architectures.</dd>
+</dl>
+
+<h3><a name="M9">KEYWORDS</a></h3>
+
+<a href="../Keywords/O.htm#operating system">operating system</a>,
+<a href="../Keywords/C.htm#cpu architecture">cpu architecture</a>,
+<a href="../Keywords/P.htm#platform">platform</a>, <a href=
+"../Keywords/A.htm#architecture">architecture</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2006 ActiveState Software Inc</div>
+</body>
+</html>
+

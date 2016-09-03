@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Library Procedures - Tcl_DetachPids manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> DetachPids</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_DetachPids, Tcl_ReapDetachedProcs, Tcl_WaitPid - manage child
+processes in background 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+<b>Tcl_DetachPids</b>(<i>numPids, pidPtr</i>)<br>
+<b>Tcl_ReapDetachedProcs</b>()<br>
+Tcl_Pid<br>
+<b>Tcl_WaitPid</b>(<i>pid, statusPtr, options</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>int <b>numPids</b> (in)</dt>
+
+<dd>Number of process ids contained in the array pointed to by
+<i>pidPtr</i>.</dd>
+
+<dt>int <b>*pidPtr</b> (in)</dt>
+
+<dd>Address of array containing <i>numPids</i> process ids.</dd>
+
+<dt>Tcl_Pid <b><a href="../TclCmd/pid.htm">pid</a></b> (in)</dt>
+
+<dd>The id of the process (pipe) to wait for.</dd>
+
+<dt>int <b>*statusPtr</b> (out)</dt>
+
+<dd>The result of waiting on a process (pipe). Either 0 or
+ECHILD.</dd>
+
+<dt>int <b><a href="../TkCmd/options.htm">options</a></b> (in)</dt>
+
+<dd>The options controlling the wait. WNOHANG specifies not to wait
+when checking the process.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_DetachPids</b> and <b>Tcl_ReapDetachedProcs</b> provide a
+mechanism for managing subprocesses that are running in background.
+These procedures are needed because the parent of a process must
+eventually invoke the <b>waitpid</b> kernel call (or one of a few
+other similar kernel calls) to wait for the child to exit. Until
+the parent waits for the child, the child's state cannot be
+completely reclaimed by the system. If a parent continually creates
+children and doesn't wait on them, the system's process table will
+eventually overflow, even if all the children have exited. 
+
+<p><b>Tcl_DetachPids</b> may be called to ask Tcl to take
+responsibility for one or more processes whose process ids are
+contained in the <i>pidPtr</i> array passed as argument. The caller
+presumably has started these processes running in background and
+does not want to have to deal with them again.</p>
+
+<p><b>Tcl_ReapDetachedProcs</b> invokes the <b>waitpid</b> kernel
+call on each of the background processes so that its state can be
+cleaned up if it has exited. If the process has not exited yet,
+<b>Tcl_ReapDetachedProcs</b> does not wait for it to exit; it will
+check again the next time it is invoked. Tcl automatically calls
+<b>Tcl_ReapDetachedProcs</b> each time the <b><a href=
+"../TclCmd/exec.htm">exec</a></b> command is executed, so in most
+cases it is not necessary for any code outside of Tcl to invoke
+<b>Tcl_ReapDetachedProcs</b>. However, if you call
+<b>Tcl_DetachPids</b> in situations where the <b><a href=
+"../TclCmd/exec.htm">exec</a></b> command may never get executed,
+you may wish to call <b>Tcl_ReapDetachedProcs</b> from time to time
+so that background processes can be cleaned up.</p>
+
+<p><b>Tcl_WaitPid</b> is a thin wrapper around the facilities
+provided by the operating system to wait on the end of a spawned
+process and to check a whether spawned process is still running. It
+is used by <b>Tcl_ReapDetachedProcs</b> and the channel system to
+portably access the operating system.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#background">background</a>, <a href=
+"../Keywords/C.htm#child">child</a>, <a href=
+"../Keywords/D.htm#detach">detach</a>, <a href=
+"../Keywords/P.htm#process">process</a>, <a href=
+"../Keywords/W.htm#wait">wait</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1989-1993 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

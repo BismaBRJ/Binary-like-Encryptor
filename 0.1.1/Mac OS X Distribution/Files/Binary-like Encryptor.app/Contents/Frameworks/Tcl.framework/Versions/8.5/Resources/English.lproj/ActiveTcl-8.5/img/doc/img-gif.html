@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>img-gif - Img</title>
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+</head>
+<body>
+<div class="doctools">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<hr>
+[ <a href="../../at.pkg_index.html">Main table Of Contents</a> | <a
+href="../toc.html">Img Table Of Contents</a> | <a href=
+"../index.html">Img Index</a> ] 
+
+<hr>
+<h1 class="title">img-gif(n) 1.4 "Img"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>img-gif - Img, Graphics Interchange Format (gif)</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">GIF OPTIONS</a></li>
+
+<li class="section"><a href="#section3">IMAGE COMPRESSION</a></li>
+
+<li class="section"><a href="#section4">TRANSPARENCY</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tk</b></li>
+
+<li>package require <b class="pkgname">img::gif <span class=
+"opt">?1.4?</span></b></li>
+</ul>
+
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">image</b> <b class="method">create
+photo</b> <span class="opt">?<i class="arg">name</i>?</span> <span
+class="opt">?<i class="arg">options</i>?</span></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>The package <b class="package">img::gif</b> is a sub-package of
+<b class="package">Img</b>. It can be loaded as a part of the
+complete Img support, via <b class="cmd">package require Img</b>,
+or on its own, via <b class="cmd">package require img::gif</b>.</p>
+
+<p>Like all packages of <b class="package">Img</b> it does
+<em>not</em> provide new commands, but extends the existing <b
+class="package"><a href="../index.html#key20">Tk</a></b> command <b
+class="cmd">image</b> so that it supports files containing raster
+images in the Graphics Interchange Format (gif). More specifically
+<b class="package">img::gif</b> extends <b class="package"><a href=
+"../index.html#key20">Tk</a></b>'s <b class="cmd">photo</b> image
+type.</p>
+
+<p>The name of the new format handler is <b class="const">gif</b>.
+This handler provides new additional configuration options. See
+section <span class="sectref"><a href="#section2">GIF
+OPTIONS</a></span> for more detailed explanations.</p>
+
+<p>All of the above means that in a call like</p>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">image</b> <b class="method">create
+photo</b> <span class="opt">?<i class="arg">name</i>?</span> <span
+class="opt">?<i class="arg">options</i>?</span></a></dt>
+</dl>
+
+<ol class="enumerated">
+<li>
+<p>Image data in gif format (options <b class="option">-data</b>
+and <b class="option">-file</b>) is detected automatically.</p>
+</li>
+
+<li>
+<p>The format name <b class="const">gif</b> is recognized by the
+option <b class="option">-format</b>. In addition the value for the
+option is treated as list and may contain any of the special
+options listed in section <span class="sectref"><a href=
+"#section2">GIF OPTIONS</a></span>.</p>
+</li>
+</ol>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">GIF OPTIONS</a></h2>
+
+<p>The handler provides two options, one for reading from a GIF
+image, the other influencing the writing of such.</p>
+
+<dl class="definitions">
+<dt><b class="option">-index</b> <i class="arg">n</i></dt>
+
+<dd>
+<p>This option is for reading from GIF files containing more than
+one image (<i class="term">animated GIF's</i>, <i class="term">GIF
+movies</i>. When specified it will read the <i class="arg">n</i>'th
+image in the data. The first image is at index <b class=
+"const">0</b> and will be read by default, i.e. when the option is
+not specified.</p>
+</dd>
+
+<dt><b class="option">-interlaced</b> <i class="arg">bool</i></dt>
+
+<dd>
+<p>If the value of this option is set to true the image will be
+written using the interlaced sub-format of GIF. The default is to
+write non-interlaced files. <em>This option is not implemented
+yet.</em></p>
+</dd>
+</dl>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">IMAGE COMPRESSION</a></h2>
+
+<p>Instead of LZW the run-length encoding of Hutchison Avenue
+Software Corporation is used, also known as <i class=
+"term">miGIF</i> compression. The miGIF compression routines do
+not, strictly speaking, generate files conforming to the GIF spec,
+since the image data is not LZW-compressed (this is the point: in
+order to avoid transgression of the Unisys patent on the LZW
+algorithm.) However, miGIF generates data streams that any
+reasonably sane LZW decompresser will decompress to what we
+want.</p>
+</div>
+
+<div id="section4" class="section">
+<h2><a name="section4">TRANSPARENCY</a></h2>
+
+<p>If you want to write images to disk which contain transparency
+information (e.g. GIF89) you need at least <b class="package"><a
+href="../index.html#key20">Tk</a></b> 8.3.</p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="img-bmp.html">img-bmp</a>, <a href=
+"img-dted.html">img-dted</a>, img-gif, <a href=
+"img-ico.html">img-ico</a>, <a href="img.html">img-intro</a>, <a
+href="img-jpeg.html">img-jpeg</a>, <a href=
+"img-pcx.html">img-pcx</a>, <a href=
+"img-pixmap.html">img-pixmap</a>, <a href=
+"img-png.html">img-png</a>, <a href="img-ppm.html">img-ppm</a>, <a
+href="img-ps.html">img-ps</a>, <a href="img-raw.html">img-raw</a>,
+<a href="img-sgi.html">img-sgi</a>, <a href=
+"img-sun.html">img-sun</a>, <a href="img-tga.html">img-tga</a>, <a
+href="img-tiff.html">img-tiff</a>, <a href=
+"img-window.html">img-window</a>, <a href=
+"img-xbm.html">img-xbm</a>, <a href="img-xpm.html">img-xpm</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../index.html#key3">gif</a>, <a href=
+"../index.html#key6">image handling</a>, <a href=
+"../index.html#key20">tk</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 1995-2009 Jan Nijtmans
+&lt;nijtmans@users.sourceforge.net&gt;</p>
+</div>
+
+<h4>Copyright &copy; 2015 <a href="http://www.activestate.com">for
+compilation: ActiveState</a></h4>
+</div>
+</body>
+</html>
+

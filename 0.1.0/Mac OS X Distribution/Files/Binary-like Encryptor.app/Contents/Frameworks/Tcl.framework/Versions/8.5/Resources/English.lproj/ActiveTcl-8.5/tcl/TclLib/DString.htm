@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_DString manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> DString</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_DStringInit, Tcl_DStringAppend, Tcl_DStringAppendElement,
+Tcl_DStringStartSublist, Tcl_DStringEndSublist, Tcl_DStringLength,
+Tcl_DStringValue, Tcl_DStringSetLength, Tcl_DStringTrunc,
+Tcl_DStringFree, Tcl_DStringResult, Tcl_DStringGetResult -
+manipulate dynamic strings 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+<b>Tcl_DStringInit</b>(<i>dsPtr</i>)<br>
+char *<br>
+<b>Tcl_DStringAppend</b>(<i>dsPtr, bytes, length</i>)<br>
+char *<br>
+<b>Tcl_DStringAppendElement</b>(<i>dsPtr, element</i>)<br>
+<b>Tcl_DStringStartSublist</b>(<i>dsPtr</i>)<br>
+<b>Tcl_DStringEndSublist</b>(<i>dsPtr</i>)<br>
+int<br>
+<b>Tcl_DStringLength</b>(<i>dsPtr</i>)<br>
+char *<br>
+<b>Tcl_DStringValue</b>(<i>dsPtr</i>)<br>
+<b>Tcl_DStringSetLength</b>(<i>dsPtr, newLength</i>)<br>
+<b>Tcl_DStringTrunc</b>(<i>dsPtr, newLength</i>)<br>
+<b>Tcl_DStringFree</b>(<i>dsPtr</i>)<br>
+<b>Tcl_DStringResult</b>(<i>interp, dsPtr</i>)<br>
+<b>Tcl_DStringGetResult</b>(<i>interp, dsPtr</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tcl_DString <b>*dsPtr</b> (in/out)</dt>
+
+<dd>Pointer to structure that is used to manage a dynamic
+string.</dd>
+
+<dt>const char <b>*bytes</b> (in)</dt>
+
+<dd>Pointer to characters to append to dynamic string.</dd>
+
+<dt>const char <b>*element</b> (in)</dt>
+
+<dd>Pointer to characters to append as list element to dynamic
+string.</dd>
+
+<dt>int <b>length</b> (in)</dt>
+
+<dd>Number of bytes from <i>bytes</i> to add to dynamic string. If
+-1, add all characters up to null terminating character.</dd>
+
+<dt>int <b>newLength</b> (in)</dt>
+
+<dd>New length for dynamic string, not including null terminating
+character.</dd>
+
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in/out)</dt>
+
+<dd>Interpreter whose result is to be set from or moved to the
+dynamic string.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+Dynamic strings provide a mechanism for building up arbitrarily
+long strings by gradually appending information. If the dynamic
+string is short then there will be no memory allocation overhead;
+as the string gets larger, additional space will be allocated as
+needed. 
+
+<p><b>Tcl_DStringInit</b> initializes a dynamic string to zero
+length. The Tcl_DString structure must have been allocated by the
+caller. No assumptions are made about the current state of the
+structure; anything already in it is discarded. If the structure
+has been used previously, <b>Tcl_DStringFree</b> should be called
+first to free up any memory allocated for the old string.</p>
+
+<p><b>Tcl_DStringAppend</b> adds new information to a dynamic
+string, allocating more memory for the string if needed. If
+<i>length</i> is less than zero then everything in <i>bytes</i> is
+appended to the dynamic string; otherwise <i>length</i> specifies
+the number of bytes to append. <b>Tcl_DStringAppend</b> returns a
+pointer to the characters of the new string. The string can also be
+retrieved from the <i>string</i> field of the Tcl_DString
+structure.</p>
+
+<p><b>Tcl_DStringAppendElement</b> is similar to
+<b>Tcl_DStringAppend</b> except that it does not take a
+<i>length</i> argument (it appends all of <i>element</i>) and it
+converts the string to a proper list element before appending.
+<b>Tcl_DStringAppendElement</b> adds a separator space before the
+new list element unless the new list element is the first in a list
+or sub-list (i.e. either the current string is empty, or it
+contains the single character &ldquo;{&rdquo;, or the last two
+characters of the current string are &ldquo; {&rdquo;).
+<b>Tcl_DStringAppendElement</b> returns a pointer to the characters
+of the new string.</p>
+
+<p><b>Tcl_DStringStartSublist</b> and <b>Tcl_DStringEndSublist</b>
+can be used to create nested lists. To append a list element that
+is itself a sublist, first call <b>Tcl_DStringStartSublist</b>,
+then call <b>Tcl_DStringAppendElement</b> for each of the elements
+in the sublist, then call <b>Tcl_DStringEndSublist</b> to end the
+sublist. <b>Tcl_DStringStartSublist</b> appends a space character
+if needed, followed by an open brace; <b>Tcl_DStringEndSublist</b>
+appends a close brace. Lists can be nested to any depth.</p>
+
+<p><b>Tcl_DStringLength</b> is a macro that returns the current
+length of a dynamic string (not including the terminating null
+character). <b>Tcl_DStringValue</b> is a macro that returns a
+pointer to the current contents of a dynamic string.</p>
+
+<p><b>Tcl_DStringSetLength</b> changes the length of a dynamic
+string. If <i>newLength</i> is less than the string's current
+length, then the string is truncated. If <i>newLength</i> is
+greater than the string's current length, then the string will
+become longer and new space will be allocated for the string if
+needed. However, <b>Tcl_DStringSetLength</b> will not initialize
+the new space except to provide a terminating null character; it is
+up to the caller to fill in the new space.
+<b>Tcl_DStringSetLength</b> does not free up the string's storage
+space even if the string is truncated to zero length, so
+<b>Tcl_DStringFree</b> will still need to be called.</p>
+
+<p><b>Tcl_DStringTrunc</b> changes the length of a dynamic string.
+This procedure is now deprecated. <b>Tcl_DStringSetLength</b>
+should be used instead.</p>
+
+<p><b>Tcl_DStringFree</b> should be called when you are finished
+using the string. It frees up any memory that was allocated for the
+string and reinitializes the string's value to an empty string.</p>
+
+<p><b>Tcl_DStringResult</b> sets the result of <i>interp</i> to the
+value of the dynamic string given by <i>dsPtr</i>. It does this by
+moving a pointer from <i>dsPtr</i> to the interpreter's result.
+This saves the cost of allocating new memory and copying the
+string. <b>Tcl_DStringResult</b> also reinitializes the dynamic
+string to an empty string.</p>
+
+<p><b>Tcl_DStringGetResult</b> does the opposite of
+<b>Tcl_DStringResult</b>. It sets the value of <i>dsPtr</i> to the
+result of <i>interp</i> and it clears <i>interp</i>'s result. If
+possible it does this by moving a pointer rather than by copying
+the string.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#append">append</a>, <a href=
+"../Keywords/D.htm#dynamic string">dynamic string</a>, <a href=
+"../Keywords/F.htm#free">free</a>, <a href=
+"../Keywords/R.htm#result">result</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

@@ -1,0 +1,587 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk::widget manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_widget</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_widget.htm#M2" name="L2111">NAME</a> 
+
+<dl>
+<dd>ttk::widget - Standard options and commands supported by Tk
+themed widgets</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_widget.htm#M3" name="L2112">DESCRIPTION</a></dd>
+
+<dd><a href="ttk_widget.htm#M4" name="L2113">STANDARD OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_widget.htm#M5" name="L2114">-class, undefined,
+undefined</a></dd>
+
+<dd><a href="ttk_widget.htm#M6" name="L2115">-cursor, cursor,
+Cursor</a></dd>
+
+<dd><a href="ttk_widget.htm#M7" name="L2116">-takefocus, takeFocus,
+TakeFocus</a></dd>
+
+<dd><a href="ttk_widget.htm#M8" name="L2117">-style, style,
+Style</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_widget.htm#M9" name="L2118">SCROLLABLE WIDGET
+OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_widget.htm#M10" name="L2119">-xscrollcommand,
+xScrollCommand, ScrollCommand</a></dd>
+</dl>
+
+<dl>
+<dd><a href="ttk_widget.htm#M11" name="L2120">-yscrollcommand,
+yScrollCommand, ScrollCommand</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_widget.htm#M12" name="L2121">LABEL OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_widget.htm#M13" name="L2122">-text, text,
+Text</a></dd>
+
+<dd><a href="ttk_widget.htm#M14" name="L2123">-textvariable,
+textVariable, Variable</a></dd>
+
+<dd><a href="ttk_widget.htm#M15" name="L2124">-underline,
+underline, Underline</a></dd>
+
+<dd><a href="ttk_widget.htm#M16" name="L2125">-image, image,
+Image</a></dd>
+
+<dd><a href="ttk_widget.htm#M17" name="L2126">-compound, compound,
+Compound</a></dd>
+</dl>
+
+<dl class="label options">
+<dd><a href="ttk_widget.htm#M18" name="L2127">text</a></dd>
+
+<dd><a href="ttk_widget.htm#M19" name="L2128">image</a></dd>
+
+<dd><a href="ttk_widget.htm#M20" name="L2129">center</a></dd>
+
+<dd><a href="ttk_widget.htm#M21" name="L2130">top</a></dd>
+
+<dd><a href="ttk_widget.htm#M22" name="L2131">bottom</a></dd>
+
+<dd><a href="ttk_widget.htm#M23" name="L2132">left</a></dd>
+
+<dd><a href="ttk_widget.htm#M24" name="L2133">right</a></dd>
+
+<dd><a href="ttk_widget.htm#M25" name="L2134">none</a></dd>
+</dl>
+
+<dl>
+<dd><a href="ttk_widget.htm#M26" name="L2135">-width, width,
+Width</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_widget.htm#M27" name="L2136">COMPATIBILITY
+OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_widget.htm#M28" name="L2137">-state, state,
+State</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_widget.htm#M29" name="L2138">COMMANDS</a> 
+
+<dl class="commands">
+<dd><a href="ttk_widget.htm#M30" name="L2139"><i>pathName</i>
+<b>cget</b> <i>option</i></a></dd>
+
+<dd><a href="ttk_widget.htm#M31" name="L2140"><i>pathName</i>
+<b>configure</b> ?<i>option</i>? ?<i>value option value
+...</i>?</a></dd>
+
+<dd><a href="ttk_widget.htm#M32" name="L2141"><i>pathName</i>
+<b>identify</b> <b>element</b> <i>x y</i></a></dd>
+
+<dd><a href="ttk_widget.htm#M33" name="L2142"><i>pathName</i>
+<b>instate</b> <i>statespec</i> ?<i>script</i>?</a></dd>
+
+<dd><a href="ttk_widget.htm#M34" name="L2143"><i>pathName</i>
+<b>state</b> ?<i>stateSpec</i>?</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_widget.htm#M35" name="L2144">WIDGET STATES</a> 
+
+<dl class="widget states">
+<dd><a href="ttk_widget.htm#M36" name=
+"L2145"><b>active</b></a></dd>
+
+<dd><a href="ttk_widget.htm#M37" name=
+"L2146"><b>disabled</b></a></dd>
+
+<dd><a href="ttk_widget.htm#M38" name="L2147"><b>focus</b></a></dd>
+
+<dd><a href="ttk_widget.htm#M39" name=
+"L2148"><b>pressed</b></a></dd>
+
+<dd><a href="ttk_widget.htm#M40" name=
+"L2149"><b>selected</b></a></dd>
+
+<dd><a href="ttk_widget.htm#M41" name=
+"L2150"><b>background</b></a></dd>
+
+<dd><a href="ttk_widget.htm#M42" name=
+"L2151"><b>readonly</b></a></dd>
+
+<dd><a href="ttk_widget.htm#M43" name=
+"L2152"><b>alternate</b></a></dd>
+
+<dd><a href="ttk_widget.htm#M44" name=
+"L2153"><b>invalid</b></a></dd>
+
+<dd><a href="ttk_widget.htm#M45" name="L2154"><b>hover</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_widget.htm#M46" name="L2155">EXAMPLES</a></dd>
+
+<dd><a href="ttk_widget.htm#M47" name="L2156">SEE ALSO</a></dd>
+
+<dd><a href="ttk_widget.htm#M48" name="L2157">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk::widget - Standard options and commands supported by Tk themed
+widgets 
+
+<h3><a name="M3">DESCRIPTION</a></h3>
+
+This manual describes common widget options and commands. 
+
+<h3><a name="M4">STANDARD OPTIONS</a></h3>
+
+The following options are supported by all Tk themed widgets: 
+
+<dl>
+<dt>Command-Line Name: <b><a name="M5">-class</a></b></dt>
+
+<dt>Database Name: <b>undefined</b></dt>
+
+<dt>Database Class: <b>undefined</b></dt>
+
+<dd>Specifies the window class. The class is used when querying the
+option database for the window's other options, to determine the
+default bindtags for the window, and to select the widget's default
+layout and style. This is a read-only option: it may only be
+specified when the window is created, and may not be changed with
+the <b>configure</b> widget command.</dd>
+
+<dt>Command-Line Name: <b><a name="M6">-cursor</a></b></dt>
+
+<dt>Database Name: <b>cursor</b></dt>
+
+<dt>Database Class: <b>Cursor</b></dt>
+
+<dd>Specifies the mouse cursor to be used for the widget. See <b><a
+href="../TkLib/GetCursor.htm">Tk_GetCursor</a></b> and
+<i>cursors(n)</i> in the Tk reference manual for the legal values.
+If set to the empty string (the default), the cursor is inherited
+from the parent widget.</dd>
+
+<dt>Command-Line Name: <b><a name="M7">-takefocus</a></b></dt>
+
+<dt>Database Name: <b>takeFocus</b></dt>
+
+<dt>Database Class: <b>TakeFocus</b></dt>
+
+<dd>Determines whether the window accepts the focus during keyboard
+traversal. Either <b>0</b>, <b>1</b>, a command prefix (to which
+the widget path is appended, and which should return <b>0</b> or
+<b>1</b>), or the empty string. See <i>options(n)</i> in the Tk
+reference manual for the full description.</dd>
+
+<dt>Command-Line Name: <b><a name="M8">-style</a></b></dt>
+
+<dt>Database Name: <b>style</b></dt>
+
+<dt>Database Class: <b>Style</b></dt>
+
+<dd>May be used to specify a custom widget style.</dd>
+</dl>
+
+<h3><a name="M9">SCROLLABLE WIDGET OPTIONS</a></h3>
+
+The following options are supported by widgets that are
+controllable by a scrollbar. See <i>scrollbar(n)</i> for more
+information 
+
+<dl>
+<dt>Command-Line Name: <b><a name=
+"M10">-xscrollcommand</a></b></dt>
+
+<dt>Database Name: <b>xScrollCommand</b></dt>
+
+<dt>Database Class: <b>ScrollCommand</b></dt>
+
+<dd>A command prefix, used to communicate with horizontal
+scrollbars.</dd>
+</dl>
+
+<dl>
+<dd>When the view in the widget's window changes, the widget will
+generate a Tcl command by concatenating the scroll command and two
+numbers. Each of the numbers is a fraction between 0 and 1
+indicating a position in the document; 0 indicates the beginning,
+and 1 indicates the end. The first fraction indicates the first
+information in the widget that is visible in the window, and the
+second fraction indicates the information just after the last
+portion that is visible. 
+
+<p>Typically the <b>xScrollCommand</b> option consists of the path
+name of a <b><a href="../TkCmd/scrollbar.htm">scrollbar</a></b>
+widget followed by &ldquo;set&rdquo;, e.g. &ldquo;.x.scrollbar
+set&rdquo;. This will cause the scrollbar to be updated whenever
+the view in the window changes.</p>
+
+<p>If this option is set to the empty string (the default), then no
+command will be executed.</p>
+</dd>
+</dl>
+
+<dl>
+<dt>Command-Line Name: <b><a name=
+"M11">-yscrollcommand</a></b></dt>
+
+<dt>Database Name: <b>yScrollCommand</b></dt>
+
+<dt>Database Class: <b>ScrollCommand</b></dt>
+
+<dd>A command prefix, used to communicate with vertical scrollbars.
+See the description of <b>-xscrollcommand</b> above for
+details.</dd>
+</dl>
+
+<h3><a name="M12">LABEL OPTIONS</a></h3>
+
+The following options are supported by labels, buttons, and other
+button-like widgets: 
+
+<dl>
+<dt>Command-Line Name: <b><a name="M13">-text</a></b></dt>
+
+<dt>Database Name: <b><a href="../TkCmd/text.htm">text</a></b></dt>
+
+<dt>Database Class: <b><a href=
+"../TkCmd/text.htm">Text</a></b></dt>
+
+<dd>Specifies a text string to be displayed inside the widget
+(unless overridden by <b>-textvariable</b>).</dd>
+
+<dt>Command-Line Name: <b><a name="M14">-textvariable</a></b></dt>
+
+<dt>Database Name: <b>textVariable</b></dt>
+
+<dt>Database Class: <b><a href=
+"../TclCmd/variable.htm">Variable</a></b></dt>
+
+<dd>Specifies the name of a global variable whose value will be
+used in place of the <b>-text</b> resource.</dd>
+
+<dt>Command-Line Name: <b><a name="M15">-underline</a></b></dt>
+
+<dt>Database Name: <b>underline</b></dt>
+
+<dt>Database Class: <b>Underline</b></dt>
+
+<dd>If set, specifies the integer index (0-based) of a character to
+underline in the text string. The underlined character is used for
+mnemonic activation.</dd>
+
+<dt>Command-Line Name: <b><a name="M16">-image</a></b></dt>
+
+<dt>Database Name: <b><a href=
+"../TkCmd/image.htm">image</a></b></dt>
+
+<dt>Database Class: <b><a href=
+"../TkCmd/image.htm">Image</a></b></dt>
+
+<dd>Specifies an image to display. This is a list of 1 or more
+elements. The first element is the default image name. The rest of
+the list is a sequence of <i>statespec / value</i> pairs as per
+<b>style map</b>, specifying different images to use when the
+widget is in a particular state or combination of states. All
+images in the list should have the same size.</dd>
+
+<dt>Command-Line Name: <b><a name="M17">-compound</a></b></dt>
+
+<dt>Database Name: <b>compound</b></dt>
+
+<dt>Database Class: <b>Compound</b></dt>
+
+<dd>Specifies how to display the image relative to the text, in the
+case both <b>-text</b> and <b>-image</b> are present. Valid values
+are:</dd>
+</dl>
+
+<dl class="label options">
+<dt><a name="M18">text</a></dt>
+
+<dd>Display text only.</dd>
+
+<dt><a name="M19">image</a></dt>
+
+<dd>Display image only.</dd>
+
+<dt><a name="M20">center</a></dt>
+
+<dd>Display text centered on top of image.</dd>
+
+<dt><a name="M21">top</a></dt>
+
+<dt><a name="M22">bottom</a></dt>
+
+<dt><a name="M23">left</a></dt>
+
+<dt><a name="M24">right</a></dt>
+
+<dd>Display image above, below, left of, or right of the text,
+respectively.</dd>
+
+<dt><a name="M25">none</a></dt>
+
+<dd>The default; display the image if present, otherwise the
+text.</dd>
+</dl>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M26">-width</a></b></dt>
+
+<dt>Database Name: <b>width</b></dt>
+
+<dt>Database Class: <b>Width</b></dt>
+
+<dd>If greater than zero, specifies how much space, in character
+widths, to allocate for the text label. If less than zero,
+specifies a minimum width. If zero or unspecified, the natural
+width of the text label is used.</dd>
+</dl>
+
+<h3><a name="M27">COMPATIBILITY OPTIONS</a></h3>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M28">-state</a></b></dt>
+
+<dt>Database Name: <b>state</b></dt>
+
+<dt>Database Class: <b>State</b></dt>
+
+<dd>May be set to <b>normal</b> or <b>disabled</b> to control the
+<b>disabled</b> state bit. This is a write-only option: setting it
+changes the widget state, but the <b>state</b> widget command does
+not affect the <b>-state</b> option.</dd>
+</dl>
+
+<h3><a name="M29">COMMANDS</a></h3>
+
+<dl class="commands">
+<dt><a name="M30"><i>pathName</i> <b>cget</b>
+<i>option</i></a></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>.</dd>
+
+<dt><a name="M31"><i>pathName</i> <b>configure</b> ?<i>option</i>?
+?<i>value option value ...</i>?</a></dt>
+
+<dd>Query or modify the configuration options of the widget. If one
+or more <i>option-value</i> pairs are specified, then the command
+modifies the given widget option(s) to have the given value(s); in
+this case the command returns an empty string. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the named option: the elements of the list are the
+option name, database name, database class, default value, and
+current value. If no <i>option</i> is specified, returns a list
+describing all of the available options for <i>pathName</i>.</dd>
+
+<dt><a name="M32"><i>pathName</i> <b>identify</b> <b>element</b>
+<i>x y</i></a></dt>
+
+<dd>Returns the name of the element under the point given by
+<i>x</i> and <i>y</i>, or an empty string if the point does not lie
+within any element. <i>x</i> and <i>y</i> are pixel coordinates
+relative to the widget. Some widgets accept other <b>identify</b>
+subcommands.</dd>
+
+<dt><a name="M33"><i>pathName</i> <b>instate</b> <i>statespec</i>
+?<i>script</i>?</a></dt>
+
+<dd>Test the widget's state. If <i>script</i> is not specified,
+returns 1 if the widget state matches <i>statespec</i> and 0
+otherwise. If <i>script</i> is specified, equivalent to 
+
+<pre>
+if {[<i>pathName</i> instate <i>stateSpec</i>]} <i>script</i>
+</pre>
+</dd>
+
+<dt><a name="M34"><i>pathName</i> <b>state</b>
+?<i>stateSpec</i>?</a></dt>
+
+<dd>Modify or inquire widget state. If <i>stateSpec</i> is present,
+sets the widget state: for each flag in <i>stateSpec</i>, sets the
+corresponding flag or clears it if prefixed by an exclamation
+point. 
+
+<dl>
+<dd>Returns a new state spec indicating which flags were changed: 
+
+<pre>
+set changes [<i>pathName</i> state <i>spec</i>]
+<i>pathName</i> state $changes
+</pre>
+
+will restore <i>pathName</i> to the original state. If
+<i>stateSpec</i> is not specified, returns a list of the
+currently-enabled state flags.</dd>
+</dl>
+</dd>
+</dl>
+
+<h3><a name="M35">WIDGET STATES</a></h3>
+
+The widget state is a bitmap of independent state flags. Widget
+state flags include: 
+
+<dl class="widget states">
+<dt><a name="M36"><b>active</b></a></dt>
+
+<dd>The mouse cursor is over the widget and pressing a mouse button
+will cause some action to occur. (aka &ldquo;prelight&rdquo;
+(Gnome), &ldquo;hot&rdquo; (Windows), &ldquo;hover&rdquo;).</dd>
+
+<dt><a name="M37"><b>disabled</b></a></dt>
+
+<dd>Widget is disabled under program control (aka
+&ldquo;unavailable&rdquo;, &ldquo;inactive&rdquo;)</dd>
+
+<dt><a name="M38"><b>focus</b></a></dt>
+
+<dd>Widget has keyboard focus</dd>
+
+<dt><a name="M39"><b>pressed</b></a></dt>
+
+<dd>Widget is being pressed (aka &ldquo;armed&rdquo; in
+Motif).</dd>
+
+<dt><a name="M40"><b>selected</b></a></dt>
+
+<dd>&ldquo;On&rdquo;, &ldquo;true&rdquo;, or &ldquo;current&rdquo;
+for things like checkbuttons and radiobuttons.</dd>
+
+<dt><a name="M41"><b>background</b></a></dt>
+
+<dd>Windows and the Mac have a notion of an &ldquo;active&rdquo; or
+foreground window. The <b>background</b> state is set for widgets
+in a background window, and cleared for those in the foreground
+window.</dd>
+
+<dt><a name="M42"><b>readonly</b></a></dt>
+
+<dd>Widget should not allow user modification.</dd>
+
+<dt><a name="M43"><b>alternate</b></a></dt>
+
+<dd>A widget-specific alternate display format. For example, used
+for checkbuttons and radiobuttons in the &ldquo;tristate&rdquo; or
+&ldquo;mixed&rdquo; state, and for buttons with <b>-default
+active</b>.</dd>
+
+<dt><a name="M44"><b>invalid</b></a></dt>
+
+<dd>The widget's value is invalid. (Potential uses: scale widget
+value out of bounds, entry widget value failed validation.)</dd>
+
+<dt><a name="M45"><b>hover</b></a></dt>
+
+<dd>The mouse cursor is within the widget. This is similar to the
+<b>active</b> state; it is used in some themes for widgets that
+provide distinct visual feedback for the active widget in addition
+to the active element within the widget.</dd>
+</dl>
+
+<p>A <i>state specification</i> or <i>stateSpec</i> is a list of
+state names, optionally prefixed with an exclamation point (!)
+indicating that the bit is off.</p>
+
+<h3><a name="M46">EXAMPLES</a></h3>
+
+<pre>
+set b [ttk::button .b]
+
+# Disable the widget:
+$b state disabled
+
+# Invoke the widget only if it is currently pressed and enabled:
+$b instate {pressed !disabled} { .b invoke }
+
+# Reenable widget:
+$b state !disabled
+</pre>
+
+<h3><a name="M47">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_intro.htm">ttk::intro</a></b>, <b><a href=
+"../TkCmd/ttk_style.htm">ttk::style</a></b> 
+
+<h3><a name="M48">KEYWORDS</a></h3>
+
+<a href="../Keywords/S.htm#state">state</a>, <a href=
+"../Keywords/C.htm#configure">configure</a>, <a href=
+"../Keywords/O.htm#option">option</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2004 Joe English</div>
+</body>
+</html>
+

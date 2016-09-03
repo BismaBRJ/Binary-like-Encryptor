@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>XOTcl - Documentation --
+xotcl/library/lib/package.xotcl</title>
+<link rel="StyleSheet" href="xotcl-doc.css" type="text/css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1><img src="./logo-100.jpg" alt="xotcl/library/lib/package.xotcl"
+align="MIDDLE"> xotcl/library/lib/package.xotcl</h1>
+
+<hr>
+<h2>Package/File Information</h2>
+
+<b>No package provided/required</b> <br>
+ <br>
+ <b>Defined Objects/Classes:</b> 
+
+<ul>
+<li><a href="#package"><em>package</em>:</a> <a href=
+"#package-present">present</a>, <a href=
+"#package-verbose">verbose</a>.<br>
+</li>
+</ul>
+
+<br>
+ <b>Filename:</b> <a href=
+"xotcl/library/lib/package.xotcl">xotcl/library/lib/package.xotcl</a>
+<br>
+ <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Represent Tcl package loading command by an XOTcl
+object. Enables tracking, tracing, and verbose output of package
+loading</td>
+</tr>
+</table>
+
+<br>
+ 
+
+<hr>
+<p><a name="package"></a></p>
+
+<h2>Object: <em>package</em></h2>
+
+<b>Class</b>: Object <br>
+ <b>Procs</b> <a href="#package-present">present</a>, <a href=
+"#package-verbose">verbose</a>. 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Supports all Tcl package options plus present and
+verbose.</td>
+</tr>
+</table>
+
+<h3>Procs</h3>
+
+<ul>
+<li><a name="package-present"></a> <b>present</b> <em>args</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>args</b>: packageName or -exact
+packageName</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Check whether a package is present or not. Similar
+to Tcl's package present, but works with Tcl &lt; 8.3</td>
+</tr>
+</table>
+</li>
+
+<li><a name="package-verbose"></a> <b>verbose</b> <em>v</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>v</b>: 1 or 0</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Toggle verbose output on/off. If on, package
+prints the locations from where packages are loaded to the screen.
+Default is off.</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<br>
+<br>
+ <br>
+ <br>
+<br>
+ 
+
+<hr>
+<a href="./index.html">Back to index page.</a> <br>
+ 
+
+<hr>
+</body>
+</html>
+

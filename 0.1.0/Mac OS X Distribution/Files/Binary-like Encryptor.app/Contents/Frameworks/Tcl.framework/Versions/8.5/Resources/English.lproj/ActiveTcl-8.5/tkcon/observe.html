@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>tkcon: observe procedure</title>
+<link rel="STYLESHEET" type="text/css" href="./style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<table width="100%" border="0" cellspacing="2" cellpadding="0"
+bgcolor="#000000">
+<tr>
+<td><!-- start header info -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0"
+bgcolor="#FFFFFF">
+<tr>
+<th><font size="+3">tkcon: <code>observe</code>
+procedure</font></th>
+<td align="right"><a href="http://tkcon.sourceforge.net/"><img src=
+"http://sourceforge.net/sflogo.php?group_id=11462&amp;type=1"
+width="88" height="31" border="0" alt="SourceForge Logo"></a> </td>
+</tr>
+</table>
+
+<!-- end header info -->
+</td>
+</tr>
+
+<tr>
+<td><!-- start main navigation table -->
+<table border="1" cellpadding="2" cellspacing="2" bgcolor="#CCCCCC"
+width="100%">
+<tr>
+<th class="hi"><a href="index.html" class=
+"hi">Documentation</a></th>
+<th><a href="purpose.html">Purpose &amp; Features</a></th>
+<th><a href="limits.html">Limitations</a></th>
+<th><a href="todo.html">To&nbsp;Do</a></th>
+<th><a href="license.terms">License</a></th>
+</tr>
+
+<tr>
+<th colspan="2"><a href="plugin.html">Online Demo</a> (requires <a
+href="http://tcl.activestate.com/software/plugin/">Tk
+plugin</a>)</th>
+<th colspan="3"><a href="nontcl.html">Using TkCon with other Tk
+Languages</a></th>
+</tr>
+</table>
+
+<!-- end main navigation table -->
+</td>
+</tr>
+
+<tr>
+<td><!-- start secondary navigation table -->
+<table border="1" cellpadding="2" cellspacing="2" bgcolor="#BBBBBB"
+width="100%">
+<tr>
+<th><a href="start.html">Getting Started</a></th>
+<th><a href="bindings.html">Special Bindings</a></th>
+<th><a href="procs.html">Procedures</a></th>
+<th><a href="demopic.png">Screenshot</a></th>
+</tr>
+
+<tr>
+<th><a href="dump.html"><code>dump</code></a></th>
+<th><a href="tkcon.html"><code>tkcon</code></a></th>
+<th><a href="idebug.html"><code>idebug</code></a></th>
+<th class="hi2"><a href="observe.html" class=
+"hi2"><code>observe</code></a></th>
+</tr>
+</table>
+
+<!-- end secondary navigation table -->
+</td>
+</tr>
+
+<tr>
+<td bgcolor="#FFFFFF">
+<div class="indent">
+<p>This command provides runtime debugging output for variables and
+commands without the need to edit your code. For variables, the
+underlying mechanism uses <code>trace</code> and <code>dump
+var</code>. For commands, it renames the observed procedure and
+uses a special wrapper procedure. <b><font color=
+"#FF0000">WARNING:</font></b> using this procedure after
+checkpointing state will result in major problems if you clean
+state because the renamed (true) commands will be lost.</p>
+
+<p>This procedure is experimental. Comments are encouraged.</p>
+
+<dl>
+<dt><code>observe <b>command</b></code> <i>cmdname
+?maxlevel?</i></dt>
+
+<dd>This will create a wrapper command which prints out (using
+<code>dump</code>) the call stack to the console. <i>maxlevel</i>
+represents the maximum number of levels of the call stack which
+will be printed (defaults to 4).</dd>
+
+<dt><code>observe <b>cdelete</b></code> <i>cmdname</i></dt>
+
+<dd>Removes the wrapper around an observed command.</dd>
+
+<dt><code>observe <b>cinfo</b></code> <i>cmdname</i></dt>
+
+<dd>Prints out useless info.</dd>
+
+<dt><code>observe <b>variable</b></code> <i>varname operation
+?args?</i></dt>
+
+<dd>Currently a wrapper around trace that uses <code>dump</code> to
+print out the value of the named variable whenever the specified
+operation on that variable occurs (must be read, write or
+unset).</dd>
+
+<dt><code>observe <b>vdelete</b></code> <i>varname
+operation</i></dt>
+
+<dd>Deletes the trace wrapper around the named variable.</dd>
+
+<dt><code>observe <b>vinfo</b></code> <i>varname</i></dt>
+
+<dd>Prints out trace info about the named variable.</dd>
+</dl>
+</div>
+</td>
+</tr>
+</table>
+
+<hr noshade size="1">
+<address><font size="2">&copy; Jeffrey Hobbs</font></address>
+</body>
+</html>
+

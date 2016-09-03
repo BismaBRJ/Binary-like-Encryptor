@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>spinner - Create and manipulate a spinner widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>spinner - Create and manipulate a spinner widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>spinner pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- Labeledwidget &lt;- Spinner 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>background</b><br>
+<b>foreground</b><br>
+<b>insertBorderWidth</b><br>
+<b>justify</b><br>
+<b>selectForeground</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>highlightColor</b><br>
+<b>insertOffTime</b><br>
+<b>relief</b><br>
+<b>textVariable</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>highlightThickness</b><br>
+<b>insertOnTime</b><br>
+<b>selectBackground</b><br>
+</td>
+<td valign="top"><b>exportSelection</b><br>
+<b>insertBackground</b><br>
+<b>insertWidth</b><br>
+<b>selectBorderWidth</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>show</b><br>
+</td>
+<td valign="top"><b>state</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/entry.n.html">"entry"</a>
+manual entry for details on the associated options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>childSitePos</b><br>
+<b>invalid</b><br>
+<b>width</b><br>
+</td>
+<td valign="top"><b>command</b><br>
+<b>textBackground</b><br>
+</td>
+<td valign="top"><b>fixed</b><br>
+<b>textFont</b><br>
+</td>
+<td valign="top"><b>focusCommand</b><br>
+<b>validate</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="entryfield.n.html">"entryfield"</a> widget
+manual entry for details on the above inherited options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>disabledForeground</b><br>
+<b>labelMargin</b><br>
+<b>state</b><br>
+</td>
+<td valign="top"><b>labelBitmap</b><br>
+<b>labelPos</b><br>
+</td>
+<td valign="top"><b>labelFont</b><br>
+<b>labelText</b><br>
+</td>
+<td valign="top"><b>labelImage</b><br>
+<b>labelVariable</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="labeledwidget.n.html">"labeledwidget"</a>
+widget manual entry for details on the above inherited options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>arrowOrient</b>
+Class:                  <b>Orient</b>
+Command-Line Switch:    <b>-arroworient</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies placement of arrow buttons:
+<b>horizontal</b> or <b>vertical</b>. The default is
+vertical.</div>
+
+<pre>
+Name:                   <b>decrement</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-decrement</b>
+</pre>
+
+<div style="margin-left: 2em">Tcl command to be executed when down
+arrow is pressed.</div>
+
+<pre>
+Name:                   <b>increment</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-increment</b>
+</pre>
+
+<div style="margin-left: 2em">Tcl command to be executed when up
+arrow is pressed.</div>
+
+<pre>
+Name:                   <b>repeatDelay</b>
+Class:                  <b>RepeatDelay</b>
+Command-Line Switch:    <b>-repeatdelay</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the initial delay in
+milliseconds before the spinner repeat action on the arrow buttons
+engages. The default is 300 milliseconds.</div>
+
+<pre>
+Name:                   <b>repeatInterval</b>
+Class:                  <b>RepeatInterval</b>
+Command-Line Switch:    <b>-repeatinterval</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the repeat delay in
+milliseconds between selections of the arrow buttons. A
+repeatinterval of 0 disables button repeat. The default is 100
+milliseconds.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>spinner</b> command creates a spinner widget. The spinner
+is comprised of an entryfield plus up and down arrow buttons.
+Arrows may be drawn horizontally or vertically.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>spinner</b> command creates a new Tcl command whose name
+is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for spinner
+widgets: 
+
+<h2>ASSOCIATED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>delete</b><br>
+<b>insert</b><br>
+</td>
+<td valign="top"><b>get</b><br>
+<b>scan</b><br>
+</td>
+<td valign="top"><b>icursor</b><br>
+<b>selection</b><br>
+</td>
+<td valign="top"><b>index</b><br>
+<b>xview</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/entry.n.html">"entry"</a>
+manual entry for details on the associated methods.</p>
+
+<h2>INHERITED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>childsite</b><br>
+</td>
+<td valign="top"><b>clear</b><br>
+</td>
+<td valign="top"><b>peek</b><br>
+</td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="entryfield.n.html">"entryfield"</a> manual
+entry for details on the associated methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>spinner</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>spinner</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>down</b></i></dt>
+
+<dd>Derived classes may overload this method to specialize
+functionality.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>up</b></i></dt>
+
+<dd>Derived classes may overload this method to specialize
+functionality.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>downarrow</b>
+Class:                  <b>Canvas</b>
+</pre>
+
+<div style="margin-left: 2em">The downarrow component is the
+downward pointing button of the spinner. See the "canvas" widget
+manual entry for details on the downarrow component item.</div>
+
+<pre>
+Name:                   <b>uparrow</b>
+Class:                  <b>Canvas</b>
+</pre>
+
+<div style="margin-left: 2em">The uparrow component is the upward
+pointing button of the spinner. See the "canvas" widget manual
+entry for details on the uparrow component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ set months {January February March April May June July \\
+                 August September October November December}
+
+ proc blockInput {char} {
+     return 0
+ }
+
+ proc spinMonth {step} {
+     global months
+
+     set index [expr [lsearch $months [.sm get]] + $step]
+
+     if {$index &lt; 0} {set index 11}
+     if {$index &gt; 11} {set index 0}
+
+     .sm delete 0 end
+     .sm insert 0 [lindex $months $index]
+ }
+
+ spinner .sm -labeltext "Month : " -width 10 -fixed 10 -validate blockInput \\
+             -decrement {spinMonth -1} -increment {spinMonth 1}
+ .sm insert 0 January
+
+ pack .sm -padx 10 -pady 10
+</pre>
+
+<h2>ACKNOWLEDGEMENTS:</h2>
+
+<p>Ken Copeland &lt;ken@hilco.com&gt;</p>
+
+<div style="margin-left: 2em">10/18/95 - Added auto-repeat action
+to spinner arrow buttons.</div>
+
+<h2>AUTHOR</h2>
+
+Sue Yockey 
+
+<h2>KEYWORDS</h2>
+
+spinner, widget
+</body>
+</html>
+

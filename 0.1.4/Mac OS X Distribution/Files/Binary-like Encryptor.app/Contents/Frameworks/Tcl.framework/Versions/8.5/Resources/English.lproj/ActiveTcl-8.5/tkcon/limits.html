@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>tkcon: Limitations</title>
+<link rel="STYLESHEET" type="text/css" href="./style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<table width="100%" border="0" cellspacing="2" cellpadding="0"
+bgcolor="#000000">
+<tr>
+<td><!-- start header info -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0"
+bgcolor="#FFFFFF">
+<tr>
+<th><font size="+3">tkcon: Limitations</font></th>
+<td align="right"><a href="http://tkcon.sourceforge.net/"><img src=
+"http://sourceforge.net/sflogo.php?group_id=11462&amp;type=1"
+width="88" height="31" border="0" alt="SourceForge Logo"></a> </td>
+</tr>
+</table>
+
+<!-- end header info -->
+</td>
+</tr>
+
+<tr>
+<td><!-- start main navigation table -->
+<table border="1" cellpadding="2" cellspacing="2" bgcolor="#CCCCCC"
+width="100%">
+<tr>
+<th><a href="index.html">Documentation</a></th>
+<th><a href="purpose.html">Purpose &amp; Features</a></th>
+<th class="hi"><a href="limits.html" class=
+"hi">Limitations</a></th>
+<th><a href="todo.html">To&nbsp;Do</a></th>
+<th><a href="license.terms">License</a></th>
+</tr>
+
+<tr>
+<th colspan="2"><a href="plugin.html">Online Demo</a> (requires <a
+href="http://www.tcl.tk/software/plugin/">Tk plugin</a>)</th>
+<th colspan="3"><a href="nontcl.html">Using TkCon with other Tk
+Languages</a></th>
+</tr>
+</table>
+
+<!-- end main navigation table -->
+</td>
+</tr>
+
+<tr>
+<td bgcolor="#FFFFFF">
+<div class="indent">
+<h3>Limitations:</h3>
+
+TkCon requires Tk8.4+. Since TkCon is meant to behave like the
+original Tk console, it does not separate itself from the
+environment (it does not use send to function, except when attached
+to foreign Tk interpreters). This means that it can be can be
+altered or destroyed by any sourced applications, and it will
+respond to an application's 'exit' call by exiting (by default,
+slave consoles will only close themselves instead of exiting the
+entire TkCon environment). However, the widget tree of TkCon is
+hidden from the user environment. 
+
+<p>Since TkCon is built for cross-platform capability, <font color=
+"#FF0000">in Unix/Windows environments it does not have tty/shell
+behavior</font>. This means programs like <code>vi</code> and
+<code>less</code> (those that rely on tty/shell settings) will not
+function appropriately (currently they may hang TkCon). Programs
+like <code>ls</code> and <code>more</code> will just spit output to
+the TkCon screen without any special control or formatting (note
+that <code>ls</code> has been rewritten for TkCon). You also do not
+get any job (process) control outside of what tcl normally can
+provide. Currently there is no way to handle <code>stdin</code>
+input.</p>
+
+<p>When connecting to non-Tcl Tk interpreters (ie - PerlTk,
+SchemeTk, ...), you must use the syntax of the target environment.
+See my <a href="nontcl.html">notes on using other Tk-embedded
+languages</a> for more info.</p>
+</div>
+</td>
+</tr>
+</table>
+
+<hr noshade size="1">
+<address><font size="2">&copy; Jeffrey Hobbs</font></address>
+</body>
+</html>
+

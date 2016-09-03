@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>DynamicHelp</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>DynamicHelp</b> - Provide help to Tk widget or BWidget</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">COMMAND</a></i></dt>
+
+<dd>DynamicHelp::<a href="#add"><b>add</b></a> <i>widget</i>
+?<i>option value ...</i>?</dd>
+
+<dd>DynamicHelp::<a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd>DynamicHelp::<a href="#delete"><b>delete</b></a>
+<i>widget</i></dd>
+
+<dd>DynamicHelp::<a href="#include"><b>include</b></a> <i>class</i>
+<i>type</i></dd>
+
+<dd>DynamicHelp::<a href="#register"><b>register</b></a>
+<i>path</i> <i>type</i> ?<i>arg...</i>?</dd>
+
+<dd>DynamicHelp::<a href="#sethelp"><b>sethelp</b></a> <i>path</i>
+<i>subpath</i> ?<i>force</i>?</dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>Description text</p>
+
+<hr width="50%">
+<br>
+<b><a name="wc">COMMAND</a></b><br>
+ 
+
+<dl>
+<dt><a name="add">DynamicHelp::<b>add</b></a> ?<i>option value
+...</i>?</dt>
+
+<dd>
+<p>This command adds dynamic help to the given <i>widget</i>.</p>
+
+<dl>
+<dt><a name="add-command"><b>-command</b></a></dt>
+
+<dd>If specified, refers to a command to execute to get the help
+text to display. The command must return a string to display. If
+the command returns an empty string, no help is displayed.</dd>
+</dl>
+
+<dl>
+<dt><a name="add-index"><b>-index</b></a></dt>
+
+<dd>If specified, refers to a menu index to bind the help to
+instead of a widget. If <b>-type</b> is not menu, this option is
+ignored.</dd>
+</dl>
+
+<dl>
+<dt><a name="add-item"><b>-item</b></a></dt>
+
+<dd>If specified, refers to an item or tag on a canvas widget or to
+a tag in a text widget to bind the help to instead of to a
+widget.</dd>
+</dl>
+
+<dl>
+<dt><a name="add-type"><b>-type</b></a></dt>
+
+<dd>Specifies the type of help. Can be: <b>balloon</b>,
+<b>variable</b> or <b>menu</b>. Default is <b>balloon</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="add-text"><b>-text</b></a></dt>
+
+<dd>The text to be displayed as help.</dd>
+</dl>
+
+<dl>
+<dt><a name="add-variable"><b>-variable</b></a></dt>
+
+<dd>Specifies a variable name to which the help string will be
+written. Some other widget (e.g., a status bar) is responsible for
+displaying this variable.</dd>
+</dl>
+
+<p>Creating dynamic help for a menu is a two-step process. The menu
+itself must first be added and then each menu entry must be added
+separately. Here is a brief example.</p>
+
+<table border="2" cellspacing="2" width="80%">
+<tr>
+<td>
+<pre>
+    <font color="red"><i># create menu</i></font>
+    menu .m -type menubar
+    <font color=
+"red"><i># associate menubar to toplevel BEFORE DynamicHelp::register</i></font>
+    <font color=
+"red"><i># to make it works with menu clone name</i></font>
+    . configure -menu .m
+    .m add cascade -label "File" -menu .m.file
+    menu .m.file
+    .m.file add command -label "Open..."
+    .m.file add command -label "Quit"
+    <font color=
+"red"><i># create label for help, using variable varinfo</i></font>
+    label .l -textvariable varinfo
+    <font color=
+"red"><i># associate all entries of menu .m.file to variable varinfo</i></font>
+    DynamicHelp::add .m.file -type menu -variable varinfo
+    <font color=
+"red"><i># then declare entries of .m.file</i></font>
+    DynamicHelp::add .m.file -type menu -index 0 -text "Detach menu"
+    DynamicHelp::add .m.file -type menu -index 1 -text "Open a file"
+    DynamicHelp::add .m.file -type menu -index 2 -text "Exit demo"
+   
+</pre>
+</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="configure">DynamicHelp::<b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>This command configure the ballon help. 
+
+<dl>
+<dt><a name="DynamicHelp-borderwidth"><b>-borderwidth</b></a></dt>
+
+<dd>Width of the black border around the balloon.</dd>
+</dl>
+
+<dl>
+<dt><a name="DynamicHelp-delay"><b>-delay</b></a></dt>
+
+<dd>Define the delay in millisecond of mouse inactivity before
+displaying the balloon.</dd>
+</dl>
+
+<dl>
+<dt><a name="DynamicHelp-state"><b>-state</b></a></dt>
+
+<dd>Specifies one of two states for help balloons: <b>normal</b>
+and <b>disabled</b>.</dd>
+
+<dd>If <b>state</b> is <b>disabled</b>, help balloons will not be
+displayed for any registered widget.</dd>
+</dl>
+
+<dl>
+<dt><a name=
+"DynamicHelp-topbackground"><b>-topbackground</b></a></dt>
+
+<dd>The background color of the toplevel window created for a
+balloon.</dd>
+</dl>
+
+<br>
+Other standard options are:</dd>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-background">-background or -bg</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-font">-font</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-foreground">-foreground or -fg</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-justify">-justify</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-padx">-padx</a></td>
+<td>&nbsp;&nbsp;<a href=
+"../tcl/TkCmd/options.htm#M-pady">-pady</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="delete">DynamicHelp::<b>delete</b></a>
+<i>widget</i></dt>
+
+<dd>Delete all dynamic help for the given <i>widget</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="include">DynamicHelp::<b>include</b></a> <i>class</i>
+<i>type</i></dt>
+
+<dd>Description text</dd>
+</dl>
+
+<dl>
+<dt><a name="register">DynamicHelp::<b>register</b></a> <i>path</i>
+<i>type</i> ?<i>arg...</i>?</dt>
+
+<dd>
+<p><b>Its use is deprecated. Use <i>DynamicHelp::add</i>
+instead.</b></p>
+
+Register a help text to the widget <i>path</i>. <i>type</i>
+determines the type of the help or the type of the widget.
+Depending on <i>type</i>, other options must be provided.<br>
+<table cellspacing="5" cellpadding="0" border="0">
+<tr>
+<td><b>type</b> </td>
+<td><b>options</b> </td>
+</tr>
+
+<tr>
+<td><b><i>balloon</i></b> </td>
+<td><i>?tagOrItem? text</i> </td>
+</tr>
+
+<tr>
+<td><b><i>variable</i></b> </td>
+<td><i>?tagOrItem? varName text</i> </td>
+</tr>
+
+<tr>
+<td><b><i>menu</i></b> </td>
+<td><i>varName</i> </td>
+</tr>
+
+<tr>
+<td><b><i>menuentry</i></b> </td>
+<td><i>index text</i> </td>
+</tr>
+</table>
+
+<br>
+If one of the option is missing or is empty, help is removed for
+this widget. 
+
+<p>If <i>tagOrItem</i> is specified, then <i>path</i> is a canvas
+or a text. In case of a canvas, <i>tagOrItem</i> is the name of a
+tag or item on the canvas to which the help will be bound. In case
+of a text, <i>tagOrItem</i> is the name of a tag on the text to
+which the help will be bound.</p>
+
+For type other than <i>balloon</i>, <i>varName</i> is typically a
+variable linked to a label.<br>
+For menu, balloon type help is not available. To declare a help for
+menu, you first declare the menu, and then entries of this
+menu.<br>
+For example:<br>
+<br>
+<center>
+<table border="2" cellspacing="2" width="80%">
+<tr>
+<td>
+<pre>
+     <font color="red"><i># create menu</i></font>
+menu .m -type menubar
+<font color=
+"red"><i># associate menubar to toplevel BEFORE DynamicHelp::register</i></font>
+<font color=
+"red"><i># to make it works with menu clone name</i></font>
+. configure -menu .m
+.m add cascade -label "File" -menu .m.file
+menu .m.file
+.m.file add command -label "Open..."
+.m.file add command -label "Quit"
+<font color=
+"red"><i># create label for help, using variable varinfo</i></font>
+label .l -textvariable varinfo
+<font color=
+"red"><i># associate all entries of menu .m.file to variable varinfo</i></font>
+DynamicHelp::register .m.file menu varinfo
+<font color="red"><i># then declare entries of .m.file</i></font>
+DynamicHelp::register .m.file menuentry 0 "Detach menu"
+DynamicHelp::register .m.file menuentry 1 "Open a file"
+DynamicHelp::register .m.file menuentry 2 "Exit demo"
+</pre>
+</td>
+</tr>
+</table>
+</center>
+
+<br>
+<br>
+Notice that if popup menu is owned by a menubar, you must associate
+first the menubar to its toplevel. In this case, when you create a
+menu popup, its clone window is also created, and
+DynamicHelp::register detects the exitence of the clone window and
+maps events to it.</dd>
+</dl>
+
+<dl>
+<dt><a name="sethelp">DynamicHelp::<b>sethelp</b></a> <i>path</i>
+<i>subpath</i> ?<i>force</i>?</dt>
+
+<dd>Description text</dd>
+</dl>
+</body>
+</html>
+

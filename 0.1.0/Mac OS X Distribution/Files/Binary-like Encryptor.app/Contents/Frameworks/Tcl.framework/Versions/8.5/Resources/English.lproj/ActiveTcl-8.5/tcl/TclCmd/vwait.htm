@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - vwait manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> vwait</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+vwait - Process events until a variable is written 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>vwait</b> <i>varName</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command enters the Tcl event loop to process events, blocking
+the application if no events are ready. It continues processing
+events until some event handler sets the value of variable
+<i>varName</i>. Once <i>varName</i> has been set, the <b>vwait</b>
+command will return as soon as the event handler that modified
+<i>varName</i> completes. <i>varName</i> must be globally scoped
+(either with a call to <b><a href=
+"../TclCmd/global.htm">global</a></b> for the <i>varName</i>, or
+with the full namespace path specification). 
+
+<p>In some cases the <b>vwait</b> command may not return
+immediately after <i>varName</i> is set. This can happen if the
+event handler that sets <i>varName</i> does not complete
+immediately. For example, if an event handler sets <i>varName</i>
+and then itself calls <b>vwait</b> to wait for a different
+variable, then it may not return for a long time. During this time
+the top-level <b>vwait</b> is blocked waiting for the event handler
+to complete, so it cannot return either.</p>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+Run the event-loop continually until some event calls <b><a href=
+"../TclCmd/exit.htm">exit</a></b>. (You can use any variable not
+mentioned elsewhere, but the name <i>forever</i> reminds you at a
+glance of the intent.) 
+
+<pre>
+<b>vwait</b> forever
+</pre>
+
+<p>Wait five seconds for a connection to a server socket, otherwise
+close the socket and continue running the script:</p>
+
+<pre>
+# Initialise the state
+after 5000 set state timeout
+set server [socket -server accept 12345]
+proc accept {args} {
+   global state connectionInfo
+   set state accepted
+   set connectionInfo $args
+}
+
+# Wait for something to happen
+<b>vwait</b> state
+
+# Clean up events that could have happened
+close $server
+after cancel set state timeout
+
+# Do something based on how the vwait finished...
+switch $state {
+   timeout {
+      puts "no connection on port 12345"
+   }
+   accepted {
+      puts "connection: $connectionInfo"
+      puts [lindex $connectionInfo 0] "Hello there!"
+   }
+}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/global.htm">global</a></b>, <b><a href=
+"../TclCmd/update.htm">update</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/E.htm#event">event</a>, <a href=
+"../Keywords/V.htm#variable">variable</a>, <a href=
+"../Keywords/W.htm#wait">wait</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1995-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

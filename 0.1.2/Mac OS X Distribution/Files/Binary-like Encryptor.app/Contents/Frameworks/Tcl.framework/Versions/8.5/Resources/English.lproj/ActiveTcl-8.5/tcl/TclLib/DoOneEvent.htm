@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_DoOneEvent manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> DoOneEvent</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="DoOneEvent.htm#M2" name="L181">NAME</a> 
+
+<dl>
+<dd>Tcl_DoOneEvent - wait for events and invoke event handlers</dd>
+</dl>
+</dd>
+
+<dd><a href="DoOneEvent.htm#M3" name="L182">SYNOPSIS</a></dd>
+
+<dd><a href="DoOneEvent.htm#M4" name="L183">ARGUMENTS</a></dd>
+
+<dd><a href="DoOneEvent.htm#M5" name="L184">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="DoOneEvent.htm#M6" name=
+"L185"><b>TCL_WINDOW_EVENTS</b> -</a></dd>
+
+<dd><a href="DoOneEvent.htm#M7" name="L186"><b>TCL_FILE_EVENTS</b>
+-</a></dd>
+
+<dd><a href="DoOneEvent.htm#M8" name="L187"><b>TCL_TIMER_EVENTS</b>
+-</a></dd>
+
+<dd><a href="DoOneEvent.htm#M9" name="L188"><b>TCL_IDLE_EVENTS</b>
+-</a></dd>
+
+<dd><a href="DoOneEvent.htm#M10" name="L189"><b>TCL_ALL_EVENTS</b>
+-</a></dd>
+
+<dd><a href="DoOneEvent.htm#M11" name="L190"><b>TCL_DONT_WAIT</b>
+-</a></dd>
+</dl>
+</dd>
+
+<dd><a href="DoOneEvent.htm#M12" name="L191">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_DoOneEvent - wait for events and invoke event handlers 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_DoOneEvent</b>(<i>flags</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>int <b>flags</b> (in)</dt>
+
+<dd>This parameter is normally zero. It may be an OR-ed combination
+of any of the following flag bits: <b>TCL_WINDOW_EVENTS</b>,
+<b>TCL_FILE_EVENTS</b>, <b>TCL_TIMER_EVENTS</b>,
+<b>TCL_IDLE_EVENTS</b>, <b>TCL_ALL_EVENTS</b>, or
+<b>TCL_DONT_WAIT</b>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+This procedure is the entry point to Tcl's event loop; it is
+responsible for waiting for events and dispatching event handlers
+created with procedures such as <b><a href=
+"../TkLib/EventHndlr.htm">Tk_CreateEventHandler</a></b>, <b><a
+href="../TclLib/CrtFileHdlr.htm">Tcl_CreateFileHandler</a></b>,
+<b><a href=
+"../TclLib/CrtTimerHdlr.htm">Tcl_CreateTimerHandler</a></b>, and
+<b><a href="../TclLib/DoWhenIdle.htm">Tcl_DoWhenIdle</a></b>.
+<b>Tcl_DoOneEvent</b> checks to see if events are already present
+on the Tcl event queue; if so, it calls the handler(s) for the
+first (oldest) event, removes it from the queue, and returns. If
+there are no events ready to be handled, then <b>Tcl_DoOneEvent</b>
+checks for new events from all possible sources. If any are found,
+it puts all of them on Tcl's event queue, calls handlers for the
+first event on the queue, and returns. If no events are found,
+<b>Tcl_DoOneEvent</b> checks for <b><a href=
+"../TclLib/DoWhenIdle.htm">Tcl_DoWhenIdle</a></b> callbacks; if any
+are found, it invokes all of them and returns. Finally, if no
+events or idle callbacks have been found, then
+<b>Tcl_DoOneEvent</b> sleeps until an event occurs; then it adds
+any new events to the Tcl event queue, calls handlers for the first
+event, and returns. The normal return value is 1 to signify that
+some event was processed (see below for other alternatives). 
+
+<p>If the <i>flags</i> argument to <b>Tcl_DoOneEvent</b> is
+non-zero, it restricts the kinds of events that will be processed
+by <b>Tcl_DoOneEvent</b>. <i>Flags</i> may be an OR-ed combination
+of any of the following bits:</p>
+
+<dl class="description">
+<dt><a name="M6"><b>TCL_WINDOW_EVENTS</b> -</a></dt>
+
+<dd>Process window system events.</dd>
+
+<dt><a name="M7"><b>TCL_FILE_EVENTS</b> -</a></dt>
+
+<dd>Process file events.</dd>
+
+<dt><a name="M8"><b>TCL_TIMER_EVENTS</b> -</a></dt>
+
+<dd>Process timer events.</dd>
+
+<dt><a name="M9"><b>TCL_IDLE_EVENTS</b> -</a></dt>
+
+<dd>Process idle callbacks.</dd>
+
+<dt><a name="M10"><b>TCL_ALL_EVENTS</b> -</a></dt>
+
+<dd>Process all kinds of events: equivalent to OR-ing together all
+of the above flags or specifying none of them.</dd>
+
+<dt><a name="M11"><b>TCL_DONT_WAIT</b> -</a></dt>
+
+<dd>Do not sleep: process only events that are ready at the time of
+the call.</dd>
+</dl>
+
+<p>If any of the flags <b>TCL_WINDOW_EVENTS</b>,
+<b>TCL_FILE_EVENTS</b>, <b>TCL_TIMER_EVENTS</b>, or
+<b>TCL_IDLE_EVENTS</b> is set, then the only events that will be
+considered are those for which flags are set. Setting none of these
+flags is equivalent to the value <b>TCL_ALL_EVENTS</b>, which
+causes all event types to be processed. If an application has
+defined additional event sources with <b><a href=
+"../TclLib/Notifier.htm">Tcl_CreateEventSource</a></b>, then
+additional <i>flag</i> values may also be valid, depending on those
+event sources.</p>
+
+<p>The <b>TCL_DONT_WAIT</b> flag causes <b>Tcl_DoOneEvent</b> not
+to put the process to sleep: it will check for events but if none
+are found then it returns immediately with a return value of 0 to
+indicate that no work was done. <b>Tcl_DoOneEvent</b> will also
+return 0 without doing anything if the only alternative is to block
+forever (this can happen, for example, if <i>flags</i> is
+<b>TCL_IDLE_EVENTS</b> and there are no <b><a href=
+"../TclLib/DoWhenIdle.htm">Tcl_DoWhenIdle</a></b> callbacks
+pending, or if no event handlers or timer handlers exist).</p>
+
+<p><b>Tcl_DoOneEvent</b> may be invoked recursively. For example,
+it is possible to invoke <b>Tcl_DoOneEvent</b> recursively from a
+handler called by <b>Tcl_DoOneEvent</b>. This sort of operation is
+useful in some modal situations, such as when a notification dialog
+has been popped up and an application wishes to wait for the user
+to click a button in the dialog before doing anything else.</p>
+
+<h3><a name="M12">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#callback">callback</a>, <a href=
+"../Keywords/E.htm#event">event</a>, <a href=
+"../Keywords/H.htm#handler">handler</a>, <a href=
+"../Keywords/I.htm#idle">idle</a>, <a href=
+"../Keywords/T.htm#timer">timer</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990-1992 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

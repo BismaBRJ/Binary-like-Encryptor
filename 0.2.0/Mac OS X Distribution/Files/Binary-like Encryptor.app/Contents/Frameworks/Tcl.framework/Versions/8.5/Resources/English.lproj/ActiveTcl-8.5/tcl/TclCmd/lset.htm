@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - lset manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> lset</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+lset - Change an element in a list 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>lset</b> <i>varName ?index...? newValue</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>lset</b> command accepts a parameter, <i>varName</i>, which
+it interprets as the name of a variable containing a Tcl list. It
+also accepts zero or more <i>indices</i> into the list. The indices
+may be presented either consecutively on the command line, or
+grouped in a Tcl list and presented as a single argument. Finally,
+it accepts a new value for an element of <i>varName</i>. 
+
+<p>If no indices are presented, the command takes the form:</p>
+
+<pre>
+lset varName newValue
+</pre>
+
+or 
+
+<pre>
+lset varName {} newValue
+</pre>
+
+In this case, <i>newValue</i> replaces the old value of the
+variable <i>varName</i>. 
+
+<p>When presented with a single index, the <b>lset</b> command
+treats the content of the <i>varName</i> variable as a Tcl list. It
+addresses the <i>index</i>'th element in it (0 refers to the first
+element of the list). When interpreting the list, <b>lset</b>
+observes the same rules concerning braces and quotes and
+backslashes as the Tcl command interpreter; however, variable
+substitution and command substitution do not occur. The command
+constructs a new list in which the designated element is replaced
+with <i>newValue</i>. This new list is stored in the variable
+<i>varName</i>, and is also the return value from the <b>lset</b>
+command.</p>
+
+<p>If <i>index</i> is negative or greater than or equal to the
+number of elements in <i>$varName</i>, then an error occurs.</p>
+
+<p>The interpretation of each simple <i>index</i> value is the same
+as for the command <b><a href="../TclCmd/string.htm">string
+index</a></b>, supporting simple index arithmetic and indices
+relative to the end of the list.</p>
+
+<p>If additional <i>index</i> arguments are supplied, then each
+argument is used in turn to address an element within a sublist
+designated by the previous indexing operation, allowing the script
+to alter elements in sublists. The command,</p>
+
+<pre>
+lset a 1 2 newValue
+</pre>
+
+or 
+
+<pre>
+lset a {1 2} newValue
+</pre>
+
+replaces element 2 of sublist 1 with <i>newValue</i>. 
+
+<p>The integer appearing in each <i>index</i> argument must be
+greater than or equal to zero. The integer appearing in each
+<i>index</i> argument must be strictly less than the length of the
+corresponding list. In other words, the <b>lset</b> command cannot
+change the size of a list. If an index is outside the permitted
+range, an error is reported.</p>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+In each of these examples, the initial value of <i>x</i> is: 
+
+<pre>
+set x [list [list a b c] [list d e f] [list g h i]]
+      <i><font size="+1">&rarr;</font> {a b c} {d e f} {g h i}</i>
+</pre>
+
+The indicated return value also becomes the new value of <i>x</i>
+(except in the last case, which is an error which leaves the value
+of <i>x</i> unchanged.) 
+
+<pre>
+<b>lset</b> x {j k l}
+      <i><font size="+1">&rarr;</font> j k l</i>
+<b>lset</b> x {} {j k l}
+      <i><font size="+1">&rarr;</font> j k l</i>
+<b>lset</b> x 0 j
+      <i><font size="+1">&rarr;</font> j {d e f} {g h i}</i>
+<b>lset</b> x 2 j
+      <i><font size="+1">&rarr;</font> {a b c} {d e f} j</i>
+<b>lset</b> x end j
+      <i><font size="+1">&rarr;</font> {a b c} {d e f} j</i>
+<b>lset</b> x end-1 j
+      <i><font size="+1">&rarr;</font> {a b c} j {g h i}</i>
+<b>lset</b> x 2 1 j
+      <i><font size="+1">&rarr;</font> {a b c} {d e f} {g j i}</i>
+<b>lset</b> x {2 1} j
+      <i><font size="+1">&rarr;</font> {a b c} {d e f} {g j i}</i>
+<b>lset</b> x {2 3} j
+      <i><font size="+1">&rarr;</font> list index out of range</i>
+</pre>
+
+In the following examples, the initial value of <i>x</i> is: 
+
+<pre>
+set x [list [list [list a b] [list c d]] \
+            [list [list e f] [list g h]]]
+      <i><font size=
+"+1">&rarr;</font> {{a b} {c d}} {{e f} {g h}}</i>
+</pre>
+
+The indicated return value also becomes the new value of <i>x</i>. 
+
+<pre>
+<b>lset</b> x 1 1 0 j
+      <i><font size=
+"+1">&rarr;</font> {{a b} {c d}} {{e f} {j h}}</i>
+<b>lset</b> x {1 1 0} j
+      <i><font size=
+"+1">&rarr;</font> {{a b} {c d}} {{e f} {j h}}</i>
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/list.htm">list</a></b>, <b><a href=
+"../TclCmd/lappend.htm">lappend</a></b>, <b><a href=
+"../TclCmd/lindex.htm">lindex</a></b>, <b><a href=
+"../TclCmd/linsert.htm">linsert</a></b>, <b><a href=
+"../TclCmd/llength.htm">llength</a></b>, <b><a href=
+"../TclCmd/lsearch.htm">lsearch</a></b>, <b><a href=
+"../TclCmd/lsort.htm">lsort</a></b>, <b><a href=
+"../TclCmd/lrange.htm">lrange</a></b>, <b><a href=
+"../TclCmd/lreplace.htm">lreplace</a></b>, <b><a href=
+"../TclCmd/string.htm">string</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/E.htm#element">element</a>, <a href=
+"../Keywords/I.htm#index">index</a>, <a href=
+"../Keywords/L.htm#list">list</a>, <a href=
+"../Keywords/R.htm#replace">replace</a>, <a href=
+"../Keywords/S.htm#set">set</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2001 by Kevin B. Kenny &lt;kennykb(at)acm.org&gt;.
+All rights reserved.</div>
+</body>
+</html>
+

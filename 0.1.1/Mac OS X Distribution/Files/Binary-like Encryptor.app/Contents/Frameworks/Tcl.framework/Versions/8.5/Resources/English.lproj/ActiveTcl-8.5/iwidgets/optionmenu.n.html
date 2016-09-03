@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>optionmenu - Create and manipulate a option menu
+widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>optionmenu - Create and manipulate a option menu widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>optionmenu pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- Labeledwidget &lt;- optionmenu 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeBackground</b><br>
+<b>borderWidth</b><br>
+<b>foreground</b><br>
+</td>
+<td valign="top"><b>activeBorderWidth</b><br>
+<b>cursor</b><br>
+<b>highlightColor</b><br>
+</td>
+<td valign="top"><b>activeForeground</b><br>
+<b>disabledForeground</b><br>
+<b>highlightThickness</b><br>
+</td>
+<td valign="top"><b>background</b><br>
+<b>font</b><br>
+<b>relief</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>disabledForeground</b><br>
+<b>labelMargin</b><br>
+<b>state</b><br>
+</td>
+<td valign="top"><b>labelBitmap</b><br>
+<b>labelPos</b><br>
+</td>
+<td valign="top"><b>labelFont</b><br>
+<b>labelText</b><br>
+</td>
+<td valign="top"><b>labelImage</b><br>
+<b>labelVariable</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the "LabeledWidget" manual entry for details on the
+inherited options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>clickTime</b>
+Class:                  <b>ClickTime</b>
+Command-Line Switch:    <b>-clicktime</b>
+</pre>
+
+<div style="margin-left: 2em">Interval time, in msec, used to
+determine that a single mouse click has occurred. Used to post menu
+on a "quick" mouse click. <b>Note</b>: changing this value may
+cause the sigle-click functionality to not work properly. The
+default is 150 msec.</div>
+
+<pre>
+Name:                   <b>command</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-command</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command procedure to
+be evaluated following a change in the current option menu
+selection.</div>
+
+<pre>
+Name:                   <b>cyclicOn</b>
+Class:                  <b>CyclicOn</b>
+Command-Line Switch:    <b>-cyclicon</b>
+</pre>
+
+<div style="margin-left: 2em">Turns on/off the 3rd mouse button
+capability. The value may be specified in any of the forms
+acceptable to <b>Tcl_GetBoolean</b>. This feature allows the right
+mouse button to cycle through the popup menu list without poping it
+up. The right mouse button cycles through the menu in reverse
+order. The default is true.</div>
+
+<pre>
+Name:                   <b>popupCursor</b>
+Class:                  <b>Cursor</b>
+Command-Line Switch:    <b>-popupcursor</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the mouse cursor to be used
+for the popup menu. The value may have any of the forms acceptable
+to <b>Tk_GetCursor</b>.</div>
+
+<pre>
+Name:                   <b>state</b>
+Class:                  <b>State</b>
+Command-Line Switch:    <b>-state</b>
+</pre>
+
+<div style="margin-left: 2em">Specified one of two states for the
+optionmenu: <b>normal</b>, or <b>disabled</b>. If the optionmenu is
+disabled, then option menu selection is ignored.</div>
+
+<pre>
+Name:                   <b>width</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-width</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a fixed size for the menu
+button label in any of the forms acceptable to \Tk_GetPixels. If
+the text is too small to fit in the label, the text is clipped.
+Note: Normally, when a new list is created, or new items are added
+to an existing list, the menu button label is resized
+automatically. Setting this option overrides that
+functionality.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>optionmenu</b> command creates an option menu widget with
+options to manage it. An option menu displays a frame containing a
+label and a button. A pop-up menu will allow for the value of the
+button to change.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>optionmenu</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. 
+
+<p>Many of the widget commands for an optionmenu take as one
+argument an indicator of which entry of the option menu to operate
+on. These indicators are called <i>index</i>es and may be specified
+in any of the following forms:</p>
+
+<dl>
+<dt><i>number</i></dt>
+
+<dd>Specifies the entry numerically, where 0 corresponds to the
+top-most entry of the option menu, 1 to the entry below it, and so
+on.</dd>
+</dl>
+
+<dl>
+<dt><b>end</b></dt>
+
+<dd>Indicates the bottommost entry in the menu. If there are no
+entries in the menu then -1 is returned.</dd>
+</dl>
+
+<dl>
+<dt><b>select</b></dt>
+
+<dd>Returns the numerical index of the currently selected option
+menu entry. If no entries exist in the menu, then -1 is
+returned.</dd>
+</dl>
+
+<dl>
+<dt><i>pattern</i></dt>
+
+<dd>If the index doesn't satisfy one of the above forms then this
+form is used. <i>Pattern</i> is pattern-matched against the label
+of each entry in the option menu, in order from the top down, until
+a matching entry is found. The rules of <b>Tcl_StringMatch</b> are
+used.</dd>
+</dl>
+
+<p>The following widget commands are possible for optionmenu
+widgets:</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>optionmenu</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>optionmenu</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>delete <i>first</i> ?<i>last</i>?</b></i></dt>
+
+<dd>Delete all of the option menu entries between <i>first</i> and
+<i>last</i> inclusive. If <i>last</i> is omitted then it defaults
+to <i>first</i>.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>disable <i>index</i></b></i></dt>
+
+<dd>Disable the option menu entry specified by <i>index</i>.
+Disabling a menu item will prevent the user from being able to
+select this item from the menu. This only effects the state of the
+item in the menu, in other words, should the item be the currently
+selected item, the programmer is responsible for determining this
+condition and taking appropriate action.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>enable <i>index</i></b></i></dt>
+
+<dd>Enable the option menu entry specified by <i>index</i>.
+Enabling a menu item allows the user to select this item from the
+menu.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>get</b> ?</i>first? ?<i>last</i>?</dt>
+
+<dd>If no arguments are specified, this operation returns the
+currently selected option menu item. Otherwise, it returns the name
+of the option at index <i>first</i>, or a range of options between
+<i>first</i> and <i>last</i>.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>index <i>index</i></b></i></dt>
+
+<dd>Returns the numerical index corresponding to <i>index</i>.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>insert <i>index string</i>
+?<i>string</i>?</b></i></dt>
+
+<dd>Insert an item, or list of items, into the menu at location
+<i>index</i>.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>select <i>index</i></b></i></dt>
+
+<dd>Select an item from the option menu to be displayed as the
+currently selected item.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>sort <i>mode</i></b></i></dt>
+
+<dd>Sort the current menu in either <b>ascending</b>, or
+<b>descending</b> order. The values <b>increasing</b>, or
+<b>decreasing</b> are also accepted.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>menuBtn</b>
+Class:                  <b>Menubutton</b>
+</pre>
+
+<div style="margin-left: 2em">The menuBtn component is the option
+menu button which displays the current choice from the popup menu.
+See the "menubutton" widget manual entry for details on the menuBtn
+component item.</div>
+
+<pre>
+Name:                   <b>popupMenu</b>
+Class:                  <b>Menu</b>
+</pre>
+
+<div style="margin-left: 2em">The popupMenu component is menu
+displayed upon selection of the menu button. The menu contains the
+choices for the option menu. See the "menu" widget manual entry for
+details on the popupMenu component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ optionmenu .om -labelmargin 5 \\
+     -labelon true -labelpos w -labeltext "Operating System :"
+
+ .om insert end Unix VMS Linux OS/2 {Windows NT} DOS
+ .om sort ascending
+ .om select Linux
+
+ pack .om  -padx 10 -pady 10
+</pre>
+
+<h2>ACKNOWLEDGEMENTS:</h2>
+
+Michael J. McLennan 
+
+<div style="margin-left: 2em">Borrowed some ideas (next &amp;
+previous) from OptionButton class.</div>
+
+<p>Steven B. Jaggers</p>
+
+<div style="margin-left: 2em">Provided an initial prototype in
+[incr Tcl].</div>
+
+<p>Bret Schuhmacher</p>
+
+<div style="margin-left: 2em">Helped with popup menu
+functionality.</div>
+
+<h2>AUTHOR</h2>
+
+Alfredo Jahn 
+
+<h2>KEYWORDS</h2>
+
+optionmenu, widget
+</body>
+</html>
+

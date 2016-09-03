@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_SetChannelError manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> SetChanErr</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="SetChanErr.htm#M2" name="L604">NAME</a> 
+
+<dl>
+<dd>Tcl_SetChannelError, Tcl_SetChannelErrorInterp,
+Tcl_GetChannelError, Tcl_GetChannelErrorInterp - functions to
+create/intercept Tcl errors by channel drivers.</dd>
+</dl>
+</dd>
+
+<dd><a href="SetChanErr.htm#M3" name="L605">SYNOPSIS</a></dd>
+
+<dd><a href="SetChanErr.htm#M4" name="L606">ARGUMENTS</a></dd>
+
+<dd><a href="SetChanErr.htm#M5" name="L607">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="SetChanErr.htm#M6" name=
+"L608"><b>Tcl_DriverCloseProc</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M7" name=
+"L609"><b>Tcl_DriverInputProc</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M8" name=
+"L610"><b>Tcl_DriverOutputProc</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M9" name=
+"L611"><b>Tcl_DriverSeekProc</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M10" name=
+"L612"><b>Tcl_DriverWideSeekProc</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M11" name=
+"L613"><b>Tcl_DriverSetOptionProc</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M12" name=
+"L614"><b>Tcl_DriverGetOptionProc</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M13" name=
+"L615"><b>Tcl_DriverWatchProc</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M14" name=
+"L616"><b>Tcl_DriverBlockModeProc</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M15" name=
+"L617"><b>Tcl_DriverGetHandleProc</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M16" name=
+"L618"><b>Tcl_DriverHandlerProc</b></a></dd>
+</dl>
+
+<dl class="description">
+<dd><a href="SetChanErr.htm#M17" name=
+"L619"><b>Tcl_StackChannel</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M18" name=
+"L620"><b>Tcl_Seek</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M19" name=
+"L621"><b>Tcl_Tell</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M20" name=
+"L622"><b>Tcl_ReadRaw</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M21" name=
+"L623"><b>Tcl_Read</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M22" name=
+"L624"><b>Tcl_ReadChars</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M23" name=
+"L625"><b>Tcl_Gets</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M24" name=
+"L626"><b>Tcl_GetsObj</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M25" name=
+"L627"><b>Tcl_Flush</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M26" name=
+"L628"><b>Tcl_WriteRaw</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M27" name=
+"L629"><b>Tcl_WriteObj</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M28" name=
+"L630"><b>Tcl_Write</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M29" name=
+"L631"><b>Tcl_WriteChars</b></a></dd>
+</dl>
+
+<dl class="description">
+<dd><a href="SetChanErr.htm#M30" name=
+"L632"><b>Tcl_Close</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M31" name=
+"L633"><b>Tcl_UnregisterChannel</b></a></dd>
+
+<dd><a href="SetChanErr.htm#M32" name=
+"L634"><b>Tcl_UnstackChannel</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="SetChanErr.htm#M33" name="L635">SEE ALSO</a></dd>
+
+<dd><a href="SetChanErr.htm#M34" name="L636">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_SetChannelError, Tcl_SetChannelErrorInterp,
+Tcl_GetChannelError, Tcl_GetChannelErrorInterp - functions to
+create/intercept Tcl errors by channel drivers. 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+void<br>
+<b>Tcl_SetChannelError</b>(<i>chan, msg</i>)<br>
+void<br>
+<b>Tcl_SetChannelErrorInterp</b>(<i>interp, msg</i>)<br>
+void<br>
+<b>Tcl_GetChannelError</b>(<i>chan, msgPtr</i>)<br>
+void<br>
+<b>Tcl_GetChannelErrorInterp</b>(<i>interp, msgPtr</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tcl_Channel <b><a href="../TclCmd/chan.htm">chan</a></b>
+(in)</dt>
+
+<dd>Refers to the Tcl channel whose bypass area is accessed.</dd>
+
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a>* <b><a href=
+"../TclCmd/interp.htm">interp</a></b> (in)</dt>
+
+<dd>Refers to the Tcl interpreter whose bypass area is
+accessed.</dd>
+
+<dt>Tcl_Obj* <b>msg</b> (in)</dt>
+
+<dd>Error message put into a bypass area. A list of return options
+and values, followed by a string message. Both message and the
+option/value information are optional.</dd>
+
+<dt>Tcl_Obj** <b>msgPtr</b> (out)</dt>
+
+<dd>Reference to a place where the message stored in the accessed
+bypass area can be stored in.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+The current definition of a Tcl channel driver does not permit the
+direct return of arbitrary error messages, except for the setting
+and retrieval of channel options. All other functions are
+restricted to POSIX error codes. 
+
+<p>The functions described here overcome this limitation. Channel
+drivers are allowed to use <b>Tcl_SetChannelError</b> and
+<b>Tcl_SetChannelErrorInterp</b> to place arbitrary error messages
+in <b>bypass areas</b> <i>defined for channels and interpreters.
+And the generic I/O layer uses</i> <b>Tcl_GetChannelError</b> and
+<b>Tcl_GetChannelErrorInterp</b> to look for messages in the bypass
+areas and arrange for their return as errors. The posix error codes
+set by a driver are used now if and only if no messages are
+present.</p>
+
+<p><b>Tcl_SetChannelError</b> stores error information in the
+bypass area of the specified channel. The number of references to
+the <b>msg</b> object goes up by one. Previously stored information
+will be discarded, by releasing the reference held by the channel.
+The channel reference must not be NULL.</p>
+
+<p><b>Tcl_SetChannelErrorInterp</b> stores error information in the
+bypass area of the specified interpreter. The number of references
+to the <b>msg</b> object goes up by one. Previously stored
+information will be discarded, by releasing the reference held by
+the interpreter. The interpreter reference must not be NULL.</p>
+
+<p><b>Tcl_GetChannelError</b> places either the error message held
+in the bypass area of the specified channel into <i>msgPtr</i>, or
+NULL; and resets the bypass. I.e. after an invocation all following
+invocations will return NULL, until an intervening invocation of
+<b>Tcl_SetChannelError</b> with a non-NULL message. The
+<i>msgPtr</i> must not be NULL. The reference count of the message
+is not touched. The reference previously held by the channel is now
+held by the caller of the function and it is its responsibility to
+release that reference when it is done with the object.</p>
+
+<p><b>Tcl_GetChannelErrorInterp</b> places either the error message
+held in the bypass area of the specified interpreter into
+<i>msgPtr</i>, or NULL; and resets the bypass. I.e. after an
+invocation all following invocations will return NULL, until an
+intervening invocation of <b>Tcl_SetChannelErrorInterp</b> with a
+non-NULL message. The <i>msgPtr</i> must not be NULL. The reference
+count of the message is not touched. The reference previously held
+by the interpreter is now held by the caller of the function and it
+is its responsibility to release that reference when it is done
+with the object.</p>
+
+<p>Which functions of a channel driver are allowed to use which
+bypass function is listed below, as is which functions of the
+public channel API may leave a messages in the bypass areas.</p>
+
+<dl class="description">
+<dt><a name="M6"><b>Tcl_DriverCloseProc</b></a></dt>
+
+<dd>May use <b>Tcl_SetChannelErrorInterp</b>, and only this
+function.</dd>
+
+<dt><a name="M7"><b>Tcl_DriverInputProc</b></a></dt>
+
+<dd>May use <b>Tcl_SetChannelError</b>, and only this
+function.</dd>
+
+<dt><a name="M8"><b>Tcl_DriverOutputProc</b></a></dt>
+
+<dd>May use <b>Tcl_SetChannelError</b>, and only this
+function.</dd>
+
+<dt><a name="M9"><b>Tcl_DriverSeekProc</b></a></dt>
+
+<dd>May use <b>Tcl_SetChannelError</b>, and only this
+function.</dd>
+
+<dt><a name="M10"><b>Tcl_DriverWideSeekProc</b></a></dt>
+
+<dd>May use <b>Tcl_SetChannelError</b>, and only this
+function.</dd>
+
+<dt><a name="M11"><b>Tcl_DriverSetOptionProc</b></a></dt>
+
+<dd>Has already the ability to pass arbitrary error messages. Must
+<b>not</b> use any of the new functions.</dd>
+
+<dt><a name="M12"><b>Tcl_DriverGetOptionProc</b></a></dt>
+
+<dd>Has already the ability to pass arbitrary error messages. Must
+<b>not</b> use any of the new functions.</dd>
+
+<dt><a name="M13"><b>Tcl_DriverWatchProc</b></a></dt>
+
+<dd>Must <b>not</b> use any of the new functions. Is internally
+called and has no ability to return any type of error
+whatsoever.</dd>
+
+<dt><a name="M14"><b>Tcl_DriverBlockModeProc</b></a></dt>
+
+<dd>May use <b>Tcl_SetChannelError</b>, and only this
+function.</dd>
+
+<dt><a name="M15"><b>Tcl_DriverGetHandleProc</b></a></dt>
+
+<dd>Must <b>not</b> use any of the new functions. It is only a
+low-level function, and not used by Tcl commands.</dd>
+
+<dt><a name="M16"><b>Tcl_DriverHandlerProc</b></a></dt>
+
+<dd>Must <b>not</b> use any of the new functions. Is internally
+called and has no ability to return any type of error
+whatsoever.</dd>
+</dl>
+
+<p>Given the information above the following public functions of
+the Tcl C API are affected by these changes. I.e. when these
+functions are called the channel may now contain a stored arbitrary
+error message requiring processing by the caller.</p>
+
+<dl class="description">
+<dt><a name="M17"><b>Tcl_StackChannel</b></a></dt>
+
+<dt><a name="M18"><b>Tcl_Seek</b></a></dt>
+
+<dt><a name="M19"><b>Tcl_Tell</b></a></dt>
+
+<dt><a name="M20"><b>Tcl_ReadRaw</b></a></dt>
+
+<dt><a name="M21"><b>Tcl_Read</b></a></dt>
+
+<dt><a name="M22"><b>Tcl_ReadChars</b></a></dt>
+
+<dt><a name="M23"><b>Tcl_Gets</b></a></dt>
+
+<dt><a name="M24"><b>Tcl_GetsObj</b></a></dt>
+
+<dt><a name="M25"><b>Tcl_Flush</b></a></dt>
+
+<dt><a name="M26"><b>Tcl_WriteRaw</b></a></dt>
+
+<dt><a name="M27"><b>Tcl_WriteObj</b></a></dt>
+
+<dt><a name="M28"><b>Tcl_Write</b></a></dt>
+
+<dt><a name="M29"><b>Tcl_WriteChars</b></a></dt>
+</dl>
+
+<p>All other API functions are unchanged. Especially the functions
+below leave all their error information in the interpreter
+result.</p>
+
+<dl class="description">
+<dt><a name="M30"><b>Tcl_Close</b></a></dt>
+
+<dt><a name="M31"><b>Tcl_UnregisterChannel</b></a></dt>
+
+<dt><a name="M32"><b>Tcl_UnstackChannel</b></a></dt>
+</dl>
+
+<h3><a name="M33">SEE ALSO</a></h3>
+
+<b><a href="../TclLib/OpenFileChnl.htm">Tcl_Close</a></b>, <b><a
+href="../TclLib/OpenFileChnl.htm">Tcl_OpenFileChannel</a></b>,
+<b><a href="../TclLib/SetErrno.htm">Tcl_SetErrno</a></b> 
+
+<h3><a name="M34">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#channel driver">channel driver</a>, <a
+href="../Keywords/E.htm#error messages">error messages</a>, <a
+href="../Keywords/C.htm#channel type">channel type</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2005 Andreas Kupries
+&lt;andreas_kupries(at)users.sourceforge.net&gt;</div>
+</body>
+</html>
+

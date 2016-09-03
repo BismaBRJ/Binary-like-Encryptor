@@ -1,0 +1,430 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>selectionbox - Create and manipulate a selection box
+widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>selectionbox - Create and manipulate a selection box
+widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>selectionbox pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- selectionbox 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeBackground</b><br>
+<b>exportSelection</b><br>
+<b>insertBackground</b><br>
+<b>insertWidth</b><br>
+<b>selectBackground</b><br>
+</td>
+<td valign="top"><b>background</b><br>
+<b>foreground</b><br>
+<b>insertBorderWidth</b><br>
+<b>relief</b><br>
+<b>selectBorderWidth</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>highlightColor</b><br>
+<b>insertOffTime</b><br>
+<b>repeatDelay</b><br>
+<b>selectForeground</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>highlightThickness</b><br>
+<b>insertOnTime</b><br>
+<b>repeatInterval</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>textBackground</b><br>
+</td>
+<td valign="top"><b>textFont</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="entryfield.n.html">"entryfield"</a> widget
+class manual entry for details on the above associated options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>labelFont</b><br>
+</td>
+<td valign="top"><b>labelMargin</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="labeledwidget.n.html">"labeledwidget"</a> class
+manual entry for details on the above associated options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeRelief</b><br>
+</td>
+<td valign="top"><b>elementBorderWidth</b><br>
+</td>
+<td valign="top"><b>jump</b><br>
+</td>
+<td valign="top"><b>troughColor</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/scrollbar.n.html">"scrollbar"</a>
+widget class manual entry for details on the above associated
+options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>dblClickCommand</b><br>
+<b>textBackground</b><br>
+</td>
+<td valign="top"><b>hscrollMode</b><br>
+<b>textFont</b><br>
+</td>
+<td valign="top"><b>sbWidth</b><br>
+<b>vscrollMode</b><br>
+</td>
+<td valign="top"><b>scrollMargin</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="scrolledlistbox.n.html">"scrolledlistbox"</a>
+widget class manual entry for details on the above associated
+options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>childSitePos</b>
+Class:                  <b>Position</b>
+Command-Line Switch:    <b>-childsitepos</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the position of the child
+site in the selection box: <b>n</b>, <b>s</b>, <b>e</b>, <b>w</b>,
+or . The default is center</div>
+
+<pre>
+Name:                   <b>height</b>
+Class:                  <b>Height</b>
+Command-Line Switch:    <b>-height</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the height of the selection
+box. The value may be specified in any of the forms acceptable to
+Tk_GetPixels. The default is 320 pixels.</div>
+
+<pre>
+Name:                   <b>itemsCommand</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-itemscommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a command to be evaluated
+following selection of an item.</div>
+
+<pre>
+Name:                   <b>itemsLabel</b>
+Class:                  <b>Text</b>
+Command-Line Switch:    <b>-itemslabel</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text of the label for
+the items list. The default is "List".</div>
+
+<pre>
+Name:                   <b>itemsLabelPos</b>
+Class:                  <b>Position</b>
+Command-Line Switch:    <b>-itemslabelpos</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the position of the label
+along the side of the items list: <b>n</b>, <b>ne</b>, <b>e</b>,
+<b>se</b>, <b>s</b>, <b>sw</b>, <b>w</b>, or <b>nw</b>. The default
+is nw.</div>
+
+<pre>
+Name:                   <b>itemsOn</b>
+Class:                  <b>ItemsOn</b>
+Command-Line Switch:    <b>-itemson</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies whether or not to display
+the items list in any of the forms acceptable to
+<b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<pre>
+Name:                   <b>margin</b>
+Class:                  <b>Margin</b>
+Command-Line Switch:    <b>-margin</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies distance between the items
+list and selection entry in any of the forms acceptable to
+<b>Tk_GetPixels</b>. The default is 7 pixels.</div>
+
+<pre>
+Name:                   <b>selectionCommand</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-selectioncommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl procedure to be
+associated with a return key press event in the selection entry
+field.</div>
+
+<pre>
+Name:                   <b>selectionLabel</b>
+Class:                  <b>Text</b>
+Command-Line Switch:    <b>-selectionlabel</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the text of the label for
+the selection entry field. The default is "Selection".</div>
+
+<pre>
+Name:                   <b>selectionLabelPos</b>
+Class:                  <b>Position</b>
+Command-Line Switch:    <b>-selectionlabelpos</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the position of the label
+along the side of the selection: <b>n</b>, <b>ne</b>, <b>e</b>,
+<b>se</b>, <b>s</b>, <b>sw</b>, <b>w</b>, or <b>nw</b>. The default
+is nw.</div>
+
+<pre>
+Name:                   <b>selectionOn</b>
+Class:                  <b>SelectionOn</b>
+Command-Line Switch:    <b>-selectionon</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies whether or not to display
+the selection entry in any of the forms acceptable to
+<b>Tcl_GetBoolean</b>. The default is true.</div>
+
+<pre>
+Name:                   <b>width</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-width</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width of the selection
+box. The value may be specified in any of the forms acceptable to
+Tk_GetPixels. The default is 260 pixels.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>selectionbox</b> command creates a scrolled list of items
+and a selection entry field. The user may choose any of the items
+displayed in the scrolled list of alternatives and the selection
+field will be filled with the choice. The user is also free to
+enter a new value in the selection entry field. Both the list and
+entry areas have labels. A child site is also provided in which the
+user may create other widgets to be used in conjunction with the
+selection box.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>selectionbox</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. 
+
+<h2>ASSOCIATED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>curselection</b><br>
+<b>scan</b><br>
+</td>
+<td valign="top"><b>delete</b><br>
+<b>selection</b><br>
+</td>
+<td valign="top"><b>index</b><br>
+<b>size</b><br>
+</td>
+<td valign="top"><b>nearest</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/listbox.n.html">"listbox"</a>
+widget class manual entry for details on the associated
+methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>selectionbox</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>childsite</b></i></dt>
+
+<dd>Returns the child site widget path name.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>clear</b></i> component</dt>
+
+<dd>Delete the contents of either the selection entry widget or
+items list. The <i>component</i> argument may be either
+<b>items</b> or <b>selection</b>.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>selectionbox</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>get</b></i></dt>
+
+<dd>Returns the current value of the selection entry widget.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>insert</b></i> component <i>args</i></dt>
+
+<dd>Insert element(s) into either the selection entry widget or
+items list. The <i>component</i> argument may be either
+<b>items</b> or <b>selection</b>. The <i>args</i> follow the rules
+of either an entry or list widget depending on the <i>component</i>
+value.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>selectitem</b></i></dt>
+
+<dd>Replace the selection entry field contents with the currently
+selected items value.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>childsite</b>
+Class:                  <b>Frame</b>
+</pre>
+
+<div style="margin-left: 2em">The childsite component is the user
+child site for the selection box. See the "frame" widget manual
+entry for details on the childsite component item.</div>
+
+<pre>
+Name:                   <b>items</b>
+Class:                  <b>Scrolledlistbox</b>
+</pre>
+
+<div style="margin-left: 2em">The items component provides the
+scrolled list box of items for the selection box. See the
+"scrolledlistbox" widget manual entry for details on the items
+component item.</div>
+
+<pre>
+Name:                   <b>selection</b>
+Class:                  <b>Entryfield</b>
+</pre>
+
+<div style="margin-left: 2em">The selection component provides the
+entry field in the selection box for display of the selected item
+in the items component. See the "entryfield" widget manual entry
+for details on the selection component item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ option add *textBackground white
+
+ selectionbox .sb -items {Hello {Out There} World}
+ pack .sb -padx 10 -pady 10 -fill both -expand yes 
+
+ set cs [label [.sb childsite].label -text "Child Site"]
+ pack $cs -fill x -padx 10 -pady 10
+
+ .sb insert items 2 {Cruel Cruel}
+
+ .sb selection set 1
+</pre>
+
+<h2>AUTHOR</h2>
+
+Mark L. Ulferts 
+
+<h2>KEYWORDS</h2>
+
+selectionbox, widget
+</body>
+</html>
+

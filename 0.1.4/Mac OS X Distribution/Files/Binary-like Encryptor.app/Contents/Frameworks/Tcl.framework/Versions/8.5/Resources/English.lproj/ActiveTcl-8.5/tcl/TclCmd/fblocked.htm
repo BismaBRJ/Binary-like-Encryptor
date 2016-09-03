@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - fblocked manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> fblocked</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+fblocked - Test whether the last input operation exhausted all
+available input 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>fblocked</b> <i>channelId</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>fblocked</b> command returns 1 if the most recent input
+operation on <i>channelId</i> returned less information than
+requested because all available input was exhausted. For example,
+if <b><a href="../TclCmd/gets.htm">gets</a></b> is invoked when
+there are only three characters available for input and no
+end-of-line sequence, <b><a href="../TclCmd/gets.htm">gets</a></b>
+returns an empty string and a subsequent call to <b>fblocked</b>
+will return 1. 
+
+<p><i>ChannelId</i> must be an identifier for an open channel such
+as a Tcl standard channel (<b>stdin</b>, <b>stdout</b>, or
+<b>stderr</b>), the return value from an invocation of <b><a href=
+"../TclCmd/open.htm">open</a></b> or <b><a href=
+"../TclCmd/socket.htm">socket</a></b>, or the result of a channel
+creation command provided by a Tcl extension.</p>
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+The <b>fblocked</b> command is particularly useful when writing
+network servers, as it allows you to write your code in a
+line-by-line style without preventing the servicing of other
+connections. This can be seen in this simple echo-service: 
+
+<pre>
+# This is called whenever a new client connects to the server
+proc connect {chan host port} {
+    set clientName [format &lt;%s:%d&gt; $host $port]
+    puts "connection from $clientName"
+    fconfigure $chan -blocking 0 -buffering line
+    fileevent $chan readable [list echoLine $chan $clientName]
+}
+
+# This is called whenever either at least one byte of input
+# data is available, or the channel was closed by the client.
+proc echoLine {chan clientName} {
+    gets $chan line
+    if {[eof $chan]} {
+        puts "finishing connection from $clientName"
+        close $chan
+    } elseif {![<b>fblocked</b> $chan]} {
+        # Didn't block waiting for end-of-line
+        puts "$clientName - $line"
+        puts $chan $line
+    }
+}
+
+# Create the server socket and enter the event-loop to wait
+# for incoming connections...
+socket -server connect 12345
+vwait forever
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/gets.htm">gets</a></b>, <b><a href=
+"../TclCmd/open.htm">open</a></b>, <b><a href=
+"../TclCmd/read.htm">read</a></b>, <b><a href=
+"../TclCmd/socket.htm">socket</a></b>, <b><a href=
+"../TclLib/StdChannels.htm">Tcl_StandardChannels</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#blocking">blocking</a>, <a href=
+"../Keywords/N.htm#nonblocking">nonblocking</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

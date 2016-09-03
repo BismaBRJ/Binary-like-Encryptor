@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>buttonbox - Create and manipulate a manager widget for
+buttons</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>buttonbox - Create and manipulate a manager widget for
+buttons</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>buttonbox pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- buttonbox 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>background</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>orient</b>
+Class:                  <b>Orient</b>
+Command-Line Switch:    <b>-orient</b>
+</pre>
+
+<div style="margin-left: 2em">Orientation of the button box:
+<b>horizontal</b> or <b>vertical</b>. The default is
+horizontal.</div>
+
+<pre>
+Name:                   <b>padX</b>
+Class:                  <b>PadX</b>
+Command-Line Switch:    <b>-padx</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a non-negative padding
+distance to leave between the button group and the outer edge of
+the button box in the x direction. The value may be given in any of
+the forms acceptable to <b>Tk_GetPixels</b>. The default is 5
+pixels.</div>
+
+<pre>
+Name:                   <b>padY</b>
+Class:                  <b>PadY</b>
+Command-Line Switch:    <b>-pady</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a non-negative padding
+distance to leave between the button group and the outer edge of
+the button box in the y direction. The value may be given in any of
+the forms acceptable to <b>Tk_GetPixels</b>. The default is 5
+pixels.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>buttonbox</b> command creates a manager widget for
+controlling buttons. The button box also supports the display and
+invocation of a default button. The button box can be configured
+either horizontally or vertically.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>buttonbox</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. 
+
+<p>Many of the widget commands for the buttonbox take as one
+argument an indicator of which button of the button box to operate
+on. These indicators are called <i>indexes</i> and allow reference
+and manipulation of buttons regardless of their current map state.
+buttonbox indexes may be specified in any of the following
+forms:</p>
+
+<dl>
+<dt><i>number</i></dt>
+
+<dd>Specifies the button numerically, where 0 corresponds to the
+left/top-most button of the button box.</dd>
+</dl>
+
+<dl>
+<dt><b>end</b></dt>
+
+<dd>Indicates the right/bottom-most button of the button box.</dd>
+</dl>
+
+<dl>
+<dt><b>default</b></dt>
+
+<dd>Indicates the current default button of the button box. This is
+the button with the default ring displayed.</dd>
+</dl>
+
+<dl>
+<dt><i>pattern</i></dt>
+
+<dd>If the index doesn't satisfy one of the above forms then this
+form is used. <i>Pattern</i> is pattern-matched against the tag of
+each button in the button box, in order from left/top to
+right/left, until a matching entry is found. The rules of
+<b>Tcl_StringMatch</b> are used.</dd>
+</dl>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>add</b></i> tag <i>args</i></dt>
+
+<dd>Add a button distinguished by <i>tag</i> to the end of the
+button box. If additional arguments are present they specify
+options to be applied to the button. See <b>PushButton</b> for
+information on the options available.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>buttonconfigure</b></i> index
+?<i>options</i>?</dt>
+
+<dd>This command is similar to the <b>configure</b> command, except
+that it applies to the options for an individual button, whereas
+<b>configure</b> applies to the options for the button box as a
+whole. <i>Options</i> may have any of the values accepted by the
+<b>PushButton</b> command. If <i>options</i> are specified, options
+are modified as indicated in the command and the command returns an
+empty string. If no <i>options</i> are specified, returns a list
+describing the current options for entry <i>index</i> (see
+<b>Tk_ConfigureInfo</b> for information on the format of this
+list).</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>buttonbox</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>buttonbox</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>default</b></i> index</dt>
+
+<dd>Sets the default button to the button given by <i>index</i>.
+This causes the default ring to appear arround the specified
+button.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>delete</b></i> index</dt>
+
+<dd>Deletes the button given by <i>index</i> from the button
+box.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>hide</b></i> index</dt>
+
+<dd>Hides the button denoted by <i>index</i>. This doesn't remove
+the button permanently, just inhibits its display.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>index <i>index</i></b></i></dt>
+
+<dd>Returns the numerical index corresponding to <i>index</i>.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>insert <i>index</i> <i>tag</i> ?<i>option value
+option value ...</i>?</b></i></dt>
+
+<dd>Same as the <b>add</b> command except that it inserts the new
+button just before the one given by <i>index</i>, instead of
+appending to the end of the button box. The <i>option</i>, and
+<i>value</i> arguments have the same interpretation as for the
+<b>add</b> widget command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>invoke</b></i> ?index?</dt>
+
+<dd>Invoke the command associated with a button. If no arguments
+are given then the current default button is invoked, otherwise the
+argument is expected to be a button <i>index</i>.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName <b>show</b></i> index</dt>
+
+<dd>Display a previously hidden button denoted by
+<i>index</i>.</dd>
+</dl>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ buttonbox .bb
+
+ .bb add Yes -text Yes -command "puts Yes" 
+ .bb add No -text No -command "puts No"
+ .bb add Maybe -text Maybe -command "puts Maybe"
+ .bb default Yes
+
+ pack .bb -expand yes -fill both
+</pre>
+
+<h2>AUTHORS</h2>
+
+Bret A. Schuhmacher 
+
+<p>Mark L. Ulferts</p>
+
+<h2>KEYWORDS</h2>
+
+buttonbox, pushbutton, button, widget
+</body>
+</html>
+

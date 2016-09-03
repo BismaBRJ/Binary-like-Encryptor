@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - eof manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> eof</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+eof - Check for end of file condition on channel 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>eof</b> <i>channelId</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+Returns 1 if an end of file condition occurred during the most
+recent input operation on <i>channelId</i> (such as <b><a href=
+"../TclCmd/gets.htm">gets</a></b>), 0 otherwise. 
+
+<p><i>ChannelId</i> must be an identifier for an open channel such
+as a Tcl standard channel (<b>stdin</b>, <b>stdout</b>, or
+<b>stderr</b>), the return value from an invocation of <b><a href=
+"../TclCmd/open.htm">open</a></b> or <b><a href=
+"../TclCmd/socket.htm">socket</a></b>, or the result of a channel
+creation command provided by a Tcl extension.</p>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+Read and print out the contents of a file line-by-line: 
+
+<pre>
+set f [open somefile.txt]
+while {1} {
+    set line [gets $f]
+    if {[<b>eof</b> $f]} {
+        close $f
+        break
+    }
+    puts "Read line: $line"
+}
+</pre>
+
+<p>Read and print out the contents of a file by fixed-size
+records:</p>
+
+<pre>
+set f [open somefile.dat]
+fconfigure $f -translation binary
+set recordSize 40
+while {1} {
+    set record [read $f $recordSize]
+    if {[<b>eof</b> $f]} {
+        close $f
+        break
+    }
+    puts "Read record: $record"
+}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/file.htm">file</a></b>, <b><a href=
+"../TclCmd/open.htm">open</a></b>, <b><a href=
+"../TclCmd/close.htm">close</a></b>, <b><a href=
+"../TclCmd/fblocked.htm">fblocked</a></b>, <b><a href=
+"../TclLib/StdChannels.htm">Tcl_StandardChannels</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#channel">channel</a>, <a href=
+"../Keywords/E.htm#end of file">end of file</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

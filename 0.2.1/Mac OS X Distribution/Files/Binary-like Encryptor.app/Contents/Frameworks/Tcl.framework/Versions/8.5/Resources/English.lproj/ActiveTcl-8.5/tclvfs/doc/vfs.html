@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>vfs - Tcl-level Virtual Filesystems</title>
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+</head>
+<body>
+<div class="doctools">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<hr>
+[ <a href="../../at.pkg_index.html">Main table Of Contents</a> | <a
+href="../toc.html">TclVFS Table Of Contents</a> | <a href=
+"../index.html">TclVFS Index</a> ] 
+
+<hr>
+<h1 class="title">vfs(n) 1.0 "Tcl-level Virtual Filesystems"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>vfs - Filesystem management in Tcl</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">API</a></li>
+
+<li class="section"><a href="#section3">LIMITATIONS</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tcl 8.4</b></li>
+
+<li>package require <b class="pkgname">vfs <span class=
+"opt">?1.2.1?</span></b></li>
+</ul>
+
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">vfs::filesystem</b> <b class=
+"method">mount</b> <span class="opt">?<b class=
+"option">-volume</b>?</span> <i class="arg">path</i> <i class=
+"arg">command</i></a></li>
+
+<li><a href="#2"><b class="cmd">vfs::filesystem</b> <b class=
+"method">unmount</b> <i class="arg">path</i></a></li>
+
+<li><a href="#3"><b class="cmd">vfs::filesystem</b> <b class=
+"method">info</b> <span class="opt">?<i class=
+"arg">path</i>?</span></a></li>
+
+<li><a href="#4"><b class="cmd">vfs::filesystem</b> <b class=
+"method">fullynormalize</b> <i class="arg">path</i></a></li>
+
+<li><a href="#5"><b class="cmd">vfs::filesystem</b> <b class=
+"method">posixerror</b> <i class="arg">int</i></a></li>
+
+<li><a href="#6"><b class="cmd">vfs::filesystem</b> <b class=
+"method">internalerror</b> <i class="arg">command</i></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>The package <b class="package">vfs</b> provides commands to
+query, mount and unmount virtual filesystems implemented in Tcl.
+This is further facilitated through the provison of helper commands
+in a tcl script library. See section "HANDLER ENVIRONMENT" of <b
+class="cmd"><a href="vfs-fsapi.html">vfs-fsapi</a></b> for more
+information.</p>
+
+<p>Once a virtual filesystem is in place, the standard Tcl
+commands, like <b class="cmd"><a href=
+"../index.html#key0">file</a></b>, <b class="cmd">glob</b>, <b
+class="cmd">cd</b>, <b class="cmd">pwd</b>, <b class=
+"cmd">open</b>, including all their C APIs in the Tcl library (e.g.
+<b class="function">Tcl_FSOpenFileChannel</b>, <b class=
+"function">Tcl_FSMatchInDirectory</b>, ...), can be used within the
+filesystem (and indeed, properly written extensions such as <b
+class="package">Tk</b> which may open or read files will also
+transparently access the virtual filesystem).</p>
+
+<p>Because all of Tcl's filesystem activity passes through a single
+layer, every operation can be intercepted. This package does just
+that. This is also quite different from simply overloading the <b
+class="cmd"><a href="../index.html#key0">file</a></b> command in
+Tcl. We are actually providing replacements for C commands like <b
+class="syscmd">access</b>, <b class="syscmd">stat</b>, etc. By
+implementing a small number of low-level commands we ensure that
+all commands at higher levels will function irrespective of what is
+going on inside the filesystem layer.</p>
+
+<p>Tcl's filesystem hooks operate on a per-process basis. This
+means every Tcl interpreter in the same process/application will
+see the same filesystem, including any virtual filesystems.</p>
+
+<p>To access this package use the command <b class="cmd">package
+require vfs</b>. This automatically registers the vfs hooks into
+Tcl's filesystem and provides the command <b class=
+"cmd">vfs::filesystem</b>. The latter allows the registration of
+actual virtual filesystems. More in the upcoming section <span
+class="sectref"><a href="#section2">API</a></span>. The hooks will
+not be removed until Tcl exits. If desired, control over this could
+be exposed to Tcl in the future. By and in itself the command above
+will have no further effect. Only after filesystem implementations
+have been registered and filesystems using them been mounted
+filesystem commands will actually be intercepted, and handled by
+the Tcl code of the mounted virtual filesystem.</p>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">API</a></h2>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">vfs::filesystem</b> <b class=
+"method">mount</b> <span class="opt">?<b class=
+"option">-volume</b>?</span> <i class="arg">path</i> <i class=
+"arg">command</i></a></dt>
+
+<dd>
+<p><i class="term">Mount</i>s a virtual filesystem at <i class=
+"arg">path</i>, making it useable. After completion of the call any
+access to a subdirectory of <i class="arg">path</i> will be handled
+by that filesystem. The filesystem is represented here by the <i
+class="arg">command</i> prefix which will be executed whenever an
+operation on a file or directory within <i class="arg">path</i> has
+to be performed.</p>
+
+<p>Whether the <i class="arg">command</i> is implemented in C or
+Tcl is of no relevance as long as it adheres to the API specified
+in <b class="cmd"><a href="vfs-fsapi.html">vfs-fsapi</a></b> and is
+present in the interpreter where the mount operation is
+executed.</p>
+
+<p>If the option <b class="option">-volume</b> is specified the new
+mount point is also registered with Tcl as a new volume and will
+therefore from then on appear in the output of the command <b
+class="cmd">file volumes</b>. This is useful (and required for
+reasonable operation) for mounts like <b class="const">ftp://</b>.
+It should not be used for paths mounted inside the native
+filesystem.</p>
+
+<p>The new filesystem mounts will be observed immediately in all
+interpreters in the current process. If the interpreter is later
+deleted, all mounts which are intercepted by it will be
+automatically removed (and will therefore affect the view of the
+filesystem seen by all interpreters).</p>
+</dd>
+
+<dt><a name="2"><b class="cmd">vfs::filesystem</b> <b class=
+"method">unmount</b> <i class="arg">path</i></a></dt>
+
+<dd>
+<p>This unmounts the virtual filesystem which was mounted at <i
+class="arg">path</i>. An error is thrown if no filesystem was
+mounted there. After the completion of the operation the filesystem
+is not visible anymore, and any previous filesystem accessible
+through this path becomes accessible again.</p>
+</dd>
+
+<dt><a name="3"><b class="cmd">vfs::filesystem</b> <b class=
+"method">info</b> <span class="opt">?<i class=
+"arg">path</i>?</span></a></dt>
+
+<dd>
+<p>A list of all filesystems mounted in all interpreters is
+returned, if no <i class="arg">path</i> argument was specified.
+Else the filesystem responsible for that <i class="arg">path</i> is
+examined and the command prefix used to handle all filesystem
+operations returned. An error is thrown if no filesystem is mounted
+for that <i class="arg">path</i>.</p>
+
+<p>There is currently no facility for examining in which
+interpreter each command will be evaluated.</p>
+</dd>
+
+<dt><a name="4"><b class="cmd">vfs::filesystem</b> <b class=
+"method">fullynormalize</b> <i class="arg">path</i></a></dt>
+
+<dd>
+<p>Performs a full expansion of <i class="arg">path</i>, (as per <b
+class="cmd">file normalize</b>). This includes the following of any
+links in the last element of <i class="arg">path</i>.</p>
+</dd>
+
+<dt><a name="5"><b class="cmd">vfs::filesystem</b> <b class=
+"method">posixerror</b> <i class="arg">int</i></a></dt>
+
+<dd>
+<p>This command can be called by filesystem implementations during
+the execution of a filesystem operation to signal the posix error
+code of a failure. See also <b class="syscmd"><a href=
+"vfs-fsapi.html">vfs-fsapi</a></b>.</p>
+</dd>
+
+<dt><a name="6"><b class="cmd">vfs::filesystem</b> <b class=
+"method">internalerror</b> <i class="arg">command</i></a></dt>
+
+<dd>
+<p>When used the specified <i class="arg">command</i> is registerd
+as the command to trap and report any internal errors thrown by
+filesystem implementations.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">LIMITATIONS</a></h2>
+
+<p>The code of the package <b class="package">vfs</b> has only a
+few limitations.</p>
+
+<ol class="enumerated">
+<li>
+<p>One subtlety one has to be aware of is that mixing
+case-(in)sensitive filesystems and application code may yield
+unexpected results.</p>
+
+<p>For example mounting a case-sensitive virtual filesystem into a
+case-insensitive system (like the standard Windows or MacOS
+filesystems) and then using this with code relying on
+case-insensitivity problems will appear when accessing the virtual
+filesystem.</p>
+
+<p>Note that application code relying on case-insensitivity will
+not under Unix either, i.e. is inherently non-portable, and should
+be fixed.</p>
+</li>
+
+<li>
+<p>The C-API's for <b class="method">link</b> and <b class=
+"method">lstat</b> are currently not exposed to the Tcl level. This
+may be done in the future to allow virtual filesystems implemented
+in Tcl to support the reading and writing of links.</p>
+</li>
+
+<li>
+<p>The public C-API filesystem function <b class=
+"function">Tcl_FSMatchInDirectory</b> is given a variety of type
+information in a <i class="term">Tcl_GlobTypeData</i> structure.
+Currently only the <i class="term">type</i> field of said strcuture
+is exposed to the tcl-level. Fields like <i class=
+"term">permissions</i> and MacOS <i class="term">type/creator</i>
+are ignored.</p>
+</li>
+</ol>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="vfs-filesystems.html">vfs-filesystems</a>, <a href=
+"vfs-fsapi.html">vfs-fsapi</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../index.html#key0">file</a>, <a href=
+"../index.html#key1">filesystem</a>, <a href=
+"../index.html#key7">vfs</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 2001-2003 Vince Darley
+&lt;vincentdarley@users.sourceforge.net&gt;<br>
+Copyright &copy; 2003 Andreas Kupries
+&lt;andreas_kupries@users.sourceforge.net&gt;</p>
+</div>
+
+<h4>Copyright &copy; 2015 <a href="http://www.activestate.com">for
+compilation: ActiveState</a></h4>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Variable scope - global, upvar, and unset</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Variable scope - global and upvar</h1>
+
+<div class="nav"><a href="Tcl12.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl14.html">Next
+lesson</a></div>
+
+<p>Tcl evaluates variables within a <i>scope</i> delineated by
+procs, namespaces (see <a href="Tcl31.html">Building reusable
+libraries - packages and namespaces</a>), and at the topmost level,
+the <code class="keyword">global</code> scope.</p>
+
+<p>The scope in which a variable will be evaluated can be changed
+with the <code class="keyword">global</code> and <code class=
+"keyword">upvar</code> commands.</p>
+
+<p>The <code class="keyword">global</code> command will cause a
+variable in a local scope (inside a procedure) to refer to the
+global variable of that name.</p>
+
+<p>The <code class="keyword">upvar</code> command is similar. It
+"ties" the name of a variable in the current scope to a variable in
+a different scope. This is commonly used to simulate
+pass-by-reference to procs.</p>
+
+<p>You might also encounter the <code class=
+"keyword">variable</code> command in others' Tcl code. It is part
+of the namespace system and is discussed in detail in that
+chapter.</p>
+
+<p>Normally, Tcl uses a type of "garbage collection" called
+reference counting in order to automatically clean up variables
+when they are not used anymore, such as when they go "out of scope"
+at the end of a procedure, so that you don't have to keep track of
+them yourself. It is also possible to explicitly unset them with
+the aptly named <code class="keyword">unset</code> command.</p>
+
+<p>The syntax for <code class="keyword">upvar</code> is:</p>
+
+<ul>
+<li><code class="keyword">upvar</code> <code class=
+"arg">?level?</code> <code class="arg">otherVar1</code> <code
+class="arg">myVar1</code> <code class="arg">?otherVar2</code> <code
+class="arg">myVar2?</code> <code class="arg">...</code> <code
+class="arg">?otherVarN</code> <code class="arg">myVarN?</code></li>
+</ul>
+
+<p>The <code class="keyword">upvar</code> command causes <code
+class="arg">myVar1</code> to become a reference to <code class=
+"arg">otherVar1</code>, and <code class="arg">myVar2</code> to
+become a reference to <code class="arg">otherVar2</code>, etc. The
+<code class="arg">otherVar</code> variable is declared to be at
+<code class="arg">level</code> relative to the current procedure.
+By default <code class="arg">level</code> is 1, the next level
+up.</p>
+
+<p>If a number is used for the <code class="arg">level</code>, then
+level references that many levels up the stack from the current
+level.</p>
+
+<p>If the <code class="keyword">level</code> number is preceded by
+a <code class="keyword">#</code> symbol, then it references that
+many levels down from the global scope. If <code class=
+"arg">level</code> is <code class="keyword">#0</code>, then the
+reference is to a variable at the global level.</p>
+
+<p>If you are using upvar with anything except #0 or 1, you are
+most likely asking for trouble, unless you really know what you're
+doing.</p>
+
+<p>You should avoid using global variables if possible. If you have
+a lot of globals, you should reconsider the design of your
+program.</p>
+
+<p>Note that since there is only one global space it is
+surprisingly easy to have name conflicts if you are importing other
+peoples code and aren't careful. It is recommended that you start
+global variables with an identifiable prefix to help avoid
+unexpected conflicts.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+proc SetPositive {variable value } {
+    upvar $variable myvar
+    if {$value &lt; 0} {
+        set myvar [expr {-$value}]
+    } else {
+        set myvar $value
+    }
+    return $myvar
+}
+
+SetPositive x 5
+SetPositive y -5
+
+puts "X : $x    Y: $y\n"
+
+proc two {y} {
+    upvar 1 $y z                    ;# tie the calling value to variable z
+    upvar 2 x a                     ;# Tie variable x two levels up  to a
+    puts "two: Z: $z A: $a"         ;# Output the values, just to confirm
+    set z 1                         ;# Set z, the passed variable to 1;
+    set a 2                         ;# Set x, two layers up to 2;
+}
+
+proc one {y} {
+    upvar $y z                      ;# This ties the calling value to variable z 
+    puts "one: Z: $z"               ;# Output that value, to check it is 5
+    two z                           ;# call proc two, which will change the value
+}
+
+one y                               ;# Call one, and output X and Y after the call.
+puts "\nX: $x  Y: $y"
+
+
+proc existence {variable} {
+    upvar $variable testVar
+    if { [info exists testVar] } {
+        puts "$variable Exists"
+    } else {
+        puts "$variable Does Not Exist"
+    }
+}
+
+set x 1
+set y 2
+for {set i 0} {$i &lt; 5} {incr i} {
+    set a($i) $i;
+}
+
+puts "\ntesting unsetting a simple variable"
+# Confirm that x exists.
+existence x
+# Unset x
+unset x
+puts "x has been unset"
+# Confirm that x no longer exists.
+existence x
+</pre>
+
+<div class="nav"><a href="Tcl12.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl14.html">Next
+lesson</a></div>
+</body>
+</html>
+

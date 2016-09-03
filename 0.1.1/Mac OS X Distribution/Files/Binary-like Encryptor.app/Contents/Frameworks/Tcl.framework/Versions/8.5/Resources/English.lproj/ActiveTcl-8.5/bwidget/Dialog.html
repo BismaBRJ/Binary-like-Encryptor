@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Dialog</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>Dialog</b> - Dialog abstraction with custom buttons</dd>
+</dl>
+
+<dl>
+<dt><i>CREATION</i></dt>
+
+<dd><a href="#descr"><b>Dialog</b></a> <i>pathName</i> ?<i>option
+value...</i>?</dd>
+</dl>
+
+<dl>
+<dt><i><a href="ButtonBox.html">OPTIONS from
+<b>ButtonBox</b></a></i></dt>
+
+<dd>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;-background or -bg</td>
+<td>&nbsp;&nbsp;-homogeneous</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-padx</td>
+<td>&nbsp;&nbsp;-pady</td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;-spacing</td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wso">WIDGET-SPECIFIC OPTIONS</a></i></dt>
+
+<dd>
+<table cellspacing="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;&nbsp;<a href="#-anchor">-anchor</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-bitmap">-bitmap</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-cancel">-cancel</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-default">-default</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-geometry">-geometry</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-image">-image</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-modal">-modal</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-parent">-parent</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-place">-place</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-separator">-separator</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-side">-side</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-title">-title</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;&nbsp;<a href="#-transient">-transient</a></td>
+</tr>
+</table>
+</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">WIDGET COMMAND</a></i></dt>
+
+<dd><i>pathName</i> <a href="#add"><b>add</b></a>
+?<i>arg...</i>?</dd>
+
+<dd><i>pathName</i> <a href="#cget"><b>cget</b></a>
+<i>option</i></dd>
+
+<dd><i>pathName</i> <a href="#configure"><b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#draw"><b>draw</b></a>
+?<i>focus</i>?</dd>
+
+<dd><i>pathName</i> <a href="#enddialog"><b>enddialog</b></a>
+<i>result</i></dd>
+
+<dd><i>pathName</i> <a href="#getframe"><b>getframe</b></a></dd>
+
+<dd><i>pathName</i> <a href="#invoke"><b>invoke</b></a>
+<i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#itemcget"><b>itemcget</b></a>
+<i>index</i> <i>option</i></dd>
+
+<dd><i>pathName</i> <a href=
+"#itemconfigure"><b>itemconfigure</b></a> <i>index</i>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dd>
+
+<dd><i>pathName</i> <a href="#setfocus"><b>setfocus</b></a>
+<i>index</i></dd>
+
+<dd><i>pathName</i> <a href="#withdraw"><b>withdraw</b></a></dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>Dialog widget enables the user to create a dialog box. Some
+commands take an <i>index</i> as argument indicating on which
+Button it work. This index is the same specified for equivalent
+ButtonBox command:</p>
+
+<dl compact>
+<dt><i>number</i></dt>
+
+<dd>Specifies the Button numerically, where 0 corresponds to the
+first added Button, 1 to the next, and so on.</dd>
+
+<dt><b>end</b> or <b>last</b></dt>
+
+<dd>Indicates the last item added.</dd>
+
+<dt><b>default</b></dt>
+
+<dd>Indicates the default Button.</dd>
+</dl>
+
+<br>
+<br>
+ <br>
+<hr width="50%">
+<br>
+<b><a name="wso">WIDGET-SPECIFIC OPTIONS</a></b><br>
+<dl>
+<dt><a name="-anchor"><b>-anchor (read-only)</b></a></dt>
+
+<dd>Specifies the anchor point of the ButtonBox. Must be one of
+<b>w</b>, <b>e</b>, <b>n</b>, <b>s</b> or <b>c</b>. If <b>side</b>
+option is set to <i>top</i> or <i>bottom</i>, <b>anchor</b> values
+<i>n</i>, <i>s</i> and <i>c</i> have the same effect. If
+<b>side</b> option is set to <i>left</i> or <i>right</i>,
+<b>anchor</b> values <i>w</i>, <i>e</i> and <i>c</i> have the same
+effect.</dd>
+</dl>
+
+<dl>
+<dt><a name="-bitmap"><b>-bitmap (read-only)</b></a></dt>
+
+<dd>Specifies a bitmap to display at the left of the user frame.
+<b>image</b> option override <b>bitmap</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-cancel"><b>-cancel</b></a></dt>
+
+<dd>Specifies the number of the cancel button of the Dialog. When
+user presses Esc or the windows close button, this button is
+invoked.<br>
+If set to <b>-1</b>, Esc does not invoke anything. The window close
+button <i>destroys</i> the dialog in this case and returns
+<b>-1</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-default"><b>-default</b></a></dt>
+
+<dd>Specifies the number of the default button of the Dialog. When
+user press Return in the Dialog, this button is invoked.</dd>
+</dl>
+
+<dl>
+<dt><a name="-geometry"><b>-geometry</b></a></dt>
+
+<dd>Set the <b>geometry</b> used when method <b>draw</b> is called.
+See <b>wm geometry</b> for a parameter description.</dd>
+</dl>
+
+<dl>
+<dt><a name="-image"><b>-image (read-only)</b></a></dt>
+
+<dd>Specifies an image to display at the left of the user frame.
+<b>image</b> option override <b>bitmap</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-modal"><b>-modal</b></a></dt>
+
+<dd>This option must be <b>none</b>, <b>local</b> or <b>global</b>.
+The value of this option specifies the grab mode of the dialog and
+how works Dialog::<b>draw</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-parent"><b>-parent</b></a></dt>
+
+<dd>Parent of the Dialog. Dialog is placed relative to its parent.
+If empty, it is placed relative to the root window. Also see
+<b>place</b> option.</dd>
+</dl>
+
+<dl>
+<dt><a name="-place"><b>-place</b></a></dt>
+
+<dd>Specifies where to draw the Dialog toplevel relative to the
+dialog's parent. Must be one of <b>none</b>, <b>center</b>,
+<b>left</b>, <b>right</b>, <b>above</b>, <b>below</b>. Default
+value of <b>place</b> is <i>center</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-separator"><b>-separator (read-only)</b></a></dt>
+
+<dd>Specifies wether or not to draw a separator between the user
+frame and the ButtonBox.</dd>
+</dl>
+
+<dl>
+<dt><a name="-side"><b>-side (read-only)</b></a></dt>
+
+<dd>Specifies where to draw the ButtonBox relative to the user
+frame. Must be one of <b>top</b>, <b>left</b>, <b>bottom</b> or
+<b>right</b>.</dd>
+</dl>
+
+<dl>
+<dt><a name="-title"><b>-title</b></a></dt>
+
+<dd>Title of the Dialog toplevel.</dd>
+</dl>
+
+<dl>
+<dt><a name="-transient"><b>-transient (read-only)</b></a></dt>
+
+<dd>Specifies if the Dialog Toplevel should be a transient window
+or not. Default value of <b>transient</b> is <i>true</i>.</dd>
+</dl>
+
+<hr width="50%">
+<br>
+<b><a name="wc">WIDGET COMMAND</a></b><br>
+<dl>
+<dt><a name="add"><i>pathName</i> <b>add</b></a>
+?<i>arg...</i>?</dt>
+
+<dd>Add a button to the button box of the dialog box. Default
+-command option is <i>Dialog::enddialog $path index</i> where
+<i>index</i> is number of button added.</dd>
+</dl>
+
+<dl>
+<dt><a name="cget"><i>pathName</i> <b>cget</b></a>
+<i>option</i></dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure"><i>pathName</i> <b>configure</b></a>
+?<i>option</i>? ?<i>value</i> <i>option</i> <i>value</i> ...?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named <i>option</i> (this list will be identical
+to the corresponding sublist of the value returned if no
+<i>option</i> is specified). If one or more <i>option-value</i>
+pairs are specified, then the command modifies the given widget
+option(s) to have the given value(s); in this case the command
+returns an empty string. <i>Option</i> may have any of the values
+accepted by the creation command. Read-only options are not be
+modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="draw"><i>pathName</i> <b>draw</b></a>
+?<i>focus</i>?</dt>
+
+<dd>This command draw the Dialog, and set grab to it following
+<b>modal</b> option. If <b>modal</b> option is set to <i>none</i>,
+the command returns immediatly an empty string. In all other case,
+the command returns when Dialog::<b>enddialog</b> is called or when
+Dialog is destroyed. The return value is the result argument of
+Dialog::<b>enddialog</b> or -1 if it is destroyed. 
+
+<p>By default, the focus is set to the default button referenced by
+<b>default</b> option, or to the toplevel of Dialog if no default
+button has been set. If <i>focus</i> is present, it must be a
+pathname, or an index to a button. Initial focus is set on this
+pathname or corresponding button.</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="enddialog"><i>pathName</i> <b>enddialog</b></a>
+<i>result</i></dt>
+
+<dd>This command is typically called within a command of a button
+to make Dialog::<b>draw</b> return.</dd>
+</dl>
+
+<dl>
+<dt><a name="getframe"><i>pathName</i> <b>getframe</b></a></dt>
+
+<dd>Returns the pathname of the user window.</dd>
+</dl>
+
+<dl>
+<dt><a name="invoke"><i>pathName</i> <b>invoke</b></a>
+<i>index</i></dt>
+
+<dd>Invoke the Button given by <i>index</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="itemcget"><i>pathName</i> <b>itemcget</b></a>
+<i>index</i> <i>option</i></dt>
+
+<dd>Returns the current value of a configuration option for the
+item. <i>Option</i> may have any of the values accepted by the item
+creation command.</dd>
+</dl>
+
+<dl>
+<dt><a name="itemconfigure"><i>pathName</i>
+<b>itemconfigure</b></a> <i>index</i> ?<i>option</i>? ?<i>value</i>
+<i>option</i> <i>value</i> ...?</dt>
+
+<dd>This command is similar to the <b>configure</b> command, except
+that it applies to the options for an individual item, whereas
+<b>configure</b> applies to the options for the widget as a whole.
+<b>Options</b> may have any of the values accepted by the item
+creation widget command. If options are specified, options are
+modified as indicated in the command and the command returns an
+empty string. If no options are specified, returns a list
+describing the current options for the item. Read-only options are
+not be modified.</dd>
+</dl>
+
+<dl>
+<dt><a name="setfocus"><i>pathName</i> <b>setfocus</b></a>
+<i>index</i></dt>
+
+<dd>Set the focus to the Button given by <i>index</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="withdraw"><i>pathName</i> <b>withdraw</b></a></dt>
+
+<dd>Call this command to hide the dialog box.</dd>
+</dl>
+</body>
+</html>
+

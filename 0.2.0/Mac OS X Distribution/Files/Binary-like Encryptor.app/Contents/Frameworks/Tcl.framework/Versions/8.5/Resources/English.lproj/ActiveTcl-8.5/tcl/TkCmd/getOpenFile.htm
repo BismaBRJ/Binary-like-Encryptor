@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - tk_getOpenFile manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> getOpenFile</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="getOpenFile.htm#M2" name="L631">NAME</a> 
+
+<dl>
+<dd>tk_getOpenFile, tk_getSaveFile - pop up a dialog box for the
+user to select a file to open or save.</dd>
+</dl>
+</dd>
+
+<dd><a href="getOpenFile.htm#M3" name="L632">SYNOPSIS</a> 
+
+<dl>
+<dd><b>tk_getOpenFile</b> ?<i>option value ...</i>?</dd>
+
+<dd><b>tk_getSaveFile</b> ?<i>option value ...</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="getOpenFile.htm#M4" name="L633">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="getOpenFile.htm#M5" name=
+"L634"><b>-confirmoverwrite</b> <i>boolean</i></a></dd>
+
+<dd><a href="getOpenFile.htm#M6" name=
+"L635"><b>-defaultextension</b> <i>extension</i></a></dd>
+
+<dd><a href="getOpenFile.htm#M7" name="L636"><b>-filetypes</b>
+<i>filePatternList</i></a></dd>
+
+<dd><a href="getOpenFile.htm#M8" name="L637"><b>-initialdir</b>
+<i>directory</i></a></dd>
+
+<dd><a href="getOpenFile.htm#M9" name="L638"><b>-initialfile</b>
+<i>filename</i></a></dd>
+
+<dd><a href="getOpenFile.htm#M10" name="L639"><b>-message</b>
+<i>string</i></a></dd>
+
+<dd><a href="getOpenFile.htm#M11" name="L640"><b>-multiple</b>
+<i>boolean</i></a></dd>
+
+<dd><a href="getOpenFile.htm#M12" name="L641"><b>-parent</b>
+<i>window</i></a></dd>
+
+<dd><a href="getOpenFile.htm#M13" name="L642"><b>-title</b>
+<i>titleString</i></a></dd>
+
+<dd><a href="getOpenFile.htm#M14" name="L643"><b>-typevariable</b>
+<i>variableName</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="getOpenFile.htm#M15" name="L644">SPECIFYING FILE
+PATTERNS</a></dd>
+
+<dd><a href="getOpenFile.htm#M16" name="L645">SPECIFYING
+EXTENSIONS</a> 
+
+<dl class="specifying extensions">
+<dd><a href="getOpenFile.htm#M17" name="L646">(1)</a></dd>
+
+<dd><a href="getOpenFile.htm#M18" name="L647">(2)</a></dd>
+
+<dd><a href="getOpenFile.htm#M19" name="L648">(3)</a></dd>
+</dl>
+</dd>
+
+<dd><a href="getOpenFile.htm#M20" name="L649">EXAMPLE</a></dd>
+
+<dd><a href="getOpenFile.htm#M21" name="L650">SEE ALSO</a></dd>
+
+<dd><a href="getOpenFile.htm#M22" name="L651">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+tk_getOpenFile, tk_getSaveFile - pop up a dialog box for the user
+to select a file to open or save. 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>tk_getOpenFile</b> ?<i>option value ...</i>?<br>
+<b>tk_getSaveFile</b> ?<i>option value ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The procedures <b>tk_getOpenFile</b> and <b>tk_getSaveFile</b> pop
+up a dialog box for the user to select a file to open or save. The
+<b>tk_getOpenFile</b> command is usually associated with the <b><a
+href="../TclCmd/open.htm">Open</a></b> command in the <b><a href=
+"../TclCmd/file.htm">File</a></b> menu. Its purpose is for the user
+to select an existing file <i>only</i>. If the user enters a
+non-existent file, the dialog box gives the user an error prompt
+and requires the user to give an alternative selection. If an
+application allows the user to create new files, it should do so by
+providing a separate <b>New</b> menu command. 
+
+<p>The <b>tk_getSaveFile</b> command is usually associated with the
+<b>Save as</b> command in the <b><a href=
+"../TclCmd/file.htm">File</a></b> menu. If the user enters a file
+that already exists, the dialog box prompts the user for
+confirmation whether the existing file should be overwritten or
+not.</p>
+
+<p>The following <i>option-value</i> pairs are possible as command
+line arguments to these two commands:</p>
+
+<dl class="description">
+<dt><a name="M5"><b>-confirmoverwrite</b> <i>boolean</i></a></dt>
+
+<dd>Configures how the Save dialog reacts when the selected file
+already exists, and saving would overwrite it. A true value
+requests a confirmation dialog be presented to the user. A false
+value requests that the overwrite take place without confirmation.
+Default value is true.</dd>
+
+<dt><a name="M6"><b>-defaultextension</b> <i>extension</i></a></dt>
+
+<dd>Specifies a string that will be appended to the filename if the
+user enters a filename without an extension. The default value is
+the empty string, which means no extension will be appended to the
+filename in any case. This option is ignored on Mac OS X, which
+does not require extensions to filenames, and the UNIX
+implementation guesses reasonable values for this from the
+<b>-filetypes</b> option when this is not supplied.</dd>
+
+<dt><a name="M7"><b>-filetypes</b> <i>filePatternList</i></a></dt>
+
+<dd>If a <b><a href="../TclCmd/file.htm">File types</a></b> listbox
+exists in the file dialog on the particular platform, this option
+gives the <i>filetype</i>s in this listbox. When the user choose a
+filetype in the listbox, only the files of that type are listed. If
+this option is unspecified, or if it is set to the empty list, or
+if the <b><a href="../TclCmd/file.htm">File types</a></b> listbox
+is not supported by the particular platform then all files are
+listed regardless of their types. See the section <b>SPECIFYING
+FILE PATTERNS</b> below for a discussion on the contents of
+<i>filePatternList</i>.</dd>
+
+<dt><a name="M8"><b>-initialdir</b> <i>directory</i></a></dt>
+
+<dd>Specifies that the files in <i>directory</i> should be
+displayed when the dialog pops up. If this parameter is not
+specified, then the files in the current working directory are
+displayed. If the parameter specifies a relative path, the return
+value will convert the relative path to an absolute path.</dd>
+
+<dt><a name="M9"><b>-initialfile</b> <i>filename</i></a></dt>
+
+<dd>Specifies a filename to be displayed in the dialog when it pops
+up.</dd>
+
+<dt><a name="M10"><b>-message</b> <i>string</i></a></dt>
+
+<dd>Specifies a message to include in the client area of the
+dialog. This is only available on Mac OS X.</dd>
+
+<dt><a name="M11"><b>-multiple</b> <i>boolean</i></a></dt>
+
+<dd>Allows the user to choose multiple files from the Open
+dialog.</dd>
+
+<dt><a name="M12"><b>-parent</b> <i>window</i></a></dt>
+
+<dd>Makes <i>window</i> the logical parent of the file dialog. The
+file dialog is displayed on top of its parent window. On Mac OS X,
+this turns the file dialog into a sheet attached to the parent
+window.</dd>
+
+<dt><a name="M13"><b>-title</b> <i>titleString</i></a></dt>
+
+<dd>Specifies a string to display as the title of the dialog box.
+If this option is not specified, then a default title is
+displayed.</dd>
+
+<dt><a name="M14"><b>-typevariable</b> <i>variableName</i></a></dt>
+
+<dd>The global variable <i>variableName</i> is used to preselect
+which filter is used from <i>filterList</i> when the dialog box is
+opened and is updated when the dialog box is closed, to the last
+selected filter. The variable is read once at the beginning to
+select the appropriate filter. If the variable does not exist, or
+its value does not match any filter typename, or is empty
+(<b>{}</b>), the dialog box will revert to the default behavior of
+selecting the first filter in the list. If the dialog is canceled,
+the variable is not modified.</dd>
+</dl>
+
+<p>If the user selects a file, both <b>tk_getOpenFile</b> and
+<b>tk_getSaveFile</b> return the full pathname of this file. If the
+user cancels the operation, both commands return the empty
+string.</p>
+
+<h3><a name="M15">SPECIFYING FILE PATTERNS</a></h3>
+
+The <i>filePatternList</i> value given by the <b>-filetypes</b>
+option is a list of file patterns. Each file pattern is a list of
+the form 
+
+<pre>
+<i>typeName</i> {<i>extension</i> ?<i>extension ...</i>?} ?{<i>macType</i> ?<i>macType ...</i>?}?
+</pre>
+
+<i>typeName</i> is the name of the file type described by this file
+pattern and is the text string that appears in the <b><a href=
+"../TclCmd/file.htm">File types</a></b> listbox. <i>extension</i>
+is a file extension for this file pattern. <i>macType</i> is a
+four-character Macintosh file type. The list of <i>macType</i>s is
+optional and may be omitted for applications that do not need to
+execute on the Macintosh platform. 
+
+<p>Several file patterns may have the same <i>typeName,</i> in
+which case they refer to the same file type and share the same
+entry in the listbox. When the user selects an entry in the
+listbox, all the files that match at least one of the file patterns
+corresponding to that entry are listed. Usually, each file pattern
+corresponds to a distinct type of file. The use of more than one
+file pattern for one type of file is only necessary on the
+Macintosh platform.</p>
+
+<p>On the Macintosh platform, a file matches a file pattern if its
+name matches at least one of the <i>extension</i>(s) AND it belongs
+to at least one of the <i>macType</i>(s) of the file pattern. For
+example, the <b>C Source Files</b> file pattern in the sample code
+matches with files that have a <b>.c</b> extension AND belong to
+the <i>macType</i> <b><a href="../TkCmd/text.htm">TEXT</a></b>. To
+use the OR rule instead, you can use two file patterns, one with
+the <i>extensions</i> only and the other with the <i>macType</i>
+only. The <b>GIF Files</b> file type in the sample code matches
+files that <i>either</i> have a <b>.gif</b> extension OR belong to
+the <i>macType</i> <b>GIFF</b>.</p>
+
+<p>On the Unix and Windows platforms, a file matches a file pattern
+if its name matches at least one of the <i>extension</i>(s) of the
+file pattern. The <i>macType</i>s are ignored.</p>
+
+<h3><a name="M16">SPECIFYING EXTENSIONS</a></h3>
+
+On the Unix and Macintosh platforms, extensions are matched using
+glob-style pattern matching. On the Windows platform, extensions
+are matched by the underlying operating system. The types of
+possible extensions are: 
+
+<dl class="specifying extensions">
+<dt><a name="M17">(1)</a></dt>
+
+<dd>the special extension &ldquo;*&rdquo; matches any file;</dd>
+
+<dt><a name="M18">(2)</a></dt>
+
+<dd>the special extension &ldquo;&rdquo; matches any files that do
+not have an extension (i.e., the filename contains no full stop
+character);</dd>
+
+<dt><a name="M19">(3)</a></dt>
+
+<dd>any character string that does not contain any wild card
+characters (* and ?).</dd>
+</dl>
+
+<p>Due to the different pattern matching rules on the various
+platforms, to ensure portability, wild card characters are not
+allowed in the extensions, except as in the special extension
+&ldquo;*&rdquo;. Extensions without a full stop character (e.g.
+&ldquo;~&rdquo;) are allowed but may not work on all platforms.</p>
+
+<h3><a name="M20">EXAMPLE</a></h3>
+
+<pre>
+set types {
+    {{Text Files}       {.txt}        }
+    {{TCL Scripts}      {.tcl}        }
+    {{C Source Files}   {.c}      TEXT}
+    {{GIF Files}        {.gif}        }
+    {{GIF Files}        {}        GIFF}
+    {{All Files}        *             }
+}
+set filename [tk_getOpenFile -filetypes $types]
+
+if {$filename != ""} {
+    # Open the file ...
+}
+</pre>
+
+<h3><a name="M21">SEE ALSO</a></h3>
+
+<b>tk_chooseDirectory</b> 
+
+<h3><a name="M22">KEYWORDS</a></h3>
+
+<a href="../Keywords/F.htm#file selection dialog">file selection
+dialog</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

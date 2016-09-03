@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Tcl Data Structures 101 - The list</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Tcl Data Structures 101 - The list</h1>
+
+<div class="nav"><a href="Tcl13.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl15.html">Next
+lesson</a></div>
+
+<p>The list is the basic Tcl data structure. A list is simply an
+ordered collection of stuff; numbers, words, strings, or other
+lists. Even commands in Tcl are just lists in which the first list
+entry is the name of a proc, and subsequent members of the list are
+the arguments to the proc.</p>
+
+<p>Lists can be created in several ways:</p>
+
+<dl>
+<dt>by setting a variable to be a list of values</dt>
+
+<dd>set lst {{item 1} {item 2} {item 3}}</dd>
+
+<dt>with the <code class="keyword">split</code> command</dt>
+
+<dd>set lst [split "item 1.item 2.item 3" "."]</dd>
+
+<dt>with the <code class="keyword">list</code> command.</dt>
+
+<dd>set lst [list "item 1" "item 2" "item 3"]</dd>
+</dl>
+
+<p>An individual list member can be accessed with the <code class=
+"keyword">lindex</code> command.</p>
+
+<p>The brief description of these commands is:</p>
+
+<dl>
+<dt><code class="keyword">list</code> <code class=
+"arg">?arg1?</code> <code class="arg">?arg2?</code> <code class=
+"arg">...</code> <code class="arg">?argN?</code></dt>
+
+<dd>makes a list of the arguments</dd>
+
+<dt><code class="keyword">split</code> <code class=
+"arg">string</code> <code class="arg">?splitChars?</code></dt>
+
+<dd>Splits the <code class="arg">string</code> into a list of items
+wherever the <code class="arg">splitChars</code> occur in the code.
+<code class="arg">SplitChars</code> defaults to being whitespace.
+Note that if there are two or more <code class=
+"arg">splitChars</code> then each one will be used individually to
+split the string. In other words: <code>split
+&nbsp;"1234567"&nbsp;"36"</code> would return the following list:
+{12 45 7}.</dd>
+
+<dt><code class="keyword">lindex</code> <code class=
+"arg">list</code> <code class="arg">index</code></dt>
+
+<dd>Returns the <code class="arg">index</code>'th item from the
+list. <strong>Note:</strong> lists start from 0, not 1, so the
+first item is at index 0, the second item is at index 1, and so
+on.</dd>
+
+<dt><code class="keyword">llength</code> <code class=
+"arg">list</code></dt>
+
+<dd>Returns the number of elements in a list.</dd>
+</dl>
+
+<p>The items in list can be iterated through using the <code class=
+"keyword">foreach</code> command:</p>
+
+<dl>
+<dt><code class="keyword">foreach</code> <code class=
+"arg">varname</code> <code class="arg">list</code> <code class=
+"arg">body</code></dt>
+
+<dd>The <code class="keyword">foreach</code> command will execute
+the <code class="arg">body</code> code one time for each list item
+in <code class="arg">list</code>. On each pass, <code class=
+"arg">varname</code> will contain the value of the next <code
+class="arg">list</code> item.</dd>
+</dl>
+
+<p>In reality, the above form of <code class=
+"keyword">foreach</code> is the simple form, but the command is
+quite powerful. It will allow you to take more than one variable at
+a time from the list:
+<code>foreach&nbsp;{a&nbsp;b}&nbsp;$listofpairs&nbsp;{&nbsp;...&nbsp;}</code>.
+You can even take a variable at a time from multiple lists! For
+example:
+<code>foreach&nbsp;a&nbsp;$listOfA&nbsp;b&nbsp;$listOfB&nbsp;{&nbsp;...&nbsp;}</code></p>
+
+<hr>
+<h2>Examples</h2>
+
+<pre class="example">
+set x "a b c"
+puts "Item at index 2 of the list {$x} is: [lindex $x 2]\n"
+
+set y [split 7/4/1776 "/"]
+puts "We celebrate on the [lindex $y 1]'th day of the [lindex $y 0]'th month\n"
+
+set z [list puts "arg 2 is $y" ]
+puts "A command resembles: $z\n"
+
+set i 0
+foreach j $x {
+    puts "$j is item number $i in list x"
+    incr i
+}
+</pre>
+
+<div class="nav"><a href="Tcl13.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl15.html">Next
+lesson</a></div>
+</body>
+</html>
+

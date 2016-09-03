@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - raise manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> raise</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+raise - Change a window's position in the stacking order 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>raise</b> <i>window</i> ?<i>aboveThis</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+If the <i>aboveThis</i> argument is omitted then the command raises
+<i>window</i> so that it is above all of its siblings in the
+stacking order (it will not be obscured by any siblings and will
+obscure any siblings that overlap it). If <i>aboveThis</i> is
+specified then it must be the path name of a window that is either
+a sibling of <i>window</i> or the descendant of a sibling of
+<i>window</i>. In this case the <b>raise</b> command will insert
+<i>window</i> into the stacking order just above <i>aboveThis</i>
+(or the ancestor of <i>aboveThis</i> that is a sibling of
+<i>window</i>); this could end up either raising or lowering
+<i>window</i>. 
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+Make a button appear to be in a sibling frame that was created
+after it. This is is often necessary when building GUIs in the
+style where you create your activity widgets first before laying
+them out on the display: 
+
+<pre>
+button .b -text "Hi there!"
+pack [frame .f -background blue]
+pack [label .f.l1 -text "This is above"]
+pack .b -in .f
+pack [label .f.l2 -text "This is below"]
+<b>raise</b> .b
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/lower.htm">lower</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/O.htm#obscure">obscure</a>, <a href=
+"../Keywords/R.htm#raise">raise</a>, <a href=
+"../Keywords/S.htm#stacking order">stacking order</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

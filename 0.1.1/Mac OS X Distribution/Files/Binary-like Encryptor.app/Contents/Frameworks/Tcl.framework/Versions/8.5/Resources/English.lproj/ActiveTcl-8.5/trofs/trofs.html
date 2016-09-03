@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>trofs - Tcl Read-Only Filesystem</title>
+<style type="text/css">
+<!--
+    HTML {
+    background:     #FFFFFF;
+    color:      black;
+    }
+    BODY {
+    background:     #FFFFFF;
+    color:      black;
+    }
+    DIV.doctools {
+    margin-left:    10%;
+    margin-right:   10%;
+    }
+    DIV.doctools H1,DIV.doctools H2 {
+    margin-left:    -5%;
+    }
+    H1, H2, H3, H4 {
+    margin-top:     1em;
+    font-family:    sans-serif;
+    font-size:  large;
+    color:      #005A9C;
+    background:     transparent;
+    text-align:     left;
+    }
+    H1.title {
+    text-align: center;
+    }
+    UL,OL {
+    margin-right: 0em;
+    margin-top: 3pt;
+    margin-bottom: 3pt;
+    }
+    UL LI {
+    list-style: disc;
+    }
+    OL LI {
+    list-style: decimal;
+    }
+    DT {
+    padding-top:    1ex;
+    }
+    UL.toc,UL.toc UL, UL.toc UL UL {
+    font:       normal 12pt/14pt sans-serif;
+    list-style: none;
+    }
+    LI.section, LI.subsection {
+    list-style:     none;
+    margin-left:    0em;
+    text-indent:    0em;
+    padding:    0em;
+    }
+    PRE {
+    display:    block;
+    font-family:    monospace;
+    white-space:    pre;
+    margin:     0%;
+    padding-top:    0.5ex;
+    padding-bottom: 0.5ex;
+    padding-left:   1ex;
+    padding-right:  1ex;
+    width:      100%;
+    }
+    PRE.example {
+    color:      black;
+    background:     #f5dcb3;
+    border:     1px solid black;
+    }
+    UL.requirements LI, UL.syntax LI {
+    list-style:     none;
+    margin-left:    0em;
+    text-indent:    0em;
+    padding:    0em;
+    }
+    DIV.synopsis {
+    color:      black;
+    background:     #80ffff;
+    border:     1px solid black;
+    font-family:    serif;
+    margin-top:     1em;
+    margin-bottom:  1em;
+    }
+    UL.syntax {
+    margin-top:     1em;
+    border-top: 1px solid black;
+    }
+    UL.requirements {
+    margin-bottom:  1em;
+    border-bottom:  1px solid black;
+    }
+-->
+</style>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<div class="doctools">
+<h1 class="title">trofs(n) 0.4 trofs "Tcl Read-Only
+Filesystem"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>trofs - Manage read-only filesystems in archive file</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">COMMANDS</a></li>
+
+<li class="section"><a href="#section3">EXAMPLE</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tcl 8.5</b></li>
+
+<li>package require <b class="pkgname">trofs <span class=
+"opt">?0.4?</span></b></li>
+</ul>
+
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">archive</b> <i class=
+"arg">directory</i> <i class="arg">archive</i></a></li>
+
+<li><a href="#2"><b class="cmd">mount</b> <i class=
+"arg">archive</i> <span class="opt">?<i class=
+"arg">mountpoint</i>?</span></a></li>
+
+<li><a href="#3"><b class="cmd">unmount</b> <i class=
+"arg">mountpoint</i></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>The <b class="package">trofs</b> package provides commands to
+create, mount, and unmount archive files containing read-only
+filesystems. Mounted trofs archives contain files, directories, and
+symbolic links that can be opened and read by Tcl commands just as
+if they were part of the native filesystem. The public commands
+documented here are all defined in and exported from the
+<em>::trofs</em> namespace.</p>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">COMMANDS</a></h2>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">archive</b> <i class=
+"arg">directory</i> <i class="arg">archive</i></a></dt>
+
+<dd>
+<p>The <b class="cmd">archive</b> command creates a trofs archive
+file <i class="arg">archive</i> from the contents of <i class=
+"arg">directory</i>. Only the contents of <i class=
+"arg">directory</i> that are readable will be archived. Unreadable
+contents will be silently omitted from the archive. If <i class=
+"arg">directory</i> is not a readable directory at all, an empty
+archive will be created. If <i class="arg">archive</i> is not an
+existing file, it will be created (assuming write permission to the
+directory containing it). If <i class="arg">archive</i> is an
+existing file, it must be writable and seekable. The archive
+contents will be appended to the <i class="arg">archive</i> file,
+starting with the character <b class="const">\u001A</b>, which is
+the end of file character for Tcl's <b class="cmd">source</b>
+command. This technique allows a trofs archive to be attached to a
+<b class="cmd">source</b>-able Tcl script. The <i class=
+"arg">archive</i> file created by <b class="cmd">archive</b> is
+suitable for use as the first argument to <b class="cmd">mount</b>.
+The <b class="cmd">archive</b> command returns an empty string.</p>
+</dd>
+
+<dt><a name="2"><b class="cmd">mount</b> <i class="arg">archive</i>
+<span class="opt">?<i class="arg">mountpoint</i>?</span></a></dt>
+
+<dd>
+<p>The <b class="cmd">mount</b> command mounts the trofs archive
+stored in <i class="arg">archive</i> as a read-only filesystem. The
+archive file <i class="arg">archive</i> must be a readable,
+seekable, trofs archive file created by the <b class=
+"cmd">archive</b> command. If the <i class="arg">mountpoint</i>
+argument is supplied, then [<b class="cmd">file exists</b> <i
+class="arg">mountpoint</i>] must return <b class="const">0</b>, and
+[<b class="cmd">file system</b> <i class="arg">mountpoint</i>] must
+return either <b class="const">native</b> or <b class=
+"const">trofs</b> before the <b class="cmd">mount</b> call. If no
+<i class="arg">mountpoint</i> argument is supplied, the <b class=
+"cmd">mount</b> command will generate a suitable mountpoint path.
+After a successful <b class="cmd">mount</b>, [<b class="cmd">file
+system</b> <i class="arg">mountpoint</i>] will return <b class=
+"const">trofs</b>, [<b class="cmd">file isdirectory</b> <i class=
+"arg">mountpoint</i>] will return <b class="const">1</b>, and the
+contents of <i class="arg">archive</i> will be visible as contents
+of the directory <i class="arg">mountpoint</i>. The <b class=
+"cmd">mount</b> command returns the normalized path to <i class=
+"arg">mountpoint</i>.</p>
+</dd>
+
+<dt><a name="3"><b class="cmd">unmount</b> <i class=
+"arg">mountpoint</i></a></dt>
+
+<dd>
+<p>The <b class="cmd">unmount</b> command reverses the effect of a
+prior <b class="cmd">mount</b> command. The <i class=
+"arg">mountpoint</i> argument must be a mountpoint created by a
+prior call to <b class="cmd">mount</b>. It can be in normalized
+form or not; it will be normalized by <b class="cmd">unmount</b> as
+part of the search for a matching existing mountpoint. If no such
+mountpoint is currently mounted, an error is raised. Otherwise, the
+mount is undone, so that [<b class="cmd">file exists</b> <i class=
+"arg">mountpoint</i>] once again returns <b class="const">0</b>.
+The <b class="cmd">unmount</b> command returns an empty string.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">EXAMPLE</a></h2>
+
+<pre class="example">
+package require trofs
+namespace import trofs::*
+archive $directory $archive
+mount $archive $mountpoint
+</pre>
+
+<p>At this point, both <i class="arg">$directory</i> and <i class=
+"arg">$mountpoint</i> are directories, and their readable content
+should be identical.</p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p>file, source</p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p>filesystem</p>
+</div>
+</div>
+</body>
+</html>
+

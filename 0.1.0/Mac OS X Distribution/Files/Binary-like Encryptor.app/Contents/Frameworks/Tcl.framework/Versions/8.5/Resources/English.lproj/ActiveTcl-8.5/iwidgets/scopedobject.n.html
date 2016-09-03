@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>scopedobject - Create and manipulate a scoped \[incr Tcl\]
+class object.</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>scopedobject - Create and manipulate a scoped \[incr Tcl\]
+class object.</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>scopedobject objName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+None 
+
+<h2>STANDARD OPTIONS</h2>
+
+<pre>
+Name:                   <b>enterscopecommand:</b>
+Command-Line Switch:    <b>-enterscopecommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command to invoke
+when an object enters scope (i.e. when it is created..). The
+default is {}.</div>
+
+<pre>
+Name:                   <b>enterscopecommand:</b>
+Command-Line Switch:    <b>-enterscopecommand</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a Tcl command to invoke
+when an object exits scope (i.e. when it is deleted..). The default
+is {}.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>scopedobject</b> command creates a base class for
+defining Itcl classes which posses scoped behavior like Tcl
+variables. The objects are only accessible within the procedure in
+which they are instantiated and are deleted when the procedure
+returns. This class was designed to be a general purpose base class
+for supporting scoped incr Tcl classes. The options include the
+execute a Tcl script command when an object enters and exits its
+scope.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>scopedobject</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the object. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for scopedobject
+objects: 
+
+<h2>OBJECT-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>scopedobject</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the object. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i>. If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given objects option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>scopedobject</b> command.</dd>
+</dl>
+
+<h2>EXAMPLE</h2>
+
+<div style="margin-left: 2em">The scopedobject was primarily meant
+to be a base class. The following is an example of usage without
+inheritance:</div>
+
+<pre>
+  proc scopedobject_demo {} {
+    scopedobject #auto \
+        -exitscopecommand {puts "enter scopedobject_demo"} \
+        -exitscopecommand {puts "exit scopedobject_demo"}
+  }
+
+  scopedobject_demo
+
+</pre>
+
+<h2>AUTHOR</h2>
+
+John A. Tucker 
+
+<h2>KEYWORDS</h2>
+
+scopedobject, object
+</body>
+</html>
+

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - append manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> append</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+append - Append to variable 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>append</b> <i>varName</i> ?<i>value value value ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+Append all of the <i>value</i> arguments to the current value of
+variable <i>varName</i>. If <i>varName</i> does not exist, it is
+given a value equal to the concatenation of all the <i>value</i>
+arguments. The result of this command is the new value stored in
+variable <i>varName</i>. This command provides an efficient way to
+build up long variables incrementally. For example,
+&ldquo;<b>append a $b</b>&rdquo; is much more efficient than
+&ldquo;<b>set a $a$b</b>&rdquo; if <b>$a</b> is long. 
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+Building a string of comma-separated numbers piecemeal using a
+loop. 
+
+<pre>
+set var 0
+for {set i 1} {$i&lt;=10} {incr i} {
+   <b>append</b> var "," $i
+}
+puts $var
+# Prints 0,1,2,3,4,5,6,7,8,9,10
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/concat.htm">concat</a></b>, <b><a href=
+"../TclCmd/lappend.htm">lappend</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#append">append</a>, <a href=
+"../Keywords/V.htm#variable">variable</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

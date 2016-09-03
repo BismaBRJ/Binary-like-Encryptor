@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>teapot-admin - TEA Package Management</title>
+<link rel="stylesheet" href="../aspn.css" type="text/css">
+</head>
+<body>
+<div class="doctools">
+<hr>
+[ 
+
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+ <a href="../../toc.html">Main Table Of Contents</a> | <a href=
+"../toc.html">Table Of Contents</a> | <a href=
+"../../index.html">Keyword Index</a> ] 
+
+<hr>
+<h1 class="title">teapot-admin(n) 1.0 tpm "TEA Package
+Management"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>teapot-admin - TEApot Administrative Client</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">Commands</a></li>
+
+<li class="section"><a href="#section3">BUGS, IDEAS,
+FEEDBACK</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">teapot-admin</b> <b class=
+"method">create</b> <i class="arg">path</i></a></li>
+
+<li><a href="#2"><b class="cmd">teapot-admin</b> <b class=
+"method">add</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <i class="arg">path</i> <i class=
+"arg">file</i>...</a></li>
+
+<li><a href="#3"><b class="cmd">teapot-admin</b> <b class=
+"method">remove</b> <i class="arg">path</i> <span class="opt">?<b
+class="option">-entity</b>?</span> <i class="arg">name</i> <span
+class="opt">?<i class="arg">version</i> <span class="opt">?<i
+class="arg">architecture</i>?</span>?</span></a></li>
+
+<li><a href="#4"><b class="cmd">teapot-admin</b> <b class=
+"method">get</b> <i class="arg">path</i> <span class="opt">?<b
+class="option">-entity</b>?</span> <i class="arg">name</i> <span
+class="opt">?<i class="arg">version</i> <span class="opt">?<i
+class="arg">architecture</i>?</span>?</span></a></li>
+
+<li><a href="#5"><b class="cmd">teapot-admin</b> <b class=
+"method">list</b> <i class="arg">path</i> <span class="opt">?<b
+class="option">-entity</b>?</span> <span class="opt">?<i class=
+"arg">name</i> <span class="opt">?<i class="arg">version</i> <span
+class="opt">?<i class=
+"arg">architecture</i>?</span>?</span>?</span></a></li>
+
+<li><a href="#6"><b class="cmd">teapot-admin</b> <b class=
+"method">version</b></a></li>
+
+<li><a href="#7"><b class="cmd">teapot-admin</b> <b class=
+"method">who</b></a></li>
+
+<li><a href="#8"><b class="cmd">teapot-admin</b> <b class=
+"method">status</b> <i class="arg">path</i></a></li>
+
+<li><a href="#9"><b class="cmd">teapot-admin</b> <b class=
+"method">rejournal</b> <i class="arg">path</i></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>This document assumes that the reader has read at least the <i
+class="term"><a href="CTP_introduction.html">TEApot
+Introduction</a></i>, the <i class="term"><a href=
+"CTP_glossary.html">TEApot Glossary of Terms</a></i>, and possibly
+the <i class="term"><a href="CTP_metadata.html">TEApot Meta Data
+Specification</a></i>.</p>
+
+<p>This tool provides the functionality for the management of <i
+class="term">local opaque</i> repositories. It allows repository
+administrators to</p>
+
+<ol class="enumerated">
+<li>
+<p>Create new repositories.</p>
+</li>
+
+<li>
+<p>Put entities into repositories.</p>
+</li>
+
+<li>
+<p>Remove entities from repositories.</p>
+</li>
+
+<li>
+<p>List the contents of repositories.</p>
+</li>
+
+<li>
+<p>Retrieve entity archive files from repositories.</p>
+</li>
+</ol>
+
+<p><em>Note:</em> If this tool modifies a repository and finds a
+"<b class="file">htmlcache</b>" directory then it will clear this
+directory, to ensure that a <i class="term"><a href=
+"CTP_teapot.html">TEApot Repository Server</a></i> using it will
+not serve invalidated information from this cache directory.</p>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">Commands</a></h2>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">teapot-admin</b> <b class=
+"method">create</b> <i class="arg">path</i></a></dt>
+
+<dd>
+<p>Creates a new repository in the directory <i class=
+"arg">path</i>. This directory must not already contain a
+repository. The new repository is empty.</p>
+</dd>
+
+<dt><a name="2"><b class="cmd">teapot-admin</b> <b class=
+"method">add</b> <span class="opt">?<b class=
+"option">-v</b>?</span> <i class="arg">path</i> <i class=
+"arg">file</i>...</a></dt>
+
+<dd>
+<p>Adds the entities contained in the specified <i class=
+"arg">file</i>s to the repository at the directory <i class=
+"arg">path</i>. The directory has to exist and contain a valid
+repository.</p>
+
+<p>If the option <b class="option">-v</b> was specified the
+application will print the full meta data of each entity to the
+standard output as it is added.</p>
+</dd>
+
+<dt><a name="3"><b class="cmd">teapot-admin</b> <b class=
+"method">remove</b> <i class="arg">path</i> <span class="opt">?<b
+class="option">-entity</b>?</span> <i class="arg">name</i> <span
+class="opt">?<i class="arg">version</i> <span class="opt">?<i
+class="arg">architecture</i>?</span>?</span></a></dt>
+
+<dd>
+<p>Removes the entity instance(s) matching the specified <i class=
+"arg">name</i>, <i class="arg">version</i>, and <i class=
+"arg">architecture</i> from the repository at the directory <i
+class="arg">path</i>. The directory has to exist and contain a
+valid repository.</p>
+
+<p>Any parts not specified are ignored during matching.</p>
+
+<p>If no <i class="arg">entity</i> was specified all possible
+entities are removed. Otherwise only entities of the specified type
+are removed. The recognized options are derived from the names of
+the known entity types:</p>
+
+<dl class="definitions">
+<dt>Application</dt>
+
+<dd>
+<p><b class="option">-application</b></p>
+</dd>
+
+<dt>Package</dt>
+
+<dd>
+<p><b class="option">-package</b></p>
+</dd>
+
+<dt>Profile</dt>
+
+<dd>
+<p><b class="option">-profile</b></p>
+</dd>
+</dl>
+</dd>
+
+<dt><a name="4"><b class="cmd">teapot-admin</b> <b class=
+"method">get</b> <i class="arg">path</i> <span class="opt">?<b
+class="option">-entity</b>?</span> <i class="arg">name</i> <span
+class="opt">?<i class="arg">version</i> <span class="opt">?<i
+class="arg">architecture</i>?</span>?</span></a></dt>
+
+<dd>
+<p>Retrieves the files of the entity instance(s) matching the
+specified <i class="arg">name</i>, <i class="arg">version</i>, and
+<i class="arg">architecture</i> from the repository at the
+directory <i class="arg">path</i>. The directory has to exist and
+contain a valid repository.</p>
+
+<p>Not specified parts are ignored during matching.</p>
+
+<p>The retrieved files are placed into the current directory, with
+file names constructed from the entity type, name, version,
+architecture, and type of archive (Tcl Module, Zip archive,
+...).</p>
+
+<p>If no <i class="arg">entity</i> was specified the archives of
+all possible entities are retrieved. Otherwise only entities of the
+specified type are retrieved. The recognized options are derived
+from the names of the known entity types, see above.</p>
+</dd>
+
+<dt><a name="5"><b class="cmd">teapot-admin</b> <b class=
+"method">list</b> <i class="arg">path</i> <span class="opt">?<b
+class="option">-entity</b>?</span> <span class="opt">?<i class=
+"arg">name</i> <span class="opt">?<i class="arg">version</i> <span
+class="opt">?<i class=
+"arg">architecture</i>?</span>?</span>?</span></a></dt>
+
+<dd>
+<p>Lists the entity instance(s) matching the specified <i class=
+"arg">name</i>, <i class="arg">version</i>, and <i class=
+"arg">architecture</i> found in the repository at the directory <i
+class="arg">path</i>. The directory has to exist and contain a
+valid repository.</p>
+
+<p>Any parts not specified are ignored during matching.</p>
+
+<p>If no <i class="arg">entity</i> was specified all possible
+entities are listed. Otherwise only entities of the specified type
+are listed. The recognized options are derived from the names of
+the known entity types, see above.</p>
+</dd>
+
+<dt><a name="6"><b class="cmd">teapot-admin</b> <b class=
+"method">version</b></a></dt>
+
+<dd>
+<p>Prints the version number of the application.</p>
+</dd>
+
+<dt><a name="7"><b class="cmd">teapot-admin</b> <b class=
+"method">who</b></a></dt>
+
+<dd>
+<p>Prints the complete teapot meta data of the application.</p>
+</dd>
+
+<dt><a name="8"><b class="cmd">teapot-admin</b> <b class=
+"method">status</b> <i class="arg">path</i></a></dt>
+
+<dd>
+<p>Returns information about modification times for repository
+index and journal, and the range spanned by entries in the
+journal.</p>
+</dd>
+
+<dt><a name="9"><b class="cmd">teapot-admin</b> <b class=
+"method">rejournal</b> <i class="arg">path</i></a></dt>
+
+<dd>
+<p>Regenerates the repository journal, compacting it as much as
+possible. In essence a new journal is created based on the current
+contents of the repository, thus removing all delete operations
+from the journal, and all information not in the repository
+anymore.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">BUGS, IDEAS, FEEDBACK</a></h2>
+
+<p>This document, and the application it describes, will
+undoubtedly contain bugs and other problems. Please report such at
+the <a href=
+"http://bugs.activestate.com/query.cgi?set_product=ActiveTcl">ActiveState
+ActiveTcl Bug Tracker</a>. The relevant component is
+<em>teapot</em>. Please also report any ideas for enhancements you
+may have for either application and/or documentation.</p>
+
+<p>The version number of the teapot-admin application with the
+problem in question can be queried with the command <b class=
+"method">version</b></p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="CTP_teacup.html">teacup</a>, <a href=
+"CTP_teapot.html">teapot</a>, <a href=
+"CTP_metadata.html">teapot-md</a>, <a href=
+"CTP_teazip.html">teapot-pkg</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../../index.html#key3">TEA</a>, <a href=
+"../../index.html#key2">TEAPOT</a>, <a href=
+"../../index.html#key17">administration</a>, <a href=
+"../../index.html#key1">package management</a>, <a href=
+"../../index.html#key7">repository</a>, <a href=
+"../../index.html#key10">server</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 2006-2008 ActiveState Software Inc.</p>
+</div>
+</div>
+</body>
+</html>
+

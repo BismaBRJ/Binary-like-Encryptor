@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - rename manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> rename</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+rename - Rename or delete a command 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>rename</b> <i>oldName newName</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+Rename the command that used to be called <i>oldName</i> so that it
+is now called <i>newName</i>. If <i>newName</i> is an empty string
+then <i>oldName</i> is deleted. <i>oldName</i> and <i>newName</i>
+may include namespace qualifiers (names of containing namespaces).
+If a command is renamed into a different namespace, future
+invocations of it will execute in the new namespace. The
+<b>rename</b> command returns an empty string as result. 
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+The <b>rename</b> command can be used to wrap the standard Tcl
+commands with your own monitoring machinery. For example, you might
+wish to count how often the <b><a href=
+"../TclCmd/source.htm">source</a></b> command is called: 
+
+<pre>
+<b>rename</b> ::source ::theRealSource
+set sourceCount 0
+proc ::source args {
+    global sourceCount
+    puts "called source for the [incr sourceCount]'th time"
+    uplevel 1 ::theRealSource $args
+}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/namespace.htm">namespace</a></b>, <b><a href=
+"../TclCmd/proc.htm">proc</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#command">command</a>, <a href=
+"../Keywords/D.htm#delete">delete</a>, <a href=
+"../Keywords/N.htm#namespace">namespace</a>, <a href=
+"../Keywords/R.htm#rename">rename</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

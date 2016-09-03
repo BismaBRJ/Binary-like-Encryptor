@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Assigning values to variables</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Assigning values to variables</h1>
+
+<div class="nav"><a href="Tcl1.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl3.html">Next
+lesson</a></div>
+
+<p>In Tcl, everything may be represented as a string, although
+internally it may be represented as a list, integer, double, or
+other type, in order to make the language fast.</p>
+
+<p>The assignment command in Tcl is <code class=
+"keyword">set</code>.</p>
+
+<p>When <code class="keyword">set</code> is called with two
+arguments, as in:</p>
+
+<pre class="example">
+set fruit Cauliflower
+</pre>
+
+<p>it places the second argument (<code class=
+"arg">Cauliflower</code>) in the memory space referenced by the
+first argument (<code class="arg">fruit</code>). <code class=
+"keyword">Set</code> always returns the contents of the variable
+named in the first argument. Thus, when <code class=
+"keyword">set</code> is called with two arguments, it places the
+second argument in the memory space referenced by the first
+argument and then returns the second argument. In the above
+example, for instance, it would return "Cauliflower", without the
+quotes.</p>
+
+<p>The first argument to a <code class="keyword">set</code> command
+can be either a single word, like <code class="arg">fruit</code> or
+<code class="arg">pi</code> , or it can be a member of an array.
+Arrays will be discussed in greater detail later, for the time
+being just remember that many data can be collected under a single
+variable name, and an individual datum can be accessed by its index
+within that array. Indexing into an array in Tcl is handled by
+putting the index within parentheses after the name of the
+variable.</p>
+
+<p><code class="keyword">Set</code> can also be invoked with only
+one argument. When called with just one argument, it will return
+the contents of that argument.</p>
+
+<p>Here's a summary of the <code class="keyword">set</code>
+command.</p>
+
+<dl>
+<dt><code class="keyword">set</code> <code class=
+"arg">varName</code> <code class="arg">?value?</code></dt>
+
+<dd>If <code class="arg">value</code> is specified, then the
+contents of the variable <code class="arg">varName</code> are set
+equal to <code class="arg">value</code> .</dd>
+
+<dd>If <code class="arg">varName</code> consists only of
+alphanumeric characters, and no parentheses, it is a scalar
+variable.</dd>
+
+<dd>If <code class="arg">varName</code> has the form <code class=
+"arg">varName(index)</code> , it is a member of an associative
+array.</dd>
+</dl>
+
+<p>If you look at the example code, you'll notice that in the <code
+class="keyword">set</code> command the first argument is typed with
+only its name, but in the <code class="keyword">puts</code>
+statement the argument is preceded with a <b>$</b>.</p>
+
+<p>The dollar sign tells Tcl to use the value of the variable - in
+this case <code class="arg">X</code> or <code class=
+"arg">Y</code>.</p>
+
+<p>Tcl passes data to subroutines either by name or by value.
+Commands that don't change the contents of a variable usually have
+their arguments passed by value. Commands that <strong>do</strong>
+change the value of the data must have the data passed by name.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set X "This is a string"
+
+set Y 1.24
+
+puts $X
+puts $Y
+
+puts "..............................."
+
+set label "The value in Y is: "
+puts "$label $Y"
+</pre>
+
+<div class="nav"><a href="Tcl1.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl3.html">Next
+lesson</a></div>
+</body>
+</html>
+

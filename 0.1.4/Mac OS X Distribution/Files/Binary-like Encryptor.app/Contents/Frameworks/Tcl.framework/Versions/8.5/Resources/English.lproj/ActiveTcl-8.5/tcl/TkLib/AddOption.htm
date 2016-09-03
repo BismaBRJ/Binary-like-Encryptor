@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Library Procedures - Tk_AddOption manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> AddOption</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="AddOption.htm#M2" name="L7">NAME</a> 
+
+<dl>
+<dd>Tk_AddOption - Add an option to the option database</dd>
+</dl>
+</dd>
+
+<dd><a href="AddOption.htm#M3" name="L8">SYNOPSIS</a></dd>
+
+<dd><a href="AddOption.htm#M4" name="L9">ARGUMENTS</a></dd>
+
+<dd><a href="AddOption.htm#M5" name="L10">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="AddOption.htm#M6" name="L11">20</a></dd>
+
+<dd><a href="AddOption.htm#M7" name="L12">40</a></dd>
+
+<dd><a href="AddOption.htm#M8" name="L13">60</a></dd>
+
+<dd><a href="AddOption.htm#M9" name="L14">80</a></dd>
+</dl>
+</dd>
+
+<dd><a href="AddOption.htm#M10" name="L15">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_AddOption - Add an option to the option database 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+void<br>
+<b>Tk_AddOption</b>(<i>tkwin, name, value, priority</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Window <b>tkwin</b> (in)</dt>
+
+<dd>Token for window.</dd>
+
+<dt>const char <b>*name</b> (in)</dt>
+
+<dd>Multi-element name of option.</dd>
+
+<dt>const char <b>*value</b> (in)</dt>
+
+<dd>Value of option.</dd>
+
+<dt>int <b>priority</b> (in)</dt>
+
+<dd>Overall priority level to use for option.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+This procedure is invoked to add an option to the database
+associated with <i>tkwin</i>'s main window. <i>Name</i> contains
+the option being specified and consists of names and/or classes
+separated by asterisks or dots, in the usual X format. <i>Value</i>
+contains the text string to associate with <i>name</i>; this value
+will be returned in calls to <b><a href=
+"../TkLib/GetOption.htm">Tk_GetOption</a></b>. <i>Priority</i>
+specifies the priority of the value; when options are queried using
+<b><a href="../TkLib/GetOption.htm">Tk_GetOption</a></b>, the value
+with the highest priority is returned. <i>Priority</i> must be
+between 0 and <b>TK_MAX_PRIO</b>. Some common priority values are: 
+
+<dl class="description">
+<dt><a name="M6">20</a></dt>
+
+<dd>Used for default values hard-coded into widgets.</dd>
+
+<dt><a name="M7">40</a></dt>
+
+<dd>Used for options specified in application-specific startup
+files.</dd>
+
+<dt><a name="M8">60</a></dt>
+
+<dd>Used for options specified in user-specific defaults files,
+such as <b>.Xdefaults</b>, resource databases loaded into the X
+server, or user-specific startup files.</dd>
+
+<dt><a name="M9">80</a></dt>
+
+<dd>Used for options specified interactively after the application
+starts running.</dd>
+</dl>
+
+<h3><a name="M10">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#class">class</a>, <a href=
+"../Keywords/N.htm#name">name</a>, <a href=
+"../Keywords/O.htm#option">option</a>, <a href=
+"../Keywords/A.htm#add">add</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1998-2000 by Scriptics Corporation.</div>
+</body>
+</html>
+

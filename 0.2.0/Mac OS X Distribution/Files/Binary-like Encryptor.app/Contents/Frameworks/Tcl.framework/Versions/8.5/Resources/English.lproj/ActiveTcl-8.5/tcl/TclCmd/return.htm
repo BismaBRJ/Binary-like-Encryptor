@@ -1,0 +1,445 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - return manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> return</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="return.htm#M2" name="L1415">NAME</a> 
+
+<dl>
+<dd>return - Return from a procedure, or set return code of a
+script</dd>
+</dl>
+</dd>
+
+<dd><a href="return.htm#M3" name="L1416">SYNOPSIS</a> 
+
+<dl>
+<dd><b>return</b> ?<i>result</i>?</dd>
+
+<dd><b>return</b> ?<b>-code</b> <i>code</i>? ?<i>result</i>?</dd>
+
+<dd><b>return</b> ?<i>option value</i> ...? ?<i>result</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="return.htm#M4" name="L1417">DESCRIPTION</a></dd>
+
+<dd><a href="return.htm#M5" name="L1418">EXCEPTIONAL RETURN
+CODES</a> 
+
+<dl class="exceptional return codes">
+<dd><a href="return.htm#M6" name="L1419"><b>ok (or 0)</b></a></dd>
+
+<dd><a href="return.htm#M7" name="L1420"><b>error (1)</b></a></dd>
+
+<dd><a href="return.htm#M8" name="L1421"><b>return (2)</b></a></dd>
+
+<dd><a href="return.htm#M9" name="L1422"><b>break (3)</b></a></dd>
+
+<dd><a href="return.htm#M10" name="L1423"><b>continue
+(4)</b></a></dd>
+
+<dd><a href="return.htm#M11" name="L1424"><i>value</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="return.htm#M12" name="L1425">RETURN OPTIONS</a> 
+
+<dl class="return options">
+<dd><a href="return.htm#M13" name="L1426"><b>-errorcode</b>
+<i>list</i></a></dd>
+
+<dd><a href="return.htm#M14" name="L1427"><b>-errorinfo</b>
+<i>info</i></a></dd>
+
+<dd><a href="return.htm#M15" name="L1428"><b>-level</b>
+<i>level</i></a></dd>
+
+<dd><a href="return.htm#M16" name="L1429"><b>-options</b>
+<i>options</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="return.htm#M17" name="L1430">RETURN CODE HANDLING
+MECHANISMS</a></dd>
+
+<dd><a href="return.htm#M18" name="L1431">EXAMPLES</a></dd>
+
+<dd><a href="return.htm#M19" name="L1432">SEE ALSO</a></dd>
+
+<dd><a href="return.htm#M20" name="L1433">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+return - Return from a procedure, or set return code of a script 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>return</b> ?<i>result</i>?<br>
+<b>return</b> ?<b>-code</b> <i>code</i>? ?<i>result</i>?<br>
+<b>return</b> ?<i>option value</i> ...? ?<i>result</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+In its simplest usage, the <b>return</b> command is used without
+options in the body of a procedure to immediately return control to
+the caller of the procedure. If a <i>result</i> argument is
+provided, its value becomes the result of the procedure passed back
+to the caller. If <i>result</i> is not specified then an empty
+string will be returned to the caller as the result of the
+procedure. 
+
+<p>The <b>return</b> command serves a similar function within
+script files that are evaluated by the <b><a href=
+"../TclCmd/source.htm">source</a></b> command. When <b><a href=
+"../TclCmd/source.htm">source</a></b> evaluates the contents of a
+file as a script, an invocation of the <b>return</b> command will
+cause script evaluation to immediately cease, and the value
+<i>result</i> (or an empty string) will be returned as the result
+of the <b><a href="../TclCmd/source.htm">source</a></b>
+command.</p>
+
+<h3><a name="M5">EXCEPTIONAL RETURN CODES</a></h3>
+
+In addition to the result of a procedure, the return code of a
+procedure may also be set by <b>return</b> through use of the
+<b>-code</b> option. In the usual case where the <b>-code</b>
+option is not specified the procedure will return normally.
+However, the <b>-code</b> option may be used to generate an
+exceptional return from the procedure. <i>Code</i> may have any of
+the following values: 
+
+<dl class="exceptional return codes">
+<dt><a name="M6"><b>ok (or 0)</b></a></dt>
+
+<dd>Normal return: same as if the option is omitted. The return
+code of the procedure is 0 (<b>TCL_OK</b>).</dd>
+
+<dt><a name="M7"><b>error (1)</b></a></dt>
+
+<dd>Error return: the return code of the procedure is 1
+(<b>TCL_ERROR</b>). The procedure command behaves in its calling
+context as if it were the command <b>error</b> <i>result</i>. See
+below for additional options.</dd>
+
+<dt><a name="M8"><b>return (2)</b></a></dt>
+
+<dd>The return code of the procedure is 2 (<b>TCL_RETURN</b>). The
+procedure command behaves in its calling context as if it were the
+command <b>return</b> (with no arguments).</dd>
+
+<dt><a name="M9"><b>break (3)</b></a></dt>
+
+<dd>The return code of the procedure is 3 (<b>TCL_BREAK</b>). The
+procedure command behaves in its calling context as if it were the
+command <b>break</b>.</dd>
+
+<dt><a name="M10"><b>continue (4)</b></a></dt>
+
+<dd>The return code of the procedure is 4 (<b>TCL_CONTINUE</b>).
+The procedure command behaves in its calling context as if it were
+the command <b>continue</b>.</dd>
+
+<dt><a name="M11"><i>value</i></a></dt>
+
+<dd><i>Value</i> must be an integer; it will be returned as the
+return code for the current procedure.</dd>
+</dl>
+
+<p>When a procedure wants to signal that it has received invalid
+arguments from its caller, it may use <b>return -code error</b>
+with <i>result</i> set to a suitable error message. Otherwise usage
+of the <b>return -code</b> option is mostly limited to procedures
+that implement a new control structure.</p>
+
+<p>The <b>return -code</b> command acts similarly within script
+files that are evaluated by the <b><a href=
+"../TclCmd/source.htm">source</a></b> command. During the
+evaluation of the contents of a file as a script by <b><a href=
+"../TclCmd/source.htm">source</a></b>, an invocation of the
+<b>return -code</b> <i>code</i> command will cause the return code
+of <b><a href="../TclCmd/source.htm">source</a></b> to be
+<i>code</i>.</p>
+
+<h3><a name="M12">RETURN OPTIONS</a></h3>
+
+In addition to a result and a return code, evaluation of a command
+in Tcl also produces a dictionary of return options. In general
+usage, all <i>option value</i> pairs given as arguments to
+<b>return</b> become entries in the return options dictionary, and
+any values at all are acceptable except as noted below. The <b><a
+href="../TclCmd/catch.htm">catch</a></b> command may be used to
+capture all of this information &mdash; the return code, the
+result, and the return options dictionary &mdash; that arise from
+evaluation of a script. 
+
+<p>As documented above, the <b>-code</b> entry in the return
+options dictionary receives special treatment by Tcl. There are
+other return options also recognized and treated specially by Tcl.
+They are:</p>
+
+<dl class="return options">
+<dt><a name="M13"><b>-errorcode</b> <i>list</i></a></dt>
+
+<dd>The <b>-errorcode</b> option receives special treatment only
+when the value of the <b>-code</b> option is <b>TCL_ERROR</b>. Then
+the <i>list</i> value is meant to be additional information about
+the error, presented as a Tcl list for further processing by
+programs. If no <b>-errorcode</b> option is provided to
+<b>return</b> when the <b>-code error</b> option is provided, Tcl
+will set the value of the <b>-errorcode</b> entry in the return
+options dictionary to the default value of <b>NONE</b>. The
+<b>-errorcode</b> return option will also be stored in the global
+variable <b>errorCode</b>.</dd>
+
+<dt><a name="M14"><b>-errorinfo</b> <i>info</i></a></dt>
+
+<dd>The <b>-errorinfo</b> option receives special treatment only
+when the value of the <b>-code</b> option is <b>TCL_ERROR</b>. Then
+<i>info</i> is the initial stack trace, meant to provide to a human
+reader additional information about the context in which the error
+occurred. The stack trace will also be stored in the global
+variable <b>errorInfo</b>. If no <b>-errorinfo</b> option is
+provided to <b>return</b> when the <b>-code error</b> option is
+provided, Tcl will provide its own initial stack trace value in the
+entry for <b>-errorinfo</b>. Tcl's initial stack trace will include
+only the call to the procedure, and stack unwinding will append
+information about higher stack levels, but there will be no
+information about the context of the error within the procedure.
+Typically the <i>info</i> value is supplied from the value of
+<b>-errorinfo</b> in a return options dictionary captured by the
+<b><a href="../TclCmd/catch.htm">catch</a></b> command (or from the
+copy of that information stored in the global variable
+<b>errorInfo</b>).</dd>
+
+<dt><a name="M15"><b>-level</b> <i>level</i></a></dt>
+
+<dd>The <b>-level</b> and <b>-code</b> options work together to set
+the return code to be returned by one of the commands currently
+being evaluated. The <i>level</i> value must be a non-negative
+integer representing a number of levels on the call stack. It
+defines the number of levels up the stack at which the return code
+of a command currently being evaluated should be <i>code</i>. If no
+<b>-level</b> option is provided, the default value of <i>level</i>
+is 1, so that <b>return</b> sets the return code that the current
+procedure returns to its caller, 1 level up the call stack. The
+mechanism by which these options work is described in more detail
+below.</dd>
+
+<dt><a name="M16"><b>-options</b> <i>options</i></a></dt>
+
+<dd>The value <i>options</i> must be a valid dictionary. The
+entries of that dictionary are treated as additional <i>option
+value</i> pairs for the <b>return</b> command.</dd>
+</dl>
+
+<h3><a name="M17">RETURN CODE HANDLING MECHANISMS</a></h3>
+
+Return codes are used in Tcl to control program flow. A Tcl script
+is a sequence of Tcl commands. So long as each command evaluation
+returns a return code of <b>TCL_OK</b>, evaluation will continue to
+the next command in the script. Any exceptional return code
+(non-<b>TCL_OK</b>) returned by a command evaluation causes the
+flow on to the next command to be interrupted. Script evaluation
+ceases, and the exceptional return code from the command becomes
+the return code of the full script evaluation. This is the
+mechanism by which errors during script evaluation cause an
+interruption and unwinding of the call stack. It is also the
+mechanism by which commands like <b>break</b>, <b>continue</b>, and
+<b>return</b> cause script evaluation to terminate without
+evaluating all commands in sequence. 
+
+<p>Some of Tcl's built-in commands evaluate scripts as part of
+their functioning. These commands can make use of exceptional
+return codes to enable special features. For example, the built-in
+Tcl commands that provide loops &mdash; such as <b><a href=
+"../TclCmd/while.htm">while</a></b>, <b><a href=
+"../TclCmd/for.htm">for</a></b>, and <b><a href=
+"../TclCmd/foreach.htm">foreach</a></b> &mdash; evaluate a script
+that is the body of the loop. If evaluation of the loop body
+returns the return code of <b>TCL_BREAK</b> or <b>TCL_CONTINUE</b>,
+the loop command can react in such a way as to give the
+<b>break</b> and <b>continue</b> commands their documented
+interpretation in loops.</p>
+
+<p>Procedure invocation also involves evaluation of a script, the
+body of the procedure. Procedure invocation provides special
+treatment when evaluation of the procedure body returns the return
+code <b>TCL_RETURN</b>. In that circumstance, the <b>-level</b>
+entry in the return options dictionary is decremented. If after
+decrementing, the value of the <b>-level</b> entry is 0, then the
+value of the <b>-code</b> entry becomes the return code of the
+procedure. If after decrementing, the value of the <b>-level</b>
+entry is greater than zero, then the return code of the procedure
+is <b>TCL_RETURN</b>. If the procedure invocation occurred during
+the evaluation of the body of another procedure, the process will
+repeat itself up the call stack, decrementing the value of the
+<b>-level</b> entry at each level, so that the <i>code</i> will be
+the return code of the current command <i>level</i> levels up the
+call stack. The <b><a href="../TclCmd/source.htm">source</a></b>
+command performs the same handling of the <b>TCL_RETURN</b> return
+code, which explains the similarity of <b>return</b> invocation
+during a <b><a href="../TclCmd/source.htm">source</a></b> to
+<b>return</b> invocation within a procedure.</p>
+
+<p>The return code of the <b>return</b> command itself triggers
+this special handling by procedure invocation. If <b>return</b> is
+provided the option <b>-level 0</b>, then the return code of the
+<b>return</b> command itself will be the value <i>code</i> of the
+<b>-code</b> option (or <b>TCL_OK</b> by default). Any other value
+for the <b>-level</b> option (including the default value of 1)
+will cause the return code of the <b>return</b> command itself to
+be <b>TCL_RETURN</b>, triggering a return from the enclosing
+procedure.</p>
+
+<h3><a name="M18">EXAMPLES</a></h3>
+
+First, a simple example of using <b>return</b> to return from a
+procedure, interrupting the procedure body. 
+
+<pre>
+proc printOneLine {} {
+   puts "line 1"    ;# This line will be printed.
+   <b>return</b>        
+   puts "line 2"    ;# This line will not be printed.
+}
+</pre>
+
+<p>Next, an example of using <b>return</b> to set the value
+returned by the procedure.</p>
+
+<pre>
+proc returnX {} {<b>return</b> X}
+puts [returnX]    ;# prints "X"
+</pre>
+
+<p>Next, a more complete example, using <b>return -code error</b>
+to report invalid arguments.</p>
+
+<pre>
+proc factorial {n} {
+   if {![string is integer $n] || ($n &lt; 0)} {
+      <b>return</b> -code error \
+            "expected non-negative integer,\
+             but got \"$n\""
+   }
+   if {$n &lt; 2} {
+      <b>return</b> 1
+   }
+   set m [expr {$n - 1}]
+   set code [catch {factorial $m} factor]
+   if {$code != 0} {
+      <b>return</b> -code $code $factor
+   }
+   set product [expr {$n * $factor}]
+   if {$product &lt; 0} {
+      <b>return</b> -code error \
+            "overflow computing factorial of $n"
+   }
+   <b>return</b> $product
+}
+</pre>
+
+<p>Next, a procedure replacement for <b>break</b>.</p>
+
+<pre>
+proc myBreak {} {
+   <b>return</b> -code break
+}
+</pre>
+
+<p>With the <b>-level 0</b> option, <b>return</b> itself can serve
+as a replacement for <b>break</b>.</p>
+
+<pre>
+interp alias {} Break {} <b>return</b> -level 0 -code break
+</pre>
+
+<p>An example of using <b><a href=
+"../TclCmd/catch.htm">catch</a></b> and <b>return -options</b> to
+re-raise a caught error:</p>
+
+<pre>
+proc doSomething {} {
+   set resource [allocate]
+   catch {
+      # Long script of operations
+      # that might raise an error
+   } result options
+   deallocate $resource
+   <b>return</b> -options $options $result
+}
+</pre>
+
+<p>Finally an example of advanced use of the <b>return</b> options
+to create a procedure replacement for <b>return</b> itself:</p>
+
+<pre>
+proc myReturn {args} {
+   set result ""
+   if {[llength $args] % 2} {
+      set result [lindex $args end]
+      set args [lrange $args 0 end-1]
+   }
+   set options [dict merge {-level 1} $args]
+   dict incr options -level
+   <b>return</b> -options $options $result
+}
+</pre>
+
+<h3><a name="M19">SEE ALSO</a></h3>
+
+<b>break</b>, <b><a href="../TclCmd/catch.htm">catch</a></b>,
+<b>continue</b>, <b><a href="../TclCmd/dict.htm">dict</a></b>,
+<b>error</b>, <b><a href="../TclCmd/proc.htm">proc</a></b>, <b><a
+href="../TclCmd/source.htm">source</a></b>, <b><a href=
+"../TclCmd/tclvars.htm">tclvars</a></b> 
+
+<h3><a name="M20">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#break">break</a>, <a href=
+"../Keywords/C.htm#catch">catch</a>, <a href=
+"../Keywords/C.htm#continue">continue</a>, <a href=
+"../Keywords/E.htm#error">error</a>, <a href=
+"../Keywords/P.htm#procedure">procedure</a>, <a href=
+"../Keywords/R.htm#return">return</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

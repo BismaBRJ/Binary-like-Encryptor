@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - send manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> send</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="send.htm#M2" name="L1246">NAME</a> 
+
+<dl>
+<dd>send - Execute a command in a different application</dd>
+</dl>
+</dd>
+
+<dd><a href="send.htm#M3" name="L1247">SYNOPSIS</a> 
+
+<dl>
+<dd><b>send ?</b><i>options</i>? <i>app cmd</i> ?<i>arg arg
+...</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="send.htm#M4" name="L1248">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="send.htm#M5" name="L1249"><b>-async</b></a></dd>
+
+<dd><a href="send.htm#M6" name="L1250"><b>-displayof</b>
+<i>pathName</i></a></dd>
+
+<dd><a href="send.htm#M7" name="L1251"><b>--</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="send.htm#M8" name="L1252">APPLICATION NAMES</a></dd>
+
+<dd><a href="send.htm#M9" name="L1253">DISABLING SENDS</a></dd>
+
+<dd><a href="send.htm#M10" name="L1254">SECURITY</a></dd>
+
+<dd><a href="send.htm#M11" name="L1255">EXAMPLE</a></dd>
+
+<dd><a href="send.htm#M12" name="L1256">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+send - Execute a command in a different application 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>send ?</b><i>options</i>? <i>app cmd</i> ?<i>arg arg
+...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command arranges for <i>cmd</i> (and <i>arg</i>s) to be
+executed in the application named by <i>app</i>. It returns the
+result or error from that command execution. <i>App</i> may be the
+name of any application whose main window is on the display
+containing the sender's main window; it need not be within the same
+process. If no <i>arg</i> arguments are present, then the command
+to be executed is contained entirely within the <i>cmd</i>
+argument. If one or more <i>arg</i>s are present, they are
+concatenated to form the command to be executed, just as for the
+<b><a href="../TclCmd/eval.htm">eval</a></b> command. 
+
+<p>If the initial arguments of the command begin with
+&ldquo;-&rdquo; they are treated as options. The following options
+are currently defined:</p>
+
+<dl class="description">
+<dt><a name="M5"><b>-async</b></a></dt>
+
+<dd>Requests asynchronous invocation. In this case the <b>send</b>
+command will complete immediately without waiting for <i>cmd</i> to
+complete in the target application; no result will be available and
+errors in the sent command will be ignored. If the target
+application is in the same process as the sending application then
+the <b>-async</b> option is ignored.</dd>
+
+<dt><a name="M6"><b>-displayof</b> <i>pathName</i></a></dt>
+
+<dd>Specifies that the target application's main window is on the
+display of the window given by <i>pathName</i>, instead of the
+display containing the application's main window.</dd>
+
+<dt><a name="M7"><b>--</b></a></dt>
+
+<dd>Serves no purpose except to terminate the list of options. This
+option is needed only if <i>app</i> could contain a leading
+&ldquo;-&rdquo; character.</dd>
+</dl>
+
+<h3><a name="M8">APPLICATION NAMES</a></h3>
+
+The name of an application is set initially from the name of the
+program or script that created the application. You can query and
+change the name of an application with the <b><a href=
+"../TkCmd/tk.htm">tk appname</a></b> command. 
+
+<h3><a name="M9">DISABLING SENDS</a></h3>
+
+If the <b>send</b> command is removed from an application (e.g.
+with the command <b>rename send {}</b>) then the application will
+not respond to incoming send requests anymore, nor will it be able
+to issue outgoing requests. Communication can be reenabled by
+invoking the <b><a href="../TkCmd/tk.htm">tk appname</a></b>
+command. 
+
+<h3><a name="M10">SECURITY</a></h3>
+
+The <b>send</b> command is potentially a serious security loophole.
+On Unix, any application that can connect to your X server can send
+scripts to your applications. These incoming scripts can use Tcl to
+read and write your files and invoke subprocesses under your name.
+Host-based access control such as that provided by <b>xhost</b> is
+particularly insecure, since it allows anyone with an account on
+particular hosts to connect to your server, and if disabled it
+allows anyone anywhere to connect to your server. In order to
+provide at least a small amount of security, Tk checks the access
+control being used by the server and rejects incoming sends unless
+(a) <b>xhost</b>-style access control is enabled (i.e. only certain
+hosts can establish connections) and (b) the list of enabled hosts
+is empty. This means that applications cannot connect to your
+server unless they use some other form of authorization such as
+that provide by <b>xauth</b>. Under Windows, <b>send</b> is
+currently disabled. Most of the functionality is provided by the
+<b><a href="../TclCmd/dde.htm">dde</a></b> command instead. 
+
+<h3><a name="M11">EXAMPLE</a></h3>
+
+This script fragment can be used to make an application that only
+runs once on a particular display. 
+
+<pre>
+if {[tk appname FoobarApp] ne "FoobarApp"} {
+    <b>send</b> -async FoobarApp RemoteStart $argv
+    exit
+}
+# The command that will be called remotely, which raises
+# the application main window and opens the requested files
+proc RemoteStart args {
+    raise .
+    foreach filename $args {
+        OpenFile $filename
+    }
+}
+</pre>
+
+<h3><a name="M12">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#application">application</a>, <a href=
+"../Keywords/D.htm#dde">dde</a>, <a href=
+"../Keywords/N.htm#name">name</a>, <a href=
+"../Keywords/R.htm#remote execution">remote execution</a>, <a href=
+"../Keywords/S.htm#security">security</a>, <a href=
+"../Keywords/S.htm#send">send</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990-1994 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

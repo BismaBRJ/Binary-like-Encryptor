@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>itcl - Itcl_RegisterC (3)</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<center>
+<h1>[incr\ Tcl] Library Procedures</h1>
+</center>
+
+<h3>NAME</h3>
+
+Itcl_RegisterC, Itcl_RegisterObjC, Itcl_FindC - Associate a
+symbolic name with a C procedure. 
+
+<h3>SYNOPSIS</h3>
+
+<b>#include &lt;itcl.h&gt;</b><br>
+<br>
+int<br>
+<b>Itcl_RegisterC</b>(<i>interp, cmdName, argProc, clientData,
+deleteProc</i>)<br>
+<br>
+int<br>
+<b>Itcl_RegisterObjC</b>(<i>interp, cmdName, objProc, clientData,
+deleteProc</i>)<br>
+<br>
+int<br>
+<b>Itcl_FindC</b>(<i>interp, cmdName, argProcPtr, objProcPtr,
+cDataPtr</i>)<br>
+<h3>ARGUMENTS</h3>
+
+<dl>
+<dt><b>Tcl_Interp</b> <i>*interp</i> (in)</dt>
+
+<dd>Interpreter in which to create new command.</dd>
+
+<dt><b>CONST char</b> <i>*cmdName</i> (in)</dt>
+
+<dd>Name of command.</dd>
+
+<dt><b>Tcl_CmdProc</b> <i>*argProc</i> (in)</dt>
+
+<dd>Implementation of new command: <i>argProc</i> will be called
+whenever</dd>
+
+<dt><b>Tcl_CmdProc</b> <i>**argProcPtr</i> (in/out)</dt>
+
+<dd>The Tcl_CmdProc * to receive the pointer.</dd>
+
+<dt><b>Tcl_ObjCmdProc</b> <i>*objProc</i> (in)</dt>
+
+<dd>Implementation of the new command: <i>objProc</i> will be
+called whenever</dd>
+
+<dt><b>Tcl_ObjCmdProc</b> <i>**objProcPtr</i> (in/out)</dt>
+
+<dd>The Tcl_ObjCmdProc * to receive the pointer.</dd>
+
+<dt><b>ClientData</b> <i>clientData</i> (in)</dt>
+
+<dd>Arbitrary one-word value to pass to <i>proc</i> and
+<i>deleteProc</i>.</dd>
+
+<dt><b>ClientData</b> <i>*cDataPtr</i> (in/out)</dt>
+
+<dd>The ClientData to receive the pointer.</dd>
+
+<dt><b>Tcl_CmdDeleteProc</b> <i>*deleteProc</i> (in)</dt>
+
+<dd>Procedure to call before <i>cmdName</i> is deleted from the
+interpreter; allows for command-specific cleanup. If NULL, then no
+procedure is called before the command is deleted.</dd>
+</dl>
+
+<h3>DESCRIPTION</h3>
+
+<p>Used to associate a symbolic name with an (argc,argv) C
+procedure that handles a Tcl command. Procedures that are
+registered in this manner can be referenced in the body of an [incr
+Tcl] class definition to specify C procedures to acting as
+methods/procs. Usually invoked in an initialization routine for an
+extension, called out in Tcl_AppInit() at the start of an
+application.</p>
+
+<p>Each symbolic procedure can have an arbitrary client data value
+associated with it. This value is passed into the command handler
+whenever it is invoked.</p>
+
+<p>A symbolic procedure name can be used only once for a given
+style (arg/obj) handler. If the name is defined with an arg-style
+handler, it can be redefined with an obj-style handler; or if the
+name is defined with an obj-style handler, it can be redefined with
+an arg-style handler. In either case, any previous client data is
+discarded and the new client data is remembered. However, if a name
+is redefined to a different handler of the same style, this
+procedure returns an error.</p>
+
+<p>Returns TCL_OK on success, or TCL_ERROR (along with an error
+message in interp-&gt;result) if anything goes wrong.</p>
+
+<p>C procedures can be integrated into an <b>[incrTcl]</b> class
+definition to implement methods, procs, and the "config" code for
+public variables. Any body that starts with "<b>@</b>" is treated
+as the symbolic name for a C procedure.</p>
+
+<p>Symbolic names are established by registering procedures via
+<b>Itcl_RegisterC()</b>. This is usually done in the
+<b>Tcl_AppInit()</b> procedure, which is automatically called when
+the interpreter starts up. In the following example, the procedure
+My_FooCmd() is registered with the symbolic name "foo". This
+procedure can be referenced in the <b><a href=
+"body.n.html">body</a></b> command as "@foo".</p>
+
+<blockquote>
+<pre>
+int
+Tcl_AppInit(interp)
+    Tcl_Interp *interp;     /* Interpreter for application. */
+{
+    if (Itcl_Init(interp) == TCL_ERROR) {
+        return TCL_ERROR;
+    }
+
+    if (Itcl_RegisterC(interp, "foo", My_FooCmd) != TCL_OK) {
+        return TCL_ERROR;
+    }
+}
+</pre>
+</blockquote>
+
+C procedures are implemented just like ordinary Tcl commands. See
+the <b>CrtCommand</b> man page for details. Within the procedure,
+class data members can be accessed like ordinary variables using
+<b>Tcl_SetVar()</b>, <b>Tcl_GetVar()</b>, <b>Tcl_TraceVar()</b>,
+etc. Class methods and procs can be executed like ordinary commands
+using <b>Tcl_Eval()</b>. <b>[incrTcl]</b> makes this possible by
+automatically setting up the context before executing the C
+procedure. 
+
+<p>This scheme provides a natural migration path for code
+development. Classes can be developed quickly using Tcl code to
+implement the bodies. An entire application can be built and
+tested. When necessary, individual bodies can be implemented with C
+code to improve performance.</p>
+
+<p>See the Archetype class in <b>[incrTk]</b> for an example of how
+this C linking method is used.</p>
+
+<h3>SEE ALSO</h3>
+
+Tcl_CreateCommand, Tcl_CreateObjCommand 
+
+<h3>KEYWORDS</h3>
+
+class, object 
+
+<hr>
+[ <a href="../itcl/contents.html">itcl</a> ] 
+
+<hr>
+<pre>
+Copyright &copy; 1989-1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.
+</pre>
+</body>
+</html>
+

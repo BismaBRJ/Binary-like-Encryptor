@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>itcl - Itcl_PreserveData (3)</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<center>
+<h1>[incr\ Tcl] Library Procedures</h1>
+</center>
+
+<h3>NAME</h3>
+
+Itcl_PreserveData, Itcl_ReleaseData, Itcl_EventuallyFree -
+Manipulate an Itcl list object. 
+
+<h3>SYNOPSIS</h3>
+
+<b>#include &lt;itcl.h&gt;</b><br>
+<br>
+void<br>
+<b>Itcl_PreserveData</b>(<i>cdata</i>)<br>
+<br>
+void<br>
+<b>Itcl_ReleaseData</b>(<i>cdata</i>)<br>
+<br>
+void<br>
+<b>Itcl_EventuallyFree</b>(<i>cdata, fproc</i>)<br>
+<h3>ARGUMENTS</h3>
+
+<dl>
+<dt><b>Tcl_FreeProc</b> <i>*fproc</i> (in)</dt>
+
+<dd>Address of function to call when the block is to be freed.</dd>
+
+<dt><b>ClientData</b> <i>clientData</i> (in)</dt>
+
+<dd>Arbitrary one-word value.</dd>
+</dl>
+
+<h3>DESCRIPTION</h3>
+
+<h3>KEYWORDS</h3>
+
+free, memory 
+
+<hr>
+[ <a href="../itcl/contents.html">itcl</a> ] 
+
+<hr>
+<pre>
+Copyright &copy; 1989-1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.
+</pre>
+</body>
+</html>
+

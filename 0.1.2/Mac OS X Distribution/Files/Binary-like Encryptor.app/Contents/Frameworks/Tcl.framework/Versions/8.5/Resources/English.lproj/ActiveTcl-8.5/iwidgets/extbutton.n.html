@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>extbutton - Extends the behavior of the Tk button</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>extbutton - Extends the behavior of the Tk button</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>extbutton <i>pathName</i> ?<i>options</i>?</b> 
+
+<h2><b>INHERITANCE</b></h2>
+
+<b><i>itk::Widget &lt;- extbutton</i></b> 
+
+<h2><b>STANDARD OPTIONS</b></h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activebackground</b><br>
+<b>bd</b><br>
+<b>foreground</b><br>
+<b>text</b><br>
+</td>
+<td valign="top"><b>activeforeground</b><br>
+<b>cursor</b><br>
+<b>image</b><br>
+</td>
+<td valign="top"><b>bitmap</b><br>
+<b>disabledforeground</b><br>
+<b>justify</b><br>
+</td>
+<td valign="top"><b>background</b><br>
+<b>font</b><br>
+<b>relief</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>bitmapforeground</b>
+Class:                  <b>Foreground</b>
+Command-Line Switch:    <b>-bitmapforeground</b>
+</pre>
+
+<div style="margin-left: 2em">Configures the foreground color of
+the bitmap.</div>
+
+<pre>
+Name:                   <b>command</b>
+Class:                  <b>Command</b>
+Command-Line Switch:    <b>-command</b>
+</pre>
+
+<div style="margin-left: 2em">Associate a command with the
+extbutton. Simulates a Tk button's -command option. Invoked by
+either &lt;1&gt; events or by explicitly calling the public
+invoke() method.</div>
+
+<pre>
+Name:                   <b>defaultring</b>
+Class:                  <b>DefaultRing</b>
+Command-Line Switch:    <b>-defaultring</b>
+</pre>
+
+<div style="margin-left: 2em">Boolean describing whether the
+extbutton displays its default ring given in any of the forms
+acceptable to <b>Tcl_GetBoolean</b>. The default is false.</div>
+
+<pre>
+Name:                   <b>defaultringpad</b>
+Class:                  <b>Pad</b>
+Command-Line Switch:    <b>-defaultringpad</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the amount of space to be
+allocated to the indentation of the default ring ring given in any
+of the forms acceptable to <b>Tcl_GetPixels</b>. The option has no
+effect if the defaultring option is set to false. The default is 4
+pixels.</div>
+
+<pre>
+Name:                   <b>imagePos</b>
+Class:                  <b>Position</b>
+Command-Line Switch:    <b>-imagepos</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the image position relative
+to the message text: <b>n</b>, <b>ne</b>, <b>nw</b>, <b>s</b>,
+<b>se</b>, <b>sw</b>, <b>w</b>, <b>wn</b>, <b>ws</b>, <b>e</b>,
+<b>en</b>, or <b>es</b>. The default is w.</div>
+
+<pre>
+Name:                   <b>ringBackground</b>
+Class:                  <b>Background</b>
+Command-Line Switch:    <b>-ringbackground</b>
+</pre>
+
+<div style="margin-left: 2em">Configures the background color of
+the default ring frame (if -defaultring is set to boolean
+true).</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>extbutton</b> extends the behavior of the atomic Tk
+button by allowing text and an image or bitmap to coexist. The user
+may use the -image or -bitmap options to specify an image as well
+as the -imagepos option to specify image position relative to the
+text. Note that the extbutton is not intended to be used without an
+image/bitmap. There will be an emtpy space next to the text if no
+image/bitmap is specified.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>extbutton</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<h2>INHERITED METHODS</h2>
+
+Each of the following methods are inherited from itk::Archetype.
+See that man page for details. 
+
+<pre>
+<i>pathName <b>cget</b>
+pathName <b>component</b>
+pathName <b>config</b>
+pathName <b>configure</b></i>
+</pre>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i><b>pathName invoke</b></i></dt>
+
+<dd>Evaluates the command fragment associated with the -command
+option.</dd>
+</dl>
+
+<dl>
+<dt><i><b>pathName flash</b></i></dt>
+
+<dd>Simulates the Tk button's flash command.</dd>
+</dl>
+
+<h2>EXAMPLES</h2>
+
+<pre>
+iwidgets::extbutton .eb -text "Bitmap example" -bitmap info \
+  -background bisque -activeforeground red -bitmapforeground blue \
+  -defaultring 1 -command {puts "Bisque is beautiful"}
+pack .eb -expand 1
+
+iwidgets::extbutton .eb -text "Image example" -relief ridge -image \
+  [image create photo -file $itk::library/../iwidgets/demos/images/clear.gif] \
+  -font 9x15bold -background lightgreen -imagepos e \
+  -activebackground lightyellow
+pack .eb -expand 1
+
+</pre>
+
+<h2>AUTHOR</h2>
+
+Chad Smith 
+
+<h2>KEYWORDS</h2>
+
+button, pushbutton
+</body>
+</html>
+

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - bell manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> bell</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+bell - Ring a display's bell 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>bell</b> ?<b>-displayof</b> <i>window</i>? ?<b>-nice</b>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command rings the bell on the display for <i>window</i> and
+returns an empty string. If the <b>-displayof</b> option is
+omitted, the display of the application's main window is used by
+default. The command uses the current bell-related settings for the
+display, which may be modified with programs such as <b>xset</b>. 
+
+<p>If <b>-nice</b> is not specified, this command also resets the
+screen saver for the screen. Some screen savers will ignore this,
+but others will reset so that the screen becomes visible again.</p>
+
+<h3><a name="M5">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#beep">beep</a>, <a href=
+"../Keywords/B.htm#bell">bell</a>, <a href=
+"../Keywords/R.htm#ring">ring</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+2000 Ajuba Solutions.</div>
+</body>
+</html>
+

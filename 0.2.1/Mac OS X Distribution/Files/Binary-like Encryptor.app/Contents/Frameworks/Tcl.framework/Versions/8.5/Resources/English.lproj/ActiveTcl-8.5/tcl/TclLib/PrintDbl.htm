@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_PrintDouble manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> PrintDbl</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_PrintDouble - Convert floating value to string 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+<b>Tcl_PrintDouble</b>(<i>interp, value, dst</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Before Tcl 8.0, the <b>tcl_precision</b> variable in this
+interpreter controlled the conversion. As of Tcl 8.0, this argument
+is ignored and the conversion is controlled by the
+<b>tcl_precision</b> variable that is now shared by all
+interpreters.</dd>
+
+<dt>double <b>value</b> (in)</dt>
+
+<dd>Floating-point value to be converted.</dd>
+
+<dt>char <b>*dst</b> (out)</dt>
+
+<dd>Where to store the string representing <i>value</i>. Must have
+at least <b>TCL_DOUBLE_SPACE</b> characters of storage.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_PrintDouble</b> generates a string that represents the value
+of <i>value</i> and stores it in memory at the location given by
+<i>dst</i>. It uses <b>%g</b> format to generate the string, with
+one special twist: the string is guaranteed to contain either a
+&ldquo;.&rdquo; or an &ldquo;e&rdquo; so that it does not look like
+an integer. Where <b>%g</b> would generate an integer with no
+decimal point, <b>Tcl_PrintDouble</b> adds &ldquo;.0&rdquo;. 
+
+<p>If the <b>tcl_precision</b> value is non-zero, the result will
+have precisely that many digits of significance. If the value is
+zero (the default), the result will have the fewest digits needed
+to represent the number in such a way that <b><a href=
+"../TclLib/DoubleObj.htm">Tcl_NewDoubleObj</a></b> will generate
+the same number when presented with the given string. IEEE
+semantics of rounding to even apply to the conversion.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#conversion">conversion</a>, <a href=
+"../Keywords/D.htm#double-precision">double-precision</a>, <a href=
+"../Keywords/F.htm#floating-point">floating-point</a>, <a href=
+"../Keywords/S.htm#string">string</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1989-1993 The Regents of the University of
+California. Copyright &copy; 1994-1997 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

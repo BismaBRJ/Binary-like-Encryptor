@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - tk_focusNext manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> focusNext</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+tk_focusNext, tk_focusPrev, tk_focusFollowsMouse - Utility
+procedures for managing the input focus. 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>tk_focusNext</b> <i>window</i><br>
+<b>tk_focusPrev</b> <i>window</i><br>
+<b>tk_focusFollowsMouse</b><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+<b>tk_focusNext</b> is a utility procedure used for keyboard
+traversal. It returns the &ldquo;next&rdquo; window after
+<i>window</i> in focus order. The focus order is determined by the
+stacking order of windows and the structure of the window
+hierarchy. Among siblings, the focus order is the same as the
+stacking order, with the lowest window being first. If a window has
+children, the window is visited first, followed by its children
+(recursively), followed by its next sibling. Top-level windows
+other than <i>window</i> are skipped, so that <b>tk_focusNext</b>
+never returns a window in a different top-level from <i>window</i>.
+
+
+<p>After computing the next window, <b>tk_focusNext</b> examines
+the window's <b>-takefocus</b> option to see whether it should be
+skipped. If so, <b>tk_focusNext</b> continues on to the next window
+in the focus order, until it eventually finds a window that will
+accept the focus or returns back to <i>window</i>.</p>
+
+<p><b>tk_focusPrev</b> is similar to <b>tk_focusNext</b> except
+that it returns the window just before <i>window</i> in the focus
+order.</p>
+
+<p><b>tk_focusFollowsMouse</b> changes the focus model for the
+application to an implicit one where the window under the mouse
+gets the focus. After this procedure is called, whenever the mouse
+enters a window Tk will automatically give it the input focus. The
+<b><a href="../TkCmd/focus.htm">focus</a></b> command may be used
+to move the focus to a window other than the one under the mouse,
+but as soon as the mouse moves into a new window the focus will
+jump to that window. Note: at present there is no built-in support
+for returning the application to an explicit focus model; to do
+this you will have to write a script that deletes the bindings
+created by <b>tk_focusFollowsMouse</b>.</p>
+
+<h3><a name="M5">KEYWORDS</a></h3>
+
+<a href="../Keywords/F.htm#focus">focus</a>, <a href=
+"../Keywords/K.htm#keyboard traversal">keyboard traversal</a>, <a
+href="../Keywords/T.htm#top-level">top-level</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

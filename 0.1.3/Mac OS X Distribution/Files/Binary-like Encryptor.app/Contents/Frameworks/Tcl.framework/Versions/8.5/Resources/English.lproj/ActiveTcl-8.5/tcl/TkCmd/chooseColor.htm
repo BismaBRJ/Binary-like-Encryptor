@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - tk_chooseColor manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> chooseColor</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+tk_chooseColor - pops up a dialog box for the user to select a
+color. 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>tk_chooseColor</b> ?<i>option value ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The procedure <b>tk_chooseColor</b> pops up a dialog box for the
+user to select a color. The following <i>option-value</i> pairs are
+possible as command line arguments: 
+
+<dl class="description">
+<dt><a name="M5"><b>-initialcolor</b> <i>color</i></a></dt>
+
+<dd>Specifies the color to display in the color dialog when it pops
+up. <i>color</i> must be in a form acceptable to the <b><a href=
+"../TkLib/GetColor.htm">Tk_GetColor</a></b> function.</dd>
+
+<dt><a name="M6"><b>-parent</b> <i>window</i></a></dt>
+
+<dd>Makes <i>window</i> the logical parent of the color dialog. The
+color dialog is displayed on top of its parent window.</dd>
+
+<dt><a name="M7"><b>-title</b> <i>titleString</i></a></dt>
+
+<dd>Specifies a string to display as the title of the dialog box.
+If this option is not specified, then a default title will be
+displayed.</dd>
+</dl>
+
+<p>If the user selects a color, <b>tk_chooseColor</b> will return
+the name of the color in a form acceptable to <b><a href=
+"../TkLib/GetColor.htm">Tk_GetColor</a></b>. If the user cancels
+the operation, both commands will return the empty string.</p>
+
+<h3><a name="M8">EXAMPLE</a></h3>
+
+<pre>
+button .b -bg [tk_chooseColor -initialcolor gray -title "Choose color"]
+</pre>
+
+<h3><a name="M9">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#color selection dialog">color selection
+dialog</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

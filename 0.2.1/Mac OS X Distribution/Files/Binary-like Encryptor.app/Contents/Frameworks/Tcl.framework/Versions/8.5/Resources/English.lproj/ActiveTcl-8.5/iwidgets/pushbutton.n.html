@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>pushbutton - Create and manipulate a push button
+widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>pushbutton - Create and manipulate a push button widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>pushbutton pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Widget &lt;- pushbutton 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeBackground</b><br>
+<b>borderWidth</b><br>
+<b>font</b><br>
+<b>highlightThickness</b><br>
+<b>state</b><br>
+</td>
+<td valign="top"><b>activeForeground</b><br>
+<b>command</b><br>
+<b>foreground</b><br>
+<b>image</b><br>
+<b>text</b><br>
+</td>
+<td valign="top"><b>background</b><br>
+<b>cursor</b><br>
+<b>highlightBackground</b><br>
+<b>padX</b><br>
+<b>underline</b><br>
+</td>
+<td valign="top"><b>bitmap</b><br>
+<b>disabledForeground</b><br>
+<b>highlightColor</b><br>
+<b>padY</b><br>
+<b>wrapLength</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>defaultRing</b>
+Class:                  <b>DefaultRing</b>
+Command-Line Switch:    <b>-defaultring</b>
+</pre>
+
+<div style="margin-left: 2em">Boolean describing whether the button
+displays its default ring given in any of the forms acceptable to
+<b>Tcl_GetBoolean</b>. The default is false.</div>
+
+<pre>
+Name:                   <b>defaultRingPad</b>
+Class:                  <b>Pad</b>
+Command-Line Switch:    <b>-defaultringpad</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the amount of space to be
+allocated to the indentation of the default ring ring given in any
+of the forms acceptable to <b>Tcl_GetPixels</b>. The option has no
+effect if the defaultring option is set to false. The default is 2
+pixels.</div>
+
+<pre>
+Name:                   <b>height</b>
+Class:                  <b>Height</b>
+Command-Line Switch:    <b>-height</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the height of the button
+inclusive of any default ring given in any of the forms acceptable
+to <b>Tk_GetPixels</b>. A value of zero lets the push button
+determine the height based on the requested height plus
+highlightring and defaultringpad.</div>
+
+<pre>
+Name:                   <b>width</b>
+Class:                  <b>Width</b>
+Command-Line Switch:    <b>-width</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the width of the button
+inclusive of any default ring given in any of the forms acceptable
+to <b>Tk_GetPixels</b>. A value of zero lets the push button
+determine the width based on the requested width plus highlightring
+and defaultringpad.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>pushbutton</b> command creates a push button with an
+optional default ring used for default designation and
+traversal.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>pushbutton</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for pushbutton
+widgets: 
+
+<h2>ASSOCIATED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>flash</b><br>
+</td>
+<td valign="top"><b>invoke</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/button.n.html">"button"</a>
+manual entry for details on the associated methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>pushbutton</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>pushbutton</b> command.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>pushbutton</b>
+Class:                  <b>Button</b>
+</pre>
+
+<div style="margin-left: 2em">The pushbutton component is the
+button surrounded by the optional default ring. See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/button.n.html">"button"</a>
+widget manual entry for details on the pushbutton component
+item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+pushbutton .pb -text "Hello" -command {puts "Hello World"} -defaultring 1
+pack .pb -padx 10 -pady 10
+</pre>
+
+<h2>AUTHOR</h2>
+
+Bret A. Schuhmacher 
+
+<p>Mark L. Ulferts</p>
+
+<h2>KEYWORDS</h2>
+
+pushbutton, widget
+</body>
+</html>
+

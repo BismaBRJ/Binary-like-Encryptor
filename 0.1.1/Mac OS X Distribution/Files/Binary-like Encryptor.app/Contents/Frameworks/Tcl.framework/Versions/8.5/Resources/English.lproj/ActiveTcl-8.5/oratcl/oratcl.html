@@ -1,0 +1,1006 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title></title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<pre>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</pre>
+
+<h2>NAME</h2>
+
+<pre>
+     Oratcl - Oracle Database Server access commands for Tcl
+
+
+
+</pre>
+
+<h2>INTRODUCTION</h2>
+
+<pre>
+     Oratcl is an extension to the Tcl language designed to  pro-
+     vide  access to an Oracle Database Server.  Each Oratcl com-
+     mand generally invokes several Oracle Call  Interface  (OCI)
+     library functions.  Programmers using Oratcl should be fami-
+     liar with basic  concepts  of  OCI  programming.   Oratcl is
+     loaded  into  the  Tcl interpreter with the tcl <b>package</b> com-
+     mand.
+
+          <b>Example</b>
+
+               package require Oratcl
+               package require -exact Oratcl 4.5
+
+
+</pre>
+
+<h2>ORATCL COMMANDS</h2>
+
+<pre>
+     <b>oralogon</b> <i>connect</i>-<i>str</i> ?-<i>async</i>? ?-<i>failovercallback procname</i>?
+          Connect to an Oracle  server  using  <i>connect</i>-<i>str</i>.   The
+          connect string should be a valid Oracle connect string,
+          in the form:
+
+               <i>name</i>/<i>password</i>
+               <i>name</i>/<i>password</i>@<i>n</i>:<i>dbname</i>
+
+          If using  system  authentication,  the  connect  string
+          should be in the form:
+
+               /
+               /@<i>dbname</i>
+
+          If connecting as SYSOPER or SYSDBA, the connect string
+          should be in the form:
+
+               <i>sysdba</i>
+               <i>sysoper</i>
+
+          A logon handle is returned and should be used  for  all
+          other   Oratcl  commands  using  this  connection  that
+          require a logon handle.  Multiple  connections  to  the
+          same or different servers are allowed.  <b>Oralogon</b> raises
+          a Tcl error if the connection is not made for any  rea-
+          son  (login or password incorrect, network unavailable,
+          etc.).  If the connect string does not include a  data-
+          base  specification,  a  connection will be established
+          with the server specified in the  environment  variable
+          ORACLE_SID.
+
+          The optional -<i>async</i> argument specifies  that  all  com-
+          mands  allowing  asynchronous  (nonblocking)  operation
+          will do  so.   The  commands  affected  are:  <b>oraparse</b>,
+          <b>oraexec</b>, <b>orafetch</b> and those that make use of these such
+          as <b>orasql</b>, <b>orabindexec</b> and <b>oraplexec</b>.   These  commands
+          will  immediately  return a code of OCI_STILL_EXECUTING
+          which is equal to the numeric value of  -3123.   Repeat
+          calls  to these commands with the same arguments until
+          a return value of OCI_SUCCESS, a 0, is  returned.   See
+          the section below on ASYNCHRONOUS TRANSACTION HANDLING.
+
+          The optional -<i>failovercallback procname</i> arguments
+          provide  a  TAF  failover functionality to Oratcl.  The
+          given  procname  is  invoked  on a TAF failover.  It is
+          often  used  to  re-execute  "alter session" statements
+          after the automatic reconnect to another RAC node.
+
+     <b>oralogoff</b> <i>logon</i>-<i>handle</i>
+          Logoff from the  Oracle  server  connection  associated
+          with  <i>logon</i>-<i>handle</i>. <i>Logon</i>-<i>handle</i> must be a valid handle
+          previously opened with <b>oralogon</b>.   <b>Oralogoff</b>  raises  a
+          Tcl  error  if  the logon handle specified is not open.
+          <b>Oralogoff</b> closes any open statement handles opened with
+          <i>logon</i>-<i>handle</i>.   <b>Oralogoff</b>  returns the return code from
+          OCISessionEnd().
+
+
+     <b>oraopen</b> <i>logon</i>-<i>handle</i>
+          Open a statement handle to the server.  <b>Oraopen</b> returns
+          a  handle to be used on subsequent Oratcl commands that
+          require a statement handle.   <i>Logon</i>-<i>handle</i>  must  be  a
+          valid handle previously opened with <b>oralogon</b>.  Multiple
+          statement handles can be opened  through  the  same  or
+          different logon handles.  <b>Oraopen</b> raises a Tcl error if
+          the logon handle specified is not open.
+
+
+     <b>oraconfig</b> <i>statement</i>-<i>handle</i> ?<i>name</i> ?<i>value</i>??
+          Configure a <i>statement</i>-<i>handle</i> or retrieve  configuration
+          information  about a <i>statement</i>-<i>handle</i>.  If no arguments
+          are provided, <b>oraconfig</b> returns a  list  of  <i>name</i>-<i>value</i>
+          pairs.   If <i>name</i> is provided, the associated <i>value</i> will
+          be returned.  If both  <i>name</i>  and  <i>value</i>  are  provided,
+          <b>oraconfig</b>   will   configure  the  <i>statement</i>-<i>handle</i>  as
+          directed.  For numeric <i>value</i>s, a  <i>value</i>  less  than  or
+          equal  to  zero or greater than the stated maximum will
+          cause <b>Oratcl</b> to raise a TCL error.  <i>Name</i> may be one  of
+          the following:
+
+          <i>longsize</i>  Sets or returns the maximum amount of LONG or
+                    LONG  RAW  data  returned  by  <b>orafetch</b>.  The
+                    default is 40960 bytes  and  the  maximum  is
+                    2147483647 bytes.
+
+          <i>bindsize</i>  Sets or returns the size of the  buffer  used
+                    for  storing  bind  variable values.  This is
+                    used in <b>orabindexec</b> and  <b>oraplexec</b>  to  allow
+                    the  buffer to be reused on subsequent calls.
+                    The default is 2000 bytes and the maximum  is
+                    4000 bytes.
+
+          <i>nullvalue</i> Sets or returns the NULL value  behavior.   A
+                    <i>value</i> of "default" causes <b>orafetch</b> to substi-
+                    tute zeros for NULLs in numeric  columns  and
+                    null  strings  "{}"  for  NULLs  in character
+                    columns.  Any other <i>value</i> causes  that  <i>value</i>
+                    to  be  returned  as  a string for all NULLs.
+                    The default is "default".
+
+          <i>fetchrows</i> Sets or  returns  the  number  of  rows  pre-
+                    fetched  by  <b>orafetch</b>.  <b>Orafetch</b>  attempts to
+                    fetch <i>fetchrows</i> rows from the  Oracle  server
+                    at  once  and  then returns single rows until
+                    the cache is exhausted  and  another  set  of
+                    rows  is retrieved.  Setting the <i>fetchrows</i> to
+                    larger numbers for queries that  return  many
+                    rows may dramatically decrease the time spent
+                    fetching the rows.  Changes to <i>fetchrows</i> only
+                    affects     subsequent    <b>orasql</b>    commands.
+                    <i>Fetchrows</i> defaults to 10 rows and the maximum
+                    is dependent upon available memory.
+
+          <i>lobpsize</i>  Sets or returns the amount  of  of  data  (in
+                    characters)   used  in  piecewise  reads  and
+                    writes to LOB types in  the  <b>oralob</b>  command.
+                    <i>Lobpsize</i>  defaults  to  10,000 characters and
+                    the maximum is 15,000 characters.
+
+          <i>longpsize</i> Sets or returns the amount  of  of  data  (in
+                    characters)   used  in  piecewise  reads  and
+                    writes to LONG types in the <b>oralong</b>  command.
+                    <i>Longpsize</i>  defaults  to 50,000 characters and
+                    the maximum is 2,147,483,648 characters.
+
+          <i>utfmode</i>   Sets or returns the UTF translation behavior.
+                    Setting  this  value  to  true causes <i>orasql</i>,
+                    <i>orabindexec</i>, <i>oraplexec</i>, <i>orafetch</i>, <i>oralong</i> and
+                    <i>oralob</i>  to  perform UTF translation on values
+                    written to and read from  the  database  with
+                    the  system  encoding.  It is not recommended
+                    that this function be enabled when reading or
+                    writing  long  raw type values with <i>oralong</i>.
+                    The default is false.
+
+          <i>numbsize</i>  Sets or returns the amount  of  of  data  (in
+                    characters)   used to represent a number column. 
+                    <i>Numbsize</i> defaults to 40 characters and the maximum
+                    is 4000 characters.
+
+          <i>datesize</i>  Sets or returns the amount  of  of  data  (in
+                    characters)   used to represent a date column. 
+                    <i>Datesize</i> defaults to 75 characters and the maximum
+                    is 7500 characters.
+
+     <b>oraclose</b> <i>statement</i>-<i>handle</i>
+          Closes the  cursor  associated  with  <i>statement</i>-<i>handle</i>.
+          <b>Oraclose</b>  raises  a  Tcl  error if the <i>statement</i>-<i>handle</i>
+          specified is not open.
+
+
+     <b>oramsg</b> <i>handle</i> <i>option</i>
+
+          <i>all</i>       returns all values as a list  in  the  format
+                    {rc error rows peo ocicode sqltype}
+
+          <i>rc</i>        returns the  result  code  of  the  last  OCI
+                    library  function  called by Oratcl with this
+                    handle.  This code is a  numeric  value  that
+                    often  corresponds  to  an Oracle error code.
+                    Refer to the Oracle Error Messages and  Codes
+                    manual  for more detailed information.  Typi-
+                    cal values are:
+
+                        0 - Function completed normally
+                     1403 - End of data in <b>orafetch</b> command
+                     1406 - Fetched column was truncated.
+                    -3123 - Asynchronous command still processing
+
+          <i>error</i>     returns the message text associated with  the
+                    return code.
+
+          <i>rows</i>      returns the number of  rows  affected  by  an
+                    <i>insert</i>,  <i>update</i>, <i>delete</i> statement by <b>oraexec</b>,
+                    or the number of  rows  fetched  to  date  by
+                    <b>orafetch</b>.
+
+          <i>peo</i>       returns the  parse  error  offset,  an  index
+                    position  in  an  SQL  string  that failed to
+                    parse due to a syntax error.
+
+          <i>ocicode</i>   returns the OCI code of the last OCI function
+                    called  by  Oratcl.   See  the OCI manual for
+                    descriptions.
+
+          <i>sqltype</i>   returns a code set  by  last  SQL  or  PL/SQL
+                    parsed with <b>oraparse</b>.  Valid values are:
+
+                    1 == SELECT  corresponds to OCI_STMT_SELECT
+                    2 == UPDATE  corresponds to OCI_STMT_UPDATE
+                    3 == DELETE  corresponds to OCI_STMT_DELETE
+                    4 == INSERT  corresponds to OCI_STMT_INSERT
+                    5 == CREATE  corresponds to OCI_STMT_CREATE
+                    6 == DROP    corresponds to OCI_STMT_DROP
+                    7 == ALTER   corresponds to OCI_STMT_ALTER
+                    8 == BEGIN   corresponds to OCI_STMT_BEGIN
+                    9 == DECLARE corresponds to OCI_STMT_DECLARE
+
+          <i>arraydml_errors</i>   returns a list of errors that occurred
+      during an array dml operation. Each element of the list
+      will  contain  the  row the error  occurred on,  the sql
+      error code, and the sql error tesxt.
+
+          <b>Oramsg</b> raises a Tcl  error  if  the  <i>handle</i>  cannot  be
+          located  in  the set of open statement-handles and con-
+          nected logon-handle.
+
+
+     <b>oraparse</b> <i>statement</i>-<i>handle</i> <i>statement</i>-<i>text</i>
+          Parse the statement <i>statment</i>-<i>text</i> on the Oracle server.
+          <i>Statement</i>-<i>handle</i>  must  be  a  valid  handle previously
+          opened with <b>oraopen</b>.  <i>Statement</i>-<i>text</i> can  be  either  a
+          SQL  or anonymous PL/SQL statement.  the <i>Statement</i>-<i>text</i>
+          may contain bind variables that begin with a colon ':'.
+
+          <b>Oraparse</b> will return the numeric  return  code  "0"  on
+          successful  parsing  of  the   <i>statement</i>-<i>text</i>,  and the
+          error code returned by Oracle when parsing fails.  <b>Ora-</b>
+          <b>parse</b> raises a Tcl error if the <i>statement</i>-<i>handle</i> speci-
+          fied is not open, or if the <i>statment</i>-<i>text</i> is  syntacti-
+          cally incorrect.
+
+
+     <b>orabind</b> <i>statement</i>-<i>handle</i> ?<i>-arraydml</i>? ?:<i>varname</i> <i>value</i> ...?
+          Bind values SQL variables in a  previously  parsed  SQL
+          statement. <i>Statement</i>-<i>handle</i> must be a valid handle pre-
+          viously opened with <b>oraopen</b>.  An SQL or  PL/SQL  state-
+          ment must have previously been parsed by executing <b>ora-</b>
+          <b>parse</b>.  <b>Orabind</b> may be executed repeatedly on a  previ-
+          ously parsed statement.  Binding should only be done in
+          conjunction with sql types (1-4) select, insert,  update,
+          delete  and  with  the  PL/SQL  types  (8-9)  begin and
+          declare type statements.
+
+          Optional :<i>varname</i> <i>value</i> pairs  allow  substitutions  on
+          SQL  bind  variables.   As  many  :varname  value pairs
+          should be specified as there are defined in the  previ-
+          ously  parsed SQL statement.  Varnames must be prefixed
+          by a colon ":".  It is not an  error  to  call  <b>orabind</b>
+          without  any  :<i>varname</i> <i>value</i> pairs, but no binding will
+          occur.
+
+      When  using  the <i>-arraydml</i>  option,  each value  should
+      contain  a  list  of values.  Each :varname  value pair
+      should have the same number of elements in their lists.
+      The <b>orabind</b> command will raise an error if they are not.
+      The  <i>-arraydml</i>  option can only be used for updates and
+      inserts.
+
+          <b>Orabind</b> will return "0" when bindings  are  successful;
+          "1003"  if a previous SQL has not been parsed with <b>ora-</b>
+          <b>parse</b>; "1008" if not all SQL bind variables  have  been
+          specified.   Refer to Oracle error numbers and messages
+          for other possible values.
+
+          <b>Orabind</b> raises a  Tcl  error  if  the  <i>statement</i>-<i>handle</i>
+          specified has not b
+
+
+     <b>oraexec</b> <i>statement</i>-<i>handle</i> ?-<i>commit</i>?
+          Execute a previously parsed and  optionally  bound  SQL
+          statement. <i>Statement</i>-<i>handle</i> must be a valid handle pre-
+          viously opened with <b>oraopen</b>.   An  SQL  statement  must
+          have  previously  been  parsed  by  executing <b>oraparse</b>.
+          <b>Orabind</b> and <b>oraexec</b> commands may be  repeatedly  issued
+          after a statement is parsed.
+
+          The optional -<i>commit</i> argument specifies  the  that  SQL
+          will be committed upon successful execution.
+
+
+     <b>orafetch</b> <i>statement</i>-<i>handle</i> ?options ...?
+          Retrieve data from the database as specified  by  prior
+          <b>oraparse</b>,   <b>orabind</b>,  <b>oraxec</b>  calls.   All  values  are
+          converted to character strings except ref_cursors which
+          will  be represented in the datavariable list as a null
+          string. <b>Orafetch</b> returns the code from the  OCIStmtExe-
+          cute()  library  function.  Likely values include 0 for
+          success, 1403 for no more data, and -3123 for asynchro-
+          nous still executing.
+
+          -<i>datavariable</i>   Specifies the variable to be set with a
+                          list   containing   the   row  of  data
+                          fetched. The list returned in the data-
+                          variable   by   <b>orafetch</b>  contains  the
+                          values of the selected columns  in  the
+                          order specified by <i>select</i>.
+
+          -<i>dataarray</i>      Specifies the array in which the  indi-
+                          vidual  columns of data fetched will be
+                          set.
+
+          -<i>indexbyname</i>    When  combined  with  the   -<i>dataarray</i>
+                          option,  <b>orafetch</b>  will  use the column
+                          names  from  the  query  as  the  index
+                          (hash) values of the array.
+
+          -<i>indexbynumber</i>  When  combinded  with  the   -<i>dataarray</i>
+                          option,  <b>orafetch</b>  will  use the column
+                          position number from the  query  as  the
+                          index (hash) values of the array.
+
+          -<i>command</i>        Specifies  a  script   to   eval   when
+                          <b>orafetch</b> retrieves a row of data.  This
+                          script may reference the  variable  and
+                          array specified by other options.
+
+          <b>Orafetch</b> raises a Tcl  error  if  the  <i>statement</i>-<i>handle</i>
+          specified  is  not  open,  or  if  an unknown option is
+          specified.
+
+
+     <b>orasql</b> <i>statement</i>-<i>handle</i> <i>sql</i>-<i>statement</i> ?-<i>parseonly</i>? ?-<i>commit</i>?
+          Execute the SQL statement <i>sql</i>-<i>statement</i> on  the  Oracle
+          server.  <i>Statement</i>-<i>handle</i> must be a valid handle previ-
+          ously opened with  <b>oraopen</b>.   <b>Orasql</b>  will  return  the
+          numeric  return code "0" on successful execution of the
+          <i>sql</i>-<i>statement</i>.
+
+          The optional -<i>parseonly</i> argument causes <b>orasql</b> to parse
+          but  not  execute the SQL statement.  The SQL statement
+          may contain bind variables  that  begin  with  a  colon
+          (':').   The  statement  may  then be executed with the
+          <b>orabindexec</b> command, allowing bind variables to be sub-
+          stituted  with  values.   Bind variables should only be
+          used for SQL  statements  <b>select,</b>  <b>insert,</b>  <b>update,</b>  or
+          <b>delete</b>.
+
+          The optional -<i>commit</i> argument specifies  the  that  SQL
+          will be committed upon successful execution.
+
+          <b>Orasql</b> raises a  Tcl  error  if  the  statement  handle
+          specified  is not open, or if the SQL statement is syn-
+          tactically incorrect.
+
+          Table inserts made with orasql should follow conversion
+          rules in the Oracle SQL Reference manual.
+
+
+     <b>orabindexec</b> <i>statement</i>-<i>handle</i> ?-<i>commit</i>? ?:<i>varname</i> <i>value</i> ...?
+          Execute a previously parsed SQL  statement,  optionally
+          binding  values to SQL variables. <i>Statement</i>-<i>handle</i> must
+          be a valid handle previously opened with  <b>oraopen</b>.   An
+          SQL  statement must have previously been parsed by exe-
+          cuting <b>oraparse</b> or <b>orasql</b> with the  -<i>parseonly</i>  option.
+          <b>Orabindexec</b>  may  be repeatedly executed after a state-
+          ment is parsed with bind variables substituted on  each
+          execution.   <b>Orabindexec</b>  does  not re-parse SQL state-
+          ments before execution.
+
+          The optional -<i>commit</i> argument specifies  that the  SQL
+          will commit upon successful execution.
+
+          Optional :<i>varname</i> <i>value</i> pairs  allow  substitutions  on
+          SQL  bind variables before execution.  As many :varname
+          value pairs should be specified as there are defined in
+          the  previously parsed SQL statement.  Varnames must be
+          prefixed by a colon ":".
+
+          <b>Orabindexec</b> will return "0" when the  SQL  is  executed
+          successfully;  "1003"  if  a  previous SQL has not been
+          parsed with orasql; "1008" if not all  SQL  bind  vari-
+          ables  have  been  specified.   Refer  to  Oracle error
+          numbers and messages for other possible values.
+
+
+     <b>oraplexec</b> <i>statement</i>-<i>handle</i> <i>pl</i>-<i>block</i> ?:<i>varname</i> <i>value</i> ...?
+          Execute  an  anonymous  PL  block,  optionally  binding
+          values to PL/SQL variables.
+
+          <i>Statement</i>-<i>handle</i> must  be  a  valid  handle  previously
+          opened with <b>oraopen</b>.  <i>Pl</i>-<i>block</i> may either be a complete
+          PL/SQL procedure or a call to a stored procedure  coded
+          as  an anonymous PL/SQL block.  Optional :<i>varname</i> <i>value</i>
+          pairs may follow the pl-block.  Varnames must  be  pre-
+          fixed  by  a colon ":", and match the subtsitution bind
+          names used in the procedure.  Any :varname that is  not
+          matched with a value is ignored.  If a :varname is used
+          for output, the value should be coded as a  null  list,
+          {}.
+
+          Ref-cursor variables may  be  returned  from  a  PL/SQL
+          block by specifying an open <i>statement</i>-<i>handle</i> as the bind
+          value for a :varname bind  variable.  The  handle  must
+          have  previously  been opened by <b>oraopen</b> using the same
+          <i>logon</i>-<i>handle</i> as the cursor used  to  execute  the  <b>ora-</b>
+          <b>plexec</b>  command.  After <b>oraplexec</b> completes, the handle
+          may be used to fetch result  rows  by  using  orafetch;
+          column information is available by using <b>oracols</b>.
+
+          <b>Oraplexec</b> will return "0" when  executed  successfully;
+          Use the command <b>orafetch</b> to retrieve the bind results.
+
+          <b>Oraplexec</b> raises a  Tcl  error  if  the  cursor  handle
+          specified  is  not  open,  or if the PL/SQL block is in
+          error.
+
+
+     <b>oralob</b> <i>sub</i>-<i>command</i> <i>handle</i> ?<i>options</i> ...?
+          Perform operations on Oracle Long Objects.
+
+          <i>Handle</i> must be either a valid statement  handle  previ-
+          ously  opened with <b>oraopen</b> or a LOB handle created with
+          the <b>alloc</b> sub-command.  Both Binary Long Object  (BLOB)
+          and  Character Long Object (CLOB) columns are supported
+          by the <b>oralob</b> command.
+
+          The following <i>sub</i>-<i>commands</i> are available:
+
+               <b>alloc</b>  <i>statement</i>-<i>handle</i>  -<i>table</i>   $<i>table</i>   -<i>column</i>
+               $<i>column</i> -<i>rowid</i> $<i>rowid</i>
+                    Create and return a LOB handle that refers to
+                    the   LOB   specified  by  ($<i>table</i>,  $<i>column</i>,
+                    $<i>rowid</i>).  <i>statement</i>-<i>handle</i> must be  a  state-
+                    ment  handle  previously created with <b>oraopen</b>
+                    and will be  used  implicitly  by  the  other
+                    <b>oralob</b> sub-commands that operate on this LOB.
+
+
+               <b>free</b> <i>LOB</i>-<i>handle</i>
+                    Destroy the LOB handle and free any resources
+                    associated with it.
+
+
+               <b>read</b> <i>LOB</i>-<i>handle</i> -<i>datavar</i> <i>varname</i>
+                    Read the LOB specified by <i>LOB</i>-<i>handle</i> into the
+                    variable identified by <i>varname</i>.
+
+
+                    <i>varname</i>
+
+               <b>substr</b> <i>LOB</i>-<i>handle</i> -<i>start</i> $<i>start</i>  -<i>stop</i>  $<i>stop</i>  -<i>datavar</i>
+                    Reads  characters  of  the  LOB  specified by
+                    <i>LOB</i>-<i>handle</i>, beginning at $<i>startpos</i> and ending
+                    at  $<i>stoppos</i>,  into  <i>varname</i>.   $<i>startpos</i> and
+                    $<i>stoppos</i> both default to 0.
+
+
+               <b>write</b> <i>LOB</i>-<i>handle</i> -<i>datavar</i> <i>varname</i>
+                    Write the data in the variable identified  by
+                    <i>varname</i> into the LOB specified by <i>LOB</i>-<i>handle</i>.
+
+
+               <b>writeappend</b> <i>LOB</i>-<i>handle</i> -<i>datavar</i> <i>varname</i>
+                    Append the data in the variable identified  by
+                    <i>varname</i> to the end of the LOB specified by <i>LOB</i>-<i>handle</i>.
+
+
+               <b>append</b> <i>LOB</i>-<i>handle1</i> <i>LOB</i>-<i>handle2</i>
+                    Appends the contents of the LOB specified  by
+                    <i>LOB</i>-<i>handle2</i>   to   the   LOB   specified   by
+                    <i>LOB</i>-<i>handle1</i>.  Both LOBs must be of  the  same
+                    type (Binary or Character).
+
+
+               <b>erase</b> <i>LOB</i>-<i>handle</i> -<i>start</i> $<i>start</i> -<i>stop</i> $<i>stop</i>
+                    Overwrites the data in the LOB  specified  by
+                    <i>LOB</i>-<i>handle</i>  from  $<i>start</i>  to  $<i>stop</i> with NULL
+                    characters.  $<i>start</i> and $<i>stop</i> both default to
+                    0.
+
+
+               <b>trim</b> <i>LOB</i>-<i>handle</i> -<i>length</i> $<i>length</i>
+                    Trims the  LOB  specified  by  <i>LOB</i>-<i>handle</i>  to
+                    $<i>length</i> characters or bytes.
+
+
+               <b>length</b> <i>LOB</i>-<i>handle</i>
+                    Returns the length (in characters  or  bytes)
+                    of the LOB specified by <i>LOB</i>-<i>handle</i>.
+
+               <b>instr</b> <i>LOB</i>-<i>handle</i> -<i>pattern</i> $<i>pattern</i>  -<i>start</i>  $<i>start</i>
+               -<i>nth</i> $<i>nth</i>
+                    Returns the position in the LOB specified  by
+                    <i>LOB</i>-<i>handle</i>  at  which  the $<i>nth</i> occurrence of
+                    the pattern $<i>pattern</i> appears.  The search  is
+                    started  at $<i>start</i>.  $<i>start</i> defaults to 0 and
+                    $<i>nth</i> defaults to 1.
+
+               <b>compare</b> <i>LOB</i>-<i>handle1</i>  <i>LOB</i>-<i>handle2</i>  -<i>start1</i>  $<i>start1</i>
+               -<i>start2</i> $<i>start2</i> -<i>length</i> $<i>length</i>
+                    Compares   the   two   LOBs   specified    by
+                    <i>LOB</i>-<i>handle1</i>  and <i>LOB</i>-<i>handle2</i>.  The comparison
+                    is begun at the position indicated by $<i>start1</i>
+                    (in  LOB 1) and $<i>start2</i> (LOB 2) and continues
+                    for $<i>length</i> positions.  A return value  of  0
+                    indicates  that  the  two  LOBs are identical
+                    through the positions specified.  A  non-zero
+                    return  value  indicates  that  the  two LOBs
+                    differ.
+
+          The  <b>oralob</b>  commands  are  a  collection  of  TCL  and
+          anonymous  PL/SQL  wrappers  for  the  Oracle  <b>dbms_lob</b>
+          PL/SQL package and therefore require the <i>rowid</i> (as well
+          as  the table name and column name) of the LOB in order
+          to operate.  The <i>rowid</i>  of  a  row  may  be  determined
+          easily, as shown in the example below.
+
+          <b>LOB</b> <b>Example</b>
+
+               # Assume that $sth is a valid statement-handle
+               # opened earlier
+               oraparse $sth "select rowid from my_table \
+                      where my_key = 'keyvalue'"
+               oraexec $sth
+               orafetch $sth -datavariable rowid
+               set data "abcdeabcdeabcde"
+               set lobid [oralob alloc $sth -table "my_table" \
+                         -column "clob_col" -rowid $rowid]
+               oralob write $lobid -datavar data
+               set l [oralob length $lobid]
+               # $l == 15
+               set data ""
+               oralob read $lobid -datavar data
+               # $data contains "abcdeabcdeabcde"
+               set i [oralob instr $lobid -pattern "eab" -start 3 -nth 2]
+               # $i == 9 -- TCL-like indexing, not Oracle indexing
+
+          <b>NOTE:</b>
+               The PL/SQL DBMS_LOB package  used  by  the  <b>oralob</b>
+               command  requires  BLOB and CLOB fields to be ini-
+               tialized before they may be  operated  upon.   You
+               may  automatically initialize a LOB field by using
+               EMPTY_BLOB() or EMPTY_CLOB() in the DEFAULT clause
+               of  a table definition or initialize before use by
+               inserting an EMPTY_BLOB() or EMPTY_CLOB().
+
+               <b>Table</b> <b>Definition</b> <b>Example:</b>
+                    create table test_lob_1 (
+                        lob_key     <b>varchar2(10)</b>  primary key,
+                        lob_clob    clob          default empty_clob(),
+                        lob_blob    blob          default empty_blob()
+                    )
+
+               <b>Initialize</b> <b>Before</b> <b>Use</b> <b>Example:</b>
+                    # Assume the following table definition:
+                    # create table test_lob_2 (
+                    #     lob_key     <b>varchar2(10)</b>,
+                    #     lob_clob    clob,
+                    #     lob_blob    blob
+                    # )
+
+                    set sql { \
+                         insert into test_lob_2 \
+                           (lob_key, lob_clob, lob_blob) \
+                         values (:lob_key, empty_clob(), empty_blob() )\
+                    }
+
+                    orasql $sth $sql -parseonly
+
+                    # Create a new row in test_lob_2 with lob_clob
+                    # and lob_blob properly initialized.
+                    orabindexec $sth :lob_key "AAAAAAAAAA"
+
+
+          <b>oralong</b> <i>sub</i>-<i>command</i> <i>handle</i> ?<i>options</i> ...?
+               Perform operations on Oracle LONG column-types.
+
+               <i>Handle</i> must be either  a  valid  statement  handle
+               previously  opened  with  <b>oraopen</b> or a LONG handle
+               created with the <b>alloc</b> sub-command.  Both LONG and
+               LONG RAW columns are supported by the <b>oralong</b> com-
+               mand.
+
+               The following <i>sub</i>-<i>commands</i> are available:
+
+               <b>alloc</b>  <i>statement</i>-<i>handle</i>  -<i>table</i>   $<i>table</i>   -<i>column</i>
+               $<i>column</i> -<i>rowid</i> $<i>rowid</i>
+                    Create and return a LONG handle  that  refers
+                    to  the  LONG  specified by ($<i>table</i>, $<i>column</i>,
+                    $<i>rowid</i>).  <i>statement</i>-<i>handle</i> must be  a  state-
+                    ment  handle  previously created with <b>oraopen</b>
+                    and will be used implicitly by the other <b>ora-</b>
+                    <b>long</b> sub-commands that operate on this LONG.
+
+
+               <b>free</b> <i>LONG</i>-<i>handle</i>
+                    Destroy  the  LONG  handle   and   free   any
+                    resources associated with it.
+
+
+               <b>read</b> <i>LONG</i>-<i>handle</i> -<i>datavar</i> <i>varname</i>
+                    Read the LONG specified by  <i>LONG</i>-<i>handle</i>  into
+                    the variable identified by <i>varname</i>.
+
+
+               <b>write</b> <i>LONG</i>-<i>handle</i> -<i>datavar</i> <i>varname</i>
+                    Write the data in the variable identified  by
+                    <i>varname</i>    into   the   LONG   specified   by
+                    <i>LONG</i>-<i>handle</i>.
+
+          <b>LONG</b> <b>Example</b>
+               # Assume that $sth is a valid statement-handle
+               # opened earlier with logon handle $lda
+               set chr_data [string repeat 0123456789---------- 10000]
+
+               # Find the ROWID for the LONG handle
+               oraparse $sth {select rowid from oratcl_long \
+                         where field = 'value'}
+               oraexec $sth
+               orafetch $sth -datavariable rowid
+               set longid [oralong alloc $sth -table oratcl_long \
+                         -column mp3 -rowid $rowid]
+
+               oralong write $longid -datavar chr_data
+               oracommit $lda
+               oralong read $longid -datavar out_data
+               oralong free $longid
+
+               if {[string equal $chr_data $out_data]} {
+                       puts "write/read results are equal"
+               }
+
+
+     <b>oracols</b> <i>statement</i>-<i>handle</i> ?<i>option</i>?
+          Return the names of the columns from the  last  <b>orasql,</b>
+          <b>orafetch,</b>  or  <b>oraplexec</b>  command  as  a Tcl list.  The
+          <b>oracols</b> may be used after <b>oraplexec</b>, in which case  the
+          bound  variable names are returned.  The <i>option</i> parame-
+          ter can be used to alter the result as follows:
+
+          <i>all</i>       returns all values as a list of lists in  the
+                    format  {{name size type precision scale nul-
+                    lok} {...}}
+
+          <i>name</i>      returns a list of column names.  This is  the
+                    default.
+
+          <i>size</i>      returns a list of column sizes.
+
+          <i>type</i>      returns a list of column types.
+
+          <i>precision</i> returns a list of column precisions.
+
+          <i>scale</i>     returns a list of column scales.
+
+          <i>nullok</i>    returns a list  of  column  "NULLOK"  values.
+                    "NULLOK" will be 1 if the column may be NULL,
+                    or 0 otherwise.
+
+          The  <b>oracols</b>  command  raises  a  Tcl  error   if   the
+          <i>statement</i>-<i>handle</i>  specified  is  not open.  The <b>oracols</b>
+          command raises a Tcl error if the <i>option</i> is not valid.
+
+     <b>oradesc</b> <i>logon</i>-<i>handle</i> <i>table</i>-<i>name</i>
+          Describes the columns of <i>table</i>-<i>name</i>.   Returns  a  list
+          containing  lists  in the format {name size type preci-
+          sion scale nullok} for each column of the table.   <b>Ora-</b>
+          <b>desc</b>  will  also describe the columns of a table refer-
+          enced by a private or public  synonym  when  given  the
+          name of a synonym as the <i>table</i>-<i>name</i> argument.  <b>Oradesc</b>
+          will describe an object in the connecting schema before
+          describing  a  public  synonym  when  the names are the
+          same.
+
+
+     <b>oracommit</b> <i>logon</i>-<i>handle</i>
+          Commit any pending transactions from prior <b>orasql,</b> <b>ora-</b>
+          <b>bindexec,</b>  or  <b>oraplexec</b>  commands that use a statement
+          handle  opened  through  the  connection  specified  by
+          <i>logon</i>-<i>handle</i>.  <i>Logon</i>-<i>handle</i> must be a valid handle pre-
+          viously opened with <b>oralogon</b>.  <b>Oracommit</b> raises  a  Tcl
+          error if the <i>logon</i>-<i>handle</i> specified is not open.
+
+
+     <b>oraroll</b> <i>logon</i>-<i>handle</i>
+          Rollback any pending transactions  from  prior  <b>orasql,</b>
+          <b>orabindexec,</b> or <b>oraplexec</b> commands that use a statement
+          handle  opened  through  the  connection  specified  by
+          <i>logon</i>-<i>handle</i>.  <i>Logon</i>-<i>handle</i> must be a valid handle pre-
+          viously opened with <b>oralogon</b>.   <b>Oraroll</b>  raises  a  Tcl
+          error if the <i>logon</i>-<i>handle</i> specified is not open.
+
+
+     <b>oraautocom</b> <i>logon</i>-<i>handle</i> <i>boolean</i>
+          Enables or disables automatic commit of SQL data  mani-
+          pulation  statements  using  a  statement handle opened
+          through  the  connection  specified  by   <i>logon</i>-<i>handle</i>.
+          <i>Logon</i>-<i>handle</i>  must  be a valid handle previously opened
+          with <b>oralogon</b>.  <i>Boolean</i> may be any value that evaluates
+          to  boolean true (1, on, true) to enable automatic com-
+          mit, or boolean false to disable.   After  setting  the
+          automatic  commit  status,  <b>oraautocom</b>  returns the new
+          commit status (1 for on, 0 for off) for validation pur-
+          poses.  The automatic commit feature defaults to "off".
+          <b>Oraautocom</b> raises  a  Tcl  error  if  the  <i>logon</i>-<i>handle</i>
+          specified is not open.
+
+
+     <b>oraldalist</b>
+          Return a list of all opened logon-handles.
+
+     <b>orastmlist</b> <i>logon</i>-<i>handle</i>
+          Return a list of all opened  statement-handles  associ-
+          ated with the <i>logon</i>-<i>handle</i>.
+
+     <b>orainfo</b> <i>option</i> ?<i>args</i>?
+          Retrieves information  about  oratcl.   <i>Option</i>  may  be
+          either "version", "server", or "logonhandle".
+      "<b>orainfo</b> version" returns the current oratcl version.   
+
+      "<b>orainfo</b> server" requires a valid logon handle previously opened
+          with <b>oralogon</b> as an argument and returns the oracle
+          server information.   
+
+      "<b>orainfo</b> client" returns the oracle client version information.  I.E. 10.2.0.1.0
+
+          "<b>orainfo</b> status" requires a valid logon handle previously opened 
+      with <b>oralogon</b> as an argument and returns the oracle server
+      connection status (1 connected, 0 not connected).
+
+      "<b>orainfo</b> logonhandle" requires a
+          statement handle previously  opened  with  <b>oraopen</b>  and
+          returns the login handle that the statement handle was
+          opened under.
+
+          <b>EXAMPLES</b>
+               puts [orainfo version]
+
+               set lda [oralogon username/password@db]
+               puts [orainfo server $lda]
+
+               set sth [oraopen $lda]
+               set mylda [orainfo logonhandle $sth]
+
+
+
+</pre>
+
+<h2>NOTES</h2>
+
+<pre>
+     Tcl errors can also be raised by any  Oratcl  command  if  a
+     command's internal calls to OCI library routines fail.
+
+     <b>Dates</b>
+          Oracle is very particular about using date literals  in
+          SQL.   Date literals should match the default date for-
+          mat for your oracle session.  default date formats  can
+          be modified with an "alter session" SQL statement.
+
+               alter session set nls_date_format = 'DD-MON-YYYY'
+
+     <b>Connection</b> <b>Limits</b>
+          The limit of the number of simultaneous connection han-
+          dles  and statement handles is determined by the Oracle
+          server configuration.  The processes  <i>init</i>.<i>ora</i>  is  the
+          most common limitation.
+
+     <b>Multithreading</b>
+          Oratcl may be used with the thread extension.
+
+     <b>Slave</b> <b>Interpreters</b>
+          Oratcl may be used in a Tcl  slave  interpreter.   How-
+          ever,  logon  handles  and  statement  handles are only
+          accessible from  the  interpreter  in  which  they  are
+          created.   The  test  suite  provides examples of slave
+          interpreter interaction.
+
+     <b>Long</b> <b>and</b> <b>Long</b> <b>Raw</b>
+          The maximum amount of LONG or LONG RAW data returned by
+          <b>orafetch</b> is ultimately dependent on Oratcl's ability to
+          malloc() <i>maxlong</i> bytes of memory for each LONG/LONG RAW
+          column  retrieved.   Configuring  maxlong to too high a
+          value may cause core dumps or memory shortages.
+
+     <b>Ref</b> <b>Cursor</b>
+          Ref-cursor variables  returned  by  oraplexec  must  be
+          specified as a currently open statement handle from the
+          same logon connection:
+
+          set lda [oralogon scott/tiger]
+          set exec_cur [oraopen $lda]
+          set fetch_cur [oraopen $lda]
+          set plsql { begin
+                  open :fetchcur for select empno, ename
+                  from emp where job = :job ;
+                  end;
+               }
+          oraplexec  $exec_cur  $plsql  :job  ANALYST  :fetchcur  $fetch_cur
+          orafetch  $fetch_cur -arrayvariable dbres -indexbyname
+          while {[oramsg $fetch_cur rc] == 0} {
+               puts "$dbres(EMPNO) $dbres(ENAME)"
+               orafetch  $fetch_cur -arrayvariable dbres -indexbyname
+          }
+
+     <b>Bind</b> <b>Variables</b>
+          Using SQL bind variables is more efficient than letting
+          Oracle  reparse  SQL  statements.  Use a combination of
+          oraparse / orabind / oraexec:
+
+          set sql "insert into name_tab(first_name) values(:firstname)"
+          oraparse $cur $sql
+          foreach name [list Ted Alice John Sue] {
+            orabind $cur :firstname $name
+            oraexec $cur
+          }
+
+     rather than:
+
+          foreach name [list Ted Alice John Sue] {
+            set sql "insert into name_tab(first_name) values('$name')"
+            oraparse $cur $sql
+            oraexec $cur
+          }
+
+
+
+
+</pre>
+
+<h2>ASYNCHRONOUS TRANSACTION PROCESSING</h2>
+
+<pre>
+     set lda [oralogon scott/tiger -async]
+     set sth [oraopen $lda]
+     set sql {select empno, ename from emp where job = :job}
+
+     #parse phase
+     while {[oraparse $sth $sql] == $::oratcl::codes(OCI_STILL_EXECUTING)} {
+          ...
+          process other events
+          ...
+     }
+
+     #bind phase
+     orabind $sth :job ANALYST
+
+     #execution phase
+     while {[oraexec $sth] == $::oratcl::codes(OCI_STILL_EXECUTING)} {
+          ...
+          process other events
+          ...
+     }
+
+     #fetch one row
+     while {[orafetch $sth -datavar row] == $::oratcl::codes(OCI_STILL_EXECUTING)} {
+          ...
+          process other events
+          ...
+     }
+     #while row found, process and fetch another row
+     while {[oramsg $sth rc] == 0} {
+
+          puts "row [oramsg $sth rows] == $row"
+
+          while {[orafetch $sth -datavar row] == $::oratcl::codes(OCI_STILL_EXECUTING)} {
+               ...
+               process other events
+               ...
+          }
+     }
+
+
+
+
+
+</pre>
+
+<h2>ENVIRONMENT VARIABLES</h2>
+
+<pre>
+     ORACLE_SID
+          The default Oracle server system ID.
+
+     ORACLE_HOME
+          The path to the Oracle home directory for ORACLE_SID.
+
+     ORACLE_LIBRARY
+          The path to the Oracle dynamic client library.
+      Used to override the default path of $ORACLE_HOME/lib/libclntsh.so
+
+</pre>
+
+<h2>FILES</h2>
+
+<pre>
+     /etc/oratab or /var/opt/oracle/oratab
+
+     $ORACLE_HOME/network/admin/tnsnames.ora
+
+     /etc/tnsnames.ora
+
+     /var/opt/oracle/tnsnames.ora
+
+     $HOME/.tnsnames.ora - definitions for Oracle servers.
+
+
+
+</pre>
+
+<h2>BUGS</h2>
+
+<pre>
+     None known.
+
+
+
+</pre>
+
+<h2>AUTHOR</h2>
+
+<pre>
+     Todd Helfter, Version 4.5
+
+     thelfter@gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+
+<hr>
+<address>Man(1) output converted with <a href=
+"http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a></address>
+</body>
+</html>
+

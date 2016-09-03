@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_CanvasTkwin manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> CanvTkwin</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_CanvasTkwin, Tk_CanvasGetCoord, Tk_CanvasDrawableCoords,
+Tk_CanvasSetStippleOrigin, Tk_CanvasWindowCoords,
+Tk_CanvasEventuallyRedraw, Tk_CanvasTagsOption - utility procedures
+for canvas type managers 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+Tk_Window<br>
+<b>Tk_CanvasTkwin</b>(<i>canvas</i>)<br>
+int<br>
+<b>Tk_CanvasGetCoord</b>(<i>interp, canvas, string,
+doublePtr</i>)<br>
+<b>Tk_CanvasDrawableCoords</b>(<i>canvas, x, y, drawableXPtr,
+drawableYPtr</i>)<br>
+<b>Tk_CanvasSetStippleOrigin</b>(<i>canvas, gc</i>)<br>
+<b>Tk_CanvasWindowCoords</b>(<i>canvas, x, y, screenXPtr,
+screenYPtr</i>)<br>
+<b>Tk_CanvasEventuallyRedraw</b>(<i>canvas, x1, y1, x2, y2</i>)<br>
+Tk_OptionParseProc *<b>Tk_CanvasTagsParseProc</b>;<br>
+Tk_OptionPrintProc *<b>Tk_CanvasTagsPrintProc</b>;<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Canvas <b><a href="../TkCmd/canvas.htm">canvas</a></b>
+(in)</dt>
+
+<dd>A token that identifies a canvas widget.</dd>
+
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in/out)</dt>
+
+<dd>Interpreter to use for error reporting.</dd>
+
+<dt>const char <b>*string</b> (in)</dt>
+
+<dd>Textual description of a canvas coordinate.</dd>
+
+<dt>double <b>*doublePtr</b> (out)</dt>
+
+<dd>Points to place to store a converted coordinate.</dd>
+
+<dt>double <b>x</b> (in)</dt>
+
+<dd>An x coordinate in the space of the canvas.</dd>
+
+<dt>double <b>y</b> (in)</dt>
+
+<dd>A y coordinate in the space of the canvas.</dd>
+
+<dt>short <b>*drawableXPtr</b> (out)</dt>
+
+<dd>Pointer to a location in which to store an x coordinate in the
+space of the drawable currently being used to redisplay the
+canvas.</dd>
+
+<dt>short <b>*drawableYPtr</b> (out)</dt>
+
+<dd>Pointer to a location in which to store a y coordinate in the
+space of the drawable currently being used to redisplay the
+canvas.</dd>
+
+<dt>GC <b>gc</b> (out)</dt>
+
+<dd>Graphics context to modify.</dd>
+
+<dt>short <b>*screenXPtr</b> (out)</dt>
+
+<dd>Points to a location in which to store the screen coordinate in
+the canvas window that corresponds to <i>x</i>.</dd>
+
+<dt>short <b>*screenYPtr</b> (out)</dt>
+
+<dd>Points to a location in which to store the screen coordinate in
+the canvas window that corresponds to <i>y</i>.</dd>
+
+<dt>int <b>x1</b> (in)</dt>
+
+<dd>Left edge of the region that needs redisplay. Only pixels at or
+to the right of this coordinate need to be redisplayed.</dd>
+
+<dt>int <b>y1</b> (in)</dt>
+
+<dd>Top edge of the region that needs redisplay. Only pixels at or
+below this coordinate need to be redisplayed.</dd>
+
+<dt>int <b>x2</b> (in)</dt>
+
+<dd>Right edge of the region that needs redisplay. Only pixels to
+the left of this coordinate need to be redisplayed.</dd>
+
+<dt>int <b>y2</b> (in)</dt>
+
+<dd>Bottom edge of the region that needs redisplay. Only pixels
+above this coordinate need to be redisplayed.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These procedures are called by canvas type managers to perform
+various utility functions. 
+
+<p><b>Tk_CanvasTkwin</b> returns the Tk_Window associated with a
+particular canvas.</p>
+
+<p><b>Tk_CanvasGetCoord</b> translates a string specification of a
+coordinate (such as <b>2p</b> or <b>1.6c</b>) into a
+double-precision canvas coordinate. If <i>string</i> is a valid
+coordinate description then <b>Tk_CanvasGetCoord</b> stores the
+corresponding canvas coordinate at *<i>doublePtr</i> and returns
+<b>TCL_OK</b>. Otherwise it stores an error message in
+<i>interp-&gt;result</i> and returns <b>TCL_ERROR</b>.</p>
+
+<p><b>Tk_CanvasDrawableCoords</b> is called by type managers during
+redisplay to compute where to draw things. Given <i>x</i> and
+<i>y</i> coordinates in the space of the canvas,
+<b>Tk_CanvasDrawableCoords</b> computes the corresponding pixel in
+the drawable that is currently being used for redisplay; it returns
+those coordinates in *<i>drawableXPtr</i> and *<i>drawableYPtr</i>.
+This procedure should not be invoked except during redisplay.</p>
+
+<p><b>Tk_CanvasSetStippleOrigin</b> is also used during redisplay.
+It sets the stipple origin in <i>gc</i> so that stipples drawn with
+<i>gc</i> in the current offscreen pixmap will line up with
+stipples drawn with origin (0,0) in the canvas's actual window.
+<b>Tk_CanvasSetStippleOrigin</b> is needed in order to guarantee
+that stipple patterns line up properly when the canvas is
+redisplayed in small pieces. Redisplays are carried out in
+double-buffered fashion where a piece of the canvas is redrawn in
+an offscreen pixmap and then copied back onto the screen. In this
+approach the stipple origins in graphics contexts need to be
+adjusted during each redisplay to compensate for the position of
+the off-screen pixmap relative to the window. If an item is being
+drawn with stipples, its type manager typically calls
+<b>Tk_CanvasSetStippleOrigin</b> just before using <i>gc</i> to
+draw something; after it is finished drawing, the type manager
+calls <b>XSetTSOrigin</b> to restore the origin in <i>gc</i> back
+to (0,0) (the restore is needed because graphics contexts are
+shared, so they cannot be modified permanently).</p>
+
+<p><b>Tk_CanvasWindowCoords</b> is similar to
+<b>Tk_CanvasDrawableCoords</b> except that it returns coordinates
+in the canvas's window on the screen, instead of coordinates in an
+off-screen pixmap.</p>
+
+<p><b>Tk_CanvasEventuallyRedraw</b> may be invoked by a type
+manager to inform Tk that a portion of a canvas needs to be
+redrawn. The <i>x1</i>, <i>y1</i>, <i>x2</i>, and <i>y2</i>
+arguments specify the region that needs to be redrawn, in canvas
+coordinates. Type managers rarely need to invoke
+<b>Tk_CanvasEventuallyRedraw</b>, since Tk can normally figure out
+when an item has changed and make the redisplay request on its
+behalf (this happens, for example whenever Tk calls a
+<i>configureProc</i> or <i>scaleProc</i>). The only time that a
+type manager needs to call <b>Tk_CanvasEventuallyRedraw</b> is if
+an item has changed on its own without being invoked through one of
+the procedures in its Tk_ItemType; this could happen, for example,
+in an image item if the image is modified using image commands.</p>
+
+<p><b>Tk_CanvasTagsParseProc</b> and <b>Tk_CanvasTagsPrintProc</b>
+are procedures that handle the <b>-tags</b> option for canvas
+items. The code of a canvas type manager will not call these
+procedures directly, but will use their addresses to create a
+<b>Tk_CustomOption</b> structure for the <b>-tags</b> option. The
+code typically looks like this:</p>
+
+<pre>
+static Tk_CustomOption tagsOption = {Tk_CanvasTagsParseProc,
+    Tk_CanvasTagsPrintProc, (ClientData) NULL
+};
+
+static Tk_ConfigSpec configSpecs[] = {
+    ...
+    {TK_CONFIG_CUSTOM, "-tags", (char *) NULL, (char *) NULL,
+        (char *) NULL, 0, TK_CONFIG_NULL_OK, &amp;tagsOption},
+    ...
+};
+</pre>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#canvas">canvas</a>, <a href=
+"../Keywords/F.htm#focus">focus</a>, <a href=
+"../Keywords/I.htm#item type">item type</a>, <a href=
+"../Keywords/R.htm#redisplay">redisplay</a>, <a href=
+"../Keywords/S.htm#selection">selection</a>, <a href=
+"../Keywords/T.htm#type manager">type manager</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

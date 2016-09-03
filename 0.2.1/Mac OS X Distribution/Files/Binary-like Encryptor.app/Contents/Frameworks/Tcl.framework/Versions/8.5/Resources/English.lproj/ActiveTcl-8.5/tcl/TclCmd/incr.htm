@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Built-In Commands - incr manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> incr</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+incr - Increment the value of a variable 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>incr</b> <i>varName</i> ?<i>increment</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+Increments the value stored in the variable whose name is
+<i>varName</i>. The value of the variable must be an integer. If
+<i>increment</i> is supplied then its value (which must be an
+integer) is added to the value of variable <i>varName</i>;
+otherwise 1 is added to <i>varName</i>. The new value is stored as
+a decimal string in variable <i>varName</i> and also returned as
+result. 
+
+<p>Starting with the Tcl 8.5 release, the variable <i>varName</i>
+passed to <b>incr</b> may be unset, and in that case, it will be
+set to the value <i>increment</i> or to the default increment value
+of <b>1</b>.</p>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+Add one to the contents of the variable <i>x</i>: 
+
+<pre>
+<b>incr</b> x
+</pre>
+
+<p>Add 42 to the contents of the variable <i>x</i>:</p>
+
+<pre>
+<b>incr</b> x 42
+</pre>
+
+<p>Add the contents of the variable <i>y</i> to the contents of the
+variable <i>x</i>:</p>
+
+<pre>
+<b>incr</b> x $y
+</pre>
+
+<p>Add nothing at all to the variable <i>x</i> (often useful for
+checking whether an argument to a procedure is actually integral
+and generating an error if it is not):</p>
+
+<pre>
+<b>incr</b> x 0
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/expr.htm">expr</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#add">add</a>, <a href=
+"../Keywords/I.htm#increment">increment</a>, <a href=
+"../Keywords/V.htm#variable">variable</a>, <a href=
+"../Keywords/V.htm#value">value</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

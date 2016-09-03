@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk::button manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_button</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_button.htm#M2" name="L1569">NAME</a> 
+
+<dl>
+<dd>ttk::button - Widget that issues a command when pressed</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_button.htm#M3" name="L1570">SYNOPSIS</a> 
+
+<dl>
+<dd><b>ttk::button</b> <i>pathName</i> ?<i>options</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_button.htm#M4" name="L1571">DESCRIPTION</a></dd>
+
+<dd><a href="ttk_button.htm#M5" name="L1572">STANDARD OPTIONS</a> 
+
+<dl>
+<dd><a href="options.htm#M-class">-class</a></dd>
+
+<dd><a href="options.htm#M-compound">-compound, compound,
+Compound</a></dd>
+
+<dd><a href="options.htm#M-cursor">-cursor, cursor, Cursor</a></dd>
+
+<dd><a href="options.htm#M-image">-image, image, Image</a></dd>
+
+<dd><a href="options.htm#M-state">-state</a></dd>
+
+<dd><a href="options.htm#M-style">-style</a></dd>
+
+<dd><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></dd>
+
+<dd><a href="options.htm#M-text">-text, text, Text</a></dd>
+
+<dd><a href="options.htm#M-textvariable">-textvariable,
+textVariable, Variable</a></dd>
+
+<dd><a href="options.htm#M-underline">-underline, underline,
+Underline</a></dd>
+
+<dd><a href="options.htm#M-width">-width</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_button.htm#M10" name="L1577">WIDGET-SPECIFIC
+OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_button.htm#M11" name="L1578">-command, command,
+Command</a></dd>
+
+<dd><a href="ttk_button.htm#M12" name="L1579">-default, default,
+Default</a></dd>
+</dl>
+
+<dl>
+<dd><a href="ttk_button.htm#M13" name="L1580">-width, width,
+Width</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_button.htm#M14" name="L1581">WIDGET COMMAND</a> 
+
+<dl class="widget command">
+<dd><a href="ttk_button.htm#M15" name="L1582"><i>pathName</i>
+<b>invoke</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_button.htm#M16" name="L1583">STANDARD
+STYLES</a></dd>
+
+<dd><a href="ttk_button.htm#M17" name="L1584">COMPATIBILITY
+OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_button.htm#M18" name="L1585">-state, state,
+State</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_button.htm#M19" name="L1586">SEE ALSO</a></dd>
+
+<dd><a href="ttk_button.htm#M20" name="L1587">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk::button - Widget that issues a command when pressed 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>ttk::button</b> <i>pathName</i> ?<i>options</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+A <b>ttk::button</b> widget displays a textual label and/or image,
+and evaluates a command when pressed. 
+
+<h3><a name="M5">STANDARD OPTIONS</a></h3>
+
+<dl>
+<dt><b><a href="options.htm#M-class">-class</a></b></dt>
+
+<dt><b><a href="options.htm#M-compound">-compound, compound,
+Compound</a></b></dt>
+
+<dt><b><a href="options.htm#M-cursor">-cursor, cursor,
+Cursor</a></b></dt>
+
+<dt><b><a href="options.htm#M-image">-image, image,
+Image</a></b></dt>
+
+<dt><b><a href="options.htm#M-state">-state</a></b></dt>
+
+<dt><b><a href="options.htm#M-style">-style</a></b></dt>
+
+<dt><b><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></b></dt>
+
+<dt><b><a href="options.htm#M-text">-text, text, Text</a></b></dt>
+
+<dt><b><a href="options.htm#M-textvariable">-textvariable,
+textVariable, Variable</a></b></dt>
+
+<dt><b><a href="options.htm#M-underline">-underline, underline,
+Underline</a></b></dt>
+
+<dt><b><a href="options.htm#M-width">-width</a></b></dt>
+</dl>
+
+<h3><a name="M10">WIDGET-SPECIFIC OPTIONS</a></h3>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M11">-command</a></b></dt>
+
+<dt>Database Name: <b>command</b></dt>
+
+<dt>Database Class: <b>Command</b></dt>
+
+<dd>A script to evaluate when the widget is invoked.</dd>
+
+<dt>Command-Line Name: <b><a name="M12">-default</a></b></dt>
+
+<dt>Database Name: <b>default</b></dt>
+
+<dt>Database Class: <b>Default</b></dt>
+
+<dd>May be set to one of <b>normal</b>, <b>active</b>, or
+<b>disabled</b>. In a dialog box, one button may be designated
+the</dd>
+</dl>
+
+&ldquo;default&rdquo; button (meaning, roughly, &ldquo;the one that
+gets invoked when the user presses &lt;Enter&gt;&rdquo;).
+<b>active</b> indicates that this is currently the default button;
+<b>normal</b> means that it may become the default button, and
+<b>disabled</b> means that it is not defaultable. The default is
+<b>normal</b>. 
+
+<dl>
+<dd>
+<p>Depending on the theme, the default button may be displayed with
+an extra highlight ring, or with a different border color.</p>
+</dd>
+</dl>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M13">-width</a></b></dt>
+
+<dt>Database Name: <b>width</b></dt>
+
+<dt>Database Class: <b>Width</b></dt>
+
+<dd>If greater than zero, specifies how much space, in character
+widths, to allocate for the text label. If less than zero,
+specifies a minimum width. If zero or unspecified, the natural
+width of the text label is used. Note that some themes may specify
+a non-zero <b>-width</b> in the style.</dd>
+</dl>
+
+<h3><a name="M14">WIDGET COMMAND</a></h3>
+
+In addition to the standard <b>cget</b>, <b>configure</b>,
+<b>identify</b>, <b>instate</b>, and <b>state</b> commands, buttons
+support the following additional widget commands: 
+
+<dl class="widget command">
+<dt><a name="M15"><i>pathName</i> <b>invoke</b></a></dt>
+
+<dd>Invokes the command associated with the button.</dd>
+</dl>
+
+<h3><a name="M16">STANDARD STYLES</a></h3>
+
+<b>Ttk::button</b> widgets support the <b>Toolbutton</b> style in
+all standard themes, which is useful for creating widgets for
+toolbars. 
+
+<h3><a name="M17">COMPATIBILITY OPTIONS</a></h3>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M18">-state</a></b></dt>
+
+<dt>Database Name: <b>state</b></dt>
+
+<dt>Database Class: <b>State</b></dt>
+
+<dd>May be set to <b>normal</b> or <b>disabled</b> to control the
+<b>disabled</b> state bit. This is a</dd>
+</dl>
+
+&ldquo;write-only&rdquo; option: setting it changes the widget
+state, but the <b>state</b> widget command does not affect the
+state option. 
+
+<h3><a name="M19">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_widget.htm">ttk::widget</a></b>, <b><a
+href="../TkCmd/button.htm">button</a></b> 
+
+<h3><a name="M20">KEYWORDS</a></h3>
+
+<a href="../Keywords/W.htm#widget">widget</a>, <a href=
+"../Keywords/B.htm#button">button</a>, <a href=
+"../Keywords/D.htm#default">default</a>, <a href=
+"../Keywords/C.htm#command">command</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2004 Joe English</div>
+</body>
+</html>
+

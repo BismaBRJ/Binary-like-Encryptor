@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - lsearch manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> lsearch</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="lsearch.htm#M2" name="L880">NAME</a> 
+
+<dl>
+<dd>lsearch - See if a list contains a particular element</dd>
+</dl>
+</dd>
+
+<dd><a href="lsearch.htm#M3" name="L881">SYNOPSIS</a> 
+
+<dl>
+<dd><b>lsearch</b> ?<i>options</i>? <i>list pattern</i></dd>
+</dl>
+</dd>
+
+<dd><a href="lsearch.htm#M4" name="L882">DESCRIPTION</a></dd>
+
+<dd><a href="lsearch.htm#M5" name="L883">MATCHING STYLE OPTIONS</a>
+
+
+<dl class="matching style options">
+<dd><a href="lsearch.htm#M6" name="L884"><b>-exact</b></a></dd>
+
+<dd><a href="lsearch.htm#M7" name="L885"><b>-glob</b></a></dd>
+
+<dd><a href="lsearch.htm#M8" name="L886"><b>-regexp</b></a></dd>
+
+<dd><a href="lsearch.htm#M9" name="L887"><b>-sorted</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="lsearch.htm#M10" name="L888">GENERAL MODIFIER
+OPTIONS</a> 
+
+<dl class="general modifier options">
+<dd><a href="lsearch.htm#M11" name="L889"><b>-all</b></a></dd>
+
+<dd><a href="lsearch.htm#M12" name="L890"><b>-inline</b></a></dd>
+
+<dd><a href="lsearch.htm#M13" name="L891"><b>-not</b></a></dd>
+
+<dd><a href="lsearch.htm#M14" name="L892"><b>-start</b>
+<i>index</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="lsearch.htm#M15" name="L893">CONTENTS DESCRIPTION
+OPTIONS</a> 
+
+<dl class="contents description options">
+<dd><a href="lsearch.htm#M16" name="L894"><b>-ascii</b></a></dd>
+
+<dd><a href="lsearch.htm#M17" name=
+"L895"><b>-dictionary</b></a></dd>
+
+<dd><a href="lsearch.htm#M18" name="L896"><b>-integer</b></a></dd>
+
+<dd><a href="lsearch.htm#M19" name="L897"><b>-nocase</b></a></dd>
+
+<dd><a href="lsearch.htm#M20" name="L898"><b>-real</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="lsearch.htm#M21" name="L899">SORTED LIST OPTIONS</a> 
+
+<dl class="sorted list options">
+<dd><a href="lsearch.htm#M22" name=
+"L900"><b>-decreasing</b></a></dd>
+
+<dd><a href="lsearch.htm#M23" name=
+"L901"><b>-increasing</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="lsearch.htm#M24" name="L902">NESTED LIST OPTIONS</a> 
+
+<dl class="nested list options">
+<dd><a href="lsearch.htm#M25" name="L903"><b>-index</b>
+<i>indexList</i></a></dd>
+
+<dd><a href="lsearch.htm#M26" name=
+"L904"><b>-subindices</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="lsearch.htm#M27" name="L905">EXAMPLES</a></dd>
+
+<dd><a href="lsearch.htm#M28" name="L906">SEE ALSO</a></dd>
+
+<dd><a href="lsearch.htm#M29" name="L907">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+lsearch - See if a list contains a particular element 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>lsearch</b> ?<i>options</i>? <i>list pattern</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command searches the elements of <i>list</i> to see if one of
+them matches <i>pattern</i>. If so, the command returns the index
+of the first matching element (unless the options <b>-all</b> or
+<b>-inline</b> are specified.) If not, the command returns
+<b>-1</b>. The <i>option</i> arguments indicates how the elements
+of the list are to be matched against <i>pattern</i> and must have
+one of the values below: 
+
+<h4><a name="M5">MATCHING STYLE OPTIONS</a></h4>
+
+If all matching style options are omitted, the default matching
+style is <b>-glob</b>. If more than one matching style is
+specified, the last matching style given takes precedence. 
+
+<dl class="matching style options">
+<dt><a name="M6"><b>-exact</b></a></dt>
+
+<dd><i>Pattern</i> is a literal string that is compared for exact
+equality against each list element.</dd>
+
+<dt><a name="M7"><b>-glob</b></a></dt>
+
+<dd><i>Pattern</i> is a glob-style pattern which is matched against
+each list element using the same rules as the <b><a href=
+"../TclCmd/string.htm">string match</a></b> command.</dd>
+
+<dt><a name="M8"><b>-regexp</b></a></dt>
+
+<dd><i>Pattern</i> is treated as a regular expression and matched
+against each list element using the rules described in the <b><a
+href="../TclCmd/re_syntax.htm">re_syntax</a></b> reference
+page.</dd>
+
+<dt><a name="M9"><b>-sorted</b></a></dt>
+
+<dd>The list elements are in sorted order. If this option is
+specified, <b>lsearch</b> will use a more efficient searching
+algorithm to search <i>list</i>. If no other options are specified,
+<i>list</i> is assumed to be sorted in increasing order, and to
+contain ASCII strings. This option is mutually exclusive with
+<b>-glob</b> and <b>-regexp</b>, and is treated exactly like
+<b>-exact</b> when either <b>-all</b> or <b>-not</b> are
+specified.</dd>
+</dl>
+
+<h4><a name="M10">GENERAL MODIFIER OPTIONS</a></h4>
+
+These options may be given with all matching styles. 
+
+<dl class="general modifier options">
+<dt><a name="M11"><b>-all</b></a></dt>
+
+<dd>Changes the result to be the list of all matching indices (or
+all matching values if <b>-inline</b> is specified as well.) If
+indices are returned, the indices will be in numeric order. If
+values are returned, the order of the values will be the order of
+those values within the input <i>list</i>.</dd>
+
+<dt><a name="M12"><b>-inline</b></a></dt>
+
+<dd>The matching value is returned instead of its index (or an
+empty string if no value matches.) If <b>-all</b> is also
+specified, then the result of the command is the list of all values
+that matched.</dd>
+
+<dt><a name="M13"><b>-not</b></a></dt>
+
+<dd>This negates the sense of the match, returning the index of the
+first non-matching value in the list.</dd>
+
+<dt><a name="M14"><b>-start</b> <i>index</i></a></dt>
+
+<dd>The list is searched starting at position <i>index</i>. The
+interpretation of the <i>index</i> value is the same as for the
+command <b><a href="../TclCmd/string.htm">string index</a></b>,
+supporting simple index arithmetic and indices relative to the end
+of the list.</dd>
+</dl>
+
+<h4><a name="M15">CONTENTS DESCRIPTION OPTIONS</a></h4>
+
+These options describe how to interpret the items in the list being
+searched. They are only meaningful when used with the <b>-exact</b>
+and <b>-sorted</b> options. If more than one is specified, the last
+one takes precedence. The default is <b>-ascii</b>. 
+
+<dl class="contents description options">
+<dt><a name="M16"><b>-ascii</b></a></dt>
+
+<dd>The list elements are to be examined as Unicode strings (the
+name is for backward-compatibility reasons.)</dd>
+
+<dt><a name="M17"><b>-dictionary</b></a></dt>
+
+<dd>The list elements are to be compared using dictionary-style
+comparisons (see <b><a href="../TclCmd/lsort.htm">lsort</a></b> for
+a fuller description). Note that this only makes a meaningful
+difference from the <b>-ascii</b> option when the <b>-sorted</b>
+option is given, because values are only dictionary-equal when
+exactly equal.</dd>
+
+<dt><a name="M18"><b>-integer</b></a></dt>
+
+<dd>The list elements are to be compared as integers.</dd>
+
+<dt><a name="M19"><b>-nocase</b></a></dt>
+
+<dd>Causes comparisons to be handled in a case-insensitive manner.
+Has no effect if combined with the <b>-dictionary</b>,
+<b>-integer</b>, or <b>-real</b> options.</dd>
+
+<dt><a name="M20"><b>-real</b></a></dt>
+
+<dd>The list elements are to be compared as floating-point
+values.</dd>
+</dl>
+
+<h4><a name="M21">SORTED LIST OPTIONS</a></h4>
+
+These options (only meaningful with the <b>-sorted</b> option)
+specify how the list is sorted. If more than one is given, the last
+one takes precedence. The default option is <b>-increasing</b>. 
+
+<dl class="sorted list options">
+<dt><a name="M22"><b>-decreasing</b></a></dt>
+
+<dd>The list elements are sorted in decreasing order. This option
+is only meaningful when used with <b>-sorted</b>.</dd>
+
+<dt><a name="M23"><b>-increasing</b></a></dt>
+
+<dd>The list elements are sorted in increasing order. This option
+is only meaningful when used with <b>-sorted</b>.</dd>
+</dl>
+
+<h4><a name="M24">NESTED LIST OPTIONS</a></h4>
+
+These options are used to search lists of lists. They may be used
+with any other options. 
+
+<dl class="nested list options">
+<dt><a name="M25"><b>-index</b> <i>indexList</i></a></dt>
+
+<dd>This option is designed for use when searching within nested
+lists. The <i>indexList</i> argument gives a path of indices (much
+as might be used with the <b><a href=
+"../TclCmd/lindex.htm">lindex</a></b> or <b><a href=
+"../TclCmd/lset.htm">lset</a></b> commands) within each element to
+allow the location of the term being matched against.</dd>
+
+<dt><a name="M26"><b>-subindices</b></a></dt>
+
+<dd>If this option is given, the index result from this command (or
+every index result when <b>-all</b> is also specified) will be a
+complete path (suitable for use with <b><a href=
+"../TclCmd/lindex.htm">lindex</a></b> or <b><a href=
+"../TclCmd/lset.htm">lset</a></b>) within the overall list to the
+term found. This option has no effect unless the <i>-index</i> is
+also specified, and is just a convenience short-cut.</dd>
+</dl>
+
+<h3><a name="M27">EXAMPLES</a></h3>
+
+Basic searching: 
+
+<pre>
+<b>lsearch</b> {a b c d e} c
+      <i><font size="+1">&rarr;</font> 2</i>
+<b>lsearch</b> -all {a b c a b c} c
+      <i><font size="+1">&rarr;</font> 2 5</i>
+</pre>
+
+<p>Using <b>lsearch</b> to filter lists:</p>
+
+<pre>
+<b>lsearch</b> -inline {a20 b35 c47} b*
+      <i><font size="+1">&rarr;</font> b35</i>
+<b>lsearch</b> -inline -not {a20 b35 c47} b*
+      <i><font size="+1">&rarr;</font> a20</i>
+<b>lsearch</b> -all -inline -not {a20 b35 c47} b*
+      <i><font size="+1">&rarr;</font> a20 c47</i>
+<b>lsearch</b> -all -not {a20 b35 c47} b*
+      <i><font size="+1">&rarr;</font> 0 2</i>
+</pre>
+
+<p>This can even do a &ldquo;set-like&rdquo; removal operation:</p>
+
+<pre>
+<b>lsearch</b> -all -inline -not -exact {a b c a d e a f g a} a
+      <i><font size="+1">&rarr;</font> b c d e f g</i>
+</pre>
+
+<p>Searching may start part-way through the list:</p>
+
+<pre>
+<b>lsearch</b> -start 3 {a b c a b c} c
+      <i><font size="+1">&rarr;</font> 5</i>
+</pre>
+
+<p>It is also possible to search inside elements:</p>
+
+<pre>
+<b>lsearch</b> -index 1 -all -inline {{a abc} {b bcd} {c cde}} *bc*
+      <i><font size="+1">&rarr;</font> {a abc} {b bcd}</i>
+</pre>
+
+<h3><a name="M28">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/foreach.htm">foreach</a></b>, <b><a href=
+"../TclCmd/list.htm">list</a></b>, <b><a href=
+"../TclCmd/lappend.htm">lappend</a></b>, <b><a href=
+"../TclCmd/lindex.htm">lindex</a></b>, <b><a href=
+"../TclCmd/linsert.htm">linsert</a></b>, <b><a href=
+"../TclCmd/llength.htm">llength</a></b>, <b><a href=
+"../TclCmd/lset.htm">lset</a></b>, <b><a href=
+"../TclCmd/lsort.htm">lsort</a></b>, <b><a href=
+"../TclCmd/lrange.htm">lrange</a></b>, <b><a href=
+"../TclCmd/lreplace.htm">lreplace</a></b>, <b><a href=
+"../TclCmd/string.htm">string</a></b> 
+
+<h3><a name="M29">KEYWORDS</a></h3>
+
+<a href="../Keywords/L.htm#list">list</a>, <a href=
+"../Keywords/M.htm#match">match</a>, <a href=
+"../Keywords/P.htm#pattern">pattern</a>, <a href=
+"../Keywords/R.htm#regular expression">regular expression</a>, <a
+href="../Keywords/S.htm#search">search</a>, <a href=
+"../Keywords/S.htm#string">string</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+2001 Kevin B. Kenny &lt;kennykb(at)acm.org&gt;. All rights
+reserved. Copyright &copy; 2003-2004 Donal K. Fellows.</div>
+</body>
+</html>
+

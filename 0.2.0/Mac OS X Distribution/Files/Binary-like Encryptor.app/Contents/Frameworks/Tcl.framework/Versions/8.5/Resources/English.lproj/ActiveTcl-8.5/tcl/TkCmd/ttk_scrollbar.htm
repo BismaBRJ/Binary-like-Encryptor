@@ -1,0 +1,377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Themed Widget - ttk::scrollbar manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> ttk_scrollbar</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ttk_scrollbar.htm#M2" name="L1912">NAME</a> 
+
+<dl>
+<dd>ttk::scrollbar - Control the viewport of a scrollable
+widget</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_scrollbar.htm#M3" name="L1913">SYNOPSIS</a> 
+
+<dl>
+<dd><b>ttk::scrollbar</b> <i>pathName</i> ?<i>options...</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_scrollbar.htm#M4" name=
+"L1914">DESCRIPTION</a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M5" name="L1915">STANDARD
+OPTIONS</a> 
+
+<dl>
+<dd><a href="options.htm#M-class">-class</a></dd>
+
+<dd><a href="options.htm#M-cursor">-cursor, cursor, Cursor</a></dd>
+
+<dd><a href="options.htm#M-style">-style</a></dd>
+
+<dd><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_scrollbar.htm#M8" name="L1918">WIDGET-SPECIFIC
+OPTIONS</a> 
+
+<dl>
+<dd><a href="ttk_scrollbar.htm#M9" name="L1919">-command, command,
+Command</a></dd>
+</dl>
+
+<dl>
+<dd><a href="ttk_scrollbar.htm#M10" name="L1920">-orient, orient,
+Orient</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_scrollbar.htm#M11" name="L1921">WIDGET COMMAND</a>
+
+
+<dl class="widget command">
+<dd><a href="ttk_scrollbar.htm#M12" name="L1922"><i>pathName</i>
+<b>cget</b> <i>option</i></a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M13" name="L1923"><i>pathName</i>
+<b>configure</b> ?<i>option</i>? ?<i>value option value
+...</i>?</a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M14" name="L1924"><i>pathName</i>
+<b>get</b></a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M15" name="L1925"><i>pathName</i>
+<b>identify</b> <i>x y</i></a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M16" name="L1926"><i>pathName</i>
+<b>instate</b> <i>statespec</i> ?<i>script</i>?</a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M17" name="L1927"><i>pathName</i>
+<b>set</b> <i>first last</i></a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M18" name="L1928"><i>pathName</i>
+<b>state</b> ?<i>stateSpec</i>?</a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_scrollbar.htm#M19" name="L1929">INTERNAL
+COMMANDS</a> 
+
+<dl class="internal commands">
+<dd><a href="ttk_scrollbar.htm#M20" name="L1930"><i>pathName</i>
+<b>delta</b> <i>deltaX deltaY</i></a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M21" name="L1931"><i>pathName</i>
+<b>fraction</b> <i>x y</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_scrollbar.htm#M22" name="L1932">SCROLLING
+COMMANDS</a> 
+
+<dl class="scrolling commands">
+<dd><a href="ttk_scrollbar.htm#M23" name="L1933"><i>prefix</i>
+<b>moveto</b> <i>fraction</i></a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M24" name="L1934"><i>prefix</i>
+<b>scroll</b> <i>number</i> <b>units</b></a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M25" name="L1935"><i>prefix</i>
+<b>scroll</b> <i>number</i> <b>pages</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ttk_scrollbar.htm#M26" name="L1936">WIDGET
+STATES</a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M27" name="L1937">EXAMPLE</a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M28" name="L1938">SEE ALSO</a></dd>
+
+<dd><a href="ttk_scrollbar.htm#M29" name="L1939">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+ttk::scrollbar - Control the viewport of a scrollable widget 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>ttk::scrollbar</b> <i>pathName</i> ?<i>options...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+<b>ttk::scrollbar</b> widgets are typically linked to an associated
+window that displays a document of some sort, such as a file being
+edited or a drawing. A scrollbar displays a <i>thumb</i> in the
+middle portion of the scrollbar, whose position and size provides
+information about the portion of the document visible in the
+associated window. The thumb may be dragged by the user to control
+the visible region. Depending on the theme, two or more arrow
+buttons may also be present; these are used to scroll the visible
+region in discrete units. 
+
+<h3><a name="M5">STANDARD OPTIONS</a></h3>
+
+<dl>
+<dt><b><a href="options.htm#M-class">-class</a></b></dt>
+
+<dt><b><a href="options.htm#M-cursor">-cursor, cursor,
+Cursor</a></b></dt>
+
+<dt><b><a href="options.htm#M-style">-style</a></b></dt>
+
+<dt><b><a href="options.htm#M-takefocus">-takefocus, takeFocus,
+TakeFocus</a></b></dt>
+</dl>
+
+<h3><a name="M8">WIDGET-SPECIFIC OPTIONS</a></h3>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M9">-command</a></b></dt>
+
+<dt>Database Name: <b>command</b></dt>
+
+<dt>Database Class: <b>Command</b></dt>
+
+<dd>A Tcl script prefix to evaluate to change the view in the
+widget associated with the scrollbar. Additional arguments are
+appended to the value of this option, as described in <b>SCROLLING
+COMMANDS</b> below, whenever the user requests a view change by
+manipulating the scrollbar.</dd>
+</dl>
+
+<dl>
+<dd>
+<p>This option typically consists of a two-element list, containing
+the name of a scrollable widget followed by either <b>xview</b>
+(for horizontal scrollbars) or <b>yview</b> (for vertical
+scrollbars).</p>
+</dd>
+</dl>
+
+<dl>
+<dt>Command-Line Name: <b><a name="M10">-orient</a></b></dt>
+
+<dt>Database Name: <b>orient</b></dt>
+
+<dt>Database Class: <b>Orient</b></dt>
+
+<dd>One of <b>horizontal</b> or <b>vertical</b>. Specifies the
+orientation of the scrollbar.</dd>
+</dl>
+
+<h3><a name="M11">WIDGET COMMAND</a></h3>
+
+<dl class="widget command">
+<dt><a name="M12"><i>pathName</i> <b>cget</b>
+<i>option</i></a></dt>
+
+<dd>Returns the current value of the specified <i>option</i>; see
+<i>ttk::widget(n)</i>.</dd>
+
+<dt><a name="M13"><i>pathName</i> <b>configure</b> ?<i>option</i>?
+?<i>value option value ...</i>?</a></dt>
+
+<dd>Modify or query widget options; see <i>ttk::widget(n)</i>.</dd>
+
+<dt><a name="M14"><i>pathName</i> <b>get</b></a></dt>
+
+<dd>Returns the scrollbar settings in the form of a list whose
+elements are the arguments to the most recent <b><a href=
+"../TclCmd/set.htm">set</a></b> widget command.</dd>
+
+<dt><a name="M15"><i>pathName</i> <b>identify</b> <i>x
+y</i></a></dt>
+
+<dd>Returns the name of the element at position <i>x</i>, <i>y</i>.
+See <i>ttk::widget(n)</i>.</dd>
+
+<dt><a name="M16"><i>pathName</i> <b>instate</b> <i>statespec</i>
+?<i>script</i>?</a></dt>
+
+<dd>Test the widget state; see <i>ttk::widget(n)</i>.</dd>
+
+<dt><a name="M17"><i>pathName</i> <b>set</b> <i>first
+last</i></a></dt>
+
+<dd>This command is normally invoked by the scrollbar's associated
+widget from an <b>-xscrollcommand</b> or <b>-yscrollcommand</b>
+callback. Specifies the visible range to be displayed. <i>first</i>
+and <i>last</i> are real fractions between 0 and 1.</dd>
+
+<dt><a name="M18"><i>pathName</i> <b>state</b>
+?<i>stateSpec</i>?</a></dt>
+
+<dd>Modify or query the widget state; see
+<i>ttk::widget(n)</i>.</dd>
+</dl>
+
+<h3><a name="M19">INTERNAL COMMANDS</a></h3>
+
+The following widget commands are used internally by the TScrollbar
+widget class bindings. 
+
+<dl class="internal commands">
+<dt><a name="M20"><i>pathName</i> <b>delta</b> <i>deltaX
+deltaY</i></a></dt>
+
+<dd>Returns a real number indicating the fractional change in the
+scrollbar setting that corresponds to a given change in thumb
+position. For example, if the scrollbar is horizontal, the result
+indicates how much the scrollbar setting must change to move the
+thumb <i>deltaX</i> pixels to the right (<i>deltaY</i> is ignored
+in this case). If the scrollbar is vertical, the result indicates
+how much the scrollbar setting must change to move the thumb
+<i>deltaY</i> pixels down. The arguments and the result may be zero
+or negative.</dd>
+
+<dt><a name="M21"><i>pathName</i> <b>fraction</b> <i>x
+y</i></a></dt>
+
+<dd>Returns a real number between 0 and 1 indicating where the
+point given by <i>x</i> and <i>y</i> lies in the trough area of the
+scrollbar, where 0.0 corresponds to the top or left of the trough
+and 1.0 corresponds to the bottom or right. <i>X</i> and <i>y</i>
+are pixel coordinates relative to the scrollbar widget. If <i>x</i>
+and <i>y</i> refer to a point outside the trough, the closest point
+in the trough is used.</dd>
+</dl>
+
+<h3><a name="M22">SCROLLING COMMANDS</a></h3>
+
+When the user interacts with the scrollbar, for example by dragging
+the thumb, the scrollbar notifies the associated widget that it
+must change its view. The scrollbar makes the notification by
+evaluating a Tcl command generated from the scrollbar's
+<b>-command</b> option. The command may take any of the following
+forms. In each case, <i>prefix</i> is the contents of the
+<b>-command</b> option, which usually has a form like <b>.t
+yview</b> 
+
+<dl class="scrolling commands">
+<dt><a name="M23"><i>prefix</i> <b>moveto</b>
+<i>fraction</i></a></dt>
+
+<dd><i>Fraction</i> is a real number between 0 and 1. The widget
+should adjust its view so that the point given by <i>fraction</i>
+appears at the beginning of the widget. If <i>fraction</i> is 0 it
+refers to the beginning of the document. 1.0 refers to the end of
+the document, 0.333 refers to a point one-third of the way through
+the document, and so on.</dd>
+
+<dt><a name="M24"><i>prefix</i> <b>scroll</b> <i>number</i>
+<b>units</b></a></dt>
+
+<dd>The widget should adjust its view by <i>number</i> units. The
+units are defined in whatever way makes sense for the widget, such
+as characters or lines in a text widget. <i>Number</i> is either 1,
+which means one unit should scroll off the top or left of the
+window, or -1, which means that one unit should scroll off the
+bottom or right of the window.</dd>
+
+<dt><a name="M25"><i>prefix</i> <b>scroll</b> <i>number</i>
+<b>pages</b></a></dt>
+
+<dd>The widget should adjust its view by <i>number</i> pages. It is
+up to the widget to define the meaning of a page; typically it is
+slightly less than what fits in the window, so that there is a
+slight overlap between the old and new views. <i>Number</i> is
+either 1, which means the next page should become visible, or -1,
+which means that the previous page should become visible.</dd>
+</dl>
+
+<h3><a name="M26">WIDGET STATES</a></h3>
+
+The scrollbar automatically sets the <b>disabled</b> state bit.
+when the entire range is visible (range is 0.0 to 1.0), and clears
+it otherwise. It also sets the <b>active</b> and <b>pressed</b>
+state flags of individual elements, based on the position and state
+of the mouse pointer. 
+
+<h3><a name="M27">EXAMPLE</a></h3>
+
+<pre>
+set f [frame .f]
+ttk::scrollbar $f.hsb -orient horizontal -command [list $f.t xview]
+ttk::scrollbar $f.vsb -orient vertical -command [list $f.t yview]
+text $f.t -xscrollcommand [list $f.hsb set] -yscrollcommand [list $f.vsb set] 
+grid $f.t -row 0 -column 0 -sticky nsew
+grid $f.vsb -row 0 -column 1 -sticky nsew
+grid $f.hsb -row 1 -column 0 -sticky nsew
+grid columnconfigure $f 0 -weight 1
+grid rowconfigure $f 0 -weight 1
+</pre>
+
+<h3><a name="M28">SEE ALSO</a></h3>
+
+<b><a href="../TkCmd/ttk_widget.htm">ttk::widget</a></b>, <b><a
+href="../TkCmd/scrollbar.htm">scrollbar</a></b> 
+
+<h3><a name="M29">KEYWORDS</a></h3>
+
+<a href="../Keywords/S.htm#scrollbar">scrollbar</a>, <a href=
+"../Keywords/W.htm#widget">widget</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc. Copyright &copy;
+2004 Joe English</div>
+</body>
+</html>
+

@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Evaluation &amp; Substitutions 1: Grouping arguments with
+""</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Evaluation &amp; Substitutions 1: Grouping
+arguments with ""</h1>
+
+<div class="nav"><a href="Tcl2.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl4.html">Next
+lesson</a></div>
+
+<p>This lesson is the first of three which discuss the way Tcl
+handles substitution during command evaluation.</p>
+
+<p>In Tcl, the evaluation of a command is done in 2 phases. The
+first phase is a single pass of substitutions. The second phase is
+the evaluation of the resulting command. Note that only <i>one</i>
+pass of substitutions is made. Thus in the command</p>
+
+<pre>
+<code>puts $varName</code>
+</pre>
+
+<p>the contents of the proper variable are substituted for <code
+class="arg">$varName</code>, and then the command is executed.
+Assuming we have set <code class="arg">varName</code> to <code
+class="arg">"Hello World"</code>, the sequence would look like
+this: <code>puts <span style=
+"background-color: #ffff33">$varName</span></code> &rArr;
+<code>puts <span style="background-color: #ffff33">"Hello
+World"</span></code>, which is then executed and prints out
+<code>Hello World</code>.</p>
+
+<p>During the substitution phase, several types of substitutions
+occur.</p>
+
+<p>A command within square brackets ([]) is replaced with the
+result of the execution of that command. (This will be explained
+more fully in the lesson "Results of a Command - Math 101.")</p>
+
+<p>Words within double quotes or braces are grouped into a single
+argument. However, double quotes and braces cause different
+behavior during the substitution phase. In this lesson, we will
+concentrate on the behavior of double quotes during the
+substitution phase.</p>
+
+<p>Grouping words within double quotes allows substitutions to
+occur within the quotations - or, in fancier terms,
+"interpolation". The substituted group is then evaluated as a
+single argument. Thus, in the command:</p>
+
+<pre>
+<code>puts "The current stock value is $varName"</code>
+</pre>
+
+<p>the current contents of varName are substituted for $varName,
+and then the entire string is printed to the output device, just
+like the example above.</p>
+
+<p>In general, the backslash (\) disables substitution for the
+single character immediately following the backslash. Any character
+immediately following the backslash will stand without
+substitution.</p>
+
+<p>However, there are specific "Backslash Sequence" strings which
+are replaced by specific values during the substitution phase. The
+following backslash strings will be substituted as shown below.</p>
+
+<table>
+<thead>
+<tr>
+<th>String</th>
+<th>Output</th>
+<th>Hex Value</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>\a</td>
+<td>Audible Bell</td>
+<td>0x07</td>
+</tr>
+
+<tr>
+<td>\b</td>
+<td>Backspace</td>
+<td>0x08</td>
+</tr>
+
+<tr>
+<td>\f</td>
+<td>Form Feed (clear screen)</td>
+<td>0x0c</td>
+</tr>
+
+<tr>
+<td>\n</td>
+<td>New Line</td>
+<td>0x0a</td>
+</tr>
+
+<tr>
+<td>\r</td>
+<td>Carriage Return</td>
+<td>0x0d</td>
+</tr>
+
+<tr>
+<td>\t</td>
+<td>Tab</td>
+<td>0x09</td>
+</tr>
+
+<tr>
+<td>\v</td>
+<td>Vertical Tab</td>
+<td>0x0b</td>
+</tr>
+
+<tr>
+<td>\0dd</td>
+<td>Octal Value</td>
+<td>d is a digit from 0-7</td>
+</tr>
+
+<tr>
+<td>\uHHHH</td>
+<td>H is a hex digit 0-9,A-F,a-f. This represents a 16-bit Unicode
+character.</td>
+</tr>
+
+<tr>
+<td>\xHH....</td>
+<td>Hex Value</td>
+<td>H is a hex digit 0-9,A-F,a-f. <strong>Note</strong> that the \x
+substitution "keeps going" as long as it has hex digits, and only
+uses the last two, meaning that \xaa and \xaaaa are equal, and that
+\xaaAnd anyway will "eat" the A of "And". Using the \u notation is
+probably a better idea.</td>
+</tr>
+</tbody>
+</table>
+
+<p>The final exception is the backslash at the end of a line of
+text. This causes the interpreter to ignore the newline, and treat
+the text as a single line of text. The interpreter will insert a
+blank space at the location of the ending backslash.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set Z Albany
+set Z_LABEL "The Capitol of New York is: "
+
+puts "$Z_LABEL $Z"   ;# Prints the value of Z
+puts "$Z_LABEL \$Z"  ;# Prints a literal $Z instead of the value of Z
+
+puts "\nBen Franklin is on the \$100.00 bill"
+
+set a 100.00
+puts "Washington is not on the $a bill"    ;# This is not what you want
+puts "Lincoln is not on the $$a bill"      ;# This is OK
+puts "Hamilton is not on the \$a bill"     ;# This is not what you want
+puts "Ben Franklin is on the \$$a bill"    ;# But, this is OK
+
+puts "\n................. examples of escape strings"
+puts "Tab\tTab\tTab"
+puts "This string prints out \non two lines"
+puts "This string comes out\
+on a single line"
+</pre>
+
+<div class="nav"><a href="Tcl2.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl4.html">Next
+lesson</a></div>
+</body>
+</html>
+

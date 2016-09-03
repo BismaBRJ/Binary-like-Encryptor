@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>hyperhelp - Create and manipulate a hyperhelp widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>hyperhelp - Create and manipulate a hyperhelp widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>hyperhelp pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Toplevel &lt;- shell &lt;- hyperhelp 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeBackground</b><br>
+<b>cursor</b><br>
+<b>highlightThickness</b><br>
+<b>insertOnTime</b><br>
+<b>relief</b><br>
+<b>selectBorderWidth</b><br>
+</td>
+<td valign="top"><b>background</b><br>
+<b>exportSelection</b><br>
+<b>insertBackground</b><br>
+<b>insertWidth</b><br>
+<b>repeatDelay</b><br>
+<b>selectForeground</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>foreground</b><br>
+<b>insertBorderWidth<br>
+</b>padX<br>
+<b>repeatInterval</b><br>
+<b>setGrid</b><br>
+</td>
+<td valign="top"><b>closecmd</b><br>
+<b>highlightColor</b><br>
+<b>insertOffTime</b><br>
+<b>padY</b><br>
+<b>selectBackground</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>hscrollmode</b><br>
+<b>fontsize</b><br>
+<b>width</b><br>
+<b>unknownimage</b><br>
+</td>
+<td valign="top"><b>vscrollmode</b><br>
+<b>fixedfont</b><br>
+<b>height</b><br>
+</td>
+<td valign="top"><b>textbackground</b><br>
+<b>link</b><br>
+<b>state</b><br>
+</td>
+<td valign="top"><b>fontname</b><br>
+<b>linkhighlight</b><br>
+<b>wrap</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the "scrolledhtml" widget manual entry for details on the
+above associated options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>modality</b><br>
+</td>
+<td valign="top"><b>title</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the "shell" manual entry for details on the above inherited
+options.</p>
+
+<h2>WIDGET-SPECIFIC OPTIONS</h2>
+
+<pre>
+Name:                   <b>topics</b>
+Class:                  <b>Topics</b>
+Command-Line Switch:    <b>-topics</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a list of help topics in
+the form {?<i>topic</i>? ... }. <i>Topic</i> may either be a topic
+name, in which case the document associated with the topic should
+be in the file <b>helpdir</b>/<i>topic</i>.html, or it may be of
+the form {<i>name</i> <i>file</i>}. In the latter case, <i>name</i>
+is displayed in the topic menu, and selecting the name loads
+<i>file</i>. If file has a relative path, it is assumed to be
+relative to helpdir.</div>
+
+<pre>
+Name:                   <b>helpdir</b>
+Class:                  <b>Directory</b>
+Command-Line Switch:    <b>-helpdir</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the directory where help
+files are located.</div>
+
+<pre>
+Name:                   <b>closeCmd</b>
+Class:                  <b>CloseCmd</b>
+Command-Line Switch:    <b>-closecmd</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the tcl command to be
+executed when the close option is selected from the topics
+menu.</div>
+
+<pre>
+Name:                   <b>maxHistory</b>
+Class:                  <b>MaxHistory</b>
+Command-Line Switch:    <b>-maxhistory</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies the maximum number of
+entries stored in the history list</div>
+
+<pre>
+Name:                   <b>beforelink</b>
+Class:                  <b>BeforeLink</b>
+Command-Line Switch:    <b>-beforelink</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a command to be eval'ed
+before a new link is displayed. The path of the link to be
+displayed is appended before evaling the command. A suggested use
+might be to busy the widget while a new page is being
+displayed.</div>
+
+<pre>
+Name:                   <b>afterlink</b>
+Class:                  <b>AfterLink</b>
+Command-Line Switch:    <b>-afterlink</b>
+</pre>
+
+<div style="margin-left: 2em">Specifies a command to be eval'ed
+after a new link is completely displayed. The path of the link that
+was displayed is appended before evaling the command.</div>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>hyperhelp</b> command creates a shell window with a
+pulldown menu showing a list of topics. The topics are displayed by
+importing a HTML formatted file named
+<b>helpdir</b>/<i>topic</i>.html. For a list of supported HTML
+tags, see <b>scrolledhtml(n)</b>.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>hyperhelp</b> command creates a new Tcl command whose
+name is <i>pathName</i>. This command may be used to invoke various
+operations on the widget. It has the following general form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for dialog
+widgets: 
+
+<h2>INHERITED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activate</b><br>
+</td>
+<td valign="top"><b>center</b><br>
+</td>
+<td valign="top"><b>childsite</b><br>
+</td>
+<td valign="top"><b>deactivate</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the "shell" manual entry for details on the above inherited
+methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>hyperhelp</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>hyperhelp</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>showtopic</b> <i>topic</i></dt>
+
+<dd>Display html file <b>helpdir</b>/<i>topic</i>.html.
+<i>Topic</i> may optionally be of the form
+<i>topicname</i>#<i>anchorname</i>. In this form, either
+<i>topicname</i> or <i>anchorname</i> or both may be empty. If
+<i>topicname</i> is empty, the current topic is assumed. If
+<i>anchorname</i> is empty, the top of the document is assumed</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>followlink</b> <i>href</i></dt>
+
+<dd>Display html file <i>href</i>. <i>Href</i> may be optionally be
+of the form <i>filename</i>#<i>anchorname</i>. In this form, either
+<i>filename</i> or <i>anchorname</i> or both may be empty. If
+<i>filename</i> is empty, the current document is assumed. If
+<i>anchorname</i> is empty, the top of the document is
+assumed.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>forward</b></dt>
+
+<dd>Display html file one forward in history list, if
+applicable.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>back</b></dt>
+
+<dd>Display html file one back in history list, if applicable.</dd>
+</dl>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ hyperhelp .h -topics { Intro Help } -helpdir ~/help
+ .h showtopic Intro
+ 
+</pre>
+
+<h2>AUTHOR</h2>
+
+Kris Raney 
+
+<h2>KEYWORDS</h2>
+
+hyperhelp, html, help, shell, widget
+</body>
+</html>
+

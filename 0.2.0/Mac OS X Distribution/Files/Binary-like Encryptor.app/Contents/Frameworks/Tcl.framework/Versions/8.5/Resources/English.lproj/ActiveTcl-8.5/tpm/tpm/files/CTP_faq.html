@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>teapot_faq - TEA Package Management</title>
+<link rel="stylesheet" href="../aspn.css" type="text/css">
+</head>
+<body>
+<div class="doctools">
+<hr>
+[ 
+
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+ <a href="../../toc.html">Main Table Of Contents</a> | <a href=
+"../toc.html">Table Of Contents</a> | <a href=
+"../../index.html">Keyword Index</a> ] 
+
+<hr>
+<h1 class="title">teapot_faq(n) 1.0 tpm "TEA Package
+Management"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>teapot_faq - TEApot FAQ</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">OVERVIEW</a> 
+
+<ul>
+<li class="subsection"><a href="#subsection1">What is this
+document?</a></li>
+
+<li class="subsection"><a href="#subsection2">What does the setup
+look like after ActiveTcl has been installed ?</a></li>
+
+<li class="subsection"><a href="#subsection3">Moving the standard
+repository elsewhere</a></li>
+
+<li class="subsection"><a href="#subsection4">Create a new
+installation directory and make it the standard</a></li>
+
+<li class="subsection"><a href="#subsection5">Create a new
+installation directory and add it to the list of repositories used
+by a tclsh</a></li>
+
+<li class="subsection"><a href="#subsection6">Disconnect a shell
+from a repository</a></li>
+
+<li class="subsection"><a href="#subsection7">Extend the set of
+archives to query</a></li>
+</ul>
+</li>
+
+<li class="section"><a href="#section3">Further reading</a></li>
+
+<li class="section"><a href="#section4">BUGS, IDEAS,
+FEEDBACK</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">OVERVIEW</a></h2>
+
+<div id="subsection1" class="subsection">
+<h3><a name="subsection1">What is this document?</a></h3>
+
+<p>This is an typical FAQ list containing the questions a newcomer
+to TEApot will likely be asking. This file is not a complete
+reference to TEApot, however; that information is in the man pages
+of the various tools.</p>
+</div>
+
+<div id="subsection2" class="subsection">
+<h3><a name="subsection2">What does the setup look like after
+ActiveTcl has been installed ?</a></h3>
+
+<dl class="definitions">
+<dt>Standard installation repository</dt>
+
+<dd>
+<p>The standard installation repository is connected to the tclsh
+installed by ActiveTcl and can be found at</p>
+
+<dl class="definitions">
+<dt>Unix</dt>
+
+<dd>
+<p>"<b class="file">~/.teapot/repository</b>"</p>
+</dd>
+
+<dt>Windows</dt>
+
+<dd>
+<p>"<b class="file">$USERPROFILE/Teapot/repository</b>".</p>
+</dd>
+
+<dt>OS X</dt>
+
+<dd>
+<p>"<b class="file">~/Library/Application
+Support/ActiveState/Teapot/repository</b>"</p>
+
+<p>(Note the space between "Application" and "Support").</p>
+</dd>
+</dl>
+</dd>
+
+<dt>Tclsh initialization</dt>
+
+<dd>
+<p>The file "<b class="file">[info library]/init.tcl</b>" of the
+installed tclsh contains code for the integration of installation
+repositories with the installed tclsh. The list of repositories
+used by this code is managed via <b class="syscmd"><a href=
+"CTP_teacup.html">teacup</a></b>. The standard installation
+repository is already put on this list.</p>
+
+<p>This causes the installed tclsh to load packages from the
+repository.</p>
+</dd>
+
+<dt>Teacup configuration</dt>
+
+<dd>
+<p>The standard installation repository is defined as the default
+installation repository of <b class="syscmd"><a href=
+"CTP_teacup.html">teacup</a></b>. To query use <b class=
+"syscmd">teacup default</b>. This will show one of the above
+locations per the system we are on, the architecture of the
+installed shell, and its location. The last piece of information
+shows that the repository is connected to the shell.</p>
+
+<p>The standard archive is defined as ActiveState's public
+repository at <a href=
+"http://teapot.activestate.com">http://teapot.activestate.com</a>.
+To query use <b class="syscmd">teacup archive list</b>.</p>
+</dd>
+</dl>
+</div>
+
+<div id="subsection3" class="subsection">
+<h3><a name="subsection3">Moving the standard repository
+elsewhere</a></h3>
+
+<p><em>Use case</em>: Making the regular per-user TEApot
+repository, as created by the ActiveTcl installer, a central
+repository shared by all users.</p>
+
+<ol class="enumerated">
+<li>
+<p>% <b class="syscmd">teacup link cut /the/teapot/standard/path
+/your/activetcl/bin/tclsh</b></p>
+
+<p>% <b class="syscmd">mv /the/teapot/standard/path
+/your/repository/path</b></p>
+
+<p>% <b class="syscmd">teacup link make /your/repository/path
+/your/activetcl/bin/tclsh</b></p>
+
+<p>This sequence of commands first severs the connection between
+repository and tclsh, then moves the repository, and at last
+re-creates the connection.</p>
+</li>
+
+<li>
+<p>% <b class="syscmd">teacup default /your/repository/path</b></p>
+
+<p>This changes the declared default for teacup to your
+location</p>
+</li>
+</ol>
+</div>
+
+<div id="subsection4" class="subsection">
+<h3><a name="subsection4">Create a new installation directory and
+make it the standard</a></h3>
+
+<p><em>Use case</em>: Connect a Tcl installation, not necessarily
+made by ActiveTcl, but also created by compiling from the sources,
+to a new repository, which can be per-user, or central to a set of
+users.</p>
+
+<p><em>NOTE:</em> The Tcl installation has to be compiled with
+support for extended versions as per <a href=
+"http://tip.tcl.tk/268">TIP 268</a>.</p>
+
+<ol class="enumerated">
+<li>
+<p>% <b class="syscmd">teacup create /your/repository/path</b></p>
+
+<p>% <b class="syscmd">teacup link make /your/repository/path
+/your/tclsh</b></p>
+
+<p>This creates the repository at "<b class=
+"file">/your/repository/path</b>" and connects it to "<b class=
+"file">/your/tclsh</b>". The last redirects your tclsh to the
+repository at your location. If your tclsh does not have the TEApot
+linkage code the <b class="method">link make</b> will fail and
+direct the user to run</p>
+
+<p>% <b class="syscmd">teacup setup /your/tclsh</b></p>
+
+<p>to install the necessary support code.</p>
+</li>
+
+<li>
+<p>% <b class="syscmd">teacup default /your/repository/path</b></p>
+
+<p>This changes the declared default for teacup to your
+location.</p>
+</li>
+</ol>
+</div>
+
+<div id="subsection5" class="subsection">
+<h3><a name="subsection5">Create a new installation directory and
+add it to the list of repositories used by a tclsh</a></h3>
+
+<p><em>Use case</em>: Extend a Tcl installation, not necessarily
+made by ActiveTcl, but also created by compiling from the sources,
+with additional installation repositories. The Tcl installation may
+already use some installation repositories, this however is not
+required.</p>
+
+<p><em>NOTE:</em> The Tcl installation has to be compiled with
+support for extended versions as per <a href=
+"http://tip.tcl.tk/268">TIP 268</a>.</p>
+
+<ol class="enumerated">
+<li>
+<p>% <b class="syscmd">teacup create /your/repository/path</b></p>
+
+<p>% <b class="syscmd">teacup link make /your/repository/path
+/your/tclsh</b></p>
+
+<p>This creates the repository at "<b class=
+"file">/your/repository/path</b>" and connects it to "<b class=
+"file">/your/tclsh</b>". The last redirects your tclsh to the
+repository at your location. If your tclsh does not have the TEApot
+linkage code the <b class="method">link make</b> will fail and
+direct the user to run</p>
+
+<p>% <b class="syscmd">teacup setup /your/tclsh</b></p>
+
+<p>to install the necessary support code.</p>
+</li>
+</ol>
+
+<p>Remember and note however that even if the Tcl installation is
+connected to more than one installation repository only one of
+these repositories can be the default installation repository of
+the teacup application.</p>
+</div>
+
+<div id="subsection6" class="subsection">
+<h3><a name="subsection6">Disconnect a shell from a
+repository</a></h3>
+
+<ol class="enumerated">
+<li>
+<p>% <b class="syscmd">teacup link cut /your/repository/path
+/your/tclsh</b></p>
+</li>
+</ol>
+</div>
+
+<div id="subsection7" class="subsection">
+<h3><a name="subsection7">Extend the set of archives to
+query</a></h3>
+
+<ol class="enumerated">
+<li>
+<p>% <b class="syscmd">teacup archive add LOCATION</b></p>
+
+<p>This tells teacup that LOCATION is a repository which it can
+search when the user requests the retrieval or installation
+packages. <i class="arg">LOCATION</i> can be a path in the file
+system, or an http url.</p>
+
+<p>For example ActiveState's public repository can be found at <a
+href=
+"http://teapot.activestate.com">http://teapot.activestate.com</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">Further reading</a></h2>
+
+<ol class="enumerated">
+<li>
+<p>The <i class="term"><a href="CTP_introduction.html">TEApot
+Introduction</a></i></p>
+</li>
+
+<li>
+<p>The <i class="term"><a href="CTP_glossary.html">TEApot Glossary
+of Terms</a></i>.</p>
+</li>
+
+<li>
+<p>The <i class="term"><a href="CTP_activetcl.html">TEApot
+ActiveTcl Integration</a></i>.</p>
+</li>
+
+<li>
+<p>The <i class="term"><a href="CTP_metadata.html">TEApot Meta Data
+Specification</a></i>.</p>
+</li>
+</ol>
+</div>
+
+<div id="section4" class="section">
+<h2><a name="section4">BUGS, IDEAS, FEEDBACK</a></h2>
+
+<p>This document, and the application it describes, will
+undoubtedly contain bugs and other problems. Please report such at
+the <a href=
+"http://bugs.activestate.com/query.cgi?set_product=ActiveTcl">ActiveState
+ActiveTcl Bug Tracker</a>. The relevant component is
+<em>teapot</em>. Please also report any ideas for enhancements you
+may have for either application and/or documentation.</p>
+
+<p>The version number of the teacup application with the problem in
+question can be queried using the command <b class="syscmd">teacup
+version</b>.</p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="CTP_teacup.html">teacup</a>, <a href=
+"CTP_teastir.html">teapot-admin</a>, <a href=
+"CTP_metadata.html">teapot-md</a>, <a href=
+"CTP_teazip.html">teapot-pkg</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../../index.html#key3">TEA</a>, <a href=
+"../../index.html#key2">TEAPOT</a>, <a href=
+"../../index.html#key46">answers</a>, <a href=
+"../../index.html#key45">faq</a>, <a href=
+"../../index.html#key1">package management</a>, <a href=
+"../../index.html#key47">questions</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 2007-2008 ActiveState Software Inc.</p>
+</div>
+</div>
+</body>
+</html>
+

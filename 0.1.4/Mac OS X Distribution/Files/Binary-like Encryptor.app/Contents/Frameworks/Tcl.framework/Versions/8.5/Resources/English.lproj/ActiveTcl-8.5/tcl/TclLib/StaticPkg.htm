@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_StaticPackage manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> StaticPkg</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_StaticPackage - make a statically linked package available via
+the 'load' command 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+<b>Tcl_StaticPackage</b>(<i>interp, pkgName, initProc,
+safeInitProc</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>If not NULL, points to an interpreter into which the package
+has already been loaded (i.e., the caller has already invoked the
+appropriate initialization procedure). NULL means the package has
+not yet been incorporated into any interpreter.</dd>
+
+<dt>const char <b>*pkgName</b> (in)</dt>
+
+<dd>Name of the package; should be properly capitalized (first
+letter upper-case, all others lower-case).</dd>
+
+<dt>Tcl_PackageInitProc <b>*initProc</b> (in)</dt>
+
+<dd>Procedure to invoke to incorporate this package into a trusted
+interpreter.</dd>
+
+<dt>Tcl_PackageInitProc <b>*safeInitProc</b> (in)</dt>
+
+<dd>Procedure to call to incorporate this package into a safe
+interpreter (one that will execute untrusted scripts). NULL means
+the package cannot be used in safe interpreters.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+This procedure may be invoked to announce that a package has been
+linked statically with a Tcl application and, optionally, that it
+has already been loaded into an interpreter. Once
+<b>Tcl_StaticPackage</b> has been invoked for a package, it may be
+loaded into interpreters using the <b><a href=
+"../TclCmd/load.htm">load</a></b> command. <b>Tcl_StaticPackage</b>
+is normally invoked only by the <b><a href=
+"../TclLib/AppInit.htm">Tcl_AppInit</a></b> procedure for the
+application, not by packages for themselves
+(<b>Tcl_StaticPackage</b> should only be invoked for statically
+loaded packages, and code in the package itself should not need to
+know whether the package is dynamically or statically loaded). 
+
+<p>When the <b><a href="../TclCmd/load.htm">load</a></b> command is
+used later to load the package into an interpreter, one of
+<i>initProc</i> and <i>safeInitProc</i> will be invoked, depending
+on whether the target interpreter is safe or not. <i>initProc</i>
+and <i>safeInitProc</i> must both match the following
+prototype:</p>
+
+<pre>
+typedef int Tcl_PackageInitProc(<a href=
+"../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>);
+</pre>
+
+The <i>interp</i> argument identifies the interpreter in which the
+package is to be loaded. The initialization procedure must return
+<b>TCL_OK</b> or <b>TCL_ERROR</b> to indicate whether or not it
+completed successfully; in the event of an error it should set the
+interpreter's result to point to an error message. The result or
+error from the initialization procedure will be returned as the
+result of the <b><a href="../TclCmd/load.htm">load</a></b> command
+that caused the initialization procedure to be invoked. 
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/I.htm#initialization procedure">initialization
+procedure</a>, <a href="../Keywords/P.htm#package">package</a>, <a
+href="../Keywords/S.htm#static linking">static linking</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1995-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

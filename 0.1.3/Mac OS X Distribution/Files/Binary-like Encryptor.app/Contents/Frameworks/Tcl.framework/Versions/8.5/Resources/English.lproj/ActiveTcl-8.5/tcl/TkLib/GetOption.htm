@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Library Procedures - Tk_GetOption manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> GetOption</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_GetOption - retrieve an option from the option database 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+<a href="../TkLib/GetUid.htm">Tk_Uid</a><br>
+<b>Tk_GetOption</b>(<i>tkwin, name, class</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Window <b>tkwin</b> (in)</dt>
+
+<dd>Token for window.</dd>
+
+<dt>const char <b>*name</b> (in)</dt>
+
+<dd>Name of desired option.</dd>
+
+<dt>const char <b>*class</b> (in)</dt>
+
+<dd>Class of desired option. Null means there is no class for this
+option; do lookup based on name only.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+This procedure is invoked to retrieve an option from the database
+associated with <i>tkwin</i>'s main window. If there is an option
+for <i>tkwin</i> that matches the given <i>name</i> or
+<i>class</i>, then it is returned in the form of a <a href=
+"../TkLib/GetUid.htm">Tk_Uid</a>. If multiple options match
+<i>name</i> and <i>class</i>, then the highest-priority one is
+returned. If no option matches, then NULL is returned. 
+
+<p><b>Tk_GetOption</b> caches options related to <i>tkwin</i> so
+that successive calls for the same <i>tkwin</i> will execute much
+more quickly than successive calls for different windows.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#class">class</a>, <a href=
+"../Keywords/N.htm#name">name</a>, <a href=
+"../Keywords/O.htm#option">option</a>, <a href=
+"../Keywords/R.htm#retrieve">retrieve</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

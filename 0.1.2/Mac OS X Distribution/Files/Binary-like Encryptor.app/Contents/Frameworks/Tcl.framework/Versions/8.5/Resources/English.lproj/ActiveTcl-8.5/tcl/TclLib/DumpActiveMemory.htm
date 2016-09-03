@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_DumpActiveMemory manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> DumpActiveMemory</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_DumpActiveMemory, Tcl_InitMemory, Tcl_ValidateAllMemory -
+Validated memory allocation interface 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_DumpActiveMemory</b>(<i>fileName</i>)<br>
+void<br>
+<b>Tcl_InitMemory</b>(<i>interp</i>)<br>
+void<br>
+<b>Tcl_ValidateAllMemory</b>(<i>fileName, line</i>)<br>
+<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Tcl interpreter in which to add commands.</dd>
+
+<dt>const char <b>*fileName</b> (in)</dt>
+
+<dd>For <b>Tcl_DumpActiveMemory</b>, name of the file to which
+memory information will be written. For
+<b>Tcl_ValidateAllMemory</b>, name of the file from which the call
+is being made (normally <b>__FILE__</b>).</dd>
+
+<dt>int <b>line</b> (in)</dt>
+
+<dd>Line number at which the call to <b>Tcl_ValidateAllMemory</b>
+is made (normally <b>__LINE__</b>).</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These functions provide access to Tcl memory debugging information.
+They are only functional when Tcl has been compiled with
+<b>TCL_MEM_DEBUG</b> defined at compile-time. When
+<b>TCL_MEM_DEBUG</b> is not defined, these functions are all
+no-ops. 
+
+<p><b>Tcl_DumpActiveMemory</b> will output a list of all currently
+allocated memory to the specified file. The information output for
+each allocated block of memory is: starting and ending addresses
+(excluding guard zone), size, source file where <b><a href=
+"../TclLib/Alloc.htm">ckalloc</a></b> was called to allocate the
+block and line number in that file. It is especially useful to call
+<b>Tcl_DumpActiveMemory</b> after the Tcl interpreter has been
+deleted.</p>
+
+<p><b>Tcl_InitMemory</b> adds the Tcl <b><a href=
+"../TclCmd/memory.htm">memory</a></b> command to the interpreter
+given by <i>interp</i>. <b>Tcl_InitMemory</b> is called by <b><a
+href="../TclLib/Tcl_Main.htm">Tcl_Main</a></b>.</p>
+
+<p><b>Tcl_ValidateAllMemory</b> forces a validation of the guard
+zones of all currently allocated blocks of memory. Normally
+validation of a block occurs when its freed, unless full validation
+is enabled, in which case validation of all blocks occurs when
+<b><a href="../TclLib/Alloc.htm">ckalloc</a></b> and <b><a href=
+"../TclLib/Alloc.htm">ckfree</a></b> are called. This function
+forces the validation to occur at any point.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b>TCL_MEM_DEBUG</b>, <b><a href=
+"../TclCmd/memory.htm">memory</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/M.htm#memory">memory</a>, <a href=
+"../Keywords/D.htm#debug">debug</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1992-1999 Karl Lehenbauer and Mark Diekhans.
+Copyright &copy; 2000 by Scriptics Corporation.</div>
+</body>
+</html>
+

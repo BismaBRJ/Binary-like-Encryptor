@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>selectiondialog - Create and manipulate a selection dialog
+widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1>selectiondialog - Create and manipulate a selection dialog
+widget</h1>
+
+<h2>SYNOPSIS</h2>
+
+<b>selectiondialog pathName</b> ?<i>options</i>? 
+
+<h2>INHERITANCE</h2>
+
+itk::Toplevel &lt;- Shell &lt;- Dialogshell &lt;- Dialog &lt;-
+Selectiondialog 
+
+<h2>STANDARD OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeBackground</b><br>
+<b>exportSelection</b><br>
+<b>insertBackground</b><br>
+<b>insertWidth</b><br>
+</td>
+<td valign="top"><b>background</b><br>
+<b>foreground</b><br>
+<b>insertBorderWidth</b><br>
+<b>selectBackground</b><br>
+</td>
+<td valign="top"><b>borderWidth</b><br>
+<b>highlightColor</b><br>
+<b>insertOffTime</b><br>
+<b>selectBorderWidth</b><br>
+</td>
+<td valign="top"><b>cursor</b><br>
+<b>highlightThickness</b><br>
+<b>insertOnTime</b><br>
+<b>selectForeground</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/options.n.html">"options"</a>
+manual entry for details on the standard options.</p>
+
+<h2>ASSOCIATED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>textBackground</b><br>
+</td>
+<td valign="top"><b>textFont</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="entryfield.n.html">"entryfield"</a> widget
+manual entry for details on the above associated options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>labelFont</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="labeledwidget.n.html">"labeledwidget"</a>
+widget manual entry for details on the above associated
+options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activeRelief</b><br>
+</td>
+<td valign="top"><b>elementBorderWidth</b><br>
+</td>
+<td valign="top"><b>jump</b><br>
+</td>
+<td valign="top"><b>troughColor</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/scrollbar.n.html">"scrollbar"</a>
+widget class manual entry for details on the above associated
+options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>textBackground</b><br>
+</td>
+<td valign="top"><b>textFont</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the <a href="scrolledlistbox.n.html">"scrolledlistbox"</a>
+widget class manual entry for details on the above associated
+options. <b>childsitepos</b> <b>itemsCommand</b> <b>itemsLabel</b>
+<b>itemsOn</b> <b>selectionCommand</b> <b>selectionLabel</b>
+<b>selectionOn</b></p>
+
+<p>See the <a href="selectionbox.n.html">"selectionbox"</a> widget
+manual entry for details on the above associated options.</p>
+
+<h2>INHERITED OPTIONS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>buttonBoxPadX</b><br>
+<b>padY</b><br>
+</td>
+<td valign="top"><b>buttonBoxPadY</b><br>
+<b>separator</b><br>
+</td>
+<td valign="top"><b>buttonBoxPos</b><br>
+<b>thickness</b><br>
+</td>
+<td valign="top"><b>padX</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="dialogshell.n.html">"dialogshell"</a> widget
+manual entry for details on the above inherited options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>height</b><br>
+</td>
+<td valign="top"><b>master</b><br>
+</td>
+<td valign="top"><b>modality</b><br>
+</td>
+<td valign="top"><b>width</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the "shell" widget manual entry for details on the above
+inherited options.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>title</b><br>
+</td>
+<td valign="top"></td>
+<td valign="top"></td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the "Toplevel" widget manual entry for details on the above
+inherited options.</p>
+
+<hr>
+<h2>DESCRIPTION</h2>
+
+<p>The <b>selectiondialog</b> command creates a selection box
+similar to the OSF/Motif standard selection dialog composite
+widget. The selectiondialog is derived from the Dialog class and is
+composed of a selectionbox with commands to manipulate the dialog
+buttons.</p>
+
+<h2>METHODS</h2>
+
+<p>The <b>selectiondialog</b> command creates a new Tcl command
+whose name is <i>pathName</i>. This command may be used to invoke
+various operations on the widget. It has the following general
+form:</p>
+
+<pre>
+<i>pathName option</i> ?<i>arg arg ...</i>?
+</pre>
+
+<i>Option</i> and the <i>arg</i>s determine the exact behavior of
+the command. The following commands are possible for
+selectiondialog widgets: 
+
+<h2>ASSOCIATED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>childsite</b><br>
+<b>selectitem</b><br>
+</td>
+<td valign="top"><b>clear</b><br>
+</td>
+<td valign="top"><b>get</b><br>
+</td>
+<td valign="top"><b>insert</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="selectionbox.n.html">"selectionbox"</a> widget
+manual entry for details on the above associated methods.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>curselection</b><br>
+<b>scan</b><br>
+</td>
+<td valign="top"><b>delete</b><br>
+<b>selection</b><br>
+</td>
+<td valign="top"><b>index</b><br>
+<b>size</b><br>
+</td>
+<td valign="top"><b>nearest</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href=
+"http://www.sco.com/Technology/tcl/man/tk_man/listbox.n.html">"listbox"</a>
+widget manual entry for details on the above associated
+methods.</p>
+
+<h2>INHERITED METHODS</h2>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>add</b><br>
+<b>invoke</b><br>
+</td>
+<td valign="top"><b>buttonconfigure</b><br>
+<b>show</b><br>
+</td>
+<td valign="top"><b>default</b><br>
+</td>
+<td valign="top"><b>hide</b><br>
+</td>
+</tr>
+</table>
+
+<p>See the <a href="buttonbox.n.html">"buttonbox"</a> widget manual
+entry for details on the above inherited methods.</p>
+
+<table cellpadding="5">
+<tr>
+<td valign="top"><b>activate</b><br>
+</td>
+<td valign="top"><b>center</b><br>
+</td>
+<td valign="top"><b>deactivate</b><br>
+</td>
+<td valign="top"></td>
+</tr>
+</table>
+
+<p>See the "shell" widget manual entry for details on the above
+inherited methods.</p>
+
+<h2>WIDGET-SPECIFIC METHODS</h2>
+
+<dl>
+<dt><i>pathName <b>cget</b></i> option</dt>
+
+<dd>Returns the current value of the configuration option given by
+<i>option</i>. <i>Option</i> may have any of the values accepted by
+the <b>selectiondialog</b> command.</dd>
+</dl>
+
+<dl>
+<dt><i>pathName</i> <b>configure</b> ?<i>option</i>? ?<i>value
+option value ...</i>?</dt>
+
+<dd>Query or modify the configuration options of the widget. If no
+<i>option</i> is specified, returns a list describing all of the
+available options for <i>pathName</i> (see <b>Tk_ConfigureInfo</b>
+for information on the format of this list). If <i>option</i> is
+specified with no <i>value</i>, then the command returns a list
+describing the one named option (this list will be identical to the
+corresponding sublist of the value returned if no <i>option</i> is
+specified). If one or more <i>option-value</i> pairs are specified,
+then the command modifies the given widget option(s) to have the
+given value(s); in this case the command returns an empty string.
+<i>Option</i> may have any of the values accepted by the
+<b>selectiondialog</b> command.</dd>
+</dl>
+
+<h2>COMPONENTS</h2>
+
+<pre>
+Name:                   <b>selectionbox</b>
+Class:                  <b>Selectionbox</b>
+</pre>
+
+<div style="margin-left: 2em">The selectionbox component is the
+selection box for the selection dialog. See the "selectionbox"
+widget manual entry for details on the selectionbox component
+item.</div>
+
+<h2>EXAMPLE</h2>
+
+<pre>
+ selectiondialog .sd 
+ .sd activate
+</pre>
+
+<h2>AUTHOR</h2>
+
+Mark L. Ulferts 
+
+<h2>KEYWORDS</h2>
+
+selectiondialog, selectionbox, dialog, dialogshell, shell, widget
+</body>
+</html>
+

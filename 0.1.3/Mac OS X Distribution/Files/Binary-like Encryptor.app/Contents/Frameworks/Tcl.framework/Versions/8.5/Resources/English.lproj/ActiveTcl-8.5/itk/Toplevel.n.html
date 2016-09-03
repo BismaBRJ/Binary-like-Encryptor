@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>itk - Toplevel (n)</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<center>
+<h1>[incr\ Tk]</h1>
+</center>
+
+<h3>NAME</h3>
+
+Toplevel - base class for mega-widgets in a top-level window 
+
+<h3>INHERITANCE</h3>
+
+itk::Archetype &lt;- itk::Toplevel 
+
+<h3>STANDARD OPTIONS</h3>
+
+<p><b>background</b><b>cursor</b><br>
+</p>
+
+<p>See the "options" manual entry for details on the standard
+options.</p>
+
+<h3>WIDGET-SPECIFIC OPTIONS</h3>
+
+<p>Name: <b>title</b><br>
+Class: <b>Title</b><br>
+Command-Line Switch: <b>-title</b><br>
+</p>
+
+<ul>
+<li>Sets the title that the window manager displays in the title
+bar above the window. The default title is the null string.</li>
+</ul>
+
+<h3>DESCRIPTION</h3>
+
+<p>The <b>Toplevel</b> class inherits everything from the <b><a
+href="Archetype.n.html">Archetype</a></b> class, and adds a Tk
+toplevel called the "hull" component to represent the body of the
+mega-widget. The window class name for the hull is set to the
+most-specific class name for the mega-widget. The protected
+variable <b>itk_interior</b> contains the window path name for the
+"hull" component. Derived classes specialize this widget by packing
+other widget components into the hull.</p>
+
+<p>Since the hull for the <b>Toplevel</b> class is implemented with
+a Tk toplevel, mega-widgets in the <b>Toplevel</b> class have their
+own toplevel window. This class is used to create dialog boxes and
+other pop-up windows.</p>
+
+<h3>COMPONENTS</h3>
+
+<p>Name:<b>hull</b><br>
+Class:<b>Toplevel</b><br>
+</p>
+
+<ul>
+<li>The "hull" component acts as the body for the entire
+mega-widget. Other components are packed into the hull to further
+specialize the widget.</li>
+</ul>
+
+<h3>EXAMPLE</h3>
+
+<p>The following example implements a <b>MessageInfo</b>
+mega-widget. It creates a pop-up message that the user can dismiss
+by pushing the "Dismiss" button.</p>
+
+<blockquote>
+<pre>
+option add *MessageInfo.title "Notice" widgetDefault
+
+itcl::class MessageInfo {
+    inherit itk::Toplevel
+
+    constructor {args} {
+        itk_component add dismiss {
+            button $itk_interior.dismiss -text "Dismiss" 
+                -command "destroy $itk_component(hull)"
+        }
+        pack $itk_component(dismiss) -side bottom -pady 4
+
+        itk_component add separator {
+            frame $itk_interior.sep -height 2 -borderwidth 1 -relief sunken
+        }
+        pack $itk_component(separator) -side bottom -fill x -padx 4
+
+        itk_component add icon {
+            label $itk_interior.icon -bitmap info
+        }
+        pack $itk_component(icon) -side left -padx 8 -pady 8
+
+        itk_component add infoFrame {
+            frame $itk_interior.info
+        }
+        pack $itk_component(infoFrame) -side left -expand yes 
+            -fill both -padx 4 -pady 4
+
+        itk_component add message {
+            label $itk_interior.mesg -width 20
+        } {
+            usual
+            rename -text -message message Text
+        }
+        pack $itk_component(message) -expand yes -fill both
+
+        eval itk_initialize $args
+
+        after idle [code $this centerOnScreen]
+    }
+
+    protected method centerOnScreen {} {
+        update idletasks
+        set wd [winfo reqwidth $itk_component(hull)]
+        set ht [winfo reqheight $itk_component(hull)]
+        set x [expr ([winfo screenwidth $itk_component(hull)]-$wd)/2]
+        set y [expr ([winfo screenheight $itk_component(hull)]-$ht)/2]
+        wm geometry $itk_component(hull) +$x+$y
+    }
+}
+
+itk::usual MessageInfo {
+    keep -background -cursor -foreground -font
+    keep -activebackground -activeforeground -disabledforeground
+    keep -highlightcolor -highlightthickness
+}
+
+#
+# EXAMPLE:  Create a notice window:
+#
+MessageInfo .m -message "File not found:n/usr/local/bin/foo"
+</pre>
+</blockquote>
+
+<h3>KEYWORDS</h3>
+
+itk, Archetype, Widget, mega-widget 
+
+<hr>
+[ <a href="../itk/contents.html">itk</a> ] 
+
+<hr>
+<pre>
+Copyright &copy; 1989-1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.
+</pre>
+</body>
+</html>
+

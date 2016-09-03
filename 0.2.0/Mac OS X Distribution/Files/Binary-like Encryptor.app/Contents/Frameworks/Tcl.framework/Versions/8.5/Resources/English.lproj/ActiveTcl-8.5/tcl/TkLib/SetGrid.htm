@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_SetGrid manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> SetGrid</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_SetGrid, Tk_UnsetGrid - control the grid for interactive
+resizing 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+<b>Tk_SetGrid</b>(<i>tkwin, reqWidth, reqHeight, widthInc,
+heightInc</i>)<br>
+<b>Tk_UnsetGrid</b>(<i>tkwin</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Window <b>tkwin</b> (in)</dt>
+
+<dd>Token for window.</dd>
+
+<dt>int <b>reqWidth</b> (in)</dt>
+
+<dd>Width in grid units that corresponds to the pixel dimension
+<i>tkwin</i> has requested via <b><a href=
+"../TkLib/GeomReq.htm">Tk_GeometryRequest</a></b>.</dd>
+
+<dt>int <b>reqHeight</b> (in)</dt>
+
+<dd>Height in grid units that corresponds to the pixel dimension
+<i>tkwin</i> has requested via <b><a href=
+"../TkLib/GeomReq.htm">Tk_GeometryRequest</a></b>.</dd>
+
+<dt>int <b>widthInc</b> (in)</dt>
+
+<dd>Width of one grid unit, in pixels.</dd>
+
+<dt>int <b>heightInc</b> (in)</dt>
+
+<dd>Height of one grid unit, in pixels.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tk_SetGrid</b> turns on gridded geometry management for
+<i>tkwin</i>'s toplevel window and specifies the geometry of the
+grid. <b>Tk_SetGrid</b> is typically invoked by a widget when its
+<b>setGrid</b> option is true. It restricts interactive resizing of
+<i>tkwin</i>'s toplevel window so that the space allocated to the
+toplevel is equal to its requested size plus or minus even
+multiples of <i>widthInc</i> and <i>heightInc</i>. Furthermore, the
+<i>reqWidth</i> and <i>reqHeight</i> values are passed to the
+window manager so that it can report the window's size in grid
+units during interactive resizes. If <i>tkwin</i>'s configuration
+changes (e.g., the size of a grid unit changes) then the widget
+should invoke <b>Tk_SetGrid</b> again with the new information. 
+
+<p><b>Tk_UnsetGrid</b> cancels gridded geometry management for
+<i>tkwin</i>'s toplevel window.</p>
+
+<p>For each toplevel window there can be at most one internal
+window with gridding enabled. If <b>Tk_SetGrid</b> or
+<b>Tk_UnsetGrid</b> is invoked when some other window is already
+controlling gridding for <i>tkwin</i>'s toplevel, the calls for the
+new window have no effect.</p>
+
+<p>See the <b><a href="../TkCmd/wm.htm">wm</a></b> manual entry for
+additional information on gridded geometry management.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/G.htm#grid">grid</a>, <a href=
+"../Keywords/W.htm#window">window</a>, <a href=
+"../Keywords/W.htm#window manager">window manager</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990-1994 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

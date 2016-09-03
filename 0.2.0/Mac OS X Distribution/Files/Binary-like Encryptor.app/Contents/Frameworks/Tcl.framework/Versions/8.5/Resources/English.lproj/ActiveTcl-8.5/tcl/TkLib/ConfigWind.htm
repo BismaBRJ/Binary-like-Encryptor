@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_ConfigureWindow manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> ConfigWind</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_ConfigureWindow, Tk_MoveWindow, Tk_ResizeWindow,
+Tk_MoveResizeWindow, Tk_SetWindowBorderWidth,
+Tk_ChangeWindowAttributes, Tk_SetWindowBackground,
+Tk_SetWindowBackgroundPixmap, Tk_SetWindowBorder,
+Tk_SetWindowBorderPixmap, Tk_SetWindowColormap, Tk_DefineCursor,
+Tk_UndefineCursor - change window configuration or attributes 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+<b>Tk_ConfigureWindow</b>(<i>tkwin, valueMask, valuePtr</i>)<br>
+<b>Tk_MoveWindow</b>(<i>tkwin, x, y</i>)<br>
+<b>Tk_ResizeWindow</b>(<i>tkwin, width, height</i>)<br>
+<b>Tk_MoveResizeWindow</b>(<i>tkwin, x, y, width, height</i>)<br>
+<b>Tk_SetWindowBorderWidth</b>(<i>tkwin, borderWidth</i>)<br>
+<b>Tk_ChangeWindowAttributes</b>(<i>tkwin, valueMask,
+attsPtr</i>)<br>
+<b>Tk_SetWindowBackground</b>(<i>tkwin, pixel</i>)<br>
+<b>Tk_SetWindowBackgroundPixmap</b>(<i>tkwin, pixmap</i>)<br>
+<b>Tk_SetWindowBorder</b>(<i>tkwin, pixel</i>)<br>
+<b>Tk_SetWindowBorderPixmap</b>(<i>tkwin, pixmap</i>)<br>
+<b>Tk_SetWindowColormap</b>(<i>tkwin, colormap</i>)<br>
+<b>Tk_DefineCursor</b>(<i>tkwin, cursor</i>)<br>
+<b>Tk_UndefineCursor</b>(<i>tkwin</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tk_Window <b>tkwin</b> (in)</dt>
+
+<dd>Token for window.</dd>
+
+<dt>unsigned int <b>valueMask</b> (in)</dt>
+
+<dd>OR-ed mask of values like <b>CWX</b> or <b>CWBorderPixel</b>,
+indicating which fields of <i>*valuePtr</i> or <i>*attsPtr</i> to
+use.</dd>
+
+<dt>XWindowChanges <b>*valuePtr</b> (in)</dt>
+
+<dd>Points to a structure containing new values for the
+configuration parameters selected by <i>valueMask</i>. Fields not
+selected by <i>valueMask</i> are ignored.</dd>
+
+<dt>int <b>x</b> (in)</dt>
+
+<dd>New x-coordinate for <i>tkwin</i>'s top left pixel (including
+border, if any) within tkwin's parent.</dd>
+
+<dt>int <b>y</b> (in)</dt>
+
+<dd>New y-coordinate for <i>tkwin</i>'s top left pixel (including
+border, if any) within tkwin's parent.</dd>
+
+<dt>int <b>width</b> (in)</dt>
+
+<dd>New width for <i>tkwin</i> (interior, not including
+border).</dd>
+
+<dt>int <b>height</b> (in)</dt>
+
+<dd>New height for <i>tkwin</i> (interior, not including
+border).</dd>
+
+<dt>int <b>borderWidth</b> (in)</dt>
+
+<dd>New width for <i>tkwin</i>'s border.</dd>
+
+<dt>XSetWindowAttributes <b>*attsPtr</b> (in)</dt>
+
+<dd>Points to a structure containing new values for the attributes
+given by the <i>valueMask</i> argument. Attributes not selected by
+<i>valueMask</i> are ignored.</dd>
+
+<dt>unsigned long <b>pixel</b> (in)</dt>
+
+<dd>New background or border color for window.</dd>
+
+<dt>Pixmap <b>pixmap</b> (in)</dt>
+
+<dd>New pixmap to use for background or border of <i>tkwin</i>.
+WARNING: cannot necessarily be deleted immediately, as for Xlib
+calls. See note below.</dd>
+
+<dt>Colormap <b>colormap</b> (in)</dt>
+
+<dd>New colormap to use for <i>tkwin</i>.</dd>
+
+<dt>Tk_Cursor <b>cursor</b> (in)</dt>
+
+<dd>New cursor to use for <i>tkwin</i>. If <b>None</b> is
+specified, then <i>tkwin</i> will not have its own cursor; it will
+use the cursor of its parent.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These procedures are analogous to the X library procedures with
+similar names, such as <b>XConfigureWindow</b>. Each one of the
+above procedures calls the corresponding X procedure and also saves
+the configuration information in Tk's local structure for the
+window. This allows the information to be retrieved quickly by the
+application (using macros such as <b><a href=
+"../TkLib/WindowId.htm">Tk_X</a></b> and <b><a href=
+"../TkLib/WindowId.htm">Tk_Height</a></b>) without having to
+contact the X server. In addition, if no X window has actually been
+created for <i>tkwin</i> yet, these procedures do not issue X
+operations or cause event handlers to be invoked; they save the
+information in Tk's local structure for the window; when the window
+is created later, the saved information will be used to configure
+the window. 
+
+<p>See the X library documentation for details on what these
+procedures do and how they use their arguments.</p>
+
+<p>In the procedures <b>Tk_ConfigureWindow</b>,
+<b>Tk_MoveWindow</b>, <b>Tk_ResizeWindow</b>,
+<b>Tk_MoveResizeWindow</b>, and <b>Tk_SetWindowBorderWidth</b>, if
+<i>tkwin</i> is an internal window then event handlers interested
+in configure events are invoked immediately, before the procedure
+returns. If <i>tkwin</i> is a top-level window then the event
+handlers will be invoked later, after X has seen the request and
+returned an event for it.</p>
+
+<p>Applications using Tk should never call procedures like
+<b>XConfigureWindow</b> directly; they should always use the
+corresponding Tk procedures.</p>
+
+<p>The size and location of a window should only be modified by the
+appropriate geometry manager for that window and never by a window
+itself (but see <b><a href=
+"../TkLib/MoveToplev.htm">Tk_MoveToplevelWindow</a></b> for moving
+a top-level window).</p>
+
+<p>You may not use <b>Tk_ConfigureWindow</b> to change the stacking
+order of a window (<i>valueMask</i> may not contain the
+<b>CWSibling</b> or <b>CWStackMode</b> bits). To change the
+stacking order, use the procedure <b><a href=
+"../TkLib/Restack.htm">Tk_RestackWindow</a></b>.</p>
+
+<p>The procedure <b>Tk_SetWindowColormap</b> will automatically add
+<i>tkwin</i> to the <b>TK_COLORMAP_WINDOWS</b> property of its
+nearest top-level ancestor if the new colormap is different from
+that of <i>tkwin</i>'s parent and <i>tkwin</i> is not already in
+the <b>TK_COLORMAP_WINDOWS</b> property.</p>
+
+<h3><a name="M6">BUGS</a></h3>
+
+<b>Tk_SetWindowBackgroundPixmap</b> and
+<b>Tk_SetWindowBorderPixmap</b> differ slightly from their Xlib
+counterparts in that the <i>pixmap</i> argument may not necessarily
+be deleted immediately after calling one of these procedures. This
+is because <i>tkwin</i>'s window may not exist yet at the time of
+the call, in which case <i>pixmap</i> is merely saved and used
+later when <i>tkwin</i>'s window is actually created. If you wish
+to delete <i>pixmap</i>, then call <b><a href=
+"../TkLib/CrtWindow.htm">Tk_MakeWindowExist</a></b> first to be
+sure that <i>tkwin</i>'s window exists and <i>pixmap</i> has been
+passed to the X server. 
+
+<p>A similar problem occurs for the <i>cursor</i> argument passed
+to <b>Tk_DefineCursor</b>. The solution is the same as for pixmaps
+above: call <b><a href=
+"../TkLib/CrtWindow.htm">Tk_MakeWindowExist</a></b> before freeing
+the cursor.</p>
+
+<h3><a name="M7">SEE ALSO</a></h3>
+
+<b><a href="../TkLib/MoveToplev.htm">Tk_MoveToplevelWindow</a></b>,
+<b><a href="../TkLib/Restack.htm">Tk_RestackWindow</a></b> 
+
+<h3><a name="M8">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#attributes">attributes</a>, <a href=
+"../Keywords/B.htm#border">border</a>, <a href=
+"../Keywords/C.htm#color">color</a>, <a href=
+"../Keywords/C.htm#configure">configure</a>, <a href=
+"../Keywords/H.htm#height">height</a>, <a href=
+"../Keywords/P.htm#pixel">pixel</a>, <a href=
+"../Keywords/P.htm#pixmap">pixmap</a>, <a href=
+"../Keywords/W.htm#width">width</a>, <a href=
+"../Keywords/W.htm#window">window</a>, <a href=
+"../Keywords/X.htm#x">x</a>, <a href="../Keywords/Y.htm#y">y</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990-1993 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

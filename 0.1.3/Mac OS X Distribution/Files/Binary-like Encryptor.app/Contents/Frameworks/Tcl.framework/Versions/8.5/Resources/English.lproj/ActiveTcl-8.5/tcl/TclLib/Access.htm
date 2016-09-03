@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_Access manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> Access</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_Access, Tcl_Stat - check file permissions and other attributes 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_Access</b>(<i>path</i>, <i>mode</i>)<br>
+int<br>
+<b>Tcl_Stat</b>(<i>path</i>, <i>statPtr</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>char <b>*path</b> (in)</dt>
+
+<dd>Native name of the file to check the attributes of.</dd>
+
+<dt>int <b>mode</b> (in)</dt>
+
+<dd>Mask consisting of one or more of R_OK, W_OK, X_OK and F_OK.
+R_OK, W_OK and X_OK request checking whether the file exists and
+has read, write and execute permissions, respectively. F_OK just
+requests checking for the existence of the file.</dd>
+
+<dt>struct stat <b>*statPtr</b> (out)</dt>
+
+<dd>The structure that contains the result.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+As of Tcl 8.4, the object-based APIs <b><a href=
+"../TclLib/FileSystem.htm">Tcl_FSAccess</a></b> and <b><a href=
+"../TclLib/FileSystem.htm">Tcl_FSStat</a></b> should be used in
+preference to <b>Tcl_Access</b> and <b>Tcl_Stat</b>, wherever
+possible. 
+
+<p>There are two reasons for calling <b>Tcl_Access</b> and
+<b>Tcl_Stat</b> rather than calling system level functions
+<b>access</b> and <b>stat</b> directly. First, the Windows
+implementation of both functions fixes some bugs in the system
+level calls. Second, both <b>Tcl_Access</b> and <b>Tcl_Stat</b> (as
+well as <b>Tcl_OpenFileChannelProc</b>) hook into a linked list of
+functions. This allows the possibility to reroute file access to
+alternative media or access methods.</p>
+
+<p><b>Tcl_Access</b> checks whether the process would be allowed to
+read, write or test for existence of the file (or other file system
+object) whose name is pathname. If pathname is a symbolic link on
+Unix, then permissions of the file referred by this symbolic link
+are tested.</p>
+
+<p>On success (all requested permissions granted), zero is
+returned. On error (at least one bit in mode asked for a permission
+that is denied, or some other error occurred), -1 is returned.</p>
+
+<p><b>Tcl_Stat</b> fills the stat structure <i>statPtr</i> with
+information about the specified file. You do not need any access
+rights to the file to get this information but you need search
+rights to all directories named in the path leading to the file.
+The stat structure includes info regarding device, inode (always 0
+on Windows), privilege mode, nlink (always 1 on Windows), user id
+(always 0 on Windows), group id (always 0 on Windows), rdev (same
+as device on Windows), size, last access time, last modification
+time, and creation time.</p>
+
+<p>If <i>path</i> exists, <b>Tcl_Stat</b> returns 0 and the stat
+structure is filled with data. Otherwise, -1 is returned, and no
+stat info is given.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/S.htm#stat">stat</a>, <a href=
+"../Keywords/A.htm#access">access</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1998-1999 Scriptics Corporation</div>
+</body>
+</html>
+

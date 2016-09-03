@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Textual Comparison - switch</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Textual Comparison - switch</h1>
+
+<div class="nav"><a href="Tcl7.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl9.html">Next
+lesson</a></div>
+
+<p>The <code class="keyword">switch</code> command allows you to
+choose one of several options in your code. It is similar to <code
+class="keyword">switch</code> in C, except that it is more
+flexible, because you can switch on strings, instead of just
+integers. The string will be compared to a set of patterns, and
+when a pattern matches the string, the code associated with that
+pattern will be evaluated.</p>
+
+<p>It's a good idea to use the <code class="keyword">switch</code>
+command when you want to match a variable against several possible
+values, and don't want to do a long series of <code>if... elseif
+... elseif</code> statements.</p>
+
+<p>The syntax of the command is:</p>
+
+<ul>
+<li><code class="keyword">switch</code> <code class=
+"arg">string</code> <code class="arg">pattern1</code> <code class=
+"arg">body1</code> <code class="arg">?pattern2 body2?</code> ...
+<code class="arg">?patternN bodyN?</code></li>
+</ul>
+
+<p>- or -</p>
+
+<ul>
+<li><code class="keyword">switch</code> <code class=
+"arg">string</code> <code class="arg">{ pattern1 body1 ?pattern2
+body2?...?patternN bodyN? }</code></li>
+</ul>
+
+<p><code class="arg">String</code> is the string that you wish to
+test, and <code class="arg">pattern1, pattern2, etc</code> are the
+patterns that the string will be compared to. If <code class=
+"arg">string</code> matches a pattern, then the code within the
+<code class="arg">body</code> associated with that pattern will be
+executed. The return value of the <code class="arg">body</code>
+will be returned as the return value of the switch statement. Only
+one pattern will be matched.</p>
+
+<p>If the last <code class="arg">pattern</code> argument is the
+string <code class="keyword">default</code>, that pattern will
+match any string. This guarantees that some set of code will be
+executed no matter what the contents of <code class=
+"arg">string</code> are.</p>
+
+<p>If there is no <code class="keyword">default</code> argument,
+and none of the <code class="arg">patterns</code> match <code
+class="arg">string</code>, then the <code class=
+"keyword">switch</code> command will return an empty string.</p>
+
+<p>If you use the brace version of this command, there will be no
+substitutions done on the patterns. The body of the command,
+however, will be parsed and evaluated just like any other command,
+so there will be a pass of substitutions done on that, just as will
+be done in the first syntax. The advantage of the second form is
+that you can write multiple line commands more readably with the
+brackets.</p>
+
+<p>Note that you can use braces to group the <code class=
+"arg">body</code> argument when using the <code class=
+"keyword">switch</code> or <code class="keyword">if</code>
+commands. This is because these commands pass their <code class=
+"arg">body</code> argument to the Tcl interpreter for evaluation.
+This evaluation includes a pass of substitutions just as it does
+for code not within a command <code class="arg">body</code>
+argument.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set x "ONE"
+set y 1
+set z ONE
+
+# This is probably the easiest and cleanest form of the command
+# to remember:
+switch $x {
+    "$z" {
+        set y1 [expr {$y+1}]
+        puts "MATCH \$z. $y + $z is $y1"
+    }
+    ONE {
+        set y1 [expr {$y+1}]
+        puts "MATCH ONE. $y + one is $y1"
+    }
+    TWO {
+        set y1 [expr {$y+2}]
+        puts "MATCH TWO. $y + two is $y1"
+    }
+    THREE {
+        set y1 [expr {$y+3}]
+        puts "MATCH THREE. $y + three is $y1"
+    }
+    default {
+        puts "$x is NOT A MATCH"
+    }
+}
+
+
+switch $x "$z" {
+    set y1 [expr {$y+1}]
+    puts "MATCH \$z. $y + $z is $y1"
+} ONE {
+    set y1 [expr {$y+1}]
+    puts "MATCH ONE. $y + one is $y1"
+} TWO {
+    set y1 [expr {$y+2}]
+    puts "MATCH TWO. $y + two is $y1"
+} THREE {
+    set y1 [expr {$y+3}]
+    puts "MATCH THREE. $y + three is $y1"
+} default {
+    puts "$x does not match any of these choices"
+}
+
+
+switch $x "ONE" "puts ONE=1" "TWO" "puts TWO=2" "default" "puts NO_MATCH"
+
+switch $x \
+"ONE"     "puts ONE=1"  \
+"TWO"     "puts TWO=2" \
+"default"     "puts NO_MATCH";
+   
+</pre>
+
+<div class="nav"><a href="Tcl7.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl9.html">Next
+lesson</a></div>
+</body>
+</html>
+

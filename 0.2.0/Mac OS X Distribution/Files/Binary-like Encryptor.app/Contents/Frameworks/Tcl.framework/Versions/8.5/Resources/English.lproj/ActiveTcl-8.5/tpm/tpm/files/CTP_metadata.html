@@ -1,0 +1,816 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>teapot-md - TEA Package Management</title>
+<link rel="stylesheet" href="../aspn.css" type="text/css">
+</head>
+<body>
+<div class="doctools">
+<hr>
+[ 
+
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+ <a href="../../toc.html">Main Table Of Contents</a> | <a href=
+"../toc.html">Table Of Contents</a> | <a href=
+"../../index.html">Keyword Index</a> ] 
+
+<hr>
+<h1 class="title">teapot-md(n) 1.0 tpm "TEA Package
+Management"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>teapot-md - TEApot Meta Data Specification</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">Fundamental format</a></li>
+
+<li class="section"><a href="#section3">Embedded Format</a></li>
+
+<li class="section"><a href="#section4">Meta data storage</a> 
+
+<ul>
+<li class="subsection"><a href="#subsection1">Zip Archives</a></li>
+
+<li class="subsection"><a href="#subsection2">Tcl Modules</a></li>
+
+<li class="subsection"><a href="#subsection3">Starkits and
+Starpacks</a></li>
+
+<li class="subsection"><a href="#subsection4">Profiles</a></li>
+</ul>
+</li>
+
+<li class="section"><a href="#section5">Keywords with predefined
+semantics</a></li>
+
+<li class="section"><a href="#section6">Entity references</a> 
+
+<ul>
+<li class="subsection"><a href="#subsection5">Backward
+compatibility</a></li>
+
+<li class="subsection"><a href="#subsection6">Example entity
+references</a></li>
+</ul>
+</li>
+
+<li class="section"><a href="#section7">BUGS, IDEAS,
+FEEDBACK</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>This document specifies the basic syntax of teapot meta data,
+the embedding of meta data into various types of files, and the set
+of standard keywords used by ActiveState, including their
+meaning.</p>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">Fundamental format</a></h2>
+
+<p>The basic format of TEApot meta data is that of a Tcl script in
+the form</p>
+
+<pre class="example">
+    ENTITY name version
+    Meta keyword1 word ...
+    Meta keyword2 word ...
+    Meta keyword3 word ...
+    ...
+</pre>
+
+<p>The format allows the description of more than one entity within
+the stored meta data, by simply storing several of the text blocks
+shown above in the same file. This is required if and only if a
+single file is used to hold the meta data of several entities
+sharing a single directory.</p>
+
+<p>In the above pseudo-example, <b class="const">ENTITY</b> is a
+placeholder for the actual command starting the description of an
+entity, which is either <b class="cmd"><a href=
+"../../index.html#key26">Package</a></b>, <b class="cmd"><a href=
+"../../index.html#key18">Profile</a></b>, or <b class="cmd"><a
+href="../../index.html#key27">Application</a></b>, for the
+description of packages, profiles, and applications respectively.
+It starts the block of meta data describing the named and versioned
+entity. The block ends at either the next entity command, or the
+end of the file, whichever comes first.</p>
+
+<p>Note that the entity version number has to use the same syntax
+as specified in <a href="http://tip.tcl.tk/268">TIP 268</a>. This
+matches the requirements of <span class="sectref"><a href=
+"#section6">Entity references</a></span> and Tcl itself.</p>
+
+<p>The actual meta data for the entity is defined by the sequence
+of <b class="cmd">Meta</b> commands and their arguments. The value
+associated with the <i class="term">keyword</i> is the
+<em>list</em> of words coming after it. Any keyword may also occur
+multiple times in <b class="cmd">Meta</b> commands. In that case
+its value is the concatenation of all lists associated with the
+individual occurrences. If, for example, the meta data is stored
+as</p>
+
+<pre class="example">
+  Meta KEY word1 word2 ...
+  Meta KEY word1' word2' ...'
+  ...''
+</pre>
+
+<p>then the actual value for KEY is</p>
+
+<pre class="example">
+  [list word1 word2 ... word1' word2' ...' ...'']
+</pre>
+
+<p>As a second example, the values resulting from the
+definitions</p>
+
+<pre class="example">
+  Meta Require {Tcl 8.2} {md5 2} struct::list
+</pre>
+
+<p>and</p>
+
+<pre class="example">
+  Meta Require {Tcl 8.2}
+  Meta Require {md5 2}
+  Meta Require struct::list
+</pre>
+
+<p>are identical.</p>
+
+<p>Another important issue is the case-sensitivity of keywords.
+They are <em>not</em>. Case-sensitive keywords imply that, for
+example, <b class="const">Description</b> and <b class=
+"const">description</b> can have different meanings and usage. No
+use-case could be thought of where such a distinction makes sense.
+Therefore the system will not make any distinctions based on
+letter-case.</p>
+
+<p>On the other hand, the values associated with the keywords are
+case-sensitive.</p>
+
+<p>The format described above is also called the <i class=
+"term">external</i> meta data format.</p>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">Embedded Format</a></h2>
+
+<p>The second format is for the embedding of meta data into tcl
+scripts. In this format, all the commands of the fundamental format
+are put into Tcl comments, with one command per line, and the whole
+block is bracketed by the markers <b class="const"># @@ Meta
+Begin</b> and <b class="const"># @@ Meta End</b>. Our example is
+for a simple Tcllib package:</p>
+
+<pre class="example">
+ # @@ Meta Begin
+ # Package comm 4.4.1
+ # Meta category        Remote communication
+ # Meta description     A remote communication facility for Tcl (7.6, 8.0,
+ # Meta description     and later)
+ # Meta platform        tcl
+ # Meta require         {Tcl 8}
+ # @@ Meta End
+</pre>
+</div>
+
+<div id="section4" class="section">
+<h2><a name="section4">Meta data storage</a></h2>
+
+<div id="subsection1" class="subsection">
+<h3><a name="subsection1">Zip Archives</a></h3>
+
+<p>For zip archives containing a teapot package the meta data is
+stored in the file "<b class="file">teapot.txt</b>" in the archive,
+using the fundamental format as documented above. For compatibility
+with older incarnations of the teapot system a copy of the meta
+data is also stored in the per-archive comment of the zip
+archive.</p>
+
+<p>Our example is for Iwidgets:</p>
+
+<pre class="example">
+Package Iwidgets 4.0.2
+Meta category        Widget set
+Meta description     This set of mega-widgets delivers many new, general
+Meta description     purpose widgets like option menus, combo boxes,
+Meta description     selection boxes, and various dialogs whose
+Meta description     counterparts are found in Motif and Windows.
+Meta platform        tcl
+Meta require         {Itcl 3.2}
+Meta require         {Itk 3.2}
+Meta require         {Tcl 8.0}
+Meta require         {Tk 8.0}
+Meta subject         iwidgets widget toolkit Tk megawidget {[incr Tcl]}
+Meta subject         {[incr Tk]}
+Meta summary         A megawidget set based on {[incr Tcl]} and {[incr Tk]}
+</pre>
+</div>
+
+<div id="subsection2" class="subsection">
+<h3><a name="subsection2">Tcl Modules</a></h3>
+
+<p>In Tcl Modules the meta data is stored using the <i class=
+"term">embedded</i> format documented above.</p>
+</div>
+
+<div id="subsection3" class="subsection">
+<h3><a name="subsection3">Starkits and Starpacks</a></h3>
+
+<p>Starkits are in essence Tcl Modules with a Metakit filesystem
+attached at the rear. The meta data is searched first in the
+header, as if it were a regular Tcl Module. Only if nothing was
+found in the header is the attached filesystem inspected as well.
+In that case a file "<b class="file">teapot.txt</b>" is sought in
+the top directory of the filesystem, and it has to contain the meta
+data using the external format.</p>
+
+<p>For a starpack the same procedure is followed, except that
+finding the meta data in the binary header is highly unlikely. It
+is possible however, if the C code of the runtime embedded the
+information in a string constant.</p>
+</div>
+
+<div id="subsection4" class="subsection">
+<h3><a name="subsection4">Profiles</a></h3>
+
+<p>Profiles are packages whose functionality is irrelevant and
+ignored. Only their meta data is used. As such their minimal
+representation is as a Tcl Module without actual code and
+containing only the meta data, using the embedded format. They are
+used by the TEApot system to define named collections of packages
+and applications.</p>
+
+<p>A profile has the entity type <b class="const">Profile</b>.
+Older profiles have the entity type <b class="const">Package</b>
+and a marker keyword <b class="const">Profile</b> whose actual
+value is irrelevant. This old form is still supported by the
+various tools for reading, for backward compatibility. This form is
+not generated anymore however.</p>
+
+<p>Examples of profiles would be all of Tcllib, or the whole of
+ActiveTcl.</p>
+
+<p>The client tool <b class="syscmd"><a href=
+"CTP_teacup.html">teacup</a></b> is also able to print the results
+of <b class="method">list</b> and <b class="method">search</b>
+queries in the form of a profile, allowing the easy generation of
+more examples as well.</p>
+</div>
+</div>
+
+<div id="section5" class="section">
+<h2><a name="section5">Keywords with predefined semantics</a></h2>
+
+<p>The semantics of the keywords listed below are defined by the
+TEAPOT system and the provided applications. In other words, the
+TEAPOT applications rely on them being used by packagers as
+specified.</p>
+
+<dl class="definitions">
+<dt><b class="const">Autopath</b></dt>
+
+<dd>
+<p>This information is optional. It represents an advanced feature
+of the package generator, <b class="syscmd"><a href=
+"CTP_teazip.html">teapot-pkg</a></b>. Its manpage explains
+more.</p>
+</dd>
+
+<dt><b class="const">Category</b></dt>
+
+<dd>
+<p>The value is interpreted as a string describing the <b class=
+"const">Subject</b> of the entity in a one-line sentence instead of
+a list of key-phrases. As such it is similar to <b class=
+"const">Summary</b>. The string is created by joining the words of
+the list.</p>
+</dd>
+
+<dt><b class="const">Description</b></dt>
+
+<dd>
+<p>The value is interpreted as a string describing the entity in
+free-form. The string is created by joining the words of the list.
+This is the information returned by <b class="cmd">teacup
+describe</b>.</p>
+</dd>
+
+<dt><b class="const">Entity</b></dt>
+
+<dd>
+<p><em>Reserved</em>. This keyword is used by repositories to
+reflect the type of the entity the meta data is for into the meta
+data itself. Anything a user may have stored under this will be
+lost. This enables repository users to search by entity via the
+general search facility.</p>
+</dd>
+
+<dt><b class="const">EntrySource</b></dt>
+
+<dd>
+<p>Their value is a list of paths containing the files in the
+package, relative to the package directory, which are <b class=
+"cmd">source</b>d to activate the functionality of the package.
+This is information for the package generator, <b class="syscmd"><a
+href="CTP_teazip.html">teapot-pkg</a></b>. Its manpage explains
+more.</p>
+</dd>
+
+<dt><b class="const">EntryLoad</b></dt>
+
+<dd>
+<p>Their value is a list of paths containing the files in the
+package, relative to the package directory, which are <b class=
+"cmd">load</b>ed to activate the functionality of the package. This
+is information for the package generator, <b class="syscmd"><a
+href="CTP_teazip.html">teapot-pkg</a></b>. Its manpage explains
+more.</p>
+</dd>
+
+<dt><b class="const">EntryKeep</b></dt>
+
+<dd>
+<p>The value of this keyword is irrelevant and ignored. The
+presence of this keyword instructs the package generator, <b class=
+"syscmd"><a href="CTP_teazip.html">teapot-pkg</a></b>, to keep an
+existing package index file ("<b class="file">pkgIndex.tcl</b>")
+instead of generating one. Its manpage explains more.</p>
+</dd>
+
+<dt><b class="const">EntryTclCommand</b></dt>
+
+<dd>
+<p>The value of this keyword is the actual load command of the
+package. The presence of this keyword instructs the package
+generator, <b class="syscmd"><a href=
+"CTP_teazip.html">teapot-pkg</a></b>. to not generate a load
+command of its own. Its manpage explains more.</p>
+</dd>
+
+<dt><b class="const">Excluded</b></dt>
+
+<dd>
+<p>This information is optional. When present it is a list of glob
+patterns specifying which files to not include in the package. This
+is information for the package generator, <b class="syscmd"><a
+href="CTP_teazip.html">teapot-pkg</a></b>. Its manpage explains
+more.</p>
+</dd>
+
+<dt><b class="const">Included</b></dt>
+
+<dd>
+<p>The information is optional. When present it is a list of glob
+patterns which specify which files should be included into the list
+of files for the package. This is information for the package
+generator, <b class="syscmd"><a href=
+"CTP_teazip.html">teapot-pkg</a></b>. Its manpage explains
+more.</p>
+</dd>
+
+<dt><b class="const">InitPrefix</b></dt>
+
+<dd>
+<p>This information is optional. It represents an advanced feature
+of the package generator, <b class="syscmd"><a href=
+"CTP_teazip.html">teapot-pkg</a></b>. Its manpage explains
+more.</p>
+</dd>
+
+<dt><b class="const">Name</b></dt>
+
+<dd>
+<p><em>Reserved</em>. This keyword is used by repositories to
+reflect the name of the entity the meta data is for into the meta
+data itself. Anything a user may have stored under this will be
+lost. This enables repository users to search by name via the
+general search facility.</p>
+</dd>
+
+<dt><b class="const">Platform</b></dt>
+
+<dd>
+<p>The value is interpreted as a string naming the architecture the
+entity is for. This is a value as generated by the command <b
+class="cmd">platform::identify</b> provided by the package <b
+class="package">platform</b>. Using the value <b class=
+"const">tcl</b> indicates that the entity is written in pure Tcl,
+without any binary parts.</p>
+
+<p>This keyword has to be present in the meta data to fully
+identify the entity. It cannot be left out.</p>
+</dd>
+
+<dt><b class="const">Profile</b></dt>
+
+<dd>
+<p><em>Deprecated</em>. In older releases of teapot a profile was a
+package with this keyword present in its meta. This form is still
+recognized, however the recommended form is to identify profiles
+through the use of <b class="const">Profile</b> as their entity
+type.</p>
+
+<p>The actual value of this keyword is irrelevant. Only the
+(non-)presence of the keyword has meaning. If the keyword is
+present the entity (should be a package) is a <i class="term"><a
+href="../../index.html#key18">Profile</a></i>, i.e. a package
+without actual code, and only requirements. Such packages are not
+installed, and only used in dependency-resolution.</p>
+</dd>
+
+<dt><b class="const">Recommend</b></dt>
+
+<dd>
+<p>The value is interpreted as a list of entity references, with
+each word one reference. The referencing entity is operational
+without them, however it may be better, faster, etc. when they are
+present.</p>
+
+<p>The format of these references is specified in section <span
+class="sectref"><a href="#section6">Entity
+references</a></span></p>
+</dd>
+
+<dt><b class="const">Require</b></dt>
+
+<dd>
+<p>The value is interpreted as a list of entity references, with
+each word one reference. The referenced entities are required for
+the referencing entity to be operational.</p>
+
+<p>The format of these references is specified in section <span
+class="sectref"><a href="#section6">Entity
+references</a></span></p>
+</dd>
+
+<dt><b class="const">Subject</b></dt>
+
+<dd>
+<p>The value is a list of key-phrases for use in an index.</p>
+</dd>
+
+<dt><b class="const">Summary</b></dt>
+
+<dd>
+<p>The value is interpreted as a free form string containing a
+brief, one-line description of the package, suitable for brief
+listings and tables of contents. The string is created by joining
+the words of the list.</p>
+</dd>
+
+<dt><b class="const">tcl_findLibrary/force</b></dt>
+
+<dd>
+<p>This information is optional. It represents an advanced feature
+of the package generator, <b class="syscmd"><a href=
+"CTP_teazip.html">teapot-pkg</a></b>. Its manpage explains
+more.</p>
+</dd>
+
+<dt><b class="const">Version</b></dt>
+
+<dd>
+<p><em>Reserved</em>. This keyword is used by repositories to
+reflect the version of the entity the meta data is for into the
+meta data itself. Anything a user may have stored under this will
+be lost.This enables repository users to search by version via the
+general search facility.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section6" class="section">
+<h2><a name="section6">Entity references</a></h2>
+
+<p>An entity reference is a list of the general form</p>
+
+<pre class="example">
+name <span class="opt">?requirement?</span>... <span class=
+"opt">?-option value?</span>...
+</pre>
+
+<p>with the name, requirements and all options and values each one
+word of the list. The smallest possible form is a list containing
+just the name as its first and only element.</p>
+
+<p>Each requirement between name and options is a short form for
+"-require requirement", and the value has the same syntax as the
+value for the option. Using this form allows the specification of
+requirements using the same syntax as specified in <a href=
+"http://tip.tcl.tk/268">TIP 268</a>. Especially when no further
+options are required.</p>
+
+<p>The recognized options are</p>
+
+<dl class="options">
+<dt><b class="option">-archglob</b> <i class=
+"arg">globpattern</i></dt>
+
+<dd>
+<p>If specified multiple times only the last value is relevant.</p>
+
+<p>The value is a glob-pattern. The <b class="const">Platform</b>
+information of a candidate package has to match this pattern to be
+valid and used.</p>
+</dd>
+
+<dt><b class="option">-exact</b> <i class="arg">bool</i></dt>
+
+<dd>
+<p>Backward compatibility option. The value is a boolean flag
+indicating if the exact version of the package is requested or not.
+<b class="const">True</b> requests an exact version. For the
+details see the section <span class="sectref"><a href=
+"#subsection5">Backward compatibility</a></span>.</p>
+</dd>
+
+<dt><b class="option">-is</b> <i class="arg">entity</i></dt>
+
+<dd>
+<p>If specified multiple times only the last value is relevant. If
+not specified at all the value defaults to <b class=
+"const">package</b>.</p>
+
+<p>The value is either <b class="const">package</b> or <b class=
+"const">application</b>, specifying the type of the referenced
+entity.</p>
+</dd>
+
+<dt><b class="option">-platform</b> <i class="arg">name</i></dt>
+
+<dd>
+<p>If specified multiple times only the last value is relevant.</p>
+
+<p>The value has to be one of <b class="const">unix</b>, <b class=
+"const">windows</b>, or <b class="const">macosx</b>. The reference
+is valid if and only if the variable <b class=
+"variable">tcl_platform(platform)</b> on the client performing the
+reference resolution contains the same value.</p>
+
+<p>In other words, this option is a guard, and makes the reference
+conditional on the platform of the client. I.e. the referenced
+packages is needed if and only if the platform is correct.</p>
+
+<p>An actual use case is Tcllib's <b class="package">autoproxy</b>
+package. It requires the package <b class="package">registry</b>
+for its operation, but this is valid only for windows. This is
+specified in the meta data of autoproxy as</p>
+
+<pre class="example">
+Meta Require {registry -platform windows}
+</pre>
+
+<p>A windows client will follow the reference. All other clients
+will ignore it.</p>
+</dd>
+
+<dt><b class="option">-require</b> <i class="arg">req</i></dt>
+
+<dd>
+<p>If specified multiple times the acceptable set of versions is
+the union of the specified ranges.</p>
+
+<p>The value specifies the range of versions which are acceptable.
+It is a list of one or two elements, specifying the min and max
+versions for the range. The maximum is exclusive, i.e. it is the
+first version which is not acceptable anymore. Note that the
+recognized forms are the same forms which are accepted by the
+builtin command <b class="cmd">package require</b></p>
+
+<dl class="definitions">
+<dt>X.y</dt>
+
+<dd>
+<p>This is equivalent to {-require X.y-(X+1)}. All versions since
+X.y are acceptable, until the next major version, i.e. X+1.</p>
+</dd>
+
+<dt>MIN-MAX</dt>
+
+<dd>
+<p>The acceptable range begins at version MIN and ends at version
+MAX, exclusive.</p>
+</dd>
+
+<dt>MIN-</dt>
+
+<dd>
+<p>The acceptable range starts at version MIN and there is no
+maximum. It can also be said that the maximum is infinity.</p>
+</dd>
+
+<dt>{MIN MAX}</dt>
+
+<dd>
+<p><em>Deprecated</em>. See "MIN-MAX".</p>
+</dd>
+
+<dt>{MIN {}}</dt>
+
+<dd>
+<p><em>Deprecated</em>. See "MIN-".</p>
+</dd>
+</dl>
+</dd>
+
+<dt><b class="option">-version</b> <i class="arg">v</i></dt>
+
+<dd>
+<p>Backward compatibility option. The value is a version number,
+the version of the package which has been requested. For the
+details see the section <span class="sectref"><a href=
+"#subsection5">Backward compatibility</a></span>.</p>
+</dd>
+</dl>
+
+<div id="subsection5" class="subsection">
+<h3><a name="subsection5">Backward compatibility</a></h3>
+
+<p>. For backward compatibility a reference may contain the options
+<b class="option">-version</b> and <b class="option">-exact</b> to
+simulate the older forms of <b class="cmd">package require</b>
+statements. They are translated internally to</p>
+
+<dl class="definitions">
+<dt>-version X.y -exact 1</dt>
+
+<dd>
+<p>=&gt; -require {X.y X.(y+1)} This means that exactness is only
+to the level of granularity specified, and below that we are free
+to choose unexact.</p>
+</dd>
+
+<dt>-version X.y -exact 0</dt>
+
+<dd>
+<p>=&gt; -require {X.y {}}</p>
+</dd>
+
+<dt>-version X.y</dt>
+
+<dd>
+<p>=&gt; -require {X.y {}}</p>
+</dd>
+</dl>
+</div>
+
+<div id="subsection6" class="subsection">
+<h3><a name="subsection6">Example entity references</a></h3>
+
+<dl class="definitions">
+<dt>FOO</dt>
+
+<dd>
+<p>This refers to package FOO (The entity-type defaults to
+package). Any version is acceptable.</p>
+</dd>
+
+<dt>FOO -is application</dt>
+
+<dd>
+<p>This refers to application FOO. Any version is acceptable.</p>
+</dd>
+
+<dt>FOO -version 2.1</dt>
+
+<dt>FOO -require 2.1</dt>
+
+<dt>FOO 2.1</dt>
+
+<dd>
+<p>Package FOO is asked for, at least version 2.1 or higher, but
+not as high as version 3.</p>
+</dd>
+
+<dt>FOO -version 2.1.1 -exact true</dt>
+
+<dt>FOO -require 2.1.1-2.1.1</dt>
+
+<dt>FOO 2.1.1-2.1.1</dt>
+
+<dd>
+<p>Version 2.1.1 of package FOO is asked for. Note that version
+2.1.1.2, 2.1.1.6, etc. are all valid. The exactness is only to the
+level specified. Below that the versions are allowed to vary.</p>
+</dd>
+
+<dt>FOO -require 4.3-4.5</dt>
+
+<dt>FOO 4.3-4.5</dt>
+
+<dd>
+<p>Acceptable versions of package FOO are 4.3 and higher, and have
+to be below version 4.5.</p>
+</dd>
+
+<dt>FOO -require 4.8-</dt>
+
+<dt>FOO 4.8-</dt>
+
+<dd>
+<p>Versions 4.8 and higher of package FOO are acceptable, with no
+upper limit.</p>
+</dd>
+
+<dt>FOO -require 4.3-4.5 -require 4.7</dt>
+
+<dt>FOO 4.3-4.5 4.7</dt>
+
+<dd>
+<p>Versions 4.3 and higher, and below 4.5 are acceptable, as are
+version 4.7 and higher, and below version 5. This accepts
+everything between versions 4.3 and 5, except for all versions
+between 4.5 and 4.7 (exclusive).</p>
+</dd>
+
+<dt>FOO -archglob *-sparc</dt>
+
+<dd>
+<p>This references all versions of package FOO which are for a
+sparc based system, independent of operating system.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="section7" class="section">
+<h2><a name="section7">BUGS, IDEAS, FEEDBACK</a></h2>
+
+<p>This document will undoubtedly contain bugs and other problems.
+Please report such at the <a href=
+"http://bugs.activestate.com/query.cgi?set_product=ActiveTcl">ActiveState
+ActiveTcl Bug Tracker</a>. The relevant component is
+<em>teapot</em>. Please also report any ideas for enhancements you
+may have for either application and/or documentation.</p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="CTP_teacup.html">teacup</a>, <a href=
+"CTP_teapot.html">teapot</a>, <a href=
+"CTP_teastir.html">teapot-admin</a>, <a href=
+"CTP_teazip.html">teapot-pkg</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../../index.html#key3">TEA</a>, <a href=
+"../../index.html#key2">TEAPOT</a>, <a href=
+"../../index.html#key4">archive</a>, <a href=
+"../../index.html#key6">development</a>, <a href=
+"../../index.html#key0">generation</a>, <a href=
+"../../index.html#key11">meta data</a>, <a href=
+"../../index.html#key1">package management</a>, <a href=
+"../../index.html#key5">packager</a>, <a href=
+"../../index.html#key12">syntax</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 2007-2008 ActiveState Software Inc.</p>
+</div>
+</div>
+</body>
+</html>
+

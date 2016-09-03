@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_GetVersion manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> GetVersion</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_GetVersion - get the version of the library at runtime 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+<b>Tcl_GetVersion</b>(<i>major, minor, patchLevel, type</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>int <b>*major</b> (out)</dt>
+
+<dd>Major version number of the Tcl library.</dd>
+
+<dt>int <b>*minor</b> (out)</dt>
+
+<dd>Minor version number of the Tcl library.</dd>
+
+<dt>int <b>*patchLevel</b> (out)</dt>
+
+<dd>The patch level of the Tcl library (or alpha or beta
+number).</dd>
+
+<dt>Tcl_ReleaseType <b>*type</b> (out)</dt>
+
+<dd>The type of release, also indicates the type of patch level.
+Can be one of <b>TCL_ALPHA_RELEASE</b>, <b>TCL_BETA_RELEASE</b>, or
+<b>TCL_FINAL_RELEASE</b>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_GetVersion</b> should be used to query the version number of
+the Tcl library at runtime. This is useful when using a dynamically
+loaded Tcl library or when writing a stubs-aware extension. For
+instance, if you write an extension that is linked against the Tcl
+stubs library, it could be loaded into a program linked to an older
+version of Tcl than you expected. Use <b>Tcl_GetVersion</b> to
+verify that fact, and possibly to change the behavior of your
+extension. 
+
+<p><b>Tcl_GetVersion</b> accepts NULL for any of the arguments. For
+instance if you do not care about the <i>patchLevel</i> of the
+library, pass a NULL for the <i>patchLevel</i> argument.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/V.htm#version">version</a>, <a href=
+"../Keywords/P.htm#patchlevel">patchlevel</a>, <a href=
+"../Keywords/M.htm#major">major</a>, <a href=
+"../Keywords/M.htm#minor">minor</a>, <a href=
+"../Keywords/A.htm#alpha">alpha</a>, <a href=
+"../Keywords/B.htm#beta">beta</a>, <a href=
+"../Keywords/R.htm#release">release</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1999 Scriptics Corporation</div>
+</body>
+</html>
+

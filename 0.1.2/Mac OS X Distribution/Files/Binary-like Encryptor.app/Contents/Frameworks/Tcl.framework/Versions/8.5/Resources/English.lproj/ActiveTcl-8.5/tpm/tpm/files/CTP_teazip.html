@@ -1,0 +1,751 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>teapot-pkg - TEA Package Management</title>
+<link rel="stylesheet" href="../aspn.css" type="text/css">
+</head>
+<body>
+<div class="doctools">
+<hr>
+[ 
+
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+ <a href="../../toc.html">Main Table Of Contents</a> | <a href=
+"../toc.html">Table Of Contents</a> | <a href=
+"../../index.html">Keyword Index</a> ] 
+
+<hr>
+<h1 class="title">teapot-pkg(n) 1.0 tpm "TEA Package
+Management"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>teapot-pkg - TEApot Package Tool</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">Commands</a></li>
+
+<li class="section"><a href="#section3">Archive Type
+Selection</a></li>
+
+<li class="section"><a href="#section4">Meta Data
+Requirements</a></li>
+
+<li class="section"><a href="#section5">BUGS, IDEAS,
+FEEDBACK</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">teapot-pkg</b> <b class=
+"method">generate</b> <span class="opt">?<b class=
+"option">--timestamp|-T</b>?</span> <span class="opt">?<b class=
+"option">--output|-o</b> <i class="arg">output</i>?</span> <span
+class="opt">?<b class="option">--type|-t</b> <i class=
+"arg">format</i>?</span> <span class="opt">?<b class=
+"option">--compile|-c</b>?</span> <i class=
+"arg">packagedir</i></a></li>
+
+<li><a href="#2"><b class="cmd">teapot-pkg</b> <b class=
+"method">ignore add</b> <i class="arg">pattern</i>...</a></li>
+
+<li><a href="#3"><b class="cmd">teapot-pkg</b> <b class=
+"method">ignore remove</b> <i class="arg">pattern</i>...</a></li>
+
+<li><a href="#4"><b class="cmd">teapot-pkg</b> <b class=
+"method">ignore list</b></a></li>
+
+<li><a href="#5"><b class="cmd">teapot-pkg</b> <b class=
+"method">version</b></a></li>
+
+<li><a href="#6"><b class="cmd">teapot-pkg</b> <b class=
+"method">who</b></a></li>
+
+<li><a href="#7"><b class="cmd">teapot-pkg</b> <b class=
+"method">show</b> <span class="opt">?<b class=
+"option">--human|-h</b>|<b class="option">--external|-x</b>|<b
+class="option">--embedded|-e</b>?</span> <i class=
+"arg">file</i></a></li>
+
+<li><a href="#8"><b class="cmd">teapot-pkg</b> <b class=
+"method">help</b></a></li>
+
+<li><a href="#9"><b class="cmd">teapot-pkg</b> <b class=
+"method">edit</b> <i class="arg">file</i> <i class=
+"arg">change</i>...</a></li>
+
+<li><a href="#10"><b class="cmd">teapot-pkg</b> <b class=
+"method">scan</b> <i class="arg">dir</i>...</a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>This document assumes that the reader has read at least the <i
+class="term"><a href="CTP_introduction.html">TEApot
+Introduction</a></i>, the <i class="term"><a href=
+"CTP_glossary.html">TEApot Glossary of Terms</a></i>, and possibly
+the <i class="term"><a href="CTP_metadata.html">TEApot Meta Data
+Specification</a></i>.</p>
+
+<p>This tool provides the ability to generate, inspect, and edit
+entity archive files from the command line. Tcl Dev Kit's Package
+Editor Tool is the visual complement.</p>
+
+<p>The first of these functions, archive generation, relies on the
+presence of a file "<b class="file">teapot.txt</b>" in the
+directory of the package(s) and containing its/their meta data
+(fundamental format). To help with the transition of existing
+packages to the use of TEApot meta data the tool also provides a
+scanner which extracts basic information from such packages using a
+set of heuristics and stores them as proper TEApot meta data.</p>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">Commands</a></h2>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">teapot-pkg</b> <b class=
+"method">generate</b> <span class="opt">?<b class=
+"option">--timestamp|-T</b>?</span> <span class="opt">?<b class=
+"option">--output|-o</b> <i class="arg">output</i>?</span> <span
+class="opt">?<b class="option">--type|-t</b> <i class=
+"arg">format</i>?</span> <span class="opt">?<b class=
+"option">--compile|-c</b>?</span> <i class=
+"arg">packagedir</i></a></dt>
+
+<dd>
+<p>Reads the meta data stored in the file "<b class=
+"file">teapot.txt</b>" found in the directory <i class=
+"arg">packagedir</i> (or sub-directories) and uses the information
+to generate one or more package archives of the given <i class=
+"arg">type</i>. The allowed type values are listed below. Note that
+the application uses <em>case-insensitive</em> string comparisons
+when checking the legality of the <i class="arg">format</i>
+argument.</p>
+
+<p><em>Available formats (--type values)</em></p>
+
+<dl class="definitions">
+<dt><b class="const">auto</b></dt>
+
+<dd>
+<p>This, the default format, is special. It tells the generator to
+choose the archive type (zip or tm, see below) on its own on a
+per-package basis, using the meta data of the package and the files
+found in it to make that decision. The used rules are explained in
+the section <span class="sectref"><a href="#section3">Archive Type
+Selection</a></span>.</p>
+</dd>
+
+<dt><b class="const">tm</b></dt>
+
+<dd>
+<p>Generate Tcl Modules. Fails for packages which do not fit.</p>
+</dd>
+
+<dt><b class="const">zip</b></dt>
+
+<dd>
+<p>Generate Zip archives.</p>
+</dd>
+
+<dt><b class="const">pkgIndex</b></dt>
+
+<dd>
+<p>This backend is special as well, it does not generate archives,
+but files "<b class="file">pkgIndex.tcl</b>".</p>
+
+<p>If <i class="arg">output</i> is not specified then the files are
+put into the directories where the packages were found. Otherwise a
+single master "<b class="file">pkgIndex.tcl</b>" is generated in
+the output directory, listing all the found packages in one
+file.</p>
+</dd>
+</dl>
+
+<p>If <i class="arg">output</i> is specified and exists it has to
+be a directory. This is required as the generator may create
+multiple archives during its recursion through <i class=
+"arg">package</i> and its sub-directories. If the path does not
+exist it will be created. If <i class="arg">output</i> is not
+specified the application defaults to the current working
+directory.</p>
+
+<p>If option <b class="option">--compile</b> is specified all Tcl
+files for the package are bytecode-compiled before being put into
+the package archive file. A Tcl file is any file with the extension
+"<b class="file">.tcl</b>", except for "<b class=
+"file">pkgIndex.tcl</b>". When this option is used the requirements
+of the package are automatically updated to require the package <b
+class="package">tbcload</b>.</p>
+
+<p>The names of the created archives are constructed from entity,
+type, name, version, architecture, and chosen archive file
+format.</p>
+
+<p><em>Note</em> that the application will recurse the whole
+directory hierarchy starting at <i class="arg">package</i> in
+search of possible packages. The recursion stops in any directory
+containing one or more packages. I.e. packages cannot be nested
+inside of other packages.</p>
+
+<p>The only exception to this are <i class="term">profile
+packages</i> (short: <i class="term"><a href=
+"../../index.html#key18">profile</a></i>). For a directory
+containing the basic definition of a single profile its
+subdirectories are searched and the found packages are recorded as
+requirements of the profile.</p>
+
+<p>Any other combination of profiles and regular packages, like a
+directory containing multiple profiles, or a mixture of regular
+packages and profiles is an error. Such errors are reported, but do
+not stop the application from scanning for more packages.</p>
+
+<p>If, and only if the option <b class="option">--timestamp</b> is
+specified, a timestamp in the format "YYYY.MM.DD.hh.mm.ss" will be
+appended to the package versions recorded in the generated
+archives. Note however that leading zeros in a version segment are
+not allowed and stripped out.</p>
+</dd>
+
+<dt><a name="2"><b class="cmd">teapot-pkg</b> <b class=
+"method">ignore add</b> <i class="arg">pattern</i>...</a></dt>
+
+<dd>
+<p>This command adds the specified glob patterns to the list of
+directories to ignore during package generation. This information
+is saved in the teapot configuration.</p>
+</dd>
+
+<dt><a name="3"><b class="cmd">teapot-pkg</b> <b class=
+"method">ignore remove</b> <i class="arg">pattern</i>...</a></dt>
+
+<dd>
+<p>This command removes the specified glob patterns from the list
+of directories to ignore during package generation. This
+information is saved in the teapot configuration.</p>
+</dd>
+
+<dt><a name="4"><b class="cmd">teapot-pkg</b> <b class=
+"method">ignore list</b></a></dt>
+
+<dd>
+<p>This command lists what standard glob patterns are used to
+detect which directories to ignore during package generation. This
+information is read out of the teapot configuration.</p>
+</dd>
+
+<dt><a name="5"><b class="cmd">teapot-pkg</b> <b class=
+"method">version</b></a></dt>
+
+<dd>
+<p>Prints the version number of the application.</p>
+</dd>
+
+<dt><a name="6"><b class="cmd">teapot-pkg</b> <b class=
+"method">who</b></a></dt>
+
+<dd>
+<p>Prints the complete teapot meta data of the application.</p>
+</dd>
+
+<dt><a name="7"><b class="cmd">teapot-pkg</b> <b class=
+"method">show</b> <span class="opt">?<b class=
+"option">--human|-h</b>|<b class="option">--external|-x</b>|<b
+class="option">--embedded|-e</b>?</span> <i class=
+"arg">file</i></a></dt>
+
+<dd>
+<p>Extracts the meta data from the specified archive <i class=
+"arg">file</i> and prints it to <b class="const">stdout</b> in one
+of three formats. The default, if no format is specified, is <b
+class="option">--human</b>. This formats the meta data for human
+consumption. The other two formats, <b class=
+"option">--external</b> and <b class="option">--embedded</b>,
+generate output for placement of the meta data into a "<b class=
+"file">teapot.txt</b>" file or a TclModule, respectively.</p>
+</dd>
+
+<dt><a name="8"><b class="cmd">teapot-pkg</b> <b class=
+"method">help</b></a></dt>
+
+<dd>
+<p>Prints basic usage information to <b class=
+"const">stdout</b>.</p>
+</dd>
+
+<dt><a name="9"><b class="cmd">teapot-pkg</b> <b class=
+"method">edit</b> <i class="arg">file</i> <i class=
+"arg">change</i>...</a></dt>
+
+<dd>
+<p>This method edits the <em>meta data</em> in the specified
+archive <i class="arg">file</i> per the given changes. Files in the
+archive file cannot be edited. Each change is specified by a
+command argument followed by a fixed set of arguments, their number
+depending on the command. The accepted commands are:</p>
+
+<dl class="definitions">
+<dt><b class="cmd">c</b> <i class="arg">pattern</i></dt>
+
+<dt><b class="cmd">clear</b> <i class="arg">pattern</i></dt>
+
+<dd>
+<p>The two forms above all remove all keys matching the glob <i
+class="arg">pattern</i> from the meta data.</p>
+</dd>
+
+<dt><b class="cmd">=</b> <i class="arg">key</i> <i class=
+"arg">value</i></dt>
+
+<dt><b class="cmd">set</b> <i class="arg">key</i> <i class=
+"arg">value</i></dt>
+
+<dd>
+<p>The two forms above all add the <i class="arg">value</i> to the
+meta data <i class="arg">key</i>, treating an existing value for
+the <i class="arg">key</i> as a list to extend. If <i class=
+"arg">key</i> does not exist it is created.</p>
+</dd>
+
+<dt><b class="cmd">!</b> <i class="arg">key</i></dt>
+
+<dt><b class="cmd">-</b> <i class="arg">key</i></dt>
+
+<dt><b class="cmd">unset</b> <i class="arg">key</i></dt>
+
+<dd>
+<p>The three forms above all remove the named <i class=
+"arg">key</i> from the meta data.</p>
+</dd>
+
+<dt><b class="cmd">name:</b> <i class="arg">value</i></dt>
+
+<dd>
+<p>Rename the entity, <i class="arg">value</i> is the new name.</p>
+</dd>
+
+<dt><b class="cmd">version:</b> <i class="arg">value</i></dt>
+
+<dd>
+<p>Change the version number of the entity, <i class=
+"arg">value</i> is the new version.</p>
+</dd>
+
+<dt><b class="cmd">type:</b> <i class="arg">value</i></dt>
+
+<dd>
+<p>Change the type of the entity, <i class="arg">value</i> is the
+new entity type.</p>
+</dd>
+</dl>
+</dd>
+
+<dt><a name="10"><b class="cmd">teapot-pkg</b> <b class=
+"method">scan</b> <i class="arg">dir</i>...</a></dt>
+
+<dd>
+<p>This method iterates over the specified directories, ignoring
+all not containing a "<b class="file">pkgIndex.tcl</b>" file. For
+the others the files in the directory are scanned and teapot meta
+data is generated through a set of heuristics. The results are
+written to "<b class="file">teapot.txt</b>" files, one per
+directory scanned.</p>
+
+<p>The heuristics inspect the "<b class="file">pkgIndex.tcl</b>"
+file to determine the packages provided by the directory, i.e.
+their names and versions. Their load commands are inspected to
+determine which files are the entry point(s) to their
+implementation.</p>
+
+<p>These entry points are further inspected for <b class=
+"cmd">package require</b> and <b class="cmd">source</b> commands,
+providing information about package dependencies, and other files
+belonging to a package. Note that caught package requirements are
+considered to be recommendations, everything else are
+requirements.</p>
+
+<p>The generator inspects all files matching the pattern "<b class=
+"file">*.man</b>" and checks if they are documentation written in
+the doctools markup language. If yes information about the package
+name, version, description, etc. is extracted. If the information
+in a file is sufficient to associate it with a package the
+extracted information is put into the meta data for that
+package.</p>
+
+<p>The generator looks for and recognizes the following
+pragmas/hints in the comments of Tcl files, and uses them to extend
+its knowledge of which files belong to what packages:</p>
+
+<ol class="enumerated">
+<li>
+<p>Each pragma is in a Tcl comment, on a single line.</p>
+</li>
+
+<li>
+<p>A pragma is introduced by either <b class="const">@mdgen</b> or
+<b class="const">@md_pragma</b>. This has to be the first word in
+the comment, with only whitespace between it and the comment
+character.</p>
+</li>
+
+<li>
+<p>After the introductory marker, separated by whitespace, three
+commands are recognized. Each command takes one argument, separated
+from the command by a sequence of whitespace, ":", and whitespace
+again. The argument goes until the end of the line, except for
+trailing whitespace.</p>
+
+<dl class="definitions">
+<dt><b class="cmd">OWNER</b></dt>
+
+<dd>
+<p>The argument is a path relative to the package directory. The
+named file belongs to the same package as the file containing the
+pragma.</p>
+</dd>
+
+<dt><b class="cmd">EXCLUDE</b></dt>
+
+<dd>
+<p>The argument is a path relative to the package directory. The
+named file does not belong to any package.</p>
+</dd>
+
+<dt><b class="cmd">NODEP</b></dt>
+
+<dd>
+<p>The argument is a package name. The named package is neither
+requirement nor recommendation for the package the file belongs,
+whatever the commands in this file say otherwise. It may however be
+named as a requirement/recommendation by other files belonging to
+the same package.</p>
+</dd>
+</dl>
+</li>
+</ol>
+
+<p>Examples:</p>
+
+<pre class="example">
+  # @md_pragma NODEP: pluginmgr
+  # @md_pragma NODEP : perfiffle
+  # @mdgen EXCLUDE: scripts/example.tcl
+</pre>
+</dd>
+</dl>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">Archive Type Selection</a></h2>
+
+<p>If the format <b class="const">auto</b> was specified the
+package generator is free to choose the format of the package
+archive file on its own. This is done according to the rules listed
+below. The rules are considered in order and the format specified
+by the first matching rule is used.</p>
+
+<ol class="enumerated">
+<li>
+<p>For profile packages the format is <b class="const">tm</b>.</p>
+</li>
+
+<li>
+<p>For a package which is not pure Tcl the format is <b class=
+"const">zip</b>.</p>
+
+<p><em>Note</em> that a package with an architecture not equal to
+"tcl", but not containing any file matching "*.so", "*.sl",
+"*.dll", or "*.dylib" is considered to be a pure Tcl package.</p>
+</li>
+
+<li>
+<p>For a package without files (bundle, or alias, via package
+index) the format is <b class="const">tm</b>.</p>
+</li>
+
+<li>
+<p>For a package containing one or more files, all of which are
+listed as entry points, the format is <b class="const">tm</b>.</p>
+</li>
+
+<li>
+<p>For all other packages the format is <b class=
+"const">zip</b>.</p>
+</li>
+</ol>
+</div>
+
+<div id="section4" class="section">
+<h2><a name="section4">Meta Data Requirements</a></h2>
+
+<p>The package generator recognizes and uses a number of keywords
+in the meta data for its own operation. These are listed below.
+With the exceptions of <b class="const">Platform</b> and <b class=
+"const">Require</b> none of the keywords listed below are passed
+through to the meta data stored in the archives. They are relevant
+to the developer and package generator, but not the person
+installing and/or using the package.</p>
+
+<p>Regarding the keywords <b class="const">Entry</b>*, one of them
+has to be present, and each excludes all the others.</p>
+
+<dl class="definitions">
+<dt>Autopath</dt>
+
+<dd>
+<p>This information is optional. It represents an advanced feature
+of the package generator influencing the generation of package
+index files. The value of the keyword is irrelevant and ignored. If
+present the backend will generate a package load command which
+extends the autopath of the Tcl interpreter with the path to the
+package before executing its entrypoints.</p>
+</dd>
+
+<dt>Circles</dt>
+
+<dd>
+<p>This information is optional. It represents an advanced feature
+of the package generator influencing the generation of package
+ifneeded scripts and package startup code. The value of the keyword
+is a list of names, a subset of the required packages. It names the
+packages which are circular dependencies of the package. If present
+the backend will generate a special code to handle the circularity
+during package load.</p>
+</dd>
+
+<dt>EntryKeep</dt>
+
+<dd>
+<p>The value of this keyword is irrelevant and ignored. The
+presence of this keyword instructs the generator to keep the
+existing "<b class="file">pkgIndex.tcl</b>" file of the package
+instead of generating one. Note that the backends for generating
+Tcl Modules and Package indices are unable to handle this
+instruction and will throw errors. Only the Zip and Auto backends
+are able to handle it.</p>
+
+<p>This feature is present to ease the transitioning of packages
+with complex package indices to TEApot.</p>
+</dd>
+
+<dt>EntryLoad</dt>
+
+<dt>EntrySource</dt>
+
+<dd>
+<p>Its value is a list of paths denoting the files in the package,
+relative to the package directory, which are either <b class=
+"cmd">load</b>ed or <b class="cmd">source</b>d to activate the
+functionality of the package. This information is used when
+generating either the header of a Tcl Module, or the file "<b
+class="file">pkgIndex.tcl</b>".</p>
+</dd>
+
+<dt>EntryTclCommand</dt>
+
+<dd>
+<p>The value of this keyword is the actual load command of the
+package. The presence of this keyword instructs the generator to
+not generate a load command of its own, but to use this one. The
+advanced features triggered by the keys <b class=
+"const">Autopath</b> and <b class="const">tcl_findLibrary/force</b>
+(see below) are still taken into account, i.e. code is generated
+for them, but not for the advanced feature normally triggered by <b
+class="const">InitPrefix</b>.</p>
+</dd>
+
+<dt>Excluded</dt>
+
+<dd>
+<p>This information is optional. When present it is a list of glob
+patterns specifying which files to not include in the package. When
+not present the list of files to exclude from the package is
+empty.</p>
+
+<p>The final list of files for a package is the list of included
+files minus the list of excluded files.</p>
+</dd>
+
+<dt>Included</dt>
+
+<dd>
+<p>The information is optional. When present it is a list of glob
+patterns which specify which files should be included into the list
+of files for the package. The information is always initialized
+with the name of the entry file as it was specified by either <b
+class="const">EntrySource</b> or <b class=
+"const">EntryLoad</b>.</p>
+</dd>
+
+<dt>InitPrefix</dt>
+
+<dd>
+<p>This information is optional. It represents an advanced feature
+of the package generator influencing the generation of package
+index files. The value of the keyword is interpreted as a
+dictionary mapping from files in the package to strings. If present
+the backend will generate a series of Tcl commands which will
+load/source each of the listed files and the associated strings put
+after these commands with only a space as separation. I.e it will
+interleave the load/source statements and the associated strings.
+This makes the meaning of the strings depending on how the file is
+used by the package.</p>
+
+<ol class="enumerated">
+<li>
+<p>For files <b class="cmd">load</b>ed into the interpreter the
+associated string becomes the name of the package to use when
+creating the name of the Init function to call. I.e., assuming that
+<b class="const">BAR</b> is the string which is associated with the
+loaded file "<b class="file">FOO.so</b>" instead of a plain</p>
+
+<pre class="example">
+    load FOO.so
+</pre>
+
+<p>the system generates</p>
+
+<pre class="example">
+    load FOO.so BAR
+</pre>
+</li>
+
+<li>
+<p>For <b class="cmd">source</b>d files however the string will
+make sense if and only if starting with a semicolon, or newline,
+i.e. making it a separate command, maybe even script, which runs
+after the file has been sourced. Without that additional separation
+an associated string will simply cause a syntax error at runtime.
+Assuming that the sourced "<b class="file">FOO.tcl</b>" is
+associated with "<b class="const">; # Helper functions</b>" the
+generated code will contain</p>
+
+<pre class="example">
+    source FOO.tcl ; # Helper functions
+</pre>
+</li>
+</ol>
+</dd>
+
+<dt>Platform</dt>
+
+<dd>
+<p>Required keyword. See the predefined semantics. This is used as
+part of the archive name, for the cases when a name is generated
+and not taken from the user. The information is passed through into
+the generated archives as well.</p>
+</dd>
+
+<dt>Require</dt>
+
+<dd>
+<p>Optional keyword. See the predefined semantics. When present its
+value is searched for dependencies on the Tcl core, to determine
+the lowest version of Tcl the package will run with. This is used
+by the Zip archive backend when generating the file "<b class=
+"file">pkgIndex.tcl</b>" to properly guard the <b class=
+"cmd">package ifneeded</b> statement. The information is passed
+through into the generated archives as well.</p>
+</dd>
+
+<dt>tcl_findLibrary/force</dt>
+
+<dd>
+<p>This information is optional. It represents an advanced feature
+of the package generator influencing the generation of package
+index files. The value of the keyword is interpreted as the base
+name XXX for an environment variable. If present the backend will
+generate a package load command which sets the environment variable
+<b class="variable">XXX</b>_LIBRARY to the path to the package
+before jumping to its entry.</p>
+</dd>
+</dl>
+</div>
+
+<div id="section5" class="section">
+<h2><a name="section5">BUGS, IDEAS, FEEDBACK</a></h2>
+
+<p>This document, and the application it describes, will
+undoubtedly contain bugs and other problems. Please report such at
+the <a href=
+"http://bugs.activestate.com/query.cgi?set_product=ActiveTcl">ActiveState
+ActiveTcl Bug Tracker</a>. The relevant component is
+<em>teapot</em>. Please also report any ideas for enhancements you
+may have for either application and/or documentation.</p>
+
+<p>The version number of the teapot-pkg application with the
+problem in question can be queried with the command <b class=
+"method">version</b></p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="CTP_teacup.html">teacup</a>, <a href=
+"CTP_teapot.html">teapot</a>, <a href=
+"CTP_teastir.html">teapot-admin</a>, <a href=
+"CTP_metadata.html">teapot-md</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../../index.html#key3">TEA</a>, <a href=
+"../../index.html#key2">TEAPOT</a>, <a href=
+"../../index.html#key4">archive</a>, <a href=
+"../../index.html#key6">development</a>, <a href=
+"../../index.html#key0">generation</a>, <a href=
+"../../index.html#key1">package management</a>, <a href=
+"../../index.html#key5">packager</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 2006-2008 ActiveState Software Inc.</p>
+</div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - lrepeat manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> lrepeat</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+lrepeat - Build a list by repeating elements 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>lrepeat</b> <i>number element1</i> ?<i>element2 element3
+...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>lrepeat</b> command creates a list of size <i>number *
+number of elements</i> by repeating <i>number</i> times the
+sequence of elements <i>element1 element2 ...</i>. <i>number</i>
+must be a positive integer, <i>elementn</i> can be any Tcl value.
+Note that <b>lrepeat 1 arg ...</b> is identical to <b>list arg
+...</b>, though the <i>arg</i> is required with <b>lrepeat</b>. 
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+<pre>
+<b>lrepeat</b> 3 a
+      <i><font size="+1">&rarr;</font> a a a</i>
+<b>lrepeat</b> 3 [<b>lrepeat</b> 3 0]
+      <i><font size="+1">&rarr;</font> {0 0 0} {0 0 0} {0 0 0}</i>
+<b>lrepeat</b> 3 a b c
+      <i><font size="+1">&rarr;</font> a b c a b c a b c</i>
+<b>lrepeat</b> 3 [<b>lrepeat</b> 2 a] b c
+      <i><font size=
+"+1">&rarr;</font> {a a} b c {a a} b c {a a} b c</i>
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/list.htm">list</a></b>, <b><a href=
+"../TclCmd/lappend.htm">lappend</a></b>, <b><a href=
+"../TclCmd/linsert.htm">linsert</a></b>, <b><a href=
+"../TclCmd/llength.htm">llength</a></b>, <b><a href=
+"../TclCmd/lset.htm">lset</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/E.htm#element">element</a>, <a href=
+"../Keywords/I.htm#index">index</a>, <a href=
+"../Keywords/L.htm#list">list</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2003 by Simon Geard. All rights reserved.</div>
+</body>
+</html>
+

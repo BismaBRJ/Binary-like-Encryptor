@@ -1,0 +1,253 @@
+#!/usr/local/bin/tclsh8.5
+# -*- tcl -*-
+
+package require Tk
+wm withdraw .
+
+set btn [tk_messageBox -icon question -type okcancel \
+	     -title   "Uninstall confirmation" \
+	     -message "Please confirm that you truly wish to uninstall all files of ActiveTcl-8.5"]
+
+if {$btn eq "cancel"} {exit 0}
+
+
+# The list of files, links, and directories to delete is not
+# hardwired, but extracted from the BOM (Bill-of-materials) file
+# stored in the receipt area, for our package.
+
+# We are also looking at the receipts for related packages,
+# i.e. different versions of the same also installed. This tells which
+# files are currently installed by several, i.e. shared, and thus must
+# not be deleted. An indirect reference counting scheme.
+
+# Set operation helper commands. Mostly snarfed frm Tcllib's
+# struct::set.
+
+proc union {A B} {
+    foreach x $B { lappend A $x }
+    return [lsort -unique $A]
+}
+
+proc difference {A B} {
+    # snarfed tcllib struct::set, difference
+    if {[llength $A] == 0} {return {}}
+    if {[llength $B] == 0} {return $A}
+
+    array set tmp {}
+    foreach x $A {::set tmp($x) .}
+    foreach x $B {catch {unset tmp($x)}}
+    return [array names tmp]
+}
+
+proc intersect {A B} {
+    # snarfed tcllib struct::set, Intersect
+    if {[llength $A] == 0} {return {}}
+    if {[llength $B] == 0} {return {}}
+
+    # This is slower than local vars, but more robust
+    if {[llength $B] > [llength $A]} {
+	::set res $A
+	::set A $B
+	::set B $res
+    }
+    ::set res {}
+    foreach x $A {::set ($x) {}}
+    foreach x $B {
+	if {[info exists ($x)]} {
+	    lappend res $x
+	}
+    }
+    return $res
+}
+
+# BOM helper commands.
+#### ================================================================
+
+proc manifest-of {bom} {
+    return [split [exec /usr/bin/lsbom -p Mf $bom | /usr/bin/cut -c 11-] \n]
+}
+
+proc manifest-union {boms} {
+    set res {}
+    foreach p $boms {
+	set res [union $res [manifest-of $p]]
+    }
+    return $res
+}
+
+#### ================================================================
+
+proc mybom {} {
+    global bompattern myreceipt
+
+    foreach {self pattern receipt} {
+	/var/db/receipts/com.activestate.pkg.ActiveTcl85.bom
+	/var/db/receipts/com.activestate.pkg.ActiveTcl*.bom
+	/var/db/receipts/com.activestate.pkg.ActiveTcl85*
+
+	/var/db/receipts/com.activestate.pkg.ActiveTcl-85.bom
+	/var/db/receipts/com.activestate.pkg.ActiveTcl-*.bom
+	/var/db/receipts/com.activestate.pkg.ActiveTcl-85*
+
+	/Library/Receipts/ActiveTcl-8.5.pkg/Contents/Archive.bom
+	/Library/Receipts/ActiveTcl-*.pkg/Contents/Archive.bom
+	/Library/Receipts/ActiveTcl-8.5.pkg
+    } {
+	if {[file exists $self]} {
+	    set bompattern $pattern
+	    set myreceipt $receipt
+	    # Memoize
+	    proc mybom {} [list return $self]
+	    return $self
+	}
+    }
+
+    return -code error "Unable to find my bom (ActiveTcl-85)"
+}
+
+proc allourboms {} {
+    global bompattern
+    glob -nocomplain $bompattern
+}
+
+proc allbutmyself {} {
+    set me [mybom]
+    difference [allourboms] [list $me]
+}
+
+proc cleanmypkg {} {
+    global myreceipt
+    foreach path [glob -nocomplain $myreceipt] {
+	puts \t$path
+	file delete -force $path
+    }
+}
+
+#### ================================================================
+
+proc mymanifest {} {
+    return [manifest-of [mybom]]
+}
+
+proc allbutmymanifest {} {
+    return [manifest-union [allbutmyself]]
+}
+
+#### ================================================================
+
+set myself [mymanifest]
+set others [allbutmymanifest]
+
+set unshared [difference $myself $others]
+set shared   [intersect  $myself $others]
+
+puts ================================================================
+puts {The following files are shared among the related packages, and not deleted}
+puts "\t[join [lsort -dict -decreasing $shared] "\n\t"]"
+
+puts ================================================================
+puts {Delete the unshared files, links, and directories}
+
+set currentlinks {}
+foreach line [lsort -dict -decreasing $unshared] {
+    set f [string trimleft [string trimright $line] " 	."]
+
+    # Files, directories, and links are done in one go. Non-empty
+    # directories will be shared, thus not in unshared.
+
+    if {[file isdirectory $f]} {
+	# Do not delete non-empty directories. May be shared with
+	# other unrelated packages (Example: /usr).
+
+	if {[llength [glob -nocomplain -directory $f *]]} {
+	    puts "\t${f}:\tSkipping non-empty directory"
+	    continue
+	}
+    }
+
+    puts \t$f
+    file delete -force -- $f
+
+    if {[file tail $f] eq "8.5"} {
+	# A version specific directory is removed.  This usually has a
+	# sibling 'Current'.  If this sibling refered to us we have to
+	# recreate it, letting it refer to the highest remaining
+	# installed version. We do this later, when everything is
+	# already gone. That way it won't matter if the link itself
+	# was removed as well.
+
+	lappend currentlinks $f
+    }
+}
+
+puts ================================================================
+puts {Handling Current}
+
+foreach f $currentlinks {
+    set dir [file dirname $f]
+
+    puts \t$f
+
+    # If Current itself was removed then there are no remaining
+    # installations. Because we know that it is shared between
+    # installation and therefore only removed when the last
+    # distribution is killed.
+
+    if {[catch {
+	glob -directory $dir Current
+    }]} {
+	# Note: We cannot use 'file exists' here to check the
+	# existence of Current. It is a link, and 'file exists' will
+	# follow it to return existence of the link target, instead of
+	# the link itself. Globbing for the link however does what we
+	# want.
+	puts "\t\tNo Current"
+	continue
+    }
+
+    # The link exists, and does not refer to the distribution we are
+    # uninstalling. Do not touch it.
+    if {[file tail [file readlink $dir/Current]] ne "8.5"} {
+	puts "\t\tCurrent not ours (-> [file tail [file readlink $dir/Current]])"
+	continue
+    }
+
+    # Link points to the uninstalled distribution. Delete, then
+    # re-create, and let it refer to the highest remaining version.
+    # We use 'ln -s' to perform the re-creation to make a relative
+    # link (Tcl's 'file link' command makes only absolute links).
+
+    set remainder [glob -directory $dir -tails *]
+
+    # Exclude Current from search
+    set pos [lsearch -exact $remainder Current]
+    set remainder [lreplace $remainder $pos $pos]
+
+    if {![llength $remainder]} {
+	puts "\t\tNothing to link to, was last, drop link"
+	file delete -force $dir/Current
+	continue
+    }
+
+    # Get max.
+    set high [lindex [lsort -command {package vcompare} $remainder] end]
+
+    if {$high eq {}} {
+	puts "\t\tNothing to link to, was last, drop link"
+	file delete -force $dir/Current
+	continue
+    }
+
+    puts "\t\tRelink to $high"
+
+    file delete -force $dir/Current
+    exec ln -s $high $dir/Current
+}
+
+puts ================================================================
+puts {Deleting receipt}
+
+# Now delete the package receipt as well.
+
+cleanmypkg
+exit

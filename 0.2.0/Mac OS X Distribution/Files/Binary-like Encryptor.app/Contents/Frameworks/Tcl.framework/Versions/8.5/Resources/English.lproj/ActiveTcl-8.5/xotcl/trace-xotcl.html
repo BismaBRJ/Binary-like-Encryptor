@@ -1,0 +1,332 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>XOTcl - Documentation --
+xotcl/library/lib/trace.xotcl</title>
+<link rel="StyleSheet" href="xotcl-doc.css" type="text/css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1><img src="./logo-100.jpg" alt="xotcl/library/lib/trace.xotcl"
+align="MIDDLE"> xotcl/library/lib/trace.xotcl</h1>
+
+<hr>
+<h2>Package/File Information</h2>
+
+<b>No package provided/required</b> <br>
+ <br>
+ <b>Defined Objects/Classes:</b> 
+
+<ul>
+<li><a href="#Object"><em>Object</em>:</a> <a href=
+"#Object-lintFilter">lintFilter</a>, <a href=
+"#Object-showCall">showCall</a>, <a href=
+"#Object-showClass">showClass</a>, <a href=
+"#Object-showMsg">showMsg</a>, <a href=
+"#Object-showStack">showStack</a>, <a href=
+"#Object-showTimeEnd">showTimeEnd</a>, <a href=
+"#Object-showTimeStart">showTimeStart</a>, <a href=
+"#Object-showVars">showVars</a>, <a href=
+"#Object-statFilter">statFilter</a>, <a href=
+"#Object-traceFilter">traceFilter</a>.<br>
+</li>
+
+<li><a href="#Trace"><em>Trace</em>:</a> <a href=
+"#Trace-closeTraceFile">closeTraceFile</a>, <a href=
+"#Trace-openTraceFile">openTraceFile</a>, <a href=
+"#Trace-puts">puts</a>.<br>
+</li>
+</ul>
+
+<br>
+ <b>Filename:</b> <a href=
+"xotcl/library/lib/trace.xotcl">xotcl/library/lib/trace.xotcl</a>
+<br>
+ <br>
+ 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Various tracing tools for the XOTcl language.</td>
+</tr>
+</table>
+
+<br>
+ 
+
+<hr>
+<p><a name="Object"></a></p>
+
+<h2>Class: <em>Object</em></h2>
+
+<b>Procs/Instprocs:</b> <a href=
+"#Object-lintFilter">lintFilter</a>, <a href=
+"#Object-showCall">showCall</a>, <a href=
+"#Object-showClass">showClass</a>, <a href=
+"#Object-showMsg">showMsg</a>, <a href=
+"#Object-showStack">showStack</a>, <a href=
+"#Object-showTimeEnd">showTimeEnd</a>, <a href=
+"#Object-showTimeStart">showTimeStart</a>, <a href=
+"#Object-showVars">showVars</a>, <a href=
+"#Object-statFilter">statFilter</a>, <a href=
+"#Object-traceFilter">traceFilter</a>. 
+
+<h3>Instprocs</h3>
+
+<ul>
+<li><a name="Object-traceFilter"></a> <b>traceFilter</b>
+<em>args</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>args</b>: arbitrary args</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Filter to trace every method call on an object or
+class hierarchy. Outputs a message befora and after each call of
+the traced object.</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Return:</em> </td>
+<td valign="top">empty string</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-lintFilter"></a> <b>lintFilter</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Experimental lint filter</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-statFilter"></a> <b>statFilter</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Experimental statistics filter</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-showVars"></a> <b>showVars</b> <em>args</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>args</b>: ist of variables</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Show the values of the specified variables (or of
+all variables) of an object on stderr.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-showMsg"></a> <b>showMsg</b> <em>msg</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>msg</b>: optional output</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Show a message msg with the form "[self]
+$cls-&gt;$method $msg" on stderr.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-showClass"></a> <b>showClass</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Show classes and mixins of the object</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-showStack"></a> <b>showStack</b>
+<em>maxDepth</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>maxDepth</b>: max stack depth, default=100</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Show callstack up to the specified calldepth.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-showCall"></a> <b>showCall</b> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Show the current call with the form "[self]
+$cls-&gt;$method $args" on stderr.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-showTimeStart"></a> <b>showTimeStart</b>
+<em>?handle?</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>?handle?</b>: Handle object name, optional</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">start a timer</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Object-showTimeEnd"></a> <b>showTimeEnd</b>
+<em>?handle?</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>?handle?</b>: Handle object name, optional</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">end a timer and show result</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<br>
+<br>
+ 
+
+<hr>
+<p><a name="Trace"></a></p>
+
+<h2>Object: <em>Trace</em></h2>
+
+<b>Class</b>: Object <br>
+ <b>Procs</b> <a href="#Trace-closeTraceFile">closeTraceFile</a>,
+<a href="#Trace-openTraceFile">openTraceFile</a>, <a href=
+"#Trace-puts">puts</a>. 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Write trace outputs and produce statistics.
+Variable traceStream defines where to write trace output (default:
+stderr).</td>
+</tr>
+</table>
+
+<h3>Procs</h3>
+
+<ul>
+<li><a name="Trace-puts"></a> <b>puts</b> <em>line</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>line</b>: output line</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Define how traceFilter writes to the output
+stream. Default: write to trace stream.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Trace-openTraceFile"></a> <b>openTraceFile</b>
+<em>name</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>name</b>: file name</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Redirect trace output to file.</td>
+</tr>
+</table>
+</li>
+
+<li><a name="Trace-closeTraceFile"></a> <b>closeTraceFile</b>
+<em>name</em> 
+
+<table border="0">
+<tr valign="top">
+<td valign="top"><em>Arguments:</em> </td>
+<td valign="top"><b>name</b>: file name</td>
+</tr>
+
+<tr valign="top">
+<td valign="top"><em>Description:</em> </td>
+<td valign="top">Close trace file and redirect output to
+stderr.</td>
+</tr>
+</table>
+</li>
+</ul>
+
+<br>
+<br>
+ <br>
+ <br>
+<br>
+ 
+
+<hr>
+<a href="./index.html">Back to index page.</a> <br>
+ 
+
+<hr>
+</body>
+</html>
+

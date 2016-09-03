@@ -1,0 +1,508 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Mathematical Functions - mathfunc manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> mathfunc</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="mathfunc.htm#M2" name="L932">NAME</a> 
+
+<dl>
+<dd>mathfunc - Mathematical functions for Tcl expressions</dd>
+</dl>
+</dd>
+
+<dd><a href="mathfunc.htm#M3" name="L933">SYNOPSIS</a> 
+
+<dl>
+<dd>package require <b>Tcl 8.5</b></dd>
+
+<dd><b>::tcl::mathfunc::abs</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::acos</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::asin</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::atan</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::atan2</b> <i>y</i> <i>x</i></dd>
+
+<dd><b>::tcl::mathfunc::bool</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::ceil</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::cos</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::cosh</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::double</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::entier</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::exp</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::floor</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::fmod</b> <i>x</i> <i>y</i></dd>
+
+<dd><b>::tcl::mathfunc::hypot</b> <i>x</i> <i>y</i></dd>
+
+<dd><b>::tcl::mathfunc::int</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::isqrt</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::log</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::log10</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::max</b> <i>arg</i> ?<i>arg</i> ...?</dd>
+
+<dd><b>::tcl::mathfunc::min</b> <i>arg</i> ?<i>arg</i> ...?</dd>
+
+<dd><b>::tcl::mathfunc::pow</b> <i>x</i> <i>y</i></dd>
+
+<dd><b>::tcl::mathfunc::rand</b></dd>
+
+<dd><b>::tcl::mathfunc::round</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::sin</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::sinh</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::sqrt</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::srand</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::tan</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::tanh</b> <i>arg</i></dd>
+
+<dd><b>::tcl::mathfunc::wide</b> <i>arg</i></dd>
+</dl>
+</dd>
+
+<dd><a href="mathfunc.htm#M4" name="L934">DESCRIPTION</a></dd>
+
+<dd><a href="mathfunc.htm#M5" name="L935">DETAILED DEFINITIONS</a> 
+
+<dl class="detailed definitions">
+<dd><a href="mathfunc.htm#M6" name="L936"><b>abs</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M7" name="L937"><b>acos</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M8" name="L938"><b>asin</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M9" name="L939"><b>atan</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M10" name="L940"><b>atan2</b> <i>y
+x</i></a></dd>
+
+<dd><a href="mathfunc.htm#M11" name="L941"><b>bool</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M12" name="L942"><b>ceil</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M13" name="L943"><b>cos</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M14" name="L944"><b>cosh</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M15" name="L945"><b>double</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M16" name="L946"><b>entier</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M17" name="L947"><b>exp</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M18" name="L948"><b>floor</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M19" name="L949"><b>fmod</b> <i>x
+y</i></a></dd>
+
+<dd><a href="mathfunc.htm#M20" name="L950"><b>hypot</b> <i>x
+y</i></a></dd>
+
+<dd><a href="mathfunc.htm#M21" name="L951"><b>int</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M22" name="L952"><b>isqrt</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M23" name="L953"><b>log</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M24" name="L954"><b>log10</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M25" name="L955"><b>max</b> <i>arg</i>
+<i>...</i></a></dd>
+
+<dd><a href="mathfunc.htm#M26" name="L956"><b>min</b> <i>arg</i>
+<i>...</i></a></dd>
+
+<dd><a href="mathfunc.htm#M27" name="L957"><b>pow</b> <i>x
+y</i></a></dd>
+
+<dd><a href="mathfunc.htm#M28" name="L958"><b>rand</b></a></dd>
+
+<dd><a href="mathfunc.htm#M29" name="L959"><b>round</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M30" name="L960"><b>sin</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M31" name="L961"><b>sinh</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M32" name="L962"><b>sqrt</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M33" name="L963"><b>srand</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M34" name="L964"><b>tan</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M35" name="L965"><b>tanh</b>
+<i>arg</i></a></dd>
+
+<dd><a href="mathfunc.htm#M36" name="L966"><b>wide</b>
+<i>arg</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="mathfunc.htm#M37" name="L967">SEE ALSO</a></dd>
+
+<dd><a href="mathfunc.htm#M38" name="L968">COPYRIGHT</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+mathfunc - Mathematical functions for Tcl expressions 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+package require <b>Tcl 8.5</b><br>
+<b>::tcl::mathfunc::abs</b> <i>arg</i><br>
+<b>::tcl::mathfunc::acos</b> <i>arg</i><br>
+<b>::tcl::mathfunc::asin</b> <i>arg</i><br>
+<b>::tcl::mathfunc::atan</b> <i>arg</i><br>
+<b>::tcl::mathfunc::atan2</b> <i>y</i> <i>x</i><br>
+<b>::tcl::mathfunc::bool</b> <i>arg</i><br>
+<b>::tcl::mathfunc::ceil</b> <i>arg</i><br>
+<b>::tcl::mathfunc::cos</b> <i>arg</i><br>
+<b>::tcl::mathfunc::cosh</b> <i>arg</i><br>
+<b>::tcl::mathfunc::double</b> <i>arg</i><br>
+<b>::tcl::mathfunc::entier</b> <i>arg</i><br>
+<b>::tcl::mathfunc::exp</b> <i>arg</i><br>
+<b>::tcl::mathfunc::floor</b> <i>arg</i><br>
+<b>::tcl::mathfunc::fmod</b> <i>x</i> <i>y</i><br>
+<b>::tcl::mathfunc::hypot</b> <i>x</i> <i>y</i><br>
+<b>::tcl::mathfunc::int</b> <i>arg</i><br>
+<b>::tcl::mathfunc::isqrt</b> <i>arg</i><br>
+<b>::tcl::mathfunc::log</b> <i>arg</i><br>
+<b>::tcl::mathfunc::log10</b> <i>arg</i><br>
+<b>::tcl::mathfunc::max</b> <i>arg</i> ?<i>arg</i> ...?<br>
+<b>::tcl::mathfunc::min</b> <i>arg</i> ?<i>arg</i> ...?<br>
+<b>::tcl::mathfunc::pow</b> <i>x</i> <i>y</i><br>
+<b>::tcl::mathfunc::rand</b><br>
+<b>::tcl::mathfunc::round</b> <i>arg</i><br>
+<b>::tcl::mathfunc::sin</b> <i>arg</i><br>
+<b>::tcl::mathfunc::sinh</b> <i>arg</i><br>
+<b>::tcl::mathfunc::sqrt</b> <i>arg</i><br>
+<b>::tcl::mathfunc::srand</b> <i>arg</i><br>
+<b>::tcl::mathfunc::tan</b> <i>arg</i><br>
+<b>::tcl::mathfunc::tanh</b> <i>arg</i><br>
+<b>::tcl::mathfunc::wide</b> <i>arg</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b><a href="../TclCmd/expr.htm">expr</a></b> command handles
+mathematical functions of the form <b>sin($x)</b> or
+<b>atan2($y,$x)</b> by converting them to calls of the form
+<b>[tcl::mathfunc::sin [expr {$x}]]</b> or <b>[tcl::mathfunc::atan2
+[expr {$y}] [expr {$x}]]</b>. A number of math functions are
+available by default within the namespace <b>::tcl::mathfunc</b>;
+these functions are also available for code apart from <b><a href=
+"../TclCmd/expr.htm">expr</a></b>, by invoking the given commands
+directly. 
+
+<p>Tcl supports the following mathematical functions in
+expressions, all of which work solely with floating-point numbers
+unless otherwise noted:</p>
+
+<pre>
+<b>abs</b> <b>acos</b> <b>asin</b> <b>atan</b>
+<b>atan2</b>    <b>bool</b> <b>ceil</b> <b>cos</b>
+<b>cosh</b> <b>double</b>   <b>entier</b>   <b>exp</b>
+<b>floor</b>    <b>fmod</b> <b>hypot</b>    <b>int</b>
+<b>isqrt</b>    <b>log</b>  <b>log10</b>    <b>max</b>
+<b>min</b>  <b>pow</b>  <b>rand</b> <b>round</b>
+<b>sin</b>  <b>sinh</b> <b>sqrt</b> <b>srand</b>
+<b>tan</b>  <b>tanh</b> <b>wide</b>
+</pre>
+
+<p>In addition to these predefined functions, applications may
+define additional functions by using <b><a href=
+"../TclCmd/proc.htm">proc</a></b> (or any other method, such as
+<b><a href="../TclCmd/interp.htm">interp alias</a></b> or <b><a
+href="../TclLib/CrtObjCmd.htm">Tcl_CreateObjCommand</a></b>) to
+define new commands in the <b>tcl::mathfunc</b> namespace. In
+addition, an obsolete interface named <b><a href=
+"../TclLib/CrtMathFnc.htm">Tcl_CreateMathFunc</a></b>() is
+available to extensions that are written in C. The latter interface
+is not recommended for new implementations.</p>
+
+<h4><a name="M5">DETAILED DEFINITIONS</a></h4>
+
+<dl class="detailed definitions">
+<dt><a name="M6"><b>abs</b> <i>arg</i></a></dt>
+
+<dd>Returns the absolute value of <i>arg</i>. <i>Arg</i> may be
+either integer or floating-point, and the result is returned in the
+same form.</dd>
+
+<dt><a name="M7"><b>acos</b> <i>arg</i></a></dt>
+
+<dd>Returns the arc cosine of <i>arg</i>, in the range
+[<i>0</i>,<i>pi</i>] radians. <i>Arg</i> should be in the range
+[<i>-1</i>,<i>1</i>].</dd>
+
+<dt><a name="M8"><b>asin</b> <i>arg</i></a></dt>
+
+<dd>Returns the arc sine of <i>arg</i>, in the range
+[<i>-pi/2</i>,<i>pi/2</i>] radians. <i>Arg</i> should be in the
+range [<i>-1</i>,<i>1</i>].</dd>
+
+<dt><a name="M9"><b>atan</b> <i>arg</i></a></dt>
+
+<dd>Returns the arc tangent of <i>arg</i>, in the range
+[<i>-pi/2</i>,<i>pi/2</i>] radians.</dd>
+
+<dt><a name="M10"><b>atan2</b> <i>y x</i></a></dt>
+
+<dd>Returns the arc tangent of <i>y</i>/<i>x</i>, in the range
+[<i>-pi</i>,<i>pi</i>] radians. <i>x</i> and <i>y</i> cannot both
+be 0. If <i>x</i> is greater than <i>0</i>, this is equivalent to
+&ldquo;<b>atan</b> [<b><a href="../TclCmd/expr.htm">expr</a></b>
+{<i>y</i><b>/</b><i>x</i>}]&rdquo;.</dd>
+
+<dt><a name="M11"><b>bool</b> <i>arg</i></a></dt>
+
+<dd>Accepts any numeric value, or any string acceptable to
+<b>string is boolean</b>, and returns the corresponding boolean
+value <b>0</b> or <b>1</b>. Non-zero numbers are true. Other
+numbers are false. Non-numeric strings produce boolean value in
+agreement with <b>string is true</b> and <b>string is
+false</b>.</dd>
+
+<dt><a name="M12"><b>ceil</b> <i>arg</i></a></dt>
+
+<dd>Returns the smallest integral floating-point value (i.e. with a
+zero fractional part) not less than <i>arg</i>. The argument may be
+any numeric value.</dd>
+
+<dt><a name="M13"><b>cos</b> <i>arg</i></a></dt>
+
+<dd>Returns the cosine of <i>arg</i>, measured in radians.</dd>
+
+<dt><a name="M14"><b>cosh</b> <i>arg</i></a></dt>
+
+<dd>Returns the hyperbolic cosine of <i>arg</i>. If the result
+would cause an overflow, an error is returned.</dd>
+
+<dt><a name="M15"><b>double</b> <i>arg</i></a></dt>
+
+<dd>The argument may be any numeric value, If <i>arg</i> is a
+floating-point value, returns <i>arg</i>, otherwise converts
+<i>arg</i> to floating-point and returns the converted value. May
+return <b>Inf</b> or <b>-Inf</b> when the argument is a numeric
+value that exceeds the floating-point range.</dd>
+
+<dt><a name="M16"><b>entier</b> <i>arg</i></a></dt>
+
+<dd>The argument may be any numeric value. The integer part of
+<i>arg</i> is determined and returned. The integer range returned
+by this function is unlimited, unlike <b>int</b> and <b>wide</b>
+which truncate their range to fit in particular storage
+widths.</dd>
+
+<dt><a name="M17"><b>exp</b> <i>arg</i></a></dt>
+
+<dd>Returns the exponential of <i>arg</i>, defined as
+<i>e</i>**<i>arg</i>. If the result would cause an overflow, an
+error is returned.</dd>
+
+<dt><a name="M18"><b>floor</b> <i>arg</i></a></dt>
+
+<dd>Returns the largest integral floating-point value (i.e. with a
+zero fractional part) not greater than <i>arg</i>. The argument may
+be any numeric value.</dd>
+
+<dt><a name="M19"><b>fmod</b> <i>x y</i></a></dt>
+
+<dd>Returns the floating-point remainder of the division of
+<i>x</i> by <i>y</i>. If <i>y</i> is 0, an error is returned.</dd>
+
+<dt><a name="M20"><b>hypot</b> <i>x y</i></a></dt>
+
+<dd>Computes the length of the hypotenuse of a right-angled
+triangle &ldquo;<b>sqrt</b> [<b><a href=
+"../TclCmd/expr.htm">expr</a></b>
+{<i>x</i><b>*</b><i>x</i><b>+</b><i>y</i><b>*</b><i>y</i>}]&rdquo;.</dd>
+
+<dt><a name="M21"><b>int</b> <i>arg</i></a></dt>
+
+<dd>The argument may be any numeric value. The integer part of
+<i>arg</i> is determined, and then the low order bits of that
+integer value up to the machine word size are returned as an
+integer value. For reference, the number of bytes in the machine
+word are stored in <b>tcl_platform(wordSize)</b>.</dd>
+
+<dt><a name="M22"><b>isqrt</b> <i>arg</i></a></dt>
+
+<dd>Computes the integer part of the square root of <i>arg</i>.
+<i>Arg</i> must be a positive value, either an integer or a
+floating point number. Unlike <b>sqrt</b>, which is limited to the
+precision of a floating point number, <i>isqrt</i> will return a
+result of arbitrary precision.</dd>
+
+<dt><a name="M23"><b>log</b> <i>arg</i></a></dt>
+
+<dd>Returns the natural logarithm of <i>arg</i>. <i>Arg</i> must be
+a positive value.</dd>
+
+<dt><a name="M24"><b>log10</b> <i>arg</i></a></dt>
+
+<dd>Returns the base 10 logarithm of <i>arg</i>. <i>Arg</i> must be
+a positive value.</dd>
+
+<dt><a name="M25"><b>max</b> <i>arg</i> <i>...</i></a></dt>
+
+<dd>Accepts one or more numeric arguments. Returns the one argument
+with the greatest value.</dd>
+
+<dt><a name="M26"><b>min</b> <i>arg</i> <i>...</i></a></dt>
+
+<dd>Accepts one or more numeric arguments. Returns the one argument
+with the least value.</dd>
+
+<dt><a name="M27"><b>pow</b> <i>x y</i></a></dt>
+
+<dd>Computes the value of <i>x</i> raised to the power <i>y</i>. If
+<i>x</i> is negative, <i>y</i> must be an integer value.</dd>
+
+<dt><a name="M28"><b>rand</b></a></dt>
+
+<dd>Returns a pseudo-random floating-point value in the range
+(<i>0</i>,<i>1</i>). The generator algorithm is a simple linear
+congruential generator that is not cryptographically secure. Each
+result from <b>rand</b> completely determines all future results
+from subsequent calls to <b>rand</b>, so <b>rand</b> should not be
+used to generate a sequence of secrets, such as one-time passwords.
+The seed of the generator is initialized from the internal clock of
+the machine or may be set with the <b>srand</b> function.</dd>
+
+<dt><a name="M29"><b>round</b> <i>arg</i></a></dt>
+
+<dd>If <i>arg</i> is an integer value, returns <i>arg</i>,
+otherwise converts <i>arg</i> to integer by rounding and returns
+the converted value.</dd>
+
+<dt><a name="M30"><b>sin</b> <i>arg</i></a></dt>
+
+<dd>Returns the sine of <i>arg</i>, measured in radians.</dd>
+
+<dt><a name="M31"><b>sinh</b> <i>arg</i></a></dt>
+
+<dd>Returns the hyperbolic sine of <i>arg</i>. If the result would
+cause an overflow, an error is returned.</dd>
+
+<dt><a name="M32"><b>sqrt</b> <i>arg</i></a></dt>
+
+<dd>The argument may be any non-negative numeric value. Returns a
+floating-point value that is the square root of <i>arg</i>. May
+return <b>Inf</b> when the argument is a numeric value that exceeds
+the square of the maximum value of the floating-point range.</dd>
+
+<dt><a name="M33"><b>srand</b> <i>arg</i></a></dt>
+
+<dd>The <i>arg</i>, which must be an integer, is used to reset the
+seed for the random number generator of <b>rand</b>. Returns the
+first random number (see <b>rand</b>) from that seed. Each
+interpreter has its own seed.</dd>
+
+<dt><a name="M34"><b>tan</b> <i>arg</i></a></dt>
+
+<dd>Returns the tangent of <i>arg</i>, measured in radians.</dd>
+
+<dt><a name="M35"><b>tanh</b> <i>arg</i></a></dt>
+
+<dd>Returns the hyperbolic tangent of <i>arg</i>.</dd>
+
+<dt><a name="M36"><b>wide</b> <i>arg</i></a></dt>
+
+<dd>The argument may be any numeric value. The integer part of
+<i>arg</i> is determined, and then the low order 64 bits of that
+integer value are returned as an integer value.</dd>
+</dl>
+
+<h3><a name="M37">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/expr.htm">expr</a></b>, <b><a href=
+"../TclCmd/mathop.htm">mathop</a></b>, <b><a href=
+"../TclCmd/namespace.htm">namespace</a></b> 
+
+<h3><a name="M38">COPYRIGHT</a></h3>
+
+Copyright (c) 1993 The Regents of the University of California.<br>
+Copyright (c) 1994-2000 Sun Microsystems Incorporated.<br>
+Copyright (c) 2005, 2006 by Kevin B. Kenny
+&lt;kennykb@acm.org&gt;.<br>
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-2000 Sun Microsystems, Inc. Copyright &copy;
+2005 by Kevin B. Kenny &lt;kennykb(at)acm.org&gt;. All rights
+reserved</div>
+</body>
+</html>
+

@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>tkcon: idebug procedure</title>
+<link rel="STYLESHEET" type="text/css" href="./style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<table width="100%" border="0" cellspacing="2" cellpadding="0"
+bgcolor="#000000">
+<tr>
+<td><!-- start header info -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0"
+bgcolor="#FFFFFF">
+<tr>
+<th><font size="+3">tkcon: <code>idebug</code>
+procedure</font></th>
+<td align="right"><a href="http://tkcon.sourceforge.net/"><img src=
+"http://sourceforge.net/sflogo.php?group_id=11462&amp;type=1"
+width="88" height="31" border="0" alt="SourceForge Logo"></a> </td>
+</tr>
+</table>
+
+<!-- end header info -->
+</td>
+</tr>
+
+<tr>
+<td><!-- start main navigation table -->
+<table border="1" cellpadding="2" cellspacing="2" bgcolor="#CCCCCC"
+width="100%">
+<tr>
+<th class="hi"><a href="index.html" class=
+"hi">Documentation</a></th>
+<th><a href="purpose.html">Purpose &amp; Features</a></th>
+<th><a href="limits.html">Limitations</a></th>
+<th><a href="todo.html">To&nbsp;Do</a></th>
+<th><a href="license.terms">License</a></th>
+</tr>
+
+<tr>
+<th colspan="2"><a href="plugin.html">Online Demo</a> (requires <a
+href="http://tcl.activestate.com/software/plugin/">Tk
+plugin</a>)</th>
+<th colspan="3"><a href="nontcl.html">Using TkCon with other Tk
+Languages</a></th>
+</tr>
+</table>
+
+<!-- end main navigation table -->
+</td>
+</tr>
+
+<tr>
+<td><!-- start secondary navigation table -->
+<table border="1" cellpadding="2" cellspacing="2" bgcolor="#BBBBBB"
+width="100%">
+<tr>
+<th><a href="start.html">Getting Started</a></th>
+<th><a href="bindings.html">Special Bindings</a></th>
+<th><a href="procs.html">Procedures</a></th>
+<th><a href="demopic.png">Screenshot</a></th>
+</tr>
+
+<tr>
+<th><a href="dump.html"><code>dump</code></a></th>
+<th><a href="tkcon.html"><code>tkcon</code></a></th>
+<th class="hi2"><a href="idebug.html" class=
+"hi2"><code>idebug</code></a></th>
+<th><a href="observe.html"><code>observe</code></a></th>
+</tr>
+</table>
+
+<!-- end secondary navigation table -->
+</td>
+</tr>
+
+<tr>
+<td bgcolor="#FFFFFF">
+<div class="indent">
+<p>The <b>idebug</b> command provides an interactive debugging
+environment for procedures via TkCon. You can place <code>idebug
+break</code> commands into your procedure to create breakpoints. It
+will pop up the TkCon console and put you into a "debugging" mode.
+The <code>body, show &amp; trace</code> methods are intended for
+internal use only.</p>
+
+<p>This procedure works for minimal debugging sessions. Comments
+are encouraged.</p>
+
+<dl>
+<dt><code>idebug <b>body</b></code> <i>?level?</i></dt>
+
+<dd>Prints out the body of the command (if it is a procedure) at
+the specified level. <i>level</i> defaults to the current
+level.</dd>
+
+<dt><code>idebug <b>break</b></code> <i>?id?</i></dt>
+
+<dd>Creates a breakpoint within a procedure. This will only trigger
+if idebug is on and the id matches the pattern. If so, TkCon will
+pop to the front with the prompt changed to an idebug prompt. You
+are given the basic ability to observe the call stack an query/set
+variables or execute Tcl commands at any level. A separate history
+is maintained in debugging mode. To see the special commands
+available at the debug prompt, type <b>?</b> and hit return.</dd>
+
+<dt><code>idebug {echo ?id?}</code> <i>?args?</i></dt>
+
+<dd>Behaves just like <code>echo</code>, but only triggers when
+idebug is on. You can specify an optional id to further restrict
+triggering. If no id is specified, it defaults to the name of the
+command in which the call was made.</dd>
+
+<dt><code>idebug <b>id</b></code> <i>?id?</i></dt>
+
+<dd>Query or set the idebug id. This id is used by other idebug
+methods to determine if they should trigger or not. The idebug id
+can be a glob pattern and defaults to *.</dd>
+
+<dt><code>idebug <b>off</b></code></dt>
+
+<dd>Turns idebug off.</dd>
+
+<dt><code>idebug <b>on</b></code> <i>?id?</i></dt>
+
+<dd>Turns idebug on. If <i>id</i> is specified, it sets the id to
+it.</dd>
+
+<dt><code>idebug {puts ?id?}</code> <i>args</i></dt>
+
+<dd>Behaves just like <code>puts</code>, but only triggers when
+idebug is on. You can specify an optional id to further restrict
+triggering. If no id is specified, it defaults to the name of the
+command in which the call was made.</dd>
+
+<dt><code>idebug <b>show</b></code> <i>type ?level?
+?VERBOSE?</i></dt>
+
+<dd><i>type</i> must be one of vars, locals or globals. This method
+will output the variables/locals/globals present in a particular
+level. If VERBOSE is added, then it actually 'dump's out the values
+as well. <i>level</i> defaults to the level in which this method
+was called.</dd>
+
+<dt><code>idebug <b>trace</b></code> <i>?level?</i></dt>
+
+<dd>Prints out the stack trace from the specified level up to the
+top level. <i>level</i> defaults to the current level.</dd>
+</dl>
+</div>
+</td>
+</tr>
+</table>
+
+<hr noshade size="1">
+<address><font size="2">&copy; Jeffrey Hobbs</font></address>
+</body>
+</html>
+

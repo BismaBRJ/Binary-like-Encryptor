@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Associative Arrays</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Associative Arrays.</h1>
+
+<div class="nav"><a href="Tcl21.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl23.html">Next
+lesson</a></div>
+
+<p>Languages like C, BASIC, FORTRAN and Java support arrays in
+which the index value is an integer. Tcl, like most scripting
+languages (Perl, Python, PHP, etc...) supports associative arrays
+(also known as "hash tables") in which the index value is a
+string.</p>
+
+<p>The syntax for an associative array is to put the index within
+parentheses:</p>
+
+<pre class="example">
+set name(first) "Mary"
+set name(last)  "Poppins"
+
+puts "Full name: $name(first) $name(last)"
+</pre>
+
+<p>There are several array commands aside from simply accessing and
+creating arrays which will be discussed in this and the next
+lesson.</p>
+
+<dl>
+<dt><code class="keyword">array exists</code> <code class=
+"arg">arrayName</code></dt>
+
+<dd>Returns 1 if <code class="arg">arrayName</code> is an array
+variable. Returns 0 if <code class="arg">arrayName</code> is a
+scalar variable, proc, or does not exist.</dd>
+
+<dt><code class="keyword">array names</code> <code class=
+"arg">arrayName</code> <code class="arg">?pattern</code></dt>
+
+<dd>Returns a list of the indices for the associative array <code
+class="arg">arrayName</code>. If <code class="arg">pattern</code>
+is supplied, only those indices that match <code class=
+"arg">pattern</code> are returned. The match is done using the
+globbing technique from <code class="arg">string match</code>.</dd>
+
+<dt><code class="keyword">array size</code> <code class=
+"arg">arrayName</code></dt>
+
+<dd>Returns the number of elements in array <code class=
+"arg">arrayName</code>.</dd>
+
+<dt><code class="keyword">array get</code> <code class=
+"arg">arrayName</code></dt>
+
+<dd>Returns a list in which each odd member of the list (1, 3, 5,
+etc) is an index into the associative array. The list element
+following a name is the value of that array member.</dd>
+
+<dt><code class="keyword">array set</code> <code class=
+"arg">arrayName dataList</code></dt>
+
+<dd>Converts a list into an associative array. <code class=
+"arg">DataList</code> is a list in the format of that returned by
+<code class="arg">array get</code>. Each odd member of the list (1,
+3, 5, etc) is an index into the associative array, and the list
+element following that is the value of that array member.</dd>
+
+<dt><code class="keyword">array unset</code> <code class=
+"arg">arrayName ?pattern?</code></dt>
+
+<dd>Unsets all of the elements in the array. If <code class=
+"arg">pattern</code> exists, only the elements that match pattern
+are unset.</dd>
+</dl>
+
+<p>When an associative array name is given as the argument to the
+<code class="keyword">global</code> command, all the elements of
+the associative array become available to that proc. For this
+reason, <i>Brent Welch</i> recommends (in <i>Practical Programming
+in Tcl and Tk</i>) using an associative array for the state
+structure in a package.</p>
+
+<p>This method makes it simpler to share data between many procs
+that are working together, and doesn't pollute the global namespace
+as badly as using separate globals for all shared data items.</p>
+
+<p>Another common use for arrays is to store tables of data. In the
+example below we use an array to store a simple database of
+names.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+proc addname {first last} {
+    global name
+
+    # Create a new ID (stored in the name array too for easy access)
+
+    incr name(ID)
+    set id $name(ID)
+
+    set name($id,first) $first   ;# The index is simply a string!
+    set name($id,last)  $last    ;# So we can use both fixed and
+                                 ;# varying parts
+}
+
+#
+# Initialise the array and add a few names
+#
+global name
+set name(ID) 0
+
+addname Mary Poppins
+addname Uriah Heep
+addname Rene Descartes
+addname Leonardo "da Vinci"
+
+#
+# Check the contents of our database
+# The parray command is a quick way to
+# print it
+#
+parray name
+
+#
+# Some array commands
+#
+array set array1 [list {123} {Abigail Aardvark} \
+                       {234} {Bob Baboon} \
+                       {345} {Cathy Coyote} \
+                       {456} {Daniel Dog} ]
+
+puts "Array1 has [array size array1] entries\n"
+
+puts "Array1 has the following entries: \n [array names array1] \n"
+
+puts "ID Number 123 belongs to $array1(123)\n"
+
+if {[array exist array1]} {
+    puts "array1 is an array"
+} else {
+    puts "array1 is not an array"
+}
+
+if {[array exist array2]} {
+    puts "array2 is an array"
+} else {
+    puts "array2 is not an array"
+}
+
+proc existence {variable} {
+    upvar $variable testVar
+    if { [info exists testVar] } {
+    puts "$variable Exists"
+    } else {
+    puts "$variable Does Not Exist"
+    }
+}
+
+puts "\ntesting unsetting a member of an array"
+existence a(0)
+puts "a0 has been unset"
+unset a(0)
+existence a(0)
+
+puts "\ntesting unsetting several members of an array, with an error"
+existence a(3)
+existence a(4)
+catch {unset a(3) a(0) a(4)}
+puts "\nAfter attempting to delete a(3), a(0) and a(4)"
+existence a(3)
+existence a(4)
+
+puts "\nUnset all the array's elements"
+existence a
+array unset a *
+
+puts "\ntesting unsetting an array"
+existence a
+puts "a has been unset"
+unset a
+existence a
+</pre>
+
+<div class="nav"><a href="Tcl21.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl23.html">Next
+lesson</a></div>
+</body>
+</html>
+

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Changing Working Directory - cd, pwd</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Changing Working Directory - cd, pwd</h1>
+
+<div class="nav"><a href="Tcl34.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl36.html">Next
+lesson</a></div>
+
+Tcl also supports commands to change and display the current
+working directory. <br>
+<br>
+<p>These are:</p>
+
+<dl>
+<dt><b>cd</b> <i>?dirName?</i></dt>
+
+<dd>Changes the current directory to <i>dirName</i> (if
+<i>dirName</i> is given, or to the <b>$HOME</b> directory if
+<i>dirName</i> is not given. If <i>dirName</i> is a tilde
+(<b>~</b>, <code class="keyword">cd</code> changes the working
+directory to the users home directory. If <i>dirName</i> starts
+with a tilde, then the rest of the characters are treated as a
+login id, and <code class="keyword">cd</code> changes the working
+directory to that user's $HOME.</dd>
+
+<dt><b>pwd</b></dt>
+
+<dd>Returns the current directory.</dd>
+</dl>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+set dirs [list TEMPDIR]
+
+puts "[format "%-15s  %-20s " "FILE" "DIRECTORY"]"
+
+foreach dir $dirs {
+    catch {cd $dir}
+    set c_files [glob -nocomplain c*]
+
+    foreach name $c_files {
+        puts "[format "%-15s  %-20s " $name [pwd]]"
+    }
+}
+</pre>
+
+<div class="nav"><a href="Tcl34.html">Previous lesson</a> | <a
+href="tcltutorial.html">Index</a> | <a href="Tcl36.html">Next
+lesson</a></div>
+</body>
+</html>
+

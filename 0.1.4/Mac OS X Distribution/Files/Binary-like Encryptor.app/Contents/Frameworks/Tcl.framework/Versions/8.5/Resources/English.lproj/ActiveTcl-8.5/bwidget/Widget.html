@@ -1,0 +1,543 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Widget</title>
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<img src="constr.gif" width="40" height="40"> Under construction
+...<br>
+<dl>
+<dt><i><a href="#descr">NAME</a></i></dt>
+
+<dd><b>Widget</b> - The Widget base class</dd>
+</dl>
+
+<dl>
+<dt><i><a href="#wc">COMMAND</a></i></dt>
+
+<dd>Widget::<a href="#addmap"><b>addmap</b></a> <i>class</i>
+<i>subclass</i> <i>subpath</i> <i>options</i></dd>
+
+<dd>Widget::<a href="#bwinclude"><b>bwinclude</b></a> <i>class</i>
+<i>subclass</i> <i>subpath</i> ?<i>arg...</i>?</dd>
+
+<dd>Widget::<a href="#cget"><b>cget</b></a> <i>path</i>
+<i>option</i></dd>
+
+<dd>Widget::<a href="#configure"><b>configure</b></a> <i>path</i>
+<i>options</i></dd>
+
+<dd>Widget::<a href="#create"><b>create</b></a> <i>class</i>
+<i>path</i> ?<i>rename</i>?</dd>
+
+<dd>Widget::<a href="#declare"><b>declare</b></a> <i>class</i>
+<i>optlist</i></dd>
+
+<dd>Widget::<a href="#define"><b>define</b></a> <i>class</i>
+<i>filename</i> ?<i>class ...</i>?</dd>
+
+<dd>Widget::<a href="#destroy"><b>destroy</b></a> <i>path</i></dd>
+
+<dd>Widget::<a href="#focusNext"><b>focusNext</b></a> <i>w</i></dd>
+
+<dd>Widget::<a href="#focusOK"><b>focusOK</b></a> <i>w</i></dd>
+
+<dd>Widget::<a href="#focusPrev"><b>focusPrev</b></a> <i>w</i></dd>
+
+<dd>Widget::<a href="#generate-doc"><b>generate-doc</b></a>
+<i>dir</i> <i>widgetlist</i></dd>
+
+<dd>Widget::<a href=
+"#generate-widget-doc"><b>generate-widget-doc</b></a> <i>class</i>
+<i>iscmd</i> <i>file</i></dd>
+
+<dd>Widget::<a href="#getoption"><b>getoption</b></a> <i>path</i>
+<i>option</i></dd>
+
+<dd>Widget::<a href="#getVariable"><b>getVariable</b></a>
+<i>path</i> <i>varName</i> <i>?myVarName?</i></dd>
+
+<dd>Widget::<a href="#hasChanged"><b>hasChanged</b></a> <i>path</i>
+<i>option</i> <i>pvalue</i></dd>
+
+<dd>Widget::<a href="#init"><b>init</b></a> <i>class</i>
+<i>path</i> <i>options</i></dd>
+
+<dd>Widget::<a href="#setoption"><b>setoption</b></a> <i>path</i>
+<i>option</i> <i>value</i></dd>
+
+<dd>Widget::<a href="#subcget"><b>subcget</b></a> <i>path</i>
+<i>subwidget</i></dd>
+
+<dd>Widget::<a href="#syncoptions"><b>syncoptions</b></a>
+<i>class</i> <i>subclass</i> <i>subpath</i> <i>options</i></dd>
+
+<dd>Widget::<a href="#tkinclude"><b>tkinclude</b></a> <i>class</i>
+<i>tkwidget</i> <i>subpath</i> ?<i>arg...</i>?</dd>
+</dl>
+
+<br>
+<hr width="100%">
+<br>
+<b><a name="descr"></a>DESCRIPTION</b><br>
+<p>The <b>Widget</b> namespace handle data associated to all
+BWidget and provide commands to easily define BWidget.<br>
+For commands can be used to define a BWidget: <b>tkinclude</b>,
+<b>bwinclude</b>, <b>declare</b>, <b>addmap</b> and
+<b>syncoptions</b>. Here is the definition of <a href=
+"ComboBox.html">ComboBox</a> widget:<br>
+<br>
+</p>
+
+<center>
+<table border="2" celspacing="2" width="80%">
+<tr>
+<td>
+<pre>
+namespace eval ComboBox {
+    <font color=
+"red"><i># We're using ArrowButton, Entry and LabelFrame</i></font>
+    ArrowButton::use
+    Entry::use
+    LabelFrame::use
+
+    <font color=
+"red"><i># Include resources of LabelFrame</i></font>
+    Widget::bwinclude ComboBox LabelFrame .labf \ 
+        rename     {-text -label} \ 
+        remove     {-focus} \ 
+        prefix     {label -justify -width -anchor -height -font} \ 
+        initialize {-relief sunken -borderwidth 2}
+
+    <font color="red"><i># Include resources of Entry</i></font>
+    Widget::bwinclude ComboBox Entry .e \ 
+        remove {-relief -bd -borderwidth -bg -fg} \ 
+        rename {-foreground -entryfg -background -entrybg}
+
+    <font color="red"><i># Declare new resources</i></font>
+    Widget::declare ComboBox {
+        {-height      TkResource 0  0 listbox}
+        {-values      String     "" 0}
+        {-modifycmd   String     "" 0}
+        {-postcommand String     "" 0}
+    }
+
+    <font color="red"><i># Map resources to subwidget</i></font>
+    Widget::addmap ComboBox "" :cmd {-background {}}
+    Widget::addmap ComboBox ArrowButton .a \ 
+        {-foreground {} -background {} -disabledforeground {} -state {}}
+
+    <font color="red"><i># Synchronize subwidget options</i></font>
+    Widget::syncoptions ComboBox Entry .e {-text {}}
+    Widget::syncoptions ComboBox LabelFrame .labf {-label -text -underline {}}
+
+    proc use {} {}
+}
+</pre>
+</td>
+</tr>
+</table>
+</center>
+
+<br>
+<br>
+ 
+
+<hr width="50%">
+<br>
+<b><a name="wc">COMMAND</a></b><br>
+<dl>
+<dt><a name="addmap">Widget::<b>addmap</b></a> <i>class</i>
+<i>subclass</i> <i>subpath</i> <i>options</i></dt>
+
+<dd>This command map some resources to subwidget. Mapped resources
+automatically configure subwidget when widget is configured. 
+
+<ul>
+<li><i>class</i> is the class of the new BWidget</li>
+
+<li><i>subclass</i> is the class the subwidget (BWidget class, e.g
+Entry, or empty for Tk widget)</li>
+
+<li><i>subpath</i> is the path of the subwidget</li>
+
+<li><i>options</i> is the list <i>{option realres ...}</i> of
+options to map to subwidget</li>
+</ul>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="bwinclude">Widget::<b>bwinclude</b></a> <i>class</i>
+<i>subclass</i> <i>subpath</i> ?<i>arg...</i>?</dt>
+
+<dd>This command includes into a new BWidget the resources of
+another BWidget. Arguments are: 
+
+<ul>
+<li><i>class</i> class of the new widget</li>
+
+<li><i>subclass</i> class name of the BWidget to be included</li>
+
+<li><i>subpath</i> path of the widget to configure when BWidget is
+configured</li>
+
+<li><i>options</i> is: 
+
+<ul>
+<li><i><b>include</b> {option option ...}</i><br>
+list of options to include (all if not defined)</li>
+
+<li><i><b>remove</b> {option option ...}</i><br>
+ list of options to remove</li>
+
+<li><i><b>rename</b> {option name option name ...}</i><br>
+list of options to rename</li>
+
+<li><i><b>prefix</b> {prefix option option ...}</i><br>
+pefix all <i>option</i> by <i>prefix</i></li>
+
+<li><i><b>initialize</b> {option value option value ...}</i><br>
+default value of options</li>
+
+<li><i><b>readonly</b> {option value option value ...}</i><br>
+new readonly flag</li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="cget">Widget::<b>cget</b></a> <i>path</i>
+<i>option</i></dt>
+
+<dd>Returns the value of <i>option</i> of BWidget <i>path</i>.
+<b>cget</b> tests the option existence and takes care of
+synchronization with subwidget. Typically called by the BWidget
+<b>cget</b> command.</dd>
+</dl>
+
+<dl>
+<dt><a name="configure">Widget::<b>configure</b></a> <i>path</i>
+<i>options</i></dt>
+
+<dd>Description text</dd>
+</dl>
+
+<dl>
+<dt><a name="create">Widget::<b>create</b></a> <i>class</i>
+<i>path</i> ?<i>rename</i>?</dt>
+
+<dd>The standard method for creating a BWidget. The real widget
+path is renamed to $path:cmd, and a new proc is created to replace
+the path which points to the BWidget's commands. 
+
+<p>If <i>rename</i> is false, the path will not be renamed, but the
+proc will still be created. This is useful when inheriting another
+BWidget who will already have renamed the widget.</p>
+
+<p>The command returns the widget path. This command is usually the
+last command executed in the ::create command for the widget.</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="declare">Widget::<b>declare</b></a> <i>class</i>
+<i>optlist</i></dt>
+
+<dd>This command declare new resources for a BWidget. 
+
+<ul>
+<li><i>class</i> is class of the new widget</li>
+
+<li><i>options</i> is the list describing new options. Each new
+option is a list <b>{option type value ro ?args?}</b> where: 
+
+<ul>
+<li><i>option</i> is the name of the option</li>
+
+<li><i>type</i> is the type of the option</li>
+
+<li><i>value</i> is the default value of the option</li>
+
+<li><i>ro</i> is the readonly flag of the option</li>
+
+<li><i>args</i> depends on type</li>
+</ul>
+</li>
+</ul>
+
+<br>
+<i>type</i> can be:<br>
+<dl>
+<dt><b>TkResource</b></dt>
+
+<dd><i>value</i> of <i>option</i> denotes a resource of a Tk
+widget. <i>args</i> must be <i>class</i> or <i>{class
+realoption}</i>. <i>class</i> is the creation command of the Tk
+widget, e.g. <b>entry</b>. The second form must be used if
+<i>option</i> has not the same name in Tk widget, but
+<i>realoption</i>.<br>
+If <i>value</i> is empty, it is initialized to the default value of
+the Tk widget.</dd>
+
+<dt><b>BwResource</b></dt>
+
+<dd><i>value</i> of <i>option</i> denotes a resource of a BWidget.
+<i>args</i> must be <i>class</i> or <i>{class realoption}</i>.
+<i>class</i> is the name of the namespace of the BWidget, e.g.
+<b>LabelFrame</b>. The second form must be used if <i>option</i>
+has not the same name in BWidget, but <i>realoption</i>.<br>
+If <i>value</i> is empty, it is initialized to the default value of
+the BWidget.</dd>
+
+<dt><b>Int</b></dt>
+
+<dd><i>value</i> of <i>option</i> is an integer. <i>args</i> can be
+<i>{?min? ?max?}</i> to force it to be in a range. The test is
+<i>[expr $option &gt; $min] &amp;&amp; [expr $option &lt; $max]</i>
+so if args is <i>{0 10}</i>, value must be beetween 0 and 10
+exclude, if <i>args</i> is <i>{=0 =10}</i> , value must be beetween
+0 and 10 include.</dd>
+
+<dt><b>Boolean</b></dt>
+
+<dd><i>value</i> of <i>option</i> is a boolean. True values can be
+<b>1</b>, <b>true</b> or <b>yes</b>. False values can be <b>0</b>,
+<b>false</b> or <b>no</b>. <b>Widget::cget</b> always return 0 or
+1.</dd>
+
+<dt><b>Enum</b></dt>
+
+<dd><i>value</i> of <i>option</i> is a element of a enumeration.
+<i>args</i> must be the list of enumeration, e.g. <i>{top left
+bottom right}</i>.</dd>
+
+<dt><b>Flag</b></dt>
+
+<dd><i>value</i> of <i>option</i> is a combination of a set of
+chars. <i>args</i> must be a string defining the set.</dd>
+
+<dt><b>String</b></dt>
+
+<dd><i>value</i> of <i>option</i> is any uncontrolled string.</dd>
+
+<dt><b>Synonym</b></dt>
+
+<dd><i>option</i> is a synonym of option <i>args</i>. <i>value</i>
+has no effect here.</dd>
+</dl>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="define">Widget::<b>define</b></a> <i>class</i>
+<i>filename</i> ?<i>class ...</i>?</dt>
+
+<dd>
+<p>This command is used to define a new BWidget class. It is
+usually the first command executed in a new widget definition.</p>
+
+<ul>
+<li><i>class</i> is the name of the new widget class.</li>
+
+<li><i>filename</i> is the name of the file (without extension) in
+the BWidget distribution that defines this class.</li>
+</ul>
+
+<p>Each class defined after the filename is a class that this
+widget depends on. The ::use command will be called for each of
+these classes after the new widget has been defined.</p>
+
+<p>This command does several things to setup the new class. First,
+it creates an alias in the global namespace for the name of the
+class that points to the class's ::create subcommand. Second, it
+defines a ::use subcommand for the class which other classes can
+use to load this class on the fly. Lastly, it creates a default
+binding to the &lt;Destroy&gt; event for the class that calls
+Widget::destroy on the path. This is the default setup for almost
+all widgets in the BWidget package.</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="destroy">Widget::<b>destroy</b></a> <i>path</i></dt>
+
+<dd>Description text</dd>
+</dl>
+
+<dl>
+<dt><a name="focusNext">Widget::<b>focusNext</b></a> <i>w</i></dt>
+
+<dd>Description text</dd>
+</dl>
+
+<dl>
+<dt><a name="focusOK">Widget::<b>focusOK</b></a> <i>w</i></dt>
+
+<dd>Description text</dd>
+</dl>
+
+<dl>
+<dt><a name="focusPrev">Widget::<b>focusPrev</b></a> <i>w</i></dt>
+
+<dd>Description text</dd>
+</dl>
+
+<dl>
+<dt><a name="generate-doc">Widget::<b>generate-doc</b></a>
+<i>dir</i> <i>widgetlist</i></dt>
+
+<dd>Description text</dd>
+</dl>
+
+<dl>
+<dt><a name=
+"generate-widget-doc">Widget::<b>generate-widget-doc</b></a>
+<i>class</i> <i>iscmd</i> <i>file</i></dt>
+
+<dd>Description text</dd>
+</dl>
+
+<dl>
+<dt><a name="getoption">Widget::<b>getoption</b></a> <i>path</i>
+<i>option</i></dt>
+
+<dd>Returns the value of <i>option</i> of BWidget <i>path</i>. This
+command does not test option existence, does not handle synonym and
+does not take care of synchronization with subwidget.</dd>
+</dl>
+
+<dl>
+<dt><a name="getVariable">Widget::<b>getVariable</b></a>
+<i>path</i> <i>varName</i> <i>?myVarName?</i></dt>
+
+<dd>
+<p>Make the variable <i>varName</i> relational to <i>path</i>
+accessible in the current procedure. The variable will be created
+in the widget namespace for <i>path</i> and can be used for storing
+widget-specific information. When <i>path</i> is destroyed, any
+variable accessed in this manner will be destroyed with it.</p>
+
+<p>If <i>myVarName</i> is specified, the variable will be
+accessible in the current procedure as that name.</p>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="hasChanged">Widget::<b>hasChanged</b></a> <i>path</i>
+<i>option</i> <i>pvalue</i></dt>
+
+<dd>Description text</dd>
+</dl>
+
+<dl>
+<dt><a name="init">Widget::<b>init</b></a> <i>class</i> <i>path</i>
+<i>options</i></dt>
+
+<dd>Description text</dd>
+</dl>
+
+<dl>
+<dt><a name="setoption">Widget::<b>setoption</b></a> <i>path</i>
+<i>option</i> <i>value</i></dt>
+
+<dd>Set the value of <i>option</i> of BWidget <i>path</i> without
+option test, subwidget mapping, synonym handling and does not set
+the modification flag.</dd>
+</dl>
+
+<dl>
+<dt><a name="subcget">Widget::<b>subcget</b></a> <i>path</i>
+<i>subwidget</i></dt>
+
+<dd>Returns the list of all option/value of BWidget <i>path</i>
+that are mapped to <i>subwidget</i>.</dd>
+</dl>
+
+<dl>
+<dt><a name="syncoptions">Widget::<b>syncoptions</b></a>
+<i>class</i> <i>subclass</i> <i>subpath</i> <i>options</i></dt>
+
+<dd>This command synchronize options value of a subwidget. Used
+when an option of a subwidget is modified out of the BWidget
+<b>configure</b> command. 
+
+<ul>
+<li><i>class</i> is the class of the new BWidget</li>
+
+<li><i>subclass</i> is the class the subwidget (BWidget class, e.g
+Entry, or empty for Tk widget)</li>
+
+<li><i>subpath</i> is the path of the subwidget</li>
+
+<li><i>options</i> is the list <i>{option realres ...}</i> of
+options to synchronize with subwidget</li>
+</ul>
+</dd>
+</dl>
+
+<dl>
+<dt><a name="tkinclude">Widget::<b>tkinclude</b></a> <i>class</i>
+<i>tkwidget</i> <i>subpath</i> ?<i>arg...</i>?</dt>
+
+<dd>This command includes into a new BWidget the resources of a Tk
+widget. Arguments are: 
+
+<ul>
+<li><i>class</i> class of the new widget</li>
+
+<li><i>tkwidger</i> command name of the Tk widget to be
+included</li>
+
+<li><i>subpath</i> path of the widget to configure when BWidget is
+configured</li>
+
+<li><i>options</i> is: 
+
+<ul>
+<li><i><b>include</b> {option option ...}</i><br>
+list of options to include (all if not defined)</li>
+
+<li><i><b>remove</b> {option option ...}</i><br>
+list of options to remove</li>
+
+<li><i><b>rename</b> {option name option name ...}</i><br>
+list of options to rename</li>
+
+<li><i><b>prefix</b> {prefix option option ...}</i><br>
+pefix all <i>option</i> by <i>prefix</i></li>
+
+<li><i><b>initialize</b> {option value option value ...}</i><br>
+default value of options</li>
+
+<li><i><b>readonly</b> {option value option value ...}</i><br>
+new readonly flag</li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</body>
+</html>
+

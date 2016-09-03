@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Library Procedures - Tcl_CreateTrace manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> CrtTrace</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_CreateTrace, Tcl_CreateObjTrace, Tcl_DeleteTrace - arrange for
+command execution to be traced 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+Tcl_Trace<br>
+<b>Tcl_CreateTrace</b>(<i>interp, level, proc, clientData</i>)<br>
+Tcl_Trace<br>
+<b>Tcl_CreateObjTrace</b>(<i>interp, level, flags, objProc,
+clientData, deleteProc</i>)<br>
+<b>Tcl_DeleteTrace</b>(<i>interp, trace</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Interpreter containing command to be traced or untraced.</dd>
+
+<dt>int <b>level</b> (in)</dt>
+
+<dd>Only commands at or below this nesting level will be traced
+unless 0 is specified. 1 means top-level commands only, 2 means
+top-level commands or those that are invoked as immediate
+consequences of executing top-level commands (procedure bodies,
+bracketed commands, etc.) and so on. A value of 0 means that
+commands at any level are traced.</dd>
+
+<dt>int <b>flags</b> (in)</dt>
+
+<dd>Flags governing the trace execution. See below for
+details.</dd>
+
+<dt>Tcl_CmdObjTraceProc <b>*objProc</b> (in)</dt>
+
+<dd>Procedure to call for each command that is executed. See below
+for details of the calling sequence.</dd>
+
+<dt>Tcl_CmdTraceProc <b>*proc</b> (in)</dt>
+
+<dd>Procedure to call for each command that is executed. See below
+for details on the calling sequence.</dd>
+
+<dt>ClientData <b>clientData</b> (in)</dt>
+
+<dd>Arbitrary one-word value to pass to <i>objProc</i> or
+<i>proc</i>.</dd>
+
+<dt>Tcl_CmdObjTraceDeleteProc <b>*deleteProc</b> (in)</dt>
+
+<dd>Procedure to call when the trace is deleted. See below for
+details of the calling sequence. A NULL pointer is permissible and
+results in no callback when the trace is deleted.</dd>
+
+<dt>Tcl_Trace <b><a href="../TclCmd/trace.htm">trace</a></b>
+(in)</dt>
+
+<dd>Token for trace to be removed (return value from previous call
+to <b>Tcl_CreateTrace</b>).</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_CreateObjTrace</b> arranges for command tracing. After it is
+called, <i>objProc</i> will be invoked before the Tcl interpreter
+calls any command procedure when evaluating commands in
+<i>interp</i>. The return value from <b>Tcl_CreateObjTrace</b> is a
+token for the trace, which may be passed to <b>Tcl_DeleteTrace</b>
+to remove the trace. There may be many traces in effect
+simultaneously for the same interpreter. 
+
+<p><i>objProc</i> should have arguments and result that match the
+type, <b>Tcl_CmdObjTraceProc</b>:</p>
+
+<pre>
+typedef int <b>Tcl_CmdObjTraceProc</b>( 
+        <b>ClientData</b> <i>clientData</i>,
+        <b><a href=
+"../TclLib/Interp.htm">Tcl_Interp</a></b>* <i>interp</i>,
+        int <i>level</i>,
+        const char *<i>command</i>,
+        <b>Tcl_Command</b> <i>commandToken</i>,
+        int <i>objc</i>,
+        <b>Tcl_Obj</b> *const <i>objv</i>[] );
+</pre>
+
+The <i>clientData</i> and <i>interp</i> parameters are copies of
+the corresponding arguments given to <b>Tcl_CreateTrace</b>.
+<i>ClientData</i> typically points to an application-specific data
+structure that describes what to do when <i>objProc</i> is invoked.
+The <i>level</i> parameter gives the nesting level of the command
+(1 for top-level commands passed to <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b> by the application, 2 for the
+next-level commands passed to <b><a href=
+"../TclLib/Eval.htm">Tcl_Eval</a></b> as part of parsing or
+interpreting level-1 commands, and so on). The <i>command</i>
+parameter points to a string containing the text of the command,
+before any argument substitution. The <i>commandToken</i> parameter
+is a Tcl command token that identifies the command to be invoked.
+The token may be passed to <b><a href=
+"../TclLib/CrtObjCmd.htm">Tcl_GetCommandName</a></b>, <b><a href=
+"../TclLib/CrtObjCmd.htm">Tcl_GetCommandInfoFromToken</a></b>, or
+<b><a href=
+"../TclLib/CrtObjCmd.htm">Tcl_SetCommandInfoFromToken</a></b> to
+manipulate the definition of the command. The <i>objc</i> and
+<i>objv</i> parameters designate the final parameter count and
+parameter vector that will be passed to the command, and have had
+all substitutions performed. 
+
+<p>The <i>objProc</i> callback is expected to return a standard Tcl
+status return code. If this code is <b>TCL_OK</b> (the normal
+case), then the Tcl interpreter will invoke the command. Any other
+return code is treated as if the command returned that status, and
+the command is <i>not</i> invoked.</p>
+
+<p>The <i>objProc</i> callback must not modify <i>objv</i> in any
+way. It is, however, permissible to change the command by calling
+<b>Tcl_SetCommandTokenInfo</b> prior to returning. Any such change
+takes effect immediately, and the command is invoked with the new
+information.</p>
+
+<p>Tracing will only occur for commands at nesting level less than
+or equal to the <i>level</i> parameter (i.e. the <i>level</i>
+parameter to <i>objProc</i> will always be less than or equal to
+the <i>level</i> parameter to <b>Tcl_CreateTrace</b>).</p>
+
+<p>Tracing has a significant effect on runtime performance because
+it causes the bytecode compiler to refrain from generating in-line
+code for Tcl commands such as <b><a href=
+"../TclCmd/if.htm">if</a></b> and <b><a href=
+"../TclCmd/while.htm">while</a></b> in order that they may be
+traced. If traces for the built-in commands are not required, the
+<i>flags</i> parameter may be set to the constant value
+<b>TCL_ALLOW_INLINE_COMPILATION</b>. In this case, traces on
+built-in commands may or may not result in trace callbacks,
+depending on the state of the interpreter, but run-time performance
+will be improved significantly. (This functionality is desirable,
+for example, when using <b>Tcl_CreateObjTrace</b> to implement an
+execution time profiler.)</p>
+
+<p>Calls to <i>objProc</i> will be made by the Tcl parser
+immediately before it calls the command procedure for the command
+(<i>cmdProc</i>). This occurs after argument parsing and
+substitution, so tracing for substituted commands occurs before
+tracing of the commands containing the substitutions. If there is a
+syntax error in a command, or if there is no command procedure
+associated with a command name, then no tracing will occur for that
+command. If a string passed to <a href=
+"../TclLib/Eval.htm">Tcl_Eval</a> contains multiple commands
+(bracketed, or on different lines) then multiple calls to
+<i>objProc</i> will occur, one for each command.</p>
+
+<p><b>Tcl_DeleteTrace</b> removes a trace, so that no future calls
+will be made to the procedure associated with the trace. After
+<b>Tcl_DeleteTrace</b> returns, the caller should never again use
+the <i>trace</i> token.</p>
+
+<p>When <b>Tcl_DeleteTrace</b> is called, the interpreter invokes
+the <i>deleteProc</i> that was passed as a parameter to
+<b>Tcl_CreateObjTrace</b>. The <i>deleteProc</i> must match the
+type, <b>Tcl_CmdObjTraceDeleteProc</b>:</p>
+
+<pre>
+typedef void <b>Tcl_CmdObjTraceDeleteProc</b>( 
+        <b>ClientData</b> <i>clientData</i>);
+</pre>
+
+The <i>clientData</i> parameter will be the same as the
+<i>clientData</i> parameter that was originally passed to
+<b>Tcl_CreateObjTrace</b>. 
+
+<p><b>Tcl_CreateTrace</b> is an alternative interface for command
+tracing, <i>not recommended for new applications</i>. It is
+provided for backward compatibility with code that was developed
+for older versions of the Tcl interpreter. It is similar to
+<b>Tcl_CreateObjTrace</b>, except that its <i>proc</i> parameter
+should have arguments and result that match the type
+<b>Tcl_CmdTraceProc</b>:</p>
+
+<pre>
+typedef void Tcl_CmdTraceProc(
+        ClientData <i>clientData</i>,
+        <a href=
+"../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>,
+        int <i>level</i>,
+        char *<i>command</i>,
+        Tcl_CmdProc *<i>cmdProc</i>,
+        ClientData <i>cmdClientData</i>,
+        int <i>argc</i>,
+        const char *<i>argv</i>[]);
+</pre>
+
+The parameters to the <i>proc</i> callback are similar to those of
+the <i>objProc</i> callback above. The <i>commandToken</i> is
+replaced with <i>cmdProc</i>, a pointer to the (string-based)
+command procedure that will be invoked; and <i>cmdClientData</i>,
+the client data that will be passed to the procedure. The
+<i>objc</i> parameter is replaced with an <i>argv</i> parameter,
+that gives the arguments to the command as character strings.
+<i>Proc</i> must not modify the <i>command</i> or <i>argv</i>
+strings. 
+
+<p>If a trace created with <b>Tcl_CreateTrace</b> is in effect,
+inline compilation of Tcl commands such as <b><a href=
+"../TclCmd/if.htm">if</a></b> and <b><a href=
+"../TclCmd/while.htm">while</a></b> is always disabled. There is no
+notification when a trace created with <b>Tcl_CreateTrace</b> is
+deleted. There is no way to be notified when the trace created by
+<b>Tcl_CreateTrace</b> is deleted. There is no way for the
+<i>proc</i> associated with a call to <b>Tcl_CreateTrace</b> to
+abort execution of <i>command</i>.</p>
+
+<h3><a name="M6">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#command">command</a>, <a href=
+"../Keywords/C.htm#create">create</a>, <a href=
+"../Keywords/D.htm#delete">delete</a>, <a href=
+"../Keywords/I.htm#interpreter">interpreter</a>, <a href=
+"../Keywords/T.htm#trace">trace</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1989-1993 The Regents of the University of
+California. Copyright &copy; 1994-1996 Sun Microsystems, Inc.
+Copyright &copy; 2002 by Kevin B. Kenny &lt;kennykb(at)acm.org&gt;.
+All rights reserved.</div>
+</body>
+</html>
+

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../aspn.css'>
+<title>Simple Text Output</title>
+<link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../images/ActiveTcl.gif" border="0" align="left" alt="ActiveTcl">
+</a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h1 class="title">Simple Text Output</h1>
+
+<div class="nav"><a href="Tcl0.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl2.html">Next
+lesson</a></div>
+
+<p>The traditional starting place for a tutorial is the classic
+"Hello, World" program. Once you can print out a string, you're
+well on your way to using Tcl for fun and profit!</p>
+
+<p>The command to output a string in Tcl is the <code class=
+"keyword">puts</code> command.</p>
+
+<p>A single unit of text after the <code class=
+"keyword">puts</code> command will be printed to the standard
+output device. The default behavior is to print a newline character
+("return") appropriate for the system after printing the text.</p>
+
+<p>If the string has more than one word, you must enclose the
+string in double quotes or braces ({}). A set of words enclosed in
+quotes or braces is treated as a single unit, while words separated
+by whitespace are treated as multiple arguments to the command.
+Quotes and braces can both be used to group several words into a
+single unit. However, they actually behave differently. In the next
+lesson you'll start to learn some of the differences between their
+behaviors. <i>Note</i> that in Tcl, single quotes are not
+significant, as they are in other programming languages such as C,
+Perl and Python.</p>
+
+<p>Many commands in Tcl (including <code class=
+"keyword">puts</code>) can accept multiple arguments. If a string
+is not enclosed in quotes or braces, the Tcl interpreter will
+consider each word in the string as a separate argument, and pass
+each individually to the <code class="keyword">puts</code> command.
+The <code class="keyword">puts</code> command will try to evaluate
+the words as optional arguments. This will probably result in an
+error.</p>
+
+<p>A command in Tcl is a list of words terminated by a newline or
+semicolon. Tcl comments are a <code>#</code> at the beginning of
+the line, or after the command is closed with a <code>;</code>
+semicolon.</p>
+
+<hr>
+<h2>Example</h2>
+
+<pre class="example">
+puts "Hello, World - In quotes"    ;# This is a comment after the command.
+# This is a comment at beginning of a line
+puts {Hello, World - In Braces}
+puts {Bad comment syntax example}   # *Error* - there is no semicolon!
+
+puts "This is line 1"; puts "this is line 2"
+
+puts "Hello, World; - With  a semicolon inside the quotes"
+
+# Words don't need to be quoted unless they contain white space:
+puts HelloWorld
+</pre>
+
+<div class="nav"><a href="Tcl0.html">Previous lesson</a> | <a href=
+"tcltutorial.html">Index</a> | <a href="Tcl2.html">Next
+lesson</a></div>
+</body>
+</html>
+

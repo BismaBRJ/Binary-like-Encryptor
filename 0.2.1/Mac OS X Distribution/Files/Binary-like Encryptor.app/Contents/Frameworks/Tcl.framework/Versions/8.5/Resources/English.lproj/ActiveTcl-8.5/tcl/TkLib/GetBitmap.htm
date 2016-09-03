@@ -1,0 +1,499 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Library Procedures - Tk_AllocBitmapFromObj manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkLib</a>
+<small>&gt;</small> GetBitmap</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="GetBitmap.htm#M2" name="L227">NAME</a> 
+
+<dl>
+<dd>Tk_AllocBitmapFromObj, Tk_GetBitmap, Tk_GetBitmapFromObj,
+Tk_DefineBitmap, Tk_NameOfBitmap, Tk_SizeOfBitmap,
+Tk_FreeBitmapFromObj, Tk_FreeBitmap - maintain database of
+single-plane pixmaps</dd>
+</dl>
+</dd>
+
+<dd><a href="GetBitmap.htm#M3" name="L228">SYNOPSIS</a></dd>
+
+<dd><a href="GetBitmap.htm#M4" name="L229">ARGUMENTS</a></dd>
+
+<dd><a href="GetBitmap.htm#M5" name="L230">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="GetBitmap.htm#M6" name=
+"L231"><b>@</b><i>fileName</i></a></dd>
+
+<dd><a href="GetBitmap.htm#M7" name="L232"><i>name</i></a> 
+
+<dl class="description">
+<dd><a href="GetBitmap.htm#M8" name="L233"><b>error</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M9" name="L234"><b>gray75</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M10" name="L235"><b>gray50</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M11" name="L236"><b>gray25</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M12" name="L237"><b>gray12</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M13" name=
+"L238"><b>hourglass</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M14" name="L239"><b>info</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M15" name=
+"L240"><b>questhead</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M16" name=
+"L241"><b>question</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M17" name="L242"><b>warning</b></a></dd>
+</dl>
+
+<dl class="description">
+<dd><a href="GetBitmap.htm#M18" name=
+"L243"><b>document</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M19" name=
+"L244"><b>stationery</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M20" name="L245"><b>edition</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M21" name=
+"L246"><b>application</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M22" name=
+"L247"><b>accessory</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M23" name="L248"><b>folder</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M24" name="L249"><b>pfolder</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M25" name="L250"><b>trash</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M26" name="L251"><b>floppy</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M27" name="L252"><b>ramdisk</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M28" name="L253"><b>cdrom</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M29" name=
+"L254"><b>preferences</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M30" name=
+"L255"><b>querydoc</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M31" name="L256"><b>stop</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M32" name="L257"><b>note</b></a></dd>
+
+<dd><a href="GetBitmap.htm#M33" name="L258"><b>caution</b></a></dd>
+</dl>
+</dd>
+</dl>
+</dd>
+
+<dd><a href="GetBitmap.htm#M34" name="L259">BUGS</a></dd>
+
+<dd><a href="GetBitmap.htm#M35" name="L260">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tk_AllocBitmapFromObj, Tk_GetBitmap, Tk_GetBitmapFromObj,
+Tk_DefineBitmap, Tk_NameOfBitmap, Tk_SizeOfBitmap,
+Tk_FreeBitmapFromObj, Tk_FreeBitmap - maintain database of
+single-plane pixmaps 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tk.h&gt;</b><br>
+Pixmap<br>
+<b>Tk_AllocBitmapFromObj(</b><i>interp, tkwin,
+objPtr</i><b>)</b><br>
+Pixmap<br>
+<b>Tk_GetBitmap(</b><i>interp, tkwin, info</i><b>)</b><br>
+Pixmap<br>
+<b>Tk_GetBitmapFromObj(</b><i>tkwin, objPtr</i><b>)</b><br>
+int<br>
+<b>Tk_DefineBitmap(</b><i>interp, name, source, width,
+height</i><b>)</b><br>
+const char *<br>
+<b>Tk_NameOfBitmap(</b><i>display, bitmap</i><b>)</b><br>
+<b>Tk_SizeOfBitmap(</b><i>display, bitmap, widthPtr,
+heightPtr</i><b>)</b><br>
+<b>Tk_FreeBitmapFromObj(</b><i>tkwin, objPtr</i><b>)</b><br>
+<b>Tk_FreeBitmap(</b><i>display, bitmap</i><b>)</b><br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Interpreter to use for error reporting; if NULL then no error
+message is left after errors.</dd>
+
+<dt>Tk_Window <b>tkwin</b> (in)</dt>
+
+<dd>Token for window in which the bitmap will be used.</dd>
+
+<dt>Tcl_Obj <b>*objPtr</b> (in/out)</dt>
+
+<dd>String value describes desired bitmap; internal rep will be
+modified to cache pointer to corresponding Pixmap.</dd>
+
+<dt>const char <b>*info</b> (in)</dt>
+
+<dd>Same as <i>objPtr</i> except description of bitmap is passed as
+a string and resulting Pixmap is not cached.</dd>
+
+<dt>const char <b>*name</b> (in)</dt>
+
+<dd>Name for new bitmap to be defined.</dd>
+
+<dt>const char <b>*source</b> (in)</dt>
+
+<dd>Data for bitmap, in standard bitmap format. Must be stored in
+static memory whose value will never change.</dd>
+
+<dt>int <b>width</b> (in)</dt>
+
+<dd>Width of bitmap.</dd>
+
+<dt>int <b>height</b> (in)</dt>
+
+<dd>Height of bitmap.</dd>
+
+<dt>int <b>*widthPtr</b> (out)</dt>
+
+<dd>Pointer to word to fill in with <i>bitmap</i>'s width.</dd>
+
+<dt>int <b>*heightPtr</b> (out)</dt>
+
+<dd>Pointer to word to fill in with <i>bitmap</i>'s height.</dd>
+
+<dt>Display <b>*display</b> (in)</dt>
+
+<dd>Display for which <i>bitmap</i> was allocated.</dd>
+
+<dt>Pixmap <b><a href="../TkCmd/bitmap.htm">bitmap</a></b>
+(in)</dt>
+
+<dd>Identifier for a bitmap allocated by
+<b>Tk_AllocBitmapFromObj</b> or <b>Tk_GetBitmap</b>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+These procedures manage a collection of bitmaps (one-plane pixmaps)
+being used by an application. The procedures allow bitmaps to be
+re-used efficiently, thereby avoiding server overhead, and also
+allow bitmaps to be named with character strings. 
+
+<p><b>Tk_AllocBitmapFromObj</b> returns a Pixmap identifier for a
+bitmap that matches the description in <i>objPtr</i> and is
+suitable for use in <i>tkwin</i>. It re-uses an existing bitmap, if
+possible, and creates a new one otherwise. <i>ObjPtr</i>'s value
+must have one of the following forms:</p>
+
+<dl class="description">
+<dt><a name="M6"><b>@</b><i>fileName</i></a></dt>
+
+<dd><i>FileName</i> must be the name of a file containing a bitmap
+description in the standard X11 or X10 format.</dd>
+
+<dt><a name="M7"><i>name</i></a></dt>
+
+<dd><i>Name</i> must be the name of a bitmap defined previously
+with a call to <b>Tk_DefineBitmap</b>. The following names are
+pre-defined by Tk: 
+
+<dl class="description">
+<dt><a name="M8"><b>error</b></a></dt>
+
+<dd>The international &ldquo;don't&rdquo; symbol: a circle with a
+diagonal line across it.</dd>
+
+<dt><a name="M9"><b>gray75</b></a></dt>
+
+<dd>75% gray: a checkerboard pattern where three out of four bits
+are on.</dd>
+
+<dt><a name="M10"><b>gray50</b></a></dt>
+
+<dd>50% gray: a checkerboard pattern where every other bit is
+on.</dd>
+
+<dt><a name="M11"><b>gray25</b></a></dt>
+
+<dd>25% gray: a checkerboard pattern where one out of every four
+bits is on.</dd>
+
+<dt><a name="M12"><b>gray12</b></a></dt>
+
+<dd>12.5% gray: a pattern where one-eighth of the bits are on,
+consisting of every fourth pixel in every other row.</dd>
+
+<dt><a name="M13"><b>hourglass</b></a></dt>
+
+<dd>An hourglass symbol.</dd>
+
+<dt><a name="M14"><b>info</b></a></dt>
+
+<dd>A large letter &ldquo;i&rdquo;.</dd>
+
+<dt><a name="M15"><b>questhead</b></a></dt>
+
+<dd>The silhouette of a human head, with a question mark in
+it.</dd>
+
+<dt><a name="M16"><b>question</b></a></dt>
+
+<dd>A large question-mark.</dd>
+
+<dt><a name="M17"><b>warning</b></a></dt>
+
+<dd>A large exclamation point.</dd>
+</dl>
+
+<dl>
+<dd>
+<p>In addition, the following pre-defined names are available only
+on the <b>Macintosh</b> platform:</p>
+
+<dl class="description">
+<dt><a name="M18"><b>document</b></a></dt>
+
+<dd>A generic document.</dd>
+
+<dt><a name="M19"><b>stationery</b></a></dt>
+
+<dd>Document stationery.</dd>
+
+<dt><a name="M20"><b>edition</b></a></dt>
+
+<dd>The <i>edition</i> symbol.</dd>
+
+<dt><a name="M21"><b>application</b></a></dt>
+
+<dd>Generic application icon.</dd>
+
+<dt><a name="M22"><b>accessory</b></a></dt>
+
+<dd>A desk accessory.</dd>
+
+<dt><a name="M23"><b>folder</b></a></dt>
+
+<dd>Generic folder icon.</dd>
+
+<dt><a name="M24"><b>pfolder</b></a></dt>
+
+<dd>A locked folder.</dd>
+
+<dt><a name="M25"><b>trash</b></a></dt>
+
+<dd>A trash can.</dd>
+
+<dt><a name="M26"><b>floppy</b></a></dt>
+
+<dd>A floppy disk.</dd>
+
+<dt><a name="M27"><b>ramdisk</b></a></dt>
+
+<dd>A floppy disk with chip.</dd>
+
+<dt><a name="M28"><b>cdrom</b></a></dt>
+
+<dd>A cd disk icon.</dd>
+
+<dt><a name="M29"><b>preferences</b></a></dt>
+
+<dd>A folder with prefs symbol.</dd>
+
+<dt><a name="M30"><b>querydoc</b></a></dt>
+
+<dd>A database document icon.</dd>
+
+<dt><a name="M31"><b>stop</b></a></dt>
+
+<dd>A stop sign.</dd>
+
+<dt><a name="M32"><b>note</b></a></dt>
+
+<dd>A face with balloon words.</dd>
+
+<dt><a name="M33"><b>caution</b></a></dt>
+
+<dd>A triangle with an exclamation point.</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<p>Under normal conditions, <b>Tk_AllocBitmapFromObj</b> returns an
+identifier for the requested bitmap. If an error occurs in creating
+the bitmap, such as when <i>objPtr</i> refers to a non-existent
+file, then <b>None</b> is returned and an error message is left in
+<i>interp</i>'s result if <i>interp</i> is not NULL.
+<b>Tk_AllocBitmapFromObj</b> caches information about the return
+value in <i>objPtr</i>, which speeds up future calls to procedures
+such as <b>Tk_AllocBitmapFromObj</b> and
+<b>Tk_GetBitmapFromObj</b>.</p>
+
+<p><b>Tk_GetBitmap</b> is identical to <b>Tk_AllocBitmapFromObj</b>
+except that the description of the bitmap is specified with a
+string instead of an object. This prevents <b>Tk_GetBitmap</b> from
+caching the return value, so <b>Tk_GetBitmap</b> is less efficient
+than <b>Tk_AllocBitmapFromObj</b>.</p>
+
+<p><b>Tk_GetBitmapFromObj</b> returns the token for an existing
+bitmap, given the window and description used to create the bitmap.
+<b>Tk_GetBitmapFromObj</b> does not actually create the bitmap; the
+bitmap must already have been created with a previous call to
+<b>Tk_AllocBitmapFromObj</b> or <b>Tk_GetBitmap</b>. The return
+value is cached in <i>objPtr</i>, which speeds up future calls to
+<b>Tk_GetBitmapFromObj</b> with the same <i>objPtr</i> and
+<i>tkwin</i>.</p>
+
+<p><b>Tk_DefineBitmap</b> associates a name with in-memory bitmap
+data so that the name can be used in later calls to
+<b>Tk_AllocBitmapFromObj</b> or <b>Tk_GetBitmap</b>. The
+<i>nameId</i> argument gives a name for the bitmap; it must not
+previously have been used in a call to <b>Tk_DefineBitmap</b>. The
+arguments <i>source</i>, <i>width</i>, and <i>height</i> describe
+the bitmap. <b>Tk_DefineBitmap</b> normally returns <b>TCL_OK</b>;
+if an error occurs (e.g. a bitmap named <i>nameId</i> has already
+been defined) then <b>TCL_ERROR</b> is returned and an error
+message is left in <i>interp-&gt;result</i>. Note:
+<b>Tk_DefineBitmap</b> expects the memory pointed to by
+<i>source</i> to be static: <b>Tk_DefineBitmap</b> does not make a
+private copy of this memory, but uses the bytes pointed to by
+<i>source</i> later in calls to <b>Tk_AllocBitmapFromObj</b> or
+<b>Tk_GetBitmap</b>.</p>
+
+<p>Typically <b>Tk_DefineBitmap</b> is used by <b>#include</b>-ing
+a bitmap file directly into a C program and then referencing the
+variables defined by the file. For example, suppose there exists a
+file <b>stip.bitmap</b>, which was created by the <b><a href=
+"../TkCmd/bitmap.htm">bitmap</a></b> program and contains a stipple
+pattern. The following code uses <b>Tk_DefineBitmap</b> to define a
+new bitmap named <b>foo</b>:</p>
+
+<pre>
+Pixmap bitmap;
+#include "stip.bitmap"
+Tk_DefineBitmap(interp, "foo", stip_bits,
+    stip_width, stip_height);
+    ...
+bitmap = Tk_GetBitmap(interp, tkwin, "foo");
+</pre>
+
+This code causes the bitmap file to be read at compile-time and
+incorporates the bitmap information into the program's executable
+image. The same bitmap file could be read at run-time using
+<b>Tk_GetBitmap</b>: 
+
+<pre>
+Pixmap bitmap;
+bitmap = Tk_GetBitmap(interp, tkwin, "@stip.bitmap");
+</pre>
+
+The second form is a bit more flexible (the file could be modified
+after the program has been compiled, or a different string could be
+provided to read a different file), but it is a little slower and
+requires the bitmap file to exist separately from the program. 
+
+<p>Tk maintains a database of all the bitmaps that are currently in
+use. Whenever possible, it will return an existing bitmap rather
+than creating a new one. When a bitmap is no longer used, Tk will
+release it automatically. This approach can substantially reduce
+server overhead, so <b>Tk_AllocBitmapFromObj</b> and
+<b>Tk_GetBitmap</b> should generally be used in preference to Xlib
+procedures like <b>XReadBitmapFile</b>.</p>
+
+<p>The bitmaps returned by <b>Tk_AllocBitmapFromObj</b> and
+<b>Tk_GetBitmap</b> are shared, so callers should never modify
+them. If a bitmap must be modified dynamically, then it should be
+created by calling Xlib procedures such as <b>XReadBitmapFile</b>
+or <b>XCreatePixmap</b> directly.</p>
+
+<p>The procedure <b>Tk_NameOfBitmap</b> is roughly the inverse of
+<b>Tk_GetBitmap</b>. Given an X Pixmap argument, it returns the
+textual description that was passed to <b>Tk_GetBitmap</b> when the
+bitmap was created. <i>Bitmap</i> must have been the return value
+from a previous call to <b>Tk_AllocBitmapFromObj</b> or
+<b>Tk_GetBitmap</b>.</p>
+
+<p><b>Tk_SizeOfBitmap</b> returns the dimensions of its
+<i>bitmap</i> argument in the words pointed to by the
+<i>widthPtr</i> and <i>heightPtr</i> arguments. As with
+<b>Tk_NameOfBitmap</b>, <i>bitmap</i> must have been created by
+<b>Tk_AllocBitmapFromObj</b> or <b>Tk_GetBitmap</b>.</p>
+
+<p>When a bitmap is no longer needed, <b>Tk_FreeBitmapFromObj</b>
+or <b>Tk_FreeBitmap</b> should be called to release it. For
+<b>Tk_FreeBitmapFromObj</b> the bitmap to release is specified with
+the same information used to create it; for <b>Tk_FreeBitmap</b>
+the bitmap to release is specified with its Pixmap token. There
+should be exactly one call to <b>Tk_FreeBitmapFromObj</b> or
+<b>Tk_FreeBitmap</b> for each call to <b>Tk_AllocBitmapFromObj</b>
+or <b>Tk_GetBitmap</b>.</p>
+
+<h3><a name="M34">BUGS</a></h3>
+
+In determining whether an existing bitmap can be used to satisfy a
+new request, <b>Tk_AllocBitmapFromObj</b> and <b>Tk_GetBitmap</b>
+consider only the immediate value of the string description. For
+example, when a file name is passed to <b>Tk_GetBitmap</b>,
+<b>Tk_GetBitmap</b> will assume it is safe to re-use an existing
+bitmap created from the same file name: it will not check to see
+whether the file itself has changed, or whether the current
+directory has changed, thereby causing the name to refer to a
+different file. 
+
+<h3><a name="M35">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#bitmap">bitmap</a>, <a href=
+"../Keywords/P.htm#pixmap">pixmap</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1990 The Regents of the University of California.
+Copyright &copy; 1994-1998 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

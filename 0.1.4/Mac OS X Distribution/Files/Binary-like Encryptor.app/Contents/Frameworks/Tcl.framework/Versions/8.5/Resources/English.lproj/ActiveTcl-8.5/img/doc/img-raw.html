@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>img-raw - Img</title>
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+</head>
+<body>
+<div class="doctools">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<hr>
+[ <a href="../../at.pkg_index.html">Main table Of Contents</a> | <a
+href="../toc.html">Img Table Of Contents</a> | <a href=
+"../index.html">Img Index</a> ] 
+
+<hr>
+<h1 class="title">img-raw(n) 1.4 "Img"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>img-raw - Img, Raw Data Format (raw)</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#section2">NOTE</a></li>
+
+<li class="section"><a href="#section3">SUPPORTED RAW
+TYPES</a></li>
+
+<li class="section"><a href="#section4">RAW OPTIONS</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tk</b></li>
+
+<li>package require <b class="pkgname">img::raw <span class=
+"opt">?1.4?</span></b></li>
+</ul>
+
+<ul class="syntax">
+<li><a href="#1"><b class="cmd">image</b> <b class="method">create
+photo</b> <span class="opt">?<i class="arg">name</i>?</span> <span
+class="opt">?<i class="arg">options</i>?</span></a></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p>The package <b class="package">img::raw</b> is a sub-package of
+<b class="package">Img</b>. It can be loaded as a part of the
+complete Img support, via <b class="cmd">package require Img</b>,
+or on its own, via <b class="cmd">package require img::raw</b>.</p>
+
+<p>Like all packages of <b class="package">Img</b> it does
+<em>not</em> provide new commands, but extends the existing <b
+class="package"><a href="../index.html#key20">Tk</a></b> command <b
+class="cmd">image</b> so that it supports files containing raster
+images in the Raw Data Format (raw). More specifically <b class=
+"package">img::raw</b> extends <b class="package"><a href=
+"../index.html#key20">Tk</a></b>'s <b class="cmd">photo</b> image
+type.</p>
+
+<p>The name of the new format handler is <b class="const">raw</b>.
+This handler provides new additional configuration options. See
+section <span class="sectref"><a href="#section4">RAW
+OPTIONS</a></span> for more detailed explanations.</p>
+
+<p>All of the above means that in a call like</p>
+
+<dl class="definitions">
+<dt><a name="1"><b class="cmd">image</b> <b class="method">create
+photo</b> <span class="opt">?<i class="arg">name</i>?</span> <span
+class="opt">?<i class="arg">options</i>?</span></a></dt>
+</dl>
+
+<ol class="enumerated">
+<li>
+<p>Image data in raw format (options <b class="option">-data</b>
+and <b class="option">-file</b>) is detected automatically.</p>
+</li>
+
+<li>
+<p>The format name <b class="const">raw</b> is recognized by the
+option <b class="option">-format</b>. In addition the value for the
+option is treated as list and may contain any of the special
+options listed in section <span class="sectref"><a href=
+"#section4">RAW OPTIONS</a></span>.</p>
+</li>
+</ol>
+</div>
+
+<div id="section2" class="section">
+<h2><a name="section2">NOTE</a></h2>
+
+<p>This format handler must be loaded explicitly with <b class=
+"cmd">package require img::raw</b>.</p>
+</div>
+
+<div id="section3" class="section">
+<h2><a name="section3">SUPPORTED RAW TYPES</a></h2>
+
+<pre class="example">
+ Grayscale image:  1 channel  of 32-bit floating point   values.
+                   1 channel  of 16-bit unsigned integer values.
+                   1 channel  of  8-bit unsigned integer values.
+ True-color image: 3 channels of 32-bit floating point   values.
+                   3 channels of 16-bit unsigned integer values.
+                   3 channels of  8-bit unsigned integer values.
+ List of currently supported features:
+ Type   |     Read      |     Write     |
+        | -file | -data | -file | -data |
+ ----------------------------------------
+ Gray   | Yes   | Yes   | Yes   | Yes   |
+ RGB    | Yes   | Yes   | Yes   | Yes   |
+ There are 2 supported file formats:
+ One with the pure raw data only, the other with a 7 line ASCII header
+ of the following form:
+     Magic=RAW\n          File format identifier. Fixed value.
+     Width=128\n          Image width in pixels.
+     Height=128\n         Image height in pixels.
+     NumChan=1\n          Possible values: 1 or 3.
+     ByteOrder=Intel\n    Possible values: "Intel" or "Motorola".
+     ScanOrder=TopDown\n  Possible values: "TopDown" or "BottomUp".
+     PixelType=byte\n     Possible values: "float", "short" or "byte".
+</pre>
+</div>
+
+<div id="section4" class="section">
+<h2><a name="section4">RAW OPTIONS</a></h2>
+
+<p>The handler provides the following options:</p>
+
+<dl class="definitions">
+<dt><b class="option">-verbose</b> <i class="arg">bool</i></dt>
+
+<dd>
+<p>This option is supported for reading and writing.</p>
+
+<p>If set to <b class="const">true</b>, additional information
+about the loaded/stored image is printed to stdout. Default is <b
+class="const">false</b>.</p>
+</dd>
+
+<dt><b class="option">-useheader</b> <i class="arg">bool</i></dt>
+
+<dd>
+<p>This option is supported for reading and writing.</p>
+
+<p>If set to <b class="const">true</b>, use the file header
+information for reading and writing. Default is <b class=
+"const">true</b>.</p>
+</dd>
+
+<dt><b class="option">-nchan</b> <i class="arg">int</i></dt>
+
+<dd>
+<p>This option is supported for reading and writing image data
+without header.</p>
+
+<p>Specify the number of channels of the input image. Default is <b
+class="const">1</b>.</p>
+</dd>
+
+<dt><b class="option">-width</b> <i class="arg">int</i></dt>
+
+<dd>
+<p>This option is supported for reading image data without header
+only.</p>
+
+<p>Specify the width of the input image. Default is <b class=
+"const">128</b>.</p>
+</dd>
+
+<dt><b class="option">-height</b> <i class="arg">int</i></dt>
+
+<dd>
+<p>This option is supported for reading image data without header
+only.</p>
+
+<p>Specify the height of the input image. Default is <b class=
+"const">128</b>.</p>
+</dd>
+
+<dt><b class="option">-byteorder</b> <i class="arg">string</i></dt>
+
+<dd>
+<p>This option is supported for reading image data without header
+only.</p>
+
+<p>Specify the byteorder of the input image data. Possible values:
+<b class="const">Intel</b> or <b class="const">Motorola</b>.
+Default is assuming the same byteorder as that of the host
+computer.</p>
+</dd>
+
+<dt><b class="option">-uuencode</b> <i class="arg">bool</i></dt>
+
+<dd>
+<p>This option is supported for reading image data without header
+only.</p>
+
+<p>If set to <b class="const">false</b>, do not assume, that the
+image data stored in a Tcl variable is uuencoded. Default is <b
+class="const">true</b>, i.e. the image data in a Tcl variable is
+assumed to be uuencoded.</p>
+</dd>
+
+<dt><b class="option">-scanorder</b> <i class="arg">string</i></dt>
+
+<dd>
+<p>This option is supported for reading and writing image data
+without header.</p>
+
+<p>Specify the scanline order of the input image. Possible values:
+<b class="const">TopDown</b> or <b class="const">BottomUp</b>.
+Default is assuming the same byteorder as that of the host
+computer.</p>
+</dd>
+
+<dt><b class="option">-pixeltype</b> <i class="arg">string</i></dt>
+
+<dd>
+<p>This option is supported for reading image data without header
+only.</p>
+
+<p>Specify the type of the pixel values. Possible values: <b class=
+"const">float</b> or <b class="const">short</b> or <b class=
+"const">byte</b>. Default is <b class="const">byte</b>.</p>
+
+<p>RAW files are always written in <b class="const">byte</b> pixel
+format.</p>
+</dd>
+
+<dt><b class="option">-gamma</b> <i class="arg">float</i></dt>
+
+<dd>
+<p>This option is supported for reading only.</p>
+
+<p>Specify a gamma correction to be applied when mapping the input
+data to 8-bit image values. Default is <b class=
+"const">1.0</b>.</p>
+</dd>
+
+<dt><b class="option">-nomap</b> <i class="arg">bool</i></dt>
+
+<dd>
+<p>This option is supported for reading only.</p>
+
+<p>If set to <b class="const">true</b>, no mapping of input values
+is done. Use this option, if your image already contains RGB values
+in the range of <b class="const">0</b> .. <b class="const">255</b>.
+When using the nomap mode, no information about the minimum and
+maximum pixel values is gathered during reading and therefore no
+verbose output is printed. On the other hand reading the image is
+faster. Default is <b class="const">false</b>.</p>
+</dd>
+
+<dt><b class="option">-min</b> <i class="arg">float</i></dt>
+
+<dd>
+<p>This option is supported for reading only.</p>
+
+<p>Specify the minimum pixel value to be used for mapping the input
+data to 8-bit image values. Default is the minimum value found in
+the image data.</p>
+</dd>
+
+<dt><b class="option">-max</b> <i class="arg">float</i></dt>
+
+<dd>
+<p>This option is supported for reading only.</p>
+
+<p>Specify the maximum pixel value to be used for mapping the input
+data to 8-bit image values. Default is the maximum value found in
+the image data.</p>
+</dd>
+</dl>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="img-bmp.html">img-bmp</a>, <a href=
+"img-dted.html">img-dted</a>, <a href="img-gif.html">img-gif</a>,
+<a href="img-ico.html">img-ico</a>, <a href=
+"img.html">img-intro</a>, <a href="img-jpeg.html">img-jpeg</a>, <a
+href="img-pcx.html">img-pcx</a>, <a href=
+"img-pixmap.html">img-pixmap</a>, <a href=
+"img-png.html">img-png</a>, <a href="img-ppm.html">img-ppm</a>, <a
+href="img-ps.html">img-ps</a>, img-raw, <a href=
+"img-sgi.html">img-sgi</a>, <a href="img-sun.html">img-sun</a>, <a
+href="img-tga.html">img-tga</a>, <a href=
+"img-tiff.html">img-tiff</a>, <a href=
+"img-window.html">img-window</a>, <a href=
+"img-xbm.html">img-xbm</a>, <a href="img-xpm.html">img-xpm</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../index.html#key6">image handling</a>, <a href=
+"../index.html#key15">raw</a>, <a href=
+"../index.html#key20">tk</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 1995-2009 Jan Nijtmans
+&lt;nijtmans@users.sourceforge.net&gt;</p>
+</div>
+
+<h4>Copyright &copy; 2015 <a href="http://www.activestate.com">for
+compilation: ActiveState</a></h4>
+</div>
+</body>
+</html>
+

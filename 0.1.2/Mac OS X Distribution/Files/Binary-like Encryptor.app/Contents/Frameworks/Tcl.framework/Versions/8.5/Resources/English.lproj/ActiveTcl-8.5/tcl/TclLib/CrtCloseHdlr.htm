@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_CreateCloseHandler manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> CrtCloseHdlr</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_CreateCloseHandler, Tcl_DeleteCloseHandler - arrange for
+callbacks when channels are closed 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+void<br>
+<b>Tcl_CreateCloseHandler</b>(<i>channel, proc, clientData</i>)<br>
+void<br>
+<b>Tcl_DeleteCloseHandler</b>(<i>channel, proc, clientData</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt>Tcl_Channel <b>channel</b> (in)</dt>
+
+<dd>The channel for which to create or delete a close
+callback.</dd>
+
+<dt>Tcl_CloseProc <b>*proc</b> (in)</dt>
+
+<dd>The procedure to call as the callback.</dd>
+
+<dt>ClientData <b>clientData</b> (in)</dt>
+
+<dd>Arbitrary one-word value to pass to <i>proc</i>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_CreateCloseHandler</b> arranges for <i>proc</i> to be called
+when <i>channel</i> is closed with <b><a href=
+"../TclLib/OpenFileChnl.htm">Tcl_Close</a></b> or <b><a href=
+"../TclLib/OpenFileChnl.htm">Tcl_UnregisterChannel</a></b>, or
+using the Tcl <b><a href="../TclCmd/close.htm">close</a></b>
+command. <i>Proc</i> should match the following prototype: 
+
+<pre>
+typedef void Tcl_CloseProc(
+        ClientData <i>clientData</i>);
+</pre>
+
+<p>The <i>clientData</i> is the same as the value provided in the
+call to <b>Tcl_CreateCloseHandler</b>.</p>
+
+<p><b>Tcl_DeleteCloseHandler</b> removes a close callback for
+<i>channel</i>. The <i>proc</i> and <i>clientData</i> identify
+which close callback to remove; <b>Tcl_DeleteCloseHandler</b> does
+nothing if its <i>proc</i> and <i>clientData</i> arguments do not
+match the <i>proc</i> and <i>clientData</i> for a close handler for
+<i>channel</i>.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/close.htm">close</a></b>, <b><a href=
+"../TclLib/OpenFileChnl.htm">Tcl_Close</a></b>, <b><a href=
+"../TclLib/OpenFileChnl.htm">Tcl_UnregisterChannel</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#callback">callback</a>, <a href=
+"../Keywords/C.htm#channel closing">channel closing</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>img-intro - Img</title>
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+</head>
+<body>
+<div class="doctools">
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<hr>
+[ <a href="../../at.pkg_index.html">Main table Of Contents</a> | <a
+href="../toc.html">Img Table Of Contents</a> | <a href=
+"../index.html">Img Index</a> ] 
+
+<hr>
+<h1 class="title">img-intro(n) 1.4 "Img"</h1>
+
+<div id="name" class="section">
+<h2><a name="name">Name</a></h2>
+
+<p>img-intro - Introduction to Img</p>
+</div>
+
+<div id="toc" class="section">
+<h2><a name="toc">Table Of Contents</a></h2>
+
+<ul class="toc">
+<li class="section"><a href="#toc">Table Of Contents</a></li>
+
+<li class="section"><a href="#synopsis">Synopsis</a></li>
+
+<li class="section"><a href="#section1">Description</a></li>
+
+<li class="section"><a href="#see-also">See Also</a></li>
+
+<li class="section"><a href="#keywords">Keywords</a></li>
+
+<li class="section"><a href="#copyright">Copyright</a></li>
+</ul>
+</div>
+
+<div id="synopsis" class="section">
+<h2><a name="synopsis">Synopsis</a></h2>
+
+<div class="synopsis">
+<ul class="requirements">
+<li>package require <b class="pkgname">Tk</b></li>
+
+<li>package require <b class="pkgname">Img <span class=
+"opt">?1.4?</span></b></li>
+</ul>
+</div>
+</div>
+
+<div id="section1" class="section">
+<h2><a name="section1">Description</a></h2>
+
+<p><b class="package">Img</b> is a <b class="package"><a href=
+"../index.html#key20">Tk</a></b> extension, adding support for many
+other Image formats, as listed below. The individual formats are
+described in more detail on their own pages.</p>
+
+<dl class="definitions">
+<dt><i class="term"><a href="../index.html#key0">bmp</a></i></dt>
+
+<dd>
+<p>Windows bitmap format. See <b class="cmd"><a href=
+"img-bmp.html">img-bmp</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key1">dted</a></i></dt>
+
+<dd>
+<p>DTED terrain elevation data interpreted as image. See <b class=
+"cmd"><a href="img-dted.html">img-dted</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key3">gif</a></i></dt>
+
+<dd>
+<p>The venerable graphics interchange format (with transparency,
+but without LZW. The latter due to patent issues). See <b class=
+"cmd"><a href="img-gif.html">img-gif</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key5">ico</a></i></dt>
+
+<dd>
+<p>Windows icon files. See <b class="cmd"><a href=
+"img-ico.html">img-ico</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key7">jpeg</a></i></dt>
+
+<dd>
+<p>The format for lossy compressed still pictures specified by the
+Joint Picture Experts Group. See <b class="cmd"><a href=
+"img-jpeg.html">img-jpeg</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key8">pcx</a></i></dt>
+
+<dd>
+<p>Paintbrush image format. See <b class="cmd"><a href=
+"img-pcx.html">img-pcx</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../index.html#key10">pixmap</a></i></dt>
+
+<dd>
+<p>While the other formats are handlers for the <b class=
+"package"><a href="../index.html#key20">Tk</a></b> photo image type
+this is a new image type for <b class="package"><a href=
+"../index.html#key20">Tk</a></b>. See <b class="cmd"><a href=
+"img-pixmap.html">img-pixmap</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key11">png</a></i></dt>
+
+<dd>
+<p>Portable Network Graphics, successor to GIF. See <b class=
+"cmd"><a href="img-png.html">img-png</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key13">ppm</a></i></dt>
+
+<dd>
+<p>Portable Pixmaps. See <b class="cmd"><a href=
+"img-ppm.html">img-ppm</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key14">ps</a></i></dt>
+
+<dd>
+<p>Postscript and PDF (Portable document format). Requires an
+external application, <b class="syscmd">ghostview</b>, for its
+operation. See <b class="cmd"><a href=
+"img-ps.html">img-ps</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key15">raw</a></i></dt>
+
+<dd>
+<p>Raw matrix data interpreted as image. See <b class="cmd"><a
+href="img-raw.html">img-raw</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key16">sgi</a></i></dt>
+
+<dd>
+<p>Native SGI format. See <b class="cmd"><a href=
+"img-sgi.html">img-sgi</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key17">sun</a></i></dt>
+
+<dd>
+<p>Sun raster images. See <b class="cmd"><a href=
+"img-sun.html">img-sun</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key18">tga</a></i></dt>
+
+<dd>
+<p>Targa files. See <b class="cmd"><a href=
+"img-tga.html">img-tga</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key19">tiff</a></i></dt>
+
+<dd>
+<p>Tagged Interchange File Format. See <b class="cmd"><a href=
+"img-tiff.html">img-tiff</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href=
+"../index.html#key21">window</a></i></dt>
+
+<dd>
+<p>Put the content of a Tk window into an image. See <b class=
+"cmd"><a href="img-window.html">img-window</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key22">xbm</a></i></dt>
+
+<dd>
+<p>X Bitmaps. See <b class="cmd"><a href=
+"img-xbm.html">img-xbm</a></b>.</p>
+</dd>
+
+<dt><i class="term"><a href="../index.html#key23">xpm</a></i></dt>
+
+<dd>
+<p>X Pixmaps. See <b class="cmd"><a href=
+"img-xpm.html">img-xpm</a></b>.</p>
+</dd>
+</dl>
+
+<p>This version only works with Tcl/Tk 8.3 or higher. If you are
+using Tk 8.2, please use Img 1.3. If you are using Tk 8.1 or lower
+please stick with Img 1.2.4 (which is still available). And if you
+are using Tk4.2 or lower, please stick with Img 1.1.4 (which is
+also still available).</p>
+</div>
+
+<div id="see-also" class="section">
+<h2><a name="see-also">See Also</a></h2>
+
+<p><a href="img-bmp.html">img-bmp</a>, <a href=
+"img-dted.html">img-dted</a>, <a href="img-gif.html">img-gif</a>,
+<a href="img-ico.html">img-ico</a>, <a href=
+"img-jpeg.html">img-jpeg</a>, <a href="img-pcx.html">img-pcx</a>,
+<a href="img-pixmap.html">img-pixmap</a>, <a href=
+"img-png.html">img-png</a>, <a href="img-ppm.html">img-ppm</a>, <a
+href="img-ps.html">img-ps</a>, <a href="img-raw.html">img-raw</a>,
+<a href="img-sgi.html">img-sgi</a>, <a href=
+"img-sun.html">img-sun</a>, <a href="img-tga.html">img-tga</a>, <a
+href="img-tiff.html">img-tiff</a>, <a href=
+"img-window.html">img-window</a>, <a href=
+"img-xbm.html">img-xbm</a>, <a href="img-xpm.html">img-xpm</a></p>
+</div>
+
+<div id="keywords" class="section">
+<h2><a name="keywords">Keywords</a></h2>
+
+<p><a href="../index.html#key0">bmp</a>, <a href=
+"../index.html#key3">gif</a>, <a href="../index.html#key5">ico</a>,
+<a href="../index.html#key6">image handling</a>, <a href=
+"../index.html#key7">jpeg</a>, <a href=
+"../index.html#key8">pcx</a>, <a href="../index.html#key9">pdf</a>,
+<a href="../index.html#key10">pixmap</a>, <a href=
+"../index.html#key11">png</a>, <a href=
+"../index.html#key12">postscript</a>, <a href=
+"../index.html#key13">ppm</a>, <a href=
+"../index.html#key14">ps</a>, <a href=
+"../index.html#key16">sgi</a>, <a href=
+"../index.html#key17">sun</a>, <a href=
+"../index.html#key18">tga</a>, <a href=
+"../index.html#key19">tiff</a>, <a href=
+"../index.html#key20">tk</a>, <a href=
+"../index.html#key21">window</a>, <a href=
+"../index.html#key22">xbm</a>, <a href=
+"../index.html#key23">xpm</a></p>
+</div>
+
+<div id="copyright" class="section">
+<h2><a name="copyright">Copyright</a></h2>
+
+<p>Copyright &copy; 1995-2009 Jan Nijtmans
+&lt;nijtmans@users.sourceforge.net&gt;</p>
+</div>
+
+<h4>Copyright &copy; 2015 <a href="http://www.activestate.com">for
+compilation: ActiveState</a></h4>
+</div>
+</body>
+</html>
+

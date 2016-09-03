@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tk Built-In Commands - clipboard manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TkCmd</a>
+<small>&gt;</small> clipboard</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="clipboard.htm#M2" name="L372">NAME</a> 
+
+<dl>
+<dd>clipboard - Manipulate Tk clipboard</dd>
+</dl>
+</dd>
+
+<dd><a href="clipboard.htm#M3" name="L373">SYNOPSIS</a> 
+
+<dl>
+<dd><b>clipboard</b> <i>option</i> ?<i>arg arg ...</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="clipboard.htm#M4" name="L374">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="clipboard.htm#M5" name="L375"><b>clipboard clear</b>
+?<b>-displayof</b> <i>window</i>?</a></dd>
+
+<dd><a href="clipboard.htm#M6" name="L376"><b>clipboard append</b>
+?<b>-displayof</b> <i>window</i>? ?<b>-format</b> <i>format</i>?
+?<b>-type</b> <i>type</i>? ?<b>--</b>? <i>data</i></a></dd>
+
+<dd><a href="clipboard.htm#M7" name="L377"><b>clipboard get</b>
+?<b>-displayof</b> <i>window</i>? ?<b>-type</b>
+<i>type</i>?</a></dd>
+</dl>
+</dd>
+
+<dd><a href="clipboard.htm#M8" name="L378">EXAMPLES</a></dd>
+
+<dd><a href="clipboard.htm#M9" name="L379">SEE ALSO</a></dd>
+
+<dd><a href="clipboard.htm#M10" name="L380">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+clipboard - Manipulate Tk clipboard 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>clipboard</b> <i>option</i> ?<i>arg arg ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command provides a Tcl interface to the Tk clipboard, which
+stores data for later retrieval using the selection mechanism (via
+the <b>-selection CLIPBOARD</b> option). In order to copy data into
+the clipboard, <b>clipboard clear</b> must be called, followed by a
+sequence of one or more calls to <b>clipboard append</b>. To ensure
+that the clipboard is updated atomically, all appends should be
+completed before returning to the event loop. 
+
+<p>The first argument to <b>clipboard</b> determines the format of
+the rest of the arguments and the behavior of the command. The
+following forms are currently supported:</p>
+
+<dl class="description">
+<dt><a name="M5"><b>clipboard clear</b> ?<b>-displayof</b>
+<i>window</i>?</a></dt>
+
+<dd>Claims ownership of the clipboard on <i>window</i>'s display
+and removes any previous contents. <i>Window</i> defaults to
+&ldquo;.&rdquo;. Returns an empty string.</dd>
+
+<dt><a name="M6"><b>clipboard append</b> ?<b>-displayof</b>
+<i>window</i>? ?<b>-format</b> <i>format</i>? ?<b>-type</b>
+<i>type</i>? ?<b>--</b>? <i>data</i></a></dt>
+
+<dd>Appends <i>data</i> to the clipboard on <i>window</i>'s display
+in the form given by <i>type</i> with the representation given by
+<i>format</i> and claims ownership of the clipboard on
+<i>window</i>'s display. 
+
+<p><i>Type</i> specifies the form in which the selection is to be
+returned (the desired &ldquo;target&rdquo; for conversion, in ICCCM
+terminology), and should be an atom name such as STRING or
+FILE_NAME; see the Inter-Client Communication Conventions Manual
+for complete details. <i>Type</i> defaults to STRING.</p>
+
+<p>The <i>format</i> argument specifies the representation that
+should be used to transmit the selection to the requester (the
+second column of Table 2 of the ICCCM), and defaults to STRING. If
+<i>format</i> is STRING, the selection is transmitted as 8-bit
+ASCII characters. If <i>format</i> is ATOM, then the <i>data</i> is
+divided into fields separated by white space; each field is
+converted to its atom value, and the 32-bit atom value is
+transmitted instead of the atom name. For any other <i>format</i>,
+<i>data</i> is divided into fields separated by white space and
+each field is converted to a 32-bit integer; an array of integers
+is transmitted to the selection requester. Note that strings passed
+to <b>clipboard append</b> are concatenated before conversion, so
+the caller must take care to ensure appropriate spacing across
+string boundaries. All items appended to the clipboard with the
+same <i>type</i> must have the same <i>format</i>.</p>
+
+<p>The <i>format</i> argument is needed only for compatibility with
+clipboard requesters that do not use Tk. If the Tk toolkit is being
+used to retrieve the CLIPBOARD selection then the value is
+converted back to a string at the requesting end, so <i>format</i>
+is irrelevant.</p>
+
+<p>A <b>--</b> argument may be specified to mark the end of
+options: the next argument will always be used as <i>data</i>. This
+feature may be convenient if, for example, <i>data</i> starts with
+a <b>-</b>.</p>
+</dd>
+
+<dt><a name="M7"><b>clipboard get</b> ?<b>-displayof</b>
+<i>window</i>? ?<b>-type</b> <i>type</i>?</a></dt>
+
+<dd>Retrieve data from the clipboard on <i>window</i>'s display.
+<i>Window</i> defaults to &ldquo;.&rdquo;. <i>Type</i> specifies
+the form in which the data is to be returned and should be an atom
+name such as STRING or FILE_NAME. <i>Type</i> defaults to STRING.
+This command is equivalent to &ldquo;<b>selection get -selection
+CLIPBOARD</b>&rdquo;. 
+
+<p>Note that on modern X11 systems, the most useful type to
+retrieve for transferred strings is not <b><a href=
+"../TclCmd/string.htm">STRING</a></b>, but rather
+<b>UTF8_STRING</b>.</p>
+</dd>
+</dl>
+
+<h3><a name="M8">EXAMPLES</a></h3>
+
+Get the current contents of the clipboard. 
+
+<pre>
+if {[catch {<b>clipboard get</b>} contents]} {
+    # There were no clipboard contents at all
+}
+</pre>
+
+<p>Set the clipboard to contain a fixed string.</p>
+
+<pre>
+<b>clipboard clear</b>
+<b>clipboard append</b> "some fixed string"
+</pre>
+
+<p>You can put custom data into the clipboard by using a custom
+<b>-type</b> option. This is not necessarily portable, but can be
+very useful. The method of passing Tcl scripts this way is
+effective, but should be mixed with safe interpreters in production
+code.</p>
+
+<pre>
+# This is a very simple canvas serializer;
+# it produces a script that recreates the item(s) when executed
+proc getItemConfig {canvas tag} {
+   set script {}
+   foreach item [$canvas find withtag $tag] {
+      append script {$canvas create } [$canvas type $item]
+      append script { } [$canvas coords $item] { }
+      foreach config [$canvas itemconf $item] {
+         lassign $config name - - - value
+         append script [list $name $value] { }
+      }
+      append script \n
+   }
+   return [string trim $script]
+}
+
+# Set up a binding on a canvas to cut and paste an item
+set c [canvas .c]
+pack $c
+$c create text 150 30 -text "cut and paste me"
+bind $c &lt;&lt;Cut&gt;&gt; {
+   <b>clipboard clear</b>
+   <b>clipboard append -type</b> TkCanvasItem \
+         [getItemConfig %W current]
+   # Delete because this is cut, not copy.
+   %W delete current
+}
+bind $c &lt;&lt;Paste&gt;&gt; {
+   catch {
+      set canvas %W
+      eval [<b>clipboard get -type</b> TkCanvasItem]
+   }
+}
+</pre>
+
+<h3><a name="M9">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/interp.htm">interp</a></b>, <b><a href=
+"../TkCmd/selection.htm">selection</a></b> 
+
+<h3><a name="M10">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#clear">clear</a>, <a href=
+"../Keywords/F.htm#format">format</a>, <a href=
+"../Keywords/C.htm#clipboard">clipboard</a>, <a href=
+"../Keywords/A.htm#append">append</a>, <a href=
+"../Keywords/S.htm#selection">selection</a>, <a href=
+"../Keywords/T.htm#type">type</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1994 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+
